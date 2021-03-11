@@ -1,0 +1,10 @@
+bin/*
+babel.config.js
+metro.config.js
+jest.node.config.js
+jest.ui.config.js
+android
+ios
+
+# Ruby dependencies
+vendor/

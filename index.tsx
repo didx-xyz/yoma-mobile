@@ -1,10 +1,10 @@
-import 'react-native-gesture-handler
+import 'react-native-gesture-handler'
 import React from 'react'
-import {AppRegistry} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native
+import { AppRegistry } from 'react-native'
+import { NavigationContainer } from '@react-navigation/native'
 
-import App from './src/modules/App';
-import {name as appName} from './app.json';
+import App from './src/modules/App'
+import { config } from './config'
 
 const Root = () => (
   <NavigationContainer>
@@ -12,4 +12,4 @@ const Root = () => (
   </NavigationContainer>
 )
 
-AppRegistry.registerComponent(appName, () => Root);
+AppRegistry.registerComponent(config.application.name, () => Root)

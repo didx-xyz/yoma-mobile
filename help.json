@@ -1,0 +1,16 @@
+{
+  "init": "initialize package",
+  "init:ios": "init app for ios",
+  "ios": "serve app on ios simulator",
+  "android": "serve app on android emulator",
+  "start": "start app bundler",
+  "start:reset": "reset and start app bundler",
+  "test": "run all unit tests",
+  "test:watch": "run all unit tests (in watch mode)",
+  "test:ui": "run all UI component tests",
+  "test:ui:watch": "run all UI component tests (in watch mode)",
+  "lint": "run JS linter",
+  "format": "formats the codebase with prettier",
+  "code:lint": "runs prettier and eslint linters",
+  "npm:audit": "audit NPM dependencies for critical vulnerabilities"
+}
