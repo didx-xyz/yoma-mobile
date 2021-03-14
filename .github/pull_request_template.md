@@ -1,5 +1,5 @@
 ![](gifSrc)
-## Scope [YOMA-XXX](https://funder.atlassian.net/browse/YOMA-XXX)
+## Scope [YOMA-XXX](https://yomaworld.atlassian.net/browse/YOMA-XXX)
 
 
 ## Work Done
