@@ -1,0 +1,72 @@
+root: true
+env:
+  jest: true
+  browser: true
+  es6: true
+globals:
+  __DEV__: true
+extends:
+  - 'airbnb'
+  - 'prettier'
+  - 'prettier/react'
+  - 'plugin:@typescript-eslint/recommended'
+  - 'prettier/@typescript-eslint'
+settings: { 'import/resolver': { 'node': { 'extensions': ['.js', '.jsx', '.ts', '.tsx'] } } }
+plugins:
+  - '@typescript-eslint'
+  - 'react'
+  - 'prettier'
+parser: '@typescript-eslint/parser'
+parserOptions:
+  { ecmaFeatures: { 'jsx': true }, 'ecmaVersion': 2018, 'sourceType': 'module', 'project': './tsconfig.json' }
+rules:
+  no-use-before-define:
+    - 0
+  react/jsx-filename-extension:
+    - 1
+    - { 'extensions': ['.ts', '.tsx'] }
+  import/prefer-default-export:
+    - off
+  indent:
+    - error
+    - 2
+  linebreak-style:
+    - error
+    - unix
+  quotes:
+    - error
+    - single
+    - avoid-escape
+  semi:
+    - error
+    - never
+  eol-last:
+    - error
+    - always
+  comma-spacing:
+    - error
+    - after: true
+  no-multiple-empty-lines:
+    - error
+    - max: 1
+  comma-dangle:
+    - error
+    - always-multiline
+  object-curly-spacing:
+    - error
+    - always
+  'react/prop-types':
+    - 0
+  '@typescript-eslint/no-shadow':
+    - warn
+  '@typescript-eslint/no-explicit-any':
+    - 0
+  '@typescript-eslint/no-non-null-assertion':
+    - 0
+  '@typescript-eslint/no-use-before-define':
+    - error
+  import/extensions:
+    - 0
+  import/no-extraneous-dependencies:
+    - error
+    - { 'devDependencies': ['**/*.test.ts', '**/*.test.tsx'] }

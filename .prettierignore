@@ -1,0 +1,35 @@
+# Mobile : Native code
+#
+ios
+android
+
+src/env.json
+.idea/
+# Artifacts:
+#
+build
+coverage
+.cache
+package.json
+package-lock.json
+public
+
+# COnfig
+#
+.eslintrc.yml
+.prettierrc
+.prettierrc.js
+.watchmanconfig
+app.json
+babel.config.js
+help.json
+jest.node.config.js
+metro.config.js
+rn-cli.config.js
+
+# Markdown
+#
+*.md
+
+# Ruby dependencies
+vendor/
