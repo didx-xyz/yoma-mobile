@@ -5,15 +5,19 @@ import React from 'react'
 import DigitalCv from '../DigitalCv/DigitalCv'
 import Earn from '../Earn/Earn'
 import Home from '../Home/Home'
+import Landing from '../Landing/Landing'
 import Onboarding from '../Onboarding/Onboarding'
 import Opportunities from '../Opportunities/Opportunities'
 import Profile from '../Profile/Profile'
+import Register from '../Register/Register'
 
 const Stack = createStackNavigator()
 
 const AppNavigation = () => (
   <NavigationContainer>
-    <Stack.Navigator>
+    <Stack.Navigator headerMode={'none'}>
+      <Stack.Screen name="Landing" component={Landing} />
+      <Stack.Screen name="Register" component={Register} />
       <Stack.Screen name="Home" component={Home} />
       <Stack.Screen name="Digital CV" component={DigitalCv} />
       <Stack.Screen name="Earn" component={Earn} />
