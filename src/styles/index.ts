@@ -1,4 +1,5 @@
 import colors from './colors.styles'
-import { Colors } from './styles.types'
+import { Colors, FontFamily } from './styles.types'
+import TextStyles from './text.styles';
 
-export { colors, Colors }
+export { colors, Colors, TextStyles, FontFamily }
