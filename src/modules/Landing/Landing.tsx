@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, Dimensions } from 'react-native'
+import { Text, View } from 'react-native'
 import RedSemiCircle from '../../assets/Images/RedSemiCircle.svg';
 import PurpleSemiCircle from '../../assets/Images/PurpleSemiCircle.svg';
 import WhiteLogo from '../../assets/Images/WhiteLogo.svg';
@@ -36,7 +36,7 @@ const Landing = ({ navigation }: Props) => {
       <View style={styles.buttonOuterContainer}>
         <ButtonContainer
           buttonText="Register"
-          buttonStyle={[ButtonStyles.mediumGreenButton]}
+          buttonStyle={[ButtonStyles.tertiary3Button]}
           buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
           onPress={() => navigation.navigate('Register')}
         />
@@ -44,7 +44,7 @@ const Landing = ({ navigation }: Props) => {
           buttonText="Login"
           buttonStyle={[ButtonStyles.transparentButton, { marginTop: 10 }]}
           buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
-          onPress={() => { }}
+          onPress={() => navigation.navigate('Login')}
         />
       </View>
     </ViewContainer>

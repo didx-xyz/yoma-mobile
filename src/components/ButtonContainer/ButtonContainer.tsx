@@ -1,10 +1,9 @@
 import React from 'react'
-import { Text, TextStyle, ViewStyle } from 'react-native'
-import { TouchableOpacity } from 'react-native-gesture-handler'
+import { Text, TextStyle, TouchableOpacityProps, TouchableOpacity, ViewStyle } from 'react-native'
 
 import { WithChildren } from '../../types/react.types'
 
-type Props = WithChildren<{
+type Props = TouchableOpacityProps & WithChildren<{
   buttonStyle: ViewStyle[] | ViewStyle;
   buttonText: string | number;
   buttonTextStyle: TextStyle[] | TextStyle;
@@ -16,12 +15,12 @@ const ButtonContainer = ({
   buttonStyle,
   buttonText,
   buttonTextStyle,
-  onPress = () => { }
+  ...props
 }: Props) => {
   return (
     <TouchableOpacity
       style={buttonStyle}
-      onPress={onPress}
+      {...props}
     >
       {children}
       <Text style={buttonTextStyle}>{buttonText}</Text>
