@@ -36,6 +36,7 @@
     "react-native": "0.63.4",
     "react-native-dropdown-picker": "^4.0.2",
     "react-native-elements": "^3.3.2",
+    "react-native-email-link": "^1.11.0",
     "react-native-fbsdk": "^3.0.0",
     "react-native-flash-message": "^0.1.23",
     "react-native-flipper": "^0.81.0",
