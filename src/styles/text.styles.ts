@@ -47,6 +47,12 @@ const TextStyles = StyleSheet.create({
     fontFamily: fontStyles[FontFamily.bold],
     fontSize: 21
   } as TextStyle,
+  errorText: {
+    color: colors[Colors.tertiary1],
+    fontFamily: fontStyles[FontFamily.semibold],
+    fontSize: 12,
+    textAlign: 'center'
+  } as TextStyle,
 })
 
 export default TextStyles;

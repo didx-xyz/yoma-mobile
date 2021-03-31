@@ -6,6 +6,7 @@ export enum Colors {
   tertiary3 = 'tertiary3',
   tertiary4 = 'tertiary4',
   tertiary5 = 'tertiary5',
+  tertiary6 = 'tertiary6',
   white = 'white',
   black = 'black',
 }
