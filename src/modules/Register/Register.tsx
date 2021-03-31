@@ -29,7 +29,7 @@ const Register = ({ navigation }: Props) => {
         </Text>
         <ButtonContainer
           buttonText="Register with email"
-          buttonStyle={[ButtonStyles.largeGreenButton, { marginVertical: 15 }]}
+          buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15 }]}
           buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
           onPress={() => navigation.navigate('RegisterWithEmail')}
         />
