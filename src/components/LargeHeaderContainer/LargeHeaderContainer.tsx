@@ -12,7 +12,8 @@ type Props =
     // TODO: Need to check Svg type
     circleImage: SVGElement,
     circleImageStyle: ViewStyle,
-    backgroundColor: string
+    backgroundColor: string,
+    navigation: any
   }>
 
 const LargeHeaderContainer = ({
@@ -22,11 +23,12 @@ const LargeHeaderContainer = ({
   circleImage,
   circleImageStyle,
   backgroundColor,
+  navigation
 }: Props) => {
   return (
     <View style={[styles.container, { backgroundColor: backgroundColor }, style]}>
       {children}
-      <HeaderContainer headerText={headerText} />
+      <HeaderContainer navigation={navigation} headerText={headerText} />
       <View style={styles.logoContainer}>
         <WhiteLogo />
       </View>

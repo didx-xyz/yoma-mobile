@@ -36,7 +36,7 @@ const Landing = ({ navigation }: Props) => {
       <View style={styles.buttonOuterContainer}>
         <ButtonContainer
           buttonText="Register"
-          buttonStyle={[ButtonStyles.tertiary3Button]}
+          buttonStyle={[ButtonStyles.mediumTertiary3Button]}
           buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
           onPress={() => navigation.navigate('Register')}
         />

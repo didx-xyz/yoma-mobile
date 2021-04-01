@@ -14,6 +14,7 @@ import Input from '../../../components/Input/Input';
 import DropDown from '../../../components/DropDown/DropDown';
 import api from '../../../api';
 import { showSimpleMessage } from '../../../utils/error';
+import Spinner from '../../../components/Spinner/Spinner';
 
 const RegisterForm = () => {
   const [checked, setChecked] = useState(false);
@@ -94,10 +95,13 @@ const RegisterForm = () => {
       })}
       onSubmit={async (values, actions) => {
         console.log("Register values: ", values);
+        actions.setSubmitting(true)
         await api.auth.register({ ...values }).then((response) => {
           console.log("response", response);
+          actions.setSubmitting(false)
           showSimpleMessage("success", "Registration Successful")
         }).catch(error => {
+          actions.setSubmitting(false)
           console.log("Error =>", error)
           showSimpleMessage("danger", "Error", error)
         });
@@ -105,6 +109,7 @@ const RegisterForm = () => {
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View>
+          <Spinner visible={isSubmitting} />
           <Input
             onChangeText={handleChange("firstName")}
             onBlur={handleBlur("firstName")}
@@ -193,7 +198,7 @@ const RegisterForm = () => {
           <ButtonContainer
             disabled={isSubmitting}
             buttonText="Get Started"
-            buttonStyle={[ButtonStyles.largeGreenButton, { marginVertical: 15, alignSelf: 'center' }]}
+            buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
             buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
             onPress={handleSubmit}
           />

@@ -17,6 +17,7 @@ const RegisterWithEmail = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <ScrollView>
         <LargeHeaderContainer
+          navigation={navigation}
           headerText="Register"
           backgroundColor={colors[Colors.tertiary6]}
           circleImage={<YellowCircleRight />}

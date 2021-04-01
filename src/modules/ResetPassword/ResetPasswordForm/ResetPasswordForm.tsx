@@ -77,7 +77,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
           <ButtonContainer
             disabled={isSubmitting}
             buttonText="Reset password"
-            buttonStyle={[ButtonStyles.largeGreenButton, { marginVertical: 15, alignSelf: 'center' }]}
+            buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
             buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
             onPress={handleSubmit}
           />

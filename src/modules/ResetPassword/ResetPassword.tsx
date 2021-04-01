@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Text, View, Button, ScrollView } from 'react-native'
+import React, { useEffect } from 'react'
+import { Text, View, ScrollView } from 'react-native'
 import LargeHeaderContainer from '../../components/LargeHeaderContainer/LargeHeaderContainer'
 
 import ViewContainer from '../../components/ViewContainer/ViewContainer'
@@ -28,6 +28,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
         paddingBottom: 30,
       }}>
         <LargeHeaderContainer
+          navigation={navigation}
           headerText=""
           backgroundColor={colors[Colors.secondary]}
           circleImage={<PurpleQuarter />}

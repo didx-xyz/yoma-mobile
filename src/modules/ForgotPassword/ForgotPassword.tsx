@@ -25,6 +25,7 @@ const ForgotPassword = ({ navigation }: Props) => {
         paddingBottom: 30,
       }}>
         <LargeHeaderContainer
+          navigation={navigation}
           headerText="Forgot password"
           backgroundColor={colors[Colors.tertiary6]}
           circleImage={<YellowCircleRight />}

@@ -18,6 +18,7 @@ const Register = ({ navigation }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <LargeHeaderContainer
+        navigation={navigation}
         headerText="Register"
         backgroundColor={colors[Colors.secondary]}
         circleImage={<PurpleQuarter />}

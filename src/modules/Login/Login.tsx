@@ -4,8 +4,6 @@ import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import ViewContainer from '../../components/ViewContainer/ViewContainer'
 import { Colors, colors, TextStyles } from '../../styles';
 import styles from './Login.styles'
-import ButtonContainer from '../../components/ButtonContainer/ButtonContainer';
-import ButtonStyles from '../../styles/button.styles';
 import YellowCircleLeft from '../../assets/Images/YellowCircleLeft.svg';
 import LargeHeaderContainer from '../../components/LargeHeaderContainer/LargeHeaderContainer';
 import SocialRegistration from '../../components/SocialRegistration/SocialRegistration';
@@ -20,6 +18,7 @@ const Login = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <ScrollView>
         <LargeHeaderContainer
+          navigation={navigation}
           headerText="Login"
           backgroundColor={colors[Colors.primary]}
           circleImage={<YellowCircleLeft />}

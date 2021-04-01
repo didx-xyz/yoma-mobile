@@ -6,7 +6,7 @@ const { height, width } = Dimensions.get("window")
 
 
 const ButtonStyles = StyleSheet.create({
-  mediumtertiary3Button: {
+  mediumTertiary3Button: {
     backgroundColor: colors[Colors.tertiary3],
     height: height / 13,
     alignItems: 'center',

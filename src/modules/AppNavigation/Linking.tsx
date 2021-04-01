@@ -1,4 +1,4 @@
-import { LinkingOptions, PathConfig, PathConfigMap } from "@react-navigation/native";
+import { LinkingOptions, PathConfigMap } from "@react-navigation/native";
 
 const screens: PathConfigMap = {
   ResetPassword: {
