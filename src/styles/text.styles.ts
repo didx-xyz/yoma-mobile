@@ -45,7 +45,9 @@ const TextStyles = StyleSheet.create({
   cardHeaderText: {
     color: colors[Colors.primary],
     fontFamily: fontStyles[FontFamily.bold],
-    fontSize: 21
+    fontSize: 21,
+    paddingTop: 10,
+    paddingBottom: 15
   } as TextStyle,
   errorText: {
     color: colors[Colors.tertiary1],

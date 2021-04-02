@@ -19,10 +19,10 @@ const Landing = ({ navigation }: Props) => {
       <View style={styles.logoContainer}>
         <WhiteLogo />
       </View>
-      <Text style={[TextStyles.h1, TextStyles.textPrimary]}>
-        Unlock
+      <Text style={[TextStyles.h1, TextStyles.textPrimary, styles.mainBodyText]}>
+        Unlock{'\n'}
+        <Text style={[TextStyles.h1, TextStyles.textWhite]}>your future</Text>
       </Text>
-      <Text style={[TextStyles.h1, TextStyles.textWhite]}>your future</Text>
       <Text style={[TextStyles.h4, TextStyles.textWhite, styles.bodyText]}>
         Build and transform your future by unlocking your hidden potential.
       </Text>

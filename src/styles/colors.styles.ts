@@ -12,7 +12,7 @@ const GREEN = 'rgb(21, 175, 146)'
 const DARK_GREEN = 'rgb(56,127,106)'
 const LIGHT_GREY = 'rgb(229,229,229)'
 const DARK_GREY = 'rgb(86,91,111)'
-const PRIMARY_BLUE = 'rgb(76,173,233)'
+const BLUE_VIOLET = 'rgb(95,101,185)'
 
 export default {
   [Colors.primary]: PURPLE,
@@ -22,7 +22,7 @@ export default {
   [Colors.tertiary3]: DARK_GREEN,
   [Colors.tertiary4]: LIGHT_GREY,
   [Colors.tertiary5]: DARK_GREY,
-  [Colors.tertiary6]: PRIMARY_BLUE,
+  [Colors.tertiary6]: BLUE_VIOLET,
   [Colors.white]: greys.white,
   [Colors.black]: greys.black,
 }
