@@ -1,14 +1,10 @@
+import { PurpleQuarter } from 'assets/Images';
+import { ButtonContainer, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components';
 import React from 'react'
 import { Text, View } from 'react-native'
-
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
-import { Colors, colors, TextStyles } from '../../styles';
+import { Colors, colors, TextStyles } from 'styles';
+import ButtonStyles from 'styles/button.styles';
 import styles from './Register.styles'
-import ButtonContainer from '../../components/ButtonContainer/ButtonContainer';
-import ButtonStyles from '../../styles/button.styles';
-import PurpleQuarter from '../../assets/Images/PurpleQuarter.svg';
-import LargeHeaderContainer from '../../components/LargeHeaderContainer/LargeHeaderContainer';
-import SocialRegistration from '../../components/SocialRegistration/SocialRegistration';
 
 interface Props {
   navigation: any

@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, ViewStyle } from 'react-native'
-import { WithChildren } from '../../types/react.types'
+import { WithChildren } from 'types/react.types'
 import styles from './LargeHeaderContainer.styles'
-import WhiteLogo from '../../assets/Images/WhiteLogo.svg';
 import HeaderContainer from '../HeaderContainer/HeaderContainer';
+import { WhiteLogo } from 'assets/Images';
 
 type Props =
   WithChildren<{

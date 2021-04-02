@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { TextStyles } from '../../styles'
+import { TextStyles } from 'styles'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker';
 
 import styles from './DropDown.styles'

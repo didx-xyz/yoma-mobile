@@ -1,20 +1,17 @@
 import { Formik } from 'formik';
 import React, { useState } from 'react';
 import { Text, View } from 'react-native';
-import ButtonContainer from '../../../components/ButtonContainer/ButtonContainer';
-import { FontFamily, TextStyles } from '../../../styles';
-import ButtonStyles from '../../../styles/button.styles';
 import * as yup from "yup";
-import { nameHasDigitsOrSymbols } from '../../../utils/regex';
-import fontStyles from '../../../styles/font.styles';
 import { CheckBox } from 'react-native-elements'
-import BlueTick from '../../../assets/Images/BlueTick.svg';
-import countries from '../../../constants/countries';
-import Input from '../../../components/Input/Input';
-import DropDown from '../../../components/DropDown/DropDown';
-import api from '../../../api';
-import { showSimpleMessage } from '../../../utils/error';
-import Spinner from '../../../components/Spinner/Spinner';
+import { nameHasDigitsOrSymbols } from 'utils/regex';
+import api from 'api';
+import { showSimpleMessage } from 'utils/error';
+import { ButtonContainer, DropDown, Input, Spinner } from 'components';
+import countries from 'constants/countries';
+import { BlueTick } from 'assets/Images';
+import { FontFamily, TextStyles } from 'styles';
+import fontStyles from 'styles/font.styles';
+import ButtonStyles from 'styles/button.styles';
 
 const RegisterForm = () => {
   const [checked, setChecked] = useState(false);

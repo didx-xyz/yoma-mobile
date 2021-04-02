@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, TextStyle, TouchableOpacityProps, TouchableOpacity, ViewStyle } from 'react-native'
 
-import { WithChildren } from '../../types/react.types'
+import { WithChildren } from 'types/react.types'
 
 type Props = TouchableOpacityProps & WithChildren<{
   buttonStyle: ViewStyle[] | ViewStyle;

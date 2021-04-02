@@ -1,14 +1,10 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import RedSemiCircle from '../../assets/Images/RedSemiCircle.svg';
-import PurpleSemiCircle from '../../assets/Images/PurpleSemiCircle.svg';
-import WhiteLogo from '../../assets/Images/WhiteLogo.svg';
-
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
-import { TextStyles } from '../../styles';
-import styles from './Landing.styles'
-import ButtonContainer from '../../components/ButtonContainer/ButtonContainer';
-import ButtonStyles from '../../styles/button.styles';
+import styles from './Landing.styles';
+import { TextStyles } from 'styles';
+import ButtonStyles from 'styles/button.styles';
+import { RedSemiCircle, WhiteLogo, PurpleSemiCircle } from 'assets/Images';
+import { ButtonContainer, ViewContainer } from 'components';
 
 interface Props {
   navigation: any

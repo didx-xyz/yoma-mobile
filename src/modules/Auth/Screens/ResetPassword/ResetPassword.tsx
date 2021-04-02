@@ -1,12 +1,10 @@
+import { PurpleQuarter } from 'assets/Images';
+import { LargeHeaderContainer, ViewContainer } from 'components';
 import React, { useEffect } from 'react'
 import { Text, View, ScrollView } from 'react-native'
-import LargeHeaderContainer from '../../components/LargeHeaderContainer/LargeHeaderContainer'
-
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
-import { colors, Colors, TextStyles } from '../../styles'
+import { Colors, colors, TextStyles } from 'styles';
 import styles from './ResetPassword.styles'
-import PurpleQuarter from '../../assets/Images/PurpleQuarter.svg';
-import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
+import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm';
 
 interface Props {
   navigation: any,

@@ -1,7 +1,5 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
-
 const styles = {
   container: {
     ...StyleSheet.absoluteFillObject,

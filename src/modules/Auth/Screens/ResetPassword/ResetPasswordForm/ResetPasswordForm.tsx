@@ -1,13 +1,12 @@
-import { Formik } from 'formik';
 import React from 'react';
 import { View } from 'react-native';
-import ButtonContainer from '../../../components/ButtonContainer/ButtonContainer';
-import { TextStyles } from '../../../styles';
-import ButtonStyles from '../../../styles/button.styles';
+import api from 'api';
+import { Input, ButtonContainer } from 'components';
+import { Formik } from 'formik';
+import { TextStyles } from 'styles';
+import ButtonStyles from 'styles/button.styles';
+import { showSimpleMessage } from 'utils/error';
 import * as yup from "yup";
-import Input from '../../../components/Input/Input';
-import api from '../../../api';
-import { showSimpleMessage } from '../../../utils/error';
 
 interface ResetPasswordFormProps {
   id: string,

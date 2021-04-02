@@ -1,7 +1,5 @@
 import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
 
-import { colors, Colors } from '../../styles'
-
 const { height, width } = Dimensions.get("window")
 
 const styles = {

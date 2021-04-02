@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
-import { TextStyles } from '../../styles'
-import BackIcon from '../../assets/Images/BackIcon.svg';
+import { TextStyles } from 'styles'
 
-import { WithChildren } from '../../types/react.types'
+import { WithChildren } from 'types/react.types'
 import styles from './HeaderContainer.styles'
 import { StackActions } from '@react-navigation/native';
+import { BackIcon } from 'assets/Images'
 
 type Props = WithChildren<{
   headerText: string,

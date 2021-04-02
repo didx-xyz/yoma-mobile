@@ -1,10 +1,8 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
-
-import { Colors, colors } from '../../styles'
+import { StyleSheet, ViewStyle } from 'react-native'
+import { colors, Colors } from 'styles'
 
 const styles = {
   container: {
-    paddingBottom: 30,
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.tertiary4]
   } as ViewStyle,
@@ -13,11 +11,11 @@ const styles = {
     height: '40%'
   } as ViewStyle,
   logoContainer: {
-    paddingVertical: 20
+    alignSelf: 'center',
   } as ViewStyle,
   yellowSemiCircleContainer: {
     position: 'absolute',
-    left: 0,
+    right: 0,
     bottom: 0
   } as ViewStyle,
   whiteCard: {
@@ -40,12 +38,7 @@ const styles = {
     backgroundColor: colors[Colors.tertiary4],
     height: 1,
     flex: 1
-  } as ViewStyle,
-  bodyText: {
-    marginVertical: 15,
-    textAlign: 'center',
-    paddingHorizontal: 20
-  } as TextStyle
+  } as ViewStyle
 }
 
 export default StyleSheet.create(styles)

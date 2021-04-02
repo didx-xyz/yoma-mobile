@@ -3,15 +3,12 @@ import { LoginManager } from "react-native-fbsdk";
 import {
   GoogleSignin,
 } from '@react-native-google-signin/google-signin';
-import ButtonStyles from '../../styles/button.styles';
-import { TextStyles } from '../../styles';
-import FacebookIcon from '../../assets/Images/FacebookIcon.svg';
-import GoogleIcon from '../../assets/Images/GoogleIcon.svg';
+import ButtonStyles from 'styles/button.styles';
+import { TextStyles } from 'styles';
 import ButtonContainer from '../ButtonContainer/ButtonContainer';
+import { FacebookIcon, GoogleIcon } from 'assets/Images';
 
 const SocialLogin = () => {
-
-
   const facebookSignin = () => {
     LoginManager.logInWithPermissions(["public_profile"]).then(
       function (result) {

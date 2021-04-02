@@ -1,9 +1,10 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
+    paddingBottom: 30,
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.tertiary4]
   } as ViewStyle,
@@ -12,11 +13,11 @@ const styles = {
     height: '40%'
   } as ViewStyle,
   logoContainer: {
-    alignSelf: 'center',
+    paddingVertical: 20
   } as ViewStyle,
-  purpleSemiCircleContainer: {
+  yellowSemiCircleContainer: {
     position: 'absolute',
-    right: 0,
+    left: 0,
     bottom: 0
   } as ViewStyle,
   whiteCard: {
@@ -26,7 +27,8 @@ const styles = {
     width: "90%",
     alignItems: 'center',
     borderRadius: 12,
-    paddingVertical: 10
+    paddingVertical: 10,
+    elevation: 3
   } as ViewStyle,
   horizontalLineView: {
     flexDirection: 'row',
@@ -38,7 +40,12 @@ const styles = {
     backgroundColor: colors[Colors.tertiary4],
     height: 1,
     flex: 1
-  } as ViewStyle
+  } as ViewStyle,
+  bodyText: {
+    marginVertical: 15,
+    textAlign: 'center',
+    paddingHorizontal: 20
+  } as TextStyle
 }
 
 export default StyleSheet.create(styles)

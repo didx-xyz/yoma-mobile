@@ -1,6 +1,6 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
@@ -14,7 +14,7 @@ const styles = {
   logoContainer: {
     alignSelf: 'center',
   } as ViewStyle,
-  yellowSemiCircleContainer: {
+  purpleSemiCircleContainer: {
     position: 'absolute',
     right: 0,
     bottom: 0
@@ -26,8 +26,7 @@ const styles = {
     width: "90%",
     alignItems: 'center',
     borderRadius: 12,
-    paddingVertical: 10,
-    elevation: 3
+    paddingVertical: 10
   } as ViewStyle,
   horizontalLineView: {
     flexDirection: 'row',

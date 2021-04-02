@@ -1,11 +1,10 @@
+import { YellowCircleRight } from 'assets/Images';
+import { LargeHeaderContainer, ViewContainer } from 'components';
 import React from 'react'
 import { Text, ScrollView, View } from 'react-native'
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
-import { Colors, colors, TextStyles } from '../../styles';
-import styles from './RegisterWithEmail.styles'
-import YellowCircleRight from '../../assets/Images/YellowCircleRight.svg';
-import LargeHeaderContainer from '../../components/LargeHeaderContainer/LargeHeaderContainer';
+import { Colors, colors, TextStyles } from 'styles';
 import RegisterForm from './RegisterForm/RegisterForm';
+import styles from './RegisterWithEmail.styles'
 
 interface Props {
   navigation: any

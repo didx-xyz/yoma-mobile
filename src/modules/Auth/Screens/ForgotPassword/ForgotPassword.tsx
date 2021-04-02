@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
-
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
-import { Colors, colors, TextStyles } from '../../styles';
-import styles from './ForgotPassword.styles'
-import YellowCircleRight from '../../assets/Images/YellowCircleRight.svg';
-import LargeHeaderContainer from '../../components/LargeHeaderContainer/LargeHeaderContainer';
-import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm';
-import ButtonContainer from '../../components/ButtonContainer/ButtonContainer';
-import ButtonStyles from '../../styles/button.styles';
-import Message from '../../assets/Images/Message.svg';
 import { openInbox } from "react-native-email-link";
+import styles from './ForgotPassword.styles'
+import { colors, Colors, TextStyles } from 'styles';
+import ButtonStyles from 'styles/button.styles';
+import { YellowCircleRight, Message } from 'assets/Images';
+import { ViewContainer, LargeHeaderContainer, ButtonContainer } from 'components';
+import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm';
 
 interface Props {
   navigation: any

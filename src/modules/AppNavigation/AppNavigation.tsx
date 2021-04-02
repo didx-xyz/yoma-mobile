@@ -5,16 +5,16 @@ import linking from './Linking'
 
 import DigitalCv from '../DigitalCv/DigitalCv'
 import Earn from '../Earn/Earn'
-import ForgotPassword from '../ForgotPassword/ForgotPassword'
+import ForgotPassword from '../Auth/Screens/ForgotPassword/ForgotPassword'
 import Home from '../Home/Home'
-import Landing from '../Landing/Landing'
-import Login from '../Login/Login'
+import Landing from '../Auth/Screens/Landing/Landing'
+import Login from '../Auth/Screens/Login/Login'
 import Onboarding from '../Onboarding/Onboarding'
 import Opportunities from '../Opportunities/Opportunities'
 import Profile from '../Profile/Profile'
-import Register from '../Register/Register'
-import RegisterWithEmail from '../RegisterWithEmail/RegisterWithEmail'
-import ResetPassword from '../ResetPassword/ResetPassword'
+import Register from '../Auth/Screens/Register/Register'
+import RegisterWithEmail from '../Auth/Screens/RegisterWithEmail/RegisterWithEmail'
+import ResetPassword from '../Auth/Screens/ResetPassword/ResetPassword'
 
 const Stack = createStackNavigator()
 

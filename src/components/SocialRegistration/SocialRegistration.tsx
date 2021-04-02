@@ -3,11 +3,10 @@ import { LoginManager } from "react-native-fbsdk";
 import {
   GoogleSignin, statusCodes,
 } from '@react-native-google-signin/google-signin';
-import ButtonStyles from '../../styles/button.styles';
-import { TextStyles } from '../../styles';
-import FacebookIcon from '../../assets/Images/FacebookIcon.svg';
-import GoogleIcon from '../../assets/Images/GoogleIcon.svg';
 import ButtonContainer from '../ButtonContainer/ButtonContainer';
+import { FacebookIcon, GoogleIcon } from 'assets/Images';
+import { TextStyles } from 'styles';
+import ButtonStyles from 'styles/button.styles';
 
 const SocialRegistration = () => {
 

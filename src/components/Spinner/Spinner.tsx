@@ -1,8 +1,8 @@
 import React from 'react'
 import { ActivityIndicator, Modal, Text, View } from 'react-native'
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from 'styles'
 
-import { WithChildren } from '../../types/react.types'
+import { WithChildren } from 'types/react.types'
 import styles from './Spinner.styles'
 
 type Props =

@@ -1,12 +1,9 @@
+import { YellowCircleLeft } from 'assets/Images';
+import { LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components';
 import React from 'react'
 import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
-
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
-import { Colors, colors, TextStyles } from '../../styles';
+import { colors, Colors, TextStyles } from 'styles';
 import styles from './Login.styles'
-import YellowCircleLeft from '../../assets/Images/YellowCircleLeft.svg';
-import LargeHeaderContainer from '../../components/LargeHeaderContainer/LargeHeaderContainer';
-import SocialRegistration from '../../components/SocialRegistration/SocialRegistration';
 import LoginForm from './LoginForm/LoginForm';
 
 interface Props {
