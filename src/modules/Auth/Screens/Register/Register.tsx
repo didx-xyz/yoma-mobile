@@ -1,6 +1,7 @@
 import { PurpleQuarter } from 'assets/Images';
 import { ButtonContainer, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components';
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { Text, View } from 'react-native'
 import { Colors, colors, TextStyles } from 'styles';
 import ButtonStyles from 'styles/button.styles';
@@ -11,21 +12,23 @@ interface Props {
 }
 
 const Register = ({ navigation }: Props) => {
+  const { t } = useTranslation();
+
   return (
     <ViewContainer style={styles.container}>
       <LargeHeaderContainer
         navigation={navigation}
-        headerText="Register"
+        headerText={t<string>("register")}
         backgroundColor={colors[Colors.secondary]}
         circleImage={<PurpleQuarter />}
         circleImageStyle={styles.purpleSemiCircleContainer}
       />
       <View style={styles.whiteCard}>
         <Text style={TextStyles.cardHeaderText}>
-          Welcome
+          {t("welcome")}
         </Text>
         <ButtonContainer
-          buttonText="Register with email"
+          buttonText={t<string>("registerWithEmail")}
           buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15 }]}
           buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
           onPress={() => navigation.navigate('RegisterWithEmail')}
@@ -36,14 +39,14 @@ const Register = ({ navigation }: Props) => {
             TextStyles.h3,
             TextStyles.textTertiary5,
             { paddingHorizontal: 15 }
-          ]}>or</Text>
+          ]}>{t('or')}</Text>
           <View style={styles.horizontalLine} />
         </View>
         <Text style={[
           TextStyles.h5,
           TextStyles.textTertiary5,
           { marginTop: 15 }
-        ]}>Register with your social account</Text>
+        ]}>{t('registerSocial')}</Text>
         <SocialRegistration />
       </View>
       <Text style={[
@@ -51,14 +54,15 @@ const Register = ({ navigation }: Props) => {
         TextStyles.textTertiary5,
         { textAlign: 'center', marginTop: 30 }
       ]}>
-        Already have an account ?
+        {t('alreadyHaveAccount')}
         <Text style={[
           TextStyles.buttonText,
           TextStyles.textTertiary3,
           { textAlign: 'center' }
         ]}
           onPress={() => navigation.navigate('Login')}
-        >&nbsp; Login.</Text>
+        >&nbsp;
+          {t('login')}.</Text>
       </Text>
     </ViewContainer>
   );

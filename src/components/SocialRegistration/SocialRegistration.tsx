@@ -7,9 +7,10 @@ import ButtonContainer from '../ButtonContainer/ButtonContainer';
 import { FacebookIcon, GoogleIcon } from 'assets/Images';
 import { TextStyles } from 'styles';
 import ButtonStyles from 'styles/button.styles';
+import { useTranslation } from 'react-i18next';
 
 const SocialRegistration = () => {
-
+  const { t } = useTranslation();
 
   const facebookSignin = () => {
     LoginManager.logInWithPermissions(["email", "public_profile", "user_friends"]).then(
@@ -61,14 +62,14 @@ const SocialRegistration = () => {
   return (
     <>
       <ButtonContainer
-        buttonText="Continue with Facebook"
+        buttonText={t<string>("loginFacebook")}
         buttonStyle={[ButtonStyles.facebookButton, { marginVertical: 15 }]}
         buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
         onPress={facebookSignin}
         children={<FacebookIcon />}
       />
       <ButtonContainer
-        buttonText="Continue with Google  "
+        buttonText={t<string>("loginGoogle")}
         buttonStyle={[ButtonStyles.googleButton, { marginVertical: 15 }]}
         buttonTextStyle={[TextStyles.textTertiary5, TextStyles.buttonText]}
         onPress={googleSignIn}

@@ -1,0 +1,24 @@
+{
+  "translation": {
+    "unlock": "Unlock",
+    "yourFuture": "your future",
+    "landingBodyText": "Build and transform your future by unlocking your hidden potential.",
+    "welcome": "Welcome",
+    "login": "Login",
+    "register": "Register",
+    "registerWithEmail": "Register with email",
+    "or": "or",
+    "registerSocial": "Register with your social account",
+    "loginFacebook": "Continue with Facebook",
+    "loginGoogle": "Continue with Google",
+    "alreadyHaveAccount": "Already have an account ?",
+    "name": "Name or Nickname",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "email": "Email",
+    "yourEmail": "Your Email",
+    "yourPassword": "Password",
+    "forgotPassword": "Forgot Password",
+    "dontHaveAccount": "Don't have an account?"
+  }
+}

@@ -1,6 +1,7 @@
 import { YellowCircleRight } from 'assets/Images';
 import { LargeHeaderContainer, ViewContainer } from 'components';
 import React from 'react'
+import { useTranslation } from 'react-i18next';
 import { Text, ScrollView, View } from 'react-native'
 import { Colors, colors, TextStyles } from 'styles';
 import RegisterForm from './RegisterForm/RegisterForm';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 const RegisterWithEmail = ({ navigation }: Props) => {
+  const { t } = useTranslation();
 
   return (
     <ViewContainer style={styles.container}>

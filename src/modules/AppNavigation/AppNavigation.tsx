@@ -8,7 +8,7 @@ import DigitalCv from './DigitalCv/DigitalCv'
 const Stack = createStackNavigator()
 
 const AppNavigation = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   return (
     <NavigationContainer linking={linking}>
