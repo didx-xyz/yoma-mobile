@@ -2,6 +2,7 @@ import api from 'api';
 import { Input, ButtonContainer } from 'components';
 import { Formik } from 'formik';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { View } from 'react-native';
 import { TextStyles } from 'styles';
 import ButtonStyles from 'styles/button.styles';
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const ForgotPasswordForm = ({ setSubmitted }: Props) => {
+  const { t } = useTranslation();
   return (
     <Formik
       initialValues={{
@@ -24,7 +26,7 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
           .min(2)
           .max(255)
           .email()
-          .required("Required")
+          .required(t("required"))
           .label("Email"),
       })}
       onSubmit={async (values, actions) => {
@@ -45,7 +47,7 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
             onChangeText={handleChange("email")}
             onBlur={handleBlur("email")}
             value={values.email}
-            label="Email"
+            label={t("email")}
             keyboardType="email-address"
             autoCapitalize="none"
             touched={touched.email}
@@ -53,7 +55,7 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
           />
           <ButtonContainer
             disabled={isSubmitting}
-            buttonText="Send instructions"
+            buttonText={t<string>("sendInstruction")}
             buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
             buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
             onPress={handleSubmit}

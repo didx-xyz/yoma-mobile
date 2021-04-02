@@ -7,6 +7,7 @@ import ButtonStyles from 'styles/button.styles';
 import { YellowCircleRight, Message } from 'assets/Images';
 import { ViewContainer, LargeHeaderContainer, ButtonContainer } from 'components';
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   navigation: any
@@ -14,6 +15,7 @@ interface Props {
 
 const ForgotPassword = ({ navigation }: Props) => {
   const [emailSent, setEmailSent] = useState(false)
+  const { t } = useTranslation();
 
   return (
     <ViewContainer style={styles.container}>
@@ -22,7 +24,7 @@ const ForgotPassword = ({ navigation }: Props) => {
       }}>
         <LargeHeaderContainer
           navigation={navigation}
-          headerText="Forgot password"
+          headerText={t("forgotPassword")}
           backgroundColor={colors[Colors.tertiary6]}
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowSemiCircleContainer}
@@ -31,20 +33,20 @@ const ForgotPassword = ({ navigation }: Props) => {
           !emailSent ?
             <View style={styles.whiteCard}>
               <Text style={TextStyles.cardHeaderText}>
-                Forgot your password?
+                {t("forgotYourPassword")} ?
               </Text>
               <Text style={[
                 TextStyles.h4,
                 TextStyles.textTertiary5,
                 styles.bodyText
               ]}>
-                Enter your email and we’ll send you an email with instructions to reset your password.
+                {t("forgotPasswordText")}
               </Text>
               <ForgotPasswordForm setSubmitted={() => setEmailSent(true)} />
             </View> :
             <View style={styles.whiteCard}>
               <Text style={TextStyles.cardHeaderText}>
-                Check your mail
+                {t('checkEmail')}
               </Text>
               <View style={styles.logoContainer}>
                 <Message />
@@ -53,9 +55,9 @@ const ForgotPassword = ({ navigation }: Props) => {
                 TextStyles.h4,
                 TextStyles.textTertiary5,
                 { marginVertical: 15, textAlign: 'center', paddingHorizontal: 20 }
-              ]}>We have sent you password recover instructions to your email. </Text>
+              ]}>{t('passwordSentText')}</Text>
               <ButtonContainer
-                buttonText="Open email app"
+                buttonText={t<string>("openEmail")}
                 buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
                 buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
                 onPress={() => openInbox()}
@@ -65,7 +67,7 @@ const ForgotPassword = ({ navigation }: Props) => {
                   TextStyles.buttonText,
                   TextStyles.textTertiary3,
                   { marginVertical: 5 }
-                ]}>Skip and complete later</Text>
+                ]}>{t('skipComplete')}</Text>
               </TouchableOpacity>
             </View>
         }

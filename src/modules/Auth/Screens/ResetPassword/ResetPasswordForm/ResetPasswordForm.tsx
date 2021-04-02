@@ -7,6 +7,7 @@ import { TextStyles } from 'styles';
 import ButtonStyles from 'styles/button.styles';
 import { showSimpleMessage } from 'utils/error';
 import * as yup from "yup";
+import { useTranslation } from 'react-i18next';
 
 interface ResetPasswordFormProps {
   id: string,
@@ -15,6 +16,7 @@ interface ResetPasswordFormProps {
 }
 
 const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) => {
+  const { t } = useTranslation();
   return (
     <Formik
       initialValues={{
@@ -25,7 +27,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
         password: yup
           .string()
           .min(8)
-          .required("Required")
+          .required(t("required"))
           .label("Password")
           .matches(
             /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/,
@@ -35,7 +37,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
           .string()
           .oneOf([yup.ref("password"), null], "Passwords must match")
           .min(8)
-          .required("Required")
+          .required(t("required"))
           .label("Confirm password"),
       })}
       onSubmit={async (values, actions) => {
@@ -57,7 +59,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
             onChangeText={handleChange("password")}
             onBlur={handleBlur("password")}
             value={values.password}
-            label="Password"
+            label={t('password')}
             autoCapitalize="none"
             touched={touched.password}
             error={errors.password}
@@ -67,7 +69,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
             onChangeText={handleChange("confirmPassword")}
             onBlur={handleBlur("confirmPassword")}
             value={values.confirmPassword}
-            label="Confirm Password"
+            label={t('confirmPassword')}
             autoCapitalize="none"
             touched={touched.confirmPassword}
             error={errors.confirmPassword}
@@ -75,7 +77,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
           />
           <ButtonContainer
             disabled={isSubmitting}
-            buttonText="Reset password"
+            buttonText={t<string>("resetPassword")}
             buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
             buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
             onPress={handleSubmit}

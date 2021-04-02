@@ -19,14 +19,14 @@ const RegisterWithEmail = ({ navigation }: Props) => {
       <ScrollView>
         <LargeHeaderContainer
           navigation={navigation}
-          headerText="Register"
+          headerText={t<string>("register")}
           backgroundColor={colors[Colors.tertiary6]}
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowCircleContainer}
         />
         <View style={styles.whiteCard}>
           <Text style={[TextStyles.cardHeaderText, { alignSelf: 'center' }]}>
-            Register
+            {t("register")}
           </Text>
           <RegisterForm />
         </View>
@@ -35,17 +35,18 @@ const RegisterWithEmail = ({ navigation }: Props) => {
           TextStyles.textTertiary5,
           { textAlign: 'center', marginVertical: 30 }
         ]}>
-          Already have an account ?
+          {t('alreadyHaveAccount')}
           <Text style={[
             TextStyles.buttonText,
             TextStyles.textTertiary3,
             { textAlign: 'center' }
           ]}
             onPress={() => navigation.navigate('Login')}
-          >&nbsp; Login.</Text>
+          >&nbsp;
+            {t('login')}.</Text>
         </Text>
       </ScrollView>
-    </ViewContainer>
+    </ViewContainer >
   );
 }
 

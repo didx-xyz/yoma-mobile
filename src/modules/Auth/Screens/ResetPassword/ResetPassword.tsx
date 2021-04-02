@@ -1,6 +1,7 @@
 import { PurpleQuarter } from 'assets/Images';
 import { LargeHeaderContainer, ViewContainer } from 'components';
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next';
 import { Text, View, ScrollView } from 'react-native'
 import { Colors, colors, TextStyles } from 'styles';
 import styles from './ResetPassword.styles'
@@ -12,6 +13,7 @@ interface Props {
 }
 
 const ResetPassword = ({ navigation, route }: Props) => {
+  const { t } = useTranslation();
   const {
     params: { Token, Id },
   } = route;
@@ -34,17 +36,21 @@ const ResetPassword = ({ navigation, route }: Props) => {
         />
         <View style={styles.whiteCard}>
           <Text style={TextStyles.cardHeaderText}>
-            Create new password
+            {t('createNewPassword')}
           </Text>
           <Text style={[
             TextStyles.h4,
             TextStyles.textTertiary5,
             styles.bodyText
           ]}>
-            Your new password must be
-            <Text style={{ fontWeight: 'bold' }}> different </Text>
-            from the previous passwords and at least
-            <Text style={{ fontWeight: 'bold' }}> 8 characters.</Text>
+            {t('resetPasswordBody1')}
+            <Text style={{ fontWeight: 'bold' }}>
+              {t('resetPasswordBody2')}
+            </Text>
+            {t('resetPasswordBody3')}
+            <Text style={{ fontWeight: 'bold' }}>
+              {t('resetPasswordBody4')}
+            </Text>
           </Text>
           <ResetPasswordForm
             id={Id}

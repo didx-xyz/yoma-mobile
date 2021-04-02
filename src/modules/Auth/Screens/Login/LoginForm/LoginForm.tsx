@@ -7,8 +7,10 @@ import { TextStyles } from 'styles';
 import ButtonStyles from 'styles/button.styles';
 import { showSimpleMessage } from 'utils/error';
 import * as yup from "yup";
+import { useTranslation } from 'react-i18next';
 
 const LoginForm = () => {
+  const { t } = useTranslation();
   return (
     <Formik
       initialValues={{
@@ -18,15 +20,15 @@ const LoginForm = () => {
       validationSchema={yup.object().shape({
         email: yup
           .string()
-          .min(2)
+          .min(2, t("emailError"))
           .max(255)
-          .email()
-          .required("Required")
+          .email(t("validEmailError"))
+          .required(t("required"))
           .label("Email"),
         password: yup
           .string()
-          .min(6)
-          .required("Required")
+          .min(8, t("passwordMinCharError"))
+          .required(t("required"))
           .label("Password")
       })}
       onSubmit={async (values, actions) => {
@@ -47,7 +49,7 @@ const LoginForm = () => {
             onChangeText={handleChange("email")}
             onBlur={handleBlur("email")}
             value={values.email}
-            label="Email"
+            label={t('email')}
             keyboardType="email-address"
             autoCapitalize="none"
             touched={touched.email}
@@ -57,14 +59,14 @@ const LoginForm = () => {
             onChangeText={handleChange("password")}
             onBlur={handleBlur("password")}
             value={values.password}
-            label="Password"
+            label={t('password')}
             touched={touched.password}
             error={errors.password}
             secureTextEntry
           />
           <ButtonContainer
             disabled={isSubmitting}
-            buttonText="Login"
+            buttonText={t<string>("login")}
             buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
             buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
             onPress={handleSubmit}
