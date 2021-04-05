@@ -7,13 +7,14 @@ export enum Colors {
   tertiary4 = 'tertiary4',
   tertiary5 = 'tertiary5',
   tertiary6 = 'tertiary6',
+  tertiary7 = 'tertiary7',
   white = 'white',
   black = 'black',
 }
 
 export enum FontFamily {
-  small = "small",
-  medium = "medium",
-  semibold = "semibold",
-  bold = "bold"
+  small = 'small',
+  medium = 'medium',
+  semibold = 'semibold',
+  bold = 'bold',
 }

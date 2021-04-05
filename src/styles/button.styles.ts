@@ -1,9 +1,9 @@
-import { Colors } from './styles.types';
 import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
-import { colors } from '.';
 
-const { height, width } = Dimensions.get("window")
+import { colors } from '.'
+import { Colors } from './styles.types'
 
+const { height, width } = Dimensions.get('window')
 
 const ButtonStyles = StyleSheet.create({
   mediumTertiary3Button: {
@@ -21,7 +21,7 @@ const ButtonStyles = StyleSheet.create({
   } as ViewStyle,
   largeTertiary3Button: {
     backgroundColor: colors[Colors.tertiary3],
-    height: height / 13,
+    height: height / 14,
     alignItems: 'center',
     justifyContent: 'center',
     width: width / 1.3,
@@ -34,7 +34,7 @@ const ButtonStyles = StyleSheet.create({
     justifyContent: 'space-evenly',
     width: width / 1.3,
     borderRadius: 60,
-    flexDirection: 'row'
+    flexDirection: 'row',
   } as ViewStyle,
   googleButton: {
     backgroundColor: colors[Colors.white],
@@ -45,8 +45,8 @@ const ButtonStyles = StyleSheet.create({
     borderRadius: 60,
     flexDirection: 'row',
     borderWidth: 1,
-    borderColor: '#DF4930'
-  } as ViewStyle
+    borderColor: '#DF4930',
+  } as ViewStyle,
 })
 
-export default ButtonStyles;
+export default ButtonStyles

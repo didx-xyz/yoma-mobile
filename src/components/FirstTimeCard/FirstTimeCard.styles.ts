@@ -1,0 +1,54 @@
+import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { colors, Colors } from 'styles'
+
+const { height, width } = Dimensions.get('window')
+
+const styles = {
+  cardView: {
+    backgroundColor: colors[Colors.secondary],
+    width: '97%',
+    borderRadius: 25,
+    alignSelf: 'center',
+    overflow: 'hidden',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+  } as ViewStyle,
+  progressBar: {
+    height: 6,
+    width: '100%',
+    alignSelf: 'center',
+    backgroundColor: 'white',
+    borderRadius: 18,
+    zIndex: 1,
+  } as ViewStyle,
+  innerProgressbar: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: colors[Colors.tertiary1],
+    borderRadius: 18,
+  } as ViewStyle,
+  percentText: {
+    textAlign: 'right',
+    paddingRight: 10,
+    zIndex: 1,
+    paddingVertical: 5,
+  } as TextStyle,
+  buttonStyle: {
+    zIndex: 1,
+    width: '100%',
+    alignSelf: 'center',
+  } as ViewStyle,
+  blueCircle: {
+    position: 'absolute',
+    left: 0,
+    bottom: 0,
+    zIndex: 0,
+  } as ViewStyle,
+  yellowPattern: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    zIndex: 0,
+  } as ViewStyle,
+}
+
+export default StyleSheet.create(styles)
