@@ -3,16 +3,16 @@ import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 import linking from './Linking'
 import Authentication from './Authentication/Authentication'
-import DigitalCv from './DigitalCv/DigitalCv'
+import Home from './Home/Home'
 
 const Stack = createStackNavigator()
 
 const AppNavigation = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
 
   return (
     <NavigationContainer linking={linking}>
-      {isAuthenticated && <DigitalCv />}
+      {isAuthenticated && <Home />}
       {!isAuthenticated && <Authentication />}
     </NavigationContainer>
   );
