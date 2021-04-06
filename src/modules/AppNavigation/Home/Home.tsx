@@ -4,6 +4,7 @@ import { DigitalCvIcon, CoursesIcon, ChallengesIcon, MarketplaceIcon } from 'ass
 import Challenges from 'modules/Challenges/Challenges'
 import Courses from 'modules/Courses/Courses'
 import Marketplace from 'modules/Marketplace/Marketplace'
+import Profile from 'modules/Profile/Profile'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { colors, Colors, FontFamily, TextStyles } from 'styles'
@@ -26,7 +27,7 @@ const tabBarOptions: BottomTabBarOptions = {
   },
 }
 
-const Home = () => {
+const BottomTabs = () => {
   const { t } = useTranslation()
   return (
     <Tab.Navigator tabBarOptions={tabBarOptions}>
@@ -63,6 +64,15 @@ const Home = () => {
         }}
       />
     </Tab.Navigator>
+  )
+}
+
+const Home = () => {
+  return (
+    <Stack.Navigator headerMode={'none'}>
+      <Stack.Screen name="BottomTabs" component={BottomTabs} />
+      <Stack.Screen name="Profile" component={Profile} />
+    </Stack.Navigator>
   )
 }
 

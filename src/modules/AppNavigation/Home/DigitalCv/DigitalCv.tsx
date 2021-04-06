@@ -1,5 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack'
 import DigitalCvHome from 'modules/DigitalCv/DigitalCvHome'
+import Profile from 'modules/Profile/Profile'
 import React from 'react'
 
 const Stack = createStackNavigator()
