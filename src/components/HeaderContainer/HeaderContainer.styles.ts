@@ -1,7 +1,8 @@
 import { StyleSheet, ViewStyle, Dimensions, ImageStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
-const { width, height } = Dimensions.get("window");
+
+const { width, height } = Dimensions.get('window')
 
 const styles = {
   header: {
@@ -9,11 +10,11 @@ const styles = {
     height: height / 12,
     padding: 10,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   } as ViewStyle,
   backIconView: {
     position: 'absolute',
-    left: 20
+    left: 20,
   } as ViewStyle,
   backIcon: {
     height: 25,

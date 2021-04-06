@@ -1,20 +1,20 @@
+import { WhiteLogo } from 'assets/Images'
 import React from 'react'
 import { View, ViewStyle } from 'react-native'
 import { WithChildren } from 'types/react.types'
-import styles from './LargeHeaderContainer.styles'
-import HeaderContainer from '../HeaderContainer/HeaderContainer';
-import { WhiteLogo } from 'assets/Images';
 
-type Props =
-  WithChildren<{
-    style?: ViewStyle,
-    headerText: string,
-    // TODO: Need to check Svg type
-    circleImage: SVGElement,
-    circleImageStyle: ViewStyle,
-    backgroundColor: string,
-    navigation: any
-  }>
+import HeaderContainer from '../HeaderContainer/HeaderContainer'
+import styles from './LargeHeaderContainer.styles'
+
+type Props = WithChildren<{
+  style?: ViewStyle
+  headerText: string
+  // TODO: Need to check Svg type
+  circleImage: SVGElement
+  circleImageStyle: ViewStyle
+  backgroundColor: string
+  navigation: any
+}>
 
 const LargeHeaderContainer = ({
   children,
@@ -23,7 +23,7 @@ const LargeHeaderContainer = ({
   circleImage,
   circleImageStyle,
   backgroundColor,
-  navigation
+  navigation,
 }: Props) => {
   return (
     <View style={[styles.container, { backgroundColor: backgroundColor }, style]}>
@@ -32,9 +32,7 @@ const LargeHeaderContainer = ({
       <View style={styles.logoContainer}>
         <WhiteLogo />
       </View>
-      <View style={circleImageStyle}>
-        {circleImage}
-      </View>
+      <View style={circleImageStyle}>{circleImage}</View>
     </View>
   )
 }
