@@ -1,9 +1,24 @@
+import { cleanup, render } from '@testing-library/react-native'
 import React from 'react'
 import 'react-native'
-import renderer from 'react-test-renderer'
 
 import App from './App'
 
-it('renders correctly', () => {
-  renderer.create(<App />)
+jest.mock('react-native-localize', () => ({
+  findBestAvailableLanguage: (_x: any) => ({
+    languageTag: null,
+  }),
+  addEventListener: jest.fn(),
+  removeEventListener: jest.fn(),
+}))
+jest.mock('@react-native-google-signin/google-signin', () => ({}))
+
+describe('App', () => {
+  afterEach(cleanup)
+  it('should render correctly', () => {
+    const { toJSON } = render(<App />)
+    const componentAsJSON = toJSON()
+
+    expect(componentAsJSON).toMatchSnapshot()
+  })
 })
