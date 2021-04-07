@@ -1,7 +1,5 @@
 import { BASE_URL } from 'api'
-import { AxiosInstance } from 'axios'
 import RNFetchBlob from 'rn-fetch-blob'
-import { showSimpleMessage } from 'utils/error'
 
 export default function () {
   return {

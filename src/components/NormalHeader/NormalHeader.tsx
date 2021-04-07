@@ -10,9 +10,10 @@ import styles from './NormalHeader.styles'
 type Props = WithChildren<{
   navigation: any
   headerText: string
+  onSave?: () => void
 }>
 
-const NormalHeader = ({ navigation, headerText }: Props) => {
+const NormalHeader = ({ navigation, headerText, onSave }: Props) => {
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       goBack()
@@ -30,12 +31,8 @@ const NormalHeader = ({ navigation, headerText }: Props) => {
         <BackIconGrey />
       </TouchableOpacity>
       <Text style={[TextStyles.textPrimary, TextStyles.semiBoldText]}>{headerText}</Text>
-      <TouchableOpacity >
-        <Text style={[
-          TextStyles.boldText,
-          TextStyles.textTertiary3,
-          { paddingRight: 20 }
-        ]}>Save</Text>
+      <TouchableOpacity onPress={onSave}>
+        <Text style={[TextStyles.boldText, TextStyles.textTertiary3, { paddingRight: 20 }]}>Save</Text>
       </TouchableOpacity>
     </View>
   )

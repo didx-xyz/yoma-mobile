@@ -46,14 +46,8 @@ const Profile = ({ navigation }: Props) => {
       mediaType: 'photo',
       useFrontCamera: true,
       cropperCircleOverlay: true,
-      height: 10,
-      width: 10,
     })
       .then(async image => {
-        console.log(image.data)
-        console.log(image.mime)
-        console.log(image.path)
-        console.log(image)
         onSubmit(image)
         setProfileImage(image.data)
       })
@@ -62,9 +56,13 @@ const Profile = ({ navigation }: Props) => {
       })
   }
 
+  const editProfile = () => {
+    console.log('parent')
+  }
+
   return (
     <ViewContainer style={styles.container}>
-      <NormalHeader navigation={navigation} headerText={'Profile'} />
+      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={editProfile} />
       <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
         <View style={styles.whiteCard}>
           {profileImage ? (
@@ -89,7 +87,7 @@ const Profile = ({ navigation }: Props) => {
               }}
             />
           )}
-          <ProfileForm />
+          <ProfileForm onSave={editProfile} />
         </View>
         <TouchableOpacity
           onPress={() =>
