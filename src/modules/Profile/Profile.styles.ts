@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { Colors, colors } from '../../styles'
 
@@ -14,7 +14,20 @@ const styles = {
     paddingVertical: 20,
     elevation: 3,
     alignItems: 'center',
-    marginTop: 50
+    marginTop: 50,
+  } as ViewStyle,
+  profileImage: {
+    height: 70,
+    width: 70,
+    borderRadius: 35,
+  } as ImageStyle,
+  editIcon: {
+    elevation: 3,
+    backgroundColor: '#fff',
+    borderRadius: 15,
+    position: 'absolute',
+    right: 0,
+    bottom: -5,
   } as ViewStyle,
 }
 

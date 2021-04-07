@@ -1,14 +1,12 @@
 import api from 'api'
-import { BlueTick } from 'assets/Images'
-import { ButtonContainer, DropDown, Spinner, } from 'components'
+import { DropDown, Spinner } from 'components'
 import CustomInput from 'components/CustomInput/CustomInput'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
-import { FontFamily, TextStyles } from 'styles'
-import fontStyles from 'styles/font.styles'
+import { TextStyles } from 'styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
@@ -26,7 +24,7 @@ const ProfileForm = () => {
         lastName: '',
         countryAlpha2: '',
         email: '',
-        phoneNumber: ''
+        phoneNumber: '',
       }}
       validationSchema={yup.object().shape({
         firstName: yup
@@ -59,8 +57,8 @@ const ProfileForm = () => {
           .string()
           .required(t('required'))
           .matches(phoneRegExp, 'Phone number is not valid')
-          .min(10, "too short")
-          .max(13, "too long"),
+          .min(10, 'too short')
+          .max(13, 'too long'),
       })}
       onSubmit={async (values, actions) => {
         console.log('Register values: ', values)
@@ -106,37 +104,35 @@ const ProfileForm = () => {
             touched={touched.countryAlpha2}
             error={errors.countryAlpha2}
           />
-          {
-            dropdown ?
-              <DropDown
-                items={countries.map(c => ({
-                  label: c.name,
-                  value: c.code,
-                }))}
-                onChangeItem={itemValue => {
-                  handleChange('countryAlpha2')
-                  handleBlur('countryAlpha2')
-                  setFieldValue('countryAlpha2', itemValue.label)
-                  setCountry(itemValue.value)
-                  setDropDown(false)
-                }}
-                defaultValue={country}
-                searchable={true}
-                searchablePlaceholder="Search for country"
-                searchablePlaceholderTextColor="gray"
-                placeholder={t('country')}
-                touched={touched.countryAlpha2}
-                error={errors.countryAlpha2}
-                isVisible={dropdown}
-              /> : null
-          }
-          <Text style={[
-            TextStyles.boldText,
-            TextStyles.textTertiary3,
-            { alignSelf: 'flex-end', paddingRight: 20 }
-          ]}
+          {dropdown ? (
+            <DropDown
+              items={countries.map(c => ({
+                label: c.name,
+                value: c.code,
+              }))}
+              onChangeItem={itemValue => {
+                handleChange('countryAlpha2')
+                handleBlur('countryAlpha2')
+                setFieldValue('countryAlpha2', itemValue.label)
+                setCountry(itemValue.value)
+                setDropDown(false)
+              }}
+              defaultValue={country}
+              searchable={true}
+              searchablePlaceholder="Search for country"
+              searchablePlaceholderTextColor="gray"
+              placeholder={t('country')}
+              touched={touched.countryAlpha2}
+              error={errors.countryAlpha2}
+              isVisible={dropdown}
+            />
+          ) : null}
+          <Text
+            style={[TextStyles.boldText, TextStyles.textTertiary3, { alignSelf: 'flex-end', paddingRight: 20 }]}
             onPress={() => setDropDown(true)}
-          >Use current location</Text>
+          >
+            Use current location
+          </Text>
           <CustomInput
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}

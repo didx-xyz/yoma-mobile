@@ -13,8 +13,13 @@ const AppNavigation = () => {
 
   return (
     <NavigationContainer linking={linking}>
-      {isAuthenticated && <Home />}
-      {!isAuthenticated && <Authentication />}
+      <Stack.Navigator headerMode="none">
+        {isAuthenticated ? (
+          <Stack.Screen name="Home" component={Home} />
+        ) : (
+          <Stack.Screen name="Authentication" component={Authentication} />
+        )}
+      </Stack.Navigator>
     </NavigationContainer>
   )
 }

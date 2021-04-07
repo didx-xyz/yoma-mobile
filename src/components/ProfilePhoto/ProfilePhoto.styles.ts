@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle, Dimensions, ImageStyle, TextStyle } from 'react-native'
+import { StyleSheet, ViewStyle, Dimensions } from 'react-native'
 
 import { colors, Colors } from '../../styles'
 
@@ -11,7 +11,7 @@ const styles = {
     borderRadius: 15,
     position: 'absolute',
     right: 0,
-    bottom: -5
+    bottom: -5,
   } as ViewStyle,
 }
 

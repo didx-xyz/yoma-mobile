@@ -6,7 +6,7 @@ import users from './users'
 const FALLBACK_MESSAGE = 'Unable to reach server'
 const REFRESH_TOKEN_FAILED_MESSAGE = 'Unable to refresh your session'
 const UNAUTHORIZED_STATUS_CODE = 401
-const BASE_URL = 'https://staging.api.yoma.africa/api/v1/'
+export const BASE_URL = 'https://staging.api.yoma.africa/api/v1/'
 
 const instance = axios.create({
   baseURL: BASE_URL,
@@ -20,7 +20,7 @@ instance.interceptors.request.use(
     request.headers = {
       ...request.headers,
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${token}`,
+      // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiVXNlciIsInVuaXF1ZV9uYW1lIjoiNWYyNTg4NDYtNmEzYi00YjJmLThjY2YtYjI1MWJlYWMwNjZiIiwibmJmIjoxNjE3Nzc5MDkzLCJleHAiOjE2MTc3ODA4OTMsImlhdCI6MTYxNzc3OTA5M30.75DU1ni0lHAAd67jRTmZILFUiFCJixqlS-WxhsTn-C0`,
     }
     return request
   },
