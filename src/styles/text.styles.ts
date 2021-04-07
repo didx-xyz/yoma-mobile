@@ -52,6 +52,9 @@ const TextStyles = StyleSheet.create({
   textTertiary7: {
     color: colors[Colors.tertiary7],
   },
+  textTertiary9: {
+    color: colors[Colors.tertiary9],
+  },
   textTertiary3: {
     color: colors[Colors.tertiary3],
   },

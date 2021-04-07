@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function ProgressCircle({
-  backgroundColor = '#eee',
+  backgroundColor = '#D4D9E4',
   borderWidth = 1,
   children,
   color = '#333',

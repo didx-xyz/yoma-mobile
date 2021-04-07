@@ -4,7 +4,7 @@ import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.tertiary4],
+    backgroundColor: colors[Colors.tertiary8],
     alignItems: 'center',
     ...StyleSheet.absoluteFillObject,
   } as ViewStyle,

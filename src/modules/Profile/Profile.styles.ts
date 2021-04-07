@@ -4,15 +4,18 @@ import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.white],
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: colors[Colors.tertiary8],
     ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
-  text: {
-    fontSize: 36,
-    fontWeight: 'bold',
-  } as TextStyle,
+  whiteCard: {
+    backgroundColor: colors[Colors.white],
+    width: '95%',
+    borderRadius: 12,
+    paddingVertical: 20,
+    elevation: 3,
+    alignItems: 'center',
+    marginTop: 50
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

@@ -19,6 +19,7 @@ import EditIcon from './icon-edit.svg'
 import ProfileIcon from './icon-profile.svg'
 import MarketplaceIcon from './marketplaceIcon.svg'
 import ZIcon from './zIcon.svg'
+import BackIconGrey from './icon-back-grey.svg'
 
 export {
   RedSemiCircle,
@@ -42,4 +43,5 @@ export {
   BlueRightCircle,
   RLabsLogo,
   EditIcon,
+  BackIconGrey
 }
