@@ -10,7 +10,7 @@ import styles from './NormalHeader.styles'
 type Props = WithChildren<{
   navigation: any
   headerText: string
-  onSave?: () => void
+  onSave?: any
 }>
 
 const NormalHeader = ({ navigation, headerText, onSave }: Props) => {

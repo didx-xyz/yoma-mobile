@@ -3,7 +3,7 @@ import { EditIcon } from 'assets/Images'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
@@ -20,6 +20,7 @@ interface Props {
 const Profile = ({ navigation }: Props) => {
   const [profileImage, setProfileImage] = useState<any>('')
   const { t } = useTranslation()
+  const childRef = useRef<any>()
 
   async function onSubmit(image: any) {
     const photo = {
@@ -56,13 +57,9 @@ const Profile = ({ navigation }: Props) => {
       })
   }
 
-  const editProfile = () => {
-    console.log('parent')
-  }
-
   return (
     <ViewContainer style={styles.container}>
-      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={editProfile} />
+      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={() => childRef.current.handleSubmit()} />
       <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
         <View style={styles.whiteCard}>
           {profileImage ? (
@@ -87,7 +84,7 @@ const Profile = ({ navigation }: Props) => {
               }}
             />
           )}
-          <ProfileForm onSave={editProfile} />
+          <ProfileForm ref={childRef} navigation={navigation} />
         </View>
         <TouchableOpacity
           onPress={() =>

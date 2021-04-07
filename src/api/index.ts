@@ -15,12 +15,13 @@ const instance = axios.create({
   },
 })
 
+// TODO: Static token for now
 instance.interceptors.request.use(
   async request => {
     request.headers = {
       ...request.headers,
       'Content-Type': 'application/json',
-      // Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiVXNlciIsInVuaXF1ZV9uYW1lIjoiNWYyNTg4NDYtNmEzYi00YjJmLThjY2YtYjI1MWJlYWMwNjZiIiwibmJmIjoxNjE3Nzc5MDkzLCJleHAiOjE2MTc3ODA4OTMsImlhdCI6MTYxNzc3OTA5M30.75DU1ni0lHAAd67jRTmZILFUiFCJixqlS-WxhsTn-C0`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoiVXNlciIsInVuaXF1ZV9uYW1lIjoiNWYyNTg4NDYtNmEzYi00YjJmLThjY2YtYjI1MWJlYWMwNjZiIiwibmJmIjoxNjE3ODE5NTM1LCJleHAiOjE2MTc4MjEzMzUsImlhdCI6MTYxNzgxOTUzNX0.g0JmabcOEKxRk47pXWMtXKj9nUeIBD_qyt5M4uKNVeg`,
     }
     return request
   },

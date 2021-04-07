@@ -2,8 +2,8 @@ import api from 'api'
 import { DropDown, Spinner } from 'components'
 import CustomInput from 'components/CustomInput/CustomInput'
 import countries from 'constants/countries'
-import { Formik, FormikValues, useFormikContext } from 'formik'
-import React, { useRef, useState } from 'react'
+import { Formik } from 'formik'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 import { TextStyles } from 'styles'
@@ -12,18 +12,27 @@ import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
 
 interface Props {
-  onSave: any
+  navigation: any
 }
 
-const ProfileForm = ({ onSave }: Props) => {
+const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
-
+  const formRef = useRef<any>()
   const [country, setCountry] = useState('')
   const [dropdown, setDropDown] = useState(false)
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
+  useImperativeHandle(ref, () => ({
+    handleSubmit() {
+      if (formRef.current) {
+        formRef.current.handleSubmit()
+      }
+    },
+  }))
+
   return (
     <Formik
+      innerRef={formRef}
       initialValues={{
         firstName: '',
         lastName: '',
@@ -67,6 +76,14 @@ const ProfileForm = ({ onSave }: Props) => {
       })}
       onSubmit={async (values, actions) => {
         console.log('edit values: ', values)
+        // TODO:static user ID
+        try {
+          const response = await api.users.edit('5f258846-6a3b-4b2f-8ccf-b251beac066b', values)
+          console.log('response', response)
+          navigation.navigate('BottomTabs')
+        } catch (error) {
+          console.log('error', error)
+        }
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => {
@@ -92,7 +109,7 @@ const ProfileForm = ({ onSave }: Props) => {
             <CustomInput
               onChangeText={handleChange('countryAlpha2')}
               onBlur={handleBlur('countryAlpha2')}
-              value={values.countryAlpha2}
+              value={country}
               label={t('Country/Region')}
               touched={touched.countryAlpha2}
               error={errors.countryAlpha2}
@@ -106,8 +123,8 @@ const ProfileForm = ({ onSave }: Props) => {
                 onChangeItem={itemValue => {
                   handleChange('countryAlpha2')
                   handleBlur('countryAlpha2')
-                  setFieldValue('countryAlpha2', itemValue.label)
-                  setCountry(itemValue.value)
+                  setFieldValue('countryAlpha2', itemValue.value)
+                  setCountry(itemValue.label)
                   setDropDown(false)
                 }}
                 defaultValue={country}
@@ -151,6 +168,6 @@ const ProfileForm = ({ onSave }: Props) => {
       }}
     </Formik>
   )
-}
+})
 
 export default ProfileForm
