@@ -3,7 +3,8 @@ import { DropDown, Spinner } from 'components'
 import CustomInput from 'components/CustomInput/CustomInput'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import { USER_ID } from 'helpers/helpers'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
 import { TextStyles } from 'styles'
@@ -17,6 +18,13 @@ interface Props {
 
 const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
+  const [user, setUser] = useState({
+    firstName: '',
+    lastName: '',
+    countryAlpha2: '',
+    email: '',
+    phoneNumber: '',
+  })
   const formRef = useRef<any>()
   const [country, setCountry] = useState('')
   const [dropdown, setDropDown] = useState(false)
@@ -30,16 +38,31 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
     },
   }))
 
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = async () => {
+    await api.users
+      .getById(USER_ID)
+      .then(async response => {
+        const userData = response.data
+        const { firstName, lastName, email, countryAlpha2, phoneNumber } = userData
+        setUser({ firstName, lastName, email, countryAlpha2, phoneNumber })
+        setCountry(countryAlpha2)
+        console.log(countryAlpha2)
+      })
+      .catch(error => {
+        console.log('error', error)
+        showSimpleMessage('danger', 'Error', error)
+      })
+  }
+
   return (
     <Formik
       innerRef={formRef}
-      initialValues={{
-        firstName: '',
-        lastName: '',
-        countryAlpha2: '',
-        email: '',
-        phoneNumber: '',
-      }}
+      initialValues={user}
+      enableReinitialize={true}
       validationSchema={yup.object().shape({
         firstName: yup
           .string()
@@ -76,9 +99,8 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
       })}
       onSubmit={async (values, actions) => {
         console.log('edit values: ', values)
-        // TODO:static user ID
         try {
-          const response = await api.users.edit('5f258846-6a3b-4b2f-8ccf-b251beac066b', values)
+          const response = await api.users.edit(USER_ID, values)
           console.log('response', response)
           navigation.navigate('Home')
         } catch (error) {

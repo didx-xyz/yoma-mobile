@@ -3,7 +3,8 @@ import { EditIcon } from 'assets/Images'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
-import React, { useRef, useState } from 'react'
+import { USER_ID } from 'helpers/helpers'
+import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
@@ -22,6 +23,24 @@ const Profile = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const childRef = useRef<any>()
 
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  const getUserData = async () => {
+    await api.users
+      .getById(USER_ID)
+      .then(async response => {
+        const userData = response.data
+        const { photoURL } = userData
+        setProfileImage(photoURL)
+      })
+      .catch(error => {
+        console.log('error', error)
+        showSimpleMessage('danger', 'Error', error)
+      })
+  }
+
   async function onSubmit(image: any) {
     const photo = {
       name: 'Photo',
@@ -30,8 +49,7 @@ const Profile = ({ navigation }: Props) => {
       data: image.data,
     }
     try {
-      // Todo:Static user id need to change
-      const response = await api.users.photo.create('5f258846-6a3b-4b2f-8ccf-b251beac066b', photo)
+      const response = await api.users.photo.create(USER_ID, photo)
       console.log(response)
     } catch (error) {
       showSimpleMessage('danger', 'Error', error)
@@ -47,6 +65,7 @@ const Profile = ({ navigation }: Props) => {
       mediaType: 'photo',
       useFrontCamera: true,
       cropperCircleOverlay: true,
+      compressImageQuality: 0.5,
     })
       .then(async image => {
         onSubmit(image)
@@ -64,10 +83,7 @@ const Profile = ({ navigation }: Props) => {
         <View style={styles.whiteCard}>
           {profileImage ? (
             <TouchableOpacity onPress={captureImage}>
-              <Image
-                source={{ uri: 'data:image/png;base64,' + profileImage }}
-                style={[styles.profileImage, { marginTop: -50 }]}
-              />
+              <Image source={{ uri: profileImage }} style={[styles.profileImage, { marginTop: -50 }]} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>
