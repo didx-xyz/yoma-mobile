@@ -6,6 +6,7 @@ import Challenges from 'modules/Challenges/Challenges'
 import Courses from 'modules/Courses/Courses'
 import DigitalCv from 'modules/DigitalCv/DigitalCv'
 import DigitalCvHome from 'modules/DigitalCv/DigitalCv'
+import Experience from 'modules/Experience/Experience'
 import Marketplace from 'modules/Marketplace/Marketplace'
 import Profile from 'modules/Profile/Profile'
 import React from 'react'
@@ -75,6 +76,7 @@ const Home = () => {
       <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="DigitalCvHome" component={DigitalCvHome} />
       <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="Experience" component={Experience} />
     </Stack.Navigator>
   )
 }

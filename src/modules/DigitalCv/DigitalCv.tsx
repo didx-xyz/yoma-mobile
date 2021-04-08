@@ -41,6 +41,7 @@ const DigitalCv = ({ navigation }: Props) => {
           }
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
+          onEdit={() => navigation.navigate('Experience')}
         />
         <CvCard
           certCount={
