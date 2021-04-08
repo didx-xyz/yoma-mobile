@@ -16,7 +16,7 @@ const styles = {
     marginVertical: 10,
     alignSelf: 'center',
     paddingHorizontal: 15,
-    flex: 1
+    flex: 1,
   } as ViewStyle,
   textInputStyle: {
     borderBottomWidth: 1,
@@ -24,7 +24,7 @@ const styles = {
     flex: 1,
     borderColor: colors[Colors.tertiary9],
     paddingLeft: 0,
-    textAlignVertical: 'top'
+    textAlignVertical: 'top',
   } as ViewStyle,
 }
 

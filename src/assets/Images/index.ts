@@ -12,6 +12,7 @@ import RedSemiCircle from './RedSemiCircle.svg'
 import WhiteLogo from './WhiteLogo.svg'
 import YellowCircleLeft from './YellowCircleLeft.svg'
 import YellowCircleRight from './YellowCircleRight.svg'
+import BackIconGrey from './icon-back-grey.svg'
 import ChallengesIcon from './icon-challenges.svg'
 import CoursesIcon from './icon-courses.svg'
 import DigitalCvIcon from './icon-digital-cv.svg'
@@ -19,7 +20,6 @@ import EditIcon from './icon-edit.svg'
 import ProfileIcon from './icon-profile.svg'
 import MarketplaceIcon from './marketplaceIcon.svg'
 import ZIcon from './zIcon.svg'
-import BackIconGrey from './icon-back-grey.svg'
 
 export {
   RedSemiCircle,
@@ -43,5 +43,5 @@ export {
   BlueRightCircle,
   RLabsLogo,
   EditIcon,
-  BackIconGrey
+  BackIconGrey,
 }

@@ -51,15 +51,15 @@ const About = ({ navigation }: Props) => {
       <InfoModal
         visible={infoModal}
         closeModal={() => setInfoModal(false)}
-        infoText={'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '}
+        infoText={
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
+        }
       />
       <NormalHeader navigation={navigation} headerText={t('About')} onSave={updateBiography} />
       <View style={styles.whiteCard}>
-        <Text style={[
-          TextStyles.textTertiary5,
-          TextStyles.semiBoldText,
-          { alignSelf: 'flex-start' }
-        ]}>{t('Summary')}</Text>
+        <Text style={[TextStyles.textTertiary5, TextStyles.semiBoldText, { alignSelf: 'flex-start' }]}>
+          {t('Summary')}
+        </Text>
         <TextInput
           style={styles.textInputStyle}
           value={summary}

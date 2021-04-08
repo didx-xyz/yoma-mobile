@@ -14,7 +14,7 @@ const styles = {
     height: 35,
     padding: 0,
     borderBottomWidth: 1,
-    borderColor: colors[Colors.tertiary9]
+    borderColor: colors[Colors.tertiary9],
   } as ViewStyle,
 }
 
