@@ -13,6 +13,8 @@ jest.mock('react-native-localize', () => ({
 }))
 jest.mock('@react-native-google-signin/google-signin', () => ({}))
 
+jest.mock('rn-fetch-blob', () => ({}));
+
 describe('App', () => {
   afterEach(cleanup)
   it('should render correctly', () => {

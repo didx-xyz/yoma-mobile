@@ -60,6 +60,8 @@
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
+    "@testing-library/jest-native": "^4.0.1",
+    "@testing-library/react-native": "^7.2.0",
     "@react-native-community/eslint-config": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^1.4.4",
     "@types/jest": "^25.2.3",
@@ -95,6 +97,14 @@
   },
   "jest": {
     "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!(jest-)?react-native|@?react-navigation)",
+      "node_modules/(?!rn-fetch-blob)"
+    ],
+    "setupFiles": [
+      "./node_modules/react-native-gesture-handler/jestSetup.js",
+      "<rootDir>/__mocks__"
+    ],
     "moduleFileExtensions": [
       "ts",
       "tsx",

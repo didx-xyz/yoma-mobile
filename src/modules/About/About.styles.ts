@@ -25,7 +25,7 @@ const styles = {
     borderColor: colors[Colors.tertiary9],
     paddingLeft: 0,
     textAlignVertical: 'top'
-  } as ViewStyle
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
