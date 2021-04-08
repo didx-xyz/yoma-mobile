@@ -17,6 +17,7 @@ const DARK_BLUE = 'rgb(22,42,66)'
 const MEDIUM_GREY = 'rgb(241,244,248)'
 const SANTAS_GREY = 'rgb(149,155,180)'
 
+// TODO:needs to be updated to correct names
 export default {
   [Colors.primary]: PURPLE,
   [Colors.secondary]: YELLOW,
