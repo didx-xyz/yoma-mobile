@@ -14,6 +14,7 @@ const LIGHT_GREY = 'rgb(229,229,229)'
 const DARK_GREY = 'rgb(86,91,111)'
 const BLUE_VIOLET = 'rgb(95,101,185)'
 
+// TODO:needs to be updated to correct names
 export default {
   [Colors.primary]: PURPLE,
   [Colors.secondary]: YELLOW,
