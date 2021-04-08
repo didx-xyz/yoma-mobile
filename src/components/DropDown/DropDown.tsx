@@ -1,20 +1,16 @@
 import React from 'react'
 import { Text, View } from 'react-native'
+import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
 import { TextStyles } from 'styles'
-import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker';
 
 import styles from './DropDown.styles'
 
 type Props = DropDownPickerProps & {
-  touched?: boolean,
+  touched?: boolean
   error?: any
-};
+}
 
-const DropDown = ({
-  touched,
-  error,
-  ...props
-}: Props) => {
+const DropDown = ({ touched, error, ...props }: Props) => {
   return (
     <View>
       <DropDownPicker
@@ -23,13 +19,13 @@ const DropDown = ({
         dropDownStyle={styles.dropDownViewStyle}
         labelStyle={[TextStyles.h4, TextStyles.textTertiary5]}
         itemStyle={{
-          justifyContent: 'flex-start'
+          justifyContent: 'flex-start',
         }}
         {...props}
       />
       <Text style={TextStyles.errorText}>{touched && error}</Text>
     </View>
-  );
-};
+  )
+}
 
 export default DropDown

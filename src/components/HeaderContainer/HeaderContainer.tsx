@@ -1,33 +1,28 @@
+import { StackActions } from '@react-navigation/native'
+import { BackIcon } from 'assets/Images'
 import React, { useEffect } from 'react'
 import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
 import { TextStyles } from 'styles'
-
 import { WithChildren } from 'types/react.types'
+
 import styles from './HeaderContainer.styles'
-import { StackActions } from '@react-navigation/native';
-import { BackIcon } from 'assets/Images'
 
 type Props = WithChildren<{
-  headerText: string,
+  headerText: string
   navigation: any
 }>
 
-const HeaderContainer = ({
-  headerText,
-  navigation
-}: Props) => {
+const HeaderContainer = ({ headerText, navigation }: Props) => {
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      goBack();
-      return true;
-    });
-    return () => backHandler.remove();
+      goBack()
+      return true
+    })
+    return () => backHandler.remove()
   }, [])
 
   const goBack = () => {
-    navigation.dispatch(
-      StackActions.pop(1)
-    );
+    navigation.dispatch(StackActions.pop(1))
   }
 
   return (
@@ -35,13 +30,7 @@ const HeaderContainer = ({
       <TouchableOpacity style={styles.backIconView} onPress={goBack}>
         <BackIcon />
       </TouchableOpacity>
-      <Text
-        style={[
-          TextStyles.textWhite,
-          TextStyles.headerText
-        ]}>
-        {headerText}
-      </Text>
+      <Text style={[TextStyles.textWhite, TextStyles.headerText]}>{headerText}</Text>
     </View>
   )
 }

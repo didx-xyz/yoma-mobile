@@ -12,8 +12,8 @@ export enum Colors {
 }
 
 export enum FontFamily {
-  small = "small",
-  medium = "medium",
-  semibold = "semibold",
-  bold = "bold"
+  small = 'small',
+  medium = 'medium',
+  semibold = 'semibold',
+  bold = 'bold',
 }
