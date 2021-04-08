@@ -80,7 +80,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
         try {
           const response = await api.users.edit('5f258846-6a3b-4b2f-8ccf-b251beac066b', values)
           console.log('response', response)
-          navigation.navigate('BottomTabs')
+          navigation.navigate('Home')
         } catch (error) {
           console.log('error', error)
         }

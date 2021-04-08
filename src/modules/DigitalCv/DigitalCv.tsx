@@ -8,13 +8,13 @@ import { Button, ScrollView, Dimensions, Text, TouchableOpacity, View } from 're
 import { Colors, colors, TextStyles } from 'styles'
 
 import ViewContainer from '../../components/ViewContainer/ViewContainer'
-import styles from './DigitalCvHome.styles'
+import styles from './DigitalCv.styles'
 
 interface Props {
   navigation: any
 }
 
-const DigitalCvHome = ({ navigation }: Props) => {
+const DigitalCv = ({ navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
@@ -22,9 +22,9 @@ const DigitalCvHome = ({ navigation }: Props) => {
       <ScrollView contentContainerStyle={{ paddingVertical: 15 }}>
         <FirstTimeCard navigation={navigation} />
         <CvCard
-          navigation={navigation}
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
+          onEdit={() => navigation.navigate('About')}
         />
         <CvCard
           certCount={
@@ -39,7 +39,6 @@ const DigitalCvHome = ({ navigation }: Props) => {
               <Text style={[TextStyles.boldText, { color: colors[Colors.tertiary7] }]}>0</Text>
             </View>
           }
-          navigation={navigation}
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
         />
@@ -56,7 +55,6 @@ const DigitalCvHome = ({ navigation }: Props) => {
               <Text style={[TextStyles.boldText, { color: colors[Colors.tertiary1] }]}>0</Text>
             </View>
           }
-          navigation={navigation}
           cardTitle={t('Education')}
           defaultText={t('Which school, university or college did you attend?')}
         />
@@ -73,7 +71,6 @@ const DigitalCvHome = ({ navigation }: Props) => {
               <Text style={[TextStyles.boldText, { color: colors[Colors.tertiary7] }]}>0</Text>
             </View>
           }
-          navigation={navigation}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
         />
@@ -82,4 +79,4 @@ const DigitalCvHome = ({ navigation }: Props) => {
   )
 }
 
-export default DigitalCvHome
+export default DigitalCv
