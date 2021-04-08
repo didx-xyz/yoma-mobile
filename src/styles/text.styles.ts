@@ -48,16 +48,16 @@ const TextStyles = StyleSheet.create({
   } as TextStyle,
   textTertiary5: {
     color: colors[Colors.tertiary5],
-  },
+  } as TextStyle,
   textTertiary7: {
     color: colors[Colors.tertiary7],
-  },
+  } as TextStyle,
   textTertiary9: {
     color: colors[Colors.tertiary9],
-  },
+  } as TextStyle,
   textTertiary3: {
     color: colors[Colors.tertiary3],
-  },
+  } as TextStyle,
   cardHeaderText: {
     color: colors[Colors.primary],
     fontFamily: fontStyles[FontFamily.bold],
