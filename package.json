@@ -25,6 +25,7 @@
     "help": "npx package-json-help.js"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^3.4.3",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-google-signin/google-signin": "^6.0.0",
     "@react-navigation/bottom-tabs": "^5.11.9",
@@ -53,6 +54,7 @@
     "react-native-screens": "^2.18.1",
     "react-native-svg": "^12.1.0",
     "react-native-svg-transformer": "^0.14.3",
+    "react-native-tags": "^2.2.0",
     "react-native-vector-icons": "^8.1.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
@@ -62,13 +64,14 @@
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
     "@testing-library/jest-native": "^4.0.1",
     "@testing-library/react-native": "^7.2.0",
-    "@react-native-community/eslint-config": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^1.4.4",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
     "@types/react-native-fbsdk": "^3.0.0",
+    "@types/react-native-tags": "^2.2.0",
     "@types/react-redux": "^7.1.16",
     "@types/react-test-renderer": "^16.9.2",
     "@types/yup": "^0.29.11",
