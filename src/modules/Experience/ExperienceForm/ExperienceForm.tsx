@@ -1,12 +1,13 @@
-import DateTimePicker from '@react-native-community/datetimepicker'
 import api from 'api'
 import { BlueTick } from 'assets/Images'
 import { DropDown, Spinner } from 'components'
 import CustomInput from 'components/CustomInput/CustomInput'
+import DateTimePicker from 'components/DatePicker/DatePicker'
 import TagInput from 'components/TagInput/TagInput'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
+import moment from 'moment'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { Platform, Text, TouchableOpacity, View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
@@ -21,8 +22,10 @@ const INITIAL_VALUES = {
   title: '',
   description: '',
   id: '',
-  startDate: '2021-04-09T05:52:02.872Z',
-  endDate: '2021-04-09T05:52:02.872Z',
+  // startDate: '2021-04-09T05:52:02.872Z',
+  // endDate: '2021-04-09T05:52:02.872Z',
+  startDate: '',
+  endDate: '',
   verifiedAt: null,
 
   // country
@@ -54,8 +57,6 @@ const ExperienceForm = forwardRef((props, ref) => {
   const [dropdown, setDropDown] = useState(false)
   const [checked, setChecked] = useState(false)
   const [tags, setTags] = useState([])
-  const [date, setDate] = useState(new Date(1598051730000))
-  const [show, setShow] = useState(false)
   const formRef = useRef<any>()
 
   useImperativeHandle(ref, () => ({
@@ -65,21 +66,6 @@ const ExperienceForm = forwardRef((props, ref) => {
       }
     },
   }))
-
-  const onChange = (event: Event, selectedDate: Date | undefined) => {
-    const currentDate = selectedDate || date
-    setShow(Platform.OS === 'ios')
-    console.log(event)
-    setDate(currentDate)
-  }
-
-  const showMode = (currentMode: any) => {
-    setShow(true)
-  }
-
-  const showDatepicker = () => {
-    showMode('date')
-  }
 
   const createJob = async (values: any, organisationId: string) => {
     const response = await api.digitalCv.workExperience.create({
@@ -111,20 +97,19 @@ const ExperienceForm = forwardRef((props, ref) => {
       onSubmit={async (values, actions) => {
         console.log('values', values)
         // TODO: static org id
-        const orgId = '7f9df1bc-10b8-445c-0b4a-08d81d3203ed'
-        try {
-          // const organisationId = await createOrganisation(orgId);
-          const job = await createJob(values, orgId)
-          await createCredential(job, values)
-        } catch (err) {
-          console.error(err)
-        }
+        // const orgId = '7f9df1bc-10b8-445c-0b4a-08d81d3203ed'
+        // try {
+        //   // const organisationId = await createOrganisation(orgId);
+        //   const job = await createJob(values, orgId)
+        //   await createCredential(job, values)
+        // } catch (err) {
+        //   console.error(err)
+        // }
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={{ width: '100%' }}>
           <Spinner visible={isSubmitting} />
-          {show ? <DateTimePicker testID="dateTimePicker" value={date} display="default" onChange={onChange} /> : null}
 
           <CustomInput
             onChangeText={handleChange('title')}
@@ -133,7 +118,7 @@ const ExperienceForm = forwardRef((props, ref) => {
             label={'Title'}
             touched={touched.title}
             error={errors.title}
-            showTitle={false}
+            showTitle={values.title !== '' ? true : false}
           />
           <CustomInput
             onChangeText={handleChange('organisationName')}
@@ -142,7 +127,7 @@ const ExperienceForm = forwardRef((props, ref) => {
             label={'Company name'}
             touched={touched.organisationName}
             error={errors.organisationName}
-            showTitle={false}
+            showTitle={values.title !== '' ? true : false}
           />
           <CustomInput
             onChangeText={handleChange('countryAlpha2')}
@@ -151,7 +136,7 @@ const ExperienceForm = forwardRef((props, ref) => {
             label={'Country or Region'}
             touched={touched.countryAlpha2}
             error={errors.countryAlpha2}
-            showTitle={false}
+            showTitle={values.title !== '' ? true : false}
           />
           {dropdown ? (
             <DropDown
@@ -199,32 +184,30 @@ const ExperienceForm = forwardRef((props, ref) => {
             </Text>
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-            <CustomInput
-              onChangeText={() => {
+            <DateTimePicker
+              onChangeDate={(date: string) => {
+                console.log(date)
                 handleChange('startDate')
+                setFieldValue('startDate', date)
               }}
-              onBlur={handleBlur('startDate')}
               value={values.startDate}
               label={'Start date'}
               touched={touched.startDate}
               error={errors.startDate}
               viewStyle={{ width: '40%' }}
-              showTitle={false}
-              // onFocus={showDatepicker}
+              showTitle={values.startDate !== '' ? true : false}
             />
-            <CustomInput
-              onChangeText={() => {
+            <DateTimePicker
+              onChangeDate={(date: string) => {
                 handleChange('endDate')
+                setFieldValue('endDate', date)
               }}
-              onBlur={handleBlur('endDate')}
               value={values.endDate}
               label={'End date'}
-              autoCapitalize="none"
               touched={touched.endDate}
               error={errors.endDate}
               viewStyle={{ width: '40%' }}
-              showTitle={false}
-              // onFocus={showDatepicker}
+              showTitle={values.endDate !== '' ? true : false}
             />
           </View>
           <CustomInput
@@ -234,7 +217,7 @@ const ExperienceForm = forwardRef((props, ref) => {
             label={'Description'}
             touched={touched.description}
             error={errors.description}
-            showTitle={false}
+            showTitle={values.title !== '' ? true : false}
           />
           <TagInput
             initialTags={tags}
