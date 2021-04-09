@@ -2,6 +2,7 @@ import axios from 'axios'
 import { AUTH_TOKEN, BASE_URL } from 'helpers/helpers'
 
 import auth from './auth'
+import digitalCv from './digitalCv'
 import users from './users'
 
 const FALLBACK_MESSAGE = 'Unable to reach server'
@@ -44,4 +45,5 @@ instance.interceptors.response.use(
 export default {
   auth: auth(instance),
   users: users(instance),
+  digitalCv: digitalCv(instance),
 }

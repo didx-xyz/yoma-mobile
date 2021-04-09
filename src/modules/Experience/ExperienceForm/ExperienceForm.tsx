@@ -7,7 +7,7 @@ import TagInput from 'components/TagInput/TagInput'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
-import React, { useState } from 'react'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { Platform, Text, TouchableOpacity, View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import { FontFamily, TextStyles } from 'styles'
@@ -21,8 +21,8 @@ const INITIAL_VALUES = {
   title: '',
   description: '',
   id: '',
-  startDate: undefined,
-  endDate: undefined,
+  startDate: '2021-04-09T05:52:02.872Z',
+  endDate: '2021-04-09T05:52:02.872Z',
   verifiedAt: null,
 
   // country
@@ -41,7 +41,7 @@ const INITIAL_VALUES = {
   requestVerificationInd: false,
 }
 
-const rendertag = ({ tag, index, onPress }) => {
+const rendertag = ({ tag, index, onPress }: any) => {
   return (
     <TouchableOpacity key={`${tag}-${index}`} onPress={onPress} style={styles.tag}>
       <Text style={styles.textTag}>X {tag}</Text>
@@ -49,17 +49,27 @@ const rendertag = ({ tag, index, onPress }) => {
   )
 }
 
-const ExperienceForm = () => {
+const ExperienceForm = forwardRef((props, ref) => {
   const [country, setCountry] = useState('')
   const [dropdown, setDropDown] = useState(false)
   const [checked, setChecked] = useState(false)
   const [tags, setTags] = useState([])
   const [date, setDate] = useState(new Date(1598051730000))
   const [show, setShow] = useState(false)
+  const formRef = useRef<any>()
+
+  useImperativeHandle(ref, () => ({
+    handleSubmit() {
+      if (formRef.current) {
+        formRef.current.handleSubmit()
+      }
+    },
+  }))
 
   const onChange = (event: Event, selectedDate: Date | undefined) => {
     const currentDate = selectedDate || date
     setShow(Platform.OS === 'ios')
+    console.log(event)
     setDate(currentDate)
   }
 
@@ -71,13 +81,44 @@ const ExperienceForm = () => {
     showMode('date')
   }
 
+  const createJob = async (values: any, organisationId: string) => {
+    const response = await api.digitalCv.workExperience.create({
+      title: values.title,
+      description: values.description,
+      organisationId: organisationId,
+      skillNames: values.skillNames,
+    })
+    return response.data
+  }
+
+  const createCredential = async (job: any, values: any) => {
+    const response = await api.users.credentials.create(USER_ID, {
+      type: 'Job',
+      credentialItemId: job.id,
+      startTime: values.startDate,
+      endTime: values.endDate,
+      requestVerification: values.requestVerificationInd,
+    })
+    return response.data
+  }
+
   return (
     <Formik
+      innerRef={formRef}
       initialValues={INITIAL_VALUES}
       enableReinitialize={true}
       validationSchema={ValidationSchema}
       onSubmit={async (values, actions) => {
-        console.log('experience: ', values)
+        console.log('values', values)
+        // TODO: static org id
+        const orgId = '7f9df1bc-10b8-445c-0b4a-08d81d3203ed'
+        try {
+          // const organisationId = await createOrganisation(orgId);
+          const job = await createJob(values, orgId)
+          await createCredential(job, values)
+        } catch (err) {
+          console.error(err)
+        }
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
@@ -159,20 +200,22 @@ const ExperienceForm = () => {
           </View>
           <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
             <CustomInput
-              onChangeText={handleChange('startDate')}
+              onChangeText={() => {
+                handleChange('startDate')
+              }}
               onBlur={handleBlur('startDate')}
               value={values.startDate}
               label={'Start date'}
-              keyboardType="email-address"
-              autoCapitalize="none"
               touched={touched.startDate}
               error={errors.startDate}
               viewStyle={{ width: '40%' }}
               showTitle={false}
-              onFocus={showDatepicker}
+              // onFocus={showDatepicker}
             />
             <CustomInput
-              onChangeText={handleChange('endDate')}
+              onChangeText={() => {
+                handleChange('endDate')
+              }}
               onBlur={handleBlur('endDate')}
               value={values.endDate}
               label={'End date'}
@@ -181,7 +224,7 @@ const ExperienceForm = () => {
               error={errors.endDate}
               viewStyle={{ width: '40%' }}
               showTitle={false}
-              onFocus={showDatepicker}
+              // onFocus={showDatepicker}
             />
           </View>
           <CustomInput
@@ -228,6 +271,6 @@ const ExperienceForm = () => {
       )}
     </Formik>
   )
-}
+})
 
 export default ExperienceForm

@@ -1,5 +1,6 @@
 import { AxiosInstance } from 'axios'
 
+import credentials from './credentials'
 import password from './password'
 import photo from './photo'
 
@@ -15,5 +16,7 @@ export default function (instance: AxiosInstance) {
 
     password: password(instance),
     photo: photo(),
+
+    credentials: credentials(instance),
   }
 }

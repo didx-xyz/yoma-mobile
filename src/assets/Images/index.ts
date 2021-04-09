@@ -12,6 +12,7 @@ import RedSemiCircle from './RedSemiCircle.svg'
 import WhiteLogo from './WhiteLogo.svg'
 import YellowCircleLeft from './YellowCircleLeft.svg'
 import YellowCircleRight from './YellowCircleRight.svg'
+import AddIcon from './addIcon.svg'
 import BackIconGrey from './icon-back-grey.svg'
 import ChallengesIcon from './icon-challenges.svg'
 import CoursesIcon from './icon-courses.svg'
@@ -22,6 +23,7 @@ import MarketplaceIcon from './marketplaceIcon.svg'
 import ZIcon from './zIcon.svg'
 
 export {
+  AddIcon,
   RedSemiCircle,
   PurpleSemiCircle,
   PurpleQuarter,

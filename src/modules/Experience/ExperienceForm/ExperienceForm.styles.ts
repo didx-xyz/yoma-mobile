@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 const styles = StyleSheet.create({
   checkBoxView: {
@@ -6,7 +6,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'center',
     width: '90%',
-  },
+  } as ViewStyle,
   tag: {
     backgroundColor: '#72C8ED15',
     borderRadius: 10,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   textTag: {
     color: '#4CADE9',
-  },
+  } as TextStyle,
 })
 
 export default styles

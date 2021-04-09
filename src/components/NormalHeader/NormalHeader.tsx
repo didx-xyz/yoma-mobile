@@ -1,5 +1,5 @@
 import { StackActions } from '@react-navigation/native'
-import { BackIconGrey } from 'assets/Images'
+import { AddIcon, BackIconGrey } from 'assets/Images'
 import React, { useEffect } from 'react'
 import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
 import { TextStyles } from 'styles'
@@ -7,13 +7,15 @@ import { WithChildren } from 'types/react.types'
 
 import styles from './NormalHeader.styles'
 
-type Props = WithChildren<{
+type Props = {
   navigation: any
   headerText: string
   onSave?: any
-}>
+  add?: boolean
+  onAdd?: any
+}
 
-const NormalHeader = ({ navigation, headerText, onSave }: Props) => {
+const NormalHeader = ({ navigation, headerText, onSave, add, onAdd }: Props) => {
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       goBack()
@@ -31,9 +33,16 @@ const NormalHeader = ({ navigation, headerText, onSave }: Props) => {
         <BackIconGrey />
       </TouchableOpacity>
       <Text style={[TextStyles.textPrimary, TextStyles.semiBoldText]}>{headerText}</Text>
-      <TouchableOpacity onPress={onSave}>
-        <Text style={[TextStyles.boldText, TextStyles.textTertiary3, { paddingRight: 20 }]}>Save</Text>
-      </TouchableOpacity>
+      {add ? (
+        <TouchableOpacity onPress={onAdd} style={{ flexDirection: 'row', paddingRight: 20 }}>
+          <Text style={[TextStyles.boldText, TextStyles.textTertiary3]}>Add</Text>
+          <AddIcon />
+        </TouchableOpacity>
+      ) : (
+        <TouchableOpacity onPress={onSave}>
+          <Text style={[TextStyles.boldText, TextStyles.textTertiary3, { paddingRight: 20 }]}>Save</Text>
+        </TouchableOpacity>
+      )}
     </View>
   )
 }
