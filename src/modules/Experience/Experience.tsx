@@ -51,14 +51,16 @@ const Experience = ({ navigation }: Props) => {
       />
       {isSave ? (
         <>
-          <View style={styles.whiteCard}>
-            <ExperienceForm ref={formRef} />
-          </View>
-          {/* <TouchableOpacity>
+          <ScrollView>
+            <View style={styles.whiteCard}>
+              <ExperienceForm ref={formRef} />
+            </View>
+            {/* <TouchableOpacity>
                 <Text style={[TextStyles.textTertiary9, TextStyles.semiBoldText, { marginVertical: 20 }]}>
                   Delete experience
                 </Text>
               </TouchableOpacity> */}
+          </ScrollView>
         </>
       ) : (
         <FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />

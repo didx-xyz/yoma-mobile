@@ -13,6 +13,7 @@ import WhiteLogo from './WhiteLogo.svg'
 import YellowCircleLeft from './YellowCircleLeft.svg'
 import YellowCircleRight from './YellowCircleRight.svg'
 import AddIcon from './addIcon.svg'
+import CrossIcon from './crossIcon.svg'
 import BackIconGrey from './icon-back-grey.svg'
 import ChallengesIcon from './icon-challenges.svg'
 import CoursesIcon from './icon-courses.svg'
@@ -46,4 +47,5 @@ export {
   RLabsLogo,
   EditIcon,
   BackIconGrey,
+  CrossIcon,
 }

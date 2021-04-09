@@ -3,15 +3,16 @@ import { BlueTick } from 'assets/Images'
 import { DropDown, Spinner } from 'components'
 import CustomInput from 'components/CustomInput/CustomInput'
 import DateTimePicker from 'components/DatePicker/DatePicker'
-import TagInput from 'components/TagInput/TagInput'
+import DropDownTags from 'components/DropDownTags/DropDownTags'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import { FontFamily, TextStyles } from 'styles'
 import fontStyles from 'styles/font.styles'
+import mapToSelect from 'utils/mapToSelect'
 
 import styles from './ExperienceForm.styles'
 import ValidationSchema from './ValidationSchema'
@@ -56,11 +57,14 @@ const ExperienceForm = forwardRef((props, ref) => {
   const [organizations, setOrganizations] = useState([])
   const [dropdown, setDropDown] = useState(false)
   const [checked, setChecked] = useState(false)
-  const [tags, setTags] = useState([])
+  const [skillsList, setSkillsList] = useState([])
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
+
   const formRef = useRef<any>()
 
   useEffect(() => {
     getOrganizationsList()
+    getSkillsList()
   }, [])
 
   const getOrganizationsList = async () => {
@@ -84,6 +88,14 @@ const ExperienceForm = forwardRef((props, ref) => {
     },
   }))
 
+  const getSkillsList = async () => {
+    const response = await api.digitalCv.skills.getKeyNames()
+    if (response.data) {
+      const skills = response.data
+      setSkillsList(mapToSelect(skills, 'value', 'value'))
+    }
+  }
+
   const createJob = async (values: any, organisationId: string) => {
     const response = await api.digitalCv.workExperience.create({
       title: values.title,
@@ -103,6 +115,10 @@ const ExperienceForm = forwardRef((props, ref) => {
       requestVerification: values.requestVerificationInd,
     })
     return response.data
+  }
+  const deleteSkill = (tag: string) => {
+    const remainingSkills = selectedSkills.filter(result => result !== tag)
+    setSelectedSkills(remainingSkills)
   }
 
   return (
@@ -125,7 +141,8 @@ const ExperienceForm = forwardRef((props, ref) => {
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
-        <View style={{ width: '100%' }}>
+        // TODO: added height as dropdown was not working
+        <View style={{ width: '100%', height: 500 }}>
           <Spinner visible={isSubmitting} />
 
           <CustomInput
@@ -244,16 +261,26 @@ const ExperienceForm = forwardRef((props, ref) => {
             error={errors.description}
             showTitle={values.title !== '' ? true : false}
           />
-          <TagInput
-            initialTags={tags}
-            initialText=""
-            onChangeTags={(tag: any) => setTags(tag)}
-            onTagPress={(index: any, tagLabel: any, event: any, deleted: any) => {
-              console.log(index, tagLabel, event, deleted ? 'deleted' : 'not deleted')
+          <DropDownTags
+            items={skillsList}
+            multiple={true}
+            multipleText="Skills developed %d"
+            min={0}
+            max={10}
+            searchable={true}
+            searchablePlaceholder="Search skills"
+            searchablePlaceholderTextColor="gray"
+            placeholder={'Skills developed'}
+            fieldName={'Skills developed'}
+            showTitle={values.skillNames.length > 0 ? true : false}
+            defaultValue={selectedSkills}
+            onChangeItem={item => {
+              setSelectedSkills(item)
             }}
-            renderTag={(tag: any) => rendertag(tag)}
+            tags={selectedSkills}
+            deleteItem={deleteSkill}
           />
-          <View style={styles.checkBoxView}>
+          <View style={[styles.checkBoxView]}>
             <CheckBox
               uncheckedIcon="circle-o"
               checkedIcon={<BlueTick />}
