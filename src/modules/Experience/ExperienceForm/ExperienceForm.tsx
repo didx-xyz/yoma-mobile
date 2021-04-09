@@ -7,9 +7,8 @@ import TagInput from 'components/TagInput/TagInput'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
-import moment from 'moment'
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
-import { Platform, Text, TouchableOpacity, View } from 'react-native'
+import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
 import { FontFamily, TextStyles } from 'styles'
 import fontStyles from 'styles/font.styles'
@@ -54,10 +53,28 @@ const rendertag = ({ tag, index, onPress }: any) => {
 
 const ExperienceForm = forwardRef((props, ref) => {
   const [country, setCountry] = useState('')
+  const [organizations, setOrganizations] = useState([])
   const [dropdown, setDropDown] = useState(false)
   const [checked, setChecked] = useState(false)
   const [tags, setTags] = useState([])
   const formRef = useRef<any>()
+
+  useEffect(() => {
+    getOrganizationsList()
+  }, [])
+
+  const getOrganizationsList = async () => {
+    const response = await api.digitalCv.organisations.getKeyNames()
+    const orgList: any = []
+    response.data.forEach((org: any) => {
+      const orgObj = {
+        label: org.value,
+        value: org.key,
+      }
+      orgList.push(orgObj)
+    })
+    setOrganizations(orgList)
+  }
 
   useImperativeHandle(ref, () => ({
     handleSubmit() {
@@ -120,14 +137,22 @@ const ExperienceForm = forwardRef((props, ref) => {
             error={errors.title}
             showTitle={values.title !== '' ? true : false}
           />
-          <CustomInput
-            onChangeText={handleChange('organisationName')}
-            onBlur={handleBlur('organisationName')}
-            value={values.organisationName}
-            label={'Company name'}
+          <DropDown
+            items={organizations}
+            onChangeItem={itemValue => {
+              handleChange('organisationName')
+              handleBlur('organisationName')
+              setFieldValue('organisationName', itemValue.label)
+            }}
+            style={styles.formDropDown}
+            searchable={true}
+            searchablePlaceholder="Search organization"
+            searchablePlaceholderTextColor="gray"
+            placeholder={'Company name'}
             touched={touched.organisationName}
             error={errors.organisationName}
-            showTitle={values.title !== '' ? true : false}
+            fieldName={'Company Name'}
+            showTitle={values.organisationName != '' ? true : false}
           />
           <CustomInput
             onChangeText={handleChange('countryAlpha2')}

@@ -1,6 +1,7 @@
 import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { colors, Colors } from 'styles'
 
-const { height, width } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 const styles = {
   dropDownStyle: {
@@ -18,6 +19,10 @@ const styles = {
     width: '90%',
     alignSelf: 'center',
   } as ViewStyle,
+  label: {
+    color: colors[Colors.tertiary9],
+    marginLeft: 10,
+  },
 }
 
 export default StyleSheet.create(styles)

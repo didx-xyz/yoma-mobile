@@ -15,7 +15,7 @@ const styles = {
     elevation: 3,
     alignItems: 'center',
     marginVertical: 10,
-    flex: 1,
+    alignSelf: 'center',
   } as ViewStyle,
 }
 

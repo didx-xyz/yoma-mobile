@@ -8,13 +8,16 @@ import styles from './DropDown.styles'
 type Props = DropDownPickerProps & {
   touched?: boolean
   error?: any
+  fieldName?: string
+  showTitle?: boolean
 }
 
-const DropDown = ({ touched, error, ...props }: Props) => {
+const DropDown = ({ touched, error, fieldName, showTitle, ...props }: Props) => {
   return (
     <View>
+      {showTitle ? <Text style={[TextStyles.h4, styles.label, { paddingLeft: 10 }]}>{fieldName}</Text> : null}
       <DropDownPicker
-        containerStyle={{ height: 45, marginTop: 15 }}
+        containerStyle={{ height: 45 }}
         style={styles.dropDownStyle}
         dropDownStyle={styles.dropDownViewStyle}
         labelStyle={[TextStyles.h4, TextStyles.textTertiary5]}
