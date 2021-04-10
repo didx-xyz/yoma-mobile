@@ -35,6 +35,7 @@ const DateTimePicker = ({
         placeholder={label}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
+        format={'DD/MM/YYYY'}
         customStyles={{
           dateInput: styles.dateInput,
         }}

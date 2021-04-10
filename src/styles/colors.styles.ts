@@ -16,6 +16,7 @@ const BLUE_VIOLET = 'rgb(95,101,185)'
 const DARK_BLUE = 'rgb(22,42,66)'
 const MEDIUM_GREY = 'rgb(241,244,248)'
 const SANTAS_GREY = 'rgb(149,155,180)'
+const BLUE = '#4CADE9'
 
 export default {
   [Colors.primary]: PURPLE,
@@ -29,6 +30,7 @@ export default {
   [Colors.tertiary7]: DARK_BLUE,
   [Colors.tertiary8]: MEDIUM_GREY,
   [Colors.tertiary9]: SANTAS_GREY,
+  [Colors.tertiary10]: BLUE,
   [Colors.white]: greys.white,
   [Colors.black]: greys.black,
 }

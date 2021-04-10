@@ -1,5 +1,5 @@
 import api from 'api'
-import { BlueTick } from 'assets/Images'
+import { BlueHollowCircle, BlueTick } from 'assets/Images'
 import { DropDown, Spinner } from 'components'
 import CustomInput from 'components/CustomInput/CustomInput'
 import DateTimePicker from 'components/DatePicker/DatePicker'
@@ -7,15 +7,19 @@ import DropDownTags from 'components/DropDownTags/DropDownTags'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
+import moment from 'moment'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
-import { Text, TouchableOpacity, View, ViewStyle } from 'react-native'
-import { CheckBox } from 'react-native-elements'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { FontFamily, TextStyles } from 'styles'
 import fontStyles from 'styles/font.styles'
 import mapToSelect from 'utils/mapToSelect'
 
 import styles from './ExperienceForm.styles'
 import ValidationSchema from './ValidationSchema'
+
+interface Props {
+  navigation: any
+}
 
 const INITIAL_VALUES = {
   // details
@@ -44,21 +48,14 @@ const INITIAL_VALUES = {
   requestVerificationInd: false,
 }
 
-const rendertag = ({ tag, index, onPress }: any) => {
-  return (
-    <TouchableOpacity key={`${tag}-${index}`} onPress={onPress} style={styles.tag}>
-      <Text style={styles.textTag}>X {tag}</Text>
-    </TouchableOpacity>
-  )
-}
-
-const ExperienceForm = forwardRef((props, ref) => {
+const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   const [country, setCountry] = useState('')
   const [organizations, setOrganizations] = useState([])
   const [dropdown, setDropDown] = useState(false)
-  const [checked, setChecked] = useState(false)
+  const [present, setPresent] = useState(false)
   const [skillsList, setSkillsList] = useState([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
+  const [requestVerification, setRequestVerification] = useState(false)
 
   const formRef = useRef<any>()
 
@@ -129,20 +126,18 @@ const ExperienceForm = forwardRef((props, ref) => {
       validationSchema={ValidationSchema}
       onSubmit={async (values, actions) => {
         console.log('values', values)
-        // TODO: static org id
-        // const orgId = '7f9df1bc-10b8-445c-0b4a-08d81d3203ed'
-        // try {
-        //   // const organisationId = await createOrganisation(orgId);
-        //   const job = await createJob(values, orgId)
-        //   await createCredential(job, values)
-        // } catch (err) {
-        //   console.error(err)
-        // }
+        try {
+          const job = await createJob(values, values.organisationId)
+          await createCredential(job, values)
+          navigation.navigate('Home')
+        } catch (err) {
+          console.error(err)
+        }
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
         // TODO: added height as dropdown was not working
-        <View style={{ width: '100%', height: 500 }}>
+        <View style={{ width: '100%', height: 600 }}>
           <Spinner visible={isSubmitting} />
 
           <CustomInput
@@ -160,6 +155,7 @@ const ExperienceForm = forwardRef((props, ref) => {
               handleChange('organisationName')
               handleBlur('organisationName')
               setFieldValue('organisationName', itemValue.label)
+              setFieldValue('organisationId', itemValue.value)
             }}
             style={styles.formDropDown}
             searchable={true}
@@ -210,17 +206,14 @@ const ExperienceForm = forwardRef((props, ref) => {
             Use current location
           </Text>
           <View style={styles.checkBoxView}>
-            <CheckBox
-              uncheckedIcon="circle-o"
-              checkedIcon={<BlueTick />}
-              checked={checked}
+            <TouchableOpacity
               onPress={() => {
-                setFieldValue('privacyInd', !checked)
-                setChecked(!checked)
+                setPresent(!present)
               }}
-              onBlur={handleChange('privacyInd')}
-              containerStyle={{ paddingVertical: 0, paddingHorizontal: 0 }}
-            />
+              style={styles.checkBox}
+            >
+              {present ? <BlueTick /> : <BlueHollowCircle />}
+            </TouchableOpacity>
             <Text style={[TextStyles.h4, TextStyles.textTertiary9, { fontFamily: fontStyles[FontFamily.semibold] }]}>
               I currently work here
             </Text>
@@ -230,6 +223,7 @@ const ExperienceForm = forwardRef((props, ref) => {
               onChangeDate={(date: string) => {
                 console.log(date)
                 handleChange('startDate')
+                handleBlur('startDate')
                 setFieldValue('startDate', date)
               }}
               value={values.startDate}
@@ -241,7 +235,9 @@ const ExperienceForm = forwardRef((props, ref) => {
             />
             <DateTimePicker
               onChangeDate={(date: string) => {
+                console.log(date)
                 handleChange('endDate')
+                handleBlur('endDate')
                 setFieldValue('endDate', date)
               }}
               value={values.endDate}
@@ -276,22 +272,25 @@ const ExperienceForm = forwardRef((props, ref) => {
             defaultValue={selectedSkills}
             onChangeItem={item => {
               setSelectedSkills(item)
+              handleChange('skillNames')
+              handleBlur('skillNames')
+              setFieldValue('skillNames', selectedSkills)
             }}
             tags={selectedSkills}
             deleteItem={deleteSkill}
+            touched={touched.skillNames}
+            error={errors.skillNames}
           />
           <View style={[styles.checkBoxView]}>
-            <CheckBox
-              uncheckedIcon="circle-o"
-              checkedIcon={<BlueTick />}
-              checked={checked}
+            <TouchableOpacity
               onPress={() => {
-                setFieldValue('privacyInd', !checked)
-                setChecked(!checked)
+                setRequestVerification(!requestVerification)
+                setFieldValue('requestVerificationInd', requestVerification)
               }}
-              onBlur={handleChange('privacyInd')}
-              containerStyle={{ paddingVertical: 0, paddingHorizontal: 0 }}
-            />
+              style={styles.checkBox}
+            >
+              {requestVerification ? <BlueTick /> : <BlueHollowCircle />}
+            </TouchableOpacity>
             <Text
               style={[
                 TextStyles.h4,

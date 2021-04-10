@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
 const { width } = Dimensions.get('window')
@@ -34,6 +34,9 @@ const styles = {
   dropDownContainerStyle: {
     height: 45,
   } as ViewStyle,
+  tagText: {
+    color: colors[Colors.tertiary10],
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

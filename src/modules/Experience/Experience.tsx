@@ -53,7 +53,7 @@ const Experience = ({ navigation }: Props) => {
         <>
           <ScrollView>
             <View style={styles.whiteCard}>
-              <ExperienceForm ref={formRef} />
+              <ExperienceForm navigation={navigation} ref={formRef} />
             </View>
             {/* <TouchableOpacity>
                 <Text style={[TextStyles.textTertiary9, TextStyles.semiBoldText, { marginVertical: 20 }]}>

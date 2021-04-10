@@ -7,6 +7,8 @@ import { TextStyles } from 'styles'
 import styles from './DropDownTags.styles'
 
 type Props = DropDownPickerProps & {
+  touched?: any
+  error?: any
   fieldName?: string
   showTitle?: boolean
   tags?: Array<string>
@@ -16,17 +18,19 @@ type Props = DropDownPickerProps & {
 const rendertags = (tags: Array<string>, deleteItem: any) => {
   return tags.map((tag, index) => {
     return (
-      <View style={styles.tag}>
+      <View key={index} style={styles.tag}>
         <TouchableOpacity style={styles.crossIcon} onPress={() => deleteItem(tag)}>
           <CrossIcon height={15} width={15} />
         </TouchableOpacity>
-        <Text key={index}>{tag}</Text>
+        <Text key={index} style={[TextStyles.h4, styles.tagText]}>
+          {tag}
+        </Text>
       </View>
     )
   })
 }
 
-const DropDownTags = ({ fieldName, showTitle, tags = [], deleteItem, ...props }: Props) => {
+const DropDownTags = ({ touched, error, fieldName, showTitle, tags = [], deleteItem, ...props }: Props) => {
   return (
     <View>
       {showTitle ? <Text style={[TextStyles.h4, styles.label, { paddingLeft: 10 }]}>{fieldName}</Text> : null}
@@ -42,6 +46,7 @@ const DropDownTags = ({ fieldName, showTitle, tags = [], deleteItem, ...props }:
         {...props}
       />
       <ScrollView horizontal>{rendertags(tags, deleteItem)}</ScrollView>
+      <Text style={TextStyles.errorText}>{touched && error}</Text>
     </View>
   )
 }

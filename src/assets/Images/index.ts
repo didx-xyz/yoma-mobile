@@ -1,4 +1,5 @@
 import BackIcon from './BackIcon.svg'
+import BlueHollowCircle from './BlueHollowCircle.svg'
 import BlueRightCircle from './BlueRightCircle.svg'
 import BlueTick from './BlueTick.svg'
 import FacebookIcon from './FacebookIcon.svg'
@@ -48,4 +49,5 @@ export {
   EditIcon,
   BackIconGrey,
   CrossIcon,
+  BlueHollowCircle,
 }
