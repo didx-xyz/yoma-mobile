@@ -1,0 +1,32 @@
+version: 2.1
+orbs:
+  node: circleci/node@3.0.0
+executors:
+  node:
+    docker:
+      - image: circleci/node:14.16.0-stretch
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
+jobs:
+  pull-request:
+    executor: node
+    steps:
+      - checkout
+      - node/install-packages
+      - run: npm run code:lint
+      - run:
+          name: Unit Tests
+          command: npm run test
+          environment:
+            - NODE_OPTIONS: --max_old_space_size=8192
+      - run: npm run npm:audit
+workflows:
+  pull-request:
+    jobs:
+      - pull-request:
+          filters:
+            branches:
+              ignore:
+                - develop
+                - main
