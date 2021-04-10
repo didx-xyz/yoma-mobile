@@ -1,6 +1,6 @@
 import { BottomTabBarOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
-import { DigitalCvIcon, CoursesIcon, ChallengesIcon, MarketplaceIcon } from 'assets/Images'
+import { DigitalCvIcon, CoursesIcon, ChallengesIcon, MarketplaceIcon } from 'assets/images'
 import About from 'modules/About/About'
 import Challenges from 'modules/Challenges/Challenges'
 import Courses from 'modules/Courses/Courses'

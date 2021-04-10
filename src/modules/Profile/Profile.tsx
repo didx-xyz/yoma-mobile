@@ -1,5 +1,5 @@
 import api from 'api'
-import { EditIcon } from 'assets/Images'
+import { EditIcon } from 'assets/images'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
 import ViewContainer from 'components/ViewContainer/ViewContainer'

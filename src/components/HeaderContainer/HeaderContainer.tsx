@@ -1,5 +1,5 @@
 import { StackActions } from '@react-navigation/native'
-import { BackIcon } from 'assets/Images'
+import { BackIcon } from 'assets/images'
 import React, { useEffect } from 'react'
 import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
 import { TextStyles } from 'styles'

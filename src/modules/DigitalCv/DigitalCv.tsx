@@ -1,4 +1,4 @@
-import { EditIcon } from 'assets/Images'
+import { EditIcon } from 'assets/images'
 import CvCard from 'components/CvCard/CvCard'
 import FirstTimeCard from 'components/FirstTimeCard/FirstTimeCard'
 import HomeHeader from 'components/HomeHeader/HomeHeader'

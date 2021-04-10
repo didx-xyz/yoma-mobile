@@ -1,4 +1,4 @@
-import { YellowCircleLeft } from 'assets/Images'
+import { YellowCircleLeft } from 'assets/images'
 import { LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

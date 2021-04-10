@@ -1,4 +1,4 @@
-import { EditIcon } from 'assets/Images'
+import { EditIcon } from 'assets/images'
 import React, { Component } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Dimensions, GestureResponderEvent, Text, TouchableOpacity, View } from 'react-native'

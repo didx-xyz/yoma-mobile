@@ -1,4 +1,4 @@
-import { EditIcon, ProfileIcon } from 'assets/Images'
+import { EditIcon, ProfileIcon } from 'assets/images'
 import ProgressCircle from 'components/ProgressCircle/ProgressCircle'
 import React from 'react'
 import { GestureResponderEvent, TouchableOpacity, View, ViewStyle } from 'react-native'

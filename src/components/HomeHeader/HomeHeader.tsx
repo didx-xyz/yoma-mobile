@@ -1,4 +1,4 @@
-import { ZIcon } from 'assets/Images'
+import { ZIcon } from 'assets/images'
 import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'

@@ -1,4 +1,4 @@
-import { YellowCircleRight } from 'assets/Images'
+import { YellowCircleRight } from 'assets/images'
 import { LargeHeaderContainer, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

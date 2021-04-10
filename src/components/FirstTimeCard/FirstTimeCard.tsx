@@ -1,4 +1,4 @@
-import { BlueRightCircle, LightYellowPattern, RLabsLogo } from 'assets/Images'
+import { BlueRightCircle, LightYellowPattern, RLabsLogo } from 'assets/images'
 import { ButtonContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
