@@ -2,8 +2,8 @@ import { BlueRightCircle, LightYellowPattern, RLabsLogo } from 'assets/images'
 import { ButtonContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { StyleSheet, Text, View } from 'react-native'
-import { colors, Colors, TextStyles } from 'styles'
+import { Text, View } from 'react-native'
+import { TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
 import styles from './FirstTimeCard.styles'
@@ -35,7 +35,7 @@ const FirstTimeCard = ({ navigation }: Props) => {
         <Text style={[TextStyles.boldText]}> 30 ZLTO </Text>
         {t('by completing our first challenge')}.
       </Text>
-      <View style={{ flexDirection: 'row', marginVertical: 10 }}>
+      <View style={styles.hostedText}>
         <Text style={[TextStyles.h5]}>{t('Hosted by')} </Text>
         <RLabsLogo />
       </View>

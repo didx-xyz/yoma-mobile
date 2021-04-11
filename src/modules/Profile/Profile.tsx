@@ -1,12 +1,10 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
-import NormalHeader from 'components/NormalHeader/NormalHeader'
-import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
-import ViewContainer from 'components/ViewContainer/ViewContainer'
+import { NormalHeader, ProfilePhoto, ViewContainer } from 'components'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Image, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 import { TextStyles } from 'styles'
 import { showSimpleMessage } from 'utils/error'
@@ -94,7 +92,7 @@ const Profile = ({ navigation }: Props) => {
               outerRadius={40}
               onPress={captureImage}
               percent={5}
-              editIcon={true}
+              showEditIcon={true}
               profileOuterStyle={{
                 marginTop: -50,
               }}

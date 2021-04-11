@@ -1,14 +1,12 @@
 import api from 'api'
-import InfoModal from 'components/InfoModal/InfoModal'
-import NormalHeader from 'components/NormalHeader/NormalHeader'
+import { InfoModal, NormalHeader, ViewContainer } from 'components'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Alert, Modal, Pressable, Text, TouchableOpacity, View } from 'react-native'
+import { Text, TouchableOpacity, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { TextStyles } from 'styles'
 
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
 import styles from './About.styles'
 
 interface Props {

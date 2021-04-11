@@ -1,8 +1,6 @@
-import { StyleSheet, ViewStyle, Dimensions, ImageStyle, TextStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
-
-const { width, height } = Dimensions.get('window')
 
 const styles = {
   header: {

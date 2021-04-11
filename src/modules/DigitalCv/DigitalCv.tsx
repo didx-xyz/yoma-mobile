@@ -1,13 +1,9 @@
-import { EditIcon } from 'assets/images'
-import CvCard from 'components/CvCard/CvCard'
-import FirstTimeCard from 'components/FirstTimeCard/FirstTimeCard'
-import HomeHeader from 'components/HomeHeader/HomeHeader'
+import { CvCard, FirstTimeCard, HomeHeader, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, ScrollView, Dimensions, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, Text, View } from 'react-native'
 import { Colors, colors, TextStyles } from 'styles'
 
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
 import styles from './DigitalCv.styles'
 
 interface Props {
@@ -32,7 +28,7 @@ const DigitalCv = ({ navigation }: Props) => {
               style={[
                 styles.certificateCountView,
                 {
-                  backgroundColor: 'rgba(229,247,253,1)',
+                  backgroundColor: '#E5F7FD',
                 },
               ]}
             >
@@ -48,7 +44,7 @@ const DigitalCv = ({ navigation }: Props) => {
               style={[
                 styles.certificateCountView,
                 {
-                  backgroundColor: 'rgba(255,228,230,1)',
+                  backgroundColor: '#FFE4E6',
                 },
               ]}
             >
@@ -64,7 +60,7 @@ const DigitalCv = ({ navigation }: Props) => {
               style={[
                 styles.certificateCountView,
                 {
-                  backgroundColor: 'rgba(229,247,253,1)',
+                  backgroundColor: '#E5F7FD',
                 },
               ]}
             >

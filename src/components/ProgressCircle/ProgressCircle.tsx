@@ -1,7 +1,10 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { View } from 'react-native'
+import { WithChildren } from 'types/react.types'
 
-interface Props {
+import styles from './ProgressCircle.styles'
+
+type Props = WithChildren<{
   backgroundColor?: string
   borderWidth?: number
   children?: React.ReactNode
@@ -9,9 +12,9 @@ interface Props {
   innerColor?: string
   percent?: number
   radius: number
-}
+}>
 
-export default function ProgressCircle({
+const ProgressCircle = ({
   backgroundColor = '#D4D9E4',
   borderWidth = 1,
   children,
@@ -19,7 +22,7 @@ export default function ProgressCircle({
   innerColor = '#fff',
   percent = 0,
   radius,
-}: Props) {
+}: Props) => {
   const diameter = 2 * radius
   return (
     <View
@@ -90,33 +93,4 @@ export default function ProgressCircle({
   )
 }
 
-const styles = StyleSheet.create({
-  circle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    position: 'relative',
-  },
-  innerCircle: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    overflow: 'hidden',
-    position: 'relative',
-    zIndex: 2,
-  },
-  leftWrap: {
-    overflow: 'hidden',
-    position: 'absolute',
-    top: 0,
-    zIndex: 1,
-  },
-  loader: {
-    borderRadius: 1000,
-    left: 0,
-    position: 'absolute',
-    top: 0,
-  },
-  rightWrap: {
-    position: 'absolute',
-  },
-})
+export default ProgressCircle

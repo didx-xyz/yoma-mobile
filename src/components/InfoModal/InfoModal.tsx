@@ -1,19 +1,18 @@
-import React, { useState } from 'react'
-import { Text, Modal, View, Pressable, TouchableOpacity } from 'react-native'
+import React from 'react'
+import { Text, Modal, View, TouchableOpacity } from 'react-native'
 import { TextStyles } from 'styles'
-import { WithChildren } from 'types/react.types'
 
 import styles from './InfoModal.styles'
 
-type Props = WithChildren<{
+interface Props {
   visible: boolean
   closeModal: () => void
   infoText: string
-}>
+}
 
-const InfoModal = ({ children, visible, closeModal, infoText, ...props }: Props) => {
+const InfoModal = ({ visible, closeModal, infoText, ...props }: Props) => {
   return (
-    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={closeModal}>
+    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={closeModal} {...props}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
           <Text style={[TextStyles.h4, TextStyles.textTertiary9, styles.modalText]}>{infoText}</Text>

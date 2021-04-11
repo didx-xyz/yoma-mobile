@@ -1,13 +1,15 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
-const { height, width } = Dimensions.get('window')
-
 const styles = {
+  textInputView: {
+    width: '95%',
+    alignSelf: 'center',
+  } as ViewStyle,
   label: {
     color: colors[Colors.tertiary9],
     marginLeft: 10,
-  },
+  } as TextStyle,
   textInputStyle: {
     width: '95%',
     alignSelf: 'center',

@@ -12,7 +12,7 @@ type InputProps = TextInputProps & {
 
 const CustomInput = ({ label, touched, error, ...props }: InputProps) => {
   return (
-    <View style={{ width: '95%', alignSelf: 'center' }}>
+    <View style={styles.textInputView}>
       <Text style={[TextStyles.h4, styles.label]}>{label}</Text>
       <TextInput
         placeholder={label}

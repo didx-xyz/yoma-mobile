@@ -3,15 +3,14 @@ import { BackIconGrey } from 'assets/images'
 import React, { useEffect } from 'react'
 import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
 import { TextStyles } from 'styles'
-import { WithChildren } from 'types/react.types'
 
 import styles from './NormalHeader.styles'
 
-type Props = WithChildren<{
+type Props = {
   navigation: any
   headerText: string
   onSave?: any
-}>
+}
 
 const NormalHeader = ({ navigation, headerText, onSave }: Props) => {
   useEffect(() => {

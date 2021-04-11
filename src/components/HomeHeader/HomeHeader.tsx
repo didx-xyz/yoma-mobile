@@ -7,9 +7,9 @@ import { WithChildren } from 'types/react.types'
 
 import styles from './HomeHeader.styles'
 
-type Props = WithChildren<{
+type Props = {
   navigation: any
-}>
+}
 
 const HomeHeader = ({ navigation }: Props) => {
   return (

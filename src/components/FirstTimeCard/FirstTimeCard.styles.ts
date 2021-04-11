@@ -1,7 +1,5 @@
-import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
-
-const { height, width } = Dimensions.get('window')
 
 const styles = {
   cardView: {
@@ -49,6 +47,10 @@ const styles = {
     bottom: 0,
     zIndex: 0,
   } as ViewStyle,
+  hostedText: {
+    flexDirection: 'row',
+    marginVertical: 10,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

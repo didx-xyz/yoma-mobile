@@ -1,9 +1,7 @@
 import { EditIcon } from 'assets/images'
-import React, { Component } from 'react'
-import { useTranslation } from 'react-i18next'
-import { Dimensions, GestureResponderEvent, Text, TouchableOpacity, View } from 'react-native'
-import { TextProps } from 'react-native-elements'
-import { colors, Colors, TextStyles } from 'styles'
+import React from 'react'
+import { Text, TouchableOpacity, View } from 'react-native'
+import { TextStyles } from 'styles'
 
 import styles from './CvCard.styles'
 
@@ -15,7 +13,6 @@ type Props = {
 }
 
 const CvCard = ({ cardTitle, defaultText, certCount, onEdit }: Props) => {
-  const { t } = useTranslation()
   return (
     <View style={styles.cardView}>
       <View style={styles.rowView}>
