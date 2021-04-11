@@ -32,7 +32,7 @@ const TextStyles = StyleSheet.create({
     fontFamily: fontStyles[FontFamily.semibold],
   } as TextStyle,
   textPrimary: {
-    color: colors[Colors.primary],
+    color: colors[Colors.primaryPurple],
   } as TextStyle,
   textWhite: {
     color: colors[Colors.white],
@@ -44,7 +44,7 @@ const TextStyles = StyleSheet.create({
     color: colors[Colors.tertiary3],
   },
   cardHeaderText: {
-    color: colors[Colors.primary],
+    color: colors[Colors.primaryPurple],
     fontFamily: fontStyles[FontFamily.bold],
     fontSize: 21,
     paddingTop: 10,

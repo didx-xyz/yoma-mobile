@@ -20,7 +20,7 @@ const Login = ({ navigation }: Props) => {
         <LargeHeaderContainer
           navigation={navigation}
           headerText={t('login')}
-          backgroundColor={colors[Colors.primary]}
+          backgroundColor={colors[Colors.primaryPurple]}
           circleImage={<YellowCircleLeft />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />

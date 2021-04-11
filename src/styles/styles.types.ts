@@ -1,5 +1,6 @@
 export enum Colors {
-  primary = 'primary',
+  primaryPurple = 'primaryPurple',
+  fontBlue = 'fontBlue',
   secondary = 'secondary',
   tertiary1 = 'tertiary1',
   tertiary2 = 'tertiary2',
@@ -8,7 +9,16 @@ export enum Colors {
   tertiary5 = 'tertiary5',
   tertiary6 = 'tertiary6',
   white = 'white',
-  black = 'black',
+  primaryDarkGrey = 'primaryDarkGrey',
+  primaryGreen = 'primaryGreen',
+  primaryYellow = 'primaryYellow',
+  primaryBlue = 'primaryBlue',
+  primaryRed = 'primaryRed',
+  secondaryPurple = 'secondaryPurple',
+  secondaryBlue = 'secondaryBlue',
+  secondaryDarkBlue = 'secondaryDarkBlue',
+  secondaryRed = 'secondaryRed',
+  menuGrey = 'menuGrey',
 }
 
 export enum FontFamily {
