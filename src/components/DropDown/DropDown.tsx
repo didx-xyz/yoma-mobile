@@ -1,8 +1,9 @@
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
-import { TextStyles } from 'styles'
+import { Colors, TextStyles } from 'styles'
 
+import Text, { FontWeights, TextAlign } from '../Typography'
 import styles from './DropDown.styles'
 
 type Props = DropDownPickerProps & {
@@ -23,7 +24,9 @@ const DropDown = ({ touched, error, ...props }: Props) => {
         }}
         {...props}
       />
-      <Text style={TextStyles.errorText}>{touched && error}</Text>
+      <Text.Meta color={Colors.primaryRed} weight={FontWeights.semiBold_600} align={TextAlign.center}>
+        {touched && error}
+      </Text.Meta>
     </View>
   )
 }

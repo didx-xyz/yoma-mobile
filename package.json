@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "_git:pre-commit": "pretty-quick --staged",
-    "_git:pre-push": "npm-run-all code:lint _remove_on_ci_setup",
-    "_remove_on_ci_setup": "npm run test",
+    "_git:pre-push": "npm-run-all code:lint",
     "init:ios": "npx pod-install",
     "init": "npm-run-all env:dev init:ios",
     "android": "react-native run-android",

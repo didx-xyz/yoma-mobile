@@ -2,9 +2,10 @@ import { PurpleQuarter } from 'assets/Images'
 import { LargeHeaderContainer, ViewContainer } from 'components'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, View, ScrollView } from 'react-native'
-import { Colors, colors, TextStyles } from 'styles'
+import { ScrollView, View } from 'react-native'
+import { Colors, colors } from 'styles'
 
+import Text, { Bold, FontWeights, HeaderLevels, TextAlign } from '../../../../components/Typography'
 import styles from './ResetPassword.styles'
 import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
 
@@ -38,13 +39,25 @@ const ResetPassword = ({ navigation, route }: Props) => {
           circleImageStyle={styles.purpleSemiCircleContainer}
         />
         <View style={styles.whiteCard}>
-          <Text style={TextStyles.cardHeaderText}>{t('createNewPassword')}</Text>
-          <Text style={[TextStyles.h4, TextStyles.textTertiary5, styles.bodyText]}>
+          <Text.Header
+            level={HeaderLevels.h3}
+            align={TextAlign.center}
+            weight={FontWeights.bold_700}
+            style={styles.cardHeader}
+          >
+            {t('createNewPassword')}
+          </Text.Header>
+          <Text.Header
+            level={HeaderLevels.h4}
+            color={Colors.primaryDarkGrey}
+            align={TextAlign.center}
+            style={styles.bodyText}
+          >
             {t('resetPasswordBody1')}
-            <Text style={{ fontWeight: 'bold' }}>{t('resetPasswordBody2')}</Text>
+            <Bold>{t('resetPasswordBody2')}</Bold>
             {t('resetPasswordBody3')}
-            <Text style={{ fontWeight: 'bold' }}>{t('resetPasswordBody4')}</Text>
-          </Text>
+            <Bold>{t('resetPasswordBody4')}</Bold>
+          </Text.Header>
           <ResetPasswordForm id={Id} token={Token} navigation={navigation} />
         </View>
       </ScrollView>

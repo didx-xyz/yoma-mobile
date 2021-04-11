@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 const styles = {
@@ -20,6 +20,13 @@ const styles = {
     paddingVertical: 20,
     elevation: 3,
   } as ViewStyle,
+  cardHeader: {
+    alignSelf: 'center',
+  } as TextStyle,
+  notice: {
+    textAlign: 'center',
+    marginVertical: 30,
+  } as TextStyle,
   scrollView: {} as ViewStyle,
 }
 

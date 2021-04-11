@@ -1,7 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Text, View } from 'react-native'
 
+import Text, { HeaderLevels } from '../../components/Typography'
 import ViewContainer from '../../components/ViewContainer/ViewContainer'
 import styles from './DigitalCvHome.styles'
 
@@ -13,7 +13,7 @@ const DigitalCvHome = ({ navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
-      <Text style={styles.text}>{t('signUpPlease')}</Text>
+      <Text.Header level={HeaderLevels.h1}>{t('signUpPlease')}</Text.Header>
     </ViewContainer>
   )
 }

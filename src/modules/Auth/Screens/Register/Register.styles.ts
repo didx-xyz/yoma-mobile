@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 const styles = {
@@ -27,6 +27,9 @@ const styles = {
     borderRadius: 12,
     paddingVertical: 10,
   } as ViewStyle,
+  cardHeader: {
+    alignSelf: 'center',
+  } as TextStyle,
   horizontalLineView: {
     flexDirection: 'row',
     paddingHorizontal: 15,
@@ -38,6 +41,9 @@ const styles = {
     height: 1,
     flex: 1,
   } as ViewStyle,
+  orText: {
+    paddingHorizontal: 15,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

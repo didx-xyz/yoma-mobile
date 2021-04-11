@@ -2,10 +2,11 @@ import { PurpleQuarter } from 'assets/Images'
 import { ButtonContainer, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { Colors, colors, TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
+import Text, { FontWeights, HeaderLevels, TextAlign } from '../../../../components/Typography'
 import styles from './Register.styles'
 
 interface Props {
@@ -25,7 +26,14 @@ const Register = ({ navigation }: Props) => {
         circleImageStyle={styles.purpleSemiCircleContainer}
       />
       <View style={styles.whiteCard}>
-        <Text style={TextStyles.cardHeaderText}>{t('welcome')}</Text>
+        <Text.Header
+          level={HeaderLevels.h3}
+          align={TextAlign.center}
+          weight={FontWeights.bold_700}
+          style={[styles.cardHeader]}
+        >
+          {t('welcome')}
+        </Text.Header>
         <ButtonContainer
           buttonText={t<string>('registerWithEmail')}
           buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15 }]}
@@ -34,22 +42,30 @@ const Register = ({ navigation }: Props) => {
         />
         <View style={styles.horizontalLineView}>
           <View style={styles.horizontalLine} />
-          <Text style={[TextStyles.h3, TextStyles.textTertiary5, { paddingHorizontal: 15 }]}>{t('or')}</Text>
+          <Text.Header level={HeaderLevels.h3} color={Colors.primaryDarkGrey} style={styles.orText}>
+            {t('or')}
+          </Text.Header>
           <View style={styles.horizontalLine} />
         </View>
-        <Text style={[TextStyles.h5, TextStyles.textTertiary5, { marginTop: 15 }]}>{t('registerSocial')}</Text>
+        <Text.Header level={HeaderLevels.h5} color={Colors.primaryDarkGrey} style={{ marginTop: 15 }}>
+          {t('registerSocial')}
+        </Text.Header>
         <SocialRegistration />
       </View>
-      <Text style={[TextStyles.h5, TextStyles.textTertiary5, { textAlign: 'center', marginTop: 30 }]}>
+      <Text.Header
+        level={HeaderLevels.h5}
+        color={Colors.primaryDarkGrey}
+        style={{ textAlign: 'center', marginTop: 30 }}
+      >
         {t('alreadyHaveAccount')}
-        <Text
+        <Text.Body
           style={[TextStyles.buttonText, TextStyles.textTertiary3, { textAlign: 'center' }]}
           onPress={() => navigation.navigate('Login')}
         >
           &nbsp;
           {t('login')}.
-        </Text>
-      </Text>
+        </Text.Body>
+      </Text.Header>
     </ViewContainer>
   )
 }
