@@ -64,4 +64,6 @@ buck-out/
 
 
 .xgitconfig
+src/env.json
+
 android/java_pid843420.hprof
