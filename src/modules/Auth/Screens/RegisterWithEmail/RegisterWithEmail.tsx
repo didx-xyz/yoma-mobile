@@ -21,7 +21,7 @@ const RegisterWithEmail = ({ navigation }: Props) => {
         <LargeHeaderContainer
           navigation={navigation}
           headerText={t<string>('register')}
-          backgroundColor={colors[Colors.tertiary6]}
+          backgroundColor={colors[Colors.secondaryPurple]}
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowCircleContainer}
         />

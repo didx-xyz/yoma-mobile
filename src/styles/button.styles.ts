@@ -7,7 +7,7 @@ const { height, width } = Dimensions.get('window')
 
 const ButtonStyles = StyleSheet.create({
   mediumTertiary3Button: {
-    backgroundColor: colors[Colors.tertiary3],
+    backgroundColor: colors[Colors.primaryGreen],
     height: height / 13,
     alignItems: 'center',
     justifyContent: 'center',
@@ -20,7 +20,7 @@ const ButtonStyles = StyleSheet.create({
     justifyContent: 'center',
   } as ViewStyle,
   largeTertiary3Button: {
-    backgroundColor: colors[Colors.tertiary3],
+    backgroundColor: colors[Colors.primaryGreen],
     height: height / 13,
     alignItems: 'center',
     justifyContent: 'center',
