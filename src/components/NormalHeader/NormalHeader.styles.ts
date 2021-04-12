@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
 
@@ -11,6 +11,9 @@ const styles = {
     justifyContent: 'space-between',
     flexDirection: 'row',
   } as ViewStyle,
+  saveText: {
+    paddingRight: 20,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

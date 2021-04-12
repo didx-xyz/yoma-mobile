@@ -4,6 +4,7 @@ import CustomInput from 'components/CustomInput/CustomInput'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
+import styles from 'modules/Auth/Screens/RegisterWithEmail/RegisterForm/RegisterForm.styles'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Text, View } from 'react-native'
@@ -110,7 +111,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => {
         return (
-          <View style={{ width: '100%' }}>
+          <View style={styles.profileForm}>
             <Spinner visible={isSubmitting} />
             <CustomInput
               onChangeText={handleChange('firstName')}

@@ -14,15 +14,10 @@ type Props = {
   navigation: any
 }
 
-// TODO: Add font Bold family
 const FirstTimeCard = ({ navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.cardView}>
-      {/* <Text style={[TextStyles.h3, TextStyles.boldText, TextStyles.textWhite]}>
-        {t('Complete')}
-        <Text>&nbsp;{t('your Cv')}</Text>
-      </Text> */}
       <Text.Header level={HeaderLevels.h3} color={Colors.white}>
         {t('Complete')}
         <Text.Header level={HeaderLevels.h3} color={Colors.secondaryDarkBlue}>
@@ -49,7 +44,7 @@ const FirstTimeCard = ({ navigation }: Props) => {
         />
       </View>
       <Text.Header level={HeaderLevels.h6} weight={FontWeights.bold_700} style={styles.percentText}>
-        1% complete
+        {t('1% complete')}
       </Text.Header>
       <ButtonContainer
         buttonText={t<string>('Let’s do it')}

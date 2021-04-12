@@ -20,6 +20,7 @@ const styles = {
     height: 70,
     width: 70,
     borderRadius: 35,
+    marginTop: -50,
   } as ImageStyle,
   editIcon: {
     elevation: 3,
@@ -32,6 +33,9 @@ const styles = {
   profileOuterStyle: {
     marginTop: -50,
   } as ViewStyle,
+  logout: {
+    marginVertical: 20,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)
