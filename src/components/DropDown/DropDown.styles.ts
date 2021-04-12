@@ -1,10 +1,14 @@
 import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { colors, Colors } from 'styles'
 
-const { height, width } = Dimensions.get('window')
+const { width } = Dimensions.get('window')
 
 const styles = {
+  container: {
+    height: 45,
+    marginTop: 15,
+  } as ViewStyle,
   dropDownStyle: {
-    backgroundColor: 'rgb(243,246,250)',
     width: width / 1.3,
     alignSelf: 'center',
     borderWidth: 0,
@@ -14,9 +18,12 @@ const styles = {
     borderBottomRightRadius: 60,
   } as ViewStyle,
   dropDownViewStyle: {
-    backgroundColor: 'rgb(243,246,250)',
+    backgroundColor: colors[Colors.white],
     width: '90%',
     alignSelf: 'center',
+  } as ViewStyle,
+  itemStyle: {
+    justifyContent: 'flex-start',
   } as ViewStyle,
 }
 

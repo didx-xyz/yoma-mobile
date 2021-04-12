@@ -12,7 +12,7 @@ const styles = {
     bottom: 0,
   } as ViewStyle,
   whiteCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     alignSelf: 'center',
     marginTop: '-30%',
     width: '90%',

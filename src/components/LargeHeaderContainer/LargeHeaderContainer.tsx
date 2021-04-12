@@ -1,4 +1,4 @@
-import { WhiteLogo } from 'assets/Images'
+import { WhiteLogo } from 'assets/images'
 import React from 'react'
 import { View, ViewStyle } from 'react-native'
 import { WithChildren } from 'types/react.types'

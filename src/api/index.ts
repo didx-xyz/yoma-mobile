@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { AUTH_TOKEN, BASE_URL } from 'helpers/helpers'
 
 import Env from '../env.json'
 import auth from './auth'
@@ -20,7 +21,7 @@ instance.interceptors.request.use(
     request.headers = {
       ...request.headers,
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${AUTH_TOKEN}`,
     }
     return request
   },
