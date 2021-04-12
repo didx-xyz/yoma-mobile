@@ -2,7 +2,7 @@ import React from 'react'
 import { TextStyle, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native'
 import { WithChildren } from 'types/react.types'
 
-import Text, { FontWeights } from '../Typography'
+import Text, { Bold } from '../Typography'
 
 type Props = TouchableOpacityProps &
   WithChildren<{
@@ -16,8 +16,8 @@ const ButtonContainer = ({ children, buttonStyle, buttonText, buttonTextStyle, .
   return (
     <TouchableOpacity style={buttonStyle} {...props}>
       {children}
-      <Text.Body weight={FontWeights.bold_700} style={buttonTextStyle}>
-        {buttonText}
+      <Text.Body style={buttonTextStyle}>
+        <Bold>{buttonText}</Bold>
       </Text.Body>
     </TouchableOpacity>
   )

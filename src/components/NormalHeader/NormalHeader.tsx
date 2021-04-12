@@ -1,6 +1,6 @@
 import { StackActions } from '@react-navigation/native'
 import { BackIconGrey } from 'assets/images'
-import Text, { Bold, FontWeights, HeaderLevels } from 'components/Typography'
+import Text, { Bold, HeaderLevels } from 'components/Typography'
 import React, { useEffect } from 'react'
 import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -32,8 +32,8 @@ const NormalHeader = ({ navigation, headerText, onSave }: Props) => {
       </TouchableOpacity>
       <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
       <TouchableOpacity onPress={onSave}>
-        <Text.Body style={styles.saveText}>
-          <Bold color={Colors.primaryGreen}>Save</Bold>
+        <Text.Body color={Colors.primaryGreen} style={styles.saveText}>
+          <Bold>Save</Bold>
         </Text.Body>
       </TouchableOpacity>
     </View>

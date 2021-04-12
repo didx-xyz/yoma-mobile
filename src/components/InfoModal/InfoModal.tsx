@@ -1,7 +1,7 @@
 import Text from 'components/Typography'
 import React from 'react'
 import { Modal, View, TouchableOpacity } from 'react-native'
-import { Colors, TextStyles } from 'styles'
+import { Colors } from 'styles'
 
 import styles from './InfoModal.styles'
 
