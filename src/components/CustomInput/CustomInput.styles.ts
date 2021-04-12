@@ -7,7 +7,6 @@ const styles = {
     alignSelf: 'center',
   } as ViewStyle,
   label: {
-    color: colors[Colors.tertiary9],
     marginLeft: 10,
   } as TextStyle,
   textInputStyle: {
@@ -16,7 +15,7 @@ const styles = {
     height: 35,
     padding: 0,
     borderBottomWidth: 1,
-    borderColor: colors[Colors.tertiary9],
+    borderColor: `${colors[Colors.menuGrey]}70`,
   } as ViewStyle,
 }
 

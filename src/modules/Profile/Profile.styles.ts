@@ -4,7 +4,7 @@ import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.tertiary8],
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
     ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   whiteCard: {
@@ -28,6 +28,9 @@ const styles = {
     position: 'absolute',
     right: 0,
     bottom: -5,
+  } as ViewStyle,
+  profileOuterStyle: {
+    marginTop: -50,
   } as ViewStyle,
 }
 

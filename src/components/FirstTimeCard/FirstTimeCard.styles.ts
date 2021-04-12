@@ -3,7 +3,7 @@ import { colors, Colors } from 'styles'
 
 const styles = {
   cardView: {
-    backgroundColor: colors[Colors.secondary],
+    backgroundColor: colors[Colors.primaryYellow],
     width: '97%',
     borderRadius: 25,
     alignSelf: 'center',
@@ -11,6 +11,10 @@ const styles = {
     paddingVertical: 10,
     paddingHorizontal: 20,
   } as ViewStyle,
+  bodyText: {
+    zIndex: 1,
+    marginTop: 5,
+  } as TextStyle,
   progressBar: {
     height: 6,
     width: '100%',
@@ -21,7 +25,7 @@ const styles = {
   } as ViewStyle,
   innerProgressbar: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: colors[Colors.tertiary1],
+    backgroundColor: colors[Colors.primaryRed],
     borderRadius: 18,
   } as ViewStyle,
   percentText: {

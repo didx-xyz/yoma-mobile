@@ -27,7 +27,12 @@ const ProfilePhoto = ({
 }: Props) => {
   return (
     <TouchableOpacity style={profileOuterStyle} activeOpacity={1} onPress={onPress}>
-      <ProgressCircle radius={outerRadius} percent={percent} borderWidth={borderWidth} color={colors[Colors.tertiary1]}>
+      <ProgressCircle
+        radius={outerRadius}
+        percent={percent}
+        borderWidth={borderWidth}
+        color={colors[Colors.primaryRed]}
+      >
         <View style={profileInnerStyle}>
           <ProfileIcon height={outerRadius} width={outerRadius} />
         </View>

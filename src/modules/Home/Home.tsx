@@ -18,7 +18,7 @@ const Tab = createBottomTabNavigator()
 
 const tabBarOptions: BottomTabBarOptions = {
   tabStyle: {
-    backgroundColor: colors[Colors.primary],
+    backgroundColor: colors[Colors.primaryPurple],
     paddingBottom: 2,
   },
   activeTintColor: colors[Colors.white],

@@ -21,17 +21,8 @@ const styles = {
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    backgroundColor: colors[Colors.tertiary2],
+    backgroundColor: colors[Colors.primaryGreen],
   } as ViewStyle,
-  textStyle: {
-    color: colors[Colors.white],
-    fontWeight: 'bold',
-    textAlign: 'center',
-  } as TextStyle,
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

@@ -15,6 +15,16 @@ const styles = {
     marginTop: 10,
     height: height / 4,
   } as ViewStyle,
+  certificateCountView: {
+    height: 25,
+    width: 25,
+    maxWidth: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 5,
+    borderRadius: 12,
+    marginRight: 10,
+  } as ViewStyle,
   rowView: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -28,7 +38,7 @@ const styles = {
   } as ViewStyle,
   dividerLine: {
     height: 2,
-    backgroundColor: colors[Colors.tertiary10],
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
     marginVertical: 10,
   } as ViewStyle,
   bodyView: {

@@ -1,6 +1,7 @@
+import Text, { TextAlign } from 'components/Typography'
 import React from 'react'
-import { Text, TextInput, TextInputProps, View } from 'react-native'
-import { TextStyles } from 'styles'
+import { TextInput, TextInputProps, View } from 'react-native'
+import { colors, Colors } from 'styles'
 
 import styles from './CustomInput.styles'
 
@@ -13,13 +14,16 @@ type InputProps = TextInputProps & {
 const CustomInput = ({ label, touched, error, ...props }: InputProps) => {
   return (
     <View style={styles.textInputView}>
-      <Text style={[TextStyles.h4, styles.label]}>{label}</Text>
+      <Text.Meta style={styles.label}>{label}</Text.Meta>
       <TextInput
+        placeholderTextColor={colors[Colors.menuGrey]}
         placeholder={label}
-        style={[styles.textInputStyle, TextStyles.h4, TextStyles.textTertiary5]}
+        style={styles.textInputStyle}
         {...props}
       />
-      <Text style={TextStyles.errorText}>{touched && error}</Text>
+      <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
+        {touched && error}
+      </Text.Meta>
     </View>
   )
 }

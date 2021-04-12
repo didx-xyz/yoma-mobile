@@ -1,12 +1,13 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
 import { NormalHeader, ProfilePhoto, ViewContainer } from 'components'
+import Text, { FontWeights } from 'components/Typography'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
-import { TextStyles } from 'styles'
+import { Colors, colors } from 'styles'
 import { showSimpleMessage } from 'utils/error'
 
 import styles from './Profile.styles'
@@ -93,9 +94,7 @@ const Profile = ({ navigation }: Props) => {
               onPress={captureImage}
               percent={5}
               showEditIcon={true}
-              profileOuterStyle={{
-                marginTop: -50,
-              }}
+              profileOuterStyle={styles.profileOuterStyle}
             />
           )}
           <ProfileForm ref={childRef} navigation={navigation} />
@@ -107,9 +106,9 @@ const Profile = ({ navigation }: Props) => {
             })
           }
         >
-          <Text style={[TextStyles.textTertiary9, TextStyles.semiBoldText, { marginVertical: 20 }]}>
+          <Text.Body weight={FontWeights.bold_700} style={{ marginVertical: 20 }}>
             {t('Log Out')}
-          </Text>
+          </Text.Body>
         </TouchableOpacity>
       </ScrollView>
     </ViewContainer>

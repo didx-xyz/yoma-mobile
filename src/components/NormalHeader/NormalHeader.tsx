@@ -1,8 +1,9 @@
 import { StackActions } from '@react-navigation/native'
 import { BackIconGrey } from 'assets/images'
+import Text, { FontWeights, HeaderLevels } from 'components/Typography'
 import React, { useEffect } from 'react'
-import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
-import { TextStyles } from 'styles'
+import { BackHandler, TouchableOpacity, View } from 'react-native'
+import { Colors } from 'styles'
 
 import styles from './NormalHeader.styles'
 
@@ -29,9 +30,11 @@ const NormalHeader = ({ navigation, headerText, onSave }: Props) => {
       <TouchableOpacity onPress={goBack}>
         <BackIconGrey />
       </TouchableOpacity>
-      <Text style={[TextStyles.textPrimary, TextStyles.semiBoldText]}>{headerText}</Text>
+      <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
       <TouchableOpacity onPress={onSave}>
-        <Text style={[TextStyles.boldText, TextStyles.textTertiary3, { paddingRight: 20 }]}>Save</Text>
+        <Text.Body weight={FontWeights.bold_700} color={Colors.primaryGreen} style={{ paddingRight: 20 }}>
+          Save
+        </Text.Body>
       </TouchableOpacity>
     </View>
   )

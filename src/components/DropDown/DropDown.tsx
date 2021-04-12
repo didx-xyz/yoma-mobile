@@ -14,13 +14,11 @@ const DropDown = ({ touched, error, ...props }: Props) => {
   return (
     <View>
       <DropDownPicker
-        containerStyle={{ height: 45, marginTop: 15 }}
+        containerStyle={styles.container}
         style={styles.dropDownStyle}
         dropDownStyle={styles.dropDownViewStyle}
         labelStyle={[TextStyles.h4, TextStyles.textTertiary5]}
-        itemStyle={{
-          justifyContent: 'flex-start',
-        }}
+        itemStyle={styles.itemStyle}
         {...props}
       />
       <Text style={TextStyles.errorText}>{touched && error}</Text>

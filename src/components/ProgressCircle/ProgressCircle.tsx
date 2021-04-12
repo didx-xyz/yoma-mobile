@@ -16,7 +16,7 @@ type Props = WithChildren<{
 }>
 
 const ProgressCircle = ({
-  backgroundColor = colors[Colors.tertiary15],
+  backgroundColor = `${colors[Colors.menuGrey]}25`,
   borderWidth = 1,
   children,
   color,

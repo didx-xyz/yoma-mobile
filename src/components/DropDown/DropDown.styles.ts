@@ -4,8 +4,11 @@ import { colors, Colors } from 'styles'
 const { width } = Dimensions.get('window')
 
 const styles = {
+  container: {
+    height: 45,
+    marginTop: 15,
+  } as ViewStyle,
   dropDownStyle: {
-    backgroundColor: colors[Colors.tertiary10],
     width: width / 1.3,
     alignSelf: 'center',
     borderWidth: 0,
@@ -15,9 +18,12 @@ const styles = {
     borderBottomRightRadius: 60,
   } as ViewStyle,
   dropDownViewStyle: {
-    backgroundColor: colors[Colors.tertiary10],
+    backgroundColor: colors[Colors.white],
     width: '90%',
     alignSelf: 'center',
+  } as ViewStyle,
+  itemStyle: {
+    justifyContent: 'flex-start',
   } as ViewStyle,
 }
 

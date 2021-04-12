@@ -1,11 +1,11 @@
 import api from 'api'
 import { InfoModal, NormalHeader, ViewContainer } from 'components'
+import Text, { MetaLevels } from 'components/Typography'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { TextInput } from 'react-native-gesture-handler'
-import { TextStyles } from 'styles'
+import { TouchableOpacity, View, TextInput } from 'react-native'
+import { Colors } from 'styles'
 
 import styles from './About.styles'
 
@@ -55,9 +55,7 @@ const About = ({ navigation }: Props) => {
       />
       <NormalHeader navigation={navigation} headerText={t('About')} onSave={updateBiography} />
       <View style={styles.whiteCard}>
-        <Text style={[TextStyles.textTertiary5, TextStyles.semiBoldText, { alignSelf: 'flex-start' }]}>
-          {t('Summary')}
-        </Text>
+        <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
         <TextInput
           style={styles.textInputStyle}
           value={summary}
@@ -69,9 +67,9 @@ const About = ({ navigation }: Props) => {
           returnKeyType="done"
         />
         <TouchableOpacity onPress={() => setInfoModal(true)}>
-          <Text style={[TextStyles.semiBoldText, TextStyles.textTertiary3, { marginVertical: 10 }]}>
+          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
             {t('Find inspiration on how to write a great profile.')}
-          </Text>
+          </Text.Meta>
         </TouchableOpacity>
       </View>
     </ViewContainer>

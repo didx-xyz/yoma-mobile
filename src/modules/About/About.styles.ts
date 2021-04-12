@@ -1,9 +1,9 @@
-import { StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.tertiary8],
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
     ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   whiteCard: {
@@ -21,10 +21,13 @@ const styles = {
     borderBottomWidth: 1,
     width: '100%',
     flex: 1,
-    borderColor: colors[Colors.tertiary9],
+    borderColor: colors[Colors.unsavedStyleLightGrey],
     paddingLeft: 0,
     textAlignVertical: 'top',
   } as ViewStyle,
+  bottomText: {
+    marginVertical: 10,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)
