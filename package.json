@@ -104,8 +104,7 @@
       "node_modules/(?!rn-fetch-blob)"
     ],
     "setupFiles": [
-      "./node_modules/react-native-gesture-handler/jestSetup.js",
-      "<rootDir>/__mocks__"
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "moduleFileExtensions": [
       "ts",

@@ -3,7 +3,7 @@ import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.secondary],
+    backgroundColor: colors[Colors.primaryYellow],
     alignItems: 'center',
     justifyContent: 'center',
     ...StyleSheet.absoluteFillObject,

@@ -38,28 +38,22 @@ const TextStyles = StyleSheet.create({
     fontFamily: fontStyles[FontFamily.semibold],
   } as TextStyle,
   textPrimary: {
-    color: colors[Colors.primary],
+    color: colors[Colors.primaryPurple],
   } as TextStyle,
   textSecondary: {
-    color: colors[Colors.secondary],
+    color: colors[Colors.primaryYellow],
   } as TextStyle,
   textWhite: {
     color: colors[Colors.white],
   } as TextStyle,
   textTertiary5: {
-    color: colors[Colors.tertiary5],
-  } as TextStyle,
-  textTertiary7: {
-    color: colors[Colors.tertiary7],
-  } as TextStyle,
-  textTertiary9: {
-    color: colors[Colors.tertiary9],
-  } as TextStyle,
+    color: colors[Colors.primaryDarkGrey],
+  },
   textTertiary3: {
-    color: colors[Colors.tertiary3],
-  } as TextStyle,
+    color: colors[Colors.primaryGreen],
+  },
   cardHeaderText: {
-    color: colors[Colors.primary],
+    color: colors[Colors.primaryPurple],
     fontFamily: fontStyles[FontFamily.bold],
     fontSize: 21,
     paddingTop: 10,
@@ -67,7 +61,7 @@ const TextStyles = StyleSheet.create({
     textAlign: 'center',
   } as TextStyle,
   errorText: {
-    color: colors[Colors.tertiary1],
+    color: colors[Colors.primaryRed],
     fontFamily: fontStyles[FontFamily.semibold],
     fontSize: 12,
     textAlign: 'center',

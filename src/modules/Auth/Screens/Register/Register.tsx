@@ -20,7 +20,7 @@ const Register = ({ navigation }: Props) => {
       <LargeHeaderContainer
         navigation={navigation}
         headerText={t<string>('register')}
-        backgroundColor={colors[Colors.secondary]}
+        backgroundColor={colors[Colors.primaryYellow]}
         circleImage={<PurpleQuarter />}
         circleImageStyle={styles.purpleSemiCircleContainer}
       />

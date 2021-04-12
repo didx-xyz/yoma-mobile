@@ -33,7 +33,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
         <LargeHeaderContainer
           navigation={navigation}
           headerText=""
-          backgroundColor={colors[Colors.secondary]}
+          backgroundColor={colors[Colors.primaryYellow]}
           circleImage={<PurpleQuarter />}
           circleImageStyle={styles.purpleSemiCircleContainer}
         />
