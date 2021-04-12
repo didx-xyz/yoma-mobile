@@ -1,15 +1,16 @@
 import axios from 'axios'
+import { AUTH_TOKEN, BASE_URL } from 'helpers/helpers'
 
+import Env from '../env.json'
 import auth from './auth'
 import users from './users'
 
 const FALLBACK_MESSAGE = 'Unable to reach server'
 const REFRESH_TOKEN_FAILED_MESSAGE = 'Unable to refresh your session'
 const UNAUTHORIZED_STATUS_CODE = 401
-const BASE_URL = 'https://staging.api.yoma.africa/api/v1/'
 
 const instance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: Env.YOMA_API_BASE_PATH,
   headers: {
     'Content-Type': 'application/json',
   },
@@ -20,7 +21,7 @@ instance.interceptors.request.use(
     request.headers = {
       ...request.headers,
       'Content-Type': 'application/json',
-      // Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${AUTH_TOKEN}`,
     }
     return request
   },

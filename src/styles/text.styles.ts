@@ -23,6 +23,12 @@ const TextStyles = StyleSheet.create({
     fontSize: 12,
     fontFamily: fontStyles[FontFamily.small],
   } as TextStyle,
+  boldText: {
+    fontFamily: fontStyles[FontFamily.bold],
+  } as TextStyle,
+  semiBoldText: {
+    fontFamily: fontStyles[FontFamily.semibold],
+  } as TextStyle,
   buttonText: {
     fontSize: 15,
     fontFamily: fontStyles[FontFamily.bold],
@@ -33,6 +39,9 @@ const TextStyles = StyleSheet.create({
   } as TextStyle,
   textPrimary: {
     color: colors[Colors.primaryPurple],
+  } as TextStyle,
+  textSecondary: {
+    color: colors[Colors.primaryYellow],
   } as TextStyle,
   textWhite: {
     color: colors[Colors.white],

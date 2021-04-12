@@ -1,4 +1,4 @@
-import { RedSemiCircle, WhiteLogo, PurpleSemiCircle } from 'assets/Images'
+import { RedSemiCircle, WhiteLogo, PurpleSemiCircle } from 'assets/images'
 import { ButtonContainer, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
