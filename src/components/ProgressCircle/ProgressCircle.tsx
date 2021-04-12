@@ -1,5 +1,6 @@
 import React from 'react'
 import { View } from 'react-native'
+import { Colors, colors } from 'styles'
 import { WithChildren } from 'types/react.types'
 
 import styles from './ProgressCircle.styles'
@@ -15,11 +16,11 @@ type Props = WithChildren<{
 }>
 
 const ProgressCircle = ({
-  backgroundColor = '#D4D9E4',
+  backgroundColor = colors[Colors.tertiary15],
   borderWidth = 1,
   children,
-  color = '#333',
-  innerColor = '#fff',
+  color,
+  innerColor = colors[Colors.white],
   percent = 0,
   radius,
 }: Props) => {

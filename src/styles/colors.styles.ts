@@ -20,6 +20,8 @@ const CATSKILL_WHITE = '#F3F6FA'
 const LIGHT_YELLOW = '#f9ab3e15'
 const FOAM_WHITE = '#E5F7FD'
 const LIGHT_RED = '#FFE4E6'
+const WHISPER_WHITE = '#F3F3F8'
+const GEYSER_WHITE = '#D4D9E4'
 
 // TODO:needs to be updated to correct names
 export default {
@@ -38,6 +40,8 @@ export default {
   [Colors.tertiary11]: LIGHT_YELLOW,
   [Colors.tertiary12]: FOAM_WHITE,
   [Colors.tertiary13]: LIGHT_RED,
+  [Colors.tertiary14]: WHISPER_WHITE,
+  [Colors.tertiary15]: GEYSER_WHITE,
   [Colors.white]: greys.white,
   [Colors.black]: greys.black,
 }

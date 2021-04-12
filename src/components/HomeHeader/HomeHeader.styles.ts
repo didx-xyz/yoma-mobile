@@ -15,7 +15,7 @@ const styles = {
     paddingHorizontal: 20,
   } as ViewStyle,
   profileInnerStyle: {
-    backgroundColor: '#F3F3F8',
+    backgroundColor: colors[Colors.tertiary14],
     borderRadius: 14,
     height: 27,
     width: 27,
