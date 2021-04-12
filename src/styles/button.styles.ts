@@ -45,7 +45,7 @@ const ButtonStyles = StyleSheet.create({
     borderRadius: 60,
     flexDirection: 'row',
     borderWidth: 1,
-    borderColor: '#DF4930',
+    borderColor: colors[Colors.tertiary1],
   } as ViewStyle,
 })
 

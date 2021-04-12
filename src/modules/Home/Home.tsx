@@ -22,7 +22,7 @@ const tabBarOptions: BottomTabBarOptions = {
     paddingBottom: 2,
   },
   activeTintColor: colors[Colors.white],
-  inactiveTintColor: '#FFFFFF38',
+  inactiveTintColor: `${colors[Colors.white]}38`,
   labelStyle: {
     fontFamily: fontStyles[FontFamily.semibold],
   },

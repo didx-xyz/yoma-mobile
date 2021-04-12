@@ -21,14 +21,14 @@ const styles = {
   } as ViewStyle,
   editIcon: {
     elevation: 3,
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     borderRadius: 15,
     position: 'absolute',
     right: 0,
   } as ViewStyle,
   dividerLine: {
     height: 2,
-    backgroundColor: 'rgb(243,246,250)',
+    backgroundColor: colors[Colors.tertiary10],
     marginVertical: 10,
   } as ViewStyle,
   bodyView: {

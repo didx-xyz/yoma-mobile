@@ -30,7 +30,7 @@ const styles = {
     height: 25,
   } as ImageStyle,
   tokensView: {
-    backgroundColor: 'rgba(249,171,62,0.15)',
+    backgroundColor: colors[Colors.tertiary11],
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 2,

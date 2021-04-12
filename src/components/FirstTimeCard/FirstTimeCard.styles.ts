@@ -15,7 +15,7 @@ const styles = {
     height: 6,
     width: '100%',
     alignSelf: 'center',
-    backgroundColor: 'white',
+    backgroundColor: colors[Colors.white],
     borderRadius: 18,
     zIndex: 1,
   } as ViewStyle,

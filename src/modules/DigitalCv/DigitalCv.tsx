@@ -1,4 +1,4 @@
-import { CvCard, FirstTimeCard, HomeHeader, ViewContainer } from 'components'
+import { ViewContainer, HomeHeader, FirstTimeCard, CvCard } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, Text, View } from 'react-native'
@@ -28,7 +28,7 @@ const DigitalCv = ({ navigation }: Props) => {
               style={[
                 styles.certificateCountView,
                 {
-                  backgroundColor: '#E5F7FD',
+                  backgroundColor: colors[Colors.tertiary12],
                 },
               ]}
             >
@@ -44,7 +44,7 @@ const DigitalCv = ({ navigation }: Props) => {
               style={[
                 styles.certificateCountView,
                 {
-                  backgroundColor: '#FFE4E6',
+                  backgroundColor: colors[Colors.tertiary13],
                 },
               ]}
             >
@@ -60,7 +60,7 @@ const DigitalCv = ({ navigation }: Props) => {
               style={[
                 styles.certificateCountView,
                 {
-                  backgroundColor: '#E5F7FD',
+                  backgroundColor: colors[Colors.tertiary12],
                 },
               ]}
             >

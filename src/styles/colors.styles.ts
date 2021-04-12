@@ -16,6 +16,10 @@ const BLUE_VIOLET = 'rgb(95,101,185)'
 const DARK_BLUE = 'rgb(22,42,66)'
 const MEDIUM_GREY = 'rgb(241,244,248)'
 const SANTAS_GREY = 'rgb(149,155,180)'
+const CATSKILL_WHITE = '#F3F6FA'
+const LIGHT_YELLOW = '#f9ab3e15'
+const FOAM_WHITE = '#E5F7FD'
+const LIGHT_RED = '#FFE4E6'
 
 // TODO:needs to be updated to correct names
 export default {
@@ -30,6 +34,10 @@ export default {
   [Colors.tertiary7]: DARK_BLUE,
   [Colors.tertiary8]: MEDIUM_GREY,
   [Colors.tertiary9]: SANTAS_GREY,
+  [Colors.tertiary10]: CATSKILL_WHITE,
+  [Colors.tertiary11]: LIGHT_YELLOW,
+  [Colors.tertiary12]: FOAM_WHITE,
+  [Colors.tertiary13]: LIGHT_RED,
   [Colors.white]: greys.white,
   [Colors.black]: greys.black,
 }

@@ -11,7 +11,7 @@ const styles = {
   } as ViewStyle,
   modalView: {
     margin: 20,
-    backgroundColor: 'white',
+    backgroundColor: colors[Colors.white],
     borderRadius: 20,
     padding: 35,
     alignItems: 'center',
@@ -24,7 +24,7 @@ const styles = {
     backgroundColor: colors[Colors.tertiary2],
   } as ViewStyle,
   textStyle: {
-    color: 'white',
+    color: colors[Colors.white],
     fontWeight: 'bold',
     textAlign: 'center',
   } as TextStyle,

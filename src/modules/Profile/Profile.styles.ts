@@ -23,7 +23,7 @@ const styles = {
   } as ImageStyle,
   editIcon: {
     elevation: 3,
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     borderRadius: 15,
     position: 'absolute',
     right: 0,
