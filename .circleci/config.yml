@@ -14,6 +14,7 @@ jobs:
     steps:
       - checkout
       - node/install-packages
+      - run: npm run env:test
       - run: npm run code:lint
       - run:
           name: Unit Tests
