@@ -19,6 +19,8 @@ interface Props {
 
 const Experience = ({ navigation }: Props) => {
   const [isSave, setIsSave] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
+  const [credentialId, setCredentialId] = useState('')
   const [experience, setExperience] = useState([])
   const formRef = useRef<any>()
 
@@ -67,7 +69,7 @@ const Experience = ({ navigation }: Props) => {
           <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>{item.job.organisationName}</Text>
           <View style={{ flexDirection: 'row' }}>
             <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>
-              {moment(item.startDate).format('MMM YYYY')} -{' '}
+              {moment(item.startDate).format('MMM YYYY')} -
             </Text>
             <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>
               {moment(item.endDate).format('MMM YYYY')}
@@ -75,7 +77,14 @@ const Experience = ({ navigation }: Props) => {
             </Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.editIcon}>
+        <TouchableOpacity
+          style={styles.editIcon}
+          onPress={() => {
+            setIsSave(true)
+            setIsEdit(true)
+            setCredentialId(item.id)
+          }}
+        >
           <EditIcon />
         </TouchableOpacity>
       </View>
@@ -96,17 +105,19 @@ const Experience = ({ navigation }: Props) => {
         }}
         add={!isSave}
       />
-      {isSave ? (
+      {isSave || isEdit ? (
         <>
           <ScrollView>
             <View style={styles.whiteCard}>
-              <ExperienceForm navigation={navigation} ref={formRef} />
+              <ExperienceForm navigation={navigation} credentialId={credentialId} ref={formRef} />
             </View>
-            {/* <TouchableOpacity>
+            {isEdit ? (
+              <TouchableOpacity style={styles.deleteText}>
                 <Text style={[TextStyles.textTertiary9, TextStyles.semiBoldText, { marginVertical: 20 }]}>
                   Delete experience
                 </Text>
-              </TouchableOpacity> */}
+              </TouchableOpacity>
+            ) : null}
           </ScrollView>
         </>
       ) : (

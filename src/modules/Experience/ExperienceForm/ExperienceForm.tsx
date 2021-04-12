@@ -19,6 +19,7 @@ import ValidationSchema from './ValidationSchema'
 
 interface Props {
   navigation: any
+  credentialId: string
 }
 
 const INITIAL_VALUES = {
@@ -48,7 +49,8 @@ const INITIAL_VALUES = {
   requestVerificationInd: false,
 }
 
-const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
+const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => {
+  const [initialValues, setInitialValues] = useState(INITIAL_VALUES)
   const [country, setCountry] = useState('')
   const [organizations, setOrganizations] = useState([])
   const [dropdown, setDropDown] = useState(false)
@@ -62,7 +64,22 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   useEffect(() => {
     getOrganizationsList()
     getSkillsList()
+    if (credentialId != '') {
+      getWorkExperience(USER_ID, credentialId)
+    }
   }, [])
+
+  const getWorkExperience = async (userId: string, credentialId: string) => {
+    const response = await api.users.credentials.getById(userId, credentialId)
+    const { job, startDate, endDate }: any = { ...response.data }
+    setInitialValues({
+      ...job,
+      startDate: new Date(startDate) || null,
+      endDate: new Date(endDate) || null,
+      skillNames: job.skills,
+    })
+    setSelectedSkills(job.skills)
+  }
 
   const getOrganizationsList = async () => {
     const response = await api.digitalCv.organisations.getKeyNames()
@@ -121,17 +138,21 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   return (
     <Formik
       innerRef={formRef}
-      initialValues={INITIAL_VALUES}
+      initialValues={initialValues}
       enableReinitialize={true}
       validationSchema={ValidationSchema}
       onSubmit={async (values, actions) => {
         console.log('values', values)
-        try {
-          const job = await createJob(values, values.organisationId)
-          await createCredential(job, values)
-          navigation.navigate('Home')
-        } catch (err) {
-          console.error(err)
+        if (credentialId != '') {
+          console.log('check')
+        } else {
+          try {
+            const job = await createJob(values, values.organisationId)
+            await createCredential(job, values)
+            navigation.navigate('Home')
+          } catch (err) {
+            console.error(err)
+          }
         }
       }}
     >
@@ -157,6 +178,8 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               setFieldValue('organisationName', itemValue.label)
               setFieldValue('organisationId', itemValue.value)
             }}
+            // defaultValue={(values.organisationName)}
+            // defaultValue={''}
             style={styles.formDropDown}
             searchable={true}
             searchablePlaceholder="Search organization"

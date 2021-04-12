@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
 const { width } = Dimensions.get('window')
@@ -22,7 +22,7 @@ const styles = {
   label: {
     color: colors[Colors.tertiary9],
     marginLeft: 10,
-  },
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

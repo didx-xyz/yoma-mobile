@@ -51,6 +51,9 @@ const styles = {
     position: 'absolute',
     right: 10,
   } as ViewStyle,
+  deleteText: {
+    alignSelf: 'center',
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
