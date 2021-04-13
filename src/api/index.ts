@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { AUTH_TOKEN, BASE_URL } from 'helpers/helpers'
 
+import Env from '../env.json'
 import auth from './auth'
 import digitalCv from './digitalCv'
 import users from './users'
@@ -10,7 +11,7 @@ const REFRESH_TOKEN_FAILED_MESSAGE = 'Unable to refresh your session'
 const UNAUTHORIZED_STATUS_CODE = 401
 
 const instance = axios.create({
-  baseURL: BASE_URL,
+  baseURL: Env.YOMA_API_BASE_PATH,
   headers: {
     'Content-Type': 'application/json',
   },

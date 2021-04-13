@@ -1,5 +1,5 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
-import { FacebookIcon, GoogleIcon } from 'assets/Images'
+import { FacebookIcon, GoogleIcon } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LoginManager } from 'react-native-fbsdk'

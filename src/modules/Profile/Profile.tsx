@@ -1,14 +1,13 @@
 import api from 'api'
-import { EditIcon } from 'assets/Images'
-import NormalHeader from 'components/NormalHeader/NormalHeader'
-import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
-import ViewContainer from 'components/ViewContainer/ViewContainer'
+import { EditIcon } from 'assets/images'
+import { NormalHeader, ProfilePhoto, ViewContainer } from 'components'
+import Text, { Bold } from 'components/Typography'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Image, Platform, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
-import { TextStyles } from 'styles'
+import { Colors } from 'styles'
 import { showSimpleMessage } from 'utils/error'
 
 import styles from './Profile.styles'
@@ -83,7 +82,7 @@ const Profile = ({ navigation }: Props) => {
         <View style={styles.whiteCard}>
           {profileImage ? (
             <TouchableOpacity onPress={captureImage}>
-              <Image source={{ uri: profileImage }} style={[styles.profileImage, { marginTop: -50 }]} />
+              <Image source={{ uri: profileImage }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>
@@ -94,10 +93,8 @@ const Profile = ({ navigation }: Props) => {
               outerRadius={40}
               onPress={captureImage}
               percent={5}
-              editIcon={true}
-              profileOuterStyle={{
-                marginTop: -50,
-              }}
+              showEditIcon={true}
+              profileOuterStyle={styles.profileOuterStyle}
             />
           )}
           <ProfileForm ref={childRef} navigation={navigation} />
@@ -109,9 +106,9 @@ const Profile = ({ navigation }: Props) => {
             })
           }
         >
-          <Text style={[TextStyles.textTertiary9, TextStyles.semiBoldText, { marginVertical: 20 }]}>
-            {t('Log Out')}
-          </Text>
+          <Text.Body style={styles.logout}>
+            <Bold color={Colors.menuGrey}>{t('Log Out')}</Bold>
+          </Text.Body>
         </TouchableOpacity>
       </ScrollView>
     </ViewContainer>

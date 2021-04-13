@@ -1,4 +1,4 @@
-import { PurpleQuarter } from 'assets/Images'
+import { PurpleQuarter } from 'assets/images'
 import { LargeHeaderContainer, ViewContainer } from 'components'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -33,7 +33,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
         <LargeHeaderContainer
           navigation={navigation}
           headerText=""
-          backgroundColor={colors[Colors.secondary]}
+          backgroundColor={colors[Colors.primaryYellow]}
           circleImage={<PurpleQuarter />}
           circleImageStyle={styles.purpleSemiCircleContainer}
         />

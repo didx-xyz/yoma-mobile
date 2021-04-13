@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Text should render correctly 1`] = `
+<Text
+  maxFontSizeMultiplier={1.3}
+  minimumFontScale={0.8}
+  style={
+    Object {
+      "color": "#41204B",
+      "fontFamily": "Montserrat-Medium",
+      "fontWeight": "500",
+      "textAlign": "left",
+    }
+  }
+  testID="text"
+>
+  Tester
+</Text>
+`;

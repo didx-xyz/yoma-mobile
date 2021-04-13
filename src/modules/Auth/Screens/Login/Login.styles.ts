@@ -4,10 +4,10 @@ import { colors, Colors } from 'styles'
 const styles = {
   container: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: colors[Colors.tertiary4],
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
   } as ViewStyle,
   topContainer: {
-    backgroundColor: colors[Colors.secondary],
+    backgroundColor: colors[Colors.primaryYellow],
     height: '40%',
   } as ViewStyle,
   logoContainer: {
@@ -19,7 +19,7 @@ const styles = {
     bottom: 0,
   } as ViewStyle,
   whiteCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     alignSelf: 'center',
     marginTop: '-20%',
     width: '90%',
@@ -35,7 +35,7 @@ const styles = {
     justifyContent: 'center',
   } as ViewStyle,
   horizontalLine: {
-    backgroundColor: colors[Colors.tertiary4],
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
     height: 1,
     flex: 1,
   } as ViewStyle,

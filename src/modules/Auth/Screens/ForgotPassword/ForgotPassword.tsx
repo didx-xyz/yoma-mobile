@@ -1,4 +1,4 @@
-import { YellowCircleRight, Message } from 'assets/Images'
+import { YellowCircleRight, Message } from 'assets/images'
 import { ViewContainer, LargeHeaderContainer, ButtonContainer } from 'components'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -28,7 +28,7 @@ const ForgotPassword = ({ navigation }: Props) => {
         <LargeHeaderContainer
           navigation={navigation}
           headerText={t('forgotPassword')}
-          backgroundColor={colors[Colors.tertiary6]}
+          backgroundColor={colors[Colors.secondaryPurple]}
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />

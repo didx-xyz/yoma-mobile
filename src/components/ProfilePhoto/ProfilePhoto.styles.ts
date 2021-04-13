@@ -1,13 +1,11 @@
-import { StyleSheet, ViewStyle, Dimensions } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
-
-const { width, height } = Dimensions.get('window')
 
 const styles = {
   editIcon: {
     elevation: 3,
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     borderRadius: 15,
     position: 'absolute',
     right: 0,

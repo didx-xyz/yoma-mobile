@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "_git:pre-commit": "pretty-quick --staged",
-    "_git:pre-push": "npm-run-all code:lint _remove_on_ci_setup",
-    "_remove_on_ci_setup": "npm run test",
+    "_git:pre-push": "npm-run-all code:lint",
+    "env:dev": "node env/generate.js dev",
+    "env:test": "node env/generate.js test",
     "init:ios": "npx pod-install",
     "init": "npm-run-all env:dev init:ios",
     "android": "react-native run-android",
@@ -64,9 +65,9 @@
   "devDependencies": {
     "@babel/core": "^7.8.4",
     "@babel/runtime": "^7.8.4",
-    "@react-native-community/eslint-config": "^1.1.0",
     "@testing-library/jest-native": "^4.0.1",
     "@testing-library/react-native": "^7.2.0",
+    "@react-native-community/eslint-config": "^1.1.0",
     "@trivago/prettier-plugin-sort-imports": "^1.4.4",
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
@@ -108,8 +109,7 @@
       "node_modules/(?!rn-fetch-blob)"
     ],
     "setupFiles": [
-      "./node_modules/react-native-gesture-handler/jestSetup.js",
-      "<rootDir>/__mocks__"
+      "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "moduleFileExtensions": [
       "ts",

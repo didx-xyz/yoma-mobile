@@ -4,7 +4,7 @@ import { Colors, colors } from 'styles'
 const styles = {
   container: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: colors[Colors.tertiary4],
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
   } as ViewStyle,
   yellowCircleContainer: {
     position: 'absolute',
@@ -12,7 +12,7 @@ const styles = {
     bottom: 0,
   } as ViewStyle,
   whiteCard: {
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     alignSelf: 'center',
     marginTop: '-30%',
     width: '90%',

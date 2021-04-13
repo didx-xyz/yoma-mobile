@@ -1,15 +1,14 @@
-import { ZIcon } from 'assets/Images'
+import { ZIcon } from 'assets/images'
 import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
 import React from 'react'
 import { Text, TouchableOpacity, View } from 'react-native'
 import { TextStyles } from 'styles'
-import { WithChildren } from 'types/react.types'
 
 import styles from './HomeHeader.styles'
 
-type Props = WithChildren<{
+type Props = {
   navigation: any
-}>
+}
 
 const HomeHeader = ({ navigation }: Props) => {
   return (

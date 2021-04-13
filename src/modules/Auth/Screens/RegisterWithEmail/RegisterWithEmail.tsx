@@ -1,4 +1,4 @@
-import { YellowCircleRight } from 'assets/Images'
+import { YellowCircleRight } from 'assets/images'
 import { LargeHeaderContainer, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,7 +21,7 @@ const RegisterWithEmail = ({ navigation }: Props) => {
         <LargeHeaderContainer
           navigation={navigation}
           headerText={t<string>('register')}
-          backgroundColor={colors[Colors.tertiary6]}
+          backgroundColor={colors[Colors.secondaryPurple]}
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowCircleContainer}
         />

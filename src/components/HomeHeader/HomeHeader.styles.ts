@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle, Dimensions, ImageStyle, TextStyle } from 'react-native'
+import { StyleSheet, ViewStyle, Dimensions, ImageStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
 
@@ -15,7 +15,7 @@ const styles = {
     paddingHorizontal: 20,
   } as ViewStyle,
   profileInnerStyle: {
-    backgroundColor: '#F3F3F8',
+    backgroundColor: colors[Colors.backgroundGrey],
     borderRadius: 14,
     height: 27,
     width: 27,
@@ -30,7 +30,7 @@ const styles = {
     height: 25,
   } as ImageStyle,
   tokensView: {
-    backgroundColor: 'rgba(249,171,62,0.15)',
+    backgroundColor: `${colors[Colors.primaryYellow]}15`,
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 2,

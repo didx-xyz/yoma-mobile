@@ -4,7 +4,7 @@ import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.tertiary8],
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
     ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   whiteCard: {
@@ -20,15 +20,22 @@ const styles = {
     height: 70,
     width: 70,
     borderRadius: 35,
+    marginTop: -50,
   } as ImageStyle,
   editIcon: {
     elevation: 3,
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     borderRadius: 15,
     position: 'absolute',
     right: 0,
     bottom: -5,
   } as ViewStyle,
+  profileOuterStyle: {
+    marginTop: -50,
+  } as ViewStyle,
+  logout: {
+    marginVertical: 20,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

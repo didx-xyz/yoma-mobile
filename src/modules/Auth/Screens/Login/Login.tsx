@@ -1,4 +1,4 @@
-import { YellowCircleLeft } from 'assets/Images'
+import { YellowCircleLeft } from 'assets/images'
 import { LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +20,7 @@ const Login = ({ navigation }: Props) => {
         <LargeHeaderContainer
           navigation={navigation}
           headerText={t('login')}
-          backgroundColor={colors[Colors.primary]}
+          backgroundColor={colors[Colors.primaryPurple]}
           circleImage={<YellowCircleLeft />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
