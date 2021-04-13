@@ -37,7 +37,7 @@ const RegisterWithEmail = ({ navigation }: Props) => {
           </Text.Header>
           <RegisterForm />
         </View>
-        <Text.Header level={HeaderLevels.h5} color={Colors.primaryDarkGrey} style={styles.notice}>
+        <Text.Header level={HeaderLevels.h5} style={styles.notice}>
           {t('alreadyHaveAccount')}
           <Text.Body
             style={[TextStyles.buttonText, TextStyles.textTertiary3, { textAlign: 'center' }]}

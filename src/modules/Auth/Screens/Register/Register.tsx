@@ -6,7 +6,7 @@ import { View } from 'react-native'
 import { Colors, colors, TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
-import Text, { FontWeights, HeaderLevels, TextAlign } from '../../../../components/Typography'
+import Text, { FontWeights, HeaderLevels, Span, TextAlign } from '../../../../components/Typography'
 import styles from './Register.styles'
 
 interface Props {
@@ -47,7 +47,7 @@ const Register = ({ navigation }: Props) => {
           </Text.Header>
           <View style={styles.horizontalLine} />
         </View>
-        <Text.Header level={HeaderLevels.h5} color={Colors.primaryDarkGrey} style={{ marginTop: 15 }}>
+        <Text.Header level={HeaderLevels.h5} style={{ marginTop: 15 }}>
           {t('registerSocial')}
         </Text.Header>
         <SocialRegistration />
@@ -58,13 +58,10 @@ const Register = ({ navigation }: Props) => {
         style={{ textAlign: 'center', marginTop: 30 }}
       >
         {t('alreadyHaveAccount')}
-        <Text.Body
-          style={[TextStyles.buttonText, TextStyles.textTertiary3, { textAlign: 'center' }]}
-          onPress={() => navigation.navigate('Login')}
-        >
+        <Span color={Colors.primaryGreen} align={TextAlign.center} onPress={() => navigation.navigate('Login')}>
           &nbsp;
           {t('login')}.
-        </Text.Body>
+        </Span>
       </Text.Header>
     </ViewContainer>
   )

@@ -30,7 +30,9 @@ const NormalHeader = ({ navigation, headerText, onSave }: Props) => {
       <TouchableOpacity onPress={goBack}>
         <BackIconGrey />
       </TouchableOpacity>
-      <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
+      <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
+        {headerText}
+      </Text.Header>
       <TouchableOpacity onPress={onSave}>
         <Text.Body color={Colors.primaryGreen} style={styles.saveText}>
           <Bold>Save</Bold>
