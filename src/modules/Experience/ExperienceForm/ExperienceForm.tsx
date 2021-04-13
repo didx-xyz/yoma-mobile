@@ -6,6 +6,7 @@ import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { colors, Colors } from 'styles'
 import mapToSelect from 'utils/mapToSelect'
@@ -45,6 +46,7 @@ const INITIAL_VALUES = {
 }
 
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
+  const { t } = useTranslation()
   const [country, setCountry] = useState('')
   const [organizations, setOrganizations] = useState([])
   const [dropdown, setDropDown] = useState(false)
@@ -138,7 +140,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             onChangeText={handleChange('title')}
             onBlur={handleBlur('title')}
             value={values.title}
-            label={'Title'}
+            label={t('Title')}
             touched={touched.title}
             error={errors.title}
             showTitle={values.title !== '' ? true : false}
@@ -156,17 +158,17 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             searchablePlaceholder="Search organization"
             searchablePlaceholderTextColor={Colors.menuGrey}
             placeholderStyle={{ color: colors[Colors.menuGrey] }}
-            placeholder={'Company name'}
+            placeholder={t('Company name')}
             touched={touched.organisationName}
             error={errors.organisationName}
-            fieldName={'Company Name'}
+            fieldName={t('Company Name')}
             showTitle={values.organisationName != '' ? true : false}
           />
           <CustomInput
             onChangeText={handleChange('countryAlpha2')}
             onBlur={handleBlur('countryAlpha2')}
             value={country}
-            label={'Country or Region'}
+            label={t('Country or Region')}
             touched={touched.countryAlpha2}
             error={errors.countryAlpha2}
             showTitle={values.title !== '' ? true : false}
@@ -186,9 +188,9 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               defaultValue={country}
               searchable={true}
-              searchablePlaceholder="Search for country"
-              searchablePlaceholderTextColor="gray"
-              placeholder={'country'}
+              searchablePlaceholder={t('Search for country')}
+              searchablePlaceholderTextColor={colors[Colors.menuGrey]}
+              placeholder={t('country')}
               touched={touched.countryAlpha2}
               error={errors.countryAlpha2}
               isVisible={dropdown}
@@ -201,7 +203,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             style={styles.useLocationText}
             onPress={() => setDropDown(true)}
           >
-            Use current location
+            {t('Use current location')}
           </Text.Meta>
           <View style={styles.checkBoxView}>
             <TouchableOpacity
@@ -212,7 +214,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             >
               {present ? <BlueTick /> : <BlueHollowCircle />}
             </TouchableOpacity>
-            <Text.Body>I currently work here</Text.Body>
+            <Text.Body>{t('I currently work here')}</Text.Body>
           </View>
           <View style={styles.datePickersRowView}>
             <DatePicker
@@ -223,7 +225,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
                 setFieldValue('startDate', date)
               }}
               value={values.startDate}
-              label={'Start date'}
+              label={t('Start date')}
               touched={touched.startDate}
               error={errors.startDate}
               viewStyle={{ width: '40%' }}
@@ -231,13 +233,12 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             />
             <DatePicker
               onChangeDate={(date: string) => {
-                console.log(date)
                 handleChange('endDate')
                 handleBlur('endDate')
                 setFieldValue('endDate', date)
               }}
               value={values.endDate}
-              label={'End date'}
+              label={t('End date')}
               touched={touched.endDate}
               error={errors.endDate}
               viewStyle={{ width: '40%' }}
@@ -248,7 +249,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             onChangeText={handleChange('description')}
             onBlur={handleBlur('description')}
             value={values.description}
-            label={'Description'}
+            label={t('Description')}
             touched={touched.description}
             error={errors.description}
             showTitle={values.description !== '' ? true : false}
@@ -256,14 +257,14 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
           <DropDownTags
             items={skillsList}
             multiple={true}
-            multipleText="Skills developed %d"
+            multipleText={t('Skills developed %d')}
             min={0}
             max={10}
             searchable={true}
-            searchablePlaceholder="Search skills"
+            searchablePlaceholder={t('Search skills')}
             searchablePlaceholderTextColor="gray"
-            placeholder={'Skills developed'}
-            fieldName={'Skills developed'}
+            placeholder={t('Skills developed')}
+            fieldName={t('Skills developed')}
             showTitle={values.skillNames.length > 0 ? true : false}
             defaultValue={selectedSkills}
             onChangeItem={item => {
@@ -287,7 +288,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             >
               {requestVerification ? <BlueTick /> : <BlueHollowCircle />}
             </TouchableOpacity>
-            <Text.Body>Request verification of employment from company</Text.Body>
+            <Text.Body>{t('Request verification of employment from company')}</Text.Body>
           </View>
         </View>
       )}

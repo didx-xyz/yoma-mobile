@@ -2,6 +2,7 @@ import { StackActions } from '@react-navigation/native'
 import { AddIcon, BackIconGrey } from 'assets/images'
 import Text, { Bold, HeaderLevels } from 'components/Typography'
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
@@ -27,6 +28,7 @@ const NormalHeader = ({ navigation, headerText, onSave, add, onAdd }: Props) => 
   const goBack = () => {
     navigation.dispatch(StackActions.pop(1))
   }
+  const { t } = useTranslation()
   return (
     <View style={styles.header}>
       <TouchableOpacity onPress={goBack}>
@@ -36,14 +38,14 @@ const NormalHeader = ({ navigation, headerText, onSave, add, onAdd }: Props) => 
       {add ? (
         <TouchableOpacity onPress={onAdd} style={styles.addView}>
           <Text.Body>
-            <Bold color={Colors.primaryGreen}>Add</Bold>
+            <Bold color={Colors.primaryGreen}>{t('Add')}</Bold>
           </Text.Body>
           <AddIcon />
         </TouchableOpacity>
       ) : (
         <TouchableOpacity onPress={onSave} style={styles.addView}>
           <Text.Body>
-            <Bold color={Colors.primaryGreen}>Save</Bold>
+            <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
           </Text.Body>
         </TouchableOpacity>
       )}

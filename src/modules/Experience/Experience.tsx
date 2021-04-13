@@ -1,14 +1,16 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
+import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { USER_ID } from 'helpers/helpers'
 import moment from 'moment'
 import React, { useEffect, useRef, useState } from 'react'
-import { Image, ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { useTranslation } from 'react-i18next'
+import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
 import { FlatList } from 'react-native-gesture-handler'
-import { Colors, colors, TextStyles } from 'styles'
+import { Colors, colors } from 'styles'
 
 import styles from './Experience.styles'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
@@ -18,6 +20,7 @@ interface Props {
 }
 
 const Experience = ({ navigation }: Props) => {
+  const { t } = useTranslation()
   const [isSave, setIsSave] = useState(false)
   const [experience, setExperience] = useState([])
   const formRef = useRef<any>()
@@ -32,7 +35,7 @@ const Experience = ({ navigation }: Props) => {
     getAllJobs()
   }, [])
 
-  function calcDate(date1: Date, date2: Date) {
+  const calculateDifferenceInDate = (date1: Date, date2: Date) => {
     let diff = Math.floor(date1.getTime() - date2.getTime())
     let day = 1000 * 60 * 60 * 24
 
@@ -59,27 +62,31 @@ const Experience = ({ navigation }: Props) => {
             rounded
             title={item.job.organisationName.charAt(0)}
             containerStyle={styles.avatar}
-            // titleStyle={{ color: colors[Colors.tertiary4] }}
+            titleStyle={{ color: colors[Colors.menuGrey] }}
           />
         )}
         <View>
-          <Text style={[TextStyles.h4]}>{item.job.title}</Text>
-          {/* <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>{item.job.organisationName}</Text> */}
-          <View style={{ flexDirection: 'row' }}>
-            {/* <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>
+          <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+            {item.job.title}
+          </Text.Header>
+          <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
+            {item.job.organisationName}
+          </Text.Body>
+          <View style={styles.row}>
+            <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
               {moment(item.startDate).format('MMM YYYY')} -{' '}
-            </Text> */}
-            {/* <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>
+            </Text.Body>
+            <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
               {moment(item.endDate).format('MMM YYYY')}
-              &nbsp;{calcDate(new Date(item.startDate), new Date(item.endDate))}
-            </Text> */}
+              &nbsp;{calculateDifferenceInDate(new Date(item.startDate), new Date(item.endDate))}
+            </Text.Body>
           </View>
         </View>
         <TouchableOpacity style={styles.editIcon}>
           <EditIcon />
         </TouchableOpacity>
       </View>
-      <Text style={[TextStyles.h4]}>{item.job.description}</Text>
+      <Text.Body>{item.job.description}</Text.Body>
     </View>
   )
 
@@ -87,7 +94,7 @@ const Experience = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={'Experience'}
+        headerText={t('Experience')}
         onSave={() => {
           formRef.current.handleSubmit()
         }}
