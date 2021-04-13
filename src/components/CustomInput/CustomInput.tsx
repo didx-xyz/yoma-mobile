@@ -1,4 +1,4 @@
-import Text, { TextAlign } from 'components/Typography'
+import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
 import { colors, Colors } from 'styles'
@@ -9,12 +9,17 @@ type InputProps = TextInputProps & {
   label: string
   touched?: boolean
   error?: any
+  showTitle?: boolean
 }
 
-const CustomInput = ({ label, touched, error, ...props }: InputProps) => {
+const CustomInput = ({ label, touched, error, showTitle = true, ...props }: InputProps) => {
   return (
     <View style={styles.textInputView}>
-      <Text.Meta style={styles.label}>{label}</Text.Meta>
+      {showTitle ? (
+        <Text.Meta level={MetaLevels.small} style={styles.label}>
+          {label}
+        </Text.Meta>
+      ) : null}
       <TextInput
         placeholderTextColor={colors[Colors.menuGrey]}
         placeholder={label}

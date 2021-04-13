@@ -1,7 +1,9 @@
 import ButtonContainer from './ButtonContainer/ButtonContainer'
 import CustomInput from './CustomInput/CustomInput'
 import CvCard from './CvCard/CvCard'
+import DatePicker from './DatePicker/DatePicker'
 import DropDown from './DropDown/DropDown'
+import DropDownTags from './DropDownTags/DropDownTags'
 import FirstTimeCard from './FirstTimeCard/FirstTimeCard'
 import HeaderContainer from './HeaderContainer/HeaderContainer'
 import HomeHeader from './HomeHeader/HomeHeader'
@@ -20,7 +22,9 @@ export {
   ButtonContainer,
   CustomInput,
   CvCard,
+  DatePicker,
   DropDown,
+  DropDownTags,
   FirstTimeCard,
   HeaderContainer,
   HomeHeader,

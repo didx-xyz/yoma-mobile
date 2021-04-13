@@ -10,6 +10,7 @@ import About from '../About'
 import Challenges from '../Challenges'
 import Courses from '../Courses'
 import DigitalCv from '../DigitalCv'
+import Experience from '../Experience'
 import Marketplace from '../Marketplace'
 import Profile from '../Profile'
 
@@ -73,8 +74,9 @@ const Home = () => {
     <Stack.Navigator headerMode={'none'}>
       <Stack.Screen name="Home" component={HomeTabs} />
       <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="DigitalCvHome" component={DigitalCv} />
+      <Stack.Screen name="DigitalCv" component={DigitalCv} />
       <Stack.Screen name="About" component={About} />
+      <Stack.Screen name="Experience" component={Experience} />
     </Stack.Navigator>
   )
 }

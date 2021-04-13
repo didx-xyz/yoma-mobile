@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
 const { width } = Dimensions.get('window')
@@ -25,6 +25,10 @@ const styles = {
   itemStyle: {
     justifyContent: 'flex-start',
   } as ViewStyle,
+  labelStyle: {} as TextStyle,
+  label: {
+    marginLeft: 10,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

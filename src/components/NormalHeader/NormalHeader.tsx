@@ -1,8 +1,9 @@
 import { StackActions } from '@react-navigation/native'
 import { AddIcon, BackIconGrey } from 'assets/images'
+import Text, { Bold, HeaderLevels } from 'components/Typography'
 import React, { useEffect } from 'react'
-import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
-import { TextStyles } from 'styles'
+import { BackHandler, TouchableOpacity, View } from 'react-native'
+import { Colors } from 'styles'
 
 import styles from './NormalHeader.styles'
 
@@ -31,15 +32,19 @@ const NormalHeader = ({ navigation, headerText, onSave, add, onAdd }: Props) => 
       <TouchableOpacity onPress={goBack}>
         <BackIconGrey />
       </TouchableOpacity>
-      <Text style={[TextStyles.textPrimary, TextStyles.semiBoldText]}>{headerText}</Text>
+      <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
       {add ? (
-        <TouchableOpacity onPress={onAdd} style={{ flexDirection: 'row', paddingRight: 20 }}>
-          <Text style={[TextStyles.boldText, TextStyles.textTertiary3]}>Add</Text>
+        <TouchableOpacity onPress={onAdd} style={styles.addView}>
+          <Text.Body>
+            <Bold color={Colors.primaryGreen}>Add</Bold>
+          </Text.Body>
           <AddIcon />
         </TouchableOpacity>
       ) : (
-        <TouchableOpacity onPress={onSave}>
-          <Text style={[TextStyles.boldText, TextStyles.textTertiary3, { paddingRight: 20 }]}>Save</Text>
+        <TouchableOpacity onPress={onSave} style={styles.addView}>
+          <Text.Body>
+            <Bold color={Colors.primaryGreen}>Save</Bold>
+          </Text.Body>
         </TouchableOpacity>
       )}
     </View>

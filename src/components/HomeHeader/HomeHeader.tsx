@@ -1,8 +1,9 @@
 import { ZIcon } from 'assets/images'
 import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
+import Text, { Bold } from 'components/Typography'
 import React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { TextStyles } from 'styles'
+import { TouchableOpacity, View } from 'react-native'
+import { Colors } from 'styles'
 
 import styles from './HomeHeader.styles'
 
@@ -22,7 +23,9 @@ const HomeHeader = ({ navigation }: Props) => {
       />
       <TouchableOpacity style={styles.tokensView}>
         <ZIcon />
-        <Text style={[TextStyles.boldText, TextStyles.textSecondary, { paddingLeft: 4 }]}>1000</Text>
+        <Text.Body>
+          <Bold color={Colors.primaryYellow}>1000</Bold>
+        </Text.Body>
       </TouchableOpacity>
     </View>
   )

@@ -59,20 +59,20 @@ const Experience = ({ navigation }: Props) => {
             rounded
             title={item.job.organisationName.charAt(0)}
             containerStyle={styles.avatar}
-            titleStyle={{ color: colors[Colors.tertiary4] }}
+            // titleStyle={{ color: colors[Colors.tertiary4] }}
           />
         )}
         <View>
           <Text style={[TextStyles.h4]}>{item.job.title}</Text>
-          <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>{item.job.organisationName}</Text>
+          {/* <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>{item.job.organisationName}</Text> */}
           <View style={{ flexDirection: 'row' }}>
-            <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>
+            {/* <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>
               {moment(item.startDate).format('MMM YYYY')} -{' '}
-            </Text>
-            <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>
+            </Text> */}
+            {/* <Text style={[TextStyles.h4, { color: colors[Colors.tertiary9] }]}>
               {moment(item.endDate).format('MMM YYYY')}
               &nbsp;{calcDate(new Date(item.startDate), new Date(item.endDate))}
-            </Text>
+            </Text> */}
           </View>
         </View>
         <TouchableOpacity style={styles.editIcon}>
@@ -102,11 +102,6 @@ const Experience = ({ navigation }: Props) => {
             <View style={styles.whiteCard}>
               <ExperienceForm navigation={navigation} ref={formRef} />
             </View>
-            {/* <TouchableOpacity>
-                <Text style={[TextStyles.textTertiary9, TextStyles.semiBoldText, { marginVertical: 20 }]}>
-                  Delete experience
-                </Text>
-              </TouchableOpacity> */}
           </ScrollView>
         </>
       ) : (

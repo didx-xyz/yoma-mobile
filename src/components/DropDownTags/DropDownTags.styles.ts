@@ -5,7 +5,6 @@ const { width } = Dimensions.get('window')
 
 const styles = {
   dropDownStyle: {
-    borderColor: colors[Colors.tertiary9],
     width: '90%',
     alignSelf: 'center',
     borderWidth: 0,
@@ -16,7 +15,6 @@ const styles = {
     alignSelf: 'center',
   } as ViewStyle,
   label: {
-    color: colors[Colors.tertiary9],
     marginLeft: 10,
   },
   tag: {
@@ -34,9 +32,9 @@ const styles = {
   dropDownContainerStyle: {
     height: 45,
   } as ViewStyle,
-  tagText: {
-    color: colors[Colors.tertiary10],
-  } as TextStyle,
+  itemStyle: {
+    justifyContent: 'flex-start',
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

@@ -1,8 +1,9 @@
-import { CrossIcon } from 'assets/Images'
+import { CrossIcon } from 'assets/images'
+import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, TouchableOpacity, View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
-import { TextStyles } from 'styles'
+import { Colors, TextStyles } from 'styles'
 
 import styles from './DropDownTags.styles'
 
@@ -22,9 +23,9 @@ const rendertags = (tags: Array<string>, deleteItem: any) => {
         <TouchableOpacity style={styles.crossIcon} onPress={() => deleteItem(tag)}>
           <CrossIcon height={15} width={15} />
         </TouchableOpacity>
-        <Text key={index} style={[TextStyles.h4, styles.tagText]}>
+        <Text.Body color={Colors.primaryBlue} key={index}>
           {tag}
-        </Text>
+        </Text.Body>
       </View>
     )
   })
@@ -33,20 +34,24 @@ const rendertags = (tags: Array<string>, deleteItem: any) => {
 const DropDownTags = ({ touched, error, fieldName, showTitle, tags = [], deleteItem, ...props }: Props) => {
   return (
     <View>
-      {showTitle ? <Text style={[TextStyles.h4, styles.label, { paddingLeft: 10 }]}>{fieldName}</Text> : null}
+      {showTitle ? (
+        <Text.Meta level={MetaLevels.small} style={styles.label}>
+          {fieldName}
+        </Text.Meta>
+      ) : null}
       <DropDownPicker
         containerStyle={styles.dropDownContainerStyle}
         style={styles.dropDownStyle}
         dropDownStyle={styles.dropDownViewStyle}
         labelStyle={[TextStyles.h4, TextStyles.textTertiary5]}
-        itemStyle={{
-          justifyContent: 'flex-start',
-        }}
+        itemStyle={styles.itemStyle}
         dropDownMaxHeight={200}
         {...props}
       />
       <ScrollView horizontal>{rendertags(tags, deleteItem)}</ScrollView>
-      <Text style={TextStyles.errorText}>{touched && error}</Text>
+      <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
+        {touched && error}
+      </Text.Meta>
     </View>
   )
 }
