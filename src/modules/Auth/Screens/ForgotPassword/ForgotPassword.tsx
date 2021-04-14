@@ -1,12 +1,13 @@
-import { YellowCircleRight, Message } from 'assets/images'
-import { ViewContainer, LargeHeaderContainer, ButtonContainer } from 'components'
+import { Message, YellowCircleRight } from 'assets/images'
+import { ButtonContainer, LargeHeaderContainer, ViewContainer } from 'components'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
+import { ScrollView, TouchableOpacity, View } from 'react-native'
 import { openInbox } from 'react-native-email-link'
 import { colors, Colors, TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
+import Text, { HeaderLevels, TextAlign } from '../../../../components/Typography'
 import styles from './ForgotPassword.styles'
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
 
@@ -34,25 +35,35 @@ const ForgotPassword = ({ navigation }: Props) => {
         />
         {!emailSent ? (
           <View style={styles.whiteCard}>
-            <Text style={TextStyles.cardHeaderText}>{t('forgotYourPassword')} ?</Text>
-            <Text style={[TextStyles.h4, TextStyles.textTertiary5, styles.bodyText]}>{t('forgotPasswordText')}</Text>
+            <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeaderText}>
+              {t('forgotYourPassword')} ?
+            </Text.Header>
+            <Text.Header
+              level={HeaderLevels.h4}
+              color={Colors.primaryDarkGrey}
+              align={TextAlign.center}
+              style={styles.bodyText}
+            >
+              {t('forgotPasswordText')}
+            </Text.Header>
             <ForgotPasswordForm setSubmitted={() => setEmailSent(true)} />
           </View>
         ) : (
           <View style={styles.whiteCard}>
-            <Text style={TextStyles.cardHeaderText}>{t('checkEmail')}</Text>
+            <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeaderText}>
+              {t('checkEmail')}
+            </Text.Header>
             <View style={styles.logoContainer}>
               <Message />
             </View>
-            <Text
-              style={[
-                TextStyles.h4,
-                TextStyles.textTertiary5,
-                { marginVertical: 15, textAlign: 'center', paddingHorizontal: 20 },
-              ]}
+            <Text.Header
+              level={HeaderLevels.h4}
+              color={Colors.primaryDarkGrey}
+              align={TextAlign.center}
+              style={styles.bodyText}
             >
               {t('passwordSentText')}
-            </Text>
+            </Text.Header>
             <ButtonContainer
               buttonText={t<string>('openEmail')}
               buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
@@ -60,9 +71,9 @@ const ForgotPassword = ({ navigation }: Props) => {
               onPress={() => openInbox()}
             />
             <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-              <Text style={[TextStyles.buttonText, TextStyles.textTertiary3, { marginVertical: 5 }]}>
+              <Text.Header level={HeaderLevels.h5} color={Colors.primaryGreen} style={{ marginVertical: 5 }}>
                 {t('skipComplete')}
-              </Text>
+              </Text.Header>
             </TouchableOpacity>
           </View>
         )}

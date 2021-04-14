@@ -23,7 +23,7 @@ const HomeHeader = ({ navigation }: Props) => {
       />
       <TouchableOpacity style={styles.tokensView}>
         <ZIcon />
-        <Text.Body>
+        <Text.Body style={styles.tokenAmount}>
           <Bold color={Colors.primaryYellow}>1000</Bold>
         </Text.Body>
       </TouchableOpacity>

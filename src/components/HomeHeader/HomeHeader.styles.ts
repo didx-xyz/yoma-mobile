@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle, Dimensions, ImageStyle } from 'react-native'
+import { StyleSheet, ViewStyle, Dimensions, ImageStyle, TextStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
 
@@ -37,6 +37,9 @@ const styles = {
     paddingHorizontal: 10,
     borderRadius: 11,
   } as ViewStyle,
+  tokenAmount: {
+    paddingLeft: 4,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

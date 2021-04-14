@@ -1,5 +1,7 @@
 import { LinkingOptions, PathConfigMap } from '@react-navigation/native'
 
+import Env from '../../env.json'
+
 const screens: PathConfigMap = {
   ResetPassword: {
     path: 'auth/reset-password',
@@ -16,7 +18,7 @@ const config = {
 }
 
 const linking: LinkingOptions = {
-  prefixes: ['https://staging.app.yoma.africa/'],
+  prefixes: [Env.YOMA_APP_BASE_PATH],
   config,
 }
 

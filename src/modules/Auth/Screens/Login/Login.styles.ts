@@ -1,11 +1,29 @@
-import { StyleSheet, ViewStyle } from 'react-native'
-import { colors, Colors } from 'styles'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { colors, Colors, FontFamily } from 'styles'
+
+import fontStyles from '../../../../styles/font.styles'
 
 const styles = {
   container: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
   } as ViewStyle,
+  cardHeader: {
+    paddingTop: 10,
+    paddingBottom: 15,
+  } as TextStyle,
+  forgotPassword: {
+    marginVertical: 5,
+  } as TextStyle,
+  orText: {
+    paddingHorizontal: 15,
+  } as TextStyle,
+  loginSocial: {
+    paddingHorizontal: 15,
+  } as TextStyle,
+  noAccount: {
+    marginVertical: 30,
+  } as TextStyle,
   topContainer: {
     backgroundColor: colors[Colors.primaryYellow],
     height: '40%',

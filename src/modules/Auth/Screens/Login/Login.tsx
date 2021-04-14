@@ -2,9 +2,10 @@ import { YellowCircleLeft } from 'assets/images'
 import { LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native'
-import { colors, Colors, TextStyles } from 'styles'
+import { ScrollView, TouchableOpacity, View } from 'react-native'
+import { colors, Colors } from 'styles'
 
+import Text, { HeaderLevels, Span, TextAlign } from '../../../../components/Typography'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
@@ -25,30 +26,38 @@ const Login = ({ navigation }: Props) => {
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
         <View style={styles.whiteCard}>
-          <Text style={TextStyles.cardHeaderText}>{t('welcomeBack')}</Text>
+          <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeader}>
+            {t('welcomeBack')}
+          </Text.Header>
           <LoginForm />
           <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-            <Text style={[TextStyles.h5, TextStyles.textTertiary5, { marginVertical: 5 }]}>
+            <Text.Header level={HeaderLevels.h5} style={styles.forgotPassword}>
               {t('forgotPassword')} ?
-            </Text>
+            </Text.Header>
           </TouchableOpacity>
           <View style={styles.horizontalLineView}>
             <View style={styles.horizontalLine} />
-            <Text style={[TextStyles.h3, TextStyles.textTertiary5, { paddingHorizontal: 15 }]}>{t('or')}</Text>
+            <Text.Header level={HeaderLevels.h3} color={Colors.primaryDarkGrey} style={styles.orText}>
+              {t('or')}
+            </Text.Header>
             <View style={styles.horizontalLine} />
           </View>
-          <Text style={[TextStyles.h5, TextStyles.textTertiary5, { marginTop: 15 }]}>{t('loginSocial')}</Text>
+          <Text.Header level={HeaderLevels.h5} style={styles.loginSocial}>
+            {t('loginSocial')}
+          </Text.Header>
           <SocialRegistration />
         </View>
-        <Text style={[TextStyles.h5, TextStyles.textTertiary5, { textAlign: 'center', marginVertical: 30 }]}>
+        <Text.Header
+          level={HeaderLevels.h5}
+          color={Colors.primaryDarkGrey}
+          align={TextAlign.center}
+          style={styles.noAccount}
+        >
           {t('noAccount')}
-          <Text
-            style={[TextStyles.buttonText, TextStyles.textTertiary3, { textAlign: 'center' }]}
-            onPress={() => navigation.navigate('Register')}
-          >
+          <Span color={Colors.primaryGreen} align={TextAlign.center} onPress={() => navigation.navigate('Register')}>
             &nbsp; {t('registerHere')}.
-          </Text>
-        </Text>
+          </Span>
+        </Text.Header>
       </ScrollView>
     </ViewContainer>
   )
