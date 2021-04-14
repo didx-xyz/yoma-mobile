@@ -6,7 +6,6 @@ const { width } = Dimensions.get('window')
 const styles = {
   container: {
     height: 45,
-    marginTop: 15,
   } as ViewStyle,
   dropDownStyle: {
     width: width / 1.3,

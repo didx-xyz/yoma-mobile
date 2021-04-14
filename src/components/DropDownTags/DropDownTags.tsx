@@ -43,7 +43,6 @@ const DropDownTags = ({ touched, error, fieldName, showTitle, tags = [], deleteI
         containerStyle={styles.dropDownContainerStyle}
         style={styles.dropDownStyle}
         dropDownStyle={styles.dropDownViewStyle}
-        labelStyle={[TextStyles.h4, TextStyles.textTertiary5]}
         itemStyle={styles.itemStyle}
         dropDownMaxHeight={200}
         {...props}

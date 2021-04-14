@@ -15,10 +15,10 @@ const styles = {
     alignSelf: 'center',
   } as ViewStyle,
   label: {
-    marginLeft: 10,
+    marginLeft: 18,
   },
   tag: {
-    backgroundColor: '#72C8ED15',
+    backgroundColor: `${colors[Colors.secondaryBlue]}15`,
     borderRadius: 20,
     padding: 10,
     margin: 2,

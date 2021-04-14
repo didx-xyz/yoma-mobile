@@ -1,4 +1,5 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { colors, Colors } from 'styles'
 
 const HEIGHT_OF_FORM_CARD = 600
 
@@ -31,6 +32,23 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     marginTop: 10,
   } as ViewStyle,
+  placeholderStyle: {
+    color: colors[Colors.menuGrey],
+    marginLeft: 0,
+  } as ViewStyle,
+  rowText: {
+    width: '90%',
+  } as TextStyle,
+  bottomView: {
+    borderTopWidth: 1,
+    borderColor: `${colors[Colors.menuGrey]}70`,
+    width: '90%',
+    alignSelf: 'center',
+    marginTop: 10,
+  } as ViewStyle,
+  bottomText: {
+    marginVertical: 10,
+  } as TextStyle,
 })
 
 export default styles

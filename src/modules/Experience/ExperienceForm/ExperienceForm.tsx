@@ -1,6 +1,6 @@
 import api from 'api'
 import { BlueHollowCircle, BlueTick } from 'assets/images'
-import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags } from 'components'
+import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags, InfoModal } from 'components'
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
@@ -30,7 +30,7 @@ const INITIAL_VALUES = {
   verifiedAt: null,
 
   // country
-  countryAlpha2: '',
+  country: '',
   // skills developed
   skillNames: [],
 
@@ -47,13 +47,12 @@ const INITIAL_VALUES = {
 
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
-  const [country, setCountry] = useState('')
   const [organizations, setOrganizations] = useState([])
-  const [dropdown, setDropDown] = useState(false)
   const [present, setPresent] = useState(false)
   const [skillsList, setSkillsList] = useState([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [requestVerification, setRequestVerification] = useState(false)
+  const [infoModal, setInfoModal] = useState(false)
 
   const formRef = useRef<any>()
 
@@ -135,6 +134,13 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={styles.formView}>
+          <InfoModal
+            visible={infoModal}
+            closeModal={() => setInfoModal(false)}
+            infoText={
+              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
+            }
+          />
           <Spinner visible={isSubmitting} />
           <CustomInput
             onChangeText={handleChange('title')}
@@ -157,7 +163,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             searchable={true}
             searchablePlaceholder="Search organization"
             searchablePlaceholderTextColor={Colors.menuGrey}
-            placeholderStyle={{ color: colors[Colors.menuGrey] }}
+            placeholderStyle={styles.placeholderStyle}
             placeholder={t('Company name')}
             touched={touched.organisationName}
             error={errors.organisationName}
@@ -165,43 +171,19 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             showTitle={values.organisationName != '' ? true : false}
           />
           <CustomInput
-            onChangeText={handleChange('countryAlpha2')}
-            onBlur={handleBlur('countryAlpha2')}
-            value={country}
-            label={t('Country or Region')}
-            touched={touched.countryAlpha2}
-            error={errors.countryAlpha2}
+            onChangeText={handleChange('country')}
+            onBlur={handleBlur('country')}
+            value={values.country}
+            label={t('Country or region')}
+            touched={touched.country}
+            error={errors.country}
             showTitle={values.title !== '' ? true : false}
           />
-          {dropdown ? (
-            <DropDown
-              items={countries.map(c => ({
-                label: c.name,
-                value: c.code,
-              }))}
-              onChangeItem={itemValue => {
-                handleChange('countryAlpha2')
-                handleBlur('countryAlpha2')
-                setFieldValue('countryAlpha2', itemValue.value)
-                setCountry(itemValue.label)
-                setDropDown(false)
-              }}
-              defaultValue={country}
-              searchable={true}
-              searchablePlaceholder={t('Search for country')}
-              searchablePlaceholderTextColor={colors[Colors.menuGrey]}
-              placeholder={t('country')}
-              touched={touched.countryAlpha2}
-              error={errors.countryAlpha2}
-              isVisible={dropdown}
-            />
-          ) : null}
           <Text.Meta
             level={MetaLevels.smallBold}
             color={Colors.primaryGreen}
             align={TextAlign.right}
             style={styles.useLocationText}
-            onPress={() => setDropDown(true)}
           >
             {t('Use current location')}
           </Text.Meta>
@@ -265,6 +247,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             searchablePlaceholderTextColor="gray"
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
+            placeholderStyle={styles.placeholderStyle}
             showTitle={values.skillNames.length > 0 ? true : false}
             defaultValue={selectedSkills}
             onChangeItem={item => {
@@ -288,8 +271,13 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             >
               {requestVerification ? <BlueTick /> : <BlueHollowCircle />}
             </TouchableOpacity>
-            <Text.Body>{t('Request verification of employment from company')}</Text.Body>
+            <Text.Body style={styles.rowText}>{t('Request verification of employment from company')}</Text.Body>
           </View>
+          <TouchableOpacity onPress={() => setInfoModal(true)} style={styles.bottomView}>
+            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
+              {t('Find inspiration on how to write a great profile.')}
+            </Text.Meta>
+          </TouchableOpacity>
         </View>
       )}
     </Formik>
