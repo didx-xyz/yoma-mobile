@@ -2,7 +2,7 @@ import { EditIcon } from 'assets/images'
 import Text, { HeaderLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors } from 'styles'
 
 import styles from './CvCard.styles'
 

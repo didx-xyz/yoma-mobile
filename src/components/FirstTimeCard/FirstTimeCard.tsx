@@ -1,13 +1,12 @@
 import { BlueRightCircle, LightYellowPattern, RLabsLogo } from 'assets/images'
 import { ButtonContainer } from 'components'
-import Text, { BodyLevels, Bold, FontWeights, HeaderLevels } from 'components/Typography'
-import { fontWeights } from 'components/Typography/fontWeights.styles'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors, TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
+import Text, { Bold, Span, FontWeights, HeaderLevels } from '../Typography'
 import styles from './FirstTimeCard.styles'
 
 type Props = {
@@ -20,9 +19,7 @@ const FirstTimeCard = ({ navigation }: Props) => {
     <View style={styles.cardView}>
       <Text.Header level={HeaderLevels.h3} color={Colors.white}>
         {t('Complete')}
-        <Text.Header level={HeaderLevels.h3} color={Colors.secondaryDarkBlue}>
-          &nbsp;{t('your CV')}
-        </Text.Header>
+        <Span color={Colors.secondaryDarkBlue}>&nbsp;{t('your CV')}</Span>
       </Text.Header>
       <Text.Header level={HeaderLevels.h6} color={Colors.secondaryDarkBlue} style={styles.bodyText}>
         {t('Future proof your career and earn')}

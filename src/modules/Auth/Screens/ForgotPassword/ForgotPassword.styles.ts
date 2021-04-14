@@ -42,8 +42,11 @@ const styles = {
   } as ViewStyle,
   bodyText: {
     marginVertical: 15,
-    textAlign: 'center',
     paddingHorizontal: 20,
+  } as TextStyle,
+  cardHeaderText: {
+    paddingTop: 10,
+    paddingBottom: 15,
   } as TextStyle,
 }
 

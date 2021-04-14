@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AUTH_TOKEN, BASE_URL } from 'helpers/helpers'
+import { AUTH_TOKEN } from 'helpers/helpers'
 
 import Env from '../env.json'
 import auth from './auth'
