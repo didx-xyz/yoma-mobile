@@ -17,6 +17,7 @@ import ValidationSchema from './ValidationSchema'
 interface Props {
   navigation: any
   credentialId: string
+  jobId: string
 }
 
 const INITIAL_VALUES = {
@@ -31,7 +32,7 @@ const INITIAL_VALUES = {
   verifiedAt: null,
 
   // country
-  countryAlpha2: '',
+  country: '',
   // skills developed
   skillNames: [],
 
@@ -46,12 +47,10 @@ const INITIAL_VALUES = {
   requestVerificationInd: false,
 }
 
-const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => {
+const ExperienceForm = forwardRef(({ navigation, credentialId, jobId }: Props, ref) => {
   const [initialValues, setInitialValues] = useState(INITIAL_VALUES)
   const { t } = useTranslation()
-  const [country, setCountry] = useState('')
   const [organizations, setOrganizations] = useState([])
-  const [dropdown, setDropDown] = useState(false)
   const [present, setPresent] = useState(false)
   const [skillsList, setSkillsList] = useState([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
@@ -67,8 +66,8 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
     }
   }, [])
 
-  const getWorkExperience = async (userId: string, credentialId: string) => {
-    const response = await api.users.credentials.getById(userId, credentialId)
+  const getWorkExperience = async (userId: string, credId: string) => {
+    const response = await api.users.credentials.getById(userId, credId)
     const { job, startDate, endDate }: any = { ...response.data }
     setInitialValues({
       ...job,
@@ -133,6 +132,18 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
     setSelectedSkills(remainingSkills)
   }
 
+  const editCredential = async (credId: string, values: any) => {
+    const response = await api.digitalCv.workExperience.editJob(jobId, {
+      title: values.title,
+      description: values.title,
+      organisationId: values.organisationId,
+      skillNames: values.skillNames,
+      countries: [values.country],
+      language: values.language,
+    })
+    return response.data
+  }
+
   return (
     <Formik
       innerRef={formRef}
@@ -142,7 +153,12 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
       onSubmit={async (values, actions) => {
         console.log('values', values)
         if (credentialId != '') {
-          console.log('check')
+          try {
+            await editCredential(credentialId, values)
+            navigation.navigate('Home')
+          } catch (err) {
+            console.error(err)
+          }
         } else {
           try {
             const job = await createJob(values, values.organisationId)
@@ -174,8 +190,6 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
               setFieldValue('organisationName', itemValue.label)
               setFieldValue('organisationId', itemValue.value)
             }}
-            // defaultValue={(values.organisationName)}
-            // defaultValue={''}
             style={styles.formDropDown}
             searchable={true}
             searchablePlaceholder="Search organization"
@@ -188,43 +202,19 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
             showTitle={values.organisationName != '' ? true : false}
           />
           <CustomInput
-            onChangeText={handleChange('countryAlpha2')}
-            onBlur={handleBlur('countryAlpha2')}
-            value={country}
-            label={t('Country or Region')}
-            touched={touched.countryAlpha2}
-            error={errors.countryAlpha2}
+            onChangeText={handleChange('country')}
+            onBlur={handleBlur('country')}
+            value={values.country}
+            label={t('Country/Region')}
+            touched={touched.country}
+            error={errors.country}
             showTitle={values.title !== '' ? true : false}
           />
-          {dropdown ? (
-            <DropDown
-              items={countries.map(c => ({
-                label: c.name,
-                value: c.code,
-              }))}
-              onChangeItem={itemValue => {
-                handleChange('countryAlpha2')
-                handleBlur('countryAlpha2')
-                setFieldValue('countryAlpha2', itemValue.value)
-                setCountry(itemValue.label)
-                setDropDown(false)
-              }}
-              defaultValue={country}
-              searchable={true}
-              searchablePlaceholder={t('Search for country')}
-              searchablePlaceholderTextColor={colors[Colors.menuGrey]}
-              placeholder={t('country')}
-              touched={touched.countryAlpha2}
-              error={errors.countryAlpha2}
-              isVisible={dropdown}
-            />
-          ) : null}
           <Text.Meta
             level={MetaLevels.smallBold}
             color={Colors.primaryGreen}
             align={TextAlign.right}
             style={styles.useLocationText}
-            onPress={() => setDropDown(true)}
           >
             {t('Use current location')}
           </Text.Meta>

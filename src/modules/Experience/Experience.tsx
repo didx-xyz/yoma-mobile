@@ -8,7 +8,7 @@ import moment from 'moment'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
-import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
+import { Avatar } from 'react-native-elements'
 import { FlatList } from 'react-native-gesture-handler'
 import { Colors, colors } from 'styles'
 
@@ -24,6 +24,7 @@ const Experience = ({ navigation }: Props) => {
   const [isSave, setIsSave] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
   const [credentialId, setCredentialId] = useState('')
+  const [jobId, setJobId] = useState('')
   const [experience, setExperience] = useState([])
   const formRef = useRef<any>()
 
@@ -53,51 +54,55 @@ const Experience = ({ navigation }: Props) => {
     return message
   }
 
-  const renderItem = ({ item }: any) => (
-    <View style={styles.cardView}>
-      <View style={styles.row}>
-        {item.job.organisationLogoURL ? (
-          <Image source={{ uri: item.job.organisationLogoURL }} style={styles.image} />
-        ) : (
-          <Avatar
-            size="small"
-            rounded
-            title={item.job.organisationName.charAt(0)}
-            containerStyle={styles.avatar}
-            titleStyle={{ color: colors[Colors.menuGrey] }}
-          />
-        )}
-        <View>
-          <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
-            {item.job.title}
-          </Text.Header>
-          <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
-            {item.job.organisationName}
-          </Text.Body>
-          <View style={styles.row}>
+  const renderItem = ({ item }: any) => {
+    return (
+      <View style={styles.cardView}>
+        <View style={styles.row}>
+          {item.job.organisationLogoURL ? (
+            <Image source={{ uri: item.job.organisationLogoURL }} style={styles.image} />
+          ) : (
+            <Avatar
+              size="small"
+              rounded
+              title={item.job.organisationName.charAt(0)}
+              containerStyle={styles.avatar}
+              titleStyle={{ color: colors[Colors.menuGrey] }}
+            />
+          )}
+          <View>
+            <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+              {item.job.title}
+            </Text.Header>
             <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
-              {moment(item.startDate).format('MMM YYYY')} -{' '}
+              {item.job.organisationName}
             </Text.Body>
-            <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
-              {moment(item.endDate).format('MMM YYYY')}
-              &nbsp;{calculateDifferenceInDate(new Date(item.startDate), new Date(item.endDate))}
-            </Text.Body>
+            <View style={styles.row}>
+              <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
+                {moment(item.startDate).format('MMM YYYY')} -{' '}
+              </Text.Body>
+              <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
+                {moment(item.endDate).format('MMM YYYY')}
+                &nbsp;{calculateDifferenceInDate(new Date(item.startDate), new Date(item.endDate))}
+              </Text.Body>
+            </View>
           </View>
+          <TouchableOpacity
+            style={styles.editIcon}
+            onPress={() => {
+              setIsSave(true)
+              setIsEdit(true)
+              console.log(item.job.id)
+              setJobId(item.job.id)
+              setCredentialId(item.id)
+            }}
+          >
+            <EditIcon />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          style={styles.editIcon}
-          onPress={() => {
-            setIsSave(true)
-            setIsEdit(true)
-            setCredentialId(item.id)
-          }}
-        >
-          <EditIcon />
-        </TouchableOpacity>
+        <Text.Body>{item.job.description}</Text.Body>
       </View>
-      <Text.Body>{item.job.description}</Text.Body>
-    </View>
-  )
+    )
+  }
 
   return (
     <ViewContainer style={styles.container}>
@@ -116,7 +121,7 @@ const Experience = ({ navigation }: Props) => {
         <>
           <ScrollView>
             <View style={styles.whiteCard}>
-              <ExperienceForm navigation={navigation} credentialId={credentialId} ref={formRef} />
+              <ExperienceForm navigation={navigation} credentialId={credentialId} jobId={jobId} ref={formRef} />
             </View>
             {isEdit ? (
               <TouchableOpacity>

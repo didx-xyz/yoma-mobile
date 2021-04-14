@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { AUTH_TOKEN, BASE_URL } from 'helpers/helpers'
+import { AUTH_TOKEN } from 'helpers/helpers'
 
 import Env from '../env.json'
 import auth from './auth'
@@ -39,6 +39,7 @@ instance.interceptors.response.use(
     if (response?.status === UNAUTHORIZED_STATUS_CODE) {
       return Promise.reject(REFRESH_TOKEN_FAILED_MESSAGE)
     }
+    // console.log(response);
     return Promise.reject((response && response.data?.meta?.message) || FALLBACK_MESSAGE)
   },
 )
