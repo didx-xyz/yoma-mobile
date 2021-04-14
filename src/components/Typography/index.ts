@@ -5,6 +5,7 @@ import Header from './Header/Header'
 import { HeaderLevels } from './Header/Header.types'
 import Meta from './Meta/Meta'
 import { MetaLevels } from './Meta/Meta.types'
+import Span from './Span'
 import { FontWeights, TextAlign } from './Text.types'
 
 const Text = {
@@ -15,4 +16,4 @@ const Text = {
 
 export default Text
 
-export { Bold, HeaderLevels, BodyLevels, MetaLevels, FontWeights, TextAlign }
+export { Bold, Span, HeaderLevels, BodyLevels, MetaLevels, FontWeights, TextAlign }

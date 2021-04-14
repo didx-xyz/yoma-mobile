@@ -14,7 +14,7 @@ type Props = WithChildren<{
   percent?: number
   radius: number
 }>
-
+// TODO: refactor this
 const ProgressCircle = ({
   backgroundColor = `${colors[Colors.menuGrey]}25`,
   borderWidth = 1,

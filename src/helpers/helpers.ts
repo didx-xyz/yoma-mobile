@@ -1,5 +1,3 @@
-export const BASE_URL = 'https://staging.api.yoma.africa/api/v1/'
-
 // TODO: Static user ID for now
 export const USER_ID = '5f258846-6a3b-4b2f-8ccf-b251beac066b'
 

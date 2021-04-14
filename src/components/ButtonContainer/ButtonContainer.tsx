@@ -1,6 +1,8 @@
 import React from 'react'
-import { Text, TextStyle, TouchableOpacityProps, TouchableOpacity, ViewStyle } from 'react-native'
+import { TextStyle, TouchableOpacity, TouchableOpacityProps, ViewStyle } from 'react-native'
 import { WithChildren } from 'types/react.types'
+
+import Text, { Bold } from '../Typography'
 
 type Props = TouchableOpacityProps &
   WithChildren<{
@@ -14,7 +16,9 @@ const ButtonContainer = ({ children, buttonStyle, buttonText, buttonTextStyle, .
   return (
     <TouchableOpacity style={buttonStyle} {...props}>
       {children}
-      <Text style={buttonTextStyle}>{buttonText}</Text>
+      <Text.Body style={buttonTextStyle}>
+        <Bold>{buttonText}</Bold>
+      </Text.Body>
     </TouchableOpacity>
   )
 }

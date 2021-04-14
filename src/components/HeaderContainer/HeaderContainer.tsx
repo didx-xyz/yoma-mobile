@@ -1,10 +1,11 @@
 import { StackActions } from '@react-navigation/native'
 import { BackIcon } from 'assets/images'
 import React, { useEffect } from 'react'
-import { BackHandler, Text, TouchableOpacity, View } from 'react-native'
-import { TextStyles } from 'styles'
+import { BackHandler, TouchableOpacity, View } from 'react-native'
+import { Colors } from 'styles'
 import { WithChildren } from 'types/react.types'
 
+import Text, { HeaderLevels } from '../Typography'
 import styles from './HeaderContainer.styles'
 
 type Props = WithChildren<{
@@ -30,7 +31,9 @@ const HeaderContainer = ({ headerText, navigation }: Props) => {
       <TouchableOpacity style={styles.backIconView} onPress={goBack}>
         <BackIcon />
       </TouchableOpacity>
-      <Text style={[TextStyles.textWhite, TextStyles.headerText]}>{headerText}</Text>
+      <Text.Header level={HeaderLevels.h5} color={Colors.white}>
+        {headerText}
+      </Text.Header>
     </View>
   )
 }

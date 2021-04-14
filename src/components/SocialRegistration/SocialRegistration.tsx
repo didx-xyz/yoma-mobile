@@ -11,10 +11,10 @@ import ButtonContainer from '../ButtonContainer/ButtonContainer'
 const SocialRegistration = () => {
   const { t } = useTranslation()
 
-  const facebookSignin = () => {
+  const facebookSignIn = () => {
     LoginManager.logInWithPermissions(['email', 'public_profile', 'user_friends']).then(
       function (result) {
-        console.log('🚀 ~ file: SocialRegistration.tsx ~ line 18 ~ facebookSignin ~ result', result)
+        console.log('🚀 ~ file: SocialRegistration.tsx ~ line 18 ~ facebookSignIn ~ result', result)
         if (result.isCancelled) {
           console.log('Login cancelled')
         } else {
@@ -61,7 +61,7 @@ const SocialRegistration = () => {
         buttonText={t<string>('loginFacebook')}
         buttonStyle={[ButtonStyles.facebookButton, { marginVertical: 15 }]}
         buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
-        onPress={facebookSignin}
+        onPress={facebookSignIn}
         children={<FacebookIcon />}
       />
       <ButtonContainer

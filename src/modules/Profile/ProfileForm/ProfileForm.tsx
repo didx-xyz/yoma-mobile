@@ -1,14 +1,15 @@
 import api from 'api'
 import { DropDown, Spinner } from 'components'
 import CustomInput from 'components/CustomInput/CustomInput'
+import Text, { Bold } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import styles from 'modules/Auth/Screens/RegisterWithEmail/RegisterForm/RegisterForm.styles'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, View } from 'react-native'
-import { TextStyles } from 'styles'
+import { View } from 'react-native'
+import { Colors } from 'styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
@@ -160,12 +161,13 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
                 isVisible={dropdown}
               />
             ) : null}
-            <Text
-              style={[TextStyles.boldText, TextStyles.textTertiary3, { alignSelf: 'flex-end', paddingRight: 20 }]}
+            <Text.Body
+              color={Colors.primaryGreen}
+              style={styles.currentLocationButton}
               onPress={() => setDropDown(true)}
             >
-              Use current location
-            </Text>
+              <Bold>Use current location</Bold>
+            </Text.Body>
             <CustomInput
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}

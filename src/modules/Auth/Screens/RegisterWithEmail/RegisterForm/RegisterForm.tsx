@@ -5,14 +5,15 @@ import countries from 'constants/countries'
 import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import { CheckBox } from 'react-native-elements'
-import { FontFamily, TextStyles } from 'styles'
+import { TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
-import fontStyles from 'styles/font.styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
+
+import Text, { HeaderLevels, Span } from '../../../../../components/Typography'
 
 const RegisterForm = () => {
   const { t } = useTranslation()
@@ -171,10 +172,10 @@ const RegisterForm = () => {
               onBlur={handleChange('privacyInd')}
               containerStyle={{ paddingVertical: 0, paddingHorizontal: 0 }}
             />
-            <Text style={[TextStyles.h5, TextStyles.textTertiary5, { fontFamily: fontStyles[FontFamily.semibold] }]}>
+            <Text.Header level={HeaderLevels.h5}>
               {t('iAgree')} &nbsp;
-              <Text style={{ textDecorationLine: 'underline' }}>{t('privacyPolicy')}</Text>
-            </Text>
+              <Span style={{ textDecorationLine: 'underline' }}>{t('privacyPolicy')}</Span>
+            </Text.Header>
           </View>
           <ButtonContainer
             disabled={isSubmitting}

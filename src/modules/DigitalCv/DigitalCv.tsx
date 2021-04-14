@@ -1,8 +1,8 @@
 import { ViewContainer, HomeHeader, FirstTimeCard, CvCard } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, Text, View } from 'react-native'
-import { Colors, colors, TextStyles } from 'styles'
+import { ScrollView } from 'react-native'
+import { Colors } from 'styles'
 
 import styles from './DigitalCv.styles'
 

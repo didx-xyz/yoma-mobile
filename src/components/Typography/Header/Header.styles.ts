@@ -34,7 +34,7 @@ const styles: Record<HeaderLevels, TextStyle> = {
     ...fontWeights.semiBold_600,
     fontSize: 16,
     lineHeight: 17,
-    color: colors[Colors.primaryPurple],
+    color: colors[Colors.primaryDarkGrey],
   } as TextStyle,
   [HeaderLevels.h6]: {
     ...fontWeights.semiBold_600,
