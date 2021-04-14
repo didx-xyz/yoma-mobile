@@ -1,7 +1,8 @@
+import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
-import { Text, TextInput, TextInputProps, View, TextStyle, ViewStyle } from 'react-native'
+import { View, TextStyle, ViewStyle } from 'react-native'
 import DatePicker from 'react-native-datepicker'
-import { TextStyles } from 'styles'
+import { Colors } from 'styles'
 
 import styles from './DatePicker.styles'
 
@@ -28,24 +29,29 @@ const DateTimePicker = ({
   ...props
 }: DateTimePickerProps) => {
   return (
-    <View style={[{ width: '95%', alignSelf: 'center' }, viewStyle]}>
-      {showTitle ? <Text style={[TextStyles.h4, styles.label]}>{label}</Text> : null}
+    <View style={[styles.datePickerOuterView, viewStyle]}>
+      {showTitle ? (
+        <Text.Meta level={MetaLevels.small} style={styles.label}>
+          {label}
+        </Text.Meta>
+      ) : null}
       <DatePicker
         mode="date"
         placeholder={label}
         confirmBtnText="Confirm"
         cancelBtnText="Cancel"
         format={'DD/MM/YYYY'}
-        customStyles={{
-          dateInput: styles.dateInput,
-        }}
-        style={[styles.textInputStyle, { paddingHorizontal: 0 }]}
+        customStyles={{ dateInput: styles.dateInput }}
+        style={styles.textInputStyle}
         onDateChange={onChangeDate}
         showIcon={false}
         date={value}
         maxDate={new Date()}
+        {...props}
       />
-      <Text style={TextStyles.errorText}>{touched && error}</Text>
+      <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
+        {touched && error}
+      </Text.Meta>
     </View>
   )
 }

@@ -2,8 +2,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 
+import Home from '../Home/Home'
 import Authentication from './Authentication/Authentication'
-import Home from './Home/Home'
 import linking from './Linking'
 
 const Stack = createStackNavigator()

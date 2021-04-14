@@ -1,8 +1,6 @@
-import { StyleSheet, ViewStyle, Dimensions, ImageStyle, TextStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
-
-const { width, height } = Dimensions.get('window')
 
 const styles = {
   header: {
@@ -12,6 +10,13 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+  } as ViewStyle,
+  saveText: {
+    paddingRight: 20,
+  } as TextStyle,
+  addView: {
+    flexDirection: 'row',
+    paddingRight: 20,
   } as ViewStyle,
 }
 

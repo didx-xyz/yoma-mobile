@@ -1,5 +1,5 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { FacebookIcon, GoogleIcon } from 'assets/Images'
+import { FacebookIcon, GoogleIcon } from 'assets/images'
 import React from 'react'
 import { LoginManager } from 'react-native-fbsdk'
 import { TextStyles } from 'styles'

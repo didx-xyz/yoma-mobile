@@ -1,17 +1,14 @@
 import api from 'api'
-import { BlueHollowCircle, BlueTick } from 'assets/Images'
-import { DropDown, Spinner } from 'components'
-import CustomInput from 'components/CustomInput/CustomInput'
-import DateTimePicker from 'components/DatePicker/DatePicker'
-import DropDownTags from 'components/DropDownTags/DropDownTags'
+import { BlueHollowCircle, BlueTick } from 'assets/images'
+import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags } from 'components'
+import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
-import moment from 'moment'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import { FontFamily, TextStyles } from 'styles'
-import fontStyles from 'styles/font.styles'
+import { useTranslation } from 'react-i18next'
+import { TouchableOpacity, View } from 'react-native'
+import { colors, Colors } from 'styles'
 import mapToSelect from 'utils/mapToSelect'
 
 import styles from './ExperienceForm.styles'
@@ -51,6 +48,7 @@ const INITIAL_VALUES = {
 
 const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => {
   const [initialValues, setInitialValues] = useState(INITIAL_VALUES)
+  const { t } = useTranslation()
   const [country, setCountry] = useState('')
   const [organizations, setOrganizations] = useState([])
   const [dropdown, setDropDown] = useState(false)
@@ -157,15 +155,13 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
-        // TODO: added height as dropdown was not working
-        <View style={{ width: '100%', height: 600 }}>
+        <View style={styles.formView}>
           <Spinner visible={isSubmitting} />
-
           <CustomInput
             onChangeText={handleChange('title')}
             onBlur={handleBlur('title')}
             value={values.title}
-            label={'Title'}
+            label={t('Title')}
             touched={touched.title}
             error={errors.title}
             showTitle={values.title !== '' ? true : false}
@@ -183,18 +179,19 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
             style={styles.formDropDown}
             searchable={true}
             searchablePlaceholder="Search organization"
-            searchablePlaceholderTextColor="gray"
-            placeholder={'Company name'}
+            searchablePlaceholderTextColor={Colors.menuGrey}
+            placeholderStyle={{ color: colors[Colors.menuGrey] }}
+            placeholder={t('Company name')}
             touched={touched.organisationName}
             error={errors.organisationName}
-            fieldName={'Company Name'}
+            fieldName={t('Company Name')}
             showTitle={values.organisationName != '' ? true : false}
           />
           <CustomInput
             onChangeText={handleChange('countryAlpha2')}
             onBlur={handleBlur('countryAlpha2')}
             value={country}
-            label={'Country or Region'}
+            label={t('Country or Region')}
             touched={touched.countryAlpha2}
             error={errors.countryAlpha2}
             showTitle={values.title !== '' ? true : false}
@@ -214,20 +211,23 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
               }}
               defaultValue={country}
               searchable={true}
-              searchablePlaceholder="Search for country"
-              searchablePlaceholderTextColor="gray"
-              placeholder={'country'}
+              searchablePlaceholder={t('Search for country')}
+              searchablePlaceholderTextColor={colors[Colors.menuGrey]}
+              placeholder={t('country')}
               touched={touched.countryAlpha2}
               error={errors.countryAlpha2}
               isVisible={dropdown}
             />
           ) : null}
-          <Text
-            style={[TextStyles.boldText, TextStyles.textTertiary3, { alignSelf: 'flex-end', paddingRight: 20 }]}
+          <Text.Meta
+            level={MetaLevels.smallBold}
+            color={Colors.primaryGreen}
+            align={TextAlign.right}
+            style={styles.useLocationText}
             onPress={() => setDropDown(true)}
           >
-            Use current location
-          </Text>
+            {t('Use current location')}
+          </Text.Meta>
           <View style={styles.checkBoxView}>
             <TouchableOpacity
               onPress={() => {
@@ -237,12 +237,10 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
             >
               {present ? <BlueTick /> : <BlueHollowCircle />}
             </TouchableOpacity>
-            <Text style={[TextStyles.h4, TextStyles.textTertiary9, { fontFamily: fontStyles[FontFamily.semibold] }]}>
-              I currently work here
-            </Text>
+            <Text.Body>{t('I currently work here')}</Text.Body>
           </View>
-          <View style={{ flexDirection: 'row', justifyContent: 'space-around' }}>
-            <DateTimePicker
+          <View style={styles.datePickersRowView}>
+            <DatePicker
               onChangeDate={(date: string) => {
                 console.log(date)
                 handleChange('startDate')
@@ -250,21 +248,20 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
                 setFieldValue('startDate', date)
               }}
               value={values.startDate}
-              label={'Start date'}
+              label={t('Start date')}
               touched={touched.startDate}
               error={errors.startDate}
               viewStyle={{ width: '40%' }}
               showTitle={values.startDate !== '' ? true : false}
             />
-            <DateTimePicker
+            <DatePicker
               onChangeDate={(date: string) => {
-                console.log(date)
                 handleChange('endDate')
                 handleBlur('endDate')
                 setFieldValue('endDate', date)
               }}
               value={values.endDate}
-              label={'End date'}
+              label={t('End date')}
               touched={touched.endDate}
               error={errors.endDate}
               viewStyle={{ width: '40%' }}
@@ -275,22 +272,22 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
             onChangeText={handleChange('description')}
             onBlur={handleBlur('description')}
             value={values.description}
-            label={'Description'}
+            label={t('Description')}
             touched={touched.description}
             error={errors.description}
-            showTitle={values.title !== '' ? true : false}
+            showTitle={values.description !== '' ? true : false}
           />
           <DropDownTags
             items={skillsList}
             multiple={true}
-            multipleText="Skills developed %d"
+            multipleText={t('Skills developed %d')}
             min={0}
             max={10}
             searchable={true}
-            searchablePlaceholder="Search skills"
+            searchablePlaceholder={t('Search skills')}
             searchablePlaceholderTextColor="gray"
-            placeholder={'Skills developed'}
-            fieldName={'Skills developed'}
+            placeholder={t('Skills developed')}
+            fieldName={t('Skills developed')}
             showTitle={values.skillNames.length > 0 ? true : false}
             defaultValue={selectedSkills}
             onChangeItem={item => {
@@ -314,15 +311,7 @@ const ExperienceForm = forwardRef(({ navigation, credentialId }: Props, ref) => 
             >
               {requestVerification ? <BlueTick /> : <BlueHollowCircle />}
             </TouchableOpacity>
-            <Text
-              style={[
-                TextStyles.h4,
-                TextStyles.textTertiary9,
-                { fontFamily: fontStyles[FontFamily.semibold], width: '90%' },
-              ]}
-            >
-              Request verification of employment from company
-            </Text>
+            <Text.Body>{t('Request verification of employment from company')}</Text.Body>
           </View>
         </View>
       )}

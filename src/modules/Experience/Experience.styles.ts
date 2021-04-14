@@ -1,10 +1,9 @@
-import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
-
-import { Colors, colors } from '../../styles'
+import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
+import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.tertiary8],
+    backgroundColor: colors[Colors.backgroundGrey],
     ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   whiteCard: {
@@ -17,7 +16,6 @@ const styles = {
     marginVertical: 10,
     alignSelf: 'center',
   } as ViewStyle,
-
   cardView: {
     backgroundColor: colors[Colors.white],
     width: '95%',
@@ -39,11 +37,11 @@ const styles = {
     height: 35,
     width: 35,
     borderRadius: 17,
-    backgroundColor: colors[Colors.tertiary9],
+    backgroundColor: colors[Colors.backgroundGrey],
     marginHorizontal: 10,
   } as ViewStyle,
   editIcon: {
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     elevation: 3,
     height: 25,
     width: 25,
@@ -52,7 +50,7 @@ const styles = {
     right: 10,
   } as ViewStyle,
   deleteText: {
-    alignSelf: 'center',
+    marginVertical: 20,
   } as ViewStyle,
 }
 

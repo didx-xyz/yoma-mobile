@@ -1,29 +1,29 @@
 import { BottomTabBarOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
-import { DigitalCvIcon, CoursesIcon, ChallengesIcon, MarketplaceIcon } from 'assets/Images'
-import About from 'modules/About/About'
-import Challenges from 'modules/Challenges/Challenges'
-import Courses from 'modules/Courses/Courses'
-import DigitalCv from 'modules/DigitalCv/DigitalCv'
-import DigitalCvHome from 'modules/DigitalCv/DigitalCv'
-import Experience from 'modules/Experience/Experience'
-import Marketplace from 'modules/Marketplace/Marketplace'
-import Profile from 'modules/Profile/Profile'
+import { DigitalCvIcon, CoursesIcon, ChallengesIcon, MarketplaceIcon } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { colors, Colors, FontFamily } from 'styles'
 import fontStyles from 'styles/font.styles'
+
+import About from '../About'
+import Challenges from '../Challenges'
+import Courses from '../Courses'
+import DigitalCv from '../DigitalCv'
+import Experience from '../Experience'
+import Marketplace from '../Marketplace'
+import Profile from '../Profile'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const tabBarOptions: BottomTabBarOptions = {
   tabStyle: {
-    backgroundColor: colors[Colors.primary],
+    backgroundColor: colors[Colors.primaryPurple],
     paddingBottom: 2,
   },
   activeTintColor: colors[Colors.white],
-  inactiveTintColor: '#FFFFFF38',
+  inactiveTintColor: `${colors[Colors.white]}38`,
   labelStyle: {
     fontFamily: fontStyles[FontFamily.semibold],
   },
@@ -74,7 +74,7 @@ const Home = () => {
     <Stack.Navigator headerMode={'none'}>
       <Stack.Screen name="Home" component={HomeTabs} />
       <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="DigitalCvHome" component={DigitalCvHome} />
+      <Stack.Screen name="DigitalCv" component={DigitalCv} />
       <Stack.Screen name="About" component={About} />
       <Stack.Screen name="Experience" component={Experience} />
     </Stack.Navigator>

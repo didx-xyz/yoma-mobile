@@ -1,7 +1,7 @@
-import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
-const { height, width } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 
 const styles = {
   cardView: {
@@ -15,20 +15,30 @@ const styles = {
     marginTop: 10,
     height: height / 4,
   } as ViewStyle,
+  certificateCountView: {
+    height: 25,
+    width: 25,
+    maxWidth: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 5,
+    borderRadius: 12,
+    marginRight: 10,
+  } as ViewStyle,
   rowView: {
     flexDirection: 'row',
     alignItems: 'center',
   } as ViewStyle,
   editIcon: {
     elevation: 3,
-    backgroundColor: '#fff',
+    backgroundColor: colors[Colors.white],
     borderRadius: 15,
     position: 'absolute',
     right: 0,
   } as ViewStyle,
   dividerLine: {
     height: 2,
-    backgroundColor: 'rgb(243,246,250)',
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
     marginVertical: 10,
   } as ViewStyle,
   bodyView: {

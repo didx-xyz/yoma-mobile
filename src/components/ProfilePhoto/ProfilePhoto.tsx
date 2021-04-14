@@ -1,21 +1,20 @@
-import { EditIcon, ProfileIcon } from 'assets/Images'
+import { EditIcon, ProfileIcon } from 'assets/images'
 import ProgressCircle from 'components/ProgressCircle/ProgressCircle'
 import React from 'react'
 import { GestureResponderEvent, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
-import { WithChildren } from 'types/react.types'
 
 import styles from './ProfilePhoto.styles'
 
-type Props = WithChildren<{
+type Props = {
   outerRadius: number
   percent: number
   onPress: (event: GestureResponderEvent) => void
   borderWidth: number
   profileInnerStyle?: ViewStyle
   profileOuterStyle?: ViewStyle
-  editIcon?: boolean
-}>
+  showEditIcon?: boolean
+}
 
 const ProfilePhoto = ({
   outerRadius,
@@ -24,16 +23,21 @@ const ProfilePhoto = ({
   borderWidth,
   profileInnerStyle,
   profileOuterStyle,
-  editIcon = false,
+  showEditIcon = false,
 }: Props) => {
   return (
     <TouchableOpacity style={profileOuterStyle} activeOpacity={1} onPress={onPress}>
-      <ProgressCircle radius={outerRadius} percent={percent} borderWidth={borderWidth} color={colors[Colors.tertiary1]}>
+      <ProgressCircle
+        radius={outerRadius}
+        percent={percent}
+        borderWidth={borderWidth}
+        color={colors[Colors.primaryRed]}
+      >
         <View style={profileInnerStyle}>
           <ProfileIcon height={outerRadius} width={outerRadius} />
         </View>
       </ProgressCircle>
-      {editIcon ? (
+      {showEditIcon ? (
         <TouchableOpacity style={styles.editIcon} onPress={onPress}>
           <EditIcon />
         </TouchableOpacity>

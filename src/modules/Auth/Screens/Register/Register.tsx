@@ -1,4 +1,4 @@
-import { PurpleQuarter } from 'assets/Images'
+import { PurpleQuarter } from 'assets/images'
 import { ButtonContainer, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +20,7 @@ const Register = ({ navigation }: Props) => {
       <LargeHeaderContainer
         navigation={navigation}
         headerText={t<string>('register')}
-        backgroundColor={colors[Colors.secondary]}
+        backgroundColor={colors[Colors.primaryYellow]}
         circleImage={<PurpleQuarter />}
         circleImageStyle={styles.purpleSemiCircleContainer}
       />

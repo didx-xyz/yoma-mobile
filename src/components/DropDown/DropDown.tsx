@@ -1,7 +1,8 @@
+import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
-import { Text, View } from 'react-native'
+import { View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
-import { TextStyles } from 'styles'
+import { Colors } from 'styles'
 
 import styles from './DropDown.styles'
 
@@ -15,18 +16,22 @@ type Props = DropDownPickerProps & {
 const DropDown = ({ touched, error, fieldName, showTitle, ...props }: Props) => {
   return (
     <View>
-      {showTitle ? <Text style={[TextStyles.h4, styles.label, { paddingLeft: 10 }]}>{fieldName}</Text> : null}
+      {showTitle ? (
+        <Text.Meta level={MetaLevels.small} style={styles.label}>
+          {fieldName}
+        </Text.Meta>
+      ) : null}
       <DropDownPicker
-        containerStyle={{ height: 45 }}
+        containerStyle={styles.container}
         style={styles.dropDownStyle}
         dropDownStyle={styles.dropDownViewStyle}
-        labelStyle={[TextStyles.h4, TextStyles.textTertiary5]}
-        itemStyle={{
-          justifyContent: 'flex-start',
-        }}
+        labelStyle={styles.labelStyle}
+        itemStyle={styles.itemStyle}
         {...props}
       />
-      <Text style={TextStyles.errorText}>{touched && error}</Text>
+      <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
+        {touched && error}
+      </Text.Meta>
     </View>
   )
 }

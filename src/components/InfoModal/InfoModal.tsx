@@ -1,24 +1,26 @@
-import React, { useState } from 'react'
-import { Text, Modal, View, Pressable, TouchableOpacity } from 'react-native'
-import { TextStyles } from 'styles'
-import { WithChildren } from 'types/react.types'
+import Text from 'components/Typography'
+import React from 'react'
+import { useTranslation } from 'react-i18next'
+import { Modal, View, TouchableOpacity } from 'react-native'
+import { Colors } from 'styles'
 
 import styles from './InfoModal.styles'
 
-type Props = WithChildren<{
+interface Props {
   visible: boolean
   closeModal: () => void
   infoText: string
-}>
+}
 
-const InfoModal = ({ children, visible, closeModal, infoText, ...props }: Props) => {
+const InfoModal = ({ visible, closeModal, infoText, ...props }: Props) => {
+  const { t } = useTranslation()
   return (
-    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={closeModal}>
+    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={closeModal} {...props}>
       <View style={styles.centeredView}>
         <View style={styles.modalView}>
-          <Text style={[TextStyles.h4, TextStyles.textTertiary9, styles.modalText]}>{infoText}</Text>
+          <Text.Body>{infoText}</Text.Body>
           <TouchableOpacity style={styles.button} onPress={closeModal}>
-            <Text style={styles.textStyle}>Close</Text>
+            <Text.Body color={Colors.white}>{t('Close')}</Text.Body>
           </TouchableOpacity>
         </View>
       </View>

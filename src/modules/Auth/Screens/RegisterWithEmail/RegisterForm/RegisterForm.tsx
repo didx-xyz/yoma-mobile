@@ -1,5 +1,5 @@
 import api from 'api'
-import { BlueTick } from 'assets/Images'
+import { BlueTick } from 'assets/images'
 import { ButtonContainer, DropDown, Input, Spinner } from 'components'
 import countries from 'constants/countries'
 import { Formik } from 'formik'

@@ -1,6 +1,5 @@
 import api from 'api'
-import { DropDown, Spinner } from 'components'
-import CustomInput from 'components/CustomInput/CustomInput'
+import { CustomInput, DropDown, Spinner } from 'components'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
@@ -11,6 +10,8 @@ import { TextStyles } from 'styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
+
+import styles from './ProfileForm.styles'
 
 interface Props {
   navigation: any
@@ -110,7 +111,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => {
         return (
-          <View style={{ width: '100%' }}>
+          <View style={styles.profileForm}>
             <Spinner visible={isSubmitting} />
             <CustomInput
               onChangeText={handleChange('firstName')}
