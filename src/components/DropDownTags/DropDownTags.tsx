@@ -1,4 +1,5 @@
 import { CrossIcon } from 'assets/images'
+import { Optional } from 'components'
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
@@ -31,14 +32,14 @@ const rendertags = (tags: Array<string>, deleteItem: any) => {
   })
 }
 
-const DropDownTags = ({ touched, error, fieldName, showTitle, tags = [], deleteItem, ...props }: Props) => {
+const DropDownTags = ({ touched, error, fieldName, showTitle = false, tags = [], deleteItem, ...props }: Props) => {
   return (
     <View>
-      {showTitle ? (
+      <Optional condition={showTitle}>
         <Text.Meta level={MetaLevels.small} style={styles.label}>
           {fieldName}
         </Text.Meta>
-      ) : null}
+      </Optional>
       <DropDownPicker
         containerStyle={styles.dropDownContainerStyle}
         style={styles.dropDownStyle}

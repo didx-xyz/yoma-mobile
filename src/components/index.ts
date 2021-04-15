@@ -11,6 +11,7 @@ import InfoModal from './InfoModal/InfoModal'
 import Input from './Input/Input'
 import LargeHeaderContainer from './LargeHeaderContainer/LargeHeaderContainer'
 import NormalHeader from './NormalHeader/NormalHeader'
+import Optional from './Optional/Optional'
 import ProfilePhoto from './ProfilePhoto/ProfilePhoto'
 import ProgressCircle from './ProgressCircle/ProgressCircle'
 import SocialLogin from './SocialLogin/SocialLogin'
@@ -32,6 +33,7 @@ export {
   Input,
   LargeHeaderContainer,
   NormalHeader,
+  Optional,
   ProfilePhoto,
   ProgressCircle,
   SocialLogin,

@@ -1,3 +1,4 @@
+import { Optional } from 'components'
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { View, TextStyle, ViewStyle } from 'react-native'
@@ -30,11 +31,11 @@ const DateTimePicker = ({
 }: DateTimePickerProps) => {
   return (
     <View style={[styles.datePickerOuterView, viewStyle]}>
-      {showTitle ? (
+      <Optional condition={showTitle}>
         <Text.Meta level={MetaLevels.small} style={styles.label}>
           {label}
         </Text.Meta>
-      ) : null}
+      </Optional>
       <DatePicker
         mode="date"
         placeholder={label}
