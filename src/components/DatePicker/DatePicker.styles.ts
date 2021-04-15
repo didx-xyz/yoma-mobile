@@ -1,7 +1,5 @@
-import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
-
-const { height, width } = Dimensions.get('window')
 
 const styles = {
   datePickerOuterView: {

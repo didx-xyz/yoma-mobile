@@ -24,7 +24,6 @@ const styles = {
   itemStyle: {
     justifyContent: 'flex-start',
   } as ViewStyle,
-  labelStyle: {} as TextStyle,
   label: {
     marginLeft: 10,
   } as TextStyle,

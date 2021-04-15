@@ -1,3 +1,4 @@
+import { API_BASE_USERS } from 'api/api.constants'
 import { AxiosInstance } from 'axios'
 
 import credentials from './credentials'
@@ -7,16 +8,15 @@ import photo from './photo'
 export default function (instance: AxiosInstance) {
   return {
     edit(userId: string, body: any, config = {}) {
-      return instance.patch(`users/${userId}`, body, config)
+      return instance.patch(`${API_BASE_USERS}/${userId}`, body, config)
     },
 
     getById(userId: string, config = {}) {
-      return instance.get(`users/${userId}`, config)
+      return instance.get(`${API_BASE_USERS}/${userId}`, config)
     },
 
     password: password(instance),
     photo: photo(),
-
     credentials: credentials(instance),
   }
 }
