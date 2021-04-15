@@ -16,6 +16,7 @@ import ProgressCircle from './ProgressCircle/ProgressCircle'
 import SocialLogin from './SocialLogin/SocialLogin'
 import SocialRegistration from './SocialRegistration/SocialRegistration'
 import Spinner from './Spinner/Spinner'
+import Upload from './Upload/Upload'
 import ViewContainer from './ViewContainer/ViewContainer'
 
 export {
@@ -37,5 +38,6 @@ export {
   SocialLogin,
   SocialRegistration,
   Spinner,
+  Upload,
   ViewContainer,
 }

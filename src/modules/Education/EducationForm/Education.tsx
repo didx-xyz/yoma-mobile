@@ -1,11 +1,11 @@
 import { BlueHollowCircle, BlueTick } from 'assets/images'
-import { CustomInput, Spinner, DatePicker, DropDownTags, InfoModal } from 'components'
+import { CustomInput, Spinner, DatePicker, DropDownTags, InfoModal, Upload } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors } from 'styles'
 
 import styles from './Education.styles'
 import ValidationSchema from './ValidationSchema'
@@ -179,32 +179,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             touched={touched.skillNames}
             error={errors.skillNames}
           />
-          <View style={{ marginHorizontal: 15 }}>
-            <Text.Meta level={MetaLevels.small}>{t('Upload certification (if completed)')}</Text.Meta>
-            <View
-              style={{
-                flexDirection: 'row',
-                backgroundColor: colors[Colors.grey4],
-                borderRadius: 14,
-                paddingHorizontal: 14,
-                paddingVertical: 6,
-                justifyContent: 'space-between',
-                marginVertical: 10,
-              }}
-            >
-              <Text.Body>{t('Upload')}</Text.Body>
-              <View
-                style={{
-                  backgroundColor: colors[Colors.white],
-                  paddingHorizontal: 10,
-                  borderRadius: 25,
-                }}
-              >
-                <Text.Body>{t('Choose file')}</Text.Body>
-              </View>
-            </View>
-            <Text.Meta>{t('.pdf’s supported')}</Text.Meta>
-          </View>
+          <Upload onPress={() => {}} />
           <View style={[styles.checkBoxView]}>
             <TouchableOpacity
               onPress={() => {
