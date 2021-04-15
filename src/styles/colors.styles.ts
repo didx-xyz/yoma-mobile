@@ -16,17 +16,17 @@ const SECONDARY_DARK_BLUE = '#162A42'
 const MENU_GREY = '#959BB4'
 const BACKGROUND_GREY = '#F1F4F8'
 const WHITE = '#FFFFFF'
+const GREY_4 = '#F3F6FA'
 
 // Not set as a styled color in the designs
 const UNSAVED_STYLE_LIGHT_GREY = '#E5E5E5'
-const UNSAVED_STYLE_LIGHT_BLUE = '#E5F7FD'
-const UNSAVED_STYLE_LIGHT_RED = '#FFE4E6'
 
 export default {
   [Colors.fontBlue]: FONT_BLUE,
   [Colors.unsavedStyleLightGrey]: UNSAVED_STYLE_LIGHT_GREY,
   [Colors.menuGrey]: MENU_GREY,
   [Colors.backgroundGrey]: BACKGROUND_GREY,
+  [Colors.grey4]: GREY_4,
   [Colors.primaryBlue]: PRIMARY_BLUE,
   [Colors.primaryDarkGrey]: PRIMARY_DARK_GREY,
   [Colors.primaryGreen]: PRIMARY_GREEN,
@@ -40,6 +40,4 @@ export default {
   [Colors.secondaryPurple]: SECONDARY_PURPLE,
   [Colors.secondaryRed]: SECONDARY_RED,
   [Colors.white]: WHITE,
-  [Colors.unsavedStyleLightBlue]: UNSAVED_STYLE_LIGHT_BLUE,
-  [Colors.unsavedStyleLightRed]: UNSAVED_STYLE_LIGHT_RED,
 }

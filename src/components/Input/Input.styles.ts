@@ -5,7 +5,7 @@ const { width } = Dimensions.get('window')
 
 const styles = {
   textInputStyle: {
-    backgroundColor: colors[Colors.tertiary10],
+    backgroundColor: colors[Colors.grey4],
     width: width / 1.3,
     alignSelf: 'center',
     borderRadius: 60,
