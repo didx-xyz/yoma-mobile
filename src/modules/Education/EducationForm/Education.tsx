@@ -18,6 +18,7 @@ const INITIAL_VALUES = {
   // details
   school: '',
   description: '',
+  qualificationType: '',
   id: '',
   // startDate: '2021-04-09T05:52:02.872Z',
   // endDate: '2021-04-09T05:52:02.872Z',
@@ -44,7 +45,12 @@ const INITIAL_VALUES = {
 const EducationForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [present, setPresent] = useState(false)
-  const [skillsList, setSkillsList] = useState([])
+  // TODO: Adding static data to complete the UI
+  const [skillsList, setSkillsList] = useState([
+    { label: 'UI', value: 'UI' },
+    { label: 'Design', value: 'Design' },
+    { label: 'UX', value: 'UX' },
+  ])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [requestVerification, setRequestVerification] = useState(false)
   const [infoModal, setInfoModal] = useState(false)
@@ -89,13 +95,13 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             showTitle={values.school !== '' ? true : false}
           />
           <CustomInput
-            onChangeText={handleChange('school')}
-            onBlur={handleBlur('school')}
-            value={values.school}
+            onChangeText={handleChange('qualificationType')}
+            onBlur={handleBlur('qualificationType')}
+            value={values.qualificationType}
             label={t('Qualification type')}
-            touched={touched.school}
-            error={errors.school}
-            showTitle={values.school !== '' ? true : false}
+            touched={touched.qualificationType}
+            error={errors.qualificationType}
+            showTitle={values.qualificationType !== '' ? true : false}
           />
           <CustomInput
             onChangeText={handleChange('country')}
@@ -154,6 +160,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             touched={touched.description}
             error={errors.description}
             showTitle={values.description !== '' ? true : false}
+            multiline
           />
           <DropDownTags
             items={skillsList}

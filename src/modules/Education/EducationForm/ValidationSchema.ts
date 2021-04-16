@@ -4,6 +4,7 @@ export default () => {
   return yup.object().shape({
     title: yup.string().min(2).max(200).required('Required'),
     description: yup.string().min(2).max(1000).required('Required'),
+    qualificationType: yup.string().min(2).max(30).required('Required'),
     organisationId: yup.string().when('noResultInd', {
       is: false,
       then: yup.string().required('Required'),

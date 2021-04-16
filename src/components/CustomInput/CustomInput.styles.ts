@@ -5,6 +5,7 @@ const styles = {
   textInputView: {
     width: '95%',
     alignSelf: 'center',
+    marginVertical: 2,
   } as ViewStyle,
   label: {
     marginLeft: 10,
@@ -12,7 +13,6 @@ const styles = {
   textInputStyle: {
     width: '95%',
     alignSelf: 'center',
-    height: 35,
     padding: 0,
     borderBottomWidth: 1,
     borderColor: `${colors[Colors.menuGrey]}70`,

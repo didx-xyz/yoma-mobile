@@ -28,6 +28,7 @@ const styles = {
   } as ViewStyle,
   row: {
     flexDirection: 'row',
+    marginVertical: 5,
   } as ViewStyle,
   image: {
     height: 35,
@@ -38,7 +39,7 @@ const styles = {
     height: 35,
     width: 35,
     borderRadius: 17,
-    backgroundColor: colors[Colors.menuGrey],
+    backgroundColor: colors[Colors.primaryGreen],
     marginHorizontal: 10,
   } as ViewStyle,
   editIcon: {
