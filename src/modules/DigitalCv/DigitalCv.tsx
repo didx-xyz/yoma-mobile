@@ -48,6 +48,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={Colors.primaryGreen}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
+          onEdit={() => navigation.navigate('Skills')}
         />
       </ScrollView>
     </ViewContainer>
