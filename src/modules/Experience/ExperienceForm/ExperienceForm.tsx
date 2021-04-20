@@ -1,18 +1,17 @@
 import api from 'api'
 import { BlueHollowCircle, BlueTick } from 'assets/images'
-import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags, InfoModal } from 'components'
+import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Optional } from 'components'
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
-import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors } from 'styles'
 import mapToSelect from 'utils/mapToSelect'
 
 import styles from './ExperienceForm.styles'
-import ValidationSchema from './ValidationSchema'
+import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
   navigation: any
@@ -121,8 +120,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       initialValues={INITIAL_VALUES}
       enableReinitialize={true}
       validationSchema={ValidationSchema}
-      onSubmit={async (values, actions) => {
-        console.log('values', values)
+      onSubmit={async values => {
         try {
           const job = await createJob(values, values.organisationId)
           await createCredential(job, values)
@@ -132,7 +130,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
         }
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
+      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={styles.formView}>
           <InfoModal
             visible={infoModal}
@@ -149,7 +147,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Title')}
             touched={touched.title}
             error={errors.title}
-            showTitle={values.title !== '' ? true : false}
+            showTitle={values.title !== ''}
           />
           <DropDown
             items={organizations}
@@ -168,7 +166,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             touched={touched.organisationName}
             error={errors.organisationName}
             fieldName={t('Company Name')}
-            showTitle={values.organisationName != '' ? true : false}
+            showTitle={values.organisationName !== ''}
           />
           <CustomInput
             onChangeText={handleChange('country')}
@@ -177,14 +175,9 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Country or region')}
             touched={touched.country}
             error={errors.country}
-            showTitle={values.title !== '' ? true : false}
+            showTitle={values.title !== ''}
           />
-          <Text.Meta
-            level={MetaLevels.smallBold}
-            color={Colors.primaryGreen}
-            align={TextAlign.right}
-            style={styles.useLocationText}
-          >
+          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} align={TextAlign.right}>
             {t('Use current location')}
           </Text.Meta>
           <View style={styles.checkBoxView}>
@@ -194,7 +187,9 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               style={styles.checkBox}
             >
-              {present ? <BlueTick /> : <BlueHollowCircle />}
+              <Optional condition={present} fallback={<BlueHollowCircle />}>
+                <BlueTick />
+              </Optional>
             </TouchableOpacity>
             <Text.Body>{t('I currently work here')}</Text.Body>
           </View>
@@ -209,8 +204,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('Start date')}
               touched={touched.startDate}
               error={errors.startDate}
-              viewStyle={{ width: '40%' }}
-              showTitle={values.startDate !== '' ? true : false}
+              showTitle={values.startDate !== ''}
             />
             <DatePicker
               onChangeDate={(date: string) => {
@@ -222,8 +216,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('End date')}
               touched={touched.endDate}
               error={errors.endDate}
-              viewStyle={{ width: '40%' }}
-              showTitle={values.endDate !== '' ? true : false}
+              showTitle={values.endDate !== ''}
             />
           </View>
           <CustomInput
@@ -233,7 +226,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Description')}
             touched={touched.description}
             error={errors.description}
-            showTitle={values.description !== '' ? true : false}
+            showTitle={values.description !== ''}
           />
           <DropDownTags
             items={skillsList}
@@ -247,7 +240,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
             placeholderStyle={styles.placeholderStyle}
-            showTitle={values.skillNames.length > 0 ? true : false}
+            showTitle={values.skillNames.length > 0}
             defaultValue={selectedSkills}
             onChangeItem={item => {
               setSelectedSkills(item)
@@ -257,8 +250,6 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             }}
             tags={selectedSkills}
             deleteItem={deleteSkill}
-            touched={touched.skillNames}
-            error={errors.skillNames}
           />
           <View style={[styles.checkBoxView]}>
             <TouchableOpacity
@@ -268,9 +259,11 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               style={styles.checkBox}
             >
-              {requestVerification ? <BlueTick /> : <BlueHollowCircle />}
+              <Optional condition={requestVerification} fallback={<BlueHollowCircle />}>
+                <BlueTick />
+              </Optional>
             </TouchableOpacity>
-            <Text.Body style={styles.rowText}>{t('Request verification of employment from company')}</Text.Body>
+            <Text.Body>{t('Request verification of employment from company')}</Text.Body>
           </View>
           <TouchableOpacity onPress={() => setInfoModal(true)} style={styles.bottomView}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>

@@ -15,11 +15,9 @@ type InputProps = TextInputProps & {
 
 const CustomInput = ({ label, touched, error, showTitle = true, ...props }: InputProps) => {
   return (
-    <View style={styles.textInputView}>
+    <View>
       <Optional condition={showTitle}>
-        <Text.Meta level={MetaLevels.small} style={styles.label}>
-          {label}
-        </Text.Meta>
+        <Text.Meta level={MetaLevels.small}>{label}</Text.Meta>
       </Optional>
       <TextInput
         placeholderTextColor={colors[Colors.menuGrey]}

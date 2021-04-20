@@ -6,15 +6,15 @@ import { ScrollView, TouchableOpacity, View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 
+import { DROP_DOWN_MAX_HEIGHT } from './DropDownTags.constants'
 import styles from './DropDownTags.styles'
 
 type Props = DropDownPickerProps & {
-  touched?: boolean
   error?: string
   fieldName?: string
   showTitle?: boolean
-  tags?: Array<string>
-  deleteItem?: (tag: string) => void
+  tags?: string[]
+  deleteItem: (tag: string) => void
 }
 
 const rendertags = (tags: Array<string>, deleteItem: any) => {
@@ -32,25 +32,22 @@ const rendertags = (tags: Array<string>, deleteItem: any) => {
   })
 }
 
-const DropDownTags = ({ touched, error, fieldName, showTitle = false, tags = [], deleteItem, ...props }: Props) => {
+const DropDownTags = ({ error, fieldName, showTitle = false, tags = [], deleteItem, ...props }: Props) => {
   return (
     <View>
       <Optional condition={showTitle}>
-        <Text.Meta level={MetaLevels.small} style={styles.label}>
-          {fieldName}
-        </Text.Meta>
+        <Text.Meta level={MetaLevels.small}>{fieldName}</Text.Meta>
       </Optional>
       <DropDownPicker
         containerStyle={styles.dropDownContainerStyle}
         style={styles.dropDownStyle}
-        dropDownStyle={styles.dropDownViewStyle}
         itemStyle={styles.itemStyle}
-        dropDownMaxHeight={200}
+        dropDownMaxHeight={DROP_DOWN_MAX_HEIGHT}
         {...props}
       />
       <ScrollView horizontal>{rendertags(tags, deleteItem)}</ScrollView>
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {touched && error}
+        {error}
       </Text.Meta>
     </View>
   )
