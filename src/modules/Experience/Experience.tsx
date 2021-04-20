@@ -1,6 +1,6 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
-import { DateDisplay } from 'components'
+import { DateDisplay, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
@@ -15,8 +15,8 @@ import { Colors, colors } from 'styles'
 import { calculateDifferenceInDate } from 'utils/dates.utils'
 
 import styles from './Experience.styles'
+import { ExperienceType } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
-import { ExperienceType } from './experience.types'
 
 interface Props {
   navigation: any
@@ -90,15 +90,16 @@ const Experience = ({ navigation }: Props) => {
         }}
         add={!isSave}
       />
-      {isSave ? (
+      <Optional
+        condition={isSave}
+        fallback={<FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />}
+      >
         <ScrollView>
           <View style={styles.whiteCard}>
             <ExperienceForm navigation={navigation} ref={formRef} />
           </View>
         </ScrollView>
-      ) : (
-        <FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />
-      )}
+      </Optional>
     </ViewContainer>
   )
 }

@@ -14,6 +14,7 @@ import DigitalCv from '../DigitalCv'
 import Experience from '../Experience'
 import Marketplace from '../Marketplace'
 import Profile from '../Profile'
+import { NavigationRoutes } from './Home.routes'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -73,11 +74,11 @@ const HomeTabs = () => {
 const Home = () => {
   return (
     <Stack.Navigator headerMode={'none'}>
-      <Stack.Screen name="Home" component={HomeTabs} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="DigitalCv" component={DigitalCv} />
-      <Stack.Screen name="About" component={About} />
-      <Stack.Screen name="Experience" component={Experience} />
+      <Stack.Screen name={NavigationRoutes.home} component={HomeTabs} />
+      <Stack.Screen name={NavigationRoutes.profile} component={Profile} />
+      <Stack.Screen name={NavigationRoutes.digitalCv} component={DigitalCv} />
+      <Stack.Screen name={NavigationRoutes.about} component={About} />
+      <Stack.Screen name={NavigationRoutes.experience} component={Experience} />
     </Stack.Navigator>
   )
 }

@@ -8,52 +8,27 @@ import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } f
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
-import mapToSelect from 'utils/mapToSelect'
+import { mapToSelect } from 'utils/strings.utils'
 
+import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
+import { DropDownOrg, ExperienceValue } from './ExperienceForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
   navigation: any
 }
 
-const INITIAL_VALUES = {
-  // details
-  title: '',
-  description: '',
-  id: '',
-  // startDate: '2021-04-09T05:52:02.872Z',
-  // endDate: '2021-04-09T05:52:02.872Z',
-  startDate: '',
-  endDate: '',
-  verifiedAt: null,
-
-  // country
-  country: '',
-  // skills developed
-  skillNames: [],
-
-  // organisation
-  organisationId: '',
-  organisationName: '',
-  organisationWebsite: '',
-  primaryContactName: '',
-  primaryContactEmail: '',
-
-  noResultInd: false,
-  requestVerificationInd: false,
-}
-
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
-  const [organizations, setOrganizations] = useState([])
+  const [organizations, setOrganizations] = useState<DropDownOrg[]>([])
   const [present, setPresent] = useState(false)
-  const [skillsList, setSkillsList] = useState([])
+  const [skillsList, setSkillsList] = useState<{ label: string; value: string }[]>([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [requestVerification, setRequestVerification] = useState(false)
   const [infoModal, setInfoModal] = useState(false)
 
-  const formRef = useRef<any>()
+  const formRef = useRef<string>()
 
   useEffect(() => {
     getOrganizationsList()
@@ -62,15 +37,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
 
   const getOrganizationsList = async () => {
     const response = await api.digitalCv.organisations.getKeyNames()
-    const orgList: any = []
-    response.data.forEach((org: any) => {
-      const orgObj = {
-        label: org.value,
-        value: org.key,
-      }
-      orgList.push(orgObj)
-    })
-    setOrganizations(orgList)
+    setOrganizations(mapToSelect(response.data, 'key', 'value'))
   }
 
   useImperativeHandle(ref, () => ({
@@ -83,13 +50,11 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
 
   const getSkillsList = async () => {
     const response = await api.digitalCv.skills.getKeyNames()
-    if (response.data) {
-      const skills = response.data
-      setSkillsList(mapToSelect(skills, 'value', 'value'))
-    }
+    // const skills = response.data
+    setSkillsList(mapToSelect(response.data, 'value', 'value'))
   }
 
-  const createJob = async (values: any, organisationId: string) => {
+  const createJob = async (values: ExperienceValue, organisationId: string) => {
     const response = await api.digitalCv.workExperience.create({
       title: values.title,
       description: values.description,
@@ -99,7 +64,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
     return response.data
   }
 
-  const createCredential = async (job: any, values: any) => {
+  const createCredential = async (job: any, values: ExperienceValue) => {
     const response = await api.users.credentials.create(USER_ID, {
       type: 'Job',
       credentialItemId: job.id,
