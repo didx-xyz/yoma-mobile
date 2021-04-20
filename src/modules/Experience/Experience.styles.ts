@@ -1,11 +1,10 @@
-import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
 
 import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.tertiary8],
-    ...StyleSheet.absoluteFillObject,
+    backgroundColor: colors[Colors.unsavedStyleLightGrey],
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],

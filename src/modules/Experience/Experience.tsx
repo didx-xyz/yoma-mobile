@@ -14,6 +14,7 @@ import { Colors, colors } from 'styles'
 
 import styles from './Experience.styles'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
+import { ExperienceType } from './experience.types'
 
 interface Props {
   navigation: any
@@ -51,7 +52,7 @@ const Experience = ({ navigation }: Props) => {
     return message
   }
 
-  const renderItem = ({ item }: any) => {
+  const renderItem = ({ item }: { item: ExperienceType }) => {
     return (
       <View style={styles.cardView}>
         <View style={styles.row}>
@@ -106,13 +107,11 @@ const Experience = ({ navigation }: Props) => {
         add={!isSave}
       />
       {isSave ? (
-        <>
-          <ScrollView>
-            <View style={styles.whiteCard}>
-              <ExperienceForm navigation={navigation} ref={formRef} />
-            </View>
-          </ScrollView>
-        </>
+        <ScrollView>
+          <View style={styles.whiteCard}>
+            <ExperienceForm navigation={navigation} ref={formRef} />
+          </View>
+        </ScrollView>
       ) : (
         <FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />
       )}

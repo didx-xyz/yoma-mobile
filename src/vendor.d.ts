@@ -3,7 +3,7 @@ declare module 'ramda' {
   export function concat(...rest: any[]): any[]
   export function curry(...rest: any[]): any[]
   export function equals(...rest: any[]): any
-  export function join(...rest: any[]): string
+  export function join(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
   export function multiply(...rest: any[]): number
   export function of(...rest: any[]): any[]

@@ -4,13 +4,13 @@ import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
-import { Colors, TextStyles } from 'styles'
+import { Colors } from 'styles'
 
 import styles from './DropDownTags.styles'
 
 type Props = DropDownPickerProps & {
-  touched?: any
-  error?: any
+  touched?: boolean
+  error?: string
   fieldName?: string
   showTitle?: boolean
   tags?: Array<string>

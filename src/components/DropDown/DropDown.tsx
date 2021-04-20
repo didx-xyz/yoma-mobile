@@ -9,7 +9,7 @@ import styles from './DropDown.styles'
 
 type Props = DropDownPickerProps & {
   touched?: boolean
-  error?: any
+  error?: string
   fieldName?: string
   showTitle?: boolean
 }

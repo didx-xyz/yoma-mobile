@@ -9,7 +9,7 @@ import styles from './CustomInput.styles'
 type InputProps = TextInputProps & {
   label: string
   touched?: boolean
-  error?: any
+  error?: string
   showTitle?: boolean
 }
 

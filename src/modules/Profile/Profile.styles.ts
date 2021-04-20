@@ -5,7 +5,6 @@ import { Colors, colors } from '../../styles'
 const styles = {
   container: {
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
-    ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
