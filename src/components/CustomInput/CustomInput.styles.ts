@@ -1,5 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 const styles = {
   textInputView: {
@@ -15,7 +16,7 @@ const styles = {
     height: 35,
     padding: 0,
     borderBottomWidth: 1,
-    borderColor: `${colors[Colors.menuGrey]}70`,
+    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
   } as ViewStyle,
 }
 

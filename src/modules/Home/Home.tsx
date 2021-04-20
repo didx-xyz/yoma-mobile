@@ -5,6 +5,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { colors, Colors, FontFamily } from 'styles'
 import fontStyles from 'styles/font.styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 import About from '../About'
 import Challenges from '../Challenges'
@@ -23,7 +24,7 @@ const tabBarOptions: BottomTabBarOptions = {
     paddingBottom: 2,
   },
   activeTintColor: colors[Colors.white],
-  inactiveTintColor: `${colors[Colors.white]}38`,
+  inactiveTintColor: applyAlphaToHex(colors[Colors.white])(0.38),
   labelStyle: {
     fontFamily: fontStyles[FontFamily.semibold],
   },

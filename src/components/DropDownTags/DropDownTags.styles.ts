@@ -1,5 +1,6 @@
 import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 const { width } = Dimensions.get('window')
 
@@ -18,7 +19,7 @@ const styles = {
     marginLeft: 18,
   },
   tag: {
-    backgroundColor: `${colors[Colors.secondaryBlue]}15`,
+    backgroundColor: applyAlphaToHex(colors[Colors.secondaryBlue])(0.15),
     borderRadius: 20,
     padding: 10,
     margin: 2,

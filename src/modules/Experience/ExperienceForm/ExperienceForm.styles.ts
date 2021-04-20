@@ -1,5 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 const HEIGHT_OF_FORM_CARD = 600
 
@@ -41,7 +42,7 @@ const styles = StyleSheet.create({
   } as TextStyle,
   bottomView: {
     borderTopWidth: 1,
-    borderColor: `${colors[Colors.menuGrey]}70`,
+    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
     width: '90%',
     alignSelf: 'center',
     marginTop: 10,
