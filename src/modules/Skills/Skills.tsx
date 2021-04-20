@@ -2,7 +2,7 @@ import { NormalHeader, ViewContainer } from 'components'
 import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FlatList, View } from 'react-native'
+import { FlatList, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
 import styles from './Skills.styles'
@@ -77,6 +77,9 @@ const Skills = ({ navigation }: Props) => {
                   {item.skill}
                   <Text.Body level={BodyLevels.small}> • {item.count}</Text.Body>
                 </Text.Header>
+                <TouchableOpacity>
+                  <Text.Header level={HeaderLevels.h6}>{t('Skills acquired')}</Text.Header>
+                </TouchableOpacity>
               </View>
             )}
             keyExtractor={item => item.skill}

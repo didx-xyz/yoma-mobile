@@ -5,7 +5,6 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 const styles = {
   container: {
     backgroundColor: colors[Colors.backgroundGrey],
-    ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
@@ -37,6 +36,9 @@ const styles = {
     padding: 5,
     borderTopWidth: 1,
     borderColor: colors[Colors.grey4],
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   } as ViewStyle,
 }
 
