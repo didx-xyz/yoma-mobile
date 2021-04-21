@@ -1,19 +1,23 @@
 import { CrossIcon } from 'assets/images'
+import { ColorCard, Optional } from 'components'
 import Text from 'components/Typography'
 import React, { useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FlatList, TouchableOpacity, View } from 'react-native'
 import Autocomplete from 'react-native-autocomplete-input'
-import { colors, Colors } from 'styles'
+import { Colors } from 'styles'
 
-import styles from './Skills.styles'
+import { FILTERED_SKILLS_DEFAULT, SELECTED_VALUE_DEFAULT } from './SkillsForm.constants'
+import styles from './SkillsForm.styles'
 
 const SkillsForm = () => {
+  const { t } = useTranslation()
   // TODO:adding static skills for UI handling
   const [skillsList, setSkills] = useState<string[]>(['Software Engineering', 'figma', 'UI', 'UX', 'Design'])
   // For Filtered Data
-  const [filteredSkills, setFilteredSkills] = useState<string[]>([])
+  const [filteredSkills, setFilteredSkills] = useState<string[]>(FILTERED_SKILLS_DEFAULT)
   // For Selected Data
-  const [selectedValue, setSelectedValue] = useState('')
+  const [selectedValue, setSelectedValue] = useState(SELECTED_VALUE_DEFAULT)
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
 
   const findSkill = (query: string) => {
@@ -25,7 +29,7 @@ const SkillsForm = () => {
       setFilteredSkills(skillsList.filter(skill => skill.search(regex) >= 0))
     } else {
       // If the query is null then return blank
-      setFilteredSkills([])
+      setFilteredSkills(FILTERED_SKILLS_DEFAULT)
     }
   }
 
@@ -41,38 +45,34 @@ const SkillsForm = () => {
   }
 
   return (
-    <View style={{ height: 500 }}>
-      <View style={styles.container}>
-        <View>
-          {skillsList.length > 0 ? (
-            <>
-              <Text.Meta>Skills Developed</Text.Meta>
-              <FlatList
-                data={selectedSkills}
-                renderItem={({ item }) => rendertags(item)}
-                keyExtractor={index => index.toString()}
-                horizontal
-              />
-            </>
-          ) : null}
-        </View>
+    <View style={styles.outerContainer}>
+      <ColorCard style={styles.innerContainer}>
+        <Text.Meta>{t('Skills Developed')}</Text.Meta>
+        <Optional condition={skillsList.length > 0}>
+          <FlatList
+            data={selectedSkills}
+            renderItem={({ item }) => rendertags(item)}
+            keyExtractor={index => index.toString()}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+          />
+        </Optional>
         <Autocomplete
           autoCapitalize="none"
           autoCorrect={false}
           containerStyle={styles.autocompleteContainer}
           data={filteredSkills}
-          defaultValue={selectedValue === '' ? '' : selectedValue}
+          defaultValue={selectedValue ?? ''}
           onChangeText={text => findSkill(text)}
           placeholder="Enter the skill"
           flatListProps={{
             renderItem: ({ item }) => (
               <TouchableOpacity
                 onPress={() => {
-                  console.log(item)
                   setSelectedValue(item)
                   setSelectedSkills([...selectedSkills, item])
-                  setFilteredSkills([])
-                  setSelectedValue('')
+                  setFilteredSkills(FILTERED_SKILLS_DEFAULT)
+                  setSelectedValue(SELECTED_VALUE_DEFAULT)
                 }}
               >
                 <Text.Body>{item}</Text.Body>
@@ -80,13 +80,9 @@ const SkillsForm = () => {
             ),
             keyExtractor: index => index.toString(),
           }}
-          inputContainerStyle={{
-            borderWidth: 0,
-            borderBottomWidth: 1,
-            borderColor: colors[Colors.menuGrey],
-          }}
+          inputContainerStyle={styles.inputContainerStyle}
         />
-      </View>
+      </ColorCard>
     </View>
   )
 }

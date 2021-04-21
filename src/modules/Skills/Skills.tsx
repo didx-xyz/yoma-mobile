@@ -1,11 +1,11 @@
-import { NormalHeader, ViewContainer } from 'components'
+import { NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList } from 'react-native'
 
 import styles from './Skills.styles'
-import SkillsForm from './SkillsForm/Skills'
+import SkillsForm from './SkillsForm/SkillsForm'
 
 interface Props {
   navigation: any
@@ -14,7 +14,6 @@ interface Props {
 const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSave, setIsSave] = useState(false)
-  // TODO: adding static data for UI
   const [skills, setSkills] = useState([])
   const formRef = useRef<any>()
 
@@ -31,13 +30,12 @@ const Skills = ({ navigation }: Props) => {
         }}
         add={!isSave}
       />
-      {isSave ? (
-        <>
-          <SkillsForm />
-        </>
-      ) : (
-        <FlatList data={skills} renderItem={() => <Text.Body>render</Text.Body>} />
-      )}
+      <Optional
+        condition={isSave}
+        fallback={<FlatList data={skills} renderItem={() => <Text.Body>render</Text.Body>} />}
+      >
+        <SkillsForm />
+      </Optional>
     </ViewContainer>
   )
 }
