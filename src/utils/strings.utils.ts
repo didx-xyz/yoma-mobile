@@ -4,3 +4,5 @@ export const mapToSelect = (options: any[], valueProp = 'key', labelProp = 'valu
     value: opt[valueProp],
   }))
 }
+
+export const getFirstCharacter = (data: string) => data.trim().charAt(0).toUpperCase()

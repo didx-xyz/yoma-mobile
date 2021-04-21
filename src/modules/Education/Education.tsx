@@ -1,14 +1,10 @@
-import { EditIcon } from 'assets/images'
-import { ColorCard, NormalHeader, Optional, ViewContainer } from 'components'
-import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
-import { format } from 'date-fns'
+import { ColorCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FlatList, Image, ScrollView, TouchableOpacity, View } from 'react-native'
-import { Avatar } from 'react-native-elements'
-import { Colors } from 'styles'
+import { FlatList, ScrollView } from 'react-native'
 
 import styles from './Education.styles'
+import { EducationValue } from './Education.types'
 import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
@@ -37,31 +33,15 @@ const Education = ({ navigation }: Props) => {
   ])
   const formRef = useRef<any>()
 
-  const renderItem = ({ item }: any) => {
+  const renderItem = ({ description, endDate, organisationLogoURL, qualification, school }: EducationValue) => {
     return (
-      <View style={styles.cardView}>
-        <View style={styles.row}>
-          {item.organisationLogoURL ? (
-            <Image source={{ uri: item.organisationLogoURL }} style={styles.image} />
-          ) : (
-            <Avatar size="small" rounded title={item.school.charAt(0)} containerStyle={styles.avatar} />
-          )}
-          <View>
-            <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
-              {item.qualification + ' : ' + item.school}
-            </Text.Header>
-            <View style={styles.row}>
-              <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
-                {format(new Date(item.endDate), 'MMM yyyy')}
-              </Text.Body>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.editIcon}>
-            <EditIcon />
-          </TouchableOpacity>
-        </View>
-        {item.description ? <Text.Body>{item.description}</Text.Body> : null}
-      </View>
+      <InfoCard
+        title={school}
+        subtitle={qualification}
+        description={description}
+        endDate={endDate}
+        logo={organisationLogoURL}
+      />
     )
   }
 
@@ -78,20 +58,11 @@ const Education = ({ navigation }: Props) => {
         }}
         add={!isSave}
       />
-      {/* {isSave ? (
-        <>
-          <ScrollView>
-            <View style={styles.whiteCard}>
-              <EducationForm navigation={navigation} ref={formRef} />
-            </View>
-          </ScrollView>
-        </>
-      ) : (
-        <FlatList data={education} renderItem={item => renderItem(item)} keyExtractor={item => item.id} />
-      )} */}
       <Optional
         condition={isSave}
-        fallback={<FlatList data={education} renderItem={item => renderItem(item)} keyExtractor={item => item.id} />}
+        fallback={
+          <FlatList data={education} renderItem={({ item }) => renderItem(item)} keyExtractor={item => item.school} />
+        }
       >
         <ScrollView>
           <ColorCard>

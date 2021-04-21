@@ -9,6 +9,7 @@ import DropDownTags from './DropDownTags'
 import FirstTimeCard from './FirstTimeCard'
 import HeaderContainer from './HeaderContainer'
 import HomeHeader from './HomeHeader'
+import InfoCard from './InfoCard'
 import InfoModal from './InfoModal'
 import Input from './Input'
 import LargeHeaderContainer from './LargeHeaderContainer'
@@ -34,6 +35,7 @@ export {
   FirstTimeCard,
   HeaderContainer,
   HomeHeader,
+  InfoCard,
   InfoModal,
   Input,
   LargeHeaderContainer,

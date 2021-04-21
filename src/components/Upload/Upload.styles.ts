@@ -6,7 +6,7 @@ import { BUTTON_RADIUS, CONTAINER_RADIUS, HORIZONTAL_SPACING, VERTICAL_SPACING }
 const styles = {
   innerView: {
     flexDirection: 'row',
-    backgroundColor: colors[Colors.grey4],
+    backgroundColor: colors[Colors.lightGrey],
     borderRadius: CONTAINER_RADIUS,
     paddingHorizontal: HORIZONTAL_SPACING,
     paddingVertical: 6,
