@@ -2,43 +2,35 @@ import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
+import {
+  CERTIFICATE_COUNT_HEIGHT,
+  CERTIFICATE_COUNT_WIDTH,
+  LEFT_SPACING,
+  OVERALL_SPACING,
+  VERTICAL_SPACING,
+} from './Skills.constants'
+
 const styles = {
   container: {
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
-    width: '95%',
-    borderRadius: 12,
-    paddingVertical: 20,
-    elevation: 3,
-    marginVertical: 10,
-    alignSelf: 'center',
-    paddingHorizontal: 10,
+  outerCard: {
+    padding: 10,
   } as ViewStyle,
   certificateCountView: {
-    height: 30,
-    width: 30,
+    height: CERTIFICATE_COUNT_HEIGHT,
+    width: CERTIFICATE_COUNT_WIDTH,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: 5,
-    borderRadius: 15,
-    marginRight: 10,
+    padding: OVERALL_SPACING,
+    borderRadius: CERTIFICATE_COUNT_HEIGHT / 2,
+    marginRight: LEFT_SPACING,
     backgroundColor: applyAlphaToHex(colors[Colors.primaryBlue])(0.15),
   } as ViewStyle,
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingBottom: 10,
-  } as ViewStyle,
-  bodyItemView: {
-    paddingVertical: 15,
-    padding: 5,
-    borderTopWidth: 1,
-    borderColor: colors[Colors.lightGrey],
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
+    paddingBottom: VERTICAL_SPACING,
   } as ViewStyle,
 }
 

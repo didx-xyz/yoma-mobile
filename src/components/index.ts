@@ -17,6 +17,7 @@ import NormalHeader from './NormalHeader'
 import Optional from './Optional'
 import ProfilePhoto from './ProfilePhoto'
 import ProgressCircle from './ProgressCircle'
+import SkillCard from './SkillCard'
 import SocialLogin from './SocialLogin'
 import SocialRegistration from './SocialRegistration'
 import Spinner from './Spinner'
@@ -43,6 +44,7 @@ export {
   Optional,
   ProfilePhoto,
   ProgressCircle,
+  SkillCard,
   SocialLogin,
   SocialRegistration,
   Spinner,
