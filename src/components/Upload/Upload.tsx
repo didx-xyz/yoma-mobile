@@ -12,11 +12,11 @@ type Props = {
 const Upload = ({ onPress }: Props) => {
   const { t } = useTranslation()
   return (
-    <View style={styles.outerView}>
+    <View>
       <Text.Meta level={MetaLevels.small}>{t('Upload certification (if completed)')}</Text.Meta>
       <View style={styles.innerView}>
         <Text.Body>{t('Upload')}</Text.Body>
-        <TouchableOpacity style={styles.buttonView}>
+        <TouchableOpacity style={styles.buttonView} onPress={onPress}>
           <Text.Body>{t('Choose file')}</Text.Body>
         </TouchableOpacity>
       </View>

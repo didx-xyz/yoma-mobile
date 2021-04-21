@@ -1,10 +1,10 @@
 import { ZIcon } from 'assets/images'
-import ProfilePhoto from 'components/ProfilePhoto/ProfilePhoto'
-import Text, { Bold } from 'components/Typography'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
+import ProfilePhoto from '../ProfilePhoto'
+import Text, { Bold } from '../Typography'
 import styles from './HomeHeader.styles'
 
 type Props = {

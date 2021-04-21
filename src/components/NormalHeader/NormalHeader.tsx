@@ -1,11 +1,12 @@
 import { StackActions } from '@react-navigation/native'
 import { AddIcon, BackIconGrey } from 'assets/images'
-import Text, { Bold, HeaderLevels } from 'components/Typography'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
+import Optional from '../Optional'
+import Text, { Bold, HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
 
 type Props = {
@@ -16,7 +17,7 @@ type Props = {
   onAdd?: any
 }
 
-const NormalHeader = ({ navigation, headerText, onSave, add, onAdd }: Props) => {
+const NormalHeader = ({ navigation, headerText, onSave, add = false, onAdd }: Props) => {
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       goBack()
@@ -35,20 +36,23 @@ const NormalHeader = ({ navigation, headerText, onSave, add, onAdd }: Props) => 
         <BackIconGrey />
       </TouchableOpacity>
       <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
-      {add ? (
+      <Optional
+        condition={add}
+        fallback={
+          <TouchableOpacity onPress={onSave} style={styles.addView}>
+            <Text.Body>
+              <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
+            </Text.Body>
+          </TouchableOpacity>
+        }
+      >
         <TouchableOpacity onPress={onAdd} style={styles.addView}>
           <Text.Body>
             <Bold color={Colors.primaryGreen}>{t('Add')}</Bold>
           </Text.Body>
           <AddIcon />
         </TouchableOpacity>
-      ) : (
-        <TouchableOpacity onPress={onSave} style={styles.addView}>
-          <Text.Body>
-            <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
-          </Text.Body>
-        </TouchableOpacity>
-      )}
+      </Optional>
     </View>
   )
 }

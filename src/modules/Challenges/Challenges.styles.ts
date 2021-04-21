@@ -7,7 +7,6 @@ const styles = {
     backgroundColor: colors[Colors.white],
     alignItems: 'center',
     justifyContent: 'center',
-    ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
 }
 
