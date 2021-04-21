@@ -1,17 +1,15 @@
 import { EditIcon } from 'assets/images'
-import NormalHeader from 'components/NormalHeader/NormalHeader'
+import { ColorCard, NormalHeader, Optional, ViewContainer } from 'components'
 import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
-import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { format } from 'date-fns'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
+import { FlatList, Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements'
-import { FlatList } from 'react-native-gesture-handler'
 import { Colors } from 'styles'
 
 import styles from './Education.styles'
-import EducationForm from './EducationForm/Education'
+import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
   navigation: any
@@ -80,7 +78,7 @@ const Education = ({ navigation }: Props) => {
         }}
         add={!isSave}
       />
-      {isSave ? (
+      {/* {isSave ? (
         <>
           <ScrollView>
             <View style={styles.whiteCard}>
@@ -90,7 +88,17 @@ const Education = ({ navigation }: Props) => {
         </>
       ) : (
         <FlatList data={education} renderItem={item => renderItem(item)} keyExtractor={item => item.id} />
-      )}
+      )} */}
+      <Optional
+        condition={isSave}
+        fallback={<FlatList data={education} renderItem={item => renderItem(item)} keyExtractor={item => item.id} />}
+      >
+        <ScrollView>
+          <ColorCard>
+            <EducationForm navigation={navigation} ref={formRef} />
+          </ColorCard>
+        </ScrollView>
+      </Optional>
     </ViewContainer>
   )
 }

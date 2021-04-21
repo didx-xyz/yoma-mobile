@@ -24,7 +24,6 @@ const styles = {
     zIndex: 1,
   } as ViewStyle,
   innerProgressbar: {
-    ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.primaryRed],
     borderRadius: 18,
   } as ViewStyle,

@@ -11,7 +11,6 @@ export default function (instance: AxiosInstance) {
     getById(skillId: string, config: AxiosRequestConfig = {}) {
       return instance.get(`skills/${skillId}`, config)
     },
-
     /**
      * Create skill. Will need an organisation to create.
      * @param {object} body { name }

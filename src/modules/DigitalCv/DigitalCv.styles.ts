@@ -3,9 +3,8 @@ import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
     alignItems: 'center',
-    ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
 }
 

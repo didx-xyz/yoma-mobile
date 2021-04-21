@@ -1,6 +1,7 @@
 import React from 'react'
 import { View } from 'react-native'
 import { Colors, colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 import { WithChildren } from 'types/react.types'
 
 import styles from './ProgressCircle.styles'
@@ -16,7 +17,7 @@ type Props = WithChildren<{
 }>
 // TODO: refactor this
 const ProgressCircle = ({
-  backgroundColor = `${colors[Colors.menuGrey]}25`,
+  backgroundColor = applyAlphaToHex(colors[Colors.menuGrey])(0.25),
   borderWidth = 1,
   children,
   color,

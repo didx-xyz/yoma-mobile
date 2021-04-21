@@ -6,7 +6,6 @@ const styles = {
     backgroundColor: colors[Colors.primaryYellow],
     alignItems: 'center',
     justifyContent: 'center',
-    ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   redSemiCircleContainer: {
     position: 'absolute',

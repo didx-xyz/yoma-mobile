@@ -38,7 +38,7 @@ const styles = {
   } as ViewStyle,
   dividerLine: {
     height: 2,
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
     marginVertical: 10,
   } as ViewStyle,
   bodyView: {

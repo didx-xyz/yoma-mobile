@@ -3,8 +3,7 @@ import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
   topContainer: {
     backgroundColor: colors[Colors.primaryYellow],
@@ -37,7 +36,7 @@ const styles = {
     justifyContent: 'center',
   } as ViewStyle,
   horizontalLine: {
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
     height: 1,
     flex: 1,
   } as ViewStyle,
