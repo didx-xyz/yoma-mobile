@@ -1,23 +1,22 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
+import { BUTTON_RADIUS, CONTAINER_RADIUS, HORIZONTAL_SPACING, VERTICAL_SPACING } from './Upload.constants'
+
 const styles = {
-  outerView: {
-    marginHorizontal: 15,
-  } as ViewStyle,
   innerView: {
     flexDirection: 'row',
-    backgroundColor: colors[Colors.grey4],
-    borderRadius: 14,
-    paddingHorizontal: 14,
+    backgroundColor: colors[Colors.lightGrey],
+    borderRadius: CONTAINER_RADIUS,
+    paddingHorizontal: HORIZONTAL_SPACING,
     paddingVertical: 6,
     justifyContent: 'space-between',
-    marginVertical: 10,
+    marginVertical: VERTICAL_SPACING,
   } as ViewStyle,
   buttonView: {
     backgroundColor: colors[Colors.white],
-    paddingHorizontal: 10,
-    borderRadius: 25,
+    paddingHorizontal: HORIZONTAL_SPACING,
+    borderRadius: BUTTON_RADIUS,
   } as ViewStyle,
 }
 

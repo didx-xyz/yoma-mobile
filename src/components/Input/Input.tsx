@@ -8,7 +8,7 @@ import styles from './Input.styles'
 type InputProps = TextInputProps & {
   label: string
   touched?: boolean
-  error?: any
+  error?: string
 }
 
 const Input = ({ label, touched, error, ...props }: InputProps) => {

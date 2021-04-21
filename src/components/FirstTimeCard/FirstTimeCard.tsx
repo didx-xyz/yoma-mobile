@@ -1,11 +1,11 @@
 import { BlueRightCircle, LightYellowPattern, RLabsLogo } from 'assets/images'
-import { ButtonContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors, TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
+import ButtonContainer from '../ButtonContainer'
 import Text, { Bold, Span, FontWeights, HeaderLevels } from '../Typography'
 import styles from './FirstTimeCard.styles'
 

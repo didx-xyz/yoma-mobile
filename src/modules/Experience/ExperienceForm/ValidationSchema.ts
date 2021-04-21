@@ -1,6 +1,6 @@
 import * as yup from 'yup'
 
-export default () => {
+export const ValidationSchema = () => {
   return yup.object().shape({
     title: yup.string().min(2).max(200).required('Required'),
     description: yup.string().min(2).max(1000).required('Required'),

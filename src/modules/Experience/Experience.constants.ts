@@ -1,0 +1,9 @@
+export const HORIZONTAL_SPACING = 10
+export const VERTICAL_SPACING = 10
+export const HEIGHT_OF_FORM_CARD = 600
+export const CARD_BORDER_RADIUS = 12
+export const LOGO_HEIGHT = 35
+export const LOGO_WIDTH = 35
+export const LOGO_RADIUS = 17
+export const EDIT_ICON_RADIUS = 13
+export const FORM_INNER_SPACING = 12

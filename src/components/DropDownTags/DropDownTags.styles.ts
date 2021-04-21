@@ -1,36 +1,34 @@
-import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
-const { width } = Dimensions.get('window')
+import {
+  DROP_DOWN_CONTAINER_HEIGHT,
+  LEFT_SPACING,
+  TAG_BORDER_RADIUS,
+  TAG_MARGIN,
+  VERTICAL_SPACING,
+} from './DropDownTags.constants'
 
 const styles = {
   dropDownStyle: {
-    width: '90%',
-    alignSelf: 'center',
     borderWidth: 0,
     borderBottomWidth: 1,
   } as ViewStyle,
-  dropDownViewStyle: {
-    width: '90%',
-    alignSelf: 'center',
-  } as ViewStyle,
-  label: {
-    marginLeft: 18,
-  },
   tag: {
-    backgroundColor: `${colors[Colors.secondaryBlue]}15`,
-    borderRadius: 20,
-    padding: 10,
-    margin: 2,
+    backgroundColor: applyAlphaToHex(colors[Colors.secondaryBlue])(0.15),
+    borderRadius: TAG_BORDER_RADIUS,
+    padding: VERTICAL_SPACING,
+    margin: TAG_MARGIN,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
   } as ViewStyle,
   crossIcon: {
-    marginRight: 5,
+    marginRight: LEFT_SPACING,
   } as ViewStyle,
   dropDownContainerStyle: {
-    height: 45,
+    height: DROP_DOWN_CONTAINER_HEIGHT,
   } as ViewStyle,
   itemStyle: {
     justifyContent: 'flex-start',

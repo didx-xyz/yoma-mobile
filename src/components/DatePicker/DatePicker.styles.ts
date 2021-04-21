@@ -1,25 +1,19 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { TEXT_INPUT_HEIGHT } from './DatePicker.constants'
 
 const styles = {
-  datePickerOuterView: {
-    width: '95%',
-    alignSelf: 'center',
+  container: {
+    flex: 1,
   } as ViewStyle,
-  label: {
-    marginLeft: 10,
-  } as TextStyle,
   textInputStyle: {
-    width: '95%',
-    alignSelf: 'center',
-    height: 35,
-    padding: 0,
+    height: TEXT_INPUT_HEIGHT,
     borderBottomWidth: 1,
-    paddingHorizontal: 0,
-    borderColor: colors[Colors.menuGrey],
+    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
   } as ViewStyle,
   dateInput: {
-    paddingLeft: 10,
     alignItems: 'flex-start',
     borderWidth: 0,
   } as ViewStyle,

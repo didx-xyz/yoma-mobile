@@ -3,8 +3,7 @@ import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
   yellowCircleContainer: {
     position: 'absolute',

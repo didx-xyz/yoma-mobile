@@ -1,9 +1,10 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
+import { ColorCard, DateDisplay, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
-import { format } from 'date-fns'
+import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -11,8 +12,10 @@ import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
 import { FlatList } from 'react-native-gesture-handler'
 import { Colors, colors } from 'styles'
+import { calculateDifferenceInDate } from 'utils/dates.utils'
 
 import styles from './Experience.styles'
+import { ExperienceType } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
 
 interface Props {
@@ -29,29 +32,12 @@ const Experience = ({ navigation }: Props) => {
     const getAllJobs = async () => {
       // TODO: added static type
       const response = await api.users.credentials.getByType(USER_ID, 'Job')
-      console.log(response.data)
       setExperience(response.data)
     }
     getAllJobs()
   }, [])
 
-  const calculateDifferenceInDate = (date1: Date, date2: Date) => {
-    let diff = Math.floor(date1.getTime() - date2.getTime())
-    let day = 1000 * 60 * 60 * 24
-
-    let days = Math.floor(diff / day)
-    let months = Math.floor(days / 31)
-    let years = Math.floor(months / 12)
-
-    let message = ''
-    years != 0 ? (message += years + ' years ') : null
-    // months != 0 ? message += months + " months " : null
-    // days != 0 ? message += days + " days " : null
-
-    return message
-  }
-
-  const renderItem = ({ item }: any) => {
+  const renderItem = ({ item }: { item: ExperienceType }) => {
     return (
       <View style={styles.cardView}>
         <View style={styles.row}>
@@ -74,13 +60,12 @@ const Experience = ({ navigation }: Props) => {
               {item.job.organisationName}
             </Text.Body>
             <View style={styles.row}>
-              <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
-                {format(new Date(item.startDate), 'MMM yyyy')} -{' '}
-              </Text.Body>
-              <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
-                {format(new Date(item.endDate), 'MMM yyyy')}
-                &nbsp;{calculateDifferenceInDate(new Date(item.startDate), new Date(item.endDate))}
-              </Text.Body>
+              <DateDisplay template={DATE_TPL_MON_YEAR} date={item.startDate}>
+                &nbsp; - &nbsp;
+              </DateDisplay>
+              <DateDisplay template={DATE_TPL_MON_YEAR} date={item.endDate}>
+                &nbsp;{calculateDifferenceInDate(item.startDate, item.endDate)}
+              </DateDisplay>
             </View>
           </View>
           <TouchableOpacity style={styles.editIcon}>
@@ -105,17 +90,16 @@ const Experience = ({ navigation }: Props) => {
         }}
         add={!isSave}
       />
-      {isSave ? (
-        <>
-          <ScrollView>
-            <View style={styles.whiteCard}>
-              <ExperienceForm navigation={navigation} ref={formRef} />
-            </View>
-          </ScrollView>
-        </>
-      ) : (
-        <FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />
-      )}
+      <Optional
+        condition={isSave}
+        fallback={<FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />}
+      >
+        <ScrollView>
+          <ColorCard>
+            <ExperienceForm navigation={navigation} ref={formRef} />
+          </ColorCard>
+        </ScrollView>
+      </Optional>
     </ViewContainer>
   )
 }

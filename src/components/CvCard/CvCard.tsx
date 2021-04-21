@@ -1,9 +1,10 @@
 import { EditIcon } from 'assets/images'
-import Text, { HeaderLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
+import Optional from '../Optional'
+import Text, { HeaderLevels, TextAlign } from '../Typography'
 import styles from './CvCard.styles'
 
 type Props = {
@@ -28,13 +29,13 @@ const CvCard = ({
   return (
     <View style={styles.cardView}>
       <View style={styles.rowView}>
-        {hasCount ? (
+        <Optional condition={hasCount}>
           <View style={[styles.certificateCountView, { backgroundColor: countBackgroundColor }]}>
             <Text.Header level={HeaderLevels.h6} color={countColor}>
               {count}
             </Text.Header>
           </View>
-        ) : null}
+        </Optional>
         <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
           {cardTitle}
         </Text.Header>

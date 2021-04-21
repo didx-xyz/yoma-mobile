@@ -35,7 +35,7 @@ const styles = {
     paddingVertical: 15,
     padding: 5,
     borderTopWidth: 1,
-    borderColor: colors[Colors.grey4],
+    borderColor: colors[Colors.lightGrey],
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

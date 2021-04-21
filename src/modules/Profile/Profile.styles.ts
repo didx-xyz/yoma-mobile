@@ -4,8 +4,7 @@ import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
-    ...StyleSheet.absoluteFillObject,
+    backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],

@@ -1,4 +1,4 @@
-import { NormalHeader, ViewContainer } from 'components'
+import { NormalHeader, Optional, ViewContainer } from 'components'
 import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -6,7 +6,7 @@ import { FlatList, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
 import styles from './Skills.styles'
-import SkillsForm from './SkillsForm/Skills'
+import SkillsForm from './SkillsForm/SkillsForm'
 
 interface Props {
   navigation: any
@@ -53,39 +53,40 @@ const Skills = ({ navigation }: Props) => {
         }}
         add={!isSave}
       />
-      {isSave ? (
-        <>
-          <SkillsForm />
-        </>
-      ) : (
-        <View style={styles.whiteCard}>
-          <View style={styles.cardHeader}>
-            <View style={styles.certificateCountView}>
-              <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
-                60
+      <Optional
+        condition={isSave}
+        fallback={
+          <View style={styles.whiteCard}>
+            <View style={styles.cardHeader}>
+              <View style={styles.certificateCountView}>
+                <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
+                  60
+                </Text.Header>
+              </View>
+              <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
+                {t('Top skills')}
               </Text.Header>
             </View>
-            <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
-              {t('Top skills')}
-            </Text.Header>
+            <FlatList
+              data={skills}
+              renderItem={({ item }) => (
+                <View style={styles.bodyItemView}>
+                  <Text.Header level={HeaderLevels.h6}>
+                    {item.skill}
+                    <Text.Body level={BodyLevels.small}> • {item.count}</Text.Body>
+                  </Text.Header>
+                  <TouchableOpacity>
+                    <Text.Header level={HeaderLevels.h6}>{t('Skills acquired')}</Text.Header>
+                  </TouchableOpacity>
+                </View>
+              )}
+              keyExtractor={item => item.skill}
+            />
           </View>
-          <FlatList
-            data={skills}
-            renderItem={({ item }) => (
-              <View style={styles.bodyItemView}>
-                <Text.Header level={HeaderLevels.h6}>
-                  {item.skill}
-                  <Text.Body level={BodyLevels.small}> • {item.count}</Text.Body>
-                </Text.Header>
-                <TouchableOpacity>
-                  <Text.Header level={HeaderLevels.h6}>{t('Skills acquired')}</Text.Header>
-                </TouchableOpacity>
-              </View>
-            )}
-            keyExtractor={item => item.skill}
-          />
-        </View>
-      )}
+        }
+      >
+        <SkillsForm />
+      </Optional>
     </ViewContainer>
   )
 }
