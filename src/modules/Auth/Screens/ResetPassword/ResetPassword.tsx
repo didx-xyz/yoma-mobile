@@ -25,7 +25,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
     }
   }, [Token, Id])
   return (
-    <ViewContainer style={styles.container}>
+    <ViewContainer>
       <ScrollView
         contentContainerStyle={{
           paddingBottom: 30,

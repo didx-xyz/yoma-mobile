@@ -1,6 +1,7 @@
 import ButtonContainer from './ButtonContainer/ButtonContainer'
 import CustomInput from './CustomInput/CustomInput'
 import CvCard from './CvCard/CvCard'
+import DateDisplay from './DateDisplay/DateDisplay'
 import DatePicker from './DatePicker/DatePicker'
 import DropDown from './DropDown/DropDown'
 import DropDownTags from './DropDownTags/DropDownTags'
@@ -11,6 +12,7 @@ import InfoModal from './InfoModal/InfoModal'
 import Input from './Input/Input'
 import LargeHeaderContainer from './LargeHeaderContainer/LargeHeaderContainer'
 import NormalHeader from './NormalHeader/NormalHeader'
+import Optional from './Optional/Optional'
 import ProfilePhoto from './ProfilePhoto/ProfilePhoto'
 import ProgressCircle from './ProgressCircle/ProgressCircle'
 import SocialLogin from './SocialLogin/SocialLogin'
@@ -23,6 +25,7 @@ export {
   ButtonContainer,
   CustomInput,
   CvCard,
+  DateDisplay,
   DatePicker,
   DropDown,
   DropDownTags,
@@ -33,6 +36,7 @@ export {
   Input,
   LargeHeaderContainer,
   NormalHeader,
+  Optional,
   ProfilePhoto,
   ProgressCircle,
   SocialLogin,

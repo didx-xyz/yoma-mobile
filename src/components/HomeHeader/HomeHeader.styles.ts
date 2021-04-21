@@ -1,4 +1,5 @@
 import { StyleSheet, ViewStyle, Dimensions, ImageStyle, TextStyle } from 'react-native'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 import { colors, Colors } from '../../styles'
 
@@ -30,7 +31,7 @@ const styles = {
     height: 25,
   } as ImageStyle,
   tokensView: {
-    backgroundColor: `${colors[Colors.primaryYellow]}15`,
+    backgroundColor: applyAlphaToHex(colors[Colors.primaryYellow])(0.15),
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 2,

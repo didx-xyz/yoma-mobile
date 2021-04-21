@@ -1,19 +1,20 @@
 import { CrossIcon } from 'assets/images'
+import { Optional } from 'components'
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
-import { Colors, TextStyles } from 'styles'
+import { Colors } from 'styles'
 
+import { DROP_DOWN_MAX_HEIGHT } from './DropDownTags.constants'
 import styles from './DropDownTags.styles'
 
 type Props = DropDownPickerProps & {
-  touched?: any
-  error?: any
+  error?: string
   fieldName?: string
   showTitle?: boolean
-  tags?: Array<string>
-  deleteItem?: (tag: string) => void
+  tags?: string[]
+  deleteItem: (tag: string) => void
 }
 
 const rendertags = (tags: Array<string>, deleteItem: any) => {
@@ -31,25 +32,22 @@ const rendertags = (tags: Array<string>, deleteItem: any) => {
   })
 }
 
-const DropDownTags = ({ touched, error, fieldName, showTitle, tags = [], deleteItem, ...props }: Props) => {
+const DropDownTags = ({ error, fieldName, showTitle = false, tags = [], deleteItem, ...props }: Props) => {
   return (
     <View>
-      {showTitle ? (
-        <Text.Meta level={MetaLevels.small} style={styles.label}>
-          {fieldName}
-        </Text.Meta>
-      ) : null}
+      <Optional condition={showTitle}>
+        <Text.Meta level={MetaLevels.small}>{fieldName}</Text.Meta>
+      </Optional>
       <DropDownPicker
         containerStyle={styles.dropDownContainerStyle}
         style={styles.dropDownStyle}
-        dropDownStyle={styles.dropDownViewStyle}
         itemStyle={styles.itemStyle}
-        dropDownMaxHeight={200}
+        dropDownMaxHeight={DROP_DOWN_MAX_HEIGHT}
         {...props}
       />
       <ScrollView horizontal>{rendertags(tags, deleteItem)}</ScrollView>
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {touched && error}
+        {error}
       </Text.Meta>
     </View>
   )

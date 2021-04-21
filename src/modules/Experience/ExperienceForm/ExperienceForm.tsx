@@ -1,60 +1,34 @@
 import api from 'api'
 import { BlueHollowCircle, BlueTick } from 'assets/images'
-import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags, InfoModal } from 'components'
+import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Optional } from 'components'
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
-import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
-import { colors, Colors } from 'styles'
-import mapToSelect from 'utils/mapToSelect'
+import { Colors } from 'styles'
+import { mapToSelect } from 'utils/strings.utils'
 
+import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
-import ValidationSchema from './ValidationSchema'
+import { DropDownOrg, ExperienceValue } from './ExperienceForm.types'
+import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
   navigation: any
 }
 
-const INITIAL_VALUES = {
-  // details
-  title: '',
-  description: '',
-  id: '',
-  // startDate: '2021-04-09T05:52:02.872Z',
-  // endDate: '2021-04-09T05:52:02.872Z',
-  startDate: '',
-  endDate: '',
-  verifiedAt: null,
-
-  // country
-  country: '',
-  // skills developed
-  skillNames: [],
-
-  // organisation
-  organisationId: '',
-  organisationName: '',
-  organisationWebsite: '',
-  primaryContactName: '',
-  primaryContactEmail: '',
-
-  noResultInd: false,
-  requestVerificationInd: false,
-}
-
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
-  const [organizations, setOrganizations] = useState([])
+  const [organizations, setOrganizations] = useState<DropDownOrg[]>([])
   const [present, setPresent] = useState(false)
-  const [skillsList, setSkillsList] = useState([])
+  const [skillsList, setSkillsList] = useState<{ label: string; value: string }[]>([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [requestVerification, setRequestVerification] = useState(false)
   const [infoModal, setInfoModal] = useState(false)
 
-  const formRef = useRef<any>()
+  const formRef = useRef<string>()
 
   useEffect(() => {
     getOrganizationsList()
@@ -63,15 +37,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
 
   const getOrganizationsList = async () => {
     const response = await api.digitalCv.organisations.getKeyNames()
-    const orgList: any = []
-    response.data.forEach((org: any) => {
-      const orgObj = {
-        label: org.value,
-        value: org.key,
-      }
-      orgList.push(orgObj)
-    })
-    setOrganizations(orgList)
+    setOrganizations(mapToSelect(response.data, 'key', 'value'))
   }
 
   useImperativeHandle(ref, () => ({
@@ -84,13 +50,11 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
 
   const getSkillsList = async () => {
     const response = await api.digitalCv.skills.getKeyNames()
-    if (response.data) {
-      const skills = response.data
-      setSkillsList(mapToSelect(skills, 'value', 'value'))
-    }
+    // const skills = response.data
+    setSkillsList(mapToSelect(response.data, 'value', 'value'))
   }
 
-  const createJob = async (values: any, organisationId: string) => {
+  const createJob = async (values: ExperienceValue, organisationId: string) => {
     const response = await api.digitalCv.workExperience.create({
       title: values.title,
       description: values.description,
@@ -100,7 +64,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
     return response.data
   }
 
-  const createCredential = async (job: any, values: any) => {
+  const createCredential = async (job: any, values: ExperienceValue) => {
     const response = await api.users.credentials.create(USER_ID, {
       type: 'Job',
       credentialItemId: job.id,
@@ -121,8 +85,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       initialValues={INITIAL_VALUES}
       enableReinitialize={true}
       validationSchema={ValidationSchema}
-      onSubmit={async (values, actions) => {
-        console.log('values', values)
+      onSubmit={async values => {
         try {
           const job = await createJob(values, values.organisationId)
           await createCredential(job, values)
@@ -132,7 +95,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
         }
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
+      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={styles.formView}>
           <InfoModal
             visible={infoModal}
@@ -149,7 +112,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Title')}
             touched={touched.title}
             error={errors.title}
-            showTitle={values.title !== '' ? true : false}
+            showTitle={values.title !== ''}
           />
           <DropDown
             items={organizations}
@@ -168,7 +131,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             touched={touched.organisationName}
             error={errors.organisationName}
             fieldName={t('Company Name')}
-            showTitle={values.organisationName != '' ? true : false}
+            showTitle={values.organisationName !== ''}
           />
           <CustomInput
             onChangeText={handleChange('country')}
@@ -177,14 +140,9 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Country or region')}
             touched={touched.country}
             error={errors.country}
-            showTitle={values.title !== '' ? true : false}
+            showTitle={values.title !== ''}
           />
-          <Text.Meta
-            level={MetaLevels.smallBold}
-            color={Colors.primaryGreen}
-            align={TextAlign.right}
-            style={styles.useLocationText}
-          >
+          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} align={TextAlign.right}>
             {t('Use current location')}
           </Text.Meta>
           <View style={styles.checkBoxView}>
@@ -194,14 +152,15 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               style={styles.checkBox}
             >
-              {present ? <BlueTick /> : <BlueHollowCircle />}
+              <Optional condition={present} fallback={<BlueHollowCircle />}>
+                <BlueTick />
+              </Optional>
             </TouchableOpacity>
             <Text.Body>{t('I currently work here')}</Text.Body>
           </View>
           <View style={styles.datePickersRowView}>
             <DatePicker
               onChangeDate={(date: string) => {
-                console.log(date)
                 handleChange('startDate')
                 handleBlur('startDate')
                 setFieldValue('startDate', date)
@@ -210,8 +169,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('Start date')}
               touched={touched.startDate}
               error={errors.startDate}
-              viewStyle={{ width: '40%' }}
-              showTitle={values.startDate !== '' ? true : false}
+              showTitle={values.startDate !== ''}
             />
             <DatePicker
               onChangeDate={(date: string) => {
@@ -223,8 +181,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('End date')}
               touched={touched.endDate}
               error={errors.endDate}
-              viewStyle={{ width: '40%' }}
-              showTitle={values.endDate !== '' ? true : false}
+              showTitle={values.endDate !== ''}
             />
           </View>
           <CustomInput
@@ -234,7 +191,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Description')}
             touched={touched.description}
             error={errors.description}
-            showTitle={values.description !== '' ? true : false}
+            showTitle={values.description !== ''}
           />
           <DropDownTags
             items={skillsList}
@@ -248,7 +205,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
             placeholderStyle={styles.placeholderStyle}
-            showTitle={values.skillNames.length > 0 ? true : false}
+            showTitle={values.skillNames.length > 0}
             defaultValue={selectedSkills}
             onChangeItem={item => {
               setSelectedSkills(item)
@@ -258,8 +215,6 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             }}
             tags={selectedSkills}
             deleteItem={deleteSkill}
-            touched={touched.skillNames}
-            error={errors.skillNames}
           />
           <View style={[styles.checkBoxView]}>
             <TouchableOpacity
@@ -269,9 +224,11 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               style={styles.checkBox}
             >
-              {requestVerification ? <BlueTick /> : <BlueHollowCircle />}
+              <Optional condition={requestVerification} fallback={<BlueHollowCircle />}>
+                <BlueTick />
+              </Optional>
             </TouchableOpacity>
-            <Text.Body style={styles.rowText}>{t('Request verification of employment from company')}</Text.Body>
+            <Text.Body>{t('Request verification of employment from company')}</Text.Body>
           </View>
           <TouchableOpacity onPress={() => setInfoModal(true)} style={styles.bottomView}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>

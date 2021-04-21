@@ -5,7 +5,6 @@ import fontStyles from '../../../../styles/font.styles'
 
 const styles = {
   container: {
-    ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
   } as ViewStyle,
   cardHeader: {

@@ -4,7 +4,6 @@ import { Colors, colors } from 'styles'
 const styles = {
   container: {
     paddingBottom: 30,
-    ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
   } as ViewStyle,
   topContainer: {

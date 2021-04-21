@@ -1,21 +1,15 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { TEXT_INPUT_HEIGHT } from './CustomInput.constants'
 
 const styles = {
-  textInputView: {
-    width: '95%',
-    alignSelf: 'center',
-  } as ViewStyle,
-  label: {
-    marginLeft: 10,
-  } as TextStyle,
   textInputStyle: {
-    width: '95%',
-    alignSelf: 'center',
-    height: 35,
+    height: TEXT_INPUT_HEIGHT,
     padding: 0,
     borderBottomWidth: 1,
-    borderColor: `${colors[Colors.menuGrey]}70`,
+    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
   } as ViewStyle,
 }
 

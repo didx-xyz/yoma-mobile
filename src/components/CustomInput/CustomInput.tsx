@@ -1,3 +1,4 @@
+import { Optional } from 'components'
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
@@ -8,18 +9,16 @@ import styles from './CustomInput.styles'
 type InputProps = TextInputProps & {
   label: string
   touched?: boolean
-  error?: any
+  error?: string
   showTitle?: boolean
 }
 
 const CustomInput = ({ label, touched, error, showTitle = true, ...props }: InputProps) => {
   return (
-    <View style={styles.textInputView}>
-      {showTitle ? (
-        <Text.Meta level={MetaLevels.small} style={styles.label}>
-          {label}
-        </Text.Meta>
-      ) : null}
+    <View>
+      <Optional condition={showTitle}>
+        <Text.Meta level={MetaLevels.small}>{label}</Text.Meta>
+      </Optional>
       <TextInput
         placeholderTextColor={colors[Colors.menuGrey]}
         placeholder={label}

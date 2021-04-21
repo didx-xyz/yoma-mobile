@@ -2,9 +2,6 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 const styles = {
-  container: {
-    ...StyleSheet.absoluteFillObject,
-  } as ViewStyle,
   text: {
     fontSize: 36,
     fontWeight: 'bold',
