@@ -1,13 +1,11 @@
-import NormalHeader from 'components/NormalHeader/NormalHeader'
+import { NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
-import ViewContainer from 'components/ViewContainer/ViewContainer'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, View } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
+import { ScrollView, View, FlatList } from 'react-native'
 
 import styles from './Education.styles'
-import EducationForm from './EducationForm/Education'
+import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
   navigation: any
@@ -32,21 +30,16 @@ const Education = ({ navigation }: Props) => {
         }}
         add={!isSave}
       />
-      {isSave ? (
-        <>
-          <ScrollView>
-            <View style={styles.whiteCard}>
-              <EducationForm navigation={navigation} ref={formRef} />
-            </View>
-          </ScrollView>
-        </>
-      ) : (
-        <FlatList
-          data={education}
-          renderItem={() => <Text.Body>RenderItem</Text.Body>}
-          keyExtractor={item => item.id}
-        />
-      )}
+      <Optional
+        condition={isSave}
+        fallback={<FlatList data={education} renderItem={() => <Text.Body>RenderItem</Text.Body>} />}
+      >
+        <ScrollView>
+          <View style={styles.whiteCard}>
+            <EducationForm navigation={navigation} ref={formRef} />
+          </View>
+        </ScrollView>
+      </Optional>
     </ViewContainer>
   )
 }

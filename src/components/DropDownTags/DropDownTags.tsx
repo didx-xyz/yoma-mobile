@@ -1,11 +1,11 @@
 import { CrossIcon } from 'assets/images'
-import { Optional } from 'components'
-import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 
+import Optional from '../Optional'
+import Text, { MetaLevels, TextAlign } from '../Typography'
 import { DROP_DOWN_MAX_HEIGHT } from './DropDownTags.constants'
 import styles from './DropDownTags.styles'
 

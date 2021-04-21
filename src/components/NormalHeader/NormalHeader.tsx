@@ -1,12 +1,12 @@
 import { StackActions } from '@react-navigation/native'
 import { AddIcon, BackIconGrey } from 'assets/images'
-import { Optional } from 'components'
-import Text, { Bold, HeaderLevels } from 'components/Typography'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
+import Optional from '../Optional'
+import Text, { Bold, HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
 
 type Props = {

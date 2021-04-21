@@ -1,9 +1,9 @@
-import { Optional } from 'components'
-import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
 import { colors, Colors } from 'styles'
 
+import Optional from '../Optional'
+import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './CustomInput.styles'
 
 type InputProps = TextInputProps & {

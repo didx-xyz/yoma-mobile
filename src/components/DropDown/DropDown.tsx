@@ -1,10 +1,10 @@
-import { Optional } from 'components'
-import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 
+import Optional from '../Optional'
+import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDown.styles'
 
 type Props = DropDownPickerProps & {

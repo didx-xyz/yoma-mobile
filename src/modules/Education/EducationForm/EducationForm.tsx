@@ -1,5 +1,5 @@
 import { BlueHollowCircle, BlueTick } from 'assets/images'
-import { CustomInput, Spinner, DatePicker, DropDownTags, InfoModal, Upload } from 'components'
+import { CustomInput, Spinner, DatePicker, DropDownTags, InfoModal, Upload, Optional } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
@@ -7,38 +7,12 @@ import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import styles from './Education.styles'
+import { INITIAL_VALUES } from './EducationForm.constants'
+import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
 interface Props {
   navigation: any
-}
-
-const INITIAL_VALUES = {
-  // details
-  school: '',
-  description: '',
-  id: '',
-  // startDate: '2021-04-09T05:52:02.872Z',
-  // endDate: '2021-04-09T05:52:02.872Z',
-  startDate: '',
-  endDate: '',
-  verifiedAt: null,
-
-  // country
-  country: '',
-  // skills developed
-  skillNames: [],
-
-  // organisation
-  organisationId: '',
-  organisationName: '',
-  organisationWebsite: '',
-  primaryContactName: '',
-  primaryContactEmail: '',
-
-  noResultInd: false,
-  requestVerificationInd: false,
 }
 
 const EducationForm = forwardRef(({ navigation }: Props, ref) => {
@@ -46,7 +20,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
   const [present, setPresent] = useState(false)
   const [skillsList, setSkillsList] = useState([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
-  const [requestVerification, setRequestVerification] = useState(false)
   const [infoModal, setInfoModal] = useState(false)
 
   const formRef = useRef<any>()
@@ -65,11 +38,9 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       initialValues={INITIAL_VALUES}
       enableReinitialize={true}
       validationSchema={ValidationSchema}
-      onSubmit={async (values, actions) => {
-        console.log('values', values)
-      }}
+      onSubmit={values => {}}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
+      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={styles.formView}>
           <InfoModal
             visible={infoModal}
@@ -86,7 +57,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('School')}
             touched={touched.school}
             error={errors.school}
-            showTitle={values.school !== '' ? true : false}
+            showTitle={values.school !== ''}
           />
           <CustomInput
             onChangeText={handleChange('school')}
@@ -95,7 +66,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Qualification type')}
             touched={touched.school}
             error={errors.school}
-            showTitle={values.school !== '' ? true : false}
+            showTitle={values.school !== ''}
           />
           <CustomInput
             onChangeText={handleChange('country')}
@@ -104,7 +75,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Country or region')}
             touched={touched.country}
             error={errors.country}
-            showTitle={values.country !== '' ? true : false}
+            showTitle={values.country !== ''}
           />
           <View style={styles.checkBoxView}>
             <TouchableOpacity
@@ -113,7 +84,9 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               style={styles.checkBox}
             >
-              {present ? <BlueTick /> : <BlueHollowCircle />}
+              <Optional condition={present} fallback={<BlueHollowCircle />}>
+                <BlueTick />
+              </Optional>
             </TouchableOpacity>
             <Text.Body>{t('I currently study here')}</Text.Body>
           </View>
@@ -129,8 +102,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('Start date')}
               touched={touched.startDate}
               error={errors.startDate}
-              viewStyle={{ width: '40%' }}
-              showTitle={values.startDate !== '' ? true : false}
+              showTitle={values.startDate !== ''}
             />
             <DatePicker
               onChangeDate={(date: string) => {
@@ -142,8 +114,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('End date')}
               touched={touched.endDate}
               error={errors.endDate}
-              viewStyle={{ width: '40%' }}
-              showTitle={values.endDate !== '' ? true : false}
+              showTitle={values.endDate !== ''}
             />
           </View>
           <CustomInput
@@ -153,7 +124,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Description')}
             touched={touched.description}
             error={errors.description}
-            showTitle={values.description !== '' ? true : false}
+            showTitle={values.description !== ''}
           />
           <DropDownTags
             items={skillsList}
@@ -167,7 +138,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
             placeholderStyle={styles.placeholderStyle}
-            showTitle={values.skillNames.length > 0 ? true : false}
+            showTitle={values.skillNames.length > 0}
             defaultValue={selectedSkills}
             onChangeItem={item => {
               setSelectedSkills(item)
@@ -180,18 +151,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             error={errors.skillNames}
           />
           <Upload onPress={() => {}} />
-          <View style={[styles.checkBoxView]}>
-            <TouchableOpacity
-              onPress={() => {
-                setRequestVerification(!requestVerification)
-                setFieldValue('requestVerificationInd', requestVerification)
-              }}
-              style={styles.checkBox}
-            >
-              {requestVerification ? <BlueTick /> : <BlueHollowCircle />}
-            </TouchableOpacity>
-            <Text.Body style={styles.rowText}>{t('Request verification of completion from school')}</Text.Body>
-          </View>
           <TouchableOpacity onPress={() => setInfoModal(true)} style={styles.bottomView}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
               {t('Find inspiration on how to write a great education description.')}
