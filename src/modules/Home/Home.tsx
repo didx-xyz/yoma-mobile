@@ -14,6 +14,7 @@ import DigitalCv from '../DigitalCv'
 import Education from '../Education'
 import Experience from '../Experience'
 import Marketplace from '../Marketplace'
+import NewChallenge from '../NewChallenge'
 import Profile from '../Profile'
 import Skills from '../Skills'
 import { NavigationRoutes } from './Home.routes'
@@ -83,6 +84,7 @@ const Home = () => {
       <Stack.Screen name={NavigationRoutes.experience} component={Experience} />
       <Stack.Screen name={NavigationRoutes.education} component={Education} />
       <Stack.Screen name={NavigationRoutes.skills} component={Skills} />
+      <Stack.Screen name={NavigationRoutes.newChallenge} component={NewChallenge} />
     </Stack.Navigator>
   )
 }

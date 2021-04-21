@@ -12,9 +12,9 @@ import styles from './NormalHeader.styles'
 type Props = {
   navigation: any
   headerText: string
-  onSave?: any
+  onSave?: () => void
   add?: boolean
-  onAdd?: any
+  onAdd?: () => void
 }
 
 const NormalHeader = ({ navigation, headerText, onSave, add = false, onAdd }: Props) => {
@@ -50,7 +50,9 @@ const NormalHeader = ({ navigation, headerText, onSave, add = false, onAdd }: Pr
           <Text.Body>
             <Bold color={Colors.primaryGreen}>{t('Add')}</Bold>
           </Text.Body>
-          <AddIcon />
+          <View style={styles.addIcon}>
+            <AddIcon />
+          </View>
         </TouchableOpacity>
       </Optional>
     </View>

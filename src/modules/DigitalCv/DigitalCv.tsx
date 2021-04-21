@@ -2,7 +2,8 @@ import { ViewContainer, HomeHeader, FirstTimeCard, CvCard } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import { Colors } from 'styles'
+import { colors, Colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 import styles from './DigitalCv.styles'
 
@@ -27,7 +28,7 @@ const DigitalCv = ({ navigation }: Props) => {
           hasCount={true}
           count={0}
           countColor={Colors.primaryBlue}
-          countBackgroundColor={Colors.primaryBlue}
+          countBackgroundColor={applyAlphaToHex(colors[Colors.primaryBlue])(0.1)}
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
           onEdit={() => navigation.navigate('Experience')}
@@ -36,7 +37,7 @@ const DigitalCv = ({ navigation }: Props) => {
           hasCount={true}
           count={0}
           countColor={Colors.primaryRed}
-          countBackgroundColor={Colors.primaryRed}
+          countBackgroundColor={applyAlphaToHex(colors[Colors.primaryRed])(0.1)}
           cardTitle={t('Education')}
           defaultText={t('Which school, university or college did you attend?')}
           onEdit={() => navigation.navigate('Education')}
@@ -45,10 +46,19 @@ const DigitalCv = ({ navigation }: Props) => {
           hasCount={true}
           count={0}
           countColor={Colors.primaryGreen}
-          countBackgroundColor={Colors.primaryGreen}
+          countBackgroundColor={applyAlphaToHex(colors[Colors.primaryGreen])(0.1)}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
           onEdit={() => navigation.navigate('Skills')}
+        />
+        <CvCard
+          hasCount={true}
+          count={0}
+          countColor={Colors.secondaryPurple}
+          countBackgroundColor={applyAlphaToHex(colors[Colors.secondaryPurple])(0.1)}
+          cardTitle={t('Completed challenges')}
+          defaultText={t('Have you completed any challenges yet?')}
+          onEdit={() => navigation.navigate('NewChallenge')}
         />
       </ScrollView>
     </ViewContainer>

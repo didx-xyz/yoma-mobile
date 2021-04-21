@@ -6,4 +6,5 @@ export enum NavigationRoutes {
   experience = 'Experience',
   education = 'Education',
   skills = 'Skills',
+  newChallenge = 'NewChallenge',
 }
