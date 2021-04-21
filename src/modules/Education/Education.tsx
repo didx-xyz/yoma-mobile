@@ -1,8 +1,8 @@
-import { NormalHeader, Optional, ViewContainer } from 'components'
+import { ColorCard, NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, View, FlatList } from 'react-native'
+import { ScrollView, FlatList } from 'react-native'
 
 import styles from './Education.styles'
 import EducationForm from './EducationForm/EducationForm'
@@ -35,9 +35,9 @@ const Education = ({ navigation }: Props) => {
         fallback={<FlatList data={education} renderItem={() => <Text.Body>RenderItem</Text.Body>} />}
       >
         <ScrollView>
-          <View style={styles.whiteCard}>
+          <ColorCard>
             <EducationForm navigation={navigation} ref={formRef} />
-          </View>
+          </ColorCard>
         </ScrollView>
       </Optional>
     </ViewContainer>
