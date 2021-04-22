@@ -14,14 +14,14 @@ import styles from './InfoCard.styles'
 
 type Props = {
   title: string
-  subtitle: string
+  subtitle?: string
   description: string
   endDate: string
   logo: string
   onEdit?: () => void
 }
 
-const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props) => {
+const InfoCard = ({ description, endDate, logo, subtitle = '', title, onEdit }: Props) => {
   return (
     <ColorCard style={styles.cardView}>
       <View style={styles.row}>
@@ -32,9 +32,18 @@ const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props
           <Image source={{ uri: logo }} style={styles.image} />
         </Optional>
         <View>
-          <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
-            {subtitle + ' : ' + title}
-          </Text.Header>
+          <Optional
+            condition={subtitle !== ''}
+            fallback={
+              <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+                {title}
+              </Text.Header>
+            }
+          >
+            <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+              {subtitle + ' : ' + title}
+            </Text.Header>
+          </Optional>
           <View style={styles.row}>
             <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate} />
           </View>
