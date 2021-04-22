@@ -54,6 +54,15 @@ const DigitalCv = ({ navigation }: Props) => {
         <CvCard
           hasCount={true}
           count={0}
+          countColor={Colors.primaryYellow}
+          countBackgroundColor={applyAlphaToHex(colors[Colors.primaryYellow])(0.1)}
+          cardTitle={t('Completed courses')}
+          defaultText={t('Have you completed any courses yet?')}
+          onEdit={() => navigation.navigate('NewCourse')}
+        />
+        <CvCard
+          hasCount={true}
+          count={0}
           countColor={Colors.secondaryPurple}
           countBackgroundColor={applyAlphaToHex(colors[Colors.secondaryPurple])(0.1)}
           cardTitle={t('Completed challenges')}
