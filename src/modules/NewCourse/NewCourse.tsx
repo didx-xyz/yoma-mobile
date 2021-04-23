@@ -1,10 +1,10 @@
-import { ColorCard, NormalHeader, Optional, ViewContainer } from 'components'
-import Text from 'components/Typography'
+import { ColorCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import styles from './NewCourse.styles'
+import { CourseValue } from './NewCourse.types'
 import NewCourseForm from './NewCourseForm/NewCourseForm'
 
 interface Props {
@@ -14,8 +14,21 @@ interface Props {
 const NewCourse = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSave, setIsSave] = useState(false)
-  const [courses, setCourses] = useState([])
+  // TODO: adding static data for UI handling
+  const [courses, setCourses] = useState([
+    {
+      course: 'Beyond your future challenge',
+      organisationLogoURL: '',
+      courseHostProvider: '',
+      endDate: '04/01/2020',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    },
+  ])
   const formRef = useRef<any>()
+
+  const renderItem = ({ course, description, endDate, organisationLogoURL }: CourseValue) => {
+    return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoURL} />
+  }
 
   return (
     <ViewContainer style={styles.container}>
@@ -32,7 +45,9 @@ const NewCourse = ({ navigation }: Props) => {
       />
       <Optional
         condition={isSave}
-        fallback={<FlatList data={courses} renderItem={({ item }) => <Text.Body>render</Text.Body>} />}
+        fallback={
+          <FlatList data={courses} renderItem={({ item }) => renderItem(item)} keyExtractor={item => item.course} />
+        }
       >
         <ScrollView>
           <ColorCard>
