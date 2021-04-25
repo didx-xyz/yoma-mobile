@@ -40,6 +40,8 @@ export interface AuthLoginSuccessResponse {
   meta: ApiMetaResponse
 }
 
+export type AuthLoginFailureResponse = string
+
 export type AuthState = AuthCredentialsResponse
 
 export type AuthLoginMiddleware = {
