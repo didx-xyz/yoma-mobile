@@ -1,23 +1,54 @@
+import { AxiosResponse } from 'axios'
 import { Middleware } from 'redux'
 
-import { logout, authorize } from './Auth.reducer'
+import { showSimpleMessage } from '../../utils/error'
+import { authLogin, authLoginFailure, authLoginSuccess, setAuthCredentials } from './Auth.reducer'
+import { getCredentialsFromAuthSuccess } from './Auth.utils'
 
-export const authorizeFlow = (): Middleware => _store => next => async action => {
+export const authLoginFlow = ({ api }: { api: any }): Middleware => ({ dispatch }) => next => async action => {
   const result = next(action)
 
-  if (authorize.match(action)) {
-    // authorize the user
-    console.log('Logging in a user')
+  if (authLogin.match(action)) {
+    await api.auth
+      .login(action.payload)
+      .then((response: AxiosResponse) => {
+        dispatch(authLoginSuccess(response))
+      })
+      .catch((error: string) => {
+        dispatch(authLoginFailure(error))
+      })
+    // dispatch(authLoginSuccess(action.payload))
+    // dispatch(
+    //   apiRequest(action.payload, {
+    //     client: 'auth',
+    //     clientAction: 'login',
+    //     onSuccess: authLoginSuccess,
+    //     onFailure: authLoginFailure,
+    //   }),
+    // )
   }
 
   return result
 }
 
-export const logoutFlow = (): Middleware => _store => next => async action => {
+export const authSetCredentialsFlow = (): Middleware => ({ dispatch }) => next => async action => {
   const result = next(action)
 
-  if (logout.match(action)) {
-    // logout the user
+  if (authLoginSuccess.match(action)) {
+    const credentials = getCredentialsFromAuthSuccess(action)
+    // TODO: this should be handled by the notification module
+    showSimpleMessage('success', 'Login Successful')
+    dispatch(setAuthCredentials(credentials))
+  }
+  return result
+}
+
+export const authLoginFailureFlow = (): Middleware => _store => next => async action => {
+  const result = next(action)
+
+  if (authLoginFailure.match(action)) {
+    // TODO: this should be handled by the notification module
+    showSimpleMessage('danger', 'Error', action.payload)
   }
 
   return result

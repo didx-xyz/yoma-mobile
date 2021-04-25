@@ -4,7 +4,7 @@ import Landing from 'modules/Auth/Screens/Landing/Landing'
 import Register from 'modules/Auth/Screens/Register/Register'
 import RegisterWithEmail from 'modules/Auth/Screens/RegisterWithEmail/RegisterWithEmail'
 import ResetPassword from 'modules/Auth/Screens/ResetPassword/ResetPassword'
-import Login from 'modules/Login/Login'
+import Login from 'modules/Login'
 import React from 'react'
 
 const Stack = createStackNavigator()

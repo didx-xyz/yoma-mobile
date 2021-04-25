@@ -1,4 +1,3 @@
-import api from 'api'
 import { Input, ButtonContainer } from 'components'
 import { Formik } from 'formik'
 import React from 'react'
@@ -6,11 +5,12 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
-import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
+import { AuthCredentials } from '../../Auth/Auth.types'
+
 interface Props {
-  onLoginUser: (details: { email: string; password: string }) => void
+  onLoginUser: (details: AuthCredentials) => void
 }
 
 const LoginForm = ({ onLoginUser }: Props) => {
@@ -32,19 +32,7 @@ const LoginForm = ({ onLoginUser }: Props) => {
         password: yup.string().min(8, t('passwordMinCharError')).required(t('required')).label('Password'),
       })}
       onSubmit={async (values, actions) => {
-        console.log('Login values: ', values)
         onLoginUser(values)
-        // await api.auth
-        //   .login({ ...values })
-        //   .then(response => {
-        //     console.log('response', response)
-        //
-        //     showSimpleMessage('success', 'Login Successful')
-        //   })
-        //   .catch(error => {
-        //     console.log('Error =>', error)
-        //     showSimpleMessage('danger', 'Error', error)
-        //   })
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => (

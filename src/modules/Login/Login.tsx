@@ -6,12 +6,13 @@ import { ScrollView, TouchableOpacity, View } from 'react-native'
 import { colors, Colors } from 'styles'
 
 import Text, { HeaderLevels, Span, TextAlign } from '../../components/Typography'
+import { AuthCredentials } from '../Auth/Auth.types'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
   navigation: any
-  onLoginUser: () => void
+  onLoginUser: (details: AuthCredentials) => void
 }
 
 const Login = ({ navigation, onLoginUser }: Props) => {

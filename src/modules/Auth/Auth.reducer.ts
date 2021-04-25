@@ -1,23 +1,23 @@
-import { createAction, createSlice } from '@reduxjs/toolkit'
+import { createAction, createReducer } from '@reduxjs/toolkit'
+import { AxiosResponse } from 'axios'
+import { mergeDeepRight } from 'ramda'
 
-import { AuthState } from './Auth.types'
-
-export const INITIAL_STATE = {} as AuthState
+import { AuthCredentials, AuthState } from './Auth.types'
 
 const name = '[Auth]'
+export const INITIAL_STATE = {
+  refreshToken: '',
+  token: '',
+  expiresAt: '',
+} as AuthState
 
-export const authorize = createAction(`${name}/authorize`)
-export const logout = createAction(`${name}/logout`)
+export const authLogin = createAction<AuthCredentials>(`${name} Login`)
+export const authLoginSuccess = createAction<AxiosResponse>(`${name} Login Success`)
+export const authLoginFailure = createAction<string>(`${name} Login Failure`)
+export const setAuthCredentials = createAction<AuthState>(`${name} Set Auth Credentials`)
 
-// TODO: not sure I like create Slice - might be worth rolling with redux/toolkit's other helpers directly rather
-export const authSlice = createSlice({
-  name,
-  initialState: INITIAL_STATE,
-  reducers: {
-    clearAuthCredentials: () => INITIAL_STATE,
-  },
+const authReducer = createReducer(INITIAL_STATE, builder => {
+  builder.addCase(authLoginSuccess, (state, action) => mergeDeepRight(state)(action.payload))
 })
 
-export const { clearAuthCredentials } = authSlice.actions
-
-export default authSlice.reducer
+export default authReducer
