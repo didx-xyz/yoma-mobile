@@ -7,6 +7,7 @@ export const authorizeFlow = (): Middleware => _store => next => async action =>
 
   if (authorize.match(action)) {
     // authorize the user
+    console.log('Logging in a user')
   }
 
   return result

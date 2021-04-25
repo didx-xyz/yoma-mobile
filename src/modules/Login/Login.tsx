@@ -5,15 +5,16 @@ import { useTranslation } from 'react-i18next'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
 import { colors, Colors } from 'styles'
 
-import Text, { HeaderLevels, Span, TextAlign } from '../../../../components/Typography'
+import Text, { HeaderLevels, Span, TextAlign } from '../../components/Typography'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
   navigation: any
+  onLoginUser: () => void
 }
 
-const Login = ({ navigation }: Props) => {
+const Login = ({ navigation, onLoginUser }: Props) => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
@@ -29,7 +30,7 @@ const Login = ({ navigation }: Props) => {
           <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeader}>
             {t('welcomeBack')}
           </Text.Header>
-          <LoginForm />
+          <LoginForm onLoginUser={onLoginUser} />
           <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
             <Text.Header level={HeaderLevels.h5} style={styles.forgotPassword}>
               {t('forgotPassword')} ?

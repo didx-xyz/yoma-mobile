@@ -9,7 +9,11 @@ import ButtonStyles from 'styles/button.styles'
 import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
-const LoginForm = () => {
+interface Props {
+  onLoginUser: (details: { email: string; password: string }) => void
+}
+
+const LoginForm = ({ onLoginUser }: Props) => {
   const { t } = useTranslation()
   return (
     <Formik
@@ -29,17 +33,18 @@ const LoginForm = () => {
       })}
       onSubmit={async (values, actions) => {
         console.log('Login values: ', values)
-        await api.auth
-          .login({ ...values })
-          .then(response => {
-            console.log('response', response)
-
-            showSimpleMessage('success', 'Login Successful')
-          })
-          .catch(error => {
-            console.log('Error =>', error)
-            showSimpleMessage('danger', 'Error', error)
-          })
+        onLoginUser(values)
+        // await api.auth
+        //   .login({ ...values })
+        //   .then(response => {
+        //     console.log('response', response)
+        //
+        //     showSimpleMessage('success', 'Login Successful')
+        //   })
+        //   .catch(error => {
+        //     console.log('Error =>', error)
+        //     showSimpleMessage('danger', 'Error', error)
+        //   })
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => (
