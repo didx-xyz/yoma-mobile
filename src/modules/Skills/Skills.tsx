@@ -1,4 +1,4 @@
-import { ColorCard, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import { Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import Text, { HeaderLevels } from 'components/Typography'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -56,7 +56,7 @@ const Skills = ({ navigation }: Props) => {
       <Optional
         condition={isSave}
         fallback={
-          <ColorCard style={styles.outerCard}>
+          <Card style={styles.outerCard}>
             <FlatList
               data={skills}
               ListHeaderComponent={
@@ -74,7 +74,7 @@ const Skills = ({ navigation }: Props) => {
               renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
               keyExtractor={item => item.skill}
             />
-          </ColorCard>
+          </Card>
         }
       >
         <SkillsForm />

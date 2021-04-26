@@ -1,4 +1,4 @@
-import { ColorCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -50,9 +50,9 @@ const NewCourse = ({ navigation }: Props) => {
         }
       >
         <ScrollView>
-          <ColorCard>
+          <Card>
             <NewCourseForm navigation={navigation} ref={formRef} />
-          </ColorCard>
+          </Card>
         </ScrollView>
       </Optional>
     </ViewContainer>

@@ -6,7 +6,7 @@ import { Avatar } from 'react-native-elements'
 import { Colors } from 'styles'
 import { getFirstCharacter } from 'utils/strings.utils'
 
-import ColorCard from '../ColorCard'
+import Card from '../Card'
 import DateDisplay from '../DateDisplay'
 import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
@@ -23,7 +23,7 @@ type Props = {
 
 const InfoCard = ({ description, endDate, logo, subtitle = '', title, onEdit }: Props) => {
   return (
-    <ColorCard style={styles.cardView}>
+    <Card style={styles.cardView}>
       <View style={styles.row}>
         <Optional
           condition={logo !== ''}
@@ -55,7 +55,7 @@ const InfoCard = ({ description, endDate, logo, subtitle = '', title, onEdit }: 
       <Optional condition={description !== ''}>
         <Text.Body>{description}</Text.Body>
       </Optional>
-    </ColorCard>
+    </Card>
   )
 }
 

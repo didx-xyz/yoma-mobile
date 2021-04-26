@@ -1,5 +1,5 @@
 import { CrossIcon } from 'assets/images'
-import { ColorCard, Optional } from 'components'
+import { Card, Optional } from 'components'
 import Text from 'components/Typography'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -46,7 +46,7 @@ const SkillsForm = () => {
 
   return (
     <View style={styles.outerContainer}>
-      <ColorCard style={styles.innerContainer}>
+      <Card style={styles.innerContainer}>
         <Text.Meta>{t('Skills Developed')}</Text.Meta>
         <Optional condition={skillsList.length > 0}>
           <FlatList
@@ -82,7 +82,7 @@ const SkillsForm = () => {
           }}
           inputContainerStyle={styles.inputContainerStyle}
         />
-      </ColorCard>
+      </Card>
     </View>
   )
 }

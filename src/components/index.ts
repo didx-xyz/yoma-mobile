@@ -1,5 +1,5 @@
 import ButtonContainer from './ButtonContainer'
-import ColorCard from './ColorCard'
+import Card from './Card'
 import CustomInput from './CustomInput'
 import CvCard from './CvCard'
 import DateDisplay from './DateDisplay'
@@ -26,7 +26,7 @@ import ViewContainer from './ViewContainer'
 
 export {
   ButtonContainer,
-  ColorCard,
+  Card,
   CustomInput,
   CvCard,
   DateDisplay,
