@@ -6,6 +6,9 @@ module.exports = {
       'module-resolver',
       {
         root: ['./src'],
+        alias: {
+          assets: './src/assets',
+        },
         extensions: [
           '.ios.ts',
           '.android.ts',

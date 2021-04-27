@@ -9,4 +9,5 @@ declare module 'ramda' {
   export function pipe(...rest: any[]): any
   export function prepend(...rest: any[]): any
   export function tap(...rest: any[]): any[]
+  export function mergeDeepRight(...rest: any[]): any[]
 }
