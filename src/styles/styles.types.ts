@@ -15,6 +15,7 @@ export enum Colors {
   secondaryPurple = 'secondaryPurple',
   secondaryRed = 'secondaryRed',
   white = 'white',
+  transparent = 'transparent',
   unsavedStyleLightGrey = 'unsavedStyleLightGrey',
   unsavedStyleLightBlue = 'unsavedStyleLightBlue',
   unsavedStyleLightRed = 'unsavedStyleLightRed',

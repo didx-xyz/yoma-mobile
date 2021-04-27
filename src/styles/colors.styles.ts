@@ -21,6 +21,7 @@ const WHITE = '#FFFFFF'
 const UNSAVED_STYLE_LIGHT_GREY = '#E5E5E5'
 const UNSAVED_STYLE_LIGHT_BLUE = '#E5F7FD'
 const UNSAVED_STYLE_LIGHT_RED = '#FFE4E6'
+const TRANSPARENT = 'transparent'
 
 export default {
   [Colors.fontBlue]: FONT_BLUE,
@@ -40,6 +41,7 @@ export default {
   [Colors.secondaryPurple]: SECONDARY_PURPLE,
   [Colors.secondaryRed]: SECONDARY_RED,
   [Colors.white]: WHITE,
+  [Colors.transparent]: TRANSPARENT,
   [Colors.unsavedStyleLightBlue]: UNSAVED_STYLE_LIGHT_BLUE,
   [Colors.unsavedStyleLightRed]: UNSAVED_STYLE_LIGHT_RED,
 }
