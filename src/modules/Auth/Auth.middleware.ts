@@ -8,6 +8,7 @@ import { getCredentialsFromAuthSuccess } from './Auth.utils'
 export const authLoginFlow = ({ api }: { api: any }): Middleware => ({ dispatch }) => next => async action => {
   const result = next(action)
 
+  // TODO: Abstract the api calls into a single api middleware
   if (authLogin.match(action)) {
     await api.auth
       .login(action.payload)
@@ -17,16 +18,6 @@ export const authLoginFlow = ({ api }: { api: any }): Middleware => ({ dispatch 
       .catch((error: AuthLoginFailureResponse) => {
         dispatch(authLoginFailure(error))
       })
-    // TODO: Abstract the api calls into a single api middleware
-    // dispatch(authLoginSuccess(action.payload))
-    // dispatch(
-    //   apiRequest(action.payload, {
-    //     client: 'auth',
-    //     clientAction: 'login',
-    //     onSuccess: authLoginSuccess,
-    //     onFailure: authLoginFailure,
-    //   }),
-    // )
   }
 
   return result
