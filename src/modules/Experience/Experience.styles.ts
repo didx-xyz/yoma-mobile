@@ -1,15 +1,6 @@
 import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
 
 import { Colors, colors } from '../../styles'
-import {
-  CARD_BORDER_RADIUS,
-  EDIT_ICON_RADIUS,
-  HORIZONTAL_SPACING,
-  LOGO_HEIGHT,
-  LOGO_RADIUS,
-  LOGO_WIDTH,
-  VERTICAL_SPACING,
-} from './Experience.constants'
 
 const styles = {
   container: {
@@ -17,40 +8,40 @@ const styles = {
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
-    borderRadius: CARD_BORDER_RADIUS,
+    borderRadius: 12,
     elevation: 3,
-    margin: VERTICAL_SPACING,
+    margin: 10,
   } as ViewStyle,
 
   cardView: {
     backgroundColor: colors[Colors.white],
-    borderRadius: CARD_BORDER_RADIUS,
-    padding: HORIZONTAL_SPACING,
+    borderRadius: 12,
+    padding: 10,
     elevation: 3,
-    marginTop: VERTICAL_SPACING,
-    marginHorizontal: HORIZONTAL_SPACING,
+    marginTop: 10,
+    marginHorizontal: 10,
   } as ViewStyle,
   row: {
     flexDirection: 'row',
   } as ViewStyle,
   image: {
-    height: LOGO_HEIGHT,
-    width: LOGO_WIDTH,
-    marginHorizontal: HORIZONTAL_SPACING,
+    height: 35,
+    width: 35,
+    marginHorizontal: 10,
   } as ImageStyle,
   avatar: {
-    height: LOGO_HEIGHT,
-    width: LOGO_WIDTH,
-    borderRadius: LOGO_RADIUS,
+    height: 35,
+    width: 35,
+    borderRadius: 17,
     backgroundColor: colors[Colors.backgroundGrey],
-    marginHorizontal: HORIZONTAL_SPACING,
+    marginHorizontal: 10,
   } as ViewStyle,
   editIcon: {
     backgroundColor: colors[Colors.white],
     elevation: 3,
-    borderRadius: EDIT_ICON_RADIUS,
+    borderRadius: 13,
     position: 'absolute',
-    right: HORIZONTAL_SPACING,
+    right: 10,
   } as ViewStyle,
 }
 

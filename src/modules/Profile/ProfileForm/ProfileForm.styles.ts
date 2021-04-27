@@ -1,6 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-const styles = StyleSheet.create({
+const styles = {
   profileForm: {
     width: '100%',
   } as ViewStyle,
@@ -8,6 +8,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     paddingRight: 20,
   } as TextStyle,
-})
+}
 
-export default styles
+export default StyleSheet.create(styles)

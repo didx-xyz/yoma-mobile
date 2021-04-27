@@ -1,4 +1,5 @@
 import { ViewContainer, HomeHeader, FirstTimeCard, CvCard } from 'components'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
@@ -21,7 +22,7 @@ const DigitalCv = ({ navigation }: Props) => {
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
           hasCount={false}
-          onEdit={() => navigation.navigate('About')}
+          onEdit={() => navigation.navigate(NavigationRoutes.About)}
         />
         <CvCard
           hasCount={true}
@@ -30,7 +31,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={Colors.unsavedStyleLightBlue}
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
-          onEdit={() => navigation.navigate('Experience')}
+          onEdit={() => navigation.navigate(NavigationRoutes.Experience)}
         />
         <CvCard
           hasCount={true}

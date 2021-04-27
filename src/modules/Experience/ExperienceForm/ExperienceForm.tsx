@@ -4,11 +4,12 @@ import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Op
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
-import { mapToSelect } from 'utils/strings.utils'
+import { mapToDropDownArray } from 'utils/strings.utils'
 
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
@@ -37,7 +38,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
 
   const getOrganizationsList = async () => {
     const response = await api.digitalCv.organisations.getKeyNames()
-    setOrganizations(mapToSelect(response.data, 'key', 'value'))
+    setOrganizations(mapToDropDownArray(response.data, 'key', 'value'))
   }
 
   useImperativeHandle(ref, () => ({
@@ -50,8 +51,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
 
   const getSkillsList = async () => {
     const response = await api.digitalCv.skills.getKeyNames()
-    // const skills = response.data
-    setSkillsList(mapToSelect(response.data, 'value', 'value'))
+    setSkillsList(mapToDropDownArray(response.data, 'value', 'value'))
   }
 
   const createJob = async (values: ExperienceValue, organisationId: string) => {
@@ -89,7 +89,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
         try {
           const job = await createJob(values, values.organisationId)
           await createCredential(job, values)
-          navigation.navigate('Home')
+          navigation.navigate(NavigationRoutes.Home)
         } catch (err) {
           console.error(err)
         }

@@ -4,6 +4,7 @@ import Text, { Bold, MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -104,7 +105,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
         try {
           const response = await api.users.edit(USER_ID, values)
           console.log('response', response)
-          navigation.navigate('Home')
+          navigation.navigate(NavigationRoutes.Home)
         } catch (error) {
           console.log('error', error)
         }

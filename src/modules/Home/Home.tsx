@@ -74,11 +74,11 @@ const HomeTabs = () => {
 const Home = () => {
   return (
     <Stack.Navigator headerMode={'none'}>
-      <Stack.Screen name={NavigationRoutes.home} component={HomeTabs} />
-      <Stack.Screen name={NavigationRoutes.profile} component={Profile} />
-      <Stack.Screen name={NavigationRoutes.digitalCv} component={DigitalCv} />
-      <Stack.Screen name={NavigationRoutes.about} component={About} />
-      <Stack.Screen name={NavigationRoutes.experience} component={Experience} />
+      <Stack.Screen name={NavigationRoutes.Home} component={HomeTabs} />
+      <Stack.Screen name={NavigationRoutes.Profile} component={Profile} />
+      <Stack.Screen name={NavigationRoutes.DigitalCv} component={DigitalCv} />
+      <Stack.Screen name={NavigationRoutes.About} component={About} />
+      <Stack.Screen name={NavigationRoutes.Experience} component={Experience} />
     </Stack.Navigator>
   )
 }
