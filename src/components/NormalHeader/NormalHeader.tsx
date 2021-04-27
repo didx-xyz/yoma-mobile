@@ -12,12 +12,12 @@ import styles from './NormalHeader.styles'
 type Props = {
   navigation: any
   headerText: string
-  onSave?: any
-  add?: boolean
+  onSave?: () => void
+  isAdd?: boolean
   onAdd?: any
 }
 
-const NormalHeader = ({ navigation, headerText, onSave, add = false, onAdd }: Props) => {
+const NormalHeader = ({ navigation, headerText, onSave, isAdd = false, onAdd }: Props) => {
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
       goBack()
@@ -37,7 +37,7 @@ const NormalHeader = ({ navigation, headerText, onSave, add = false, onAdd }: Pr
       </TouchableOpacity>
       <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
       <Optional
-        condition={add}
+        condition={isAdd}
         fallback={
           <TouchableOpacity onPress={onSave} style={styles.addView}>
             <Text.Body>

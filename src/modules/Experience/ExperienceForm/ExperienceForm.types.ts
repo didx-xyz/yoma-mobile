@@ -2,12 +2,8 @@ export type DropDownOrg = {
   label: string
   value: string
 }
-export type Organization = {
-  key: string
-  value: string
-}
 
-export type ExperienceValue = {
+export type ExperienceFields = {
   title: string
   description: string
   id: string

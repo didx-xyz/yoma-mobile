@@ -20,7 +20,7 @@ const styles = {
     marginRight: 5,
   } as ViewStyle,
   dropDownContainerStyle: {
-    height: 20,
+    height: 45,
   } as ViewStyle,
   itemStyle: {
     justifyContent: 'flex-start',
