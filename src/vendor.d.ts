@@ -19,4 +19,5 @@ declare module 'ramda' {
   export function tap(...rest: any[]): any[]
   export function unless(...rest: any[]): any[]
   export function when(...rest: any[]): any[]
+  export function mergeDeepRight(...rest: any[]): any[]
 }
