@@ -36,8 +36,6 @@ const styles = {
   } as TextStyle,
   buttonStyle: {
     zIndex: 1,
-    width: '100%',
-    alignSelf: 'center',
   } as ViewStyle,
   blueCircle: {
     position: 'absolute',

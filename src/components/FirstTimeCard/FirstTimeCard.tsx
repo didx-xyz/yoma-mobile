@@ -6,7 +6,8 @@ import { View } from 'react-native'
 import { Colors, TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
-import Text, { Bold, Span, FontWeights, HeaderLevels } from '../Typography'
+import Button, { ButtonSizes } from '../Button'
+import Text, { Bold, FontWeights, HeaderLevels, Span } from '../Typography'
 import styles from './FirstTimeCard.styles'
 
 type Props = {
@@ -43,12 +44,7 @@ const FirstTimeCard = ({ navigation }: Props) => {
       <Text.Header level={HeaderLevels.h6} weight={FontWeights.bold_700} style={styles.percentText}>
         {t('1% complete')}
       </Text.Header>
-      <ButtonContainer
-        buttonText={t<string>('Let’s do it')}
-        buttonStyle={[ButtonStyles.largeTertiary3Button, styles.buttonStyle]}
-        buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
-        onPress={() => {}}
-      />
+      <Button label={t('Let’s do it')} onPress={() => {}} size={ButtonSizes.Slim} style={styles.buttonStyle} />
       <View style={styles.blueCircle}>
         <BlueRightCircle />
       </View>

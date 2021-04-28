@@ -23,7 +23,7 @@ const Button = ({
   variant = ButtonVariants.Primary,
   size = ButtonSizes.Default,
   isDisabled = false,
-  isFullWidth = false,
+  isFullWidth = true,
   labelColor = Colors.white,
   labelStyle,
   style,

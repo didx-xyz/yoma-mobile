@@ -1,11 +1,11 @@
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from 'assets/images'
-import { ButtonContainer, ViewContainer } from 'components'
+import { ViewContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors, TextStyles } from 'styles'
-import ButtonStyles from 'styles/button.styles'
+import { Colors } from 'styles'
 
+import Button, { ButtonVariants } from '../../../../components/Button'
 import Text, { HeaderLevels, Span, TextAlign } from '../../../../components/Typography'
 import styles from './Landing.styles'
 
@@ -36,17 +36,13 @@ const Landing = ({ navigation }: Props) => {
         <PurpleSemiCircle />
       </View>
       <View style={styles.buttonOuterContainer}>
-        <ButtonContainer
-          buttonText={t<string>('register')}
-          buttonStyle={[ButtonStyles.mediumTertiary3Button]}
-          buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
-          onPress={() => navigation.navigate('Register')}
-        />
-        <ButtonContainer
-          buttonText={t<string>('login')}
-          buttonStyle={[ButtonStyles.transparentButton, { marginTop: 10 }]}
-          buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+        <Button label={t('register')} onPress={() => navigation.navigate('Register')} style={styles.registerButton} />
+        <Button
+          variant={ButtonVariants.Clear}
+          labelColor={Colors.white}
+          label={t('login')}
           onPress={() => navigation.navigate('Login')}
+          style={styles.loginButton}
         />
       </View>
     </ViewContainer>

@@ -27,6 +27,13 @@ const styles = {
     position: 'absolute',
     bottom: 50,
   } as ViewStyle,
+  registerButton: {
+    marginHorizontal: 45,
+  } as ViewStyle,
+  loginButton: {
+    marginTop: 10,
+    marginHorizontal: 45,
+  } as ViewStyle,
   bodyText: {
     marginTop: 10,
     paddingHorizontal: 20,
