@@ -184,9 +184,8 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               setFieldValue('skillNames', selectedSkills)
             }}
             tags={selectedSkills}
-            deleteItem={tag => {
+            onDelete={tag => {
               const filteredSkills = deleteSkill(selectedSkills, tag)
-              console.log(filteredSkills)
               setSelectedSkills(filteredSkills)
               setFieldValue('skillNames', filteredSkills)
             }}

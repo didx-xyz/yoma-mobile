@@ -93,7 +93,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
           <View style={styles.datePickersRowView}>
             <DatePicker
               onChangeDate={(date: string) => {
-                console.log(date)
                 handleChange('startDate')
                 handleBlur('startDate')
                 setFieldValue('startDate', date)
