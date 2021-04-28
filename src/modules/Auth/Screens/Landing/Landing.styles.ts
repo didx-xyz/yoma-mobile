@@ -22,7 +22,6 @@ const styles = {
     flex: 1,
     width: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
   } as ViewStyle,
   logoContainer: {
     flex: 1,
@@ -31,6 +30,7 @@ const styles = {
   content: {
     flex: 1,
     alignItems: 'center',
+    marginBottom: 80,
   } as ViewStyle,
   bodyText: {
     marginTop: 10,
