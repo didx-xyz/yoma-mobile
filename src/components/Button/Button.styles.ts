@@ -34,7 +34,7 @@ const styles = {
     height: 37,
   } as ViewStyle,
   fullWidth: {
-    flex: 1,
+    alignSelf: 'stretch',
     marginHorizontal: 12,
   } as ViewStyle,
 }
