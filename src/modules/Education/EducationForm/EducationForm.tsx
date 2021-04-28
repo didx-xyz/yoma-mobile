@@ -17,7 +17,7 @@ interface Props {
 
 const EducationForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
-  const [isStudyingHere, setIsStudyingHere] = useState(false)
+  const [isStudying, setIsStudying] = useState(false)
   const [skillsList, setSkillsList] = useState(MOCKED_SKILLS_DATA)
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [showInfoModal, setShowInfoModal] = useState(false)
@@ -79,11 +79,11 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
           <View style={styles.checkBoxView}>
             <TouchableOpacity
               onPress={() => {
-                setIsStudyingHere(!isStudyingHere)
+                setIsStudying(!isStudying)
               }}
               style={styles.checkBox}
             >
-              <Optional condition={isStudyingHere} fallback={<BlueHollowCircle />}>
+              <Optional condition={isStudying} fallback={<BlueHollowCircle />}>
                 <BlueTick />
               </Optional>
             </TouchableOpacity>
