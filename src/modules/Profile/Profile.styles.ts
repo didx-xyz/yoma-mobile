@@ -8,12 +8,12 @@ const styles = {
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
-    width: '95%',
+    marginHorizontal: 13,
     borderRadius: 12,
     paddingVertical: 20,
     elevation: 3,
-    alignItems: 'center',
     marginTop: 50,
+    paddingHorizontal: 13,
   } as ViewStyle,
   profileImage: {
     height: 70,
@@ -31,6 +31,7 @@ const styles = {
   } as ViewStyle,
   profileOuterView: {
     marginTop: -50,
+    alignSelf: 'center',
   } as ViewStyle,
   logout: {
     marginVertical: 20,

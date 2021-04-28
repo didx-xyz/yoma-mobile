@@ -16,7 +16,7 @@ const DigitalCv = ({ navigation }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <HomeHeader navigation={navigation} />
-      <ScrollView contentContainerStyle={{ paddingVertical: 15 }}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FirstTimeCard navigation={navigation} />
         <CvCard
           cardTitle={t('About')}

@@ -2,7 +2,7 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 const styles = {
   profileForm: {
-    width: '100%',
+    paddingHorizontal: 13,
   } as ViewStyle,
   currentLocationButton: {
     alignSelf: 'flex-end',

@@ -26,7 +26,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   const [skillsList, setSkillsList] = useState<DropDownOrg[]>([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [requestVerification, setRequestVerification] = useState(false)
-  const [infoModal, showInfoModal] = useState(false)
+  const [showInfoModal, setShowInfoModal] = useState(false)
 
   const formRef = useRef<string>()
 
@@ -35,11 +35,14 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       const organizationsList = await getOrganizationsList()
       setOrganizations(mapToDropDownArray(organizationsList.data))
     }
+    getOrganizations()
+  }, [])
+
+  useEffect(() => {
     const getSkills = async () => {
       const skills = await getSkillsList()
       setSkillsList(mapToDropDownArray(skills.data, 'value'))
     }
-    getOrganizations()
     getSkills()
   }, [])
 
@@ -65,8 +68,8 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={styles.formView}>
           <InfoModal
-            visible={infoModal}
-            closeModal={() => showInfoModal(false)}
+            visible={showInfoModal}
+            closeModal={() => setShowInfoModal(false)}
             infoText={
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
             }
@@ -168,7 +171,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             max={10}
             searchable={true}
             searchablePlaceholder={t('Search skills')}
-            searchablePlaceholderTextColor="gray"
+            searchablePlaceholderTextColor={Colors.menuGrey}
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
             placeholderStyle={styles.placeholder}

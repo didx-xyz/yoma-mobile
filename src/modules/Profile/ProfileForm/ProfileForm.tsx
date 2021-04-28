@@ -100,20 +100,18 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
           .min(10, 'too short')
           .max(13, 'too long'),
       })}
-      onSubmit={async (values, actions) => {
-        console.log('edit values: ', values)
+      onSubmit={async values => {
         try {
-          const response = await api.users.edit(USER_ID, values)
-          console.log('response', response)
+          await api.users.edit(USER_ID, values)
           navigation.navigate(NavigationRoutes.Home)
         } catch (error) {
           console.log('error', error)
         }
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => {
+      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => {
         return (
-          <View style={styles.profileForm}>
+          <View>
             <Spinner visible={isSubmitting} />
             <CustomInput
               onChangeText={handleChange('firstName')}
@@ -155,9 +153,9 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
                 defaultValue={country}
                 searchable={true}
                 searchablePlaceholder="Search for country"
-                searchablePlaceholderTextColor="gray"
+                searchablePlaceholderTextColor={Colors.menuGrey}
                 placeholder={t('country')}
-                touched={touched.countryAlpha2}
+                isTouched={touched.countryAlpha2}
                 error={errors.countryAlpha2}
                 isVisible={dropdown}
               />

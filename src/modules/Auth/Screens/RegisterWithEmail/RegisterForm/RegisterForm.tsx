@@ -134,7 +134,7 @@ const RegisterForm = () => {
             defaultValue={country}
             searchable={true}
             searchablePlaceholder="Search for country"
-            searchablePlaceholderTextColor="gray"
+            searchablePlaceholderTextColor={Colors.menuGrey}
             placeholder={t('country')}
             isTouched={touched.countryAlpha2}
             error={errors.countryAlpha2}

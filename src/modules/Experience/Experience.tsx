@@ -91,7 +91,7 @@ const Experience = ({ navigation }: Props) => {
         onAdd={() => {
           setIsSaved(true)
         }}
-        isAdd={!isSaved}
+        showAddButton={!isSaved}
       />
       <Optional
         condition={isSaved}

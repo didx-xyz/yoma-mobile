@@ -1,7 +1,7 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
-import { NormalHeader, ProfilePhoto, ViewContainer } from 'components'
-import Text, { Bold } from 'components/Typography'
+import { NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
+import Text, { Bold, TextAlign } from 'components/Typography'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -78,25 +78,28 @@ const Profile = ({ navigation }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader navigation={navigation} headerText={'Profile'} onSave={() => childRef.current.handleSubmit()} />
-      <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+      <ScrollView>
         <View style={styles.whiteCard}>
-          {profileImage ? (
+          <Optional
+            condition={profileImage !== ''}
+            fallback={
+              <ProfilePhoto
+                borderWidth={6}
+                outerRadius={40}
+                onPress={captureImage}
+                percent={5}
+                showEditIcon={true}
+                profileOuterStyle={styles.profileOuterView}
+              />
+            }
+          >
             <TouchableOpacity onPress={captureImage}>
               <Image source={{ uri: profileImage }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>
             </TouchableOpacity>
-          ) : (
-            <ProfilePhoto
-              borderWidth={6}
-              outerRadius={40}
-              onPress={captureImage}
-              percent={5}
-              showEditIcon={true}
-              profileOuterStyle={styles.profileOuterView}
-            />
-          )}
+          </Optional>
           <ProfileForm ref={childRef} navigation={navigation} />
         </View>
         <TouchableOpacity
@@ -106,7 +109,7 @@ const Profile = ({ navigation }: Props) => {
             })
           }
         >
-          <Text.Body style={styles.logout}>
+          <Text.Body align={TextAlign.center} style={styles.logout}>
             <Bold color={Colors.menuGrey}>{t('Log Out')}</Bold>
           </Text.Body>
         </TouchableOpacity>
