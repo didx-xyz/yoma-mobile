@@ -22,7 +22,7 @@ interface Props {
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [organizations, setOrganizations] = useState<DropDownOrg[]>([])
-  const [present, setPresent] = useState(false)
+  const [isWorkingHere, setIsWorkingHere] = useState(false)
   const [skillsList, setSkillsList] = useState<DropDownOrg[]>([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [requestVerification, setRequestVerification] = useState(false)
@@ -118,11 +118,11 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
           <View style={styles.checkBoxView}>
             <TouchableOpacity
               onPress={() => {
-                setPresent(!present)
+                setIsWorkingHere(!isWorkingHere)
               }}
               style={styles.checkBox}
             >
-              <Optional condition={present} fallback={<BlueHollowCircle />}>
+              <Optional condition={isWorkingHere} fallback={<BlueHollowCircle />}>
                 <BlueTick />
               </Optional>
             </TouchableOpacity>
