@@ -12,32 +12,33 @@ import styles from './NormalHeader.styles'
 type Props = {
   navigation: any
   headerText: string
-  onSave?: any
-  add?: boolean
-  onAdd?: any
+  onSave?: () => void
+  showAddButton?: boolean
+  onAdd?: () => void
 }
 
-const NormalHeader = ({ navigation, headerText, onSave, add = false, onAdd }: Props) => {
+const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, onAdd }: Props) => {
+  const { t } = useTranslation()
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      goBack()
+      onNavigateBack()
       return true
     })
     return () => backHandler.remove()
   }, [])
 
-  const goBack = () => {
+  const onNavigateBack = () => {
     navigation.dispatch(StackActions.pop(1))
   }
-  const { t } = useTranslation()
+
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={goBack}>
+      <TouchableOpacity onPress={onNavigateBack}>
         <BackIconGrey />
       </TouchableOpacity>
       <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
       <Optional
-        condition={add}
+        condition={showAddButton}
         fallback={
           <TouchableOpacity onPress={onSave} style={styles.addView}>
             <Text.Body>

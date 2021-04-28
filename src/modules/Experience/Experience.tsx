@@ -24,7 +24,7 @@ interface Props {
 
 const Experience = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
   const [experience, setExperience] = useState([])
   const formRef = useRef<any>()
 
@@ -41,17 +41,20 @@ const Experience = ({ navigation }: Props) => {
     return (
       <View style={styles.cardView}>
         <View style={styles.row}>
-          {item.job.organisationLogoURL ? (
+          <Optional
+            condition={!!item.job.organisationLogoURL}
+            fallback={
+              <Avatar
+                size="small"
+                rounded
+                title={item.job.organisationName.charAt(0)}
+                containerStyle={styles.avatar}
+                titleStyle={{ color: colors[Colors.menuGrey] }}
+              />
+            }
+          >
             <Image source={{ uri: item.job.organisationLogoURL }} style={styles.image} />
-          ) : (
-            <Avatar
-              size="small"
-              rounded
-              title={item.job.organisationName.charAt(0)}
-              containerStyle={styles.avatar}
-              titleStyle={{ color: colors[Colors.menuGrey] }}
-            />
-          )}
+          </Optional>
           <View>
             <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
               {item.job.title}
@@ -86,12 +89,12 @@ const Experience = ({ navigation }: Props) => {
           formRef.current.handleSubmit()
         }}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={<FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />}
       >
         <ScrollView>

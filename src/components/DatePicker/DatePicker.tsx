@@ -7,9 +7,9 @@ import Optional from '../Optional'
 import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DatePicker.styles'
 
-type DateTimePickerProps = {
+type DatePickerProps = {
   label: string
-  touched?: boolean
+  isTouched?: boolean
   error?: any
   showTitle?: boolean
   value: any
@@ -18,13 +18,13 @@ type DateTimePickerProps = {
 
 const DateTimePicker = ({
   label,
-  touched,
+  isTouched,
   error,
   value,
   onChangeDate,
   showTitle = true,
   ...props
-}: DateTimePickerProps) => {
+}: DatePickerProps) => {
   return (
     <View style={styles.container}>
       <Optional condition={showTitle}>
@@ -39,7 +39,7 @@ const DateTimePicker = ({
         customStyles={{
           dateInput: styles.dateInput,
         }}
-        style={styles.textInputStyle}
+        style={styles.textInput}
         onDateChange={onChangeDate}
         showIcon={false}
         date={value}
@@ -47,7 +47,7 @@ const DateTimePicker = ({
         {...props}
       />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {touched && error}
+        {isTouched && error}
       </Text.Meta>
     </View>
   )

@@ -1,9 +1,11 @@
-import { applyMiddleware, createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
+import { configureStore } from '@reduxjs/toolkit'
 
 import middleware from './middleware'
 import rootReducer from './reducers'
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(...middleware)))
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: getDefaultMiddleware => getDefaultMiddleware().concat(middleware),
+})
 
 export { store }
