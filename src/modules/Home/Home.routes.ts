@@ -1,9 +1,9 @@
 export enum NavigationRoutes {
-  home = 'Home',
-  profile = 'Profile',
-  digitalCv = 'DigitalCv',
-  about = 'About',
-  experience = 'Experience',
-  education = 'Education',
-  skills = 'Skills',
+  Home = 'Home',
+  Profile = 'Profile',
+  DigitalCv = 'DigitalCv',
+  About = 'About',
+  Experience = 'Experience',
+  Education = 'Education',
+  Skills = 'Skills',
 }

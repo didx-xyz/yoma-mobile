@@ -5,7 +5,7 @@ import { Colors } from './styles.types'
 
 const { height, width } = Dimensions.get('window')
 
-const ButtonStyles = StyleSheet.create({
+const ButtonStyles = {
   mediumTertiary3Button: {
     backgroundColor: colors[Colors.primaryGreen],
     height: height / 13,
@@ -47,6 +47,6 @@ const ButtonStyles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DF4930',
   } as ViewStyle,
-})
+}
 
-export default ButtonStyles
+export default StyleSheet.create(ButtonStyles)
