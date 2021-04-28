@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { FlatList, View } from 'react-native'
 import { Colors } from 'styles'
 
+import { MOCK_SKILLS } from './Skills.constants'
 import styles from './Skills.styles'
 import SkillsForm from './SkillsForm/SkillsForm'
 
@@ -15,29 +16,7 @@ interface Props {
 const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  // TODO: adding static data for UI
-  const [skills, setSkills] = useState([
-    {
-      skill: 'Graphic Design',
-      count: 3,
-    },
-    {
-      skill: 'Photograph',
-      count: 45,
-    },
-    {
-      skill: 'Illustration',
-      count: 12,
-    },
-    {
-      skill: 'Figma',
-      count: 3,
-    },
-    {
-      skill: 'Keynote',
-      count: 22,
-    },
-  ])
+  const [skills, setSkills] = useState(MOCK_SKILLS)
   const formRef = useRef<any>()
 
   return (

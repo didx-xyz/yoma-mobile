@@ -2,13 +2,9 @@ import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
-import {
-  CERTIFICATE_COUNT_HEIGHT,
-  CERTIFICATE_COUNT_WIDTH,
-  LEFT_SPACING,
-  OVERALL_SPACING,
-  VERTICAL_SPACING,
-} from './Skills.constants'
+const CERTIFICATE_COUNT_SIZE = 30
+const CIRCULAR_RADIUS_DIVISOR = 2
+const CERTIFICATE_COUNT_BORDER_RADIUS = CERTIFICATE_COUNT_SIZE / CIRCULAR_RADIUS_DIVISOR
 
 const styles = {
   container: {
@@ -18,19 +14,19 @@ const styles = {
     padding: 10,
   } as ViewStyle,
   certificateCountView: {
-    height: CERTIFICATE_COUNT_HEIGHT,
-    width: CERTIFICATE_COUNT_WIDTH,
+    height: CERTIFICATE_COUNT_SIZE,
+    width: CERTIFICATE_COUNT_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: OVERALL_SPACING,
-    borderRadius: CERTIFICATE_COUNT_HEIGHT / 2,
-    marginRight: LEFT_SPACING,
+    padding: 5,
+    borderRadius: CERTIFICATE_COUNT_BORDER_RADIUS,
+    marginRight: 10,
     backgroundColor: applyAlphaToHex(colors[Colors.primaryBlue])(0.15),
   } as ViewStyle,
   cardHeader: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingBottom: VERTICAL_SPACING,
+    paddingBottom: 15,
   } as ViewStyle,
 }
 
