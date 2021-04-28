@@ -29,7 +29,7 @@ const styles = {
     right: 0,
     bottom: -5,
   } as ViewStyle,
-  profileOuterStyle: {
+  profileOuterView: {
     marginTop: -50,
   } as ViewStyle,
   logout: {

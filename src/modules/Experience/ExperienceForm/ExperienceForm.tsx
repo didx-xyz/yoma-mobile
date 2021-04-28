@@ -77,7 +77,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('title')}
             value={values.title}
             label={t('Title')}
-            touched={touched.title}
+            isTouched={touched.title}
             error={errors.title}
             showTitle={values.title !== ''}
           />
@@ -93,9 +93,9 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             searchable={true}
             searchablePlaceholder="Search organization"
             searchablePlaceholderTextColor={Colors.menuGrey}
-            placeholderStyle={styles.placeholderStyle}
+            placeholderStyle={styles.placeholder}
             placeholder={t('Company name')}
-            touched={touched.organisationName}
+            isTouched={touched.organisationName}
             error={errors.organisationName}
             fieldName={t('Company Name')}
             showTitle={values.organisationName !== ''}
@@ -105,7 +105,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('country')}
             value={values.country}
             label={t('Country or region')}
-            touched={touched.country}
+            isTouched={touched.country}
             error={errors.country}
             showTitle={values.title !== ''}
           />
@@ -134,7 +134,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               value={values.startDate}
               label={t('Start date')}
-              touched={touched.startDate}
+              isTouched={touched.startDate}
               error={errors.startDate}
               showTitle={values.startDate !== ''}
             />
@@ -146,7 +146,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               value={values.endDate}
               label={t('End date')}
-              touched={touched.endDate}
+              isTouched={touched.endDate}
               error={errors.endDate}
               showTitle={values.endDate !== ''}
             />
@@ -156,7 +156,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('description')}
             value={values.description}
             label={t('Description')}
-            touched={touched.description}
+            isTouched={touched.description}
             error={errors.description}
             showTitle={values.description !== ''}
           />
@@ -171,7 +171,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             searchablePlaceholderTextColor="gray"
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
-            placeholderStyle={styles.placeholderStyle}
+            placeholderStyle={styles.placeholder}
             showTitle={values.skillNames.length > 0}
             defaultValue={selectedSkills}
             onChangeItem={item => {

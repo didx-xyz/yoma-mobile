@@ -120,7 +120,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               onBlur={handleBlur('firstName')}
               value={values.firstName}
               label={t('firstName')}
-              touched={touched.firstName}
+              isTouched={touched.firstName}
               error={errors.firstName}
             />
             <CustomInput
@@ -128,7 +128,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               onBlur={handleBlur('lastName')}
               value={values.lastName}
               label={t('Surname')}
-              touched={touched.lastName}
+              isTouched={touched.lastName}
               error={errors.lastName}
             />
             <CustomInput
@@ -136,7 +136,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               onBlur={handleBlur('countryAlpha2')}
               value={country}
               label={t('Country/Region')}
-              touched={touched.countryAlpha2}
+              isTouched={touched.countryAlpha2}
               error={errors.countryAlpha2}
             />
             {dropdown ? (
@@ -176,7 +176,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('email')}
               keyboardType="email-address"
               autoCapitalize="none"
-              touched={touched.email}
+              isTouched={touched.email}
               error={errors.email}
             />
             <CustomInput
@@ -186,7 +186,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('Cellphone')}
               keyboardType="phone-pad"
               autoCapitalize="none"
-              touched={touched.phoneNumber}
+              isTouched={touched.phoneNumber}
               error={errors.phoneNumber}
             />
           </View>

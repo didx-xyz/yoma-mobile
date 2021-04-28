@@ -3,7 +3,7 @@ import { Colors, colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 const styles = {
-  textInputStyle: {
+  textInput: {
     height: 40,
     padding: 0,
     borderBottomWidth: 1,

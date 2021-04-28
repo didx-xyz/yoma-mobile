@@ -16,7 +16,7 @@ const styles = {
     paddingHorizontal: 15,
     flex: 1,
   } as ViewStyle,
-  textInputStyle: {
+  textInput: {
     borderBottomWidth: 1,
     width: '100%',
     flex: 1,

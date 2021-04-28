@@ -8,12 +8,12 @@ import styles from './CustomInput.styles'
 
 type InputProps = TextInputProps & {
   label: string
-  touched?: boolean
+  isTouched?: boolean
   error?: string
   showTitle?: boolean
 }
 
-const CustomInput = ({ label, touched, error, showTitle = true, ...props }: InputProps) => {
+const CustomInput = ({ label, isTouched, error, showTitle = true, ...props }: InputProps) => {
   return (
     <View>
       <Optional condition={showTitle}>
@@ -22,11 +22,11 @@ const CustomInput = ({ label, touched, error, showTitle = true, ...props }: Inpu
       <TextInput
         placeholderTextColor={colors[Colors.menuGrey]}
         placeholder={label}
-        style={styles.textInputStyle}
+        style={styles.textInput}
         {...props}
       />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {touched && error}
+        {isTouched && error}
       </Text.Meta>
     </View>
   )

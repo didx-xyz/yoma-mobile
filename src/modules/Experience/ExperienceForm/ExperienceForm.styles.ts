@@ -26,7 +26,7 @@ const styles = {
     justifyContent: 'space-between',
     marginTop: 10,
   } as ViewStyle,
-  placeholderStyle: {
+  placeholder: {
     color: colors[Colors.menuGrey],
     marginLeft: 0,
   } as ViewStyle,

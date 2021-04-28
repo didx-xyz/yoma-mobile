@@ -1,11 +1,8 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
-  container: {
-    height: 250,
-  } as ViewStyle,
-  logoContainer: {
-    alignSelf: 'center',
+  button: {
+    marginVertical: 15,
   } as ViewStyle,
 }
 

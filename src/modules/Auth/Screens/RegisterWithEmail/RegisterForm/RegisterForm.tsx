@@ -1,19 +1,19 @@
 import api from 'api'
-import { BlueTick } from 'assets/images'
-import { ButtonContainer, DropDown, Input, Spinner } from 'components'
+import { BlueHollowCircle, BlueTick } from 'assets/images'
+import { ButtonContainer, DropDown, Input, Optional, Spinner } from 'components'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
-import { CheckBox } from 'react-native-elements'
-import { TextStyles } from 'styles'
+import { TouchableOpacity, View } from 'react-native'
+import { Colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
 
-import Text, { HeaderLevels, Span } from '../../../../../components/Typography'
+import Text, { BodyLevels, Span } from '../../../../../components/Typography'
+import styles from './RegisterForm.styles'
 
 const RegisterForm = () => {
   const { t } = useTranslation()
@@ -80,8 +80,7 @@ const RegisterForm = () => {
         actions.setSubmitting(true)
         await api.auth
           .register({ ...values })
-          .then(response => {
-            console.log('response', response)
+          .then(() => {
             actions.setSubmitting(false)
             showSimpleMessage('success', 'Registration Successful')
           })
@@ -100,7 +99,7 @@ const RegisterForm = () => {
             onBlur={handleBlur('firstName')}
             value={values.firstName}
             label={t('firstName')}
-            touched={touched.firstName}
+            isTouched={touched.firstName}
             error={errors.firstName}
           />
           <Input
@@ -108,7 +107,7 @@ const RegisterForm = () => {
             onBlur={handleBlur('lastName')}
             value={values.lastName}
             label={t('lastName')}
-            touched={touched.lastName}
+            isTouched={touched.lastName}
             error={errors.lastName}
           />
           <Input
@@ -118,7 +117,7 @@ const RegisterForm = () => {
             label={t('email')}
             keyboardType="email-address"
             autoCapitalize="none"
-            touched={touched.email}
+            isTouched={touched.email}
             error={errors.email}
           />
           <DropDown
@@ -137,7 +136,7 @@ const RegisterForm = () => {
             searchablePlaceholder="Search for country"
             searchablePlaceholderTextColor="gray"
             placeholder={t('country')}
-            touched={touched.countryAlpha2}
+            isTouched={touched.countryAlpha2}
             error={errors.countryAlpha2}
           />
           <Input
@@ -146,7 +145,7 @@ const RegisterForm = () => {
             value={values.password}
             label={t('createPassword')}
             autoCapitalize="none"
-            touched={touched.password}
+            isTouched={touched.password}
             error={errors.password}
             secureTextEntry
           />
@@ -156,32 +155,33 @@ const RegisterForm = () => {
             value={values.confirmPassword}
             label={t('confirmPassword')}
             autoCapitalize="none"
-            touched={touched.confirmPassword}
+            isTouched={touched.confirmPassword}
             error={errors.confirmPassword}
             secureTextEntry
           />
-          <View style={{ flexDirection: 'row', alignItems: 'center', alignSelf: 'center', width: '90%' }}>
-            <CheckBox
-              uncheckedIcon="circle-o"
-              checkedIcon={<BlueTick />}
-              checked={checked}
+          <View style={styles.checkBoxView}>
+            <TouchableOpacity
               onPress={() => {
                 setFieldValue('privacyInd', !checked)
                 setChecked(!checked)
               }}
-              onBlur={handleChange('privacyInd')}
-              containerStyle={{ paddingVertical: 0, paddingHorizontal: 0 }}
-            />
-            <Text.Header level={HeaderLevels.h5}>
+              style={styles.checkBox}
+            >
+              <Optional condition={checked} fallback={<BlueHollowCircle />}>
+                <BlueTick />
+              </Optional>
+            </TouchableOpacity>
+            <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
               {t('iAgree')} &nbsp;
-              <Span style={{ textDecorationLine: 'underline' }}>{t('privacyPolicy')}</Span>
-            </Text.Header>
+              <Span color={Colors.menuGrey} style={styles.privacy}>
+                {t('privacyPolicy')}
+              </Span>
+            </Text.Body>
           </View>
           <ButtonContainer
             disabled={isSubmitting}
             buttonText={t<string>('getStarted')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
-            buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
             onPress={handleSubmit}
           />
         </View>

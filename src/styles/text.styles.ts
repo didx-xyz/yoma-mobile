@@ -9,13 +9,6 @@ const TextStyles = {
     fontSize: 14,
     fontFamily: fontStyles[FontFamily.medium],
   } as TextStyle,
-  buttonText: {
-    fontSize: 15,
-    fontFamily: fontStyles[FontFamily.bold],
-  } as TextStyle,
-  textWhite: {
-    color: colors[Colors.white],
-  } as TextStyle,
   textTertiary5: {
     color: colors[Colors.primaryDarkGrey],
   },

@@ -20,7 +20,7 @@ const HomeHeader = ({ navigation }: Props) => {
         onPress={() => navigation.navigate(NavigationRoutes.Profile)}
         outerRadius={17}
         percent={10}
-        profileInnerStyle={styles.profileInnerStyle}
+        profileInnerStyle={styles.profileInnerView}
       />
       <TouchableOpacity style={styles.tokensView}>
         <ZIcon />

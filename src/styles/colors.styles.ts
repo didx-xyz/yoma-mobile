@@ -16,7 +16,7 @@ const SECONDARY_DARK_BLUE = '#162A42'
 const MENU_GREY = '#959BB4'
 const BACKGROUND_GREY = '#F1F4F8'
 const WHITE = '#FFFFFF'
-
+const LIGHT_GREY = '#F3F6FA'
 // Not set as a styled color in the designs
 const UNSAVED_STYLE_LIGHT_GREY = '#E5E5E5'
 const UNSAVED_STYLE_LIGHT_BLUE = '#E5F7FD'
@@ -42,4 +42,5 @@ export default {
   [Colors.white]: WHITE,
   [Colors.unsavedStyleLightBlue]: UNSAVED_STYLE_LIGHT_BLUE,
   [Colors.unsavedStyleLightRed]: UNSAVED_STYLE_LIGHT_RED,
+  [Colors.lightGrey]: LIGHT_GREY,
 }

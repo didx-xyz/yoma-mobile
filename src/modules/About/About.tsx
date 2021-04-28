@@ -58,7 +58,7 @@ const About = ({ navigation }: Props) => {
       <View style={styles.whiteCard}>
         <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
         <TextInput
-          style={styles.textInputStyle}
+          style={styles.textInput}
           value={summary}
           multiline
           maxLength={1000}

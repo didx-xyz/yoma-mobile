@@ -18,6 +18,7 @@ export enum Colors {
   unsavedStyleLightGrey = 'unsavedStyleLightGrey',
   unsavedStyleLightBlue = 'unsavedStyleLightBlue',
   unsavedStyleLightRed = 'unsavedStyleLightRed',
+  lightGrey = 'lightGrey',
 }
 
 export enum FontFamily {

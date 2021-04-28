@@ -1,11 +1,12 @@
 import { YellowCircleLeft } from 'assets/images'
 import { LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
+import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
 import { colors, Colors } from 'styles'
 
-import Text, { HeaderLevels, Span, TextAlign } from '../../components/Typography'
+import Text, { BodyLevels, HeaderLevels, Span, TextAlign } from '../../components/Typography'
 import { AuthCredentials } from '../Auth/Auth.types'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
@@ -32,34 +33,40 @@ const Login = ({ navigation, onLoginUser }: Props) => {
             {t('welcomeBack')}
           </Text.Header>
           <LoginForm onLoginUser={onLoginUser} />
-          <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-            <Text.Header level={HeaderLevels.h5} style={styles.forgotPassword}>
+          <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.ForgotPassword)}>
+            <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.forgotPassword}>
               {t('forgotPassword')} ?
-            </Text.Header>
+            </Text.Body>
           </TouchableOpacity>
           <View style={styles.horizontalLineView}>
             <View style={styles.horizontalLine} />
-            <Text.Header level={HeaderLevels.h3} color={Colors.primaryDarkGrey} style={styles.orText}>
+            <Text.Body color={Colors.primaryDarkGrey} style={styles.orText}>
               {t('or')}
-            </Text.Header>
+            </Text.Body>
             <View style={styles.horizontalLine} />
           </View>
-          <Text.Header level={HeaderLevels.h5} style={styles.loginSocial}>
+          <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.loginSocial}>
             {t('loginSocial')}
-          </Text.Header>
-          <SocialRegistration />
+          </Text.Body>
+          <View style={styles.social}>
+            <SocialRegistration />
+          </View>
         </View>
-        <Text.Header
-          level={HeaderLevels.h5}
+        <Text.Body
+          level={BodyLevels.small}
           color={Colors.primaryDarkGrey}
           align={TextAlign.center}
           style={styles.noAccount}
         >
           {t('noAccount')}
-          <Span color={Colors.primaryGreen} align={TextAlign.center} onPress={() => navigation.navigate('Register')}>
+          <Span
+            color={Colors.primaryGreen}
+            align={TextAlign.center}
+            onPress={() => navigation.navigate(NavigationRoutes.Register)}
+          >
             &nbsp; {t('registerHere')}.
           </Span>
-        </Text.Header>
+        </Text.Body>
       </ScrollView>
     </ViewContainer>
   )
