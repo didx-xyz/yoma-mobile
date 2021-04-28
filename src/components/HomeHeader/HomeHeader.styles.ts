@@ -1,9 +1,7 @@
-import { StyleSheet, ViewStyle, Dimensions, ImageStyle, TextStyle } from 'react-native'
+import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 import { colors, Colors } from '../../styles'
-
-const { width, height } = Dimensions.get('window')
 
 const styles = {
   header: {
@@ -15,7 +13,7 @@ const styles = {
     flexDirection: 'row',
     paddingHorizontal: 20,
   } as ViewStyle,
-  profileInnerStyle: {
+  profileInnerView: {
     backgroundColor: colors[Colors.backgroundGrey],
     borderRadius: 14,
     height: 27,

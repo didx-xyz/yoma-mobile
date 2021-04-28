@@ -1,5 +1,3 @@
-import { AuthState } from '../modules/Auth/Auth.types'
+import { store } from './store'
 
-export interface RootState {
-  auth: AuthState
-}
+export type RootState = ReturnType<typeof store.getState>

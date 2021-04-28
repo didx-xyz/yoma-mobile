@@ -17,11 +17,11 @@ type Props = DropDownPickerProps & {
   deleteItem: (tag: string) => void
 }
 
-const rendertags = (tags: Array<string>, deleteItem: any) => {
+const rendertags = (tags: string[], deleteItem: any) => {
   return tags.map((tag, index) => {
     return (
       <View key={index} style={styles.tag}>
-        <TouchableOpacity style={styles.crossIcon} onPress={() => deleteItem(tag)}>
+        <TouchableOpacity style={styles.crossIcon} onPress={deleteItem}>
           <CrossIcon height={15} width={15} />
         </TouchableOpacity>
         <Text.Body color={Colors.primaryBlue} key={index}>
@@ -39,13 +39,15 @@ const DropDownTags = ({ error, fieldName, showTitle = false, tags = [], deleteIt
         <Text.Meta level={MetaLevels.small}>{fieldName}</Text.Meta>
       </Optional>
       <DropDownPicker
-        containerStyle={styles.dropDownContainerStyle}
-        style={styles.dropDownStyle}
-        itemStyle={styles.itemStyle}
+        containerStyle={styles.dropDownContainer}
+        style={styles.dropDown}
+        itemStyle={styles.item}
         dropDownMaxHeight={DROP_DOWN_MAX_HEIGHT}
         {...props}
       />
-      <ScrollView horizontal>{rendertags(tags, deleteItem)}</ScrollView>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {rendertags(tags, deleteItem)}
+      </ScrollView>
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
         {error}
       </Text.Meta>

@@ -1,4 +1,7 @@
-import { ColorCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, NormalHeader, Optional, ViewContainer } from 'components'
+import InfoCard from 'components/InfoCard'
+import Text from 'components/Typography'
+import { FormikProps, FormikValues } from 'formik'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -13,7 +16,7 @@ interface Props {
 
 const Education = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
   // TODO: adding static data for UI
   const [education, setEducation] = useState([
     {
@@ -31,7 +34,7 @@ const Education = ({ navigation }: Props) => {
       description: '',
     },
   ])
-  const formRef = useRef<any>()
+  const formRef = useRef<FormikProps<FormikValues>>()
 
   const renderItem = ({ description, endDate, organisationLogoURL, qualification, school }: EducationValue) => {
     return (
@@ -50,24 +53,22 @@ const Education = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={t('Education')}
-        onSave={() => {
-          formRef.current.handleSubmit()
-        }}
+        onSave={() => formRef.current?.handleSubmit()}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={
           <FlatList data={education} renderItem={({ item }) => renderItem(item)} keyExtractor={item => item.school} />
         }
       >
         <ScrollView>
-          <ColorCard>
+          <Card>
             <EducationForm navigation={navigation} ref={formRef} />
-          </ColorCard>
+          </Card>
         </ScrollView>
       </Optional>
     </ViewContainer>
