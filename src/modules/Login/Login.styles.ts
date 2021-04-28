@@ -1,11 +1,8 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { colors, Colors, FontFamily } from 'styles'
-
-import fontStyles from '../../../../styles/font.styles'
+import { colors, Colors } from 'styles'
 
 const styles = {
   container: {
-    ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
   } as ViewStyle,
   cardHeader: {
@@ -24,13 +21,6 @@ const styles = {
   noAccount: {
     marginVertical: 30,
   } as TextStyle,
-  topContainer: {
-    backgroundColor: colors[Colors.primaryYellow],
-    height: '40%',
-  } as ViewStyle,
-  logoContainer: {
-    alignSelf: 'center',
-  } as ViewStyle,
   yellowSemiCircleContainer: {
     position: 'absolute',
     right: 0,
@@ -38,10 +28,8 @@ const styles = {
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
-    alignSelf: 'center',
+    marginHorizontal: 13,
     marginTop: '-20%',
-    width: '90%',
-    alignItems: 'center',
     borderRadius: 12,
     paddingVertical: 10,
     elevation: 3,
@@ -56,6 +44,9 @@ const styles = {
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
     height: 1,
     flex: 1,
+  } as ViewStyle,
+  social: {
+    alignSelf: 'center',
   } as ViewStyle,
 }
 

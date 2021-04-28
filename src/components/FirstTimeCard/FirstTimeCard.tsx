@@ -3,7 +3,7 @@ import { ButtonContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors, TextStyles } from 'styles'
+import { Colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
 import Button, { ButtonSizes } from '../Button'

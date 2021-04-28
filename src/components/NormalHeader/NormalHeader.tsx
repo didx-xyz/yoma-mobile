@@ -1,7 +1,9 @@
 import { StackActions } from '@react-navigation/native'
-import { BackIconGrey } from 'assets/images'
+import { AddIcon, BackIconGrey } from 'assets/images'
+import { Optional } from 'components'
 import Text, { Bold, HeaderLevels } from 'components/Typography'
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
@@ -10,34 +12,48 @@ import styles from './NormalHeader.styles'
 type Props = {
   navigation: any
   headerText: string
-  onSave?: any
+  onSave?: () => void
+  showAddButton?: boolean
+  onAdd?: () => void
 }
 
-const NormalHeader = ({ navigation, headerText, onSave }: Props) => {
+const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, onAdd }: Props) => {
+  const { t } = useTranslation()
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      goBack()
+      onNavigateBack()
       return true
     })
     return () => backHandler.remove()
   }, [])
 
-  const goBack = () => {
+  const onNavigateBack = () => {
     navigation.dispatch(StackActions.pop(1))
   }
+
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={goBack}>
+      <TouchableOpacity onPress={onNavigateBack}>
         <BackIconGrey />
       </TouchableOpacity>
-      <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
-        {headerText}
-      </Text.Header>
-      <TouchableOpacity onPress={onSave}>
-        <Text.Body color={Colors.primaryGreen} style={styles.saveText}>
-          <Bold>Save</Bold>
-        </Text.Body>
-      </TouchableOpacity>
+      <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
+      <Optional
+        condition={showAddButton}
+        fallback={
+          <TouchableOpacity onPress={onSave} style={styles.addView}>
+            <Text.Body>
+              <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
+            </Text.Body>
+          </TouchableOpacity>
+        }
+      >
+        <TouchableOpacity onPress={onAdd} style={styles.addView}>
+          <Text.Body>
+            <Bold color={Colors.primaryGreen}>{t('Add')}</Bold>
+          </Text.Body>
+          <AddIcon />
+        </TouchableOpacity>
+      </Optional>
     </View>
   )
 }

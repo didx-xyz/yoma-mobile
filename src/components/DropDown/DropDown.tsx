@@ -1,29 +1,36 @@
-import Text, { TextAlign } from 'components/Typography'
+import { Optional } from 'components'
+import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
-import { Colors, TextStyles } from 'styles'
+import { Colors } from 'styles'
 
 import styles from './DropDown.styles'
 
 type Props = DropDownPickerProps & {
-  touched?: boolean
-  error?: any
+  isTouched?: boolean
+  error?: string
+  fieldName?: string
+  showTitle?: boolean
 }
 
-const DropDown = ({ touched, error, ...props }: Props) => {
+const DropDown = ({ isTouched, error, fieldName, showTitle = false, ...props }: Props) => {
   return (
     <View>
+      <Optional condition={showTitle}>
+        <Text.Meta level={MetaLevels.small} style={styles.label}>
+          {fieldName}
+        </Text.Meta>
+      </Optional>
       <DropDownPicker
         containerStyle={styles.container}
-        style={styles.dropDownStyle}
-        dropDownStyle={styles.dropDownViewStyle}
-        labelStyle={[TextStyles.h4, TextStyles.textTertiary5]}
-        itemStyle={styles.itemStyle}
+        style={styles.dropDown}
+        dropDownStyle={styles.dropDownView}
+        itemStyle={styles.item}
         {...props}
       />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {touched && error}
+        {isTouched && error}
       </Text.Meta>
     </View>
   )

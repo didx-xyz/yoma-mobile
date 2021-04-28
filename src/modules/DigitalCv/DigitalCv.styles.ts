@@ -5,7 +5,9 @@ const styles = {
   container: {
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
     alignItems: 'center',
-    ...StyleSheet.absoluteFillObject,
+  } as ViewStyle,
+  scrollContainer: {
+    paddingVertical: 15,
   } as ViewStyle,
 }
 

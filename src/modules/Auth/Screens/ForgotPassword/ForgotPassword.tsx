@@ -1,10 +1,11 @@
 import { Message, YellowCircleRight } from 'assets/images'
-import { ButtonContainer, LargeHeaderContainer, ViewContainer } from 'components'
+import { ButtonContainer, LargeHeaderContainer, Optional, ViewContainer } from 'components'
+import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
 import { openInbox } from 'react-native-email-link'
-import { colors, Colors, TextStyles } from 'styles'
+import { colors, Colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
 import Text, { HeaderLevels, TextAlign } from '../../../../components/Typography'
@@ -21,11 +22,7 @@ const ForgotPassword = ({ navigation }: Props) => {
 
   return (
     <ViewContainer style={styles.container}>
-      <ScrollView
-        contentContainerStyle={{
-          paddingBottom: 30,
-        }}
-      >
+      <ScrollView>
         <LargeHeaderContainer
           navigation={navigation}
           headerText={t('forgotPassword')}
@@ -33,22 +30,20 @@ const ForgotPassword = ({ navigation }: Props) => {
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
-        {!emailSent ? (
-          <View style={styles.whiteCard}>
-            <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeaderText}>
-              {t('forgotYourPassword')} ?
-            </Text.Header>
-            <Text.Header
-              level={HeaderLevels.h4}
-              color={Colors.primaryDarkGrey}
-              align={TextAlign.center}
-              style={styles.bodyText}
-            >
-              {t('forgotPasswordText')}
-            </Text.Header>
-            <ForgotPasswordForm setSubmitted={() => setEmailSent(true)} />
-          </View>
-        ) : (
+        <Optional
+          condition={emailSent}
+          fallback={
+            <View style={styles.whiteCard}>
+              <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeaderText}>
+                {t('forgotYourPassword')} ?
+              </Text.Header>
+              <Text.Body color={Colors.primaryDarkGrey} style={styles.bodyText}>
+                {t('forgotPasswordText')}
+              </Text.Body>
+              <ForgotPasswordForm setSubmitted={() => setEmailSent(true)} />
+            </View>
+          }
+        >
           <View style={styles.whiteCard}>
             <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeaderText}>
               {t('checkEmail')}
@@ -56,27 +51,21 @@ const ForgotPassword = ({ navigation }: Props) => {
             <View style={styles.logoContainer}>
               <Message />
             </View>
-            <Text.Header
-              level={HeaderLevels.h4}
-              color={Colors.primaryDarkGrey}
-              align={TextAlign.center}
-              style={styles.bodyText}
-            >
+            <Text.Body color={Colors.primaryDarkGrey} style={styles.bodyText}>
               {t('passwordSentText')}
-            </Text.Header>
+            </Text.Body>
             <ButtonContainer
               buttonText={t<string>('openEmail')}
-              buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
-              buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+              buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
               onPress={() => openInbox()}
             />
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-              <Text.Header level={HeaderLevels.h5} color={Colors.primaryGreen} style={{ marginVertical: 5 }}>
+            <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.Login)}>
+              <Text.Header level={HeaderLevels.h5} align={TextAlign.center} color={Colors.primaryGreen}>
                 {t('skipComplete')}
               </Text.Header>
             </TouchableOpacity>
           </View>
-        )}
+        </Optional>
       </ScrollView>
     </ViewContainer>
   )

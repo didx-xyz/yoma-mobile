@@ -1,13 +1,15 @@
 import api from 'api'
 import { Input, ButtonContainer } from 'components'
 import { Formik } from 'formik'
+import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
+
+import styles from './ResetPasswordForm.styles'
 
 interface ResetPasswordFormProps {
   id: string
@@ -40,7 +42,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
           .required(t('required'))
           .label('Confirm password'),
       })}
-      onSubmit={async (values, actions) => {
+      onSubmit={async values => {
         console.log('Login values: ', values)
         await api.users.password
           .edit(id, { ...values, token })
@@ -48,7 +50,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
             console.log('response', response)
 
             showSimpleMessage('success', 'Password Reset Successful')
-            navigation.navigate('Login')
+            navigation.navigate(NavigationRoutes.Login)
           })
           .catch(error => {
             console.log('Error =>', error)
@@ -64,7 +66,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
             value={values.password}
             label={t('password')}
             autoCapitalize="none"
-            touched={touched.password}
+            isTouched={touched.password}
             error={errors.password}
             secureTextEntry
           />
@@ -74,15 +76,14 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
             value={values.confirmPassword}
             label={t('confirmPassword')}
             autoCapitalize="none"
-            touched={touched.confirmPassword}
+            isTouched={touched.confirmPassword}
             error={errors.confirmPassword}
             secureTextEntry
           />
           <ButtonContainer
             disabled={isSubmitting}
             buttonText={t<string>('resetPassword')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
-            buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
             onPress={handleSubmit}
           />
         </View>

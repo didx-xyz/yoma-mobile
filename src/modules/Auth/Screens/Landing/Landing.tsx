@@ -1,12 +1,13 @@
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from 'assets/images'
 import { ViewContainer } from 'components'
+import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
 
 import Button, { ButtonSizes, ButtonVariants } from '../../../../components/Button'
-import Text, { HeaderLevels, Span, TextAlign } from '../../../../components/Typography'
+import Text, { HeaderLevels, TextAlign } from '../../../../components/Typography'
 import styles from './Landing.styles'
 
 interface Props {
@@ -43,14 +44,14 @@ const Landing = ({ navigation }: Props) => {
           <Button
             size={ButtonSizes.Default}
             label={t('register')}
-            onPress={() => navigation.navigate('Register')}
+            onPress={() => navigation.navigate(NavigationRoutes.Register)}
             style={styles.registerButton}
           />
           <Button
             variant={ButtonVariants.Clear}
             labelColor={Colors.white}
             label={t('login')}
-            onPress={() => navigation.navigate('Login')}
+            onPress={() => navigation.navigate(NavigationRoutes.Login)}
             style={styles.loginButton}
           />
         </View>

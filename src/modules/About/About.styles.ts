@@ -4,7 +4,6 @@ import { Colors, colors } from 'styles'
 const styles = {
   container: {
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
-    ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
@@ -17,7 +16,7 @@ const styles = {
     paddingHorizontal: 15,
     flex: 1,
   } as ViewStyle,
-  textInputStyle: {
+  textInput: {
     borderBottomWidth: 1,
     width: '100%',
     flex: 1,

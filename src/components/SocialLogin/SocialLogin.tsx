@@ -2,10 +2,10 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin'
 import { FacebookIcon, GoogleIcon } from 'assets/images'
 import React from 'react'
 import { LoginManager } from 'react-native-fbsdk'
-import { TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
 import ButtonContainer from '../ButtonContainer/ButtonContainer'
+import styles from './SocialLogin.styles'
 
 const SocialLogin = () => {
   const facebookSignin = () => {
@@ -38,15 +38,13 @@ const SocialLogin = () => {
     <>
       <ButtonContainer
         buttonText="Continue with Facebook"
-        buttonStyle={[ButtonStyles.facebookButton, { marginVertical: 15 }]}
-        buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+        buttonStyle={[ButtonStyles.facebookButton, styles.button]}
         onPress={facebookSignin}
         children={<FacebookIcon />}
       />
       <ButtonContainer
         buttonText="Continue with Google  "
-        buttonStyle={[ButtonStyles.googleButton, { marginVertical: 15 }]}
-        buttonTextStyle={[TextStyles.textTertiary5, TextStyles.buttonText]}
+        buttonStyle={[ButtonStyles.googleButton, styles.button]}
         onPress={googleSignIn}
         children={<GoogleIcon />}
       />

@@ -5,13 +5,16 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { colors, Colors, FontFamily } from 'styles'
 import fontStyles from 'styles/font.styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 import About from '../About'
 import Challenges from '../Challenges'
 import Courses from '../Courses'
 import DigitalCv from '../DigitalCv'
+import Experience from '../Experience'
 import Marketplace from '../Marketplace'
 import Profile from '../Profile'
+import { NavigationRoutes } from './Home.routes'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -22,7 +25,7 @@ const tabBarOptions: BottomTabBarOptions = {
     paddingBottom: 2,
   },
   activeTintColor: colors[Colors.white],
-  inactiveTintColor: `${colors[Colors.white]}38`,
+  inactiveTintColor: applyAlphaToHex(colors[Colors.white])(0.38),
   labelStyle: {
     fontFamily: fontStyles[FontFamily.semibold],
   },
@@ -71,10 +74,11 @@ const HomeTabs = () => {
 const Home = () => {
   return (
     <Stack.Navigator headerMode={'none'}>
-      <Stack.Screen name="Home" component={HomeTabs} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="DigitalCvHome" component={DigitalCv} />
-      <Stack.Screen name="About" component={About} />
+      <Stack.Screen name={NavigationRoutes.Home} component={HomeTabs} />
+      <Stack.Screen name={NavigationRoutes.Profile} component={Profile} />
+      <Stack.Screen name={NavigationRoutes.DigitalCv} component={DigitalCv} />
+      <Stack.Screen name={NavigationRoutes.About} component={About} />
+      <Stack.Screen name={NavigationRoutes.Experience} component={Experience} />
     </Stack.Navigator>
   )
 }

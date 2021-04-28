@@ -14,6 +14,10 @@ const styles = {
   saveText: {
     paddingRight: 20,
   } as TextStyle,
+  addView: {
+    flexDirection: 'row',
+    paddingRight: 20,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
