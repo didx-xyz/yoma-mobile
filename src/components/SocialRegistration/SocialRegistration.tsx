@@ -3,10 +3,11 @@ import { FacebookIcon, GoogleIcon } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LoginManager } from 'react-native-fbsdk'
-import { TextStyles } from 'styles'
+import { Colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
 import ButtonContainer from '../ButtonContainer/ButtonContainer'
+import styles from './SocialRegistration.styles'
 
 const SocialRegistration = () => {
   const { t } = useTranslation()
@@ -59,15 +60,14 @@ const SocialRegistration = () => {
     <>
       <ButtonContainer
         buttonText={t<string>('loginFacebook')}
-        buttonStyle={[ButtonStyles.facebookButton, { marginVertical: 15 }]}
-        buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+        buttonStyle={[ButtonStyles.facebookButton, styles.button]}
         onPress={facebookSignIn}
         children={<FacebookIcon />}
       />
       <ButtonContainer
         buttonText={t<string>('loginGoogle')}
-        buttonStyle={[ButtonStyles.googleButton, { marginVertical: 15 }]}
-        buttonTextStyle={[TextStyles.textTertiary5, TextStyles.buttonText]}
+        buttonStyle={[ButtonStyles.googleButton, styles.button]}
+        buttonTextColor={Colors.primaryDarkGrey}
         onPress={googleSignIn}
         children={<GoogleIcon />}
       />

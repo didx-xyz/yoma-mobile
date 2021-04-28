@@ -3,15 +3,7 @@ import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.unsavedStyleLightGrey],
-  } as ViewStyle,
-  topContainer: {
-    backgroundColor: colors[Colors.primaryYellow],
-    height: '40%',
-  } as ViewStyle,
-  logoContainer: {
-    alignSelf: 'center',
   } as ViewStyle,
   purpleSemiCircleContainer: {
     position: 'absolute',
@@ -20,16 +12,12 @@ const styles = {
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
-    alignSelf: 'center',
     marginTop: '-20%',
-    width: '90%',
+    marginHorizontal: 10,
     alignItems: 'center',
     borderRadius: 12,
     paddingVertical: 10,
   } as ViewStyle,
-  cardHeader: {
-    alignSelf: 'center',
-  } as TextStyle,
   horizontalLineView: {
     flexDirection: 'row',
     paddingHorizontal: 15,
@@ -44,6 +32,15 @@ const styles = {
   orText: {
     paddingHorizontal: 15,
   } as TextStyle,
+  bodyText: {
+    marginTop: 15,
+  } as TextStyle,
+  bottomText: {
+    marginTop: 30,
+  } as TextStyle,
+  button: {
+    marginVertical: 15,
+  },
 }
 
 export default StyleSheet.create(styles)

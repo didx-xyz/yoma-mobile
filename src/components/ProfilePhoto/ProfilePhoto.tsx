@@ -1,4 +1,5 @@
 import { EditIcon, ProfileIcon } from 'assets/images'
+import { Optional } from 'components'
 import ProgressCircle from 'components/ProgressCircle/ProgressCircle'
 import React from 'react'
 import { GestureResponderEvent, TouchableOpacity, View, ViewStyle } from 'react-native'
@@ -37,11 +38,11 @@ const ProfilePhoto = ({
           <ProfileIcon height={outerRadius} width={outerRadius} />
         </View>
       </ProgressCircle>
-      {showEditIcon ? (
+      <Optional condition={showEditIcon}>
         <TouchableOpacity style={styles.editIcon} onPress={onPress}>
           <EditIcon />
         </TouchableOpacity>
-      ) : null}
+      </Optional>
     </TouchableOpacity>
   )
 }

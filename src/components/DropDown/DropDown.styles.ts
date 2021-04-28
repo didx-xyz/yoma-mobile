@@ -1,30 +1,30 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
-
-const { width } = Dimensions.get('window')
 
 const styles = {
   container: {
     height: 45,
-    marginTop: 15,
+    marginTop: 10,
   } as ViewStyle,
-  dropDownStyle: {
-    width: width / 1.3,
-    alignSelf: 'center',
+  dropDown: {
+    marginHorizontal: 13,
     borderWidth: 0,
     borderTopLeftRadius: 60,
     borderTopRightRadius: 60,
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
+    height: 45,
+    backgroundColor: colors[Colors.lightGrey],
   } as ViewStyle,
-  dropDownViewStyle: {
-    backgroundColor: colors[Colors.white],
-    width: '90%',
-    alignSelf: 'center',
+  dropDownView: {
+    backgroundColor: colors[Colors.lightGrey],
   } as ViewStyle,
-  itemStyle: {
+  item: {
     justifyContent: 'flex-start',
   } as ViewStyle,
+  label: {
+    marginLeft: 10,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

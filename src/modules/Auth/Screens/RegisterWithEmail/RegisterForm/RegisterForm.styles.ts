@@ -1,13 +1,21 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-const styles = StyleSheet.create({
-  profileForm: {
-    width: '100%',
+const styles = {
+  checkBoxView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginHorizontal: 13,
   } as ViewStyle,
-  currentLocationButton: {
-    alignSelf: 'flex-end',
-    paddingRight: 20,
+  checkBox: {
+    paddingRight: 10,
+  } as ViewStyle,
+  privacy: {
+    textDecorationLine: 'underline',
   } as TextStyle,
-})
+  button: {
+    marginVertical: 15,
+    alignSelf: 'center',
+  } as ViewStyle,
+}
 
-export default styles
+export default StyleSheet.create(styles)

@@ -1,11 +1,10 @@
 import api from 'api'
-import { DropDown, Spinner } from 'components'
-import CustomInput from 'components/CustomInput/CustomInput'
-import Text, { Bold } from 'components/Typography'
+import { CustomInput, DropDown, Spinner } from 'components'
+import Text, { Bold, MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
 import { USER_ID } from 'helpers/helpers'
-import styles from 'modules/Auth/Screens/RegisterWithEmail/RegisterForm/RegisterForm.styles'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -13,6 +12,8 @@ import { Colors } from 'styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
+
+import styles from './ProfileForm.styles'
 
 interface Props {
   navigation: any
@@ -99,27 +100,25 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
           .min(10, 'too short')
           .max(13, 'too long'),
       })}
-      onSubmit={async (values, actions) => {
-        console.log('edit values: ', values)
+      onSubmit={async values => {
         try {
-          const response = await api.users.edit(USER_ID, values)
-          console.log('response', response)
-          navigation.navigate('Home')
+          await api.users.edit(USER_ID, values)
+          navigation.navigate(NavigationRoutes.Home)
         } catch (error) {
           console.log('error', error)
         }
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => {
+      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => {
         return (
-          <View style={styles.profileForm}>
+          <View>
             <Spinner visible={isSubmitting} />
             <CustomInput
               onChangeText={handleChange('firstName')}
               onBlur={handleBlur('firstName')}
               value={values.firstName}
               label={t('firstName')}
-              touched={touched.firstName}
+              isTouched={touched.firstName}
               error={errors.firstName}
             />
             <CustomInput
@@ -127,7 +126,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               onBlur={handleBlur('lastName')}
               value={values.lastName}
               label={t('Surname')}
-              touched={touched.lastName}
+              isTouched={touched.lastName}
               error={errors.lastName}
             />
             <CustomInput
@@ -135,7 +134,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               onBlur={handleBlur('countryAlpha2')}
               value={country}
               label={t('Country/Region')}
-              touched={touched.countryAlpha2}
+              isTouched={touched.countryAlpha2}
               error={errors.countryAlpha2}
             />
             {dropdown ? (
@@ -154,20 +153,20 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
                 defaultValue={country}
                 searchable={true}
                 searchablePlaceholder="Search for country"
-                searchablePlaceholderTextColor="gray"
+                searchablePlaceholderTextColor={Colors.menuGrey}
                 placeholder={t('country')}
-                touched={touched.countryAlpha2}
+                isTouched={touched.countryAlpha2}
                 error={errors.countryAlpha2}
                 isVisible={dropdown}
               />
             ) : null}
-            <Text.Body
-              color={Colors.primaryGreen}
+            <Text.Meta
+              level={MetaLevels.smallBold}
               style={styles.currentLocationButton}
               onPress={() => setDropDown(true)}
             >
-              <Bold>Use current location</Bold>
-            </Text.Body>
+              <Bold color={Colors.primaryGreen}>Use current location</Bold>
+            </Text.Meta>
             <CustomInput
               onChangeText={handleChange('email')}
               onBlur={handleBlur('email')}
@@ -175,7 +174,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('email')}
               keyboardType="email-address"
               autoCapitalize="none"
-              touched={touched.email}
+              isTouched={touched.email}
               error={errors.email}
             />
             <CustomInput
@@ -185,7 +184,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               label={t('Cellphone')}
               keyboardType="phone-pad"
               autoCapitalize="none"
-              touched={touched.phoneNumber}
+              isTouched={touched.phoneNumber}
               error={errors.phoneNumber}
             />
           </View>

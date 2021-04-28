@@ -6,7 +6,6 @@ const styles = {
     backgroundColor: colors[Colors.primaryYellow],
     alignItems: 'center',
     justifyContent: 'center',
-    ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   redSemiCircleContainer: {
     position: 'absolute',
@@ -15,7 +14,6 @@ const styles = {
   } as ViewStyle,
   logoContainer: {
     position: 'absolute',
-    alignSelf: 'center',
     top: 50,
   } as ViewStyle,
   purpleSemiCircleContainer: {
@@ -31,6 +29,9 @@ const styles = {
     marginTop: 10,
     paddingHorizontal: 20,
   } as TextStyle,
+  secondaryButton: {
+    marginTop: 10,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

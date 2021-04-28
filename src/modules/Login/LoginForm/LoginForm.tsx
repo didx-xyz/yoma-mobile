@@ -3,11 +3,11 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 import * as yup from 'yup'
 
 import { AuthCredentials } from '../../Auth/Auth.types'
+import styles from './LoginForm.styles'
 
 interface Props {
   onLoginUser: (details: AuthCredentials) => void
@@ -31,7 +31,7 @@ const LoginForm = ({ onLoginUser }: Props) => {
           .label('Email'),
         password: yup.string().min(8, t('passwordMinCharError')).required(t('required')).label('Password'),
       })}
-      onSubmit={async (values, actions) => {
+      onSubmit={async values => {
         onLoginUser(values)
       }}
     >
@@ -44,7 +44,7 @@ const LoginForm = ({ onLoginUser }: Props) => {
             label={t('email')}
             keyboardType="email-address"
             autoCapitalize="none"
-            touched={touched.email}
+            isTouched={touched.email}
             error={errors.email}
           />
           <Input
@@ -52,15 +52,14 @@ const LoginForm = ({ onLoginUser }: Props) => {
             onBlur={handleBlur('password')}
             value={values.password}
             label={t('password')}
-            touched={touched.password}
+            isTouched={touched.password}
             error={errors.password}
             secureTextEntry
           />
           <ButtonContainer
             disabled={isSubmitting}
             buttonText={t<string>('login')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
-            buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
             onPress={handleSubmit}
           />
         </View>

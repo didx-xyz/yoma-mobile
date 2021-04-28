@@ -7,16 +7,18 @@ import ResetPassword from 'modules/Auth/Screens/ResetPassword/ResetPassword'
 import Login from 'modules/Login'
 import React from 'react'
 
+import { NavigationRoutes } from './Authentication.routes'
+
 const Stack = createStackNavigator()
 
 const Authentication = () => (
   <Stack.Navigator headerMode={'none'}>
-    <Stack.Screen name="Landing" component={Landing} />
-    <Stack.Screen name="Register" component={Register} />
-    <Stack.Screen name="RegisterWithEmail" component={RegisterWithEmail} />
-    <Stack.Screen name="Login" component={Login} />
-    <Stack.Screen name="ResetPassword" component={ResetPassword} />
-    <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
+    <Stack.Screen name={NavigationRoutes.Landing} component={Landing} />
+    <Stack.Screen name={NavigationRoutes.Register} component={Register} />
+    <Stack.Screen name={NavigationRoutes.RegisterWithEmail} component={RegisterWithEmail} />
+    <Stack.Screen name={NavigationRoutes.Login} component={Login} />
+    <Stack.Screen name={NavigationRoutes.ForgotPassword} component={ForgotPassword} />
+    <Stack.Screen name={NavigationRoutes.ResetPassword} component={ResetPassword} />
   </Stack.Navigator>
 )
 

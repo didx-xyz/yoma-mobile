@@ -24,7 +24,6 @@ const styles = {
     zIndex: 1,
   } as ViewStyle,
   innerProgressbar: {
-    ...StyleSheet.absoluteFillObject,
     backgroundColor: colors[Colors.primaryRed],
     borderRadius: 18,
   } as ViewStyle,
@@ -34,7 +33,7 @@ const styles = {
     zIndex: 1,
     paddingVertical: 5,
   } as TextStyle,
-  buttonStyle: {
+  button: {
     zIndex: 1,
     width: '100%',
     alignSelf: 'center',

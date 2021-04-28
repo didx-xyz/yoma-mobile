@@ -4,10 +4,11 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
+
+import styles from './ForgotPasswordForm.styles'
 
 interface Props {
   setSubmitted: Function
@@ -23,8 +24,7 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
       validationSchema={yup.object().shape({
         email: yup.string().min(2).max(255).email().required(t('required')).label('Email'),
       })}
-      onSubmit={async (values, actions) => {
-        console.log('Register values: ', values)
+      onSubmit={async values => {
         await api.auth
           .resetPassword({ ...values })
           .then((response: any) => {
@@ -47,14 +47,13 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
             label={t('email')}
             keyboardType="email-address"
             autoCapitalize="none"
-            touched={touched.email}
+            isTouched={touched.email}
             error={errors.email}
           />
           <ButtonContainer
             disabled={isSubmitting}
             buttonText={t<string>('sendInstruction')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
-            buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
             onPress={handleSubmit}
           />
         </View>
