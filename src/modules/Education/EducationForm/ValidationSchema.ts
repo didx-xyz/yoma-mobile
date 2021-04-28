@@ -18,8 +18,5 @@ export default () => {
       )
       .nullable()
       .required('Required'),
-    // skillNames: yup
-    //   .array()
-    //   .required('Required'),
   })
 }

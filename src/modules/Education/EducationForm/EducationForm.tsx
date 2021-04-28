@@ -17,10 +17,10 @@ interface Props {
 
 const EducationForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
-  const [present, setPresent] = useState(false)
+  const [isStudyingHere, setIsStudyingHere] = useState(false)
   const [skillsList, setSkillsList] = useState([])
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
-  const [infoModal, setInfoModal] = useState(false)
+  const [showInfoModal, setShowInfoModal] = useState(false)
 
   const formRef = useRef<any>()
 
@@ -43,8 +43,8 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={styles.formView}>
           <InfoModal
-            visible={infoModal}
-            closeModal={() => setInfoModal(false)}
+            visible={showInfoModal}
+            closeModal={() => setShowInfoModal(false)}
             infoText={
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
             }
@@ -55,7 +55,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('school')}
             value={values.school}
             label={t('School')}
-            touched={touched.school}
+            isTouched={touched.school}
             error={errors.school}
             showTitle={values.school !== ''}
           />
@@ -64,7 +64,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('school')}
             value={values.school}
             label={t('Qualification type')}
-            touched={touched.school}
+            isTouched={touched.school}
             error={errors.school}
             showTitle={values.school !== ''}
           />
@@ -73,18 +73,18 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('country')}
             value={values.country}
             label={t('Country or region')}
-            touched={touched.country}
+            isTouched={touched.country}
             error={errors.country}
             showTitle={values.country !== ''}
           />
           <View style={styles.checkBoxView}>
             <TouchableOpacity
               onPress={() => {
-                setPresent(!present)
+                setIsStudyingHere(!isStudyingHere)
               }}
               style={styles.checkBox}
             >
-              <Optional condition={present} fallback={<BlueHollowCircle />}>
+              <Optional condition={isStudyingHere} fallback={<BlueHollowCircle />}>
                 <BlueTick />
               </Optional>
             </TouchableOpacity>
@@ -100,7 +100,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               value={values.startDate}
               label={t('Start date')}
-              touched={touched.startDate}
+              isTouched={touched.startDate}
               error={errors.startDate}
               showTitle={values.startDate !== ''}
             />
@@ -112,7 +112,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               }}
               value={values.endDate}
               label={t('End date')}
-              touched={touched.endDate}
+              isTouched={touched.endDate}
               error={errors.endDate}
               showTitle={values.endDate !== ''}
             />
@@ -122,7 +122,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('description')}
             value={values.description}
             label={t('Description')}
-            touched={touched.description}
+            isTouched={touched.description}
             error={errors.description}
             showTitle={values.description !== ''}
           />
@@ -151,7 +151,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             error={errors.skillNames}
           />
           <Upload onPress={() => {}} />
-          <TouchableOpacity onPress={() => setInfoModal(true)} style={styles.bottomView}>
+          <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottomView}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
               {t('Find inspiration on how to write a great education description.')}
             </Text.Meta>

@@ -1,4 +1,4 @@
-import { ColorCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,7 +13,7 @@ interface Props {
 
 const Education = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
   const [education, setEducation] = useState([])
   const formRef = useRef<any>()
 
@@ -26,18 +26,18 @@ const Education = ({ navigation }: Props) => {
           formRef.current.handleSubmit()
         }}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={<FlatList data={education} renderItem={() => <Text.Body>RenderItem</Text.Body>} />}
       >
         <ScrollView>
-          <ColorCard>
+          <Card>
             <EducationForm navigation={navigation} ref={formRef} />
-          </ColorCard>
+          </Card>
         </ScrollView>
       </Optional>
     </ViewContainer>

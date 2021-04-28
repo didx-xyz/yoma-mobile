@@ -1,6 +1,6 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
-import { ColorCard, DateDisplay, Optional } from 'components'
+import { Card, DateDisplay, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
@@ -98,9 +98,9 @@ const Experience = ({ navigation }: Props) => {
         fallback={<FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />}
       >
         <ScrollView>
-          <ColorCard>
+          <Card>
             <ExperienceForm navigation={navigation} ref={formRef} />
-          </ColorCard>
+          </Card>
         </ScrollView>
       </Optional>
     </ViewContainer>

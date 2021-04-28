@@ -1,4 +1,4 @@
-export type EducationValue = {
+export type EducationFields = {
   school: string
   description: string
   id: string

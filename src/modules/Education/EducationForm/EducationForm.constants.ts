@@ -1,6 +1,6 @@
-import { EducationValue } from './EducationForm.types'
+import { EducationFields } from './EducationForm.types'
 
-export const INITIAL_VALUES: EducationValue = {
+export const INITIAL_VALUES: EducationFields = {
   school: '',
   description: '',
   id: '',
