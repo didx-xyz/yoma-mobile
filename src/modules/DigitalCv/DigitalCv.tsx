@@ -1,4 +1,5 @@
 import { ViewContainer, HomeHeader, FirstTimeCard, CvCard } from 'components'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
@@ -15,13 +16,13 @@ const DigitalCv = ({ navigation }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <HomeHeader navigation={navigation} />
-      <ScrollView contentContainerStyle={{ paddingVertical: 15 }}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FirstTimeCard navigation={navigation} />
         <CvCard
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
           hasCount={false}
-          onEdit={() => navigation.navigate('About')}
+          onEdit={() => navigation.navigate(NavigationRoutes.About)}
         />
         <CvCard
           hasCount={true}
@@ -30,7 +31,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={Colors.primaryBlue}
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
-          onEdit={() => navigation.navigate('Experience')}
+          onEdit={() => navigation.navigate(NavigationRoutes.Experience)}
         />
         <CvCard
           hasCount={true}
@@ -39,7 +40,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={Colors.primaryRed}
           cardTitle={t('Education')}
           defaultText={t('Which school, university or college did you attend?')}
-          onEdit={() => navigation.navigate('Education')}
+          onEdit={() => navigation.navigate(NavigationRoutes.Education)}
         />
         <CvCard
           hasCount={true}
@@ -48,7 +49,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={Colors.primaryGreen}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
-          onEdit={() => navigation.navigate('Skills')}
+          onEdit={() => navigation.navigate(NavigationRoutes.Skills)}
         />
       </ScrollView>
     </ViewContainer>

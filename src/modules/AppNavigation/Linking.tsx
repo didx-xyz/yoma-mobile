@@ -18,7 +18,7 @@ const config = {
 }
 
 const linking: LinkingOptions = {
-  prefixes: [Env.YOMA_APP_BASE_PATH],
+  prefixes: [Env.YOMA_API_BASE_PATH],
   config,
 }
 

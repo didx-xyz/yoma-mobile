@@ -1,9 +1,3 @@
 export const SELECTED_VALUE_DEFAULT = ''
 export const FILTERED_SKILLS_DEFAULT = []
-export const HEIGHT_OF_CONTAINER = 300
-export const OVERALL_SPACING = 10
-export const LEFT_SPACING = 5
-export const TOP_SPACING = 5
-export const HORIZONTAL_SPACING = 10
-export const TEXT_SPACING = 2
-export const ITEM_RADIUS = 20
+export const MOCK_SKILLS_LIST = ['Software Engineering', 'figma', 'UI', 'UX', 'Design']

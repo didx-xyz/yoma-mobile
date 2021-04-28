@@ -1,6 +1,6 @@
-import { EducationValue } from './EducationForm.types'
+import { EducationFields } from './EducationForm.types'
 
-export const INITIAL_VALUES: EducationValue = {
+export const INITIAL_VALUES: EducationFields = {
   school: '',
   description: '',
   qualificationType: '',
@@ -12,3 +12,9 @@ export const INITIAL_VALUES: EducationValue = {
   organisationId: '',
   organisationName: '',
 }
+
+export const MOCKED_SKILLS_DATA = [
+  { label: 'UI', value: 'UI' },
+  { label: 'Design', value: 'Design' },
+  { label: 'UX', value: 'UX' },
+]

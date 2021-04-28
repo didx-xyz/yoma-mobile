@@ -1,5 +1,5 @@
 import ButtonContainer from './ButtonContainer'
-import ColorCard from './ColorCard'
+import Card from './Card'
 import CustomInput from './CustomInput'
 import CvCard from './CvCard'
 import DateDisplay from './DateDisplay'
@@ -21,12 +21,13 @@ import SkillCard from './SkillCard'
 import SocialLogin from './SocialLogin'
 import SocialRegistration from './SocialRegistration'
 import Spinner from './Spinner'
+import Tag from './Tag'
 import Upload from './Upload'
 import ViewContainer from './ViewContainer'
 
 export {
   ButtonContainer,
-  ColorCard,
+  Card,
   CustomInput,
   CvCard,
   DateDisplay,
@@ -48,6 +49,7 @@ export {
   SocialLogin,
   SocialRegistration,
   Spinner,
+  Tag,
   Upload,
   ViewContainer,
 }

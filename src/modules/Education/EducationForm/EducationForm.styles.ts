@@ -2,12 +2,10 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
-import { FORM_INNER_SPACING, HORIZONTAL_SPACING, VERTICAL_SPACING } from '../Education.constants'
-
 const styles = StyleSheet.create({
   formView: {
     flex: 1,
-    padding: FORM_INNER_SPACING,
+    padding: 12,
   } as ViewStyle,
   checkBoxView: {
     flexDirection: 'row',
@@ -19,12 +17,12 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
   } as ViewStyle,
   checkBox: {
-    marginRight: HORIZONTAL_SPACING,
+    marginRight: 10,
   } as ViewStyle,
   datePickersRowView: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    marginTop: VERTICAL_SPACING,
+    marginTop: 10,
   } as ViewStyle,
   placeholderStyle: {
     color: colors[Colors.menuGrey],
@@ -33,10 +31,10 @@ const styles = StyleSheet.create({
   bottomView: {
     borderTopWidth: 1,
     borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
-    marginTop: VERTICAL_SPACING,
+    marginTop: 10,
   } as ViewStyle,
   bottomText: {
-    marginVertical: VERTICAL_SPACING,
+    marginVertical: 10,
   } as TextStyle,
 })
 
