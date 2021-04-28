@@ -1,6 +1,10 @@
-export enum ButtonTypes {
-  Primary = 'Primary',
-  PrimaryOutline = 'PrimaryOutline',
-  PrimaryClear = 'PrimaryClear',
-  Secondary = 'Secondary',
+export enum ButtonVariants {
+  Primary = 'primary',
+  Outline = 'outline',
+  Clear = 'clear',
+}
+
+export enum ButtonSizes {
+  Default = 'defaultSize',
+  Slim = 'slimSize',
 }
