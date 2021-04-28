@@ -2,6 +2,7 @@ import api from 'api'
 import { EditIcon } from 'assets/images'
 import { NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
 import Text, { Bold, TextAlign } from 'components/Typography'
+import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,7 +21,7 @@ interface Props {
 const Profile = ({ navigation }: Props) => {
   const [profileImage, setProfileImage] = useState<any>('')
   const { t } = useTranslation()
-  const childRef = useRef<any>()
+  const childRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
     getUserData()

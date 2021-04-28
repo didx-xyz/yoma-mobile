@@ -1,7 +1,7 @@
 import { BlueHollowCircle, BlueTick } from 'assets/images'
 import { CustomInput, Spinner, DatePicker, DropDownTags, InfoModal, Upload, Optional } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
-import { Formik } from 'formik'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
@@ -22,7 +22,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [showInfoModal, setShowInfoModal] = useState(false)
 
-  const formRef = useRef<any>()
+  const formRef = useRef<FormikProps<FormikValues>>()
 
   useImperativeHandle(ref, () => ({
     handleSubmit() {

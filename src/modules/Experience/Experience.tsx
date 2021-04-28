@@ -5,6 +5,7 @@ import NormalHeader from 'components/NormalHeader/NormalHeader'
 import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
+import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -26,7 +27,7 @@ const Experience = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [experience, setExperience] = useState([])
-  const formRef = useRef<any>()
+  const formRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
     const getAllJobs = async () => {
