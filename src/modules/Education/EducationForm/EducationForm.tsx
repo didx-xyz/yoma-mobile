@@ -41,7 +41,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       onSubmit={values => {}}
     >
       {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
-        <View style={styles.formView}>
+        <View style={styles.form}>
           <InfoModal
             visible={showInfoModal}
             closeModal={() => setShowInfoModal(false)}
@@ -90,7 +90,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             </TouchableOpacity>
             <Text.Body>{t('I currently study here')}</Text.Body>
           </View>
-          <View style={styles.datePickersRowView}>
+          <View style={styles.row}>
             <DatePicker
               onChangeDate={(date: string) => {
                 handleChange('startDate')
@@ -136,7 +136,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             searchablePlaceholderTextColor="gray"
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
-            placeholderStyle={styles.placeholderStyle}
+            placeholderStyle={styles.placeholder}
             showTitle={values.skillNames.length > 0}
             defaultValue={selectedSkills}
             onChangeItem={item => {
@@ -150,7 +150,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             error={errors.skillNames}
           />
           <Upload onPress={() => {}} />
-          <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottomView}>
+          <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottom}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
               {t('Find inspiration on how to write a great education description.')}
             </Text.Meta>
