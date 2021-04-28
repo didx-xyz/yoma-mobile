@@ -13,7 +13,7 @@ interface Props {
 
 const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
   const [skills, setSkills] = useState([])
   const formRef = useRef<any>()
 
@@ -26,12 +26,12 @@ const Skills = ({ navigation }: Props) => {
           formRef.current.handleSubmit()
         }}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={<FlatList data={skills} renderItem={() => <Text.Body>render</Text.Body>} />}
       >
         <SkillsForm />
