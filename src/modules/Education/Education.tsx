@@ -7,7 +7,7 @@ import { FlatList, ScrollView } from 'react-native'
 
 import { MOCKED_EDUCATION_DATA } from './Education.constants'
 import styles from './Education.styles'
-import { EducationValue } from './Education.types'
+import { EductationEntry } from './Education.types'
 import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
@@ -20,7 +20,7 @@ const Education = ({ navigation }: Props) => {
   const [education, setEducation] = useState(MOCKED_EDUCATION_DATA)
   const formRef = useRef<FormikProps<FormikValues>>()
 
-  const renderItem = ({ description, endDate, organisationLogoURL, qualification, school }: EducationValue) => {
+  const renderItem = ({ description, endDate, organisationLogoURL, qualification, school }: EductationEntry) => {
     return (
       <InfoCard
         title={school}
