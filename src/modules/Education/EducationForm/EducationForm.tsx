@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import { INITIAL_VALUES } from './EducationForm.constants'
+import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
 import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
@@ -18,12 +18,7 @@ interface Props {
 const EducationForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [isStudyingHere, setIsStudyingHere] = useState(false)
-  // TODO: Adding static data to complete the UI
-  const [skillsList, setSkillsList] = useState([
-    { label: 'UI', value: 'UI' },
-    { label: 'Design', value: 'Design' },
-    { label: 'UX', value: 'UX' },
-  ])
+  const [skillsList, setSkillsList] = useState(MOCKED_SKILLS_DATA)
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [showInfoModal, setShowInfoModal] = useState(false)
 
@@ -43,7 +38,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       initialValues={INITIAL_VALUES}
       enableReinitialize={true}
       validationSchema={ValidationSchema}
-      onSubmit={values => {}}
     >
       {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={styles.formView}>
@@ -97,8 +91,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
           </View>
           <View style={styles.datePickersRowView}>
             <DatePicker
-              onChangeDate={(date: string) => {
-                console.log(date)
+              onDateChange={(date: string) => {
                 handleChange('startDate')
                 handleBlur('startDate')
                 setFieldValue('startDate', date)
@@ -110,7 +103,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               showTitle={values.startDate !== ''}
             />
             <DatePicker
-              onChangeDate={(date: string) => {
+              onDateChange={(date: string) => {
                 handleChange('endDate')
                 handleBlur('endDate')
                 setFieldValue('endDate', date)
@@ -153,7 +146,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               setFieldValue('skillNames', selectedSkills)
             }}
             tags={selectedSkills}
-            touched={touched.skillNames}
             error={errors.skillNames}
           />
           <Upload onPress={() => {}} />
