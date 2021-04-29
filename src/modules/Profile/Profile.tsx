@@ -90,7 +90,7 @@ const Profile = ({ navigation }: Props) => {
                 onPress={captureImage}
                 percent={5}
                 showEditIcon={true}
-                profileOuterStyle={styles.profileOuterView}
+                profileOuterStyle={styles.profileContainer}
               />
             }
           >

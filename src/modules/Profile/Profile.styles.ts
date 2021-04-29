@@ -29,7 +29,7 @@ const styles = {
     right: 0,
     bottom: -5,
   } as ViewStyle,
-  profileOuterView: {
+  profileContainer: {
     marginTop: -50,
     alignSelf: 'center',
   } as ViewStyle,

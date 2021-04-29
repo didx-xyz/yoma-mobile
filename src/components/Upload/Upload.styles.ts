@@ -2,7 +2,7 @@ import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 const styles = {
-  innerView: {
+  inner: {
     flexDirection: 'row',
     backgroundColor: colors[Colors.lightGrey],
     borderRadius: 20,
@@ -11,7 +11,7 @@ const styles = {
     justifyContent: 'space-between',
     marginVertical: 10,
   } as ViewStyle,
-  buttonView: {
+  button: {
     backgroundColor: colors[Colors.white],
     paddingHorizontal: 15,
     borderRadius: 25,

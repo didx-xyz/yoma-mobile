@@ -22,7 +22,7 @@ import SocialRegistration from './SocialRegistration'
 import Spinner from './Spinner'
 import Tag from './Tag'
 import Upload from './Upload'
-import ViewContainer from './ViewContainer'
+import ViewContainer from './ViewContainer/ViewContainer'
 
 export {
   ButtonContainer,
