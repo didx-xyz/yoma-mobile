@@ -7,4 +7,4 @@ export const mapToDropDownArray = (array: Record<string, string>[], valueProp = 
   }))
 }
 
-export const getFirstCharAndUppercase = (data: string) => pipe(trim, head, toUpper)(data)
+export const getUppercasedHead = (data: string) => pipe(trim, head, toUpper)(data)

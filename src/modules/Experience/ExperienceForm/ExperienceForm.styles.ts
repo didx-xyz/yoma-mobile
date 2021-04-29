@@ -21,7 +21,7 @@ const styles = {
   checkBox: {
     paddingRight: 10,
   } as ViewStyle,
-  datePickersRowView: {
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
@@ -30,7 +30,7 @@ const styles = {
     color: colors[Colors.menuGrey],
     marginLeft: 0,
   } as ViewStyle,
-  bottomView: {
+  bottom: {
     borderTopWidth: 1,
     borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
     marginTop: 10,

@@ -21,8 +21,8 @@ const SkillsForm = () => {
   }
 
   return (
-    <View style={styles.outerContainer}>
-      <Card style={styles.innerContainer}>
+    <View style={styles.container}>
+      <Card style={styles.inner}>
         <Text.Meta>{t('Skills Developed')}</Text.Meta>
         <Optional condition={skillsList.length > 0}>
           <FlatList
@@ -36,7 +36,7 @@ const SkillsForm = () => {
         <Autocomplete
           autoCapitalize="none"
           autoCorrect={false}
-          containerStyle={styles.autocompleteContainer}
+          containerStyle={styles.autocompleteInputContainer}
           data={filteredSkills}
           defaultValue={selectedValue ?? ''}
           onChangeText={text => setFilteredSkills(findSkill(skillsList, text))}
@@ -56,7 +56,7 @@ const SkillsForm = () => {
             ),
             keyExtractor: index => index.toString(),
           }}
-          inputContainerStyle={styles.inputContainerStyle}
+          inputContainerStyle={styles.inputContainer}
         />
       </Card>
     </View>

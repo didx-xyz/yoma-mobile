@@ -4,7 +4,7 @@ import React from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { Colors } from 'styles'
-import { getFirstCharAndUppercase } from 'utils/strings.utils'
+import { getUppercasedHead } from 'utils/strings.utils'
 
 import Card from '../Card'
 import DateDisplay from '../DateDisplay'
@@ -27,9 +27,7 @@ const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props
       <View style={styles.row}>
         <Optional
           condition={logo !== ''}
-          fallback={
-            <Avatar size="small" rounded title={getFirstCharAndUppercase(title)} containerStyle={styles.avatar} />
-          }
+          fallback={<Avatar size="small" rounded title={getUppercasedHead(title)} containerStyle={styles.avatar} />}
         >
           <Image source={{ uri: logo }} style={styles.image} />
         </Optional>
