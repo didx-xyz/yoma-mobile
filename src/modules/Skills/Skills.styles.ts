@@ -13,7 +13,7 @@ const styles = {
   outerCard: {
     padding: 10,
   } as ViewStyle,
-  certificateCountView: {
+  certificateCount: {
     height: CERTIFICATE_COUNT_SIZE,
     width: CERTIFICATE_COUNT_SIZE,
     alignItems: 'center',

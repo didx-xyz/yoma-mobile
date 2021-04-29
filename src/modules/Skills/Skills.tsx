@@ -40,7 +40,7 @@ const Skills = ({ navigation }: Props) => {
               data={skills}
               ListHeaderComponent={
                 <View style={styles.cardHeader}>
-                  <View style={styles.certificateCountView}>
+                  <View style={styles.certificateCount}>
                     <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
                       60
                     </Text.Header>
