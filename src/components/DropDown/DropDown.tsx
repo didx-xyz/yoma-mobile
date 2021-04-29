@@ -8,13 +8,13 @@ import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDown.styles'
 
 type Props = DropDownPickerProps & {
-  touched?: boolean
+  isTouched?: boolean
   error?: string
   fieldName?: string
   showTitle?: boolean
 }
 
-const DropDown = ({ touched, error, fieldName, showTitle = false, ...props }: Props) => {
+const DropDown = ({ isTouched, error, fieldName, showTitle = false, ...props }: Props) => {
   return (
     <View>
       <Optional condition={showTitle}>
@@ -24,13 +24,13 @@ const DropDown = ({ touched, error, fieldName, showTitle = false, ...props }: Pr
       </Optional>
       <DropDownPicker
         containerStyle={styles.container}
-        style={styles.dropDownStyle}
-        dropDownStyle={styles.dropDownViewStyle}
-        itemStyle={styles.itemStyle}
+        style={styles.dropDown}
+        dropDownStyle={styles.dropDownView}
+        itemStyle={styles.item}
         {...props}
       />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {touched && error}
+        {isTouched && error}
       </Text.Meta>
     </View>
   )

@@ -2,7 +2,7 @@ import { BlueRightCircle, LightYellowPattern, RLabsLogo } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors, TextStyles } from 'styles'
+import { Colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
 import ButtonContainer from '../ButtonContainer'
@@ -45,8 +45,7 @@ const FirstTimeCard = ({ navigation }: Props) => {
       </Text.Header>
       <ButtonContainer
         buttonText={t<string>('Let’s do it')}
-        buttonStyle={[ButtonStyles.largeTertiary3Button, styles.buttonStyle]}
-        buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+        buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
         onPress={() => {}}
       />
       <View style={styles.blueCircle}>

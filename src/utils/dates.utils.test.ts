@@ -1,6 +1,6 @@
 import * as SUT from './dates.utils'
 
-describe('utils/numbers.utils', () => {
+describe('dates.utils', () => {
   describe('formatDateString', () => {
     it.each([
       ['MMM yyyy', '2016-10-04T00:00:00', 'Oct 2016'],

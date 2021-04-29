@@ -1,10 +1,12 @@
-import { ColorCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { FormikProps, FormikValues } from 'formik'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import { MOCKED_CHALLEGES } from './NewChallenge.constants'
 import styles from './NewChallenge.styles'
-import { ChallengeValue } from './NewChallenge.types'
+import { ChallengeEntry } from './NewChallenge.types'
 import NewChallengeForm from './NewChallengeForm/NewChallengeForm'
 
 interface Props {
@@ -13,26 +15,11 @@ interface Props {
 
 const NewChallenge = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
-  const [challenges, setChallenges] = useState([
-    {
-      challenge: 'COVID Challenge',
-      organisationLogoURL: '',
-      challengeHostProvider: '',
-      endDate: '03/01/2021',
-      description: '',
-    },
-    {
-      challenge: 'Beyond your future challenge',
-      organisationLogoURL: '',
-      challengeHostProvider: '',
-      endDate: '04/01/2020',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
-    },
-  ])
-  const formRef = useRef<any>()
+  const [isSaved, setIsSaved] = useState(false)
+  const [challenges, setChallenges] = useState(MOCKED_CHALLEGES)
+  const formRef = useRef<FormikProps<FormikValues>>()
 
-  const renderItem = ({ challenge, description, endDate, organisationLogoURL }: ChallengeValue) => {
+  const renderItem = ({ challenge, description, endDate, organisationLogoURL }: ChallengeEntry) => {
     return <InfoCard title={challenge} description={description} endDate={endDate} logo={organisationLogoURL} />
   }
 
@@ -41,16 +28,14 @@ const NewChallenge = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={t('Challenges')}
-        onSave={() => {
-          formRef.current.handleSubmit()
-        }}
+        onSave={() => formRef.current.handleSubmit()}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={
           <FlatList
             data={challenges}
@@ -60,9 +45,9 @@ const NewChallenge = ({ navigation }: Props) => {
         }
       >
         <ScrollView>
-          <ColorCard>
+          <Card>
             <NewChallengeForm navigation={navigation} ref={formRef} />
-          </ColorCard>
+          </Card>
         </ScrollView>
       </Optional>
     </ViewContainer>

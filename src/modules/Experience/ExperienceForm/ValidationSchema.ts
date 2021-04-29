@@ -18,8 +18,5 @@ export const ValidationSchema = () => {
       )
       .nullable()
       .required('Required'),
-    // skillNames: yup
-    //   .array()
-    //   .required('Required'),
   })
 }

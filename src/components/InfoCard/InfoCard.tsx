@@ -4,9 +4,9 @@ import React from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { Colors } from 'styles'
-import { getFirstCharacter } from 'utils/strings.utils'
+import { getUppercasedHead } from 'utils/strings.utils'
 
-import ColorCard from '../ColorCard'
+import Card from '../Card'
 import DateDisplay from '../DateDisplay'
 import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
@@ -23,11 +23,11 @@ type Props = {
 
 const InfoCard = ({ description, endDate, logo, subtitle = '', title, onEdit }: Props) => {
   return (
-    <ColorCard style={styles.cardView}>
+    <Card style={styles.cardView}>
       <View style={styles.row}>
         <Optional
           condition={logo !== ''}
-          fallback={<Avatar size="small" rounded title={getFirstCharacter(title)} containerStyle={styles.avatar} />}
+          fallback={<Avatar size="small" rounded title={getUppercasedHead(title)} containerStyle={styles.avatar} />}
         >
           <Image source={{ uri: logo }} style={styles.image} />
         </Optional>
@@ -55,7 +55,7 @@ const InfoCard = ({ description, endDate, logo, subtitle = '', title, onEdit }: 
       <Optional condition={description !== ''}>
         <Text.Body>{description}</Text.Body>
       </Optional>
-    </ColorCard>
+    </Card>
   )
 }
 

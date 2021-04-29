@@ -1,11 +1,12 @@
 import { YellowCircleRight } from 'assets/images'
 import { LargeHeaderContainer, ViewContainer } from 'components'
+import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
-import { Colors, colors, TextStyles } from 'styles'
+import { Colors, colors } from 'styles'
 
-import Text, { FontWeights, HeaderLevels, TextAlign } from '../../../../components/Typography'
+import Text, { BodyLevels, HeaderLevels, TextAlign } from '../../../../components/Typography'
 import RegisterForm from './RegisterForm/RegisterForm'
 import styles from './RegisterWithEmail.styles'
 
@@ -27,26 +28,18 @@ const RegisterWithEmail = ({ navigation }: Props) => {
           circleImageStyle={styles.yellowCircleContainer}
         />
         <View style={styles.whiteCard}>
-          <Text.Header
-            level={HeaderLevels.h3}
-            align={TextAlign.center}
-            weight={FontWeights.bold_700}
-            style={[styles.cardHeader]}
-          >
+          <Text.Header level={HeaderLevels.h3} align={TextAlign.center}>
             {t('register')}
           </Text.Header>
           <RegisterForm />
         </View>
-        <Text.Header level={HeaderLevels.h5} style={styles.notice}>
+        <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.notice}>
           {t('alreadyHaveAccount')}
-          <Text.Body
-            style={[TextStyles.buttonText, TextStyles.textTertiary3, { textAlign: 'center' }]}
-            onPress={() => navigation.navigate('Login')}
-          >
+          <Text.Body color={Colors.primaryGreen} onPress={() => navigation.navigate(NavigationRoutes.Login)}>
             &nbsp;
             {t('login')}.
           </Text.Body>
-        </Text.Header>
+        </Text.Body>
       </ScrollView>
     </ViewContainer>
   )
