@@ -1,10 +1,8 @@
 import { BlueRightCircle, LightYellowPattern, RLabsLogo } from 'assets/images'
-import { ButtonContainer } from 'components'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
-import ButtonStyles from 'styles/button.styles'
 
 import Button, { ButtonSizes } from '../Button'
 import Text, { Bold, FontWeights, HeaderLevels, Span } from '../Typography'
@@ -44,7 +42,7 @@ const FirstTimeCard = ({ navigation }: Props) => {
       <Text.Header level={HeaderLevels.h6} weight={FontWeights.bold_700} style={styles.percentText}>
         {t('1% complete')}
       </Text.Header>
-      <Button label={t('Let’s do it')} onPress={() => {}} size={ButtonSizes.Slim} style={styles.buttonStyle} />
+      <Button label={t('Let’s do it')} onPress={() => {}} size={ButtonSizes.Slim} style={styles.button} />
       <View style={styles.blueCircle}>
         <BlueRightCircle />
       </View>

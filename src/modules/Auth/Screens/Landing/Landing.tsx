@@ -49,7 +49,7 @@ const Landing = ({ navigation }: Props) => {
           />
           <Button
             variant={ButtonVariants.Clear}
-            labelColor={Colors.white}
+            color={Colors.white}
             label={t('login')}
             onPress={() => navigation.navigate(NavigationRoutes.Login)}
             style={styles.loginButton}

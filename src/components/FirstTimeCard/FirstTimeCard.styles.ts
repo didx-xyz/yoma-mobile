@@ -26,6 +26,7 @@ const styles = {
   innerProgressbar: {
     backgroundColor: colors[Colors.primaryRed],
     borderRadius: 18,
+    height: '100%',
   } as ViewStyle,
   percentText: {
     textAlign: 'right',

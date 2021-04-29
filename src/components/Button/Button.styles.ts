@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
 import { ButtonSizes, ButtonVariants } from './Button.types'

@@ -3,6 +3,7 @@ import { StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native
 
 import { Colors } from '../../styles'
 import Text, { FontWeights, TextAlign } from '../Typography'
+import { mapVariantToLabelColor } from './Button.constants'
 import styles from './Button.styles'
 import { ButtonSizes, ButtonVariants } from './Button.types'
 
@@ -11,9 +12,9 @@ interface Props {
   onPress: () => void
   variant?: ButtonVariants
   size?: ButtonSizes
+  color?: Colors
   isDisabled?: boolean
   isFullWidth?: boolean
-  labelColor?: Colors
   labelStyle?: TextStyle
   style?: ViewStyle
 }
@@ -24,12 +25,12 @@ const Button = ({
   size = ButtonSizes.Default,
   isDisabled = false,
   isFullWidth = true,
-  labelColor = Colors.white,
+  color,
   labelStyle,
   style,
 }: Props) => {
   const [buttonStyle, setButtonStyle] = useState<ViewStyle>(styles[ButtonVariants.Primary])
-  const [textColor, setTextColor] = useState<Colors>(Colors.white)
+  const [labelColor, setLabelColor] = useState<Colors>(Colors.white)
 
   useEffect(() => {
     const variantStyle = styles[variant]
@@ -40,13 +41,13 @@ const Button = ({
   }, [isFullWidth, variant, size, style])
 
   useEffect(() => {
-    const labelVariantColor = variant === ButtonVariants.Primary ? Colors.white : Colors.primaryGreen
-    setTextColor(labelColor || labelVariantColor)
-  }, [variant, labelColor])
+    const labelVariantColor = mapVariantToLabelColor[variant]
+    setLabelColor(color || labelVariantColor)
+  }, [variant, color])
 
   return (
     <TouchableOpacity onPress={onPress} disabled={isDisabled} style={buttonStyle}>
-      <Text.Body align={TextAlign.center} weight={FontWeights.bold_700} color={textColor} style={labelStyle}>
+      <Text.Body align={TextAlign.center} weight={FontWeights.bold_700} color={labelColor} style={labelStyle}>
         {label}
       </Text.Body>
     </TouchableOpacity>
