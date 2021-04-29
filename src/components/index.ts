@@ -21,7 +21,7 @@ import SocialLogin from './SocialLogin'
 import SocialRegistration from './SocialRegistration'
 import Spinner from './Spinner'
 import Upload from './Upload'
-import ViewContainer from './ViewContainer'
+import ViewContainer from './ViewContainer/ViewContainer'
 
 export {
   ButtonContainer,
