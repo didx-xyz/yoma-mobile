@@ -21,6 +21,7 @@ const LIGHT_GREY = '#F3F6FA'
 const UNSAVED_STYLE_LIGHT_GREY = '#E5E5E5'
 const UNSAVED_STYLE_LIGHT_BLUE = '#E5F7FD'
 const UNSAVED_STYLE_LIGHT_RED = '#FFE4E6'
+const UNSAVED_STYLE_PALE_YELLOW = '#FDCB86'
 const TRANSPARENT = 'transparent'
 
 export default {
@@ -44,5 +45,6 @@ export default {
   [Colors.transparent]: TRANSPARENT,
   [Colors.unsavedStyleLightBlue]: UNSAVED_STYLE_LIGHT_BLUE,
   [Colors.unsavedStyleLightRed]: UNSAVED_STYLE_LIGHT_RED,
+  [Colors.unsavedStylePaleYellow]: UNSAVED_STYLE_PALE_YELLOW,
   [Colors.lightGrey]: LIGHT_GREY,
 }

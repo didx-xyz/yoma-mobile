@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
 
+import Background from '../../../../components/Background/Background'
 import Button, { ButtonSizes, ButtonVariants } from '../../../../components/Button'
 import Text, { HeaderLevels, TextAlign } from '../../../../components/Typography'
 import styles from './Landing.styles'
@@ -18,13 +19,13 @@ const Landing = ({ navigation }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <ViewContainer style={styles.container}>
-      <View style={styles.background}>
+    <ViewContainer>
+      <Background>
         <RedSemiCircle style={styles.redSemiCircle} />
         <View style={styles.purpleSemiCircleContainer}>
           <PurpleSemiCircle />
         </View>
-      </View>
+      </Background>
       <View style={styles.wrapper}>
         <View style={styles.logoContainer}>
           <WhiteLogo />

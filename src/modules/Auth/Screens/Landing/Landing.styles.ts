@@ -1,13 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
 
 const styles = {
-  container: {
-    backgroundColor: colors[Colors.primaryYellow],
-  } as ViewStyle,
-  background: {
-    ...StyleSheet.absoluteFillObject,
-  } as ViewStyle,
   redSemiCircle: {
     position: 'absolute',
     left: 0,

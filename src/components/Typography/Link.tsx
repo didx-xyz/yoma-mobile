@@ -2,8 +2,8 @@ import React from 'react'
 
 import { Colors } from '../../styles'
 import { GetComponentProps, WithChildren } from '../../types/react.types'
-import Bold from './Bold'
 import Text from './Text'
+import { FontWeights } from './Text.types'
 
 type Props = WithChildren<Omit<GetComponentProps<typeof Text>, 'color'>> & {
   color?: Colors
@@ -12,8 +12,15 @@ type Props = WithChildren<Omit<GetComponentProps<typeof Text>, 'color'>> & {
 
 const Link = ({ onPress, children, color = Colors.primaryGreen, ...props }: Props) => {
   return (
-    <Text maxFontSizeMultiplier={undefined} minimumFontScale={undefined} color={color} onPress={onPress} {...props}>
-      <Bold>{children}</Bold>
+    <Text
+      maxFontSizeMultiplier={undefined}
+      minimumFontScale={undefined}
+      weight={FontWeights.bold_700}
+      color={color}
+      onPress={onPress}
+      {...props}
+    >
+      {children}
     </Text>
   )
 }

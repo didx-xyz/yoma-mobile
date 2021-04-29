@@ -2,8 +2,7 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
 const styles = {
-  cardView: {
-    backgroundColor: colors[Colors.primaryYellow],
+  container: {
     width: '97%',
     borderRadius: 25,
     alignSelf: 'center',
@@ -12,16 +11,14 @@ const styles = {
     paddingHorizontal: 20,
   } as ViewStyle,
   bodyText: {
-    zIndex: 1,
     marginTop: 5,
   } as TextStyle,
   progressBar: {
     height: 6,
     width: '100%',
     alignSelf: 'center',
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.unsavedStylePaleYellow],
     borderRadius: 18,
-    zIndex: 1,
   } as ViewStyle,
   innerProgressbar: {
     backgroundColor: colors[Colors.primaryRed],
@@ -31,12 +28,8 @@ const styles = {
   percentText: {
     textAlign: 'right',
     paddingRight: 10,
-    zIndex: 1,
     paddingVertical: 5,
   } as TextStyle,
-  button: {
-    zIndex: 1,
-  } as ViewStyle,
   blueCircle: {
     position: 'absolute',
     left: 0,

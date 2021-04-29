@@ -19,6 +19,7 @@ export enum Colors {
   unsavedStyleLightGrey = 'unsavedStyleLightGrey',
   unsavedStyleLightBlue = 'unsavedStyleLightBlue',
   unsavedStyleLightRed = 'unsavedStyleLightRed',
+  unsavedStylePaleYellow = 'unsavedStylePaleYellow',
   lightGrey = 'lightGrey',
 }
 

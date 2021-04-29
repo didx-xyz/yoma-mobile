@@ -3,7 +3,7 @@ import { StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native
 
 import { Colors } from '../../styles'
 import Text, { FontWeights, TextAlign } from '../Typography'
-import { mapVariantToLabelColor } from './Button.constants'
+import { MAP_VARIANT_TO_LABEL_COLOR } from './Button.constants'
 import styles from './Button.styles'
 import { ButtonSizes, ButtonVariants } from './Button.types'
 
@@ -36,12 +36,12 @@ const Button = ({
     const variantStyle = styles[variant]
     const sizeStyle = styles[size]
     const fullWidthStyle = isFullWidth ? styles.fullWidth : {}
-    const flattenedStyles = StyleSheet.flatten([variantStyle, sizeStyle, fullWidthStyle, style])
-    setButtonStyle(flattenedStyles)
+    const flattenedButtonStyles = StyleSheet.flatten([variantStyle, sizeStyle, fullWidthStyle, style])
+    setButtonStyle(flattenedButtonStyles)
   }, [isFullWidth, variant, size, style])
 
   useEffect(() => {
-    const labelVariantColor = mapVariantToLabelColor[variant]
+    const labelVariantColor = MAP_VARIANT_TO_LABEL_COLOR[variant]
     setLabelColor(color || labelVariantColor)
   }, [variant, color])
 
