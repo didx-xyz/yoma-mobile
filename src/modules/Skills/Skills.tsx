@@ -1,10 +1,11 @@
-import { ColorCard, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import { Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import Text, { HeaderLevels } from 'components/Typography'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, View } from 'react-native'
 import { Colors } from 'styles'
 
+import { MOCK_SKILLS } from './Skills.constants'
 import styles from './Skills.styles'
 import SkillsForm from './SkillsForm/SkillsForm'
 
@@ -14,30 +15,8 @@ interface Props {
 
 const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
-  // TODO: adding static data for UI
-  const [skills, setSkills] = useState([
-    {
-      skill: 'Graphic Design',
-      count: 3,
-    },
-    {
-      skill: 'Photograph',
-      count: 45,
-    },
-    {
-      skill: 'Illustration',
-      count: 12,
-    },
-    {
-      skill: 'Figma',
-      count: 3,
-    },
-    {
-      skill: 'Keynote',
-      count: 22,
-    },
-  ])
+  const [isSaved, setIsSaved] = useState(false)
+  const [skills, setSkills] = useState(MOCK_SKILLS)
   const formRef = useRef<any>()
 
   return (
@@ -49,19 +28,19 @@ const Skills = ({ navigation }: Props) => {
           formRef.current.handleSubmit()
         }}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={
-          <ColorCard style={styles.outerCard}>
+          <Card style={styles.outerCard}>
             <FlatList
               data={skills}
               ListHeaderComponent={
                 <View style={styles.cardHeader}>
-                  <View style={styles.certificateCountView}>
+                  <View style={styles.certificateCount}>
                     <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
                       60
                     </Text.Header>
@@ -74,7 +53,7 @@ const Skills = ({ navigation }: Props) => {
               renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
               keyExtractor={item => item.skill}
             />
-          </ColorCard>
+          </Card>
         }
       >
         <SkillsForm />

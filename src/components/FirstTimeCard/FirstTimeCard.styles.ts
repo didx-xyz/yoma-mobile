@@ -33,7 +33,7 @@ const styles = {
     zIndex: 1,
     paddingVertical: 5,
   } as TextStyle,
-  buttonStyle: {
+  button: {
     zIndex: 1,
     width: '100%',
     alignSelf: 'center',

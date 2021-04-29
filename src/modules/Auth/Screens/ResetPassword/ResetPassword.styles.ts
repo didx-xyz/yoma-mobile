@@ -2,10 +2,9 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 const styles = {
-  text: {
-    fontSize: 36,
-    fontWeight: 'bold',
-  } as TextStyle,
+  container: {
+    paddingBottom: 30,
+  } as ViewStyle,
   purpleSemiCircleContainer: {
     position: 'absolute',
     right: 0,
@@ -13,10 +12,8 @@ const styles = {
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
-    alignSelf: 'center',
+    marginHorizontal: 13,
     marginTop: '-20%',
-    width: '90%',
-    alignItems: 'center',
     borderRadius: 12,
     paddingVertical: 10,
     elevation: 3,

@@ -1,19 +1,16 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
-
-const { height } = Dimensions.get('window')
 
 const styles = {
   cardView: {
     backgroundColor: colors[Colors.white],
-    width: '97%',
     borderRadius: 25,
-    alignSelf: 'center',
     overflow: 'hidden',
     paddingVertical: 10,
     paddingHorizontal: 20,
     marginTop: 10,
-    height: height / 4,
+    marginHorizontal: 10,
+    height: 175,
   } as ViewStyle,
   certificateCountView: {
     height: 25,
@@ -42,7 +39,8 @@ const styles = {
     marginVertical: 10,
   } as ViewStyle,
   bodyView: {
-    height: '70%',
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
   } as ViewStyle,
 }

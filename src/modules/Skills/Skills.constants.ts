@@ -1,5 +1,22 @@
-export const CERTIFICATE_COUNT_HEIGHT = 30
-export const CERTIFICATE_COUNT_WIDTH = 30
-export const OVERALL_SPACING = 5
-export const VERTICAL_SPACING = 15
-export const LEFT_SPACING = 10
+export const MOCK_SKILLS = [
+  {
+    skill: 'Graphic Design',
+    count: 3,
+  },
+  {
+    skill: 'Photograph',
+    count: 45,
+  },
+  {
+    skill: 'Illustration',
+    count: 12,
+  },
+  {
+    skill: 'Figma',
+    count: 3,
+  },
+  {
+    skill: 'Keynote',
+    count: 22,
+  },
+]
