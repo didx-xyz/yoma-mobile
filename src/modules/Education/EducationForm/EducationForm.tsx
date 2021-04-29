@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import { INITIAL_VALUES } from './EducationForm.constants'
+import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
 import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
@@ -17,8 +17,8 @@ interface Props {
 
 const EducationForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
-  const [isStudyingHere, setIsStudyingHere] = useState(false)
-  const [skillsList, setSkillsList] = useState([])
+  const [isStudying, setIsStudying] = useState(false)
+  const [skillsList, setSkillsList] = useState(MOCKED_SKILLS_DATA)
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [showInfoModal, setShowInfoModal] = useState(false)
 
@@ -38,7 +38,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       initialValues={INITIAL_VALUES}
       enableReinitialize={true}
       validationSchema={ValidationSchema}
-      onSubmit={values => {}}
     >
       {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
         <View style={styles.form}>
@@ -60,9 +59,9 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             showTitle={values.school !== ''}
           />
           <CustomInput
-            onChangeText={handleChange('school')}
-            onBlur={handleBlur('school')}
-            value={values.school}
+            onChangeText={handleChange('qualificationType')}
+            onBlur={handleBlur('qualificationType')}
+            value={values.qualificationType}
             label={t('Qualification type')}
             isTouched={touched.school}
             error={errors.school}
@@ -80,11 +79,11 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
           <View style={styles.checkBoxView}>
             <TouchableOpacity
               onPress={() => {
-                setIsStudyingHere(!isStudyingHere)
+                setIsStudying(!isStudying)
               }}
               style={styles.checkBox}
             >
-              <Optional condition={isStudyingHere} fallback={<BlueHollowCircle />}>
+              <Optional condition={isStudying} fallback={<BlueHollowCircle />}>
                 <BlueTick />
               </Optional>
             </TouchableOpacity>
@@ -92,7 +91,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
           </View>
           <View style={styles.row}>
             <DatePicker
-              onChangeDate={(date: string) => {
+              onDateChange={(date: string) => {
                 handleChange('startDate')
                 handleBlur('startDate')
                 setFieldValue('startDate', date)
@@ -104,7 +103,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               showTitle={values.startDate !== ''}
             />
             <DatePicker
-              onChangeDate={(date: string) => {
+              onDateChange={(date: string) => {
                 handleChange('endDate')
                 handleBlur('endDate')
                 setFieldValue('endDate', date)
@@ -123,6 +122,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Description')}
             isTouched={touched.description}
             error={errors.description}
+            multiline
             showTitle={values.description !== ''}
           />
           <DropDownTags
@@ -146,7 +146,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               setFieldValue('skillNames', selectedSkills)
             }}
             tags={selectedSkills}
-            touched={touched.skillNames}
             error={errors.skillNames}
           />
           <Upload onPress={() => {}} />

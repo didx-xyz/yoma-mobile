@@ -1,30 +1,22 @@
+import { FormikErrors, FormikTouched } from 'formik'
 import React from 'react'
 import { View } from 'react-native'
-import DatePicker from 'react-native-datepicker'
+import DatePicker, { DatePickerProps } from 'react-native-datepicker'
 import { Colors } from 'styles'
 
 import Optional from '../Optional'
 import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DatePicker.styles'
 
-type DatePickerProps = {
+type Props = DatePickerProps & {
   label: string
-  isTouched?: boolean
-  error?: any
+  isTouched?: boolean | FormikTouched<any> | FormikTouched<any>[]
+  error?: string | string[] | FormikErrors<any> | FormikErrors<any>[]
   showTitle?: boolean
-  value: any
-  onChangeDate: any
+  value: string | Date
 }
 
-const DateTimePicker = ({
-  label,
-  isTouched,
-  error,
-  value,
-  onChangeDate,
-  showTitle = true,
-  ...props
-}: DatePickerProps) => {
+const DateTimePicker = ({ label, isTouched, error, value, showTitle = true, ...props }: Props) => {
   return (
     <View style={styles.container}>
       <Optional condition={showTitle}>
@@ -40,7 +32,6 @@ const DateTimePicker = ({
           dateInput: styles.dateInput,
         }}
         style={styles.textInput}
-        onDateChange={onChangeDate}
         showIcon={false}
         date={value}
         maxDate={new Date()}

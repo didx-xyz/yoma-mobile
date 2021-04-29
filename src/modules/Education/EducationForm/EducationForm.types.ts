@@ -1,6 +1,7 @@
 export type EducationFields = {
   school: string
   description: string
+  qualificationType: string
   id: string
   startDate: string
   endDate: string

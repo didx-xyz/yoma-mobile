@@ -1,4 +1,5 @@
 import { CrossIcon } from 'assets/images'
+import { FormikErrors } from 'formik'
 import React from 'react'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
@@ -10,7 +11,7 @@ import { DROP_DOWN_MAX_HEIGHT } from './DropDownTags.constants'
 import styles from './DropDownTags.styles'
 
 type Props = DropDownPickerProps & {
-  error?: string
+  error?: string | string[] | FormikErrors<any> | FormikErrors<any>[]
   fieldName?: string
   showTitle?: boolean
   tags?: string[]
