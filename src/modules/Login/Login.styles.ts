@@ -3,7 +3,7 @@ import { colors, Colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
   cardHeader: {
     paddingTop: 10,
@@ -41,7 +41,7 @@ const styles = {
     justifyContent: 'center',
   } as ViewStyle,
   horizontalLine: {
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
     height: 1,
     flex: 1,
   } as ViewStyle,

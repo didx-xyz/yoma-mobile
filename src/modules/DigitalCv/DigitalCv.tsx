@@ -28,7 +28,7 @@ const DigitalCv = ({ navigation }: Props) => {
           hasCount={true}
           count={0}
           countColor={Colors.primaryBlue}
-          countBackgroundColor={Colors.unsavedStyleLightBlue}
+          countBackgroundColor={Colors.primaryBlue}
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
           onEdit={() => navigation.navigate(NavigationRoutes.Experience)}
@@ -37,15 +37,16 @@ const DigitalCv = ({ navigation }: Props) => {
           hasCount={true}
           count={0}
           countColor={Colors.primaryRed}
-          countBackgroundColor={Colors.unsavedStyleLightRed}
+          countBackgroundColor={Colors.primaryRed}
           cardTitle={t('Education')}
           defaultText={t('Which school, university or college did you attend?')}
+          onEdit={() => navigation.navigate('Education')}
         />
         <CvCard
           hasCount={true}
           count={0}
           countColor={Colors.primaryGreen}
-          countBackgroundColor={Colors.unsavedStyleLightRed}
+          countBackgroundColor={Colors.primaryGreen}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
         />

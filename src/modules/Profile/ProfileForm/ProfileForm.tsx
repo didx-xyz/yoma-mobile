@@ -2,7 +2,7 @@ import api from 'api'
 import { CustomInput, DropDown, Spinner } from 'components'
 import Text, { Bold, MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
-import { Formik } from 'formik'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
@@ -28,7 +28,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
     email: '',
     phoneNumber: '',
   })
-  const formRef = useRef<any>()
+  const formRef = useRef<FormikProps<FormikValues>>()
   const [country, setCountry] = useState('')
   const [dropdown, setDropDown] = useState(false)
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/

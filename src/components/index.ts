@@ -1,4 +1,5 @@
-import ButtonContainer from './ButtonContainer/ButtonContainer'
+import ButtonContainer from './ButtonContainer'
+import Card from './Card'
 import CustomInput from './CustomInput/CustomInput'
 import CvCard from './CvCard/CvCard'
 import DateDisplay from './DateDisplay/DateDisplay'
@@ -18,10 +19,12 @@ import ProgressCircle from './ProgressCircle/ProgressCircle'
 import SocialLogin from './SocialLogin/SocialLogin'
 import SocialRegistration from './SocialRegistration/SocialRegistration'
 import Spinner from './Spinner/Spinner'
+import Upload from './Upload'
 import ViewContainer from './ViewContainer/ViewContainer'
 
 export {
   ButtonContainer,
+  Card,
   CustomInput,
   CvCard,
   DateDisplay,
@@ -41,5 +44,6 @@ export {
   SocialLogin,
   SocialRegistration,
   Spinner,
+  Upload,
   ViewContainer,
 }

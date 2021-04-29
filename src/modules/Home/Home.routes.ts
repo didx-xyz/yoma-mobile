@@ -4,4 +4,5 @@ export enum NavigationRoutes {
   DigitalCv = 'DigitalCv',
   About = 'About',
   Experience = 'Experience',
+  Education = 'Education',
 }

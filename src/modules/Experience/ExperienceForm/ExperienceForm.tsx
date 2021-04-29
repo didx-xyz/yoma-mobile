@@ -128,7 +128,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             </TouchableOpacity>
             <Text.Body>{t('I currently work here')}</Text.Body>
           </View>
-          <View style={styles.datePickersRowView}>
+          <View style={styles.row}>
             <DatePicker
               onChangeDate={(date: string) => {
                 handleChange('startDate')
@@ -184,9 +184,8 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               setFieldValue('skillNames', selectedSkills)
             }}
             tags={selectedSkills}
-            deleteItem={tag => {
+            onDelete={tag => {
               const filteredSkills = deleteSkill(selectedSkills, tag)
-              console.log(filteredSkills)
               setSelectedSkills(filteredSkills)
               setFieldValue('skillNames', filteredSkills)
             }}
@@ -205,7 +204,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             </TouchableOpacity>
             <Text.Body>{t('Request verification of employment from company')}</Text.Body>
           </View>
-          <TouchableOpacity onPress={() => showInfoModal(true)} style={styles.bottomView}>
+          <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottom}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
               {t('Find inspiration on how to write a great profile.')}
             </Text.Meta>
