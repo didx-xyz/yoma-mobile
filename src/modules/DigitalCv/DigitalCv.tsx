@@ -59,7 +59,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={applyAlphaToHex(colors[Colors.secondaryPurple])(0.1)}
           cardTitle={t('Completed challenges')}
           defaultText={t('Have you completed any challenges yet?')}
-          onEdit={() => navigation.navigate('NewChallenge')}
+          onEdit={() => navigation.navigate(NavigationRoutes.NewChallenge)}
         />
       </ScrollView>
     </ViewContainer>

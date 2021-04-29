@@ -1,4 +1,4 @@
-export type ChallengeValue = {
+export type ChallengeFields = {
   challenge: string
   challengeHostProvider: string
   description: string

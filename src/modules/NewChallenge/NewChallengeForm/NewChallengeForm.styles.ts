@@ -2,28 +2,23 @@ import { StyleSheet, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
 const styles = StyleSheet.create({
-  formView: {
+  form: {
     flex: 1,
     padding: 12,
   } as ViewStyle,
-  checkBoxView: {
+  checkBoxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-  } as ViewStyle,
-  formDropDown: {
-    borderWidth: 0,
-    borderBottomWidth: 1,
-    paddingLeft: 0,
   } as ViewStyle,
   checkBox: {
     marginRight: 10,
   } as ViewStyle,
-  datePickersRowView: {
+  row: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     marginTop: 10,
   } as ViewStyle,
-  placeholderStyle: {
+  placeholder: {
     color: colors[Colors.menuGrey],
     marginLeft: 0,
   } as ViewStyle,

@@ -1,35 +1,27 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
-import {
-  HEADER_HEIGHT,
-  ICON_ELEVATION,
-  ICON_LEFT_SPACING,
-  ICON_RADIUS,
-  LEFT_SPACING,
-  RIGHT_SPACING,
-} from './NormalHeader.constants'
 
 const styles = {
   header: {
-    height: HEADER_HEIGHT,
+    height: 50,
     backgroundColor: colors[Colors.white],
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
   } as ViewStyle,
   saveText: {
-    paddingRight: LEFT_SPACING,
+    paddingRight: 20,
   } as TextStyle,
-  addView: {
+  add: {
     flexDirection: 'row',
-    paddingRight: RIGHT_SPACING,
+    paddingRight: 20,
   } as ViewStyle,
   addIcon: {
     backgroundColor: colors[Colors.white],
-    marginLeft: ICON_LEFT_SPACING,
-    elevation: ICON_ELEVATION,
-    borderRadius: ICON_RADIUS,
+    marginLeft: 10,
+    elevation: 3,
+    borderRadius: 10,
   },
 }
 

@@ -1,5 +1,6 @@
-import { ColorCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
+import { FormikProps, FormikValues } from 'formik'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -13,9 +14,9 @@ interface Props {
 
 const NewChallenge = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
   const [challenges, setChallenges] = useState([])
-  const formRef = useRef<any>()
+  const formRef = useRef<FormikProps<FormikValues>>()
 
   return (
     <ViewContainer style={styles.container}>
@@ -26,18 +27,18 @@ const NewChallenge = ({ navigation }: Props) => {
           formRef.current.handleSubmit()
         }}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={<FlatList data={challenges} renderItem={() => <Text.Body>render</Text.Body>} />}
       >
         <ScrollView>
-          <ColorCard>
+          <Card>
             <NewChallengeForm navigation={navigation} ref={formRef} />
-          </ColorCard>
+          </Card>
         </ScrollView>
       </Optional>
     </ViewContainer>

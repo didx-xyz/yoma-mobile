@@ -1,6 +1,6 @@
-import { ChallengeValue } from './NewChallengeForm.types'
+import { ChallengeFields } from './NewChallengeForm.types'
 
-export const INITIAL_VALUES: ChallengeValue = {
+export const INITIAL_VALUES: ChallengeFields = {
   challenge: '',
   challengeHostProvider: '',
   description: '',
@@ -9,3 +9,9 @@ export const INITIAL_VALUES: ChallengeValue = {
   endDate: '',
   skillNames: [],
 }
+
+export const MOCK_SKILLS = [
+  { label: 'UI', value: 'UI' },
+  { label: 'Design', value: 'Design' },
+  { label: 'UX', value: 'UX' },
+]
