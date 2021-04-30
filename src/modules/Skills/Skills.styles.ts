@@ -1,10 +1,7 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
+import { CERTIFICATE_COUNT_BORDER_RADIUS, CERTIFICATE_COUNT_SIZE } from 'styles/styles.constants'
 import { applyAlphaToHex } from 'styles/styles.utils'
-
-const CERTIFICATE_COUNT_SIZE = 30
-const CIRCULAR_RADIUS_DIVISOR = 2
-const CERTIFICATE_COUNT_BORDER_RADIUS = CERTIFICATE_COUNT_SIZE / CIRCULAR_RADIUS_DIVISOR
 
 const styles = {
   container: {

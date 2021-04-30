@@ -13,7 +13,7 @@ type Props = DatePickerProps & {
   isTouched?: boolean | FormikTouched<any> | FormikTouched<any>[]
   error?: string | string[] | FormikErrors<any> | FormikErrors<any>[]
   showTitle?: boolean
-  value: string | Date | undefined
+  value: string | Date
 }
 
 const DateTimePicker = ({ label, isTouched, error, value, showTitle = true, ...props }: Props) => {
