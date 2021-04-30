@@ -59,7 +59,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={applyAlphaToHex(colors[Colors.primaryYellow])(0.1)}
           cardTitle={t('Completed courses')}
           defaultText={t('Have you completed any courses yet?')}
-          onEdit={() => navigation.navigate('NewCourse')}
+          onEdit={() => navigation.navigate(NavigationRoutes.NewCourse)}
         />
         <CvCard
           hasCount={true}

@@ -1,6 +1,6 @@
-import { ColorCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
@@ -13,31 +13,28 @@ interface Props {
 
 const NewCourse = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
   const [courses, setCourses] = useState([])
-  const formRef = useRef<any>()
 
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
         headerText={t('Courses')}
-        onSave={() => {
-          formRef.current.handleSubmit()
-        }}
+        onSave={() => {}}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={<FlatList data={courses} renderItem={({ item }) => <Text.Body>render</Text.Body>} />}
       >
         <ScrollView>
-          <ColorCard>
-            <NewCourseForm navigation={navigation} ref={formRef} />
-          </ColorCard>
+          <Card>
+            <NewCourseForm navigation={navigation} />
+          </Card>
         </ScrollView>
       </Optional>
     </ViewContainer>
