@@ -20,7 +20,11 @@ const NewCourse = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={t('Courses')}
+        headerText={
+          <Optional condition={isSaved} fallback={t('Courses')}>
+            {t('Add course')}
+          </Optional>
+        }
         onSave={() => {}}
         onAdd={() => {
           setIsSaved(true)
