@@ -1,4 +1,4 @@
-export type CourseValue = {
+export type CourseFields = {
   course: string
   courseHostProvider: string
   description: string

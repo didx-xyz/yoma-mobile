@@ -78,15 +78,15 @@ const HomeTabs = () => {
 const Home = () => {
   return (
     <Stack.Navigator headerMode={'none'}>
-      <Stack.Screen name={NavigationRoutes.home} component={HomeTabs} />
-      <Stack.Screen name={NavigationRoutes.profile} component={Profile} />
-      <Stack.Screen name={NavigationRoutes.digitalCv} component={DigitalCv} />
-      <Stack.Screen name={NavigationRoutes.about} component={About} />
-      <Stack.Screen name={NavigationRoutes.experience} component={Experience} />
-      <Stack.Screen name={NavigationRoutes.education} component={Education} />
-      <Stack.Screen name={NavigationRoutes.skills} component={Skills} />
-      <Stack.Screen name={NavigationRoutes.newChallenge} component={NewChallenge} />
-      <Stack.Screen name={NavigationRoutes.newCourse} component={NewCourse} />
+      <Stack.Screen name={NavigationRoutes.Home} component={HomeTabs} />
+      <Stack.Screen name={NavigationRoutes.Profile} component={Profile} />
+      <Stack.Screen name={NavigationRoutes.DigitalCv} component={DigitalCv} />
+      <Stack.Screen name={NavigationRoutes.About} component={About} />
+      <Stack.Screen name={NavigationRoutes.Experience} component={Experience} />
+      <Stack.Screen name={NavigationRoutes.Education} component={Education} />
+      <Stack.Screen name={NavigationRoutes.Skills} component={Skills} />
+      <Stack.Screen name={NavigationRoutes.NewChallenge} component={NewChallenge} />
+      <Stack.Screen name={NavigationRoutes.NewCourse} component={NewCourse} />
     </Stack.Navigator>
   )
 }

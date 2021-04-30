@@ -4,17 +4,10 @@ import colors from './colors.styles'
 import fontStyles from './font.styles'
 import { Colors, FontFamily } from './styles.types'
 
-const TextStyles = StyleSheet.create({
+const TextStyles = {
   h4: {
     fontSize: 14,
     fontFamily: fontStyles[FontFamily.medium],
-  } as TextStyle,
-  buttonText: {
-    fontSize: 15,
-    fontFamily: fontStyles[FontFamily.bold],
-  } as TextStyle,
-  textWhite: {
-    color: colors[Colors.white],
   } as TextStyle,
   textTertiary5: {
     color: colors[Colors.primaryDarkGrey],
@@ -22,6 +15,6 @@ const TextStyles = StyleSheet.create({
   textTertiary3: {
     color: colors[Colors.primaryGreen],
   },
-})
+}
 
-export default TextStyles
+export default StyleSheet.create(TextStyles)

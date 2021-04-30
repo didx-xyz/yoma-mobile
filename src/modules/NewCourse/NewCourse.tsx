@@ -1,5 +1,5 @@
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
@@ -13,7 +13,7 @@ interface Props {
 
 const NewCourse = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSave, setIsSave] = useState(false)
+  const [isSaved, setIsSaved] = useState(false)
   // TODO: adding static data for UI handling
   const [courses, setCourses] = useState([
     {
@@ -24,7 +24,6 @@ const NewCourse = ({ navigation }: Props) => {
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
     },
   ])
-  const formRef = useRef<any>()
 
   const renderItem = ({ course, description, endDate, organisationLogoURL }: CourseValue) => {
     return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoURL} />
@@ -35,23 +34,21 @@ const NewCourse = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={t('Courses')}
-        onSave={() => {
-          formRef.current.handleSubmit()
-        }}
+        onSave={() => {}}
         onAdd={() => {
-          setIsSave(true)
+          setIsSaved(true)
         }}
-        add={!isSave}
+        showAddButton={!isSaved}
       />
       <Optional
-        condition={isSave}
+        condition={isSaved}
         fallback={
           <FlatList data={courses} renderItem={({ item }) => renderItem(item)} keyExtractor={item => item.course} />
         }
       >
         <ScrollView>
           <Card>
-            <NewCourseForm navigation={navigation} ref={formRef} />
+            <NewCourseForm navigation={navigation} />
           </Card>
         </ScrollView>
       </Optional>

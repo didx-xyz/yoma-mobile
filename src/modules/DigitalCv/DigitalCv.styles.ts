@@ -6,6 +6,9 @@ const styles = {
     backgroundColor: colors[Colors.backgroundGrey],
     alignItems: 'center',
   } as ViewStyle,
+  scrollContainer: {
+    paddingVertical: 15,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

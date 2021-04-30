@@ -6,12 +6,9 @@ const styles = {
     paddingBottom: 30,
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
-  topContainer: {
-    backgroundColor: colors[Colors.primaryYellow],
-    height: '40%',
-  } as ViewStyle,
   logoContainer: {
     paddingVertical: 20,
+    alignSelf: 'center',
   } as ViewStyle,
   yellowSemiCircleContainer: {
     position: 'absolute',
@@ -20,10 +17,8 @@ const styles = {
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
-    alignSelf: 'center',
     marginTop: '-20%',
-    width: '90%',
-    alignItems: 'center',
+    marginHorizontal: 13,
     borderRadius: 12,
     paddingVertical: 10,
     elevation: 3,
@@ -47,6 +42,10 @@ const styles = {
     paddingTop: 10,
     paddingBottom: 15,
   } as TextStyle,
+  button: {
+    marginVertical: 15,
+    alignSelf: 'center',
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

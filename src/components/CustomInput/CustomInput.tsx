@@ -1,3 +1,4 @@
+import { FormikErrors, FormikTouched } from 'formik'
 import React from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
 import { colors, Colors } from 'styles'
@@ -8,12 +9,12 @@ import styles from './CustomInput.styles'
 
 type InputProps = TextInputProps & {
   label: string
-  touched?: boolean
-  error?: string
+  isTouched?: boolean | FormikTouched<any> | FormikTouched<any>[]
+  error?: string | string[] | FormikErrors<any> | FormikErrors<any>[]
   showTitle?: boolean
 }
 
-const CustomInput = ({ label, touched, error, showTitle = true, ...props }: InputProps) => {
+const CustomInput = ({ label, isTouched, error, showTitle = true, ...props }: InputProps) => {
   return (
     <View>
       <Optional condition={showTitle}>
@@ -22,11 +23,11 @@ const CustomInput = ({ label, touched, error, showTitle = true, ...props }: Inpu
       <TextInput
         placeholderTextColor={colors[Colors.menuGrey]}
         placeholder={label}
-        style={styles.textInputStyle}
+        style={styles.textInput}
         {...props}
       />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {touched && error}
+        {isTouched && error}
       </Text.Meta>
     </View>
   )

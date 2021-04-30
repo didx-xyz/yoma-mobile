@@ -2,12 +2,12 @@ import { BlueHollowCircle, BlueTick, IconInfo } from 'assets/images'
 import { CustomInput, Spinner, DatePicker, DropDownTags, Upload, Optional } from 'components'
 import Text from 'components/Typography'
 import { Formik } from 'formik'
-import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
+import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import { INITIAL_VALUES } from './NewCourseForm.constants'
+import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
 
 interface Props {
@@ -16,36 +16,22 @@ interface Props {
 
 const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
-  const [present, setPresent] = useState(false)
-  // TODO: Adding static data to complete the UI
-  const [skillsList, setSkillsList] = useState([
-    { label: 'UI', value: 'UI' },
-    { label: 'Design', value: 'Design' },
-    { label: 'UX', value: 'UX' },
-  ])
+  const [isCourseActive, setIsCourseActive] = useState<boolean>(false)
+  const [skillsList, setSkillsList] = useState(MOCK_SKILLS_LIST)
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
-  const [requestVerification, setRequestVerification] = useState<boolean>(false)
-  const formRef = useRef<any>()
-
-  useImperativeHandle(ref, () => ({
-    handleSubmit() {
-      if (formRef.current) {
-        formRef.current.handleSubmit()
-      }
-    },
-  }))
+  const [shouldRequestVerification, setShouldRequestVerification] = useState<boolean>(false)
 
   return (
-    <Formik innerRef={formRef} initialValues={INITIAL_VALUES} onSubmit={() => {}}>
+    <Formik initialValues={INITIAL_VALUES} onSubmit={() => {}}>
       {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
-        <View style={styles.formView}>
+        <View style={styles.form}>
           <Spinner visible={isSubmitting} />
           <CustomInput
             onChangeText={handleChange('course')}
             onBlur={handleBlur('course')}
             value={values.course}
             label={t('Course name')}
-            touched={touched.course}
+            isTouched={touched.course}
             error={errors.course}
             showTitle={values.course !== ''}
           />
@@ -54,46 +40,40 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('courseHostProvider')}
             value={values.courseHostProvider}
             label={t('Course host provider')}
-            touched={touched.courseHostProvider}
+            isTouched={touched.courseHostProvider}
             error={errors.courseHostProvider}
             showTitle={values.courseHostProvider !== ''}
           />
-          <View style={styles.checkBoxView}>
-            <TouchableOpacity
-              onPress={() => {
-                setPresent(!present)
-              }}
-              style={styles.checkBox}
-            >
-              <Optional condition={present} fallback={<BlueHollowCircle />}>
+          <View style={styles.checkBoxContainer}>
+            <TouchableOpacity onPress={() => setIsCourseActive(!isCourseActive)} style={styles.checkBox}>
+              <Optional condition={isCourseActive} fallback={<BlueHollowCircle />}>
                 <BlueTick />
               </Optional>
             </TouchableOpacity>
             <Text.Body color={Colors.menuGrey}>{t('Course is currently in progress')}</Text.Body>
           </View>
-          <View style={styles.datePickersRowView}>
+          <View style={styles.row}>
             <DatePicker
-              onChangeDate={(date: string) => {
-                console.log(date)
+              onDateChange={(date: string) => {
                 handleChange('startDate')
                 handleBlur('startDate')
                 setFieldValue('startDate', date)
               }}
               value={values.startDate}
               label={t('Start date')}
-              touched={touched.startDate}
+              isTouched={touched.startDate}
               error={errors.startDate}
               showTitle={values.startDate !== ''}
             />
             <DatePicker
-              onChangeDate={(date: string) => {
+              onDateChange={(date: string) => {
                 handleChange('endDate')
                 handleBlur('endDate')
                 setFieldValue('endDate', date)
               }}
               value={values.endDate}
               label={t('End date')}
-              touched={touched.endDate}
+              isTouched={touched.endDate}
               error={errors.endDate}
               showTitle={values.endDate !== ''}
             />
@@ -103,7 +83,7 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
             onBlur={handleBlur('description')}
             value={values.description}
             label={t('Description')}
-            touched={touched.description}
+            isTouched={touched.description}
             error={errors.description}
             multiline
             showTitle={values.description !== ''}
@@ -118,7 +98,7 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
             searchablePlaceholder={t('Search skills')}
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
-            placeholderStyle={styles.placeholderStyle}
+            placeholderStyle={styles.placeholder}
             showTitle={values.skillNames.length > 0}
             defaultValue={selectedSkills}
             onChangeItem={item => {
@@ -128,18 +108,16 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
               setFieldValue('skillNames', selectedSkills)
             }}
             tags={selectedSkills}
-            touched={touched.skillNames}
             error={errors.skillNames}
+            onDelete={() => {}}
           />
           <Upload onPress={() => {}} />
-          <View style={styles.checkBoxView}>
+          <View style={styles.checkBoxContainer}>
             <TouchableOpacity
-              onPress={() => {
-                setRequestVerification(!requestVerification)
-              }}
+              onPress={() => setShouldRequestVerification(!shouldRequestVerification)}
               style={styles.checkBox}
             >
-              <Optional condition={requestVerification} fallback={<BlueHollowCircle />}>
+              <Optional condition={shouldRequestVerification} fallback={<BlueHollowCircle />}>
                 <BlueTick />
               </Optional>
             </TouchableOpacity>

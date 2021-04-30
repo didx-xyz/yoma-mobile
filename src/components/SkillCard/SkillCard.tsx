@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
+import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels } from '../Typography'
 import styles from './SkillCard.styles'
@@ -15,9 +16,12 @@ const SkillCard = ({ skill, skillCount, onPress }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
-      <Text.Header level={HeaderLevels.h6}>
+      <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
         {skill}
-        <Text.Body level={BodyLevels.small}> {skillCount}</Text.Body>
+        <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
+          {' '}
+          • {skillCount}
+        </Text.Body>
       </Text.Header>
       <TouchableOpacity onPress={onPress}>
         <Text.Header level={HeaderLevels.h6}>{t('Skills acquired')}</Text.Header>
