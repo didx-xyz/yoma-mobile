@@ -1,4 +1,4 @@
-export type CourseValue = {
+export type CourseEntry = {
   course: string
   organisationLogoURL: string
   courseHostProvider: string
