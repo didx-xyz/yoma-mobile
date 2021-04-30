@@ -1,4 +1,4 @@
-export const MOCKED_CHALLEGES = [
+export const MOCKED_CHALLENGES = [
   {
     challenge: 'COVID Challenge',
     organisationLogoURL: '',

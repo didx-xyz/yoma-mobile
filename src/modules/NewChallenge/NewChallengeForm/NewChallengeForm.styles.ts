@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
   checkBoxContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    marginVertical: 15,
   } as ViewStyle,
   checkBox: {
     marginRight: 10,
