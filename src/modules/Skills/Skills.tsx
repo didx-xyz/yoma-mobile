@@ -1,6 +1,6 @@
 import { Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import Text, { HeaderLevels } from 'components/Typography'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, View } from 'react-native'
 import { Colors } from 'styles'
@@ -17,20 +17,13 @@ const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [skills, setSkills] = useState(MOCK_SKILLS)
-  const formRef = useRef<any>()
 
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={
-          <Optional condition={isSaved} fallback={t('Skills')}>
-            {t('Add skill')}
-          </Optional>
-        }
-        onSave={() => {
-          formRef.current.handleSubmit()
-        }}
+        headerText={t('Skills')}
+        onSave={() => {}}
         onAdd={() => {
           setIsSaved(true)
         }}
