@@ -22,13 +22,15 @@ const NewChallenge = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={t('Challenges')}
+        headerText={
+          <Optional condition={isSaved} fallback={t('Challenges')}>
+            {t('Add challenge')}
+          </Optional>
+        }
         onSave={() => {
           formRef.current.handleSubmit()
         }}
-        onAdd={() => {
-          setIsSaved(true)
-        }}
+        onAdd={() => setIsSaved(true)}
         showAddButton={!isSaved}
       />
       <Optional

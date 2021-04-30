@@ -1,5 +1,5 @@
 import { BlueHollowCircle, BlueTick, IconInfo } from 'assets/images'
-import { CustomInput, Spinner, DatePicker, DropDownTags, Upload, Optional } from 'components'
+import { CustomInput, DatePicker, DropDownTags, Upload, Optional } from 'components'
 import Text from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
@@ -19,7 +19,7 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
   const [isInProgress, setIsInProgress] = useState(false)
   const [skillsList, setSkillsList] = useState(MOCK_SKILLS)
   const [selectedSkills, setSelectedSkills] = useState<string[]>([])
-  const [requestVerification, setRequestVerification] = useState<boolean>(false)
+  const [shouldRequestVerification, setShouldRequestVerification] = useState<boolean>(false)
   const formRef = useRef<FormikProps<FormikValues>>()
 
   useImperativeHandle(ref, () => ({
@@ -32,9 +32,8 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
 
   return (
     <Formik innerRef={formRef} initialValues={INITIAL_VALUES} onSubmit={() => {}}>
-      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
+      {({ handleChange, handleBlur, values, touched, errors, setFieldValue }) => (
         <View style={styles.form}>
-          <Spinner visible={isSubmitting} />
           <CustomInput
             onChangeText={handleChange('challenge')}
             onBlur={handleBlur('challenge')}
@@ -128,11 +127,11 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
           <View style={styles.checkBoxContainer}>
             <TouchableOpacity
               onPress={() => {
-                setRequestVerification(!requestVerification)
+                setShouldRequestVerification(!shouldRequestVerification)
               }}
               style={styles.checkBox}
             >
-              <Optional condition={requestVerification} fallback={<BlueHollowCircle />}>
+              <Optional condition={shouldRequestVerification} fallback={<BlueHollowCircle />}>
                 <BlueTick />
               </Optional>
             </TouchableOpacity>
