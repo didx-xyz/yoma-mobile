@@ -13,15 +13,15 @@ interface Props {
   navigation: any
 }
 
+const renderChallengeEntry = ({ challenge, description, endDate, organisationLogoURL }: ChallengeEntry) => {
+  return <InfoCard title={challenge} description={description} endDate={endDate} logo={organisationLogoURL} />
+}
+
 const NewChallenge = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [challenges, setChallenges] = useState(MOCKED_CHALLENGES)
   const formRef = useRef<FormikProps<FormikValues>>()
-
-  const renderItem = ({ challenge, description, endDate, organisationLogoURL }: ChallengeEntry) => {
-    return <InfoCard title={challenge} description={description} endDate={endDate} logo={organisationLogoURL} />
-  }
 
   return (
     <ViewContainer style={styles.container}>
@@ -41,7 +41,7 @@ const NewChallenge = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={challenges}
-            renderItem={({ item }) => renderItem(item)}
+            renderItem={({ item }) => renderChallengeEntry(item)}
             keyExtractor={item => item.challenge}
           />
         }
