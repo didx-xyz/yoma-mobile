@@ -1,10 +1,8 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
-
-const { height, width } = Dimensions.get('window')
+import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
   container: {
-    height: height / 2.5,
+    height: 250,
   } as ViewStyle,
   logoContainer: {
     alignSelf: 'center',

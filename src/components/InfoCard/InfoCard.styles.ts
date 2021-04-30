@@ -1,44 +1,33 @@
 import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
-import {
-  AVATAR_RADIUS,
-  ELEVATION,
-  HORIZONTAL_SPACING,
-  ICON_RADIUS,
-  IMAGE_HEIGHT,
-  IMAGE_WIDTH,
-  TOP_SPACING,
-  VERTICAL_SPACING,
-} from './InfoCard.constants'
-
 const styles = {
   cardView: {
-    padding: VERTICAL_SPACING,
-    elevation: ELEVATION,
+    padding: 10,
+    elevation: 3,
   } as ViewStyle,
   row: {
     flexDirection: 'row',
-    marginVertical: TOP_SPACING,
+    marginVertical: 5,
   } as ViewStyle,
   image: {
-    height: IMAGE_HEIGHT,
-    width: IMAGE_WIDTH,
-    marginHorizontal: HORIZONTAL_SPACING,
+    height: 35,
+    width: 35,
+    marginHorizontal: 10,
   } as ImageStyle,
   avatar: {
-    height: IMAGE_HEIGHT,
-    width: IMAGE_WIDTH,
-    borderRadius: AVATAR_RADIUS,
+    height: 35,
+    width: 35,
+    borderRadius: 17,
     backgroundColor: colors[Colors.primaryGreen],
-    marginHorizontal: HORIZONTAL_SPACING,
+    marginHorizontal: 10,
   } as ViewStyle,
   editIcon: {
     backgroundColor: colors[Colors.white],
-    elevation: ELEVATION,
-    borderRadius: ICON_RADIUS,
+    elevation: 3,
+    borderRadius: 13,
     position: 'absolute',
-    right: HORIZONTAL_SPACING,
+    right: 10,
   } as ViewStyle,
 }
 

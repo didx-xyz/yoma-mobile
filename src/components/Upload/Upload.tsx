@@ -14,9 +14,9 @@ const Upload = ({ onPress }: Props) => {
   return (
     <View>
       <Text.Meta level={MetaLevels.small}>{t('Upload certification (if completed)')}</Text.Meta>
-      <View style={styles.innerView}>
+      <View style={styles.inner}>
         <Text.Body>{t('Upload')}</Text.Body>
-        <TouchableOpacity style={styles.buttonView} onPress={onPress}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
           <Text.Body>{t('Choose file')}</Text.Body>
         </TouchableOpacity>
       </View>

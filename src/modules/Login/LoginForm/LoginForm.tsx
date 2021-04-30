@@ -1,15 +1,19 @@
-import api from 'api'
 import { Input, ButtonContainer } from 'components'
 import { Formik } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { TextStyles } from 'styles'
 import ButtonStyles from 'styles/button.styles'
-import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
-const LoginForm = () => {
+import { AuthCredentials } from '../../Auth/Auth.types'
+import styles from './LoginForm.styles'
+
+interface Props {
+  onLoginUser: (details: AuthCredentials) => void
+}
+
+const LoginForm = ({ onLoginUser }: Props) => {
   const { t } = useTranslation()
   return (
     <Formik
@@ -27,19 +31,8 @@ const LoginForm = () => {
           .label('Email'),
         password: yup.string().min(8, t('passwordMinCharError')).required(t('required')).label('Password'),
       })}
-      onSubmit={async (values, actions) => {
-        console.log('Login values: ', values)
-        await api.auth
-          .login({ ...values })
-          .then(response => {
-            console.log('response', response)
-
-            showSimpleMessage('success', 'Login Successful')
-          })
-          .catch(error => {
-            console.log('Error =>', error)
-            showSimpleMessage('danger', 'Error', error)
-          })
+      onSubmit={async values => {
+        onLoginUser(values)
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => (
@@ -51,7 +44,7 @@ const LoginForm = () => {
             label={t('email')}
             keyboardType="email-address"
             autoCapitalize="none"
-            touched={touched.email}
+            isTouched={touched.email}
             error={errors.email}
           />
           <Input
@@ -59,15 +52,14 @@ const LoginForm = () => {
             onBlur={handleBlur('password')}
             value={values.password}
             label={t('password')}
-            touched={touched.password}
+            isTouched={touched.password}
             error={errors.password}
             secureTextEntry
           />
           <ButtonContainer
             disabled={isSubmitting}
             buttonText={t<string>('login')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, { marginVertical: 15, alignSelf: 'center' }]}
-            buttonTextStyle={[TextStyles.textWhite, TextStyles.buttonText]}
+            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
             onPress={handleSubmit}
           />
         </View>

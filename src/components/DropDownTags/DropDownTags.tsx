@@ -1,4 +1,5 @@
 import { CrossIcon } from 'assets/images'
+import { FormikErrors } from 'formik'
 import React from 'react'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
 import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
@@ -10,18 +11,18 @@ import { DROP_DOWN_MAX_HEIGHT } from './DropDownTags.constants'
 import styles from './DropDownTags.styles'
 
 type Props = DropDownPickerProps & {
-  error?: string
+  error?: string | string[] | FormikErrors<any> | FormikErrors<any>[]
   fieldName?: string
   showTitle?: boolean
   tags?: string[]
-  deleteItem: (tag: string) => void
+  onDelete: (tag: string) => void
 }
 
-const rendertags = (tags: Array<string>, deleteItem: any) => {
+const rendertags = (tags: string[], onDelete: (tag: string) => void) => {
   return tags.map((tag, index) => {
     return (
       <View key={index} style={styles.tag}>
-        <TouchableOpacity style={styles.crossIcon} onPress={() => deleteItem(tag)}>
+        <TouchableOpacity style={styles.crossIcon} onPress={() => onDelete(tag)}>
           <CrossIcon height={15} width={15} />
         </TouchableOpacity>
         <Text.Body color={Colors.primaryBlue} key={index}>
@@ -32,20 +33,22 @@ const rendertags = (tags: Array<string>, deleteItem: any) => {
   })
 }
 
-const DropDownTags = ({ error, fieldName, showTitle = false, tags = [], deleteItem, ...props }: Props) => {
+const DropDownTags = ({ error, fieldName, showTitle = false, tags = [], onDelete, ...props }: Props) => {
   return (
     <View>
       <Optional condition={showTitle}>
         <Text.Meta level={MetaLevels.small}>{fieldName}</Text.Meta>
       </Optional>
       <DropDownPicker
-        containerStyle={styles.dropDownContainerStyle}
-        style={styles.dropDownStyle}
-        itemStyle={styles.itemStyle}
+        containerStyle={styles.dropDownContainer}
+        style={styles.dropDown}
+        itemStyle={styles.item}
         dropDownMaxHeight={DROP_DOWN_MAX_HEIGHT}
         {...props}
       />
-      <ScrollView horizontal>{rendertags(tags, deleteItem)}</ScrollView>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {rendertags(tags, onDelete)}
+      </ScrollView>
       <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
         {error}
       </Text.Meta>

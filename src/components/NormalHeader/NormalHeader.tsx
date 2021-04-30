@@ -11,42 +11,45 @@ import styles from './NormalHeader.styles'
 
 type Props = {
   navigation: any
-  headerText: string
+  headerText: string | Element
   onSave?: () => void
-  add?: boolean
+  showAddButton?: boolean
   onAdd?: () => void
 }
 
-const NormalHeader = ({ navigation, headerText, onSave, add = false, onAdd }: Props) => {
+const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, onAdd }: Props) => {
+  const { t } = useTranslation()
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      goBack()
+      onNavigateBack()
       return true
     })
     return () => backHandler.remove()
   }, [])
 
-  const goBack = () => {
+  const onNavigateBack = () => {
     navigation.dispatch(StackActions.pop(1))
   }
-  const { t } = useTranslation()
+
   return (
     <View style={styles.header}>
-      <TouchableOpacity onPress={goBack}>
+      <TouchableOpacity onPress={onNavigateBack}>
         <BackIconGrey />
       </TouchableOpacity>
-      <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
+      <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
+        {headerText}
+      </Text.Header>
       <Optional
-        condition={add}
+        condition={showAddButton}
         fallback={
-          <TouchableOpacity onPress={onSave} style={styles.addView}>
+          <TouchableOpacity onPress={onSave} style={styles.add}>
             <Text.Body>
               <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
             </Text.Body>
           </TouchableOpacity>
         }
       >
-        <TouchableOpacity onPress={onAdd} style={styles.addView}>
+        <TouchableOpacity onPress={onAdd} style={styles.add}>
           <Text.Body>
             <Bold color={Colors.primaryGreen}>{t('Add')}</Bold>
           </Text.Body>
