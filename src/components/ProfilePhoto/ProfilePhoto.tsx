@@ -1,10 +1,10 @@
 import { EditIcon, ProfileIcon } from 'assets/images'
-import { Optional } from 'components'
-import ProgressCircle from 'components/ProgressCircle/ProgressCircle'
 import React from 'react'
 import { GestureResponderEvent, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
+import Optional from '../Optional'
+import ProgressCircle from '../ProgressCircle'
 import styles from './ProfilePhoto.styles'
 
 type Props = {

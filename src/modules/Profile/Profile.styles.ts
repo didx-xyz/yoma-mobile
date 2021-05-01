@@ -4,7 +4,7 @@ import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
@@ -29,7 +29,7 @@ const styles = {
     right: 0,
     bottom: -5,
   } as ViewStyle,
-  profileOuterView: {
+  profileContainer: {
     marginTop: -50,
     alignSelf: 'center',
   } as ViewStyle,

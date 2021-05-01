@@ -20,11 +20,6 @@ const LIGHT_GREY = '#F3F6FA'
 const LIGHT_YELLOW = '#FDCB86'
 const TRANSPARENT = 'transparent'
 
-// Not set as a styled color in the designs
-const UNSAVED_STYLE_LIGHT_GREY = '#E5E5E5'
-const UNSAVED_STYLE_LIGHT_BLUE = '#E5F7FD'
-const UNSAVED_STYLE_LIGHT_RED = '#FFE4E6'
-
 export default {
   [Colors.backgroundGrey]: BACKGROUND_GREY,
   [Colors.fontBlue]: FONT_BLUE,
@@ -44,8 +39,5 @@ export default {
   [Colors.secondaryPurple]: SECONDARY_PURPLE,
   [Colors.secondaryRed]: SECONDARY_RED,
   [Colors.transparent]: TRANSPARENT,
-  [Colors.unsavedStyleLightBlue]: UNSAVED_STYLE_LIGHT_BLUE,
-  [Colors.unsavedStyleLightGrey]: UNSAVED_STYLE_LIGHT_GREY,
-  [Colors.unsavedStyleLightRed]: UNSAVED_STYLE_LIGHT_RED,
   [Colors.white]: WHITE,
 }

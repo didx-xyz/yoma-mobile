@@ -1,10 +1,10 @@
 import { EditIcon } from 'assets/images'
-import { Optional } from 'components'
-import Text, { HeaderLevels, TextAlign } from 'components/Typography'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
+import Optional from '../Optional'
+import Text, { HeaderLevels, TextAlign } from '../Typography'
 import styles from './CvCard.styles'
 
 type Props = {

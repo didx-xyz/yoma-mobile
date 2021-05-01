@@ -3,7 +3,7 @@ import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.unsavedStyleLightGrey],
+    backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
   whiteCard: {
     backgroundColor: colors[Colors.white],
@@ -20,7 +20,7 @@ const styles = {
     borderBottomWidth: 1,
     width: '100%',
     flex: 1,
-    borderColor: colors[Colors.unsavedStyleLightGrey],
+    borderColor: colors[Colors.backgroundGrey],
     paddingLeft: 0,
     textAlignVertical: 'top',
   } as ViewStyle,

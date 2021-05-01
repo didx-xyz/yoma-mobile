@@ -11,6 +11,7 @@ import About from '../About'
 import Challenges from '../Challenges'
 import Courses from '../Courses'
 import DigitalCv from '../DigitalCv'
+import Education from '../Education'
 import Experience from '../Experience'
 import Marketplace from '../Marketplace'
 import Profile from '../Profile'
@@ -79,6 +80,7 @@ const Home = () => {
       <Stack.Screen name={NavigationRoutes.DigitalCv} component={DigitalCv} />
       <Stack.Screen name={NavigationRoutes.About} component={About} />
       <Stack.Screen name={NavigationRoutes.Experience} component={Experience} />
+      <Stack.Screen name={NavigationRoutes.Education} component={Education} />
     </Stack.Navigator>
   )
 }
