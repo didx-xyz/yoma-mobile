@@ -17,7 +17,7 @@ const styles = {
     height: 6,
     width: '100%',
     alignSelf: 'center',
-    backgroundColor: colors[Colors.unsavedStylePaleYellow],
+    backgroundColor: colors[Colors.lightYellow],
     borderRadius: 18,
   } as ViewStyle,
   innerProgressbar: {

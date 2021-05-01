@@ -17,18 +17,20 @@ const MENU_GREY = '#959BB4'
 const BACKGROUND_GREY = '#F1F4F8'
 const WHITE = '#FFFFFF'
 const LIGHT_GREY = '#F3F6FA'
+const LIGHT_YELLOW = '#FDCB86'
+const TRANSPARENT = 'transparent'
+
 // Not set as a styled color in the designs
 const UNSAVED_STYLE_LIGHT_GREY = '#E5E5E5'
 const UNSAVED_STYLE_LIGHT_BLUE = '#E5F7FD'
 const UNSAVED_STYLE_LIGHT_RED = '#FFE4E6'
-const UNSAVED_STYLE_PALE_YELLOW = '#FDCB86'
-const TRANSPARENT = 'transparent'
 
 export default {
-  [Colors.fontBlue]: FONT_BLUE,
-  [Colors.unsavedStyleLightGrey]: UNSAVED_STYLE_LIGHT_GREY,
-  [Colors.menuGrey]: MENU_GREY,
   [Colors.backgroundGrey]: BACKGROUND_GREY,
+  [Colors.fontBlue]: FONT_BLUE,
+  [Colors.lightGrey]: LIGHT_GREY,
+  [Colors.lightYellow]: LIGHT_YELLOW,
+  [Colors.menuGrey]: MENU_GREY,
   [Colors.primaryBlue]: PRIMARY_BLUE,
   [Colors.primaryDarkGrey]: PRIMARY_DARK_GREY,
   [Colors.primaryGreen]: PRIMARY_GREEN,
@@ -41,10 +43,9 @@ export default {
   [Colors.secondaryKhaki]: SECONDARY_KHAKI,
   [Colors.secondaryPurple]: SECONDARY_PURPLE,
   [Colors.secondaryRed]: SECONDARY_RED,
-  [Colors.white]: WHITE,
   [Colors.transparent]: TRANSPARENT,
   [Colors.unsavedStyleLightBlue]: UNSAVED_STYLE_LIGHT_BLUE,
+  [Colors.unsavedStyleLightGrey]: UNSAVED_STYLE_LIGHT_GREY,
   [Colors.unsavedStyleLightRed]: UNSAVED_STYLE_LIGHT_RED,
-  [Colors.unsavedStylePaleYellow]: UNSAVED_STYLE_PALE_YELLOW,
-  [Colors.lightGrey]: LIGHT_GREY,
+  [Colors.white]: WHITE,
 }

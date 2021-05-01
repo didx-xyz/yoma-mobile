@@ -1,7 +1,9 @@
 export enum Colors {
-  fontBlue = 'fontBlue',
-  menuGrey = 'menuGrey',
   backgroundGrey = 'backgroundGrey',
+  fontBlue = 'fontBlue',
+  lightGrey = 'lightGrey',
+  lightYellow = 'lightYellow',
+  menuGrey = 'menuGrey',
   primaryBlue = 'primaryBlue',
   primaryDarkGrey = 'primaryDarkGrey',
   primaryGreen = 'primaryGreen',
@@ -14,13 +16,11 @@ export enum Colors {
   secondaryKhaki = 'secondaryKhaki',
   secondaryPurple = 'secondaryPurple',
   secondaryRed = 'secondaryRed',
-  white = 'white',
   transparent = 'transparent',
-  unsavedStyleLightGrey = 'unsavedStyleLightGrey',
   unsavedStyleLightBlue = 'unsavedStyleLightBlue',
+  unsavedStyleLightGrey = 'unsavedStyleLightGrey',
   unsavedStyleLightRed = 'unsavedStyleLightRed',
-  unsavedStylePaleYellow = 'unsavedStylePaleYellow',
-  lightGrey = 'lightGrey',
+  white = 'white',
 }
 
 export enum FontFamily {
