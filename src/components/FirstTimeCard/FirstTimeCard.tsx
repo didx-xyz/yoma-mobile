@@ -3,10 +3,10 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
-import ButtonStyles from 'styles/button.styles'
 
-import ButtonContainer from '../ButtonContainer'
-import Text, { Bold, Span, FontWeights, HeaderLevels } from '../Typography'
+import Background from '../Background/Background'
+import Button, { ButtonSizes } from '../Button'
+import Text, { Bold, FontWeights, HeaderLevels, Span } from '../Typography'
 import styles from './FirstTimeCard.styles'
 
 type Props = {
@@ -16,7 +16,15 @@ type Props = {
 const FirstTimeCard = ({ navigation }: Props) => {
   const { t } = useTranslation()
   return (
-    <View style={styles.cardView}>
+    <View style={styles.container}>
+      <Background>
+        <View style={styles.blueCircle}>
+          <BlueRightCircle />
+        </View>
+        <View style={styles.yellowPattern}>
+          <LightYellowPattern />
+        </View>
+      </Background>
       <Text.Header level={HeaderLevels.h3} color={Colors.white}>
         {t('Complete')}
         <Span color={Colors.secondaryDarkBlue}>&nbsp;{t('your CV')}</Span>
@@ -27,7 +35,7 @@ const FirstTimeCard = ({ navigation }: Props) => {
         {t('by completing our first challenge')}.
       </Text.Header>
       <View style={styles.hostedText}>
-        <Text.Body>{t('Hosted by')}</Text.Body>
+        <Text.Body color={Colors.secondaryDarkBlue}>{t('Hosted by')}</Text.Body>
         <RLabsLogo />
       </View>
       <View style={styles.progressBar}>
@@ -43,17 +51,7 @@ const FirstTimeCard = ({ navigation }: Props) => {
       <Text.Header level={HeaderLevels.h6} weight={FontWeights.bold_700} style={styles.percentText}>
         {t('1% complete')}
       </Text.Header>
-      <ButtonContainer
-        buttonText={t<string>('Let’s do it')}
-        buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
-        onPress={() => {}}
-      />
-      <View style={styles.blueCircle}>
-        <BlueRightCircle />
-      </View>
-      <View style={styles.yellowPattern}>
-        <LightYellowPattern />
-      </View>
+      <Button label={t('Let’s do it')} onPress={() => {}} size={ButtonSizes.Slim} />
     </View>
   )
 }
