@@ -1,6 +1,5 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
 import { LoginManager } from 'react-native-fbsdk'
 
 import SocialButton from '../SocialButton'
@@ -8,8 +7,6 @@ import { SocialVariants } from '../SocialButton/SocialButton.types'
 import Spacer from '../Spacer'
 
 const SocialRegistration = () => {
-  const { t } = useTranslation()
-
   const facebookSignIn = () => {
     LoginManager.logInWithPermissions(['email', 'public_profile', 'user_friends']).then(
       function (result) {
