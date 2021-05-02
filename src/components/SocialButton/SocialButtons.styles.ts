@@ -12,7 +12,7 @@ const styles = {
     position: 'relative',
     alignSelf: 'stretch',
   } as ViewStyle,
-  icon: {
+  iconWrapper: {
     position: 'absolute',
     top: 0,
     left: 24,

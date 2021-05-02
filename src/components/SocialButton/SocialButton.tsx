@@ -16,17 +16,15 @@ const SocialButton = ({ onPress, variant }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <>
-      <Button
-        variant={ButtonVariants.Clear}
-        onPress={onPress}
-        color={MAP_VARIANT_TO_OPTIONS[variant].color}
-        style={styles[variant]}
-        label={t(MAP_VARIANT_TO_OPTIONS[variant].translationKey)}
-      >
-        <View style={styles.icon}>{MAP_VARIANT_TO_OPTIONS[variant].icon}</View>
-      </Button>
-    </>
+    <Button
+      variant={ButtonVariants.Clear}
+      onPress={onPress}
+      color={MAP_VARIANT_TO_OPTIONS[variant].color}
+      style={styles[variant]}
+      label={t(MAP_VARIANT_TO_OPTIONS[variant].translationKey)}
+    >
+      <View style={styles.iconWrapper}>{MAP_VARIANT_TO_OPTIONS[variant].icon}</View>
+    </Button>
   )
 }
 
