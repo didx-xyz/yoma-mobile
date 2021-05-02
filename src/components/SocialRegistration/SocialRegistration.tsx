@@ -1,13 +1,11 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
-import { FacebookIcon, GoogleIcon } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { LoginManager } from 'react-native-fbsdk'
-import { Colors } from 'styles'
-import ButtonStyles from 'styles/button.styles'
 
-import ButtonContainer from '../ButtonContainer/ButtonContainer'
-import styles from './SocialRegistration.styles'
+import SocialButton from '../SocialButton'
+import { SocialVariants } from '../SocialButton/SocialButton.types'
+import Spacer from '../Spacer'
 
 const SocialRegistration = () => {
   const { t } = useTranslation()
@@ -58,19 +56,9 @@ const SocialRegistration = () => {
 
   return (
     <>
-      <ButtonContainer
-        buttonText={t<string>('loginFacebook')}
-        buttonStyle={[ButtonStyles.facebookButton, styles.button]}
-        onPress={facebookSignIn}
-        children={<FacebookIcon />}
-      />
-      <ButtonContainer
-        buttonText={t<string>('loginGoogle')}
-        buttonStyle={[ButtonStyles.googleButton, styles.button]}
-        buttonTextColor={Colors.primaryDarkGrey}
-        onPress={googleSignIn}
-        children={<GoogleIcon />}
-      />
+      <SocialButton variant={SocialVariants.Facebook} onPress={facebookSignIn} />
+      <Spacer height={20} />
+      <SocialButton variant={SocialVariants.Google} onPress={googleSignIn} />
     </>
   )
 }
