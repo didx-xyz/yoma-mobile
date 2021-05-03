@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
 import { ButtonSizes, ButtonVariants } from './Button.types'
@@ -35,6 +35,7 @@ const styles = {
   } as ViewStyle,
   fullWidth: {
     alignSelf: 'stretch',
+    position: 'relative',
     marginHorizontal: 12,
   } as ViewStyle,
 }
