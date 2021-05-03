@@ -1,13 +1,14 @@
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from 'assets/images'
-import { ButtonContainer, ViewContainer } from 'components'
+import { ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
-import ButtonStyles from 'styles/button.styles'
 
-import Text, { HeaderLevels, Span, TextAlign } from '../../../../components/Typography'
+import Background from '../../../../components/Background/Background'
+import Button, { ButtonSizes, ButtonVariants } from '../../../../components/Button'
+import Text, { HeaderLevels, TextAlign } from '../../../../components/Typography'
 import styles from './Landing.styles'
 
 interface Props {
@@ -18,35 +19,43 @@ const Landing = ({ navigation }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <ViewContainer style={styles.container}>
-      <View style={styles.redSemiCircleContainer}>
-        <RedSemiCircle />
-      </View>
-      <View style={styles.logoContainer}>
-        <WhiteLogo />
-      </View>
-      <Text.Header level={HeaderLevels.h1} align={TextAlign.center}>
-        {t('unlock')}
-        {'\n'}
-        <Span color={Colors.white}>{t('yourFuture')}</Span>
-      </Text.Header>
-      <Text.Body align={TextAlign.center} style={styles.bodyText}>
-        <Span color={Colors.white}>{t('landingBodyText')}</Span>
-      </Text.Body>
-      <View style={styles.purpleSemiCircleContainer}>
-        <PurpleSemiCircle />
-      </View>
-      <View style={styles.buttonOuterContainer}>
-        <ButtonContainer
-          buttonText={t<string>('register')}
-          buttonStyle={ButtonStyles.mediumTertiary3Button}
-          onPress={() => navigation.navigate(NavigationRoutes.Register)}
-        />
-        <ButtonContainer
-          buttonText={t<string>('login')}
-          buttonStyle={[ButtonStyles.transparentButton, styles.secondaryButton]}
-          onPress={() => navigation.navigate(NavigationRoutes.Login)}
-        />
+    <ViewContainer>
+      <Background>
+        <RedSemiCircle style={styles.redSemiCircle} />
+        <View style={styles.purpleSemiCircleContainer}>
+          <PurpleSemiCircle />
+        </View>
+      </Background>
+      <View style={styles.wrapper}>
+        <View style={styles.logoContainer}>
+          <WhiteLogo />
+        </View>
+        <View style={styles.content}>
+          <Text.Header level={HeaderLevels.h1} align={TextAlign.center}>
+            {t('unlock')}
+          </Text.Header>
+          <Text.Header level={HeaderLevels.h1} align={TextAlign.center} color={Colors.white}>
+            {t('yourFuture')}
+          </Text.Header>
+          <Text.Header level={HeaderLevels.h4} color={Colors.white} align={TextAlign.center} style={styles.bodyText}>
+            {t('landingBodyText')}
+          </Text.Header>
+        </View>
+        <View style={styles.actionsContainer}>
+          <Button
+            size={ButtonSizes.Default}
+            label={t('register')}
+            onPress={() => navigation.navigate(NavigationRoutes.Register)}
+            style={styles.registerButton}
+          />
+          <Button
+            variant={ButtonVariants.Clear}
+            color={Colors.white}
+            label={t('login')}
+            onPress={() => navigation.navigate(NavigationRoutes.Login)}
+            style={styles.loginButton}
+          />
+        </View>
       </View>
     </ViewContainer>
   )
