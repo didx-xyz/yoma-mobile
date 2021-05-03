@@ -1,6 +1,6 @@
 import { NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList } from 'react-native'
 
@@ -13,7 +13,7 @@ interface Props {
 
 const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [skills, setSkills] = useState([])
 
   return (
@@ -22,13 +22,11 @@ const Skills = ({ navigation }: Props) => {
         navigation={navigation}
         headerText={t('Skills')}
         onSave={() => {}}
-        onAdd={() => {
-          setIsSaved(true)
-        }}
-        showAddButton={!isSaved}
+        onAdd={() => setIsEditing(true)}
+        showAddButton={!isEditing}
       />
       <Optional
-        condition={isSaved}
+        condition={isEditing}
         fallback={<FlatList data={skills} renderItem={() => <Text.Body>render</Text.Body>} />}
       >
         <SkillsForm />
