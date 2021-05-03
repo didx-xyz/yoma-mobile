@@ -3,7 +3,6 @@ import React from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
 import { colors, Colors } from 'styles'
 
-import Optional from '../Optional'
 import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './Input.styles'
 
@@ -16,10 +15,8 @@ type Props = TextInputProps & {
 const Input = ({ name, label, handlers, ...props }: Props) => {
   const { handleChange, handleBlur, values, errors, touched } = handlers
   return (
-    <View style={styles.container}>
-      <Optional condition={values[name] !== ''}>
-        <Text.Meta level={MetaLevels.small}>{label}</Text.Meta>
-      </Optional>
+    <View>
+      <Text.Meta level={MetaLevels.small}>{values[name] !== '' ? label : ' '}</Text.Meta>
       <TextInput
         placeholderTextColor={colors[Colors.menuGrey]}
         placeholder={label}
@@ -29,11 +26,9 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
         onBlur={handleBlur(name)}
         {...props}
       />
-      {errors[name] && touched[name] && (
-        <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-          {errors[name]}
-        </Text.Meta>
-      )}
+      <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
+        {errors[name] && touched[name] ? errors[name] : ' '}
+      </Text.Meta>
     </View>
   )
 }
