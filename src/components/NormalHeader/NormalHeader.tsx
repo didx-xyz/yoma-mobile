@@ -11,7 +11,7 @@ import styles from './NormalHeader.styles'
 
 type Props = {
   navigation: any
-  headerText: string | Element
+  headerText: string | React.ReactNode
   onSave?: () => void
   showAddButton?: boolean
   onAdd?: () => void
