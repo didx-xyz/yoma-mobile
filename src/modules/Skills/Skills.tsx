@@ -15,7 +15,7 @@ interface Props {
 
 const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [skills, setSkills] = useState(MOCK_SKILLS)
 
   return (
@@ -23,16 +23,16 @@ const Skills = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={
-          <Optional condition={isSaved} fallback={t('Skills')}>
+          <Optional condition={isEditing} fallback={t('Skills')}>
             {t('Add skill')}
           </Optional>
         }
         onSave={() => {}}
-        onAdd={() => setIsSaved(true)}
-        showAddButton={!isSaved}
+        onAdd={() => setIsEditing(true)}
+        showAddButton={!isEditing}
       />
       <Optional
-        condition={isSaved}
+        condition={isEditing}
         fallback={
           <Card style={styles.outerCard}>
             <FlatList
