@@ -1,9 +1,11 @@
-import { NormalHeader, Optional, ViewContainer } from 'components'
-import Text from 'components/Typography'
+import { Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import Text, { HeaderLevels } from 'components/Typography'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FlatList } from 'react-native'
+import { FlatList, View } from 'react-native'
+import { Colors } from 'styles'
 
+import { MOCK_SKILLS } from './Skills.constants'
 import styles from './Skills.styles'
 import SkillsForm from './SkillsForm/SkillsForm'
 
@@ -14,20 +16,44 @@ interface Props {
 const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
-  const [skills, setSkills] = useState([])
+  const [skills, setSkills] = useState(MOCK_SKILLS)
 
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={t('Skills')}
+        headerText={
+          <Optional condition={isEditing} fallback={t('Skills')}>
+            {t('Add skill')}
+          </Optional>
+        }
         onSave={() => {}}
         onAdd={() => setIsEditing(true)}
         showAddButton={!isEditing}
       />
       <Optional
         condition={isEditing}
-        fallback={<FlatList data={skills} renderItem={() => <Text.Body>render</Text.Body>} />}
+        fallback={
+          <Card style={styles.outerCard}>
+            <FlatList
+              data={skills}
+              ListHeaderComponent={
+                <View style={styles.cardHeader}>
+                  <View style={styles.certificateCount}>
+                    <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
+                      60
+                    </Text.Header>
+                  </View>
+                  <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
+                    {t('Top skills')}
+                  </Text.Header>
+                </View>
+              }
+              renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
+              keyExtractor={item => item.skill}
+            />
+          </Card>
+        }
       >
         <SkillsForm />
       </Optional>
