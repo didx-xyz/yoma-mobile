@@ -120,6 +120,8 @@ const RegisterForm = () => {
             placeholder={t('country')}
             isTouched={formikHandlers.touched.countryAlpha2}
             error={formikHandlers.errors.countryAlpha2}
+            showTitle={formikHandlers.values.countryAlpha2 !== ''}
+            fieldName={'Country'}
           />
           <Input
             name={'password'}

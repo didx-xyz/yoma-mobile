@@ -1,4 +1,4 @@
-import { FormikProps, FormikValues, connect } from 'formik'
+import { FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
 import { colors, Colors } from 'styles'
@@ -33,4 +33,4 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
   )
 }
 
-export default connect(Input)
+export default Input
