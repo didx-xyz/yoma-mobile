@@ -22,11 +22,13 @@ const Skills = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={t('Skills')}
+        headerText={
+          <Optional condition={isSaved} fallback={t('Skills')}>
+            {t('Add skill')}
+          </Optional>
+        }
         onSave={() => {}}
-        onAdd={() => {
-          setIsSaved(true)
-        }}
+        onAdd={() => setIsSaved(true)}
         showAddButton={!isSaved}
       />
       <Optional

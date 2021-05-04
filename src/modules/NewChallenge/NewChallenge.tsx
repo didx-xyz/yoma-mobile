@@ -13,8 +13,8 @@ interface Props {
   navigation: any
 }
 
-const renderChallengeEntry = ({ challenge, description, endDate, organisationLogoURL }: ChallengeEntry) => {
-  return <InfoCard title={challenge} description={description} endDate={endDate} logo={organisationLogoURL} />
+const renderChallengeEntry = ({ challenge, description, endDate, organisationLogoUrl }: ChallengeEntry) => {
+  return <InfoCard title={challenge} description={description} endDate={endDate} logo={organisationLogoUrl} />
 }
 
 const NewChallenge = ({ navigation }: Props) => {
@@ -27,7 +27,7 @@ const NewChallenge = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        onSave={() => formRef.current.handleSubmit()}
+        onSave={formRef.current?.handleSubmit}
         headerText={
           <Optional condition={isSaved} fallback={t('Challenges')}>
             {t('Add challenge')}
