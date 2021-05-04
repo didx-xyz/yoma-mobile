@@ -1,6 +1,6 @@
 export type ChallengeEntry = {
   challenge: string
-  organisationLogoURL: string
+  organisationLogoUrl: string
   challengeHostProvider: string
   endDate: string
   description: string
