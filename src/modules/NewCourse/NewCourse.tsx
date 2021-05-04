@@ -13,7 +13,7 @@ interface Props {
 
 const NewCourse = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isAddingCourse, setIsAddingCourse] = useState(false)
   const [courses, setCourses] = useState([])
 
   return (
@@ -21,18 +21,16 @@ const NewCourse = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={
-          <Optional condition={isSaved} fallback={t('Courses')}>
+          <Optional condition={isAddingCourse} fallback={t('Courses')}>
             {t('Add course')}
           </Optional>
         }
         onSave={() => {}}
-        onAdd={() => {
-          setIsSaved(true)
-        }}
-        showAddButton={!isSaved}
+        onAdd={() => setIsAddingCourse(true)}
+        showAddButton={!isAddingCourse}
       />
       <Optional
-        condition={isSaved}
+        condition={isAddingCourse}
         fallback={<FlatList data={courses} renderItem={({ item }) => <Text.Body>render</Text.Body>} />}
       >
         <ScrollView>
