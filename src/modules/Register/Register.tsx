@@ -7,7 +7,7 @@ import { View } from 'react-native'
 import { Colors, colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
-import Text, { BodyLevels, HeaderLevels, Span, TextAlign } from '../../../../components/Typography'
+import Text, { BodyLevels, HeaderLevels, Span, TextAlign } from '../../components/Typography'
 import styles from './Register.styles'
 
 interface Props {
