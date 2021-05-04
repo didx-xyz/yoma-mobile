@@ -1,6 +1,6 @@
 export type CourseEntry = {
   course: string
-  organisationLogoURL: string
+  organisationLogoUrl: string
   courseHostProvider: string
   endDate: string
   description: string

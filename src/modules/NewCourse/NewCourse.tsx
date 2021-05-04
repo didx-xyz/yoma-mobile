@@ -12,8 +12,8 @@ interface Props {
   navigation: any
 }
 
-const renderCourseEntry = ({ course, description, endDate, organisationLogoURL }: CourseEntry) => {
-  return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoURL} />
+const renderCourseEntry = ({ course, description, endDate, organisationLogoUrl }: CourseEntry) => {
+  return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoUrl} />
 }
 
 const NewCourse = ({ navigation }: Props) => {
