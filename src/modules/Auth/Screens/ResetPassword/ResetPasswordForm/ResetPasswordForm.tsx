@@ -1,6 +1,6 @@
 import api from 'api'
 import { Input, ButtonContainer } from 'components'
-import { Formik } from 'formik'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -47,8 +47,6 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
         await api.users.password
           .edit(id, { ...values, token })
           .then(response => {
-            console.log('response', response)
-
             showSimpleMessage('success', 'Password Reset Successful')
             navigation.navigate(NavigationRoutes.Login)
           })
@@ -58,33 +56,27 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
           })
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => (
-        <View>
+      {(formikHandlers: FormikProps<FormikValues>) => (
+        <View style={styles.form}>
           <Input
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            value={values.password}
+            name={'password'}
             label={t('password')}
+            handlers={formikHandlers}
             autoCapitalize="none"
-            isTouched={touched.password}
-            error={errors.password}
             secureTextEntry
           />
           <Input
-            onChangeText={handleChange('confirmPassword')}
-            onBlur={handleBlur('confirmPassword')}
-            value={values.confirmPassword}
+            name={'confirmPassword'}
             label={t('confirmPassword')}
+            handlers={formikHandlers}
             autoCapitalize="none"
-            isTouched={touched.confirmPassword}
-            error={errors.confirmPassword}
             secureTextEntry
           />
           <ButtonContainer
-            disabled={isSubmitting}
+            disabled={formikHandlers.isSubmitting}
             buttonText={t<string>('resetPassword')}
             buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
-            onPress={handleSubmit}
+            onPress={formikHandlers.handleSubmit}
           />
         </View>
       )}
