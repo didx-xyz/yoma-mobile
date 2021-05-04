@@ -1,11 +1,9 @@
-import { BlueHollowCircle, BlueTick, IconInfo } from 'assets/images'
-import { CustomInput, Spinner, DatePicker, DropDownTags, Upload, Optional } from 'components'
-import Text from 'components/Typography'
+import { IconInfo } from 'assets/images'
+import { CustomInput, Spinner, DatePicker, DropDownTags, Upload, CheckBox } from 'components'
 import { Formik } from 'formik'
 import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View } from 'react-native'
-import { Colors } from 'styles'
+import { View } from 'react-native'
 
 import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
@@ -44,14 +42,11 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
             error={errors.courseHostProvider}
             showTitle={values.courseHostProvider !== ''}
           />
-          <View style={styles.checkBoxContainer}>
-            <TouchableOpacity onPress={() => setIsCourseActive(!isCourseActive)} style={styles.checkBox}>
-              <Optional condition={isCourseActive} fallback={<BlueHollowCircle />}>
-                <BlueTick />
-              </Optional>
-            </TouchableOpacity>
-            <Text.Body color={Colors.menuGrey}>{t('Course is currently in progress')}</Text.Body>
-          </View>
+          <CheckBox
+            isChecked={isCourseActive}
+            label={t('Course is currently in progress')}
+            onPress={() => setIsCourseActive(!isCourseActive)}
+          />
           <View style={styles.row}>
             <DatePicker
               onDateChange={(date: string) => {
@@ -112,18 +107,12 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
             onDelete={() => {}}
           />
           <Upload onPress={() => {}} />
-          <View style={styles.checkBoxContainer}>
-            <TouchableOpacity
+          <View style={styles.checkBoxRow}>
+            <CheckBox
+              isChecked={shouldRequestVerification}
+              label={t('Request verification of employment from company')}
               onPress={() => setShouldRequestVerification(!shouldRequestVerification)}
-              style={styles.checkBox}
-            >
-              <Optional condition={shouldRequestVerification} fallback={<BlueHollowCircle />}>
-                <BlueTick />
-              </Optional>
-            </TouchableOpacity>
-            <Text.Body color={Colors.menuGrey} style={styles.verificationText}>
-              {t('Request verification of completion from provider')}
-            </Text.Body>
+            />
             <View style={styles.iconInfo}>
               <IconInfo />
             </View>

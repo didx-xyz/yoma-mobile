@@ -13,7 +13,7 @@ const styles = {
   saveText: {
     paddingRight: 20,
   } as TextStyle,
-  add: {
+  addButton: {
     flexDirection: 'row',
     paddingRight: 20,
   } as ViewStyle,
