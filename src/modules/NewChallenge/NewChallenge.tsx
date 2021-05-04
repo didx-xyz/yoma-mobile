@@ -27,7 +27,7 @@ const NewChallenge = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        onSave={() => formRef.current.handleSubmit()}
+        onSave={formRef.current?.handleSubmit}
         headerText={
           <Optional condition={isSaved} fallback={t('Challenges')}>
             {t('Add challenge')}
