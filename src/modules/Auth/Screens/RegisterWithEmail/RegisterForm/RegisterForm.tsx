@@ -5,7 +5,7 @@ import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors } from 'styles'
+import { colors, Colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
@@ -116,7 +116,7 @@ const RegisterForm = () => {
             defaultValue={country}
             searchable={true}
             searchablePlaceholder="Search for country"
-            searchablePlaceholderTextColor={Colors.menuGrey}
+            searchablePlaceholderTextColor={colors[Colors.menuGrey]}
             placeholder={t('country')}
             isTouched={formikHandlers.touched.countryAlpha2}
             error={formikHandlers.errors.countryAlpha2}
