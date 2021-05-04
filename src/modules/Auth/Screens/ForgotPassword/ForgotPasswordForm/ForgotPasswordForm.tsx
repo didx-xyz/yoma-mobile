@@ -1,6 +1,6 @@
 import api from 'api'
 import { Input, ButtonContainer } from 'components'
-import { Formik } from 'formik'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -28,33 +28,28 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
         await api.auth
           .resetPassword({ ...values })
           .then((response: any) => {
-            console.log('response', response)
             showSimpleMessage('success', response.meta.message)
             setSubmitted(true)
           })
           .catch(error => {
-            console.log('Error =>', error)
             showSimpleMessage('danger', 'Error', error)
           })
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => (
-        <View>
+      {(formikHandlers: FormikProps<FormikValues>) => (
+        <View style={styles.form}>
           <Input
-            onChangeText={handleChange('email')}
-            onBlur={handleBlur('email')}
-            value={values.email}
+            name={'email'}
             label={t('email')}
             keyboardType="email-address"
             autoCapitalize="none"
-            isTouched={touched.email}
-            error={errors.email}
+            handlers={formikHandlers}
           />
           <ButtonContainer
-            disabled={isSubmitting}
+            disabled={formikHandlers.isSubmitting}
             buttonText={t<string>('sendInstruction')}
             buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
-            onPress={handleSubmit}
+            onPress={formikHandlers.handleSubmit}
           />
         </View>
       )}
