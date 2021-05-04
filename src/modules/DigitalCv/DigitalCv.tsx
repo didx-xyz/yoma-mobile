@@ -40,7 +40,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={Colors.primaryRed}
           cardTitle={t('Education')}
           defaultText={t('Which school, university or college did you attend?')}
-          onEdit={() => navigation.navigate('Education')}
+          onEdit={() => navigation.navigate(NavigationRoutes.Education)}
         />
         <CvCard
           hasCount={true}
@@ -49,6 +49,7 @@ const DigitalCv = ({ navigation }: Props) => {
           countBackgroundColor={Colors.primaryGreen}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
+          onEdit={() => navigation.navigate(NavigationRoutes.Skills)}
         />
       </ScrollView>
     </ViewContainer>
