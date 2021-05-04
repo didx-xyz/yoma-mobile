@@ -1,13 +1,8 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 const styles = {
-  checkBoxView: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 13,
-  } as ViewStyle,
-  checkBox: {
-    paddingRight: 10,
+  form: {
+    paddingHorizontal: 20,
   } as ViewStyle,
   privacy: {
     textDecorationLine: 'underline',
