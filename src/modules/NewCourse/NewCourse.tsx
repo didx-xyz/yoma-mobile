@@ -12,13 +12,13 @@ interface Props {
   navigation: any
 }
 
-const renderCourseEntry = ({ course, description, endDate, organisationLogoURL }: CourseEntry) => {
-  return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoURL} />
+const renderCourseEntry = ({ course, description, endDate, organisationLogoUrl }: CourseEntry) => {
+  return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoUrl} />
 }
 
 const NewCourse = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isAddingCourse, setIsAddingCourse] = useState(false)
   const [courses, setCourses] = useState(MOCK_COURSES)
 
   return (
@@ -26,16 +26,16 @@ const NewCourse = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={
-          <Optional condition={isSaved} fallback={t('Courses')}>
+          <Optional condition={isAddingCourse} fallback={t('Courses')}>
             {t('Add course')}
           </Optional>
         }
         onSave={() => {}}
-        onAdd={() => setIsSaved(true)}
-        showAddButton={!isSaved}
+        onAdd={() => setIsAddingCourse(true)}
+        showAddButton={!isAddingCourse}
       />
       <Optional
-        condition={isSaved}
+        condition={isAddingCourse}
         fallback={
           <FlatList
             data={courses}

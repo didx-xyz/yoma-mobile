@@ -1,11 +1,9 @@
-import { BlueHollowCircle, BlueTick, IconInfo } from 'assets/images'
-import { CustomInput, DatePicker, DropDownTags, Upload, Optional } from 'components'
-import Text from 'components/Typography'
+import { IconInfo } from 'assets/images'
+import { CustomInput, DatePicker, DropDownTags, Upload, CheckBox } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View } from 'react-native'
-import { Colors } from 'styles'
+import { View } from 'react-native'
 
 import { INITIAL_VALUES, MOCK_SKILLS } from './NewChallengeForm.constants'
 import styles from './NewChallengeForm.styles'
@@ -52,19 +50,11 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
             error={errors.challengeHostProvider}
             showTitle={values.challengeHostProvider !== ''}
           />
-          <View style={styles.checkBoxContainer}>
-            <TouchableOpacity
-              onPress={() => {
-                setIsInProgress(!isInProgress)
-              }}
-              style={styles.checkBox}
-            >
-              <Optional condition={isInProgress} fallback={<BlueHollowCircle />}>
-                <BlueTick />
-              </Optional>
-            </TouchableOpacity>
-            <Text.Body color={Colors.menuGrey}>{t('Challenge is currently in progress')}</Text.Body>
-          </View>
+          <CheckBox
+            isChecked={isInProgress}
+            label={t('Challenge is currently in progress')}
+            onPress={() => setIsInProgress(!isInProgress)}
+          />
           <View style={styles.row}>
             <DatePicker
               onDateChange={(date: string) => {
@@ -124,18 +114,12 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
             error={errors.skillNames}
           />
           <Upload onPress={() => {}} />
-          <View style={styles.checkBoxContainer}>
-            <TouchableOpacity
-              onPress={() => {
-                setShouldRequestVerification(!shouldRequestVerification)
-              }}
-              style={styles.checkBox}
-            >
-              <Optional condition={shouldRequestVerification} fallback={<BlueHollowCircle />}>
-                <BlueTick />
-              </Optional>
-            </TouchableOpacity>
-            <Text.Body color={Colors.menuGrey}>{t('Request verification of employment from company')}</Text.Body>
+          <View style={styles.checkBoxRow}>
+            <CheckBox
+              isChecked={shouldRequestVerification}
+              label={t('Request verification of employment from company')}
+              onPress={() => setShouldRequestVerification(!shouldRequestVerification)}
+            />
             <View style={styles.iconInfo}>
               <IconInfo />
             </View>

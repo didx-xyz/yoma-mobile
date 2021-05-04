@@ -6,13 +6,10 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 12,
   } as ViewStyle,
-  checkBoxContainer: {
+  checkBoxRow: {
     flexDirection: 'row',
     alignItems: 'center',
     marginVertical: 15,
-  } as ViewStyle,
-  checkBox: {
-    marginRight: 10,
   } as ViewStyle,
   row: {
     flexDirection: 'row',
@@ -24,9 +21,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
   } as ViewStyle,
   iconInfo: {
-    position: 'absolute',
-    top: 0,
-    right: 0,
+    marginRight: 5,
   } as ViewStyle,
 })
 

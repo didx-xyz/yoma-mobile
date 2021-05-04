@@ -21,7 +21,7 @@ type Props = {
   onEdit?: () => void
 }
 
-const InfoCard = ({ description, endDate, logo, subtitle = '', title, onEdit }: Props) => {
+const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props) => {
   return (
     <Card style={styles.cardView}>
       <View style={styles.row}>
@@ -33,7 +33,7 @@ const InfoCard = ({ description, endDate, logo, subtitle = '', title, onEdit }: 
         </Optional>
         <View>
           <Optional
-            condition={subtitle !== ''}
+            condition={!!subtitle}
             fallback={
               <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
                 {title}
