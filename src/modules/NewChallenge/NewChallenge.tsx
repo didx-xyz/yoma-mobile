@@ -27,9 +27,7 @@ const NewChallenge = ({ navigation }: Props) => {
             {t('Add challenge')}
           </Optional>
         }
-        onSave={() => {
-          formRef.current.handleSubmit()
-        }}
+        onSave={formRef.current.handleSubmit}
         onAdd={() => setIsSaved(true)}
         showAddButton={!isSaved}
       />

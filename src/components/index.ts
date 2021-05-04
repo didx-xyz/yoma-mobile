@@ -1,5 +1,6 @@
 import ButtonContainer from './ButtonContainer'
 import Card from './Card'
+import CheckBox from './CheckBox'
 import CustomInput from './CustomInput'
 import CvCard from './CvCard'
 import DateDisplay from './DateDisplay'
@@ -28,6 +29,7 @@ import ViewContainer from './ViewContainer/ViewContainer'
 export {
   ButtonContainer,
   Card,
+  CheckBox,
   CustomInput,
   CvCard,
   DateDisplay,
