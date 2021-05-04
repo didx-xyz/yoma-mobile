@@ -42,14 +42,14 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
       <Optional
         condition={showAddButton}
         fallback={
-          <TouchableOpacity onPress={onSave} style={styles.add}>
+          <TouchableOpacity onPress={onSave} style={styles.addButton}>
             <Text.Body>
               <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
             </Text.Body>
           </TouchableOpacity>
         }
       >
-        <TouchableOpacity onPress={onAdd} style={styles.add}>
+        <TouchableOpacity onPress={onAdd} style={styles.addButton}>
           <Text.Body>
             <Bold color={Colors.primaryGreen}>{t('Add')}</Bold>
           </Text.Body>
