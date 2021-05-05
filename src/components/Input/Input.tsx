@@ -1,6 +1,6 @@
 import { FormikProps, FormikValues } from 'formik'
 import React from 'react'
-import { TextInput, TextInputProps, View } from 'react-native'
+import { TextInput, TextInputProps } from 'react-native'
 import { colors, Colors } from 'styles'
 
 import Text, { MetaLevels, TextAlign } from '../Typography'
@@ -15,7 +15,7 @@ type Props = TextInputProps & {
 const Input = ({ name, label, handlers, ...props }: Props) => {
   const { handleChange, handleBlur, values, errors, touched } = handlers
   return (
-    <View>
+    <>
       <Text.Meta level={MetaLevels.small}>{values[name] !== '' ? label : ' '}</Text.Meta>
       <TextInput
         placeholderTextColor={colors[Colors.menuGrey]}
@@ -29,7 +29,7 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
       <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
         {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
-    </View>
+    </>
   )
 }
 

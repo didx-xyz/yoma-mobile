@@ -17,6 +17,7 @@ import Input from './Input'
 import LargeHeaderContainer from './LargeHeaderContainer'
 import ListCard from './ListCard'
 import NormalHeader from './NormalHeader'
+import OnboardingForms from './OnboardingForms'
 import Optional from './Optional'
 import ProfilePhoto from './ProfilePhoto'
 import ProgressCircle from './ProgressCircle'
@@ -40,6 +41,7 @@ export {
   DropDown,
   DropDownTags,
   FirstTimeCard,
+  OnboardingForms,
   HeaderContainer,
   HomeHeader,
   InfoCard,

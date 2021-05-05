@@ -1,14 +1,12 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { FacebookIcon, GoogleIcon } from 'assets/images'
+import SocialButton from 'components/SocialButton'
+import { SocialVariants } from 'components/SocialButton/SocialButton.types'
+import Spacer from 'components/Spacer'
 import React from 'react'
 import { LoginManager } from 'react-native-fbsdk'
-import ButtonStyles from 'styles/button.styles'
-
-import ButtonContainer from '../ButtonContainer/ButtonContainer'
-import styles from './SocialLogin.styles'
 
 const SocialLogin = () => {
-  const facebookSignin = () => {
+  const facebookSignIn = () => {
     LoginManager.logInWithPermissions(['public_profile']).then(
       function (result) {
         if (result.isCancelled) {
@@ -36,18 +34,9 @@ const SocialLogin = () => {
 
   return (
     <>
-      <ButtonContainer
-        buttonText="Continue with Facebook"
-        buttonStyle={[ButtonStyles.facebookButton, styles.button]}
-        onPress={facebookSignin}
-        children={<FacebookIcon />}
-      />
-      <ButtonContainer
-        buttonText="Continue with Google  "
-        buttonStyle={[ButtonStyles.googleButton, styles.button]}
-        onPress={googleSignIn}
-        children={<GoogleIcon />}
-      />
+      <SocialButton variant={SocialVariants.Facebook} onPress={facebookSignIn} />
+      <Spacer height={20} />
+      <SocialButton variant={SocialVariants.Google} onPress={googleSignIn} />
     </>
   )
 }

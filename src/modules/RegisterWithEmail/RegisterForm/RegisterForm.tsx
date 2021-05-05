@@ -141,7 +141,7 @@ const RegisterForm = () => {
             isChecked={checked}
             label={
               <>
-                {t('I agree')} &nbsp;
+                {t('I agree')}&nbsp;
                 <Span color={Colors.menuGrey} style={styles.privacy} onPress={() => {}}>
                   {t('Yoma’s Privacy Policy')}
                 </Span>
