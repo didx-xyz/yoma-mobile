@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 import { Colors, colors } from 'styles'
 
-import Text, { Bold, HeaderLevels, TextAlign } from '../../../../components/Typography'
+import Text, { Bold, HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './ResetPassword.styles'
 import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
 

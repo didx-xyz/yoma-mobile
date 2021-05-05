@@ -1,6 +1,6 @@
 import { BlueHollowCircle, BlueTick } from 'assets/images'
-import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
+import React, { useEffect, useState } from 'react'
+import { Pressable, StyleSheet, View, ViewStyle } from 'react-native'
 import { Colors } from 'styles'
 
 import Optional from '../Optional'
@@ -14,15 +14,29 @@ type Props = {
 }
 
 const CheckBox = ({ label, isChecked, onPress }: Props) => {
+  const [opacity, setOpacity] = useState<number>(1)
+  const [style, setStyle] = useState<ViewStyle>(styles.checkBoxContainer)
+
+  useEffect(() => {
+    const opacityStyle = { opacity: opacity }
+    setStyle(StyleSheet.flatten([opacityStyle, styles.checkBoxContainer]))
+  }, [opacity])
+
   return (
-    <TouchableOpacity onPress={onPress} style={styles.checkBoxContainer}>
+    <Pressable
+      hitSlop={20}
+      onPress={onPress}
+      onPressIn={() => setOpacity(0.2)}
+      onPressOut={() => setOpacity(1)}
+      style={style}
+    >
       <View style={styles.checkBox}>
         <Optional condition={isChecked} fallback={<BlueHollowCircle />}>
           <BlueTick />
         </Optional>
       </View>
       <Text.Body color={Colors.menuGrey}>{label}</Text.Body>
-    </TouchableOpacity>
+    </Pressable>
   )
 }
 
