@@ -1,6 +1,9 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
 import { FormikProps, FormikValues } from 'formik'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -9,7 +12,7 @@ import styles from './NewChallenge.styles'
 import NewChallengeForm from './NewChallengeForm/NewChallengeForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.NewChallenge>
 }
 
 const NewChallenge = ({ navigation }: Props) => {
