@@ -1,6 +1,7 @@
 import { StackActions } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { AddIcon, BackIconGrey } from 'assets/images'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +13,7 @@ import Text, { Bold, HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
 
 type Props = {
-  navigation: StackNavigationProp<HomeNavigatorParamsList>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes>
   headerText: string | React.ReactNode
   onSave?: () => void
   showAddButton?: boolean

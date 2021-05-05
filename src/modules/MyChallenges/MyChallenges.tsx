@@ -8,14 +8,14 @@ import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import styles from './NewChallenge.styles'
+import styles from './MyChallenges.styles'
 import NewChallengeForm from './NewChallengeForm/NewChallengeForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.NewChallenge>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyChallenges>
 }
 
-const NewChallenge = ({ navigation }: Props) => {
+const MyChallenges = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
   const [challenges, setChallenges] = useState([])
@@ -48,4 +48,4 @@ const NewChallenge = ({ navigation }: Props) => {
   )
 }
 
-export default NewChallenge
+export default MyChallenges
