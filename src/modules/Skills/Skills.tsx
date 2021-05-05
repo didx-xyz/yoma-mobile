@@ -1,8 +1,7 @@
-import { Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
-import Text, { HeaderLevels } from 'components/Typography'
+import { Card, ListCard, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 import { Colors } from 'styles'
 
 import { MOCK_SKILLS } from './Skills.constants'
@@ -15,7 +14,7 @@ interface Props {
 
 const Skills = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [skills, setSkills] = useState(MOCK_SKILLS)
 
   return (
@@ -23,32 +22,21 @@ const Skills = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={
-          <Optional condition={isSaved} fallback={t('Skills')}>
+          <Optional condition={isEditing} fallback={t('Skills')}>
             {t('Add skill')}
           </Optional>
         }
         onSave={() => {}}
-        onAdd={() => setIsSaved(true)}
-        showAddButton={!isSaved}
+        onAdd={() => setIsEditing(true)}
+        showAddButton={!isEditing}
       />
       <Optional
-        condition={isSaved}
+        condition={isEditing}
         fallback={
           <Card style={styles.outerCard}>
             <FlatList
               data={skills}
-              ListHeaderComponent={
-                <View style={styles.cardHeader}>
-                  <View style={styles.certificateCount}>
-                    <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
-                      60
-                    </Text.Header>
-                  </View>
-                  <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
-                    {t('Top skills')}
-                  </Text.Header>
-                </View>
-              }
+              ListHeaderComponent={<ListCard color={Colors.primaryBlue} value={60} label={t('Top skills')} />}
               renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
               keyExtractor={item => item.skill}
             />
