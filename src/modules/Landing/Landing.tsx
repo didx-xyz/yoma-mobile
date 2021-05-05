@@ -6,9 +6,9 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
 
-import Background from '../../../../components/Background/Background'
-import Button, { ButtonSizes, ButtonVariants } from '../../../../components/Button'
-import Text, { HeaderLevels, TextAlign } from '../../../../components/Typography'
+import Background from '../../components/Background/Background'
+import Button, { ButtonSizes, ButtonVariants } from '../../components/Button'
+import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './Landing.styles'
 
 interface Props {

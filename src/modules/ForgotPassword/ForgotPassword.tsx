@@ -8,7 +8,7 @@ import { openInbox } from 'react-native-email-link'
 import { colors, Colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
 
-import Text, { HeaderLevels, TextAlign } from '../../../../components/Typography'
+import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './ForgotPassword.styles'
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
 

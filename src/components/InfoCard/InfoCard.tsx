@@ -32,18 +32,11 @@ const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props
           <Image source={{ uri: logo }} style={styles.image} />
         </Optional>
         <View>
-          <Optional
-            condition={!!subtitle}
-            fallback={
-              <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
-                {title}
-              </Text.Header>
-            }
-          >
-            <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+          <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+            <Optional condition={!!subtitle} fallback={<>{title}</>}>
               {subtitle + ' : ' + title}
-            </Text.Header>
-          </Optional>
+            </Optional>
+          </Text.Header>
           <View style={styles.row}>
             <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate} />
           </View>
