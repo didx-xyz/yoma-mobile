@@ -14,7 +14,7 @@ interface Props {
 
 const NewChallenge = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [challenges, setChallenges] = useState([])
   const formRef = useRef<FormikProps<FormikValues>>()
 
@@ -23,16 +23,16 @@ const NewChallenge = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={
-          <Optional condition={isSaved} fallback={t('Challenges')}>
+          <Optional condition={isEditing} fallback={t('Challenges')}>
             {t('Add challenge')}
           </Optional>
         }
-        onSave={() => formRef.current.handleSubmit()}
-        onAdd={() => setIsSaved(true)}
-        showAddButton={!isSaved}
+        onSave={formRef.current?.handleSubmit}
+        onAdd={() => setIsEditing(true)}
+        showAddButton={!isEditing}
       />
       <Optional
-        condition={isSaved}
+        condition={isEditing}
         fallback={<FlatList data={challenges} renderItem={() => <Text.Body>render</Text.Body>} />}
       >
         <ScrollView>
