@@ -8,5 +8,6 @@ export type HomeNavigatorParamsList = {
   [NavigationRoutes.Experience]: undefined
   [NavigationRoutes.Education]: undefined
   [NavigationRoutes.Skills]: undefined
+  [NavigationRoutes.MyCourses]: undefined
   [NavigationRoutes.MyChallenges]: undefined
 }

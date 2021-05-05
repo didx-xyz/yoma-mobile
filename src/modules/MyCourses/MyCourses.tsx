@@ -1,19 +1,22 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, NormalHeader, Optional, ViewContainer } from 'components'
 import Text from 'components/Typography'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import styles from './NewCourse.styles'
+import styles from './MyCourses.styles'
 import NewCourseForm from './NewCourseForm/NewCourseForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyCourses>
 }
 
-const NewCourse = ({ navigation }: Props) => {
+const MyCourses = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isAddingCourse, setIsAddingCourse] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [courses, setCourses] = useState([])
 
   return (
@@ -21,16 +24,16 @@ const NewCourse = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={
-          <Optional condition={isAddingCourse} fallback={t('Courses')}>
+          <Optional condition={isEditing} fallback={t('Courses')}>
             {t('Add course')}
           </Optional>
         }
         onSave={() => {}}
-        onAdd={() => setIsAddingCourse(true)}
-        showAddButton={!isAddingCourse}
+        onAdd={() => setIsEditing(true)}
+        showAddButton={!isEditing}
       />
       <Optional
-        condition={isAddingCourse}
+        condition={isEditing}
         fallback={<FlatList data={courses} renderItem={({ item }) => <Text.Body>render</Text.Body>} />}
       >
         <ScrollView>
@@ -43,4 +46,4 @@ const NewCourse = ({ navigation }: Props) => {
   )
 }
 
-export default NewCourse
+export default MyCourses
