@@ -11,7 +11,7 @@ import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
 
-import { Span } from '../../../../../components/Typography'
+import { Span } from '../../../components/Typography'
 import styles from './RegisterForm.styles'
 
 const RegisterForm = () => {

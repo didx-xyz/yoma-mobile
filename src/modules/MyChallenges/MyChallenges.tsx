@@ -1,25 +1,28 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import { MOCKED_CHALLENGES } from './NewChallenge.constants'
-import styles from './NewChallenge.styles'
-import { ChallengeEntry } from './NewChallenge.types'
+import { MOCKED_CHALLENGES } from './MyChallenges.constants'
+import styles from './MyChallenges.styles'
+import { ChallengeEntry } from './MyChallenges.types'
 import NewChallengeForm from './NewChallengeForm/NewChallengeForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyChallenges>
 }
 
 const renderChallengeEntry = ({ challenge, description, endDate, organisationLogoUrl }: ChallengeEntry) => {
   return <InfoCard title={challenge} description={description} endDate={endDate} logo={organisationLogoUrl} />
 }
 
-const NewChallenge = ({ navigation }: Props) => {
+const MyChallenges = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [challenges, setChallenges] = useState(MOCKED_CHALLENGES)
   const formRef = useRef<FormikProps<FormikValues>>()
 
@@ -29,15 +32,15 @@ const NewChallenge = ({ navigation }: Props) => {
         navigation={navigation}
         onSave={formRef.current?.handleSubmit}
         headerText={
-          <Optional condition={isSaved} fallback={t('Challenges')}>
+          <Optional condition={isEditing} fallback={t('Challenges')}>
             {t('Add challenge')}
           </Optional>
         }
-        onAdd={() => setIsSaved(true)}
-        showAddButton={!isSaved}
+        onAdd={() => setIsEditing(true)}
+        showAddButton={!isEditing}
       />
       <Optional
-        condition={isSaved}
+        condition={isEditing}
         fallback={
           <FlatList
             data={challenges}
@@ -56,4 +59,4 @@ const NewChallenge = ({ navigation }: Props) => {
   )
 }
 
-export default NewChallenge
+export default MyChallenges

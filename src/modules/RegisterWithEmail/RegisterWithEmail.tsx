@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 import { Colors, colors } from 'styles'
 
-import Text, { BodyLevels, HeaderLevels, TextAlign } from '../../../../components/Typography'
+import Text, { BodyLevels, HeaderLevels, TextAlign } from '../../components/Typography'
 import RegisterForm from './RegisterForm/RegisterForm'
 import styles from './RegisterWithEmail.styles'
 
