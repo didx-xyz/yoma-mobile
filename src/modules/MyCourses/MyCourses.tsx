@@ -6,9 +6,9 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import { MOCK_COURSES } from './MyCourses.constants'
 import styles from './MyCourses.styles'
-import { MOCK_COURSES } from './NewCourse.constants'
-import { CourseEntry } from './NewCourse.types'
+import { CourseEntry } from './MyCourses.types'
 import NewCourseForm from './NewCourseForm/NewCourseForm'
 
 interface Props {
