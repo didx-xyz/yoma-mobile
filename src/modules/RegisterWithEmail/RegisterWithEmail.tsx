@@ -1,6 +1,7 @@
 import { YellowCircleRight } from 'assets/images'
 import { LargeHeaderContainer, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthRegistration } from 'modules/Auth/Auth.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
@@ -12,9 +13,10 @@ import styles from './RegisterWithEmail.styles'
 
 interface Props {
   navigation: any
+  onRegisterUser: (details: AuthRegistration) => void
 }
 
-const RegisterWithEmail = ({ navigation }: Props) => {
+const RegisterWithEmail = ({ navigation, onRegisterUser }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -31,7 +33,7 @@ const RegisterWithEmail = ({ navigation }: Props) => {
           <Text.Header level={HeaderLevels.h3} align={TextAlign.center}>
             {t('register')}
           </Text.Header>
-          <RegisterForm />
+          <RegisterForm onRegisterUser={onRegisterUser} />
         </View>
         <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.notice}>
           {t('alreadyHaveAccount')}

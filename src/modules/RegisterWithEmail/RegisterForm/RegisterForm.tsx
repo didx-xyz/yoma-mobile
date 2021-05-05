@@ -1,20 +1,23 @@
-import api from 'api'
 import { ButtonContainer, CheckBox, DropDown, Input, Spinner } from 'components'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
+import { AuthRegistration } from 'modules/Auth/Auth.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { colors, Colors } from 'styles'
 import ButtonStyles from 'styles/button.styles'
-import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
 
 import { Span } from '../../../components/Typography'
 import styles from './RegisterForm.styles'
 
-const RegisterForm = () => {
+interface Props {
+  onRegisterUser: (details: AuthRegistration) => void
+}
+
+const RegisterForm = ({ onRegisterUser }: Props) => {
   const { t } = useTranslation()
   const [checked, setChecked] = useState(false)
   const [country, setCountry] = useState('')
@@ -36,8 +39,8 @@ const RegisterForm = () => {
           .min(2)
           .max(50)
           .required(t('required'))
-          .test('First name', 'First name cannot include numbers or symbols', (value: any) => {
-            return !nameHasDigitsOrSymbols(value)
+          .test('First name', 'First name cannot include numbers or symbols', value => {
+            return !nameHasDigitsOrSymbols(value!)
           })
           .label('First name'),
         lastName: yup
@@ -45,8 +48,8 @@ const RegisterForm = () => {
           .min(2)
           .max(50)
           .required(t('required'))
-          .test('Last name', 'Last name cannot include numbers or symbols', (value: any) => {
-            return !nameHasDigitsOrSymbols(value)
+          .test('Last name', 'Last name cannot include numbers or symbols', value => {
+            return !nameHasDigitsOrSymbols(value!)
           })
           .label('Last name'),
         email: yup
@@ -74,20 +77,8 @@ const RegisterForm = () => {
           .label('Confirm password')
           .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, t('passwordRegexError')),
       })}
-      onSubmit={async (values, actions) => {
-        console.log('Register values: ', values)
-        actions.setSubmitting(true)
-        await api.auth
-          .register({ ...values })
-          .then(() => {
-            actions.setSubmitting(false)
-            showSimpleMessage('success', 'Registration Successful')
-          })
-          .catch(error => {
-            actions.setSubmitting(false)
-            console.log('Error =>', error)
-            showSimpleMessage('danger', 'Error', error)
-          })
+      onSubmit={async values => {
+        onRegisterUser(values)
       }}
     >
       {(formikHandlers: FormikProps<FormikValues>) => (
