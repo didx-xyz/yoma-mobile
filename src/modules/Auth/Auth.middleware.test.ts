@@ -11,6 +11,16 @@ import {
 } from './Auth.reducer'
 import { defaultUserLoginResponseData, defaultUserRegistrationResponseData } from './Auth.test.fixtures'
 
+const userRegistrationData = {
+  firstName: 'FIRST NAME',
+  lastName: 'LAST NAME',
+  email: 'USER EMAIL',
+  countryAlpha2: 'COUNTRY CODE',
+  password: 'USER PASSWORD',
+  confirmPassword: 'USER PASSWORD',
+  privacyInd: true,
+}
+
 describe('modules/Auth/Auth.middleware', () => {
   describe('authLoginFlow', () => {
     it('should ignore other actions', async () => {
@@ -173,20 +183,11 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(mockApi).not.toHaveBeenCalled()
     })
 
-    it('should correctly call the api with the given credentials', async () => {
+    it('should correctly call the api with the given registration data', async () => {
       // given ... the authRegistration action is fired
       const create = createMiddlewareMock(jest)
-      const credentials = {
-        firstName: 'FIRST NAME',
-        lastName: 'LAST NAME',
-        email: 'USER EMAIL',
-        countryAlpha2: 'COUNTRY CODE',
-        password: 'USER PASSWORD',
-        confirmPassword: 'USER PASSWORD',
-        privacyInd: true,
-      }
       const mockApi = { api: { auth: { register: jest.fn((_x: any) => Promise.resolve('RESOLVED VALUE')) } } }
-      const action = authRegistration(credentials)
+      const action = authRegistration(userRegistrationData)
       // @ts-ignore
       const { invoke, next } = create(SUT.authRegistrationFlow(mockApi))
 
@@ -201,18 +202,9 @@ describe('modules/Auth/Auth.middleware', () => {
     it('should correctly handle a successful registration', async () => {
       // given ... the register api is called and returns successfully
       const create = createMiddlewareMock(jest)
-      const credentials = {
-        firstName: 'FIRST NAME',
-        lastName: 'LAST NAME',
-        email: 'USER EMAIL',
-        countryAlpha2: 'COUNTRY CODE',
-        password: 'USER PASSWORD',
-        confirmPassword: 'USER PASSWORD',
-        privacyInd: true,
-      }
       const response = defaultUserRegistrationResponseData
       const mockApi = { api: { auth: { register: jest.fn((_x: any) => Promise.resolve(response)) } } }
-      const action = authRegistration(credentials)
+      const action = authRegistration(userRegistrationData)
 
       // @ts-ignore
       const { store, invoke } = create(SUT.authRegistrationFlow(mockApi))
@@ -226,18 +218,9 @@ describe('modules/Auth/Auth.middleware', () => {
     it('should correctly handle a failed registration', async () => {
       // given ... the register api is called and returns a failure
       const create = createMiddlewareMock(jest)
-      const credentials = {
-        firstName: 'FIRST NAME',
-        lastName: 'LAST NAME',
-        email: 'USER EMAIL',
-        countryAlpha2: 'COUNTRY CODE',
-        password: 'USER PASSWORD',
-        confirmPassword: 'USER PASSWORD',
-        privacyInd: true,
-      }
       const response = 'ERROR: FAILED FOR A REASON'
       const mockApi = { api: { auth: { register: jest.fn((_x: any) => Promise.reject(response)) } } }
-      const action = authRegistration(credentials)
+      const action = authRegistration(userRegistrationData)
 
       // @ts-ignore
       const { store, invoke } = create(SUT.authRegistrationFlow(mockApi))
@@ -264,7 +247,7 @@ describe('modules/Auth/Auth.middleware', () => {
       // when ... we respond to the authRegistration action
       await invoke(action)
 
-      // then ... the registration API should be called
+      // then ... the notification should be called
       expect(mockNotification).toHaveBeenCalled()
     })
   })
@@ -283,7 +266,7 @@ describe('modules/Auth/Auth.middleware', () => {
       // when ... we respond to the authRegistration action
       await invoke(action)
 
-      // then ... the registration API should be called
+      // then ... the notification should be called
       expect(mockNotification).toHaveBeenCalled()
     })
   })
