@@ -1,11 +1,10 @@
 import api from 'api'
-import { Input, ButtonContainer } from 'components'
+import { Input, OnboardingForms } from 'components'
+import Button from 'components/Button'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
-import ButtonStyles from 'styles/button.styles'
 import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
@@ -47,7 +46,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
         await api.users.password
           .edit(id, { ...values, token })
           .then(response => {
-            showSimpleMessage('success', 'Password Reset Successful')
+            showSimpleMessage('success', 'Password reset successful')
             navigation.navigate(NavigationRoutes.Login)
           })
           .catch(error => {
@@ -57,28 +56,30 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
       }}
     >
       {(formikHandlers: FormikProps<FormikValues>) => (
-        <View style={styles.form}>
-          <Input
-            name={'password'}
-            label={t('password')}
-            handlers={formikHandlers}
-            autoCapitalize="none"
-            secureTextEntry
-          />
-          <Input
-            name={'confirmPassword'}
-            label={t('confirmPassword')}
-            handlers={formikHandlers}
-            autoCapitalize="none"
-            secureTextEntry
-          />
-          <ButtonContainer
-            disabled={formikHandlers.isSubmitting}
-            buttonText={t<string>('resetPassword')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
+        <>
+          <OnboardingForms>
+            <Input
+              name={'password'}
+              label={t('password')}
+              handlers={formikHandlers}
+              autoCapitalize="none"
+              secureTextEntry
+            />
+            <Input
+              name={'confirmPassword'}
+              label={t('confirmPassword')}
+              handlers={formikHandlers}
+              autoCapitalize="none"
+              secureTextEntry
+            />
+          </OnboardingForms>
+          <Button
+            isDisabled={formikHandlers.isSubmitting}
+            label={t('resetPassword')}
             onPress={formikHandlers.handleSubmit}
+            style={styles.button}
           />
-        </View>
+        </>
       )}
     </Formik>
   )
