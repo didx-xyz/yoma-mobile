@@ -1,10 +1,9 @@
 import { createAction } from '@reduxjs/toolkit'
 
-const name = '[api]'
-export const apiGet = createAction<any>(`${name} apiGet`)
-export const apiGetSuccess = createAction<any>(`${name} apiGetSuccess`)
-export const apiGetFailure = createAction<any>(`${name} apiGetFailure`)
+import { StdObj } from '../types/general.types'
+import { ApiMeta } from './api.types'
 
-export const apiPush = createAction<any>(`${name} apiPush`)
-export const apiPushSuccess = createAction<any>(`${name} apiPushSuccess`)
-export const apiPushFailure = createAction<any>(`${name} apiPushFailure`)
+const name = '[api]'
+export const apiRequest = createAction(`${name} apiRequest`, (meta: ApiMeta, payload?: StdObj) => ({ payload, meta }))
+export const apiRequestSuccess = createAction<any>(`${name} apiRequestSuccess`)
+export const apiRequestFailure = createAction<any>(`${name} apiRequestFailure`)

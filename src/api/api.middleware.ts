@@ -1,39 +1,40 @@
+import { State } from 'react-native-gesture-handler'
 import { Middleware } from 'redux'
 
-import { apiGet, apiGetFailure, apiGetSuccess } from './api.reducer'
+import { apiRequest } from './api.reducer'
+import { ApiClient, ApiClientArgs, ApiMeta } from './api.types'
 
-export const apiGetFlow = ({ api }: { api: any }): Middleware => ({ getState, dispatch }) => next => async action => {
+type PrepareApiRequestData = Pick<ApiMeta, 'onSuccess' | 'onFailure'> & {
+  apiArgs: ApiClientArgs
+}
+
+const prepareApiRequestData = (state: State, action: any): PrepareApiRequestData => {
+  const getToken = (_s: any) => 'A BEARER TOKEN'
+  const { payload: data, meta } = action
+  const { onSuccess, onFailure, requiresToken, ...args } = meta
+
+  const token = requiresToken ? getToken(state) : undefined
+  const apiArgs = {
+    token,
+    data,
+    ...args,
+  }
+  return { onSuccess, onFailure, apiArgs }
+}
+
+export const apiFlow = (api: ApiClient): Middleware => ({ getState, dispatch }) => next => async action => {
   const result = next(action)
 
-  if (apiGet.match(action)) {
-    enum ApiServices {
-      Auth = 'auth',
-    }
-
-    enum AuthEndpoints {
-      Login = 'login',
-    }
-
-    const meta = {
-      service: ApiServices.Auth,
-      endpoint: AuthEndpoints.Login,
-      requiresToken: true,
-      onSuccess: apiGetSuccess,
-      onFailure: apiGetFailure,
-    }
+  if (apiRequest.match(action)) {
     const state = getState()
-    const getToken = (_s: any) => 'A BEARER TOKEN'
-    // need to be able to apiGet from any given endpoint
-    // using the default axios instance
-    // should handle get and push (and other methods)
+    const { onSuccess, onFailure, apiArgs } = prepareApiRequestData(state, action)
 
-    await api(meta.service, meta.endpoint, meta.requiresToken && getToken(state))
-      .get(action.payload)
+    await api(apiArgs)
       .then((response: any) => {
-        dispatch(apiGetSuccess(response))
+        dispatch(onSuccess(response))
       })
       .catch((error: any) => {
-        dispatch(apiGetFailure(error))
+        dispatch(onFailure(error))
       })
   }
 
