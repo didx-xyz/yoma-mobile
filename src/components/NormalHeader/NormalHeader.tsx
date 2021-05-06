@@ -11,7 +11,7 @@ import styles from './NormalHeader.styles'
 
 type Props = {
   navigation: any
-  headerText: string
+  headerText: string | React.ReactNode
   onSave?: () => void
   showAddButton?: boolean
   onAdd?: () => void
@@ -36,7 +36,9 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
       <TouchableOpacity onPress={onNavigateBack}>
         <BackIconGrey />
       </TouchableOpacity>
-      <Text.Header level={HeaderLevels.h5}>{headerText}</Text.Header>
+      <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
+        {headerText}
+      </Text.Header>
       <Optional
         condition={showAddButton}
         fallback={

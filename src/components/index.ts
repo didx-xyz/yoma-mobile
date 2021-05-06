@@ -17,9 +17,11 @@ import NormalHeader from './NormalHeader'
 import Optional from './Optional'
 import ProfilePhoto from './ProfilePhoto'
 import ProgressCircle from './ProgressCircle'
+import SkillCard from './SkillCard'
 import SocialLogin from './SocialLogin'
 import SocialRegistration from './SocialRegistration'
 import Spinner from './Spinner'
+import Tag from './Tag'
 import Upload from './Upload'
 import ViewContainer from './ViewContainer/ViewContainer'
 
@@ -43,9 +45,11 @@ export {
   Optional,
   ProfilePhoto,
   ProgressCircle,
+  SkillCard,
   SocialLogin,
   SocialRegistration,
   Spinner,
+  Tag,
   Upload,
   ViewContainer,
 }

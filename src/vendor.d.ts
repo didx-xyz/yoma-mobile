@@ -9,6 +9,7 @@ declare module 'ramda' {
   export function flatten(...rest: any[]): any[]
   export function head(...rest: any[]): any
   export function join(...rest: any[]): any
+  export function juxt(...rest: any[]): any
   export function isNil(...rest: any[]): any[]
   export function mergeAll(...rest: any[]): any
   export function mergeRight(...rest: any[]): any
@@ -23,6 +24,7 @@ declare module 'ramda' {
   export function prepend(...rest: any[]): any
   export function reduce(...rest: any[]): any[]
   export function reduceRight(...rest: any[]): any[]
+  export function tail(...rest: any[]): any[]
   export function tap(...rest: any[]): any[]
   export function toUpper(...rest: any[]): any
   export function trim(...rest: any[]): any

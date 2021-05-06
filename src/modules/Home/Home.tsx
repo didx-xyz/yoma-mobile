@@ -15,6 +15,7 @@ import Education from '../Education'
 import Experience from '../Experience'
 import Marketplace from '../Marketplace'
 import Profile from '../Profile'
+import Skills from '../Skills'
 import { NavigationRoutes } from './Home.routes'
 
 const Stack = createStackNavigator()
@@ -81,6 +82,7 @@ const Home = () => {
       <Stack.Screen name={NavigationRoutes.About} component={About} />
       <Stack.Screen name={NavigationRoutes.Experience} component={Experience} />
       <Stack.Screen name={NavigationRoutes.Education} component={Education} />
+      <Stack.Screen name={NavigationRoutes.Skills} component={Skills} />
     </Stack.Navigator>
   )
 }
