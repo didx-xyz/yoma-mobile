@@ -15,13 +15,8 @@ const styles = {
     left: 0,
     bottom: 0,
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
+  card: {
     marginTop: '-20%',
-    marginHorizontal: 13,
-    borderRadius: 12,
-    paddingVertical: 10,
-    elevation: 3,
   } as ViewStyle,
   horizontalLineView: {
     flexDirection: 'row',
@@ -35,16 +30,17 @@ const styles = {
     flex: 1,
   } as ViewStyle,
   bodyText: {
-    marginVertical: 15,
-    paddingHorizontal: 20,
+    marginHorizontal: 20,
+    paddingBottom: 25,
   } as TextStyle,
   cardHeaderText: {
-    paddingTop: 10,
-    paddingBottom: 15,
+    marginVertical: 17,
   } as TextStyle,
   button: {
-    marginVertical: 15,
-    alignSelf: 'center',
+    marginBottom: 23,
+  } as ViewStyle,
+  skipButton: {
+    marginBottom: 23,
   } as ViewStyle,
 }
 
