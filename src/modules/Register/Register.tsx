@@ -33,7 +33,7 @@ const Register = ({ navigation }: Props) => {
         <Button
           size={ButtonSizes.Default}
           label={t('registerWithEmail')}
-          onPress={() => navigation.navigate(NavigationRoutes.Register)}
+          onPress={() => navigation.navigate(NavigationRoutes.RegisterWithEmail)}
           style={styles.button}
         />
         <View style={styles.horizontalLineView}>
