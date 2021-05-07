@@ -26,7 +26,7 @@ const DigitalCv = ({ navigation }: Props) => {
           onEdit={() => navigation.navigate(NavigationRoutes.About)}
         />
         <CvCard
-          hasCount={true}
+          hasCount
           count={0}
           countColor={Colors.primaryBlue}
           countBackgroundColor={applyAlphaToHex(colors[Colors.primaryBlue])(0.1)}
@@ -35,7 +35,7 @@ const DigitalCv = ({ navigation }: Props) => {
           onEdit={() => navigation.navigate(NavigationRoutes.Experience)}
         />
         <CvCard
-          hasCount={true}
+          hasCount
           count={0}
           countColor={Colors.primaryRed}
           countBackgroundColor={applyAlphaToHex(colors[Colors.primaryRed])(0.1)}
@@ -44,7 +44,7 @@ const DigitalCv = ({ navigation }: Props) => {
           onEdit={() => navigation.navigate(NavigationRoutes.Education)}
         />
         <CvCard
-          hasCount={true}
+          hasCount
           count={0}
           countColor={Colors.primaryGreen}
           countBackgroundColor={applyAlphaToHex(colors[Colors.primaryGreen])(0.1)}
@@ -53,7 +53,7 @@ const DigitalCv = ({ navigation }: Props) => {
           onEdit={() => navigation.navigate(NavigationRoutes.Skills)}
         />
         <CvCard
-          hasCount={true}
+          hasCount
           count={0}
           countColor={Colors.secondaryPurple}
           countBackgroundColor={applyAlphaToHex(colors[Colors.secondaryPurple])(0.1)}

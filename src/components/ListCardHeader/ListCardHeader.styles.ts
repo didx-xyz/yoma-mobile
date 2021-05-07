@@ -1,12 +1,12 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 const styles = {
-  cardHeader: {
+  container: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 10,
   } as ViewStyle,
-  label: {
+  header: {
     marginLeft: 10,
   } as TextStyle,
 }

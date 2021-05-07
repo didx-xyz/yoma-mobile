@@ -7,11 +7,11 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 import styles from './CountBadge.styles'
 
 type Props = {
-  value: number
+  count: number
   color: Colors
 }
 
-const CountBadge = ({ value, color }: Props) => {
+const CountBadge = ({ count, color }: Props) => {
   const [style, setStyle] = useState<ViewStyle>(styles.container)
 
   useEffect(() => {
@@ -22,7 +22,7 @@ const CountBadge = ({ value, color }: Props) => {
   return (
     <View style={style}>
       <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
-        {value}
+        {count}
       </Text.Header>
     </View>
   )
