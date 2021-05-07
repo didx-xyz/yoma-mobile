@@ -1,10 +1,11 @@
 import { BlueHollowCircle, BlueTick } from 'assets/images'
-import React, { useEffect, useState } from 'react'
-import { Pressable, StyleSheet, View, ViewStyle } from 'react-native'
+import React from 'react'
+import { Pressable, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Optional from '../Optional'
 import Text from '../Typography'
+import { DEFAULT_OPACITY_VALUE, LOW_OPACITY_VALUE } from './CheckBox.constants'
 import styles from './CheckBox.styles'
 
 type Props = {
@@ -14,21 +15,16 @@ type Props = {
 }
 
 const CheckBox = ({ label, isChecked, onPress }: Props) => {
-  const [opacity, setOpacity] = useState<number>(1)
-  const [style, setStyle] = useState<ViewStyle>(styles.checkBoxContainer)
-
-  useEffect(() => {
-    const opacityStyle = { opacity: opacity }
-    setStyle(StyleSheet.flatten([opacityStyle, styles.checkBoxContainer]))
-  }, [opacity])
-
   return (
     <Pressable
       hitSlop={20}
       onPress={onPress}
-      onPressIn={() => setOpacity(0.2)}
-      onPressOut={() => setOpacity(1)}
-      style={style}
+      style={({ pressed }) => [
+        {
+          opacity: pressed ? LOW_OPACITY_VALUE : DEFAULT_OPACITY_VALUE,
+        },
+        styles.checkBoxContainer,
+      ]}
     >
       <View style={styles.checkBox}>
         <Optional condition={isChecked} fallback={<BlueHollowCircle />}>
