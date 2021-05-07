@@ -5,8 +5,9 @@ import { Formik, FormikProps, FormikValues } from 'formik'
 import { AuthRegistration } from 'modules/Auth/Auth.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { colors, Colors } from 'styles'
+import { Colors } from 'styles'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
+import { mapToDropDownArray } from 'utils/strings.utils'
 import * as yup from 'yup'
 
 import { Span } from '../../../components/Typography'
@@ -18,8 +19,7 @@ interface Props {
 
 const RegisterForm = ({ onRegisterUser }: Props) => {
   const { t } = useTranslation()
-  const [checked, setChecked] = useState(false)
-  const [country, setCountry] = useState('')
+  const [hasChecked, setHasChecked] = useState(false)
 
   return (
     <Formik
@@ -94,25 +94,11 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
               autoCapitalize="none"
             />
             <DropDown
-              items={countries.map(c => ({
-                label: c.name,
-                value: c.code,
-              }))}
-              onChangeItem={itemValue => {
-                formikHandlers.handleChange('countryAlpha2')
-                formikHandlers.handleBlur('countryAlpha2')
-                formikHandlers.setFieldValue('countryAlpha2', itemValue.value)
-                setCountry(itemValue.value)
-              }}
-              defaultValue={country}
-              searchable
-              searchablePlaceholder="Search for country"
-              searchablePlaceholderTextColor={colors[Colors.menuGrey]}
-              placeholder={t('country')}
-              isTouched={formikHandlers.touched.countryAlpha2}
-              error={formikHandlers.errors.countryAlpha2}
-              showTitle={formikHandlers.values.countryAlpha2 !== ''}
-              fieldName={'Country'}
+              items={mapToDropDownArray(countries, 'code', 'name')}
+              name={'countryAlpha2'}
+              label={'Country'}
+              handlers={formikHandlers}
+              searchPlaceholder={t('Search country')}
             />
             <Input
               name={'password'}
@@ -129,7 +115,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
               secureTextEntry
             />
             <CheckBox
-              isChecked={checked}
+              isChecked={hasChecked}
               label={
                 <>
                   {t('I agree')}&nbsp;
@@ -139,8 +125,8 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
                 </>
               }
               onPress={() => {
-                formikHandlers.setFieldValue('privacyInd', !checked)
-                setChecked(!checked)
+                formikHandlers.setFieldValue('privacyInd', !hasChecked)
+                setHasChecked(!hasChecked)
               }}
             />
           </OnboardingForms>
