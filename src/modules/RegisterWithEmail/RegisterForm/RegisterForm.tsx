@@ -1,5 +1,5 @@
 import { CheckBox, DropDown, Input, Spinner, OnboardingForms } from 'components'
-import Button, { ButtonSizes } from 'components/Button'
+import Button from 'components/Button'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { AuthRegistration } from 'modules/Auth/Auth.types'
@@ -105,7 +105,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
                 setCountry(itemValue.value)
               }}
               defaultValue={country}
-              searchable={true}
+              searchable
               searchablePlaceholder="Search for country"
               searchablePlaceholderTextColor={colors[Colors.menuGrey]}
               placeholder={t('country')}
@@ -144,12 +144,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
               }}
             />
           </OnboardingForms>
-          <Button
-            size={ButtonSizes.Default}
-            label={t('getStarted')}
-            onPress={formikHandlers.handleSubmit}
-            style={styles.button}
-          />
+          <Button label={t('getStarted')} onPress={formikHandlers.handleSubmit} style={styles.button} />
         </>
       )}
     </Formik>

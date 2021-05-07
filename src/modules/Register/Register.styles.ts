@@ -33,13 +33,14 @@ const styles = {
     paddingHorizontal: 15,
   } as TextStyle,
   bodyText: {
-    marginVertical: 15,
+    marginTop: 25,
+    marginBottom: 15,
   } as TextStyle,
   bottomText: {
     marginTop: 20,
   } as TextStyle,
   button: {
-    marginVertical: 20,
+    marginVertical: 25,
   },
 }
 

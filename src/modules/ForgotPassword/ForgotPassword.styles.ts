@@ -36,11 +36,8 @@ const styles = {
   cardHeaderText: {
     marginVertical: 17,
   } as TextStyle,
-  button: {
-    marginBottom: 23,
-  } as ViewStyle,
   skipButton: {
-    marginBottom: 23,
+    marginVertical: 30,
   } as ViewStyle,
 }
 

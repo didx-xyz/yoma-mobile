@@ -4,11 +4,11 @@ import Button from 'components/Button'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, TouchableOpacity, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { openInbox } from 'react-native-email-link'
 import { colors, Colors } from 'styles'
 
-import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
+import Text, { HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import styles from './ForgotPassword.styles'
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
 
@@ -54,12 +54,16 @@ const ForgotPassword = ({ navigation }: Props) => {
             <Text.Body color={Colors.primaryDarkGrey} style={styles.bodyText}>
               {t('passwordSentText')}
             </Text.Body>
-            <Button label={t('openEmail')} onPress={openInbox} style={styles.button} />
-            <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.Login)} style={styles.skipButton}>
-              <Text.Header level={HeaderLevels.h5} align={TextAlign.center} color={Colors.primaryGreen}>
+            <Button label={t('openEmail')} onPress={openInbox} />
+            <Link
+              onPress={() => navigation.navigate(NavigationRoutes.Login)}
+              align={TextAlign.center}
+              style={styles.skipButton}
+            >
+              <Text.Header level={HeaderLevels.h5} color={Colors.primaryGreen}>
                 {t('skipComplete')}
               </Text.Header>
-            </TouchableOpacity>
+            </Link>
           </Card>
         </Optional>
       </ScrollView>

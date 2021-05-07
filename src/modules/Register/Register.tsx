@@ -1,6 +1,6 @@
 import { PurpleQuarter } from 'assets/images'
 import { Card, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
-import Button, { ButtonSizes } from 'components/Button'
+import Button from 'components/Button'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -31,7 +31,6 @@ const Register = ({ navigation }: Props) => {
           {t('welcome')}
         </Text.Header>
         <Button
-          size={ButtonSizes.Default}
           label={t('registerWithEmail')}
           onPress={() => navigation.navigate(NavigationRoutes.RegisterWithEmail)}
           style={styles.button}
