@@ -23,7 +23,7 @@ const CheckBox = ({ label, isChecked, onPress }: Props) => {
         {
           opacity: pressed ? LOW_OPACITY_VALUE : DEFAULT_OPACITY_VALUE,
         },
-        styles.checkBoxContainer,
+        styles.container,
       ]}
     >
       <View style={styles.checkBox}>
