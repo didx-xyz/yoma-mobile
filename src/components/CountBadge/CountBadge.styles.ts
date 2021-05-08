@@ -1,7 +1,7 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
 
-const BADGE_SIZE = 30
+const BADGE_SIZE = 22
 
 const styles = {
   container: {

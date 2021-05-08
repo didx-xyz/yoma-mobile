@@ -1,3 +1,4 @@
+import { Optional } from 'components'
 import Text, { HeaderLevels } from 'components/Typography'
 import React from 'react'
 import { View } from 'react-native'
@@ -10,12 +11,15 @@ type Props = {
   count: number
   color: Colors
   header: string
+  hasCountBadge?: boolean
 }
 
-const ListCardHeader = ({ count, color, header }: Props) => {
+const ListCardHeader = ({ count, color, hasCountBadge = true, header }: Props) => {
   return (
     <View style={styles.container}>
-      <CountBadge count={count} color={color} />
+      <Optional condition={hasCountBadge}>
+        <CountBadge count={count} color={color} />
+      </Optional>
       <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple} style={styles.header}>
         {header}
       </Text.Header>

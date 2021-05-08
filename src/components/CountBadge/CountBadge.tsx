@@ -1,4 +1,4 @@
-import Text, { HeaderLevels } from 'components/Typography'
+import Text, { BodyLevels, FontWeights } from 'components/Typography'
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
@@ -21,9 +21,9 @@ const CountBadge = ({ count, color }: Props) => {
 
   return (
     <View style={style}>
-      <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
+      <Text.Body level={BodyLevels.small} weight={FontWeights.bold_700} color={color}>
         {count}
-      </Text.Header>
+      </Text.Body>
     </View>
   )
 }
