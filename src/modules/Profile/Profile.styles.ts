@@ -6,12 +6,8 @@ const styles = {
   container: {
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
-    marginHorizontal: 13,
-    borderRadius: 12,
-    paddingVertical: 20,
-    elevation: 3,
+  card: {
+    paddingVertical: 24,
     marginTop: 50,
     paddingHorizontal: 13,
   } as ViewStyle,
@@ -34,7 +30,7 @@ const styles = {
     alignSelf: 'center',
   } as ViewStyle,
   logout: {
-    marginVertical: 20,
+    marginVertical: 17,
   } as TextStyle,
 }
 

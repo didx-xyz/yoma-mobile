@@ -41,7 +41,6 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
         showArrowIcon={false}
         {...props}
       />
-
       <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
         {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>

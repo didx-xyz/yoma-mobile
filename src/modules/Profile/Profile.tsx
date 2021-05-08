@@ -1,7 +1,7 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
-import { NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
-import Text, { Bold, TextAlign } from 'components/Typography'
+import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
+import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const Profile = ({ navigation }: Props) => {
-  const [profileImage, setProfileImage] = useState<any>('')
+  const [profileImage, setProfileImage] = useState('')
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 
@@ -78,11 +78,11 @@ const Profile = ({ navigation }: Props) => {
 
   return (
     <ViewContainer style={styles.container}>
-      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={() => childRef.current.handleSubmit()} />
+      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={childRef.current?.handleSubmit} />
       <ScrollView>
-        <View style={styles.whiteCard}>
+        <Card style={styles.card}>
           <Optional
-            condition={profileImage !== ''}
+            condition={profileImage === ''}
             fallback={
               <ProfilePhoto
                 borderWidth={6}
@@ -102,18 +102,18 @@ const Profile = ({ navigation }: Props) => {
             </TouchableOpacity>
           </Optional>
           <ProfileForm ref={childRef} navigation={navigation} />
-        </View>
-        <TouchableOpacity
+        </Card>
+        <Button
+          variant={ButtonVariants.Clear}
+          color={Colors.menuGrey}
+          label={t('Log Out')}
           onPress={() =>
             navigation.reset({
               routes: [{ name: 'Authentication' }],
             })
           }
-        >
-          <Text.Body align={TextAlign.center} style={styles.logout}>
-            <Bold color={Colors.menuGrey}>{t('Log Out')}</Bold>
-          </Text.Body>
-        </TouchableOpacity>
+          style={styles.logout}
+        />
       </ScrollView>
     </ViewContainer>
   )
