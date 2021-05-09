@@ -5,6 +5,7 @@ declare module 'ramda' {
   export function concat(...rest: any[]): any[]
   export function curry(...rest: any[]): any[]
   export function equals(...rest: any[]): any
+  export function evolve(...rest: any[]): any
   export function filter(...rest: any[]): any
   export function flatten(...rest: any[]): any[]
   export function head(...rest: any[]): any

@@ -1,7 +1,7 @@
 export enum AuthEndpoints {
   Login = 'login',
-  LoginSocial = 'loginsocial',
+  LoginSocial = 'login-social',
   Register = 'register',
-  RegisterSocial = 'registersocial',
-  ResetPassword = 'resetpassword',
+  RegisterSocial = 'register-social',
+  ResetPassword = 'reset-password',
 }
