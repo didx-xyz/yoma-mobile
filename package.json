@@ -99,7 +99,6 @@
     "react-test-renderer": "16.13.1",
     "redux-devtools-extension": "^2.13.8",
     "redux-flipper": "^1.4.2",
-    "redux-mock-store": "^1.5.4",
     "typescript": "^3.8.3"
   },
   "resolutions": {
