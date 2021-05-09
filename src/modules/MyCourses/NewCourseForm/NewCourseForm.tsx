@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
-import { CustomInput, Spinner, DatePicker, DropDownTags, Upload, CheckBox } from 'components'
-import { Formik } from 'formik'
+import { Spinner, DatePicker, DropDownTags, Upload, CheckBox, Input } from 'components'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useState } from 'react'
@@ -19,32 +19,15 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [isCourseActive, setIsCourseActive] = useState<boolean>(false)
   const [skillsList, setSkillsList] = useState(MOCK_SKILLS_LIST)
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [shouldRequestVerification, setShouldRequestVerification] = useState<boolean>(false)
 
   return (
     <Formik initialValues={INITIAL_VALUES} onSubmit={() => {}}>
-      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
+      {(formikHandlers: FormikProps<FormikValues>) => (
         <View style={styles.form}>
-          <Spinner visible={isSubmitting} />
-          <CustomInput
-            onChangeText={handleChange('course')}
-            onBlur={handleBlur('course')}
-            value={values.course}
-            label={t('Course name')}
-            isTouched={touched.course}
-            error={errors.course}
-            showTitle={values.course !== ''}
-          />
-          <CustomInput
-            onChangeText={handleChange('courseHostProvider')}
-            onBlur={handleBlur('courseHostProvider')}
-            value={values.courseHostProvider}
-            label={t('Course host provider')}
-            isTouched={touched.courseHostProvider}
-            error={errors.courseHostProvider}
-            showTitle={values.courseHostProvider !== ''}
-          />
+          <Spinner visible={formikHandlers.isSubmitting} />
+          <Input name={'course'} label={t('Course name')} handlers={formikHandlers} />
+          <Input name={'courseHostProvider'} label={t('Course host provider')} handlers={formikHandlers} />
           <CheckBox
             isChecked={isCourseActive}
             label={t('Course is currently in progress')}
@@ -53,61 +36,38 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
           <View style={styles.row}>
             <DatePicker
               onDateChange={(date: string) => {
-                handleChange('startDate')
-                handleBlur('startDate')
-                setFieldValue('startDate', date)
+                formikHandlers.handleChange('startDate')
+                formikHandlers.handleBlur('startDate')
+                formikHandlers.setFieldValue('startDate', date)
               }}
-              value={values.startDate}
+              value={formikHandlers.values.startDate}
               label={t('Start date')}
-              isTouched={touched.startDate}
-              error={errors.startDate}
-              showTitle={values.startDate !== ''}
+              isTouched={formikHandlers.touched.startDate}
+              error={formikHandlers.errors.startDate}
+              showTitle={formikHandlers.values.startDate !== ''}
             />
             <DatePicker
               onDateChange={(date: string) => {
-                handleChange('endDate')
-                handleBlur('endDate')
-                setFieldValue('endDate', date)
+                formikHandlers.handleChange('endDate')
+                formikHandlers.handleBlur('endDate')
+                formikHandlers.setFieldValue('endDate', date)
               }}
-              value={values.endDate}
+              value={formikHandlers.values.endDate}
               label={t('End date')}
-              isTouched={touched.endDate}
-              error={errors.endDate}
-              showTitle={values.endDate !== ''}
+              isTouched={formikHandlers.touched.endDate}
+              error={formikHandlers.errors.endDate}
+              showTitle={formikHandlers.values.endDate !== ''}
             />
           </View>
-          <CustomInput
-            onChangeText={handleChange('description')}
-            onBlur={handleBlur('description')}
-            value={values.description}
-            label={t('Description')}
-            isTouched={touched.description}
-            error={errors.description}
-            multiline
-            showTitle={values.description !== ''}
-          />
+          <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
             items={skillsList}
-            multiple={true}
-            multipleText={t('Skills developed %d')}
-            min={0}
-            max={10}
-            searchable={true}
-            searchablePlaceholder={t('Search skills')}
-            placeholder={t('Skills developed')}
-            fieldName={t('Skills developed')}
-            placeholderStyle={styles.placeholder}
-            showTitle={values.skillNames.length > 0}
-            defaultValue={selectedSkills}
-            onChangeItem={item => {
-              setSelectedSkills(item)
-              handleChange('skillNames')
-              handleBlur('skillNames')
-              setFieldValue('skillNames', selectedSkills)
-            }}
-            tags={selectedSkills}
-            error={errors.skillNames}
-            onDelete={() => {}}
+            multiple
+            searchPlaceholder={t('Search skills')}
+            label={t('Skills developed')}
+            name={'skillNames'}
+            handlers={formikHandlers}
+            dropDownDirection={'TOP'}
           />
           <Upload onPress={() => {}} />
           <View style={styles.checkBoxRow}>
