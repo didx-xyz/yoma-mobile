@@ -1,5 +1,4 @@
-import { BlueHollowCircle, BlueTick } from 'assets/images'
-import { CustomInput, Spinner, DatePicker, DropDownTags, InfoModal, Upload, Optional } from 'components'
+import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
@@ -19,7 +18,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [isStudying, setIsStudying] = useState(false)
   const [skillsList, setSkillsList] = useState(MOCKED_SKILLS_DATA)
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [showInfoModal, setShowInfoModal] = useState(false)
 
   const formRef = useRef<FormikProps<FormikValues>>()
@@ -39,7 +37,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       enableReinitialize={true}
       validationSchema={ValidationSchema}
     >
-      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
+      {formikHandlers => (
         <View style={styles.form}>
           <InfoModal
             visible={showInfoModal}
@@ -48,105 +46,50 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
             }
           />
-          <Spinner visible={isSubmitting} />
-          <CustomInput
-            onChangeText={handleChange('school')}
-            onBlur={handleBlur('school')}
-            value={values.school}
-            label={t('School')}
-            isTouched={touched.school}
-            error={errors.school}
-            showTitle={values.school !== ''}
+          <Spinner visible={formikHandlers.isSubmitting} />
+          <Input name={'school'} label={t('School')} handlers={formikHandlers} />
+          <Input name={'qualificationType'} label={t('Qualification type')} handlers={formikHandlers} />
+          <Input name={'country'} label={t('Country or region')} handlers={formikHandlers} />
+          <CheckBox
+            isChecked={isStudying}
+            label={t('I currently study here')}
+            onPress={() => setIsStudying(!isStudying)}
           />
-          <CustomInput
-            onChangeText={handleChange('qualificationType')}
-            onBlur={handleBlur('qualificationType')}
-            value={values.qualificationType}
-            label={t('Qualification type')}
-            isTouched={touched.school}
-            error={errors.school}
-            showTitle={values.school !== ''}
-          />
-          <CustomInput
-            onChangeText={handleChange('country')}
-            onBlur={handleBlur('country')}
-            value={values.country}
-            label={t('Country or region')}
-            isTouched={touched.country}
-            error={errors.country}
-            showTitle={values.country !== ''}
-          />
-          <View style={styles.checkBoxView}>
-            <TouchableOpacity
-              onPress={() => {
-                setIsStudying(!isStudying)
-              }}
-              style={styles.checkBox}
-            >
-              <Optional condition={isStudying} fallback={<BlueHollowCircle />}>
-                <BlueTick />
-              </Optional>
-            </TouchableOpacity>
-            <Text.Body>{t('I currently study here')}</Text.Body>
-          </View>
           <View style={styles.row}>
             <DatePicker
               onDateChange={(date: string) => {
-                handleChange('startDate')
-                handleBlur('startDate')
-                setFieldValue('startDate', date)
+                formikHandlers.handleChange('startDate')
+                formikHandlers.handleBlur('startDate')
+                formikHandlers.setFieldValue('startDate', date)
               }}
-              value={values.startDate}
+              value={formikHandlers.values.startDate}
               label={t('Start date')}
-              isTouched={touched.startDate}
-              error={errors.startDate}
-              showTitle={values.startDate !== ''}
+              isTouched={formikHandlers.touched.startDate}
+              error={formikHandlers.errors.startDate}
+              showTitle={formikHandlers.values.startDate !== ''}
             />
             <DatePicker
               onDateChange={(date: string) => {
-                handleChange('endDate')
-                handleBlur('endDate')
-                setFieldValue('endDate', date)
+                formikHandlers.handleChange('endDate')
+                formikHandlers.handleBlur('endDate')
+                formikHandlers.setFieldValue('endDate', date)
               }}
-              value={values.endDate}
+              value={formikHandlers.values.endDate}
               label={t('End date')}
-              isTouched={touched.endDate}
-              error={errors.endDate}
-              showTitle={values.endDate !== ''}
+              isTouched={formikHandlers.touched.endDate}
+              error={formikHandlers.errors.endDate}
+              showTitle={formikHandlers.values.endDate !== ''}
             />
           </View>
-          <CustomInput
-            onChangeText={handleChange('description')}
-            onBlur={handleBlur('description')}
-            value={values.description}
-            label={t('Description')}
-            isTouched={touched.description}
-            error={errors.description}
-            multiline
-            showTitle={values.description !== ''}
-          />
+          <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
             items={skillsList}
-            multiple={true}
-            multipleText={t('Skills developed %d')}
-            min={0}
-            max={10}
-            searchable={true}
-            searchablePlaceholder={t('Search skills')}
-            searchablePlaceholderTextColor="gray"
-            placeholder={t('Skills developed')}
-            fieldName={t('Skills developed')}
-            placeholderStyle={styles.placeholder}
-            showTitle={values.skillNames.length > 0}
-            defaultValue={selectedSkills}
-            onChangeItem={item => {
-              setSelectedSkills(item)
-              handleChange('skillNames')
-              handleBlur('skillNames')
-              setFieldValue('skillNames', selectedSkills)
-            }}
-            tags={selectedSkills}
-            error={errors.skillNames}
+            multiple
+            searchPlaceholder={t('Search skills')}
+            label={t('Skills developed')}
+            name={'skillNames'}
+            handlers={formikHandlers}
+            dropDownDirection={'TOP'}
           />
           <Upload onPress={() => {}} />
           <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottom}>

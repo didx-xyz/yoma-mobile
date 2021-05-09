@@ -12,7 +12,7 @@ import { mapToDropDownArray } from 'utils/strings.utils'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
 import { DropDownOrg } from './ExperienceForm.types'
-import { deleteSkill, getOrganizationsList, getSkillsList, submitForm } from './ExperienceForm.utils'
+import { getOrganizationsList, getSkillsList, submitForm } from './ExperienceForm.utils'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
@@ -24,8 +24,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   const [organizations, setOrganizations] = useState<DropDownOrg[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [skillsList, setSkillsList] = useState<DropDownOrg[]>([])
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
-  const [showInfoModal, setShowInfoModal] = useState(false)
+  const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
 
   const formRef = useRef<FormikProps<FormikValues>>()
 
@@ -52,11 +51,6 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       }
     },
   }))
-
-  const deleteTag = (skill: string) => {
-    console.log(skill)
-    return setSelectedSkills(deleteSkill(selectedSkills, skill))
-  }
 
   return (
     <Formik
@@ -89,10 +83,11 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
           />
           <DropDown
             items={mapToDropDownArray(countries, 'code', 'name')}
-            name={'countryAlpha2'}
+            name={'country'}
             label={'Country'}
             handlers={formikHandlers}
             searchPlaceholder={t('Search country')}
+            placeholder={t('Country or region')}
           />
           <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} align={TextAlign.right}>
             {t('Use current location')}

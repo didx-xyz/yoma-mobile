@@ -1,5 +1,4 @@
 import { StyleSheet, ViewStyle } from 'react-native'
-import { colors, Colors } from 'styles'
 
 const styles = {
   formView: {
@@ -9,10 +8,6 @@ const styles = {
     flexDirection: 'row',
     justifyContent: 'space-between',
     marginTop: 10,
-  } as ViewStyle,
-  placeholder: {
-    color: colors[Colors.menuGrey],
-    marginLeft: 0,
   } as ViewStyle,
 }
 
