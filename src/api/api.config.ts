@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 import Env from '../env.json'
-import { apiRequest } from './api.utils'
+import { apiCall } from './api.utils'
 
 const instance = axios.create({
   baseURL: Env.YOMA_API_BASE_PATH,
@@ -10,4 +10,4 @@ const instance = axios.create({
   },
 })
 
-export const createApiClient = apiRequest(instance)
+export const createApiClient = apiCall(instance)

@@ -1,7 +1,25 @@
-import { __, concat, evolve, filter, flatten, isNil, join, mergeDeepRight, not, objOf, of, pipe } from 'ramda'
+import {
+  identity,
+  concat,
+  evolve,
+  filter,
+  flatten,
+  isNil,
+  join,
+  mergeDeepRight,
+  objOf,
+  of,
+  pathOr,
+  pipe,
+  unless,
+  complement,
+  always,
+  ifElse,
+} from 'ramda'
 import { State } from 'react-native-gesture-handler'
 
-import { ApiClientArgs, ApiMeta, ApiRequest, GenerateEndpoint, PrepareApiRequestData } from './api.types'
+import { apiRequest } from './api.reducer'
+import { ApiClientArgs, ApiMeta, ApiCall, GenerateEndpoint, PrepareApiRequestData } from './api.types'
 
 export const generateEndpoint: GenerateEndpoint = join('/')
 
@@ -9,19 +27,36 @@ export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<Ap
   pipe(objOf(key), mergeDeepRight(config))
 
 export const addIdAsEndpointToConfig = addValueWithGivenKeyToConfig('endpoint')
-export const addIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: number) =>
+export const addIdBeforeEndpointInConfig = (config: Partial<ApiMeta>) => (id: number) =>
   evolve({
-    endpoint: pipe(of, concat(__, [id])),
+    endpoint: pipe(of, concat([id])),
   })(config)
 export const addParamsToConfig = addValueWithGivenKeyToConfig('params')
-export const createParam = (key: string) => objOf(key)
-export const typeParam = createParam('type')
+export const createParam = objOf
+export const createTypeParam = createParam('type')
 
-export const generateSanitisedEndpoint = pipe(filter(not(isNil)), flatten, join('/'))
+export const generateSanitisedEndpoint = pipe(flatten, filter(complement(isNil)), join('/'))
 
-export const setAuthToken = (token?: string) => (token ? { Authorization: `Bearer ${token}` } : undefined)
+export const setAuthTokenHeader = unless(isNil, pipe(concat('Bearer '), objOf('Authorization')))
+export const getTokenFromState = pathOr(null, ['auth', 'token'])
+export const getTokenIfRequired = (state: State) => ifElse(identity, getTokenFromState(state), always(undefined))
 
-export const apiRequest: ApiRequest = instance => ({
+export const prepareApiRequest = (state: State, action: typeof apiRequest): PrepareApiRequestData => {
+  //TODO: figure out the typings for an action with meta data
+  //@ts-ignore
+  const { payload: data, meta } = action
+  const { onSuccess, onFailure, isTokenRequired, ...args } = meta
+
+  const token = getTokenIfRequired(state)(isTokenRequired)
+  const apiArgs = {
+    token,
+    data,
+    ...args,
+  }
+  return { onSuccess, onFailure, apiArgs }
+}
+
+export const apiCall: ApiCall = instance => ({
   client,
   endpoint,
   method,
@@ -34,21 +69,7 @@ export const apiRequest: ApiRequest = instance => ({
     method,
     url: generateSanitisedEndpoint([client, endpoint]),
     data,
-    headers: setAuthToken(token),
+    headers: setAuthTokenHeader(token),
     params,
     ...config,
   })
-
-export const prepareApiRequest = (state: State, action: any): PrepareApiRequestData => {
-  const getToken = (_s: any) => 'A BEARER TOKEN'
-  const { payload: data, meta } = action
-  const { onSuccess, onFailure, requiresToken, ...args } = meta
-
-  const token = requiresToken ? getToken(state) : undefined
-  const apiArgs = {
-    token,
-    data,
-    ...args,
-  }
-  return { onSuccess, onFailure, apiArgs }
-}

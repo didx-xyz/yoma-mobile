@@ -6,7 +6,7 @@ import { AuthEndpoints } from './auth.types'
 export const AUTH_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Auth,
   method: ApiMethods.Post,
-  requiresToken: false,
+  isTokenRequired: false,
 }
 
 export const LOGIN_CONFIG: Partial<ApiMeta> = mergeRight(AUTH_CONFIG, {

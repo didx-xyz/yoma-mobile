@@ -6,7 +6,7 @@ import { UsersEndpoints } from './users.types'
 export const USERS_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Users,
   method: ApiMethods.Get,
-  requiresToken: true,
+  isTokenRequired: true,
 }
 
 export const USERS_EDIT_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {

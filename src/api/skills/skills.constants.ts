@@ -6,7 +6,7 @@ import { SkillsEndpoints } from './skills.types'
 export const SKILLS_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Skills,
   method: ApiMethods.Get,
-  requiresToken: true,
+  isTokenRequired: true,
 }
 
 export const SKILLS_GET_ALL_CONFIG: Partial<ApiMeta> = mergeRight(SKILLS_CONFIG, {})

@@ -6,7 +6,7 @@ import { OrganisationsEndpoints } from './organisations.types'
 export const ORGANISATIONS_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Organisations,
   method: ApiMethods.Get,
-  requiresToken: false,
+  isTokenRequired: false,
 }
 
 export const ORGANISATIONS_GET_ALL_CONFIG: Partial<ApiMeta> = mergeRight(ORGANISATIONS_CONFIG, {})

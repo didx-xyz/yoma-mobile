@@ -2,12 +2,13 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ActionCreator } from 'redux'
 
 import { AuthEndpoints } from './auth/auth.types'
+import { OrganisationsEndpoints } from './organisations/organisations.types'
+import { SkillsEndpoints } from './skills/skills.types'
 import { UsersEndpoints } from './users/users.types'
 
 export type GenerateEndpoint = (arr: string[]) => string
-export type ApiClientFn = (body: Record<string, any>, config?: AxiosRequestConfig) => Promise<AxiosResponse>
 
-type Endpoints = AuthEndpoints | UsersEndpoints // &  add the rest of the methods for User, CV, etc
+type Endpoints = AuthEndpoints | UsersEndpoints | SkillsEndpoints | OrganisationsEndpoints
 
 export enum ApiClients {
   Auth = 'auth',
@@ -39,10 +40,10 @@ export interface ApiClientArgs extends ApiClientMetaOverlap {
 }
 export type ApiClient = (args: ApiClientArgs) => Promise<AxiosResponse>
 export type CreateApiClient = (instance: AxiosInstance) => ApiClient
-export type ApiRequest = CreateApiClient
+export type ApiCall = CreateApiClient
 
 export interface ApiMeta extends ApiClientMetaOverlap {
-  requiresToken: boolean
+  isTokenRequired: boolean
   onSuccess: ActionCreator<any>
   onFailure: ActionCreator<any>
 }

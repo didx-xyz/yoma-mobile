@@ -5,7 +5,7 @@ import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
 export const JOBS_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Jobs,
   method: ApiMethods.Get,
-  requiresToken: true,
+  isTokenRequired: true,
 }
 
 export const JOBS_GET_ALL_CONFIG: Partial<ApiMeta> = mergeRight(JOBS_CONFIG, {})
