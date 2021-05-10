@@ -82,7 +82,7 @@ const Profile = ({ navigation }: Props) => {
       <ScrollView>
         <Card style={styles.card}>
           <Optional
-            condition={profileImage === ''}
+            condition={profileImage !== ''}
             fallback={
               <ProfilePhoto
                 borderWidth={6}

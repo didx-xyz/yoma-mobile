@@ -30,7 +30,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const deleteSkill = (tag: string) => setDropdownValue(filterStringArray(tag, dropDownValue))
 
   return (
-    <View>
+    <>
       <Text.Meta level={MetaLevels.small}>{dropDownValue.length > 0 ? label : ' '}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
@@ -57,7 +57,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
       <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
         {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
-    </View>
+    </>
   )
 }
 
