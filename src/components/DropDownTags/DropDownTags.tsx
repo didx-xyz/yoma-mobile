@@ -50,6 +50,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         open={isDropDown}
         setOpen={setIsDropDown}
         setValue={setDropdownValue}
+        showArrowIcon={false}
         {...props}
       />
       <View style={styles.tagsContainer}>{renderTags(dropDownValue, deleteSkill)}</View>
