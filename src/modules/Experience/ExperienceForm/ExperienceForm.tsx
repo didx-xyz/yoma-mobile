@@ -1,8 +1,10 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox } from 'components'
-import Text, { MetaLevels, TextAlign } from 'components/Typography'
+import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
@@ -16,7 +18,7 @@ import { getOrganizationsList, getSkillsList, submitForm } from './ExperienceFor
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Experience>
 }
 
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
@@ -89,9 +91,6 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             searchPlaceholder={t('Search country')}
             placeholder={t('Country or region')}
           />
-          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} align={TextAlign.right}>
-            {t('Use current location')}
-          </Text.Meta>
           <CheckBox
             isChecked={isWorkingHere}
             label={t('I currently work here')}
