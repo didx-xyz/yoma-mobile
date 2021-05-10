@@ -86,12 +86,8 @@ const Experience = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={t('Experience')}
-        onSave={() => {
-          formRef.current.handleSubmit()
-        }}
-        onAdd={() => {
-          setIsSaved(true)
-        }}
+        onSave={formRef.current?.handleSubmit}
+        onAdd={() => setIsSaved(true)}
         showAddButton={!isSaved}
       />
       <Optional

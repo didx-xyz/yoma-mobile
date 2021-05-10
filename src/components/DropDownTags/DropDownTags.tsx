@@ -1,14 +1,16 @@
 import { FormikProps, FormikValues } from 'formik'
 import React, { useState } from 'react'
 import { View } from 'react-native'
-import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
+import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
+import { GetComponentProps } from 'types/react.types'
+import { filterStringArray } from 'utils/strings.utils'
 
 import Tag from '../Tag'
 import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDownTags.styles'
 
-type Props = DropDownPickerProps & {
+type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
   name: string
   label: string
   handlers: FormikProps<FormikValues>
@@ -25,9 +27,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const [dropDownValue, setDropdownValue] = useState([])
   const { handleChange, handleBlur, errors, touched, setFieldValue } = handlers
 
-  const deleteSkill = (tag: string) => {
-    return setDropdownValue(dropDownValue.filter(result => result !== tag))
-  }
+  const deleteSkill = (tag: string) => setDropdownValue(filterStringArray(tag, dropDownValue))
 
   return (
     <View>
@@ -50,7 +50,6 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         open={isDropDown}
         setOpen={setIsDropDown}
         setValue={setDropdownValue}
-        showArrowIcon={false}
         {...props}
       />
       <View style={styles.tagsContainer}>{renderTags(dropDownValue, deleteSkill)}</View>

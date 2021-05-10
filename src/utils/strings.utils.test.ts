@@ -52,4 +52,14 @@ describe('strings.utils', () => {
       expect(result).toBe(expected)
     })
   })
+  describe('filterStringArray', () => {
+    it.each([
+      ['skill1', ['skill1', 'skill2', 'skill3'], ['skill2', 'skill3']],
+      ['test', ['skill1', 'skill2', 'skill3'], ['skill1', 'skill2', 'skill3']],
+      ['', ['skill1', 'skill2', 'skill3'], ['skill1', 'skill2', 'skill3']],
+    ])('should return a filtered string array', (value, array, expected) => {
+      const result = SUT.filterStringArray(value, array)
+      expect(result).toEqual(expected)
+    })
+  })
 })
