@@ -1,23 +1,20 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
 import { DropDown, Input, Spinner } from 'components'
-import Text, { Bold, MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
-import { Colors } from 'styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import { mapToDropDownArray } from 'utils/strings.utils'
 import * as yup from 'yup'
 
-import styles from './ProfileForm.styles'
-
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Profile>
 }
 
 const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
@@ -108,7 +105,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
     >
       {formikHandlers => {
         return (
-          <View>
+          <>
             <Spinner visible={formikHandlers.isSubmitting} />
             <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
             <Input name={'lastName'} label={t('Surname')} handlers={formikHandlers} />
@@ -119,9 +116,6 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               handlers={formikHandlers}
               searchPlaceholder={t('Search country')}
             />
-            <Text.Meta level={MetaLevels.smallBold} style={styles.currentLocationButton}>
-              <Bold color={Colors.primaryGreen}>Use current location</Bold>
-            </Text.Meta>
             <Input
               name={'email'}
               label={t('email')}
@@ -136,7 +130,7 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
               keyboardType="phone-pad"
               autoCapitalize="none"
             />
-          </View>
+          </>
         )
       }}
     </Formik>
