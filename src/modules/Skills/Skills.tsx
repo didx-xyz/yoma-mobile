@@ -43,7 +43,9 @@ const Skills = ({ navigation }: Props) => {
           </Card>
         }
       >
-        <SkillsForm />
+        <Card>
+          <SkillsForm />
+        </Card>
       </Optional>
     </ViewContainer>
   )
