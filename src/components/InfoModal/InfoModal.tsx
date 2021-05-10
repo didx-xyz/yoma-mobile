@@ -1,9 +1,9 @@
-import Text from 'components/Typography'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Modal, View, TouchableOpacity } from 'react-native'
-import { Colors } from 'styles'
+import { Modal, View } from 'react-native'
 
+import Button from '../Button'
+import Text from '../Typography'
 import styles from './InfoModal.styles'
 
 interface Props {
@@ -12,16 +12,14 @@ interface Props {
   infoText: string
 }
 
-const InfoModal = ({ visible, closeModal, infoText, ...props }: Props) => {
+const InfoModal = ({ visible, closeModal, infoText }: Props) => {
   const { t } = useTranslation()
   return (
-    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={closeModal} {...props}>
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
+    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={closeModal}>
+      <View style={styles.container}>
+        <View style={styles.inner}>
           <Text.Body>{infoText}</Text.Body>
-          <TouchableOpacity style={styles.button} onPress={closeModal}>
-            <Text.Body color={Colors.white}>{t('Close')}</Text.Body>
-          </TouchableOpacity>
+          <Button label={t('close')} onPress={closeModal} style={styles.button} />
         </View>
       </View>
     </Modal>
