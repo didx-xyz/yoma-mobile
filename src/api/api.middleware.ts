@@ -9,6 +9,7 @@ export const apiFlow = (api: ApiClient): Middleware => ({ getState, dispatch }) 
 
   if (apiRequest.match(action)) {
     const state = getState()
+    //@ts-ignore
     const { onSuccess, onFailure, apiArgs } = prepareApiRequest(state, action)
 
     await api(apiArgs)
