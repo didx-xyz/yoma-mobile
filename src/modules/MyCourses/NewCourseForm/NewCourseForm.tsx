@@ -67,7 +67,6 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Skills developed')}
             name={'skillNames'}
             handlers={formikHandlers}
-            dropDownDirection={'TOP'}
           />
           <Upload onPress={() => {}} />
           <View style={styles.checkBoxRow}>

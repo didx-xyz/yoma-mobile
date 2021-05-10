@@ -40,7 +40,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         textStyle={styles.label}
         searchTextInputStyle={styles.search}
         searchContainerStyle={styles.searchContainer}
-        listMode={'SCROLLVIEW'}
+        listMode={'MODAL'}
         onChangeValue={itemValue => {
           handleChange(name)
           handleBlur(name)

@@ -131,7 +131,6 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Skills developed')}
             name={'skillNames'}
             handlers={formikHandlers}
-            dropDownDirection={'TOP'}
           />
           <TouchableOpacity onPress={() => setShowInfoModal(true)}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen}>

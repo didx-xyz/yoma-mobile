@@ -89,7 +89,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             label={t('Skills developed')}
             name={'skillNames'}
             handlers={formikHandlers}
-            dropDownDirection={'TOP'}
           />
           <Upload onPress={() => {}} />
           <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottom}>
