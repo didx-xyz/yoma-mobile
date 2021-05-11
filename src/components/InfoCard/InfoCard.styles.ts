@@ -1,26 +1,32 @@
-import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
+import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
+import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
+
+const IMAGE_SIZE = 35
 
 const styles = {
-  cardView: {
+  container: {
     padding: 10,
+    borderRadius: 12,
     elevation: 3,
+    backgroundColor: colors[Colors.white],
+    marginHorizontal: 10,
+    marginBottom: 10,
   } as ViewStyle,
   row: {
     flexDirection: 'row',
-    marginVertical: 5,
   } as ViewStyle,
   image: {
-    height: 35,
-    width: 35,
-    marginHorizontal: 10,
+    height: IMAGE_SIZE,
+    width: IMAGE_SIZE,
+    marginRight: 10,
   } as ImageStyle,
   avatar: {
-    height: 35,
-    width: 35,
-    borderRadius: 17,
+    height: IMAGE_SIZE,
+    width: IMAGE_SIZE,
+    borderRadius: IMAGE_SIZE / CIRCULAR_RADIUS_DIVISOR,
     backgroundColor: colors[Colors.primaryGreen],
-    marginHorizontal: 10,
+    marginRight: 10,
   } as ViewStyle,
   editIcon: {
     backgroundColor: colors[Colors.white],
@@ -29,6 +35,9 @@ const styles = {
     position: 'absolute',
     right: 10,
   } as ViewStyle,
+  description: {
+    marginTop: 7,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

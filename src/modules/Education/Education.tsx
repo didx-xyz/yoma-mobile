@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import Spacer from 'components/Spacer'
 import { FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -48,7 +49,12 @@ const Education = ({ navigation }: Props) => {
       <Optional
         condition={isSaved}
         fallback={
-          <FlatList data={education} renderItem={({ item }) => renderItem(item)} keyExtractor={item => item.school} />
+          <FlatList
+            data={education}
+            ListHeaderComponent={<Spacer height={10} />}
+            renderItem={({ item }) => renderItem(item)}
+            keyExtractor={item => item.school}
+          />
         }
       >
         <ScrollView>

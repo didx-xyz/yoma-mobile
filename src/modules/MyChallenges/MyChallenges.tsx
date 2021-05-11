@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import Spacer from 'components/Spacer'
 import { FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -44,6 +45,7 @@ const MyChallenges = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={challenges}
+            ListHeaderComponent={<Spacer height={10} />}
             renderItem={({ item }) => renderChallengeEntry(item)}
             keyExtractor={item => item.challenge}
           />

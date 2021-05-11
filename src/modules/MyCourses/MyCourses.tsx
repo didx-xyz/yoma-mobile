@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import Spacer from 'components/Spacer'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
@@ -42,6 +43,7 @@ const MyCourses = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={courses}
+            ListHeaderComponent={<Spacer height={10} />}
             renderItem={({ item }) => renderCourseEntry(item)}
             keyExtractor={item => item.course}
           />

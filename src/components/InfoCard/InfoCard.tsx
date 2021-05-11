@@ -6,7 +6,6 @@ import { Avatar } from 'react-native-elements'
 import { Colors } from 'styles'
 import { getUppercasedHead } from 'utils/strings.utils'
 
-import Card from '../Card'
 import DateDisplay from '../DateDisplay'
 import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
@@ -23,7 +22,7 @@ type Props = {
 
 const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props) => {
   return (
-    <Card style={styles.cardView}>
+    <View style={styles.container}>
       <View style={styles.row}>
         <Optional
           condition={logo !== ''}
@@ -37,18 +36,16 @@ const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props
               {subtitle + ' : ' + title}
             </Optional>
           </Text.Header>
-          <View style={styles.row}>
-            <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate} />
-          </View>
+          <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate} />
         </View>
         <TouchableOpacity style={styles.editIcon} onPress={onEdit}>
           <EditIcon />
         </TouchableOpacity>
       </View>
       <Optional condition={description !== ''}>
-        <Text.Body>{description}</Text.Body>
+        <Text.Body style={styles.description}>{description}</Text.Body>
       </Optional>
-    </Card>
+    </View>
   )
 }
 

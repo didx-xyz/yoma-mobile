@@ -3,6 +3,7 @@ import api from 'api'
 import { EditIcon } from 'assets/images'
 import { Card, DateDisplay, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
+import Spacer from 'components/Spacer'
 import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
@@ -95,7 +96,14 @@ const Experience = ({ navigation }: Props) => {
       />
       <Optional
         condition={isSaved}
-        fallback={<FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />}
+        fallback={
+          <FlatList
+            data={experience}
+            ListHeaderComponent={<Spacer height={10} />}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+          />
+        }
       >
         <ScrollView>
           <Card>
