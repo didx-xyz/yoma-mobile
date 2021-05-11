@@ -1,8 +1,7 @@
-import { Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
-import Text, { HeaderLevels } from 'components/Typography'
+import { Card, ListCardHeader, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FlatList, View } from 'react-native'
+import { FlatList } from 'react-native'
 import { Colors } from 'styles'
 
 import { MOCK_SKILLS } from './Skills.constants'
@@ -37,18 +36,7 @@ const Skills = ({ navigation }: Props) => {
           <Card style={styles.outerCard}>
             <FlatList
               data={skills}
-              ListHeaderComponent={
-                <View style={styles.cardHeader}>
-                  <View style={styles.certificateCount}>
-                    <Text.Header level={HeaderLevels.h6} color={Colors.primaryBlue}>
-                      60
-                    </Text.Header>
-                  </View>
-                  <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
-                    {t('Top skills')}
-                  </Text.Header>
-                </View>
-              }
+              ListHeaderComponent={<ListCardHeader color={Colors.primaryBlue} count={60} header={t('Top skills')} />}
               renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
               keyExtractor={item => item.skill}
             />
