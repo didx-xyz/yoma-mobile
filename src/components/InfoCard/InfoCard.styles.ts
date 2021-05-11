@@ -13,8 +13,12 @@ const styles = {
     marginHorizontal: 10,
     marginBottom: 10,
   } as ViewStyle,
+  title: {
+    width: 200,
+  },
   row: {
     flexDirection: 'row',
+    marginTop: 5,
   } as ViewStyle,
   image: {
     height: IMAGE_SIZE,

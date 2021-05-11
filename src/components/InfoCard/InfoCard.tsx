@@ -4,6 +4,7 @@ import React from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { Colors } from 'styles'
+import { calculateDifferenceInDate } from 'utils/dates.utils'
 import { getUppercasedHead } from 'utils/strings.utils'
 
 import DateDisplay from '../DateDisplay'
@@ -15,12 +16,13 @@ type Props = {
   title: string
   subtitle?: string
   description: string
+  startDate: string
   endDate: string
   logo: string
   onEdit?: () => void
 }
 
-const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props) => {
+const InfoCard = ({ description, startDate, endDate, logo, subtitle, title, onEdit }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -31,12 +33,20 @@ const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props
           <Image source={{ uri: logo }} style={styles.image} />
         </Optional>
         <View>
-          <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+          <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey} style={styles.title}>
             <Optional condition={!!subtitle} fallback={<>{title}</>}>
               {subtitle + ' : ' + title}
             </Optional>
           </Text.Header>
-          <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate} />
+          <View style={styles.row}>
+            <DateDisplay template={DATE_TPL_MON_YEAR} date={startDate}>
+              {' - '}
+            </DateDisplay>
+            <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate}>
+              {' • '}
+              {calculateDifferenceInDate(startDate, endDate)}
+            </DateDisplay>
+          </View>
         </View>
         <TouchableOpacity style={styles.editIcon} onPress={onEdit}>
           <EditIcon />

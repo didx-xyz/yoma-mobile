@@ -17,8 +17,16 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyChallenges>
 }
 
-const renderChallengeEntry = ({ challenge, description, endDate, organisationLogoUrl }: ChallengeEntry) => {
-  return <InfoCard title={challenge} description={description} endDate={endDate} logo={organisationLogoUrl} />
+const renderChallengeEntry = ({ challenge, description, startDate, endDate, organisationLogoUrl }: ChallengeEntry) => {
+  return (
+    <InfoCard
+      title={challenge}
+      description={description}
+      startDate={startDate}
+      endDate={endDate}
+      logo={organisationLogoUrl}
+    />
+  )
 }
 
 const MyChallenges = ({ navigation }: Props) => {

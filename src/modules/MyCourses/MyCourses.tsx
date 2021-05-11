@@ -16,8 +16,16 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyCourses>
 }
 
-const renderCourseEntry = ({ course, description, endDate, organisationLogoUrl }: CourseEntry) => {
-  return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoUrl} />
+const renderCourseEntry = ({ course, description, startDate, endDate, organisationLogoUrl }: CourseEntry) => {
+  return (
+    <InfoCard
+      title={course}
+      description={description}
+      startDate={startDate}
+      endDate={endDate}
+      logo={organisationLogoUrl}
+    />
+  )
 }
 
 const MyCourses = ({ navigation }: Props) => {
