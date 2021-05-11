@@ -6,7 +6,6 @@ const styles = {
   header: {
     height: 50,
     backgroundColor: colors[Colors.white],
-    width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -14,10 +13,16 @@ const styles = {
   saveText: {
     paddingRight: 20,
   } as TextStyle,
-  addView: {
+  button: {
     flexDirection: 'row',
     paddingRight: 20,
   } as ViewStyle,
+  addIcon: {
+    backgroundColor: colors[Colors.white],
+    marginLeft: 10,
+    elevation: 3,
+    borderRadius: 10,
+  },
 }
 
 export default StyleSheet.create(styles)

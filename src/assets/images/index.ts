@@ -20,6 +20,7 @@ import ChallengesIcon from './icon-challenges.svg'
 import CoursesIcon from './icon-courses.svg'
 import DigitalCvIcon from './icon-digital-cv.svg'
 import EditIcon from './icon-edit.svg'
+import IconInfo from './icon-info.svg'
 import ProfileIcon from './icon-profile.svg'
 import MarketplaceIcon from './marketplaceIcon.svg'
 import ZIcon from './zIcon.svg'
@@ -38,6 +39,7 @@ export {
   EditIcon,
   FacebookIcon,
   GoogleIcon,
+  IconInfo,
   LightYellowPattern,
   MarketplaceIcon,
   Message,
