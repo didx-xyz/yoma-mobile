@@ -1,9 +1,12 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ActionCreator } from 'redux'
 
+import { AuthEndpoints } from './auth/auth.types'
+import { UsersEndpoints } from './users/users.types'
+
 export type GenerateEndpoint = (arr: string[]) => string
 
-export type ApiEndpoints = string
+export type ApiEndpoints = AuthEndpoints | UsersEndpoints
 
 export enum ApiClients {
   Auth = 'auth',
