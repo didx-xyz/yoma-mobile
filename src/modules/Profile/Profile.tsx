@@ -31,7 +31,9 @@ const Profile = ({ navigation }: Props) => {
 
   const getData = useCallback(async () => {
     const user = await getUserData()
-    setUserResponse(user)
+    if (user) {
+      setUserResponse(user)
+    }
   }, [])
 
   const uploadImage = async () => {
@@ -64,7 +66,7 @@ const Profile = ({ navigation }: Props) => {
               </View>
             </TouchableOpacity>
           </Optional>
-          <ProfileForm ref={childRef} navigation={navigation} />
+          <ProfileForm ref={childRef} navigation={navigation} user={userResponse} />
         </Card>
         <Button
           variant={ButtonVariants.Clear}
