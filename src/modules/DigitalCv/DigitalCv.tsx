@@ -3,7 +3,8 @@ import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import { Colors } from 'styles'
+import { colors, Colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 import styles from './DigitalCv.styles'
 
@@ -21,35 +22,36 @@ const DigitalCv = ({ navigation }: Props) => {
         <CvCard
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
-          hasCount={false}
+          hasCountBadge={false}
           onEdit={() => navigation.navigate(NavigationRoutes.About)}
         />
         <CvCard
-          hasCount={true}
           count={0}
-          countColor={Colors.primaryBlue}
-          countBackgroundColor={Colors.primaryBlue}
+          badgeColor={Colors.primaryBlue}
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
           onEdit={() => navigation.navigate(NavigationRoutes.Experience)}
         />
         <CvCard
-          hasCount={true}
           count={0}
-          countColor={Colors.primaryRed}
-          countBackgroundColor={Colors.primaryRed}
+          badgeColor={Colors.primaryRed}
           cardTitle={t('Education')}
           defaultText={t('Which school, university or college did you attend?')}
           onEdit={() => navigation.navigate(NavigationRoutes.Education)}
         />
         <CvCard
-          hasCount={true}
           count={0}
-          countColor={Colors.primaryGreen}
-          countBackgroundColor={Colors.primaryGreen}
+          badgeColor={Colors.primaryGreen}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
           onEdit={() => navigation.navigate(NavigationRoutes.Skills)}
+        />
+        <CvCard
+          count={0}
+          badgeColor={Colors.secondaryPurple}
+          cardTitle={t('Completed challenges')}
+          defaultText={t('Have you completed any challenges yet?')}
+          onEdit={() => navigation.navigate(NavigationRoutes.MyChallenges)}
         />
       </ScrollView>
     </ViewContainer>
