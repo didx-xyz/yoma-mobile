@@ -3,7 +3,8 @@ import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import { Colors } from 'styles'
+import { colors, Colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 import styles from './DigitalCv.styles'
 
