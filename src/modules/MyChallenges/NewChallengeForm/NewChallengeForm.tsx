@@ -1,6 +1,9 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
 import { CustomInput, DatePicker, DropDownTags, Upload, CheckBox } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -9,7 +12,7 @@ import { INITIAL_VALUES, MOCK_SKILLS } from './NewChallengeForm.constants'
 import styles from './NewChallengeForm.styles'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyChallenges>
 }
 
 const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
@@ -93,11 +96,11 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
           />
           <DropDownTags
             items={skillsList}
-            multiple={true}
+            multiple
             multipleText={t('Skills developed %d')}
             min={0}
             max={10}
-            searchable={true}
+            searchable
             searchablePlaceholder={t('Search skills')}
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}
