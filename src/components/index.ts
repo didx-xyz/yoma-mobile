@@ -9,6 +9,7 @@ import DatePicker from './DatePicker'
 import DropDown from './DropDown'
 import DropDownTags from './DropDownTags'
 import FirstTimeCard from './FirstTimeCard'
+import FormWrapper from './FormWrapper'
 import HeaderContainer from './HeaderContainer'
 import HomeHeader from './HomeHeader'
 import InfoCard from './InfoCard'
@@ -41,6 +42,7 @@ export {
   DropDown,
   DropDownTags,
   FirstTimeCard,
+  FormWrapper,
   OnboardingForms,
   HeaderContainer,
   HomeHeader,
