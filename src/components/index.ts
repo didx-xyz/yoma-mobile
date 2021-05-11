@@ -15,7 +15,7 @@ import InfoCard from './InfoCard'
 import InfoModal from './InfoModal'
 import Input from './Input'
 import LargeHeaderContainer from './LargeHeaderContainer'
-import ListCard from './ListCard'
+import ListCardHeader from './ListCardHeader'
 import NormalHeader from './NormalHeader'
 import Optional from './Optional'
 import ProfilePhoto from './ProfilePhoto'
@@ -46,7 +46,7 @@ export {
   InfoModal,
   Input,
   LargeHeaderContainer,
-  ListCard,
+  ListCardHeader,
   NormalHeader,
   Optional,
   ProfilePhoto,
