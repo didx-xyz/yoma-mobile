@@ -14,7 +14,7 @@ import styles from './InfoCard.styles'
 
 type Props = {
   title: string
-  subtitle: string
+  subtitle?: string
   description: string
   endDate: string
   logo: string
@@ -33,7 +33,9 @@ const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props
         </Optional>
         <View>
           <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
-            {subtitle + ' : ' + title}
+            <Optional condition={!!subtitle} fallback={<>{title}</>}>
+              {subtitle + ' : ' + title}
+            </Optional>
           </Text.Header>
           <View style={styles.row}>
             <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate} />

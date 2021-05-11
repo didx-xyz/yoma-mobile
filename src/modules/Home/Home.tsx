@@ -18,8 +18,9 @@ import MyChallenges from '../MyChallenges'
 import Profile from '../Profile'
 import Skills from '../Skills'
 import { NavigationRoutes } from './Home.routes'
+import { HomeNavigatorParamsList } from './Home.types'
 
-const Stack = createStackNavigator()
+const Stack = createStackNavigator<HomeNavigatorParamsList>()
 const Tab = createBottomTabNavigator()
 
 const tabBarOptions: BottomTabBarOptions = {
