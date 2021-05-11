@@ -1,8 +1,9 @@
 import { FormikProps, FormikValues } from 'formik'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 import { GetComponentProps } from 'types/react.types'
+import { textOrSpace } from 'utils/strings.utils'
 
 import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDown.styles'
@@ -14,12 +15,17 @@ type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' |
 }
 
 const DropDown = ({ name, label, handlers, ...props }: Props) => {
-  const [isDropDown, setIsDropDown] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const [dropDownValue, setDropdownValue] = useState(null)
   const { handleChange, handleBlur, values, errors, touched, setFieldValue } = handlers
+
+  useEffect(() => {
+    setDropdownValue(values[name])
+  }, [name, values])
+
   return (
     <>
-      <Text.Meta level={MetaLevels.small}>{values[name] !== '' ? label : ' '}</Text.Meta>
+      <Text.Meta level={MetaLevels.small}>{textOrSpace(values[name] !== '', label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
         dropDownContainerStyle={styles.dropDownView}
@@ -35,8 +41,8 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
           setFieldValue(name, itemValue)
         }}
         value={dropDownValue}
-        open={isDropDown}
-        setOpen={setIsDropDown}
+        open={isOpen}
+        setOpen={setIsOpen}
         setValue={setDropdownValue}
         showArrowIcon={false}
         {...props}

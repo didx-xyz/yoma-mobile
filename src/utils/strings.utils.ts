@@ -13,3 +13,5 @@ export const capitalize = pipe(juxt([pipe(head, toUpper), tail]), join(''))
 
 export const filterStringArray = (value: string, array: string[]) =>
   filter((element: string) => element !== value)(array)
+
+export const textOrSpace = (condition: boolean, text: string) => (condition ? text : ' ')
