@@ -1,12 +1,14 @@
 import { StyleSheet, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.backgroundGrey],
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 12,
   } as ViewStyle,
-  outerCard: {
-    paddingHorizontal: 10,
+  checkBox: {
+    marginRight: 10,
   } as ViewStyle,
 }
 
