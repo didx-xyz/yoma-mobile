@@ -5,9 +5,6 @@ const styles = {
   container: {
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
-  outerCard: {
-    paddingHorizontal: 10,
-  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
