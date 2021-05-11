@@ -1,0 +1,18 @@
+export const USER_RESPONSE = {
+  id: '',
+  firstName: '',
+  lastName: '',
+  phoneNumber: '',
+  biography: '',
+  countryAlpha2: '',
+  email: '',
+  zltoWalletId: '',
+  zltoBalance: 0,
+  covidChallengeCertificateURL: '',
+  tideChallengeCertificateURL: '',
+  photoURL: '',
+  role: '',
+  organisation: '',
+  createdAt: '',
+  lastLogin: '',
+}

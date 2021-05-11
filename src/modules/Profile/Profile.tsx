@@ -1,20 +1,19 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import api from 'api'
 import { EditIcon } from 'assets/images'
 import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
 import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
-import { USER_ID } from 'helpers/helpers'
+import { UserResponse } from 'modules/Auth/Auth.types'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
-import ImagePicker from 'react-native-image-crop-picker'
 import { Colors } from 'styles'
-import { showSimpleMessage } from 'utils/error'
 
+import { USER_RESPONSE } from './Profile.constants'
 import styles from './Profile.styles'
+import { captureImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
@@ -22,61 +21,22 @@ interface Props {
 }
 
 const Profile = ({ navigation }: Props) => {
-  const [profileImage, setProfileImage] = useState('')
+  const [userResponse, setUserResponse] = useState<UserResponse>(USER_RESPONSE)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
-    getUserData()
+    getData()
   }, [])
 
-  const getUserData = async () => {
-    await api.users
-      .getById(USER_ID)
-      .then(async response => {
-        const userData = response.data
-        const { photoURL } = userData
-        setProfileImage(photoURL)
-      })
-      .catch(error => {
-        console.log('error', error)
-        showSimpleMessage('danger', 'Error', error)
-      })
-  }
+  const getData = useCallback(async () => {
+    const user = await getUserData()
+    setUserResponse(user)
+  }, [])
 
-  async function onSubmit(image: any) {
-    const photo = {
-      name: 'Photo',
-      filename: image.path.substring(image.path.lastIndexOf('/') + 1),
-      type: image.mime,
-      data: image.data,
-    }
-    try {
-      const response = await api.users.photo.create(USER_ID, photo)
-      console.log(response)
-    } catch (error) {
-      showSimpleMessage('danger', 'Error', error)
-    }
-  }
-
-  const captureImage = () => {
-    ImagePicker.openCamera({
-      cropping: true,
-      includeBase64: true,
-      freeStyleCropEnabled: true,
-      forceJpg: true,
-      mediaType: 'photo',
-      useFrontCamera: true,
-      cropperCircleOverlay: true,
-      compressImageQuality: 0.5,
-    })
-      .then(async image => {
-        onSubmit(image)
-        setProfileImage(image.data)
-      })
-      .catch(e => {
-        console.log('error in image', e)
-      })
+  const uploadImage = async () => {
+    const response = await captureImage()
+    setUserResponse(response.data)
   }
 
   return (
@@ -85,20 +45,20 @@ const Profile = ({ navigation }: Props) => {
       <ScrollView>
         <Card style={styles.card}>
           <Optional
-            condition={profileImage !== ''}
+            condition={!!userResponse.photoURL}
             fallback={
               <ProfilePhoto
                 borderWidth={6}
                 outerRadius={40}
-                onPress={captureImage}
+                onPress={uploadImage}
                 percent={5}
                 showEditIcon={true}
-                profileOuterStyle={styles.profileContainer}
+                profileOuterStyle={styles.imagePlaceholder}
               />
             }
           >
-            <TouchableOpacity onPress={captureImage}>
-              <Image source={{ uri: profileImage }} style={styles.profileImage} />
+            <TouchableOpacity onPress={uploadImage} style={styles.imageContainer}>
+              <Image source={{ uri: userResponse.photoURL }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>
