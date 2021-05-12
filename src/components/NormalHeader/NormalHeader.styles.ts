@@ -3,12 +3,13 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { colors, Colors } from '../../styles'
 
 const styles = {
-  header: {
+  container: {
     height: 50,
     backgroundColor: colors[Colors.white],
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
+    elevation: 3,
   } as ViewStyle,
   saveText: {
     paddingRight: 20,
