@@ -15,6 +15,7 @@ declare module 'ramda' {
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
   export function isNil(...rest: any[]): any[]
+  export function map(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
   export function mergeRight(...rest: any[]): any
   export function mergeDeepRight(...rest: any[]): any
@@ -34,6 +35,6 @@ declare module 'ramda' {
   export function toUpper(...rest: any[]): any
   export function trim(...rest: any[]): any
   export function unless(...rest: any[]): any
-  export function when(...rest: any[]): any[]
+  export function when(...rest: any[]): any
   export function mergeDeepRight(...rest: any[]): any[]
 }
