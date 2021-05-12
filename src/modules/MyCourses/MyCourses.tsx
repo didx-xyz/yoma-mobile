@@ -1,23 +1,28 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, NormalHeader, Optional, ViewContainer } from 'components'
-import Text from 'components/Typography'
+import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import { MOCK_COURSES } from './MyCourses.constants'
 import styles from './MyCourses.styles'
+import { CourseEntry } from './MyCourses.types'
 import NewCourseForm from './NewCourseForm/NewCourseForm'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyCourses>
 }
 
+const renderCourseEntry = ({ course, description, endDate, organisationLogoUrl }: CourseEntry) => {
+  return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoUrl} />
+}
+
 const MyCourses = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
-  const [courses, setCourses] = useState([])
+  const [courses, setCourses] = useState(MOCK_COURSES)
 
   return (
     <ViewContainer style={styles.container}>
@@ -34,7 +39,13 @@ const MyCourses = ({ navigation }: Props) => {
       />
       <Optional
         condition={isEditing}
-        fallback={<FlatList data={courses} renderItem={({ item }) => <Text.Body>render</Text.Body>} />}
+        fallback={
+          <FlatList
+            data={courses}
+            renderItem={({ item }) => renderCourseEntry(item)}
+            keyExtractor={item => item.course}
+          />
+        }
       >
         <ScrollView>
           <Card>
