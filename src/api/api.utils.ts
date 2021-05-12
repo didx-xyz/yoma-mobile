@@ -15,9 +15,11 @@ import {
   always,
   ifElse,
   equals,
+  mergeAll,
 } from 'ramda'
 
 import { RootState } from '../redux/redux.types'
+import { StdObj } from '../types/general.types'
 import { ApiClientArgs, ApiMeta, ApiCall, GenerateEndpoint, PrepareApiRequestData } from './api.types'
 
 export const generateEndpoint: GenerateEndpoint = join('/')
@@ -35,7 +37,7 @@ export const createParam = objOf
 export const createTypeParam = createParam('type')
 
 export const generateSanitisedEndpoint = pipe(flatten, filter(complement(isNil)), join('/'))
-
+export const addHeaders = (headers: StdObj<string>) => pipe(concat([headers]), mergeAll)
 export const setAuthTokenHeader = unless(isNil, pipe(concat('Bearer '), objOf('Authorization')))
 export const getTokenFromState = pathOr(null, ['auth', 'token'])
 
@@ -63,13 +65,14 @@ export const apiCall: ApiCall = instance => ({
   token,
   data,
   params,
+  headers,
   config = {},
 }: ApiClientArgs) =>
   instance.request({
     method,
     url: generateSanitisedEndpoint([client, endpoint]),
     data,
-    headers: setAuthTokenHeader(token),
+    headers: addHeaders({})([headers, setAuthTokenHeader(token)]),
     params,
     ...config,
   })

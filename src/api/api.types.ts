@@ -1,6 +1,7 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ActionCreator } from 'redux'
 
+import { StdObj } from '../types/general.types'
 import { types as AuthTypes } from './auth/'
 import { types as OrgTypes } from './organisations'
 import { types as SkillsTypes } from './skills'
@@ -34,6 +35,7 @@ export interface ApiClientMetaOverlap {
   client: ApiClients
   method: ApiMethods
   endpoint: ApiEndpoints
+  headers: StdObj<string>
   params?: Record<string, string | number>
   config?: Partial<AxiosRequestConfig>
 }

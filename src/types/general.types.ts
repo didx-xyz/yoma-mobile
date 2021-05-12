@@ -1,1 +1,1 @@
-export type StdObj = Record<string, any>
+export type StdObj<T = any> = Record<string, T>
