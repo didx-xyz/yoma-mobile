@@ -117,6 +117,23 @@ describe('api/api.utils', () => {
       },
     )
   })
+  describe('addHeaders', () => {
+    it('should merge all given header objects into a single object when passed an array of objects, given an initial header object', () => {
+      // given ... an initial header object
+      const mockInitialHeaders = { initialHeader: 'INITIAL HEADER' }
+      const mockHeaders = [{ someHeader: 'SOME HEADER' }, { anotherHeader: 'ANOTHER HEADER' }, undefined]
+
+      // when ... passed an array of objects
+      const result = SUT.addHeaders(mockInitialHeaders)(mockHeaders)
+
+      // then ... should merge all given header objects into a single object
+      expect(result).toEqual({
+        initialHeader: 'INITIAL HEADER',
+        someHeader: 'SOME HEADER',
+        anotherHeader: 'ANOTHER HEADER',
+      })
+    })
+  })
   describe('setAuthTokenHeader', () => {
     it('should give the correct header string with the provided auth token when we provide a token, given a token', () => {
       // given ... a token

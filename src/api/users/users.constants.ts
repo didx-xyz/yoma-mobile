@@ -30,4 +30,5 @@ export const USERS_PASSWORD_EDIT_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CON
 export const USERS_PHOTO_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   method: ApiMethods.Post,
   endpoint: UsersEndpoints.Photo,
+  additionalHeaders: { 'Content-Type': 'multipart/form-data' },
 })
