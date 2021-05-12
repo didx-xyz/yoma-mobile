@@ -5,7 +5,7 @@ import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentic
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors, colors } from 'styles'
+import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import styles from './Register.styles'
@@ -21,8 +21,7 @@ const Register = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <LargeHeaderContainer
         navigation={navigation}
-        headerText={t<string>('register')}
-        backgroundColor={colors[Colors.primaryYellow]}
+        backgroundColor={Colors.primaryYellow}
         circleImage={<PurpleQuarter />}
         circleImageStyle={styles.purpleSemiCircleContainer}
       />
