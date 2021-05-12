@@ -3,7 +3,7 @@ import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
 
 import { Colors, colors } from '../../styles'
 
-const IMAGE_CONATAINER_SIZE = 75
+const IMAGE_CONTAINER_SIZE = 75
 const PROFILE_IMAGE_SIZE = 70
 
 const styles = {
@@ -19,8 +19,8 @@ const styles = {
     marginTop: -50,
     alignItems: 'center',
     justifyContent: 'center',
-    height: IMAGE_CONATAINER_SIZE,
-    width: IMAGE_CONATAINER_SIZE,
+    height: IMAGE_CONTAINER_SIZE,
+    width: IMAGE_CONTAINER_SIZE,
     alignSelf: 'center',
   } as ViewStyle,
   profileImage: {
