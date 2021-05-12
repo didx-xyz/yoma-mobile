@@ -15,7 +15,7 @@ import HomeHeader from './HomeHeader'
 import InfoCard from './InfoCard'
 import InfoModal from './InfoModal'
 import Input from './Input'
-import LargeHeaderContainer from './LargeHeaderContainer'
+import LargeHeader from './LargeHeader'
 import ListCard from './ListCard'
 import NormalHeader from './NormalHeader'
 import OnboardingForms from './OnboardingForms'
@@ -49,7 +49,7 @@ export {
   InfoCard,
   InfoModal,
   Input,
-  LargeHeaderContainer,
+  LargeHeader,
   ListCard,
   NormalHeader,
   Optional,

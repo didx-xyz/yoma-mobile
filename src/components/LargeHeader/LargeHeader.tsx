@@ -3,18 +3,17 @@ import { BackIcon, WhiteLogo } from 'assets/images'
 import React, { useEffect, useState } from 'react'
 import { BackHandler, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
-import { WithChildren } from 'types/react.types'
 
-import styles from './LargeHeaderContainer.styles'
+import styles from './LargeHeader.styles'
 
-type Props = WithChildren<{
+type Props = {
   circleImage: SVGElement
   circleImageStyle: ViewStyle
   backgroundColor: Colors
   navigation: any
-}>
+}
 
-const LargeHeaderContainer = ({ circleImage, circleImageStyle, backgroundColor, navigation }: Props) => {
+const LargeHeader = ({ circleImage, circleImageStyle, backgroundColor, navigation }: Props) => {
   const [style, setStyle] = useState<ViewStyle>(styles.container)
 
   useEffect(() => {
@@ -47,4 +46,4 @@ const LargeHeaderContainer = ({ circleImage, circleImageStyle, backgroundColor, 
   )
 }
 
-export default LargeHeaderContainer
+export default LargeHeader

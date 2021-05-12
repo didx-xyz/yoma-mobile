@@ -1,5 +1,5 @@
 import { PurpleQuarter } from 'assets/images'
-import { Card, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
+import { Card, LargeHeader, SocialRegistration, ViewContainer } from 'components'
 import Button from 'components/Button'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
@@ -19,7 +19,7 @@ const Register = ({ navigation }: Props) => {
 
   return (
     <ViewContainer style={styles.container}>
-      <LargeHeaderContainer
+      <LargeHeader
         navigation={navigation}
         backgroundColor={Colors.primaryYellow}
         circleImage={<PurpleQuarter />}
