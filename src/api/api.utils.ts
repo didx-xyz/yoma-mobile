@@ -16,9 +16,6 @@ import {
   ifElse,
   equals,
   mergeAll,
-  when,
-  map,
-  tap,
 } from 'ramda'
 
 import { RootState } from '../redux/redux.types'
