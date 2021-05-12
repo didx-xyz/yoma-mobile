@@ -16,7 +16,7 @@ const DigitalCv = ({ navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
-      <HomeHeader navigation={navigation} />
+      <HomeHeader navigation={navigation} percentCompleted={10} tokens={1000} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FirstTimeCard navigation={navigation} />
         <CvCard
