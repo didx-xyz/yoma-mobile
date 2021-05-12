@@ -1,4 +1,6 @@
-export const INITIAL_VALUES = {
+import { SkillsField } from './SkillsForm.types'
+
+export const SKILLS_INITIAL_VALUES: SkillsField = {
   skillNames: [],
 }
 
