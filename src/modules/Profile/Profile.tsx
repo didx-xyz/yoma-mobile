@@ -13,7 +13,7 @@ import { Colors } from 'styles'
 
 import { USER_RESPONSE } from './Profile.constants'
 import styles from './Profile.styles'
-import { captureImage, getUserData } from './Profile.utils'
+import { captureAndUploadImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
@@ -37,8 +37,14 @@ const Profile = ({ navigation }: Props) => {
   }, [])
 
   const uploadImage = async () => {
-    const response = await captureImage()
-    setUserResponse(response.data)
+    try {
+      const response = await captureAndUploadImage()
+      if (response.data) {
+        setUserResponse(response.data)
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
   }
 
   return (
