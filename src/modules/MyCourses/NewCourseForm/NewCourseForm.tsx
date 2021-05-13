@@ -88,11 +88,11 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
           />
           <DropDownTags
             items={skillsList}
-            multiple={true}
+            multiple
             multipleText={t('Skills developed %d')}
             min={0}
             max={10}
-            searchable={true}
+            searchable
             searchablePlaceholder={t('Search skills')}
             placeholder={t('Skills developed')}
             fieldName={t('Skills developed')}

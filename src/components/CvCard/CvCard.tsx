@@ -3,42 +3,31 @@ import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import Optional from '../Optional'
-import Text, { HeaderLevels, TextAlign } from '../Typography'
+import ListCardHeader from '../ListCardHeader'
+import Text, { TextAlign } from '../Typography'
 import styles from './CvCard.styles'
 
 type Props = {
   cardTitle: string
   defaultText: string
   count?: number
-  hasCount: boolean
-  countColor?: Colors
-  countBackgroundColor?: Colors
-  onEdit?: () => void
+  hasCountBadge?: boolean
+  badgeColor?: Colors
+  onEdit: () => void
 }
 
 const CvCard = ({
   cardTitle,
   defaultText,
-  count,
-  hasCount = false,
-  countColor,
-  countBackgroundColor,
+  count = 0,
+  hasCountBadge = true,
+  badgeColor = Colors.white,
   onEdit,
 }: Props) => {
   return (
-    <View style={styles.cardView}>
-      <View style={styles.rowView}>
-        <Optional condition={hasCount}>
-          <View style={[styles.certificateCountView, { backgroundColor: countBackgroundColor }]}>
-            <Text.Header level={HeaderLevels.h6} color={countColor}>
-              {count}
-            </Text.Header>
-          </View>
-        </Optional>
-        <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
-          {cardTitle}
-        </Text.Header>
+    <View style={styles.container}>
+      <View style={styles.listCard}>
+        <ListCardHeader color={badgeColor} count={count} header={cardTitle} hasCountBadge={hasCountBadge} />
         <TouchableOpacity style={styles.editIcon} onPress={onEdit}>
           <EditIcon />
         </TouchableOpacity>

@@ -9,7 +9,7 @@ import linking from './Linking'
 const Stack = createStackNavigator()
 
 const AppNavigation = () => {
-  const isAuthenticated = false
+  const isAuthenticated = true
 
   return (
     <NavigationContainer linking={linking}>
