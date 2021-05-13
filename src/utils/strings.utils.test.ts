@@ -64,11 +64,9 @@ describe('strings.utils', () => {
   })
   describe('textOrSpace', () => {
     it.each([
-      ['test', 'test'],
-      ['', ' '],
-    ])('should return a text if not empty or return space', (data, expected) => {
-      let condition = data !== ''
-
+      [true, 'test', 'test'],
+      [false, '', ' '],
+    ])('should return a text if not empty or return space', (condition, data, expected) => {
       const result = SUT.textOrSpace(condition, data)
       expect(result).toEqual(expected)
     })
