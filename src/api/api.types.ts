@@ -1,9 +1,13 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ActionCreator } from 'redux'
 
+import { StdObj } from '../types/general.types'
+import { AuthEndpoints } from './auth/auth.types'
+import { UsersEndpoints } from './users/users.types'
+
 export type GenerateEndpoint = (arr: string[]) => string
 
-export type ApiEndpoints = string
+export type ApiEndpoints = AuthEndpoints | UsersEndpoints
 
 export enum ApiClients {
   Auth = 'auth',
@@ -25,6 +29,7 @@ export interface ApiClientMetaOverlap {
   client: ApiClients
   method: ApiMethods
   endpoint: ApiEndpoints
+  headers: StdObj<string>
   params?: Record<string, string | number>
   config?: Partial<AxiosRequestConfig>
 }
