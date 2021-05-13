@@ -1,5 +1,5 @@
 import { YellowCircleLeft } from 'assets/images'
-import { LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
+import { Card, LargeHeaderContainer, SocialLogin, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -28,14 +28,14 @@ const Login = ({ navigation, onLoginUser }: Props) => {
           circleImage={<YellowCircleLeft />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
-        <View style={styles.whiteCard}>
+        <Card style={styles.card}>
           <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeader}>
             {t('welcomeBack')}
           </Text.Header>
           <LoginForm onLoginUser={onLoginUser} />
           <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.ForgotPassword)}>
             <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.forgotPassword}>
-              {t('forgotPassword')} ?
+              {t('forgotPassword')}?
             </Text.Body>
           </TouchableOpacity>
           <View style={styles.horizontalLineView}>
@@ -49,9 +49,9 @@ const Login = ({ navigation, onLoginUser }: Props) => {
             {t('loginSocial')}
           </Text.Body>
           <View style={styles.social}>
-            <SocialRegistration />
+            <SocialLogin />
           </View>
-        </View>
+        </Card>
         <Text.Body
           level={BodyLevels.small}
           color={Colors.primaryDarkGrey}

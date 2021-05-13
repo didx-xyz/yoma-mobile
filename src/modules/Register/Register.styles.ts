@@ -10,14 +10,14 @@ const styles = {
     right: 0,
     bottom: 0,
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
+  card: {
     marginTop: '-20%',
-    marginHorizontal: 10,
     alignItems: 'center',
-    borderRadius: 12,
-    paddingVertical: 10,
+    paddingBottom: 27,
   } as ViewStyle,
+  welcomeText: {
+    marginTop: 17,
+  } as TextStyle,
   horizontalLineView: {
     flexDirection: 'row',
     paddingHorizontal: 15,
@@ -33,13 +33,14 @@ const styles = {
     paddingHorizontal: 15,
   } as TextStyle,
   bodyText: {
-    marginTop: 15,
+    marginTop: 25,
+    marginBottom: 15,
   } as TextStyle,
   bottomText: {
-    marginTop: 30,
+    marginTop: 20,
   } as TextStyle,
   button: {
-    marginVertical: 15,
+    marginVertical: 25,
   },
 }
 

@@ -1,21 +1,22 @@
-import api from 'api'
-import { BlueHollowCircle, BlueTick } from 'assets/images'
-import { ButtonContainer, DropDown, Input, Optional, Spinner } from 'components'
+import { CheckBox, DropDown, Input, Spinner, OnboardingForms } from 'components'
+import Button from 'components/Button'
 import countries from 'constants/countries'
-import { Formik } from 'formik'
+import { Formik, FormikProps, FormikValues } from 'formik'
+import { AuthRegistration } from 'modules/Auth/Auth.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View } from 'react-native'
-import { Colors } from 'styles'
-import ButtonStyles from 'styles/button.styles'
-import { showSimpleMessage } from 'utils/error'
+import { colors, Colors } from 'styles'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
 
-import Text, { BodyLevels, Span } from '../../../components/Typography'
+import { Span } from '../../../components/Typography'
 import styles from './RegisterForm.styles'
 
-const RegisterForm = () => {
+interface Props {
+  onRegisterUser: (details: AuthRegistration) => void
+}
+
+const RegisterForm = ({ onRegisterUser }: Props) => {
   const { t } = useTranslation()
   const [checked, setChecked] = useState(false)
   const [country, setCountry] = useState('')
@@ -37,8 +38,8 @@ const RegisterForm = () => {
           .min(2)
           .max(50)
           .required(t('required'))
-          .test('First name', 'First name cannot include numbers or symbols', (value: any) => {
-            return !nameHasDigitsOrSymbols(value)
+          .test('First name', 'First name cannot include numbers or symbols', value => {
+            return !nameHasDigitsOrSymbols(value!)
           })
           .label('First name'),
         lastName: yup
@@ -46,8 +47,8 @@ const RegisterForm = () => {
           .min(2)
           .max(50)
           .required(t('required'))
-          .test('Last name', 'Last name cannot include numbers or symbols', (value: any) => {
-            return !nameHasDigitsOrSymbols(value)
+          .test('Last name', 'Last name cannot include numbers or symbols', value => {
+            return !nameHasDigitsOrSymbols(value!)
           })
           .label('Last name'),
         email: yup
@@ -75,116 +76,74 @@ const RegisterForm = () => {
           .label('Confirm password')
           .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, t('passwordRegexError')),
       })}
-      onSubmit={async (values, actions) => {
-        console.log('Register values: ', values)
-        actions.setSubmitting(true)
-        await api.auth
-          .register({ ...values })
-          .then(() => {
-            actions.setSubmitting(false)
-            showSimpleMessage('success', 'Registration Successful')
-          })
-          .catch(error => {
-            actions.setSubmitting(false)
-            console.log('Error =>', error)
-            showSimpleMessage('danger', 'Error', error)
-          })
-      }}
+      onSubmit={async values => onRegisterUser(values)}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting, setFieldValue }) => (
-        <View>
-          <Spinner visible={isSubmitting} />
-          <Input
-            onChangeText={handleChange('firstName')}
-            onBlur={handleBlur('firstName')}
-            value={values.firstName}
-            label={t('firstName')}
-            isTouched={touched.firstName}
-            error={errors.firstName}
-          />
-          <Input
-            onChangeText={handleChange('lastName')}
-            onBlur={handleBlur('lastName')}
-            value={values.lastName}
-            label={t('lastName')}
-            isTouched={touched.lastName}
-            error={errors.lastName}
-          />
-          <Input
-            onChangeText={handleChange('email')}
-            onBlur={handleBlur('email')}
-            value={values.email}
-            label={t('email')}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            isTouched={touched.email}
-            error={errors.email}
-          />
-          <DropDown
-            items={countries.map(c => ({
-              label: c.name,
-              value: c.code,
-            }))}
-            onChangeItem={itemValue => {
-              handleChange('countryAlpha2')
-              handleBlur('countryAlpha2')
-              setFieldValue('countryAlpha2', itemValue.value)
-              setCountry(itemValue.value)
-            }}
-            defaultValue={country}
-            searchable={true}
-            searchablePlaceholder="Search for country"
-            searchablePlaceholderTextColor={Colors.menuGrey}
-            placeholder={t('country')}
-            isTouched={touched.countryAlpha2}
-            error={errors.countryAlpha2}
-          />
-          <Input
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            value={values.password}
-            label={t('createPassword')}
-            autoCapitalize="none"
-            isTouched={touched.password}
-            error={errors.password}
-            secureTextEntry
-          />
-          <Input
-            onChangeText={handleChange('confirmPassword')}
-            onBlur={handleBlur('confirmPassword')}
-            value={values.confirmPassword}
-            label={t('confirmPassword')}
-            autoCapitalize="none"
-            isTouched={touched.confirmPassword}
-            error={errors.confirmPassword}
-            secureTextEntry
-          />
-          <View style={styles.checkBoxView}>
-            <TouchableOpacity
+      {(formikHandlers: FormikProps<FormikValues>) => (
+        <>
+          <OnboardingForms>
+            <Spinner visible={formikHandlers.isSubmitting} />
+            <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
+            <Input name={'lastName'} label={t('lastName')} handlers={formikHandlers} />
+            <Input
+              name={'email'}
+              label={t('email')}
+              handlers={formikHandlers}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            <DropDown
+              items={countries.map(c => ({
+                label: c.name,
+                value: c.code,
+              }))}
+              onChangeItem={itemValue => {
+                formikHandlers.handleChange('countryAlpha2')
+                formikHandlers.handleBlur('countryAlpha2')
+                formikHandlers.setFieldValue('countryAlpha2', itemValue.value)
+                setCountry(itemValue.value)
+              }}
+              defaultValue={country}
+              searchable
+              searchablePlaceholder="Search for country"
+              searchablePlaceholderTextColor={colors[Colors.menuGrey]}
+              placeholder={t('country')}
+              isTouched={formikHandlers.touched.countryAlpha2}
+              error={formikHandlers.errors.countryAlpha2}
+              showTitle={formikHandlers.values.countryAlpha2 !== ''}
+              fieldName={'Country'}
+            />
+            <Input
+              name={'password'}
+              label={t('createPassword')}
+              handlers={formikHandlers}
+              autoCapitalize="none"
+              secureTextEntry
+            />
+            <Input
+              name={'confirmPassword'}
+              label={t('confirmPassword')}
+              handlers={formikHandlers}
+              autoCapitalize="none"
+              secureTextEntry
+            />
+            <CheckBox
+              isChecked={checked}
+              label={
+                <>
+                  {t('I agree')}&nbsp;
+                  <Span color={Colors.menuGrey} style={styles.privacy} onPress={() => {}}>
+                    {t('Yoma’s Privacy Policy')}
+                  </Span>
+                </>
+              }
               onPress={() => {
-                setFieldValue('privacyInd', !checked)
+                formikHandlers.setFieldValue('privacyInd', !checked)
                 setChecked(!checked)
               }}
-              style={styles.checkBox}
-            >
-              <Optional condition={checked} fallback={<BlueHollowCircle />}>
-                <BlueTick />
-              </Optional>
-            </TouchableOpacity>
-            <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
-              {t('iAgree')} &nbsp;
-              <Span color={Colors.menuGrey} style={styles.privacy}>
-                {t('privacyPolicy')}
-              </Span>
-            </Text.Body>
-          </View>
-          <ButtonContainer
-            disabled={isSubmitting}
-            buttonText={t<string>('getStarted')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
-            onPress={handleSubmit}
-          />
-        </View>
+            />
+          </OnboardingForms>
+          <Button label={t('getStarted')} onPress={formikHandlers.handleSubmit} style={styles.button} />
+        </>
       )}
     </Formik>
   )

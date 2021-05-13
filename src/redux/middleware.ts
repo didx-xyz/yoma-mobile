@@ -4,7 +4,6 @@ import { Middleware } from 'redux'
 import api from '../api'
 import { middleware as apiMiddleware, apiConfig } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
-// import api from '../api'
 import { middleware as authMiddleware } from '../modules/Auth'
 import { showSimpleMessage } from '../utils/error'
 
@@ -20,6 +19,9 @@ const featureModuleMiddleware = [
   authMiddleware.authLoginFlow({ api }),
   authMiddleware.authSetCredentialsFlow({ notification: showSimpleMessage }),
   authMiddleware.authLoginFailureFlow({ notification: showSimpleMessage }),
+  authMiddleware.authRegistrationFlow({ api }),
+  authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
+  authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

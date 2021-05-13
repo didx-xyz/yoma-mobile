@@ -1,10 +1,9 @@
 import api from 'api'
-import { Input, ButtonContainer } from 'components'
-import { Formik } from 'formik'
+import { Input, OnboardingForms } from 'components'
+import Button from 'components/Button'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
-import ButtonStyles from 'styles/button.styles'
 import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
@@ -28,35 +27,27 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
         await api.auth
           .resetPassword({ ...values })
           .then((response: any) => {
-            console.log('response', response)
             showSimpleMessage('success', response.meta.message)
             setSubmitted(true)
           })
           .catch(error => {
-            console.log('Error =>', error)
             showSimpleMessage('danger', 'Error', error)
           })
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => (
-        <View>
-          <Input
-            onChangeText={handleChange('email')}
-            onBlur={handleBlur('email')}
-            value={values.email}
-            label={t('email')}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            isTouched={touched.email}
-            error={errors.email}
-          />
-          <ButtonContainer
-            disabled={isSubmitting}
-            buttonText={t<string>('sendInstruction')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
-            onPress={handleSubmit}
-          />
-        </View>
+      {(formikHandlers: FormikProps<FormikValues>) => (
+        <>
+          <OnboardingForms>
+            <Input
+              name={'email'}
+              label={t('email')}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              handlers={formikHandlers}
+            />
+          </OnboardingForms>
+          <Button label={t('sendInstruction')} onPress={formikHandlers.handleSubmit} style={styles.button} />
+        </>
       )}
     </Formik>
   )

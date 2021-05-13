@@ -1,9 +1,9 @@
 import { PurpleQuarter } from 'assets/images'
-import { LargeHeaderContainer, ViewContainer } from 'components'
+import { Card, LargeHeaderContainer, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, View } from 'react-native'
+import { ScrollView } from 'react-native'
 import { Colors, colors } from 'styles'
 
 import Text, { Bold, HeaderLevels, TextAlign } from '../../components/Typography'
@@ -35,7 +35,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
           circleImage={<PurpleQuarter />}
           circleImageStyle={styles.purpleSemiCircleContainer}
         />
-        <View style={styles.whiteCard}>
+        <Card style={styles.card}>
           <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeader}>
             {t('createNewPassword')}
           </Text.Header>
@@ -43,10 +43,10 @@ const ResetPassword = ({ navigation, route }: Props) => {
             {t('resetPasswordBody1')}
             <Bold>{t('resetPasswordBody2')}</Bold>
             {t('resetPasswordBody3')}
-            <Bold>{t('resetPasswordBody4')}</Bold>
+            <Bold>{t('resetPasswordBody4')}.</Bold>
           </Text.Body>
           <ResetPasswordForm id={Id} token={Token} navigation={navigation} />
-        </View>
+        </Card>
       </ScrollView>
     </ViewContainer>
   )

@@ -35,3 +35,21 @@ export const defaultUserLoginResponseData: AuthLoginSuccessResponse = {
 
 export const createSuccessfulLoginResponseFixture = (data: Partial<AuthLoginSuccessResponse> = {}) =>
   mergeDeepRight(defaultUserLoginResponseData)(data)
+
+export const defaultUserRegistrationResponseData = {
+  meta: {
+    success: true,
+    code: 201,
+    message: 'Account created.',
+  },
+}
+
+export const userRegistrationData = {
+  firstName: 'FIRST NAME',
+  lastName: 'LAST NAME',
+  email: 'USER EMAIL',
+  countryAlpha2: 'COUNTRY CODE',
+  password: 'USER PASSWORD',
+  confirmPassword: 'USER PASSWORD',
+  privacyInd: true,
+}

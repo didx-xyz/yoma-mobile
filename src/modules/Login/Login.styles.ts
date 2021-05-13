@@ -6,17 +6,16 @@ const styles = {
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
   cardHeader: {
-    paddingTop: 10,
-    paddingBottom: 15,
+    paddingVertical: 17,
   } as TextStyle,
   forgotPassword: {
-    marginVertical: 5,
+    marginBottom: 15,
   } as TextStyle,
   orText: {
     paddingHorizontal: 15,
   } as TextStyle,
   loginSocial: {
-    paddingHorizontal: 15,
+    padding: 15,
   } as TextStyle,
   noAccount: {
     marginVertical: 30,
@@ -26,13 +25,8 @@ const styles = {
     right: 0,
     bottom: 0,
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
-    marginHorizontal: 13,
+  card: {
     marginTop: '-20%',
-    borderRadius: 12,
-    paddingVertical: 10,
-    elevation: 3,
   } as ViewStyle,
   horizontalLineView: {
     flexDirection: 'row',
@@ -46,7 +40,7 @@ const styles = {
     flex: 1,
   } as ViewStyle,
   social: {
-    alignSelf: 'center',
+    marginBottom: 20,
   } as ViewStyle,
 }
 
