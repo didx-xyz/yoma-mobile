@@ -36,7 +36,7 @@ const Profile = ({ navigation }: Props) => {
     }
   }, [])
 
-  const uploadImage = async () => {
+  const captureProfileImage = async () => {
     try {
       const response = await captureAndUploadImage()
       if (response.data) {
@@ -58,14 +58,14 @@ const Profile = ({ navigation }: Props) => {
               <ProfilePhoto
                 borderWidth={6}
                 outerRadius={40}
-                onPress={uploadImage}
+                onPress={captureProfileImage}
                 percent={5}
                 showEditIcon={true}
                 profileOuterStyle={styles.imagePlaceholder}
               />
             }
           >
-            <TouchableOpacity onPress={uploadImage} style={styles.imageContainer}>
+            <TouchableOpacity onPress={captureProfileImage} style={styles.imageContainer}>
               <Image source={{ uri: userResponse.photoURL }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
