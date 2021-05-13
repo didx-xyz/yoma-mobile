@@ -1,4 +1,5 @@
-import { head, join, juxt, pipe, tail, toUpper, trim, filter } from 'ramda'
+import { FormikProps, FormikValues } from 'formik'
+import { head, join, juxt, pipe, tail, toUpper, trim, filter, equals } from 'ramda'
 
 export const mapToDropDownArray = (array: Record<string, string>[], valueProp = 'key', labelProp = 'value') => {
   return array.map((opt: Record<string, string>) => ({
@@ -15,3 +16,11 @@ export const filterStringArray = (value: string, array: string[]) =>
   filter((element: string) => element !== value)(array)
 
 export const textOrSpace = (condition: boolean, text: string) => (condition ? text : ' ')
+
+export const compareFormikObject = (ref: FormikProps<FormikValues>) => {
+  if (!equals(ref.initialValues, ref.values) || ref.isValid) {
+    return false
+  } else {
+    return true
+  }
+}

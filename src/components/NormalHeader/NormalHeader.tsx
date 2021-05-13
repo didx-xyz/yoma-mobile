@@ -16,11 +16,19 @@ type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes>
   headerText: string | React.ReactNode
   onSave?: () => void
+  isSaveButtonEnabled: boolean
   showAddButton?: boolean
   onAdd?: () => void
 }
 
-const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, onAdd }: Props) => {
+const NormalHeader = ({
+  navigation,
+  headerText,
+  onSave,
+  showAddButton = false,
+  isSaveButtonEnabled = false,
+  onAdd,
+}: Props) => {
   const { t } = useTranslation()
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -47,7 +55,7 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
         fallback={
           <TouchableOpacity onPress={onSave} style={styles.button}>
             <Text.Body>
-              <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
+              <Bold color={isSaveButtonEnabled ? Colors.primaryGreen : Colors.menuGrey}>{t('Save')}</Bold>
             </Text.Body>
           </TouchableOpacity>
         }

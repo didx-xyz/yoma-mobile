@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox, FormWrapper } from 'components'
+import { DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
@@ -8,6 +8,7 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
+import { compareFormikObject } from 'utils/strings.utils'
 
 import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
 import styles from './EducationForm.styles'
@@ -15,9 +16,10 @@ import ValidationSchema from './ValidationSchema'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Education>
+  changeButtonState: (value: boolean) => void
 }
 
-const EducationForm = forwardRef(({ navigation }: Props, ref) => {
+const EducationForm = forwardRef(({ navigation, changeButtonState }: Props, ref) => {
   const { t } = useTranslation()
   const [isStudying, setIsStudying] = useState(false)
   const [skillsList, setSkillsList] = useState(MOCKED_SKILLS_DATA)
@@ -33,11 +35,24 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
     },
   }))
 
+  const validation = () => {
+    // console.log(formRef.current?.errors)
+    // if (equals(INITIAL_VALUES, data) || !formRef.current?.isValid) {
+    //   console.log('val')
+    //   changeButtonState(false)
+    // } else {
+    //   changeButtonState(true)
+    // }
+    const value = compareFormikObject(formRef.current!)
+    changeButtonState(value)
+  }
+
   return (
     <Formik
       innerRef={formRef}
       initialValues={INITIAL_VALUES}
       enableReinitialize={true}
+      validate={validation}
       validationSchema={ValidationSchema}
     >
       {formikHandlers => (
@@ -49,7 +64,6 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
             }
           />
-          <Spinner visible={formikHandlers.isSubmitting} />
           <Input name={'school'} label={t('School')} handlers={formikHandlers} />
           <Input name={'qualificationType'} label={t('Qualification type')} handlers={formikHandlers} />
           <Input name={'country'} label={t('Country or region')} handlers={formikHandlers} />
@@ -60,7 +74,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
           />
           <View style={styles.row}>
             <DatePicker
-              onDateChange={(date: string) => {
+              onDateChange={(dateString: string, date: Date) => {
                 formikHandlers.handleChange('startDate')
                 formikHandlers.handleBlur('startDate')
                 formikHandlers.setFieldValue('startDate', date)
@@ -72,7 +86,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               showTitle={formikHandlers.values.startDate !== ''}
             />
             <DatePicker
-              onDateChange={(date: string) => {
+              onDateChange={(dateString: string, date: Date) => {
                 formikHandlers.handleChange('endDate')
                 formikHandlers.handleBlur('endDate')
                 formikHandlers.setFieldValue('endDate', date)

@@ -20,6 +20,7 @@ interface Props {
 const Education = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
+  const [isSaveButtonActive, setIsSaveButtonActive] = useState(false)
   const [education, setEducation] = useState(MOCKED_EDUCATION_DATA)
   const formRef = useRef<FormikProps<FormikValues>>()
 
@@ -43,11 +44,16 @@ const Education = ({ navigation }: Props) => {
     )
   }
 
+  const toggleSaveButtonState = (saveButtonState: boolean) => {
+    setIsSaveButtonActive(saveButtonState)
+  }
+
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
         headerText={t('Education')}
+        isSaveButtonEnabled={isSaveButtonActive}
         onSave={() => formRef.current?.handleSubmit()}
         onAdd={() => {
           setIsSaved(true)
@@ -67,7 +73,7 @@ const Education = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <EducationForm navigation={navigation} ref={formRef} />
+            <EducationForm navigation={navigation} ref={formRef} changeButtonState={toggleSaveButtonState} />
           </Card>
         </ScrollView>
       </Optional>
