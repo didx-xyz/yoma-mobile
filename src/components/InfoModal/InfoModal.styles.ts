@@ -10,7 +10,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: applyAlphaToHex(colors[Colors.black])(0.57),
   } as ViewStyle,
-  inner: {
+  innerContainer: {
     margin: 10,
     backgroundColor: colors[Colors.white],
     borderRadius: 20,
@@ -19,6 +19,7 @@ const styles = {
   } as ViewStyle,
   button: {
     marginTop: 20,
+    marginHorizontal: 100,
   } as ViewStyle,
 }
 

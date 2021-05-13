@@ -17,9 +17,9 @@ const InfoModal = ({ visible, closeModal, infoText }: Props) => {
   return (
     <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={closeModal}>
       <View style={styles.container}>
-        <View style={styles.inner}>
+        <View style={styles.innerContainer}>
           <Text.Body>{infoText}</Text.Body>
-          <Button label={t('close')} onPress={closeModal} style={styles.button} />
+          <Button label={t('Close')} onPress={closeModal} style={styles.button} />
         </View>
       </View>
     </Modal>
