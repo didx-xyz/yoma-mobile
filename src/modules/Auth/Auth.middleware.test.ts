@@ -9,17 +9,11 @@ import {
   authRegistrationSuccess,
   setAuthCredentials,
 } from './Auth.reducer'
-import { defaultUserLoginResponseData, defaultUserRegistrationResponseData } from './Auth.test.fixtures'
-
-const userRegistrationData = {
-  firstName: 'FIRST NAME',
-  lastName: 'LAST NAME',
-  email: 'USER EMAIL',
-  countryAlpha2: 'COUNTRY CODE',
-  password: 'USER PASSWORD',
-  confirmPassword: 'USER PASSWORD',
-  privacyInd: true,
-}
+import {
+  defaultUserLoginResponseData,
+  defaultUserRegistrationResponseData,
+  userRegistrationData,
+} from './Auth.test.fixtures'
 
 describe('modules/Auth/Auth.middleware', () => {
   describe('authLoginFlow', () => {
