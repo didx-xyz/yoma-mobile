@@ -77,9 +77,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
           .label('Confirm password')
           .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/, t('passwordRegexError')),
       })}
-      onSubmit={async values => {
-        onRegisterUser(values)
-      }}
+      onSubmit={async values => onRegisterUser(values)}
     >
       {(formikHandlers: FormikProps<FormikValues>) => (
         <View style={styles.form}>
