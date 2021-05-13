@@ -1,7 +1,7 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
-const styles = StyleSheet.create({
+const styles = {
   form: {
     flex: 1,
     padding: 12,
@@ -23,6 +23,6 @@ const styles = StyleSheet.create({
   iconInfo: {
     marginRight: 5,
   } as ViewStyle,
-})
+}
 
-export default styles
+export default StyleSheet.create(styles)
