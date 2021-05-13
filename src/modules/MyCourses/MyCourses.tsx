@@ -6,6 +6,7 @@ import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
+import { CARD_SPACER } from 'styles/styles.constants'
 
 import { MOCK_COURSES } from './MyCourses.constants'
 import styles from './MyCourses.styles'
@@ -51,7 +52,7 @@ const MyCourses = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={courses}
-            ListHeaderComponent={<Spacer height={10} />}
+            ListHeaderComponent={<Spacer height={CARD_SPACER} />}
             renderItem={({ item }) => renderCourseEntry(item)}
             keyExtractor={item => item.course}
           />
