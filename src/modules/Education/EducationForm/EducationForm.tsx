@@ -36,13 +36,6 @@ const EducationForm = forwardRef(({ navigation, changeButtonState }: Props, ref)
   }))
 
   const validation = () => {
-    // console.log(formRef.current?.errors)
-    // if (equals(INITIAL_VALUES, data) || !formRef.current?.isValid) {
-    //   console.log('val')
-    //   changeButtonState(false)
-    // } else {
-    //   changeButtonState(true)
-    // }
     const value = compareFormikObject(formRef.current!)
     changeButtonState(value)
   }
