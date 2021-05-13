@@ -1,13 +1,13 @@
 import { PurpleQuarter } from 'assets/images'
-import { ButtonContainer, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
+import { Card, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
+import Button from 'components/Button'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors, colors } from 'styles'
-import ButtonStyles from 'styles/button.styles'
 
-import Text, { BodyLevels, HeaderLevels, Span, TextAlign } from '../../components/Typography'
+import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import styles from './Register.styles'
 
 interface Props {
@@ -26,38 +26,28 @@ const Register = ({ navigation }: Props) => {
         circleImage={<PurpleQuarter />}
         circleImageStyle={styles.purpleSemiCircleContainer}
       />
-      <View style={styles.whiteCard}>
-        <Text.Header level={HeaderLevels.h3} align={TextAlign.center}>
+      <Card style={styles.card}>
+        <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.welcomeText}>
           {t('welcome')}
         </Text.Header>
-        <ButtonContainer
-          buttonText={t<string>('registerWithEmail')}
-          buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
+        <Button
+          label={t('registerWithEmail')}
           onPress={() => navigation.navigate(NavigationRoutes.RegisterWithEmail)}
+          style={styles.button}
         />
         <View style={styles.horizontalLineView}>
           <View style={styles.horizontalLine} />
-          <Text.Header level={HeaderLevels.h3} color={Colors.primaryDarkGrey} style={styles.orText}>
-            {t('or')}
-          </Text.Header>
+          <Text.Body style={styles.orText}>{t('or')}</Text.Body>
           <View style={styles.horizontalLine} />
         </View>
         <Text.Body level={BodyLevels.small} style={styles.bodyText}>
           {t('registerSocial')}
         </Text.Body>
         <SocialRegistration />
-      </View>
-      <Text.Body
-        level={BodyLevels.small}
-        color={Colors.primaryDarkGrey}
-        align={TextAlign.center}
-        style={styles.bottomText}
-      >
-        {t('alreadyHaveAccount')}
-        <Span color={Colors.primaryGreen} onPress={() => navigation.navigate(NavigationRoutes.Login)}>
-          &nbsp;
-          {t('login')}.
-        </Span>
+      </Card>
+      <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.bottomText}>
+        {t('alreadyHaveAccount')}&nbsp;
+        <Link onPress={() => navigation.navigate(NavigationRoutes.Login)}>{t('login')}.</Link>
       </Text.Body>
     </ViewContainer>
   )
