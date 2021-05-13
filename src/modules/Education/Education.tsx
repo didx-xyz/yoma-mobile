@@ -1,5 +1,4 @@
-import { Card, NormalHeader, Optional, ViewContainer } from 'components'
-import InfoCard from 'components/InfoCard'
+import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
