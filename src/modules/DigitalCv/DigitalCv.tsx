@@ -48,6 +48,13 @@ const DigitalCv = ({ navigation }: Props) => {
         />
         <CvCard
           count={0}
+          badgeColor={Colors.primaryYellow}
+          cardTitle={t('Completed courses')}
+          defaultText={t('Have you completed any courses yet?')}
+          onEdit={() => navigation.navigate(NavigationRoutes.MyCourses)}
+        />
+        <CvCard
+          count={0}
           badgeColor={Colors.secondaryPurple}
           cardTitle={t('Completed challenges')}
           defaultText={t('Have you completed any challenges yet?')}
