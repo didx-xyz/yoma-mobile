@@ -3,6 +3,17 @@ import { USER_ID } from 'helpers/helpers'
 import ImagePicker, { Image, Options } from 'react-native-image-crop-picker'
 import { showSimpleMessage } from 'utils/error'
 
+const CAPTURE_IMAGE_OPTIONS: Options = {
+  cropping: true,
+  includeBase64: true,
+  freeStyleCropEnabled: true,
+  forceJpg: true,
+  mediaType: 'photo',
+  useFrontCamera: true,
+  cropperCircleOverlay: true,
+  compressImageQuality: 0.2,
+}
+
 export const getUserData = async () => {
   try {
     const response = await api.users.getById(USER_ID)
@@ -22,27 +33,26 @@ const uploadImage = async (image: Image) => {
   }
   try {
     const response = await api.users.photo.create(USER_ID, photo)
-    return JSON.parse(response.data)
+    if (response.data) {
+      return JSON.parse(response.data)
+    }
   } catch (error) {
-    showSimpleMessage('danger', 'Error', error)
+    throw error
   }
 }
 
-export const captureImage = async () => {
-  const options: Options = {
-    cropping: true,
-    includeBase64: true,
-    freeStyleCropEnabled: true,
-    forceJpg: true,
-    mediaType: 'photo',
-    useFrontCamera: true,
-    cropperCircleOverlay: true,
-    compressImageQuality: 0.2,
-  }
+export const captureImage = () => {
   try {
-    const image = await ImagePicker.openCamera(options)
-    return await uploadImage(image)
+    return ImagePicker.openCamera(CAPTURE_IMAGE_OPTIONS)
   } catch (error) {
     console.log('error', error)
   }
+}
+
+export const captureAndUploadImage = () => {
+  return captureImage()
+    ?.then(image => uploadImage(image))
+    .catch(error => {
+      throw error
+    })
 }

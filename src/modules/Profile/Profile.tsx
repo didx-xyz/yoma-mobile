@@ -13,7 +13,7 @@ import { Colors } from 'styles'
 
 import { USER_RESPONSE } from './Profile.constants'
 import styles from './Profile.styles'
-import { captureImage, getUserData } from './Profile.utils'
+import { captureAndUploadImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
@@ -36,9 +36,15 @@ const Profile = ({ navigation }: Props) => {
     }
   }, [])
 
-  const uploadImage = async () => {
-    const response = await captureImage()
-    setUserResponse(response.data)
+  const captureProfileImage = async () => {
+    try {
+      const response = await captureAndUploadImage()
+      if (response.data) {
+        setUserResponse(response.data)
+      }
+    } catch (error) {
+      console.log('error', error)
+    }
   }
 
   return (
@@ -52,14 +58,14 @@ const Profile = ({ navigation }: Props) => {
               <ProfilePhoto
                 borderWidth={6}
                 outerRadius={40}
-                onPress={uploadImage}
+                onPress={captureProfileImage}
                 percent={5}
                 showEditIcon={true}
                 profileOuterStyle={styles.imagePlaceholder}
               />
             }
           >
-            <TouchableOpacity onPress={uploadImage} style={styles.imageContainer}>
+            <TouchableOpacity onPress={captureProfileImage} style={styles.imageContainer}>
               <Image source={{ uri: userResponse.photoURL }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
