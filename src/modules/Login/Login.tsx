@@ -35,7 +35,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
           <LoginForm onLoginUser={onLoginUser} />
           <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.ForgotPassword)}>
             <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.forgotPassword}>
-              {t('forgotPassword')} ?
+              {t('forgotPassword')}?
             </Text.Body>
           </TouchableOpacity>
           <View style={styles.horizontalLineView}>

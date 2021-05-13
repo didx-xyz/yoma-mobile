@@ -1,12 +1,11 @@
-import { ButtonContainer, CheckBox, DropDown, Input, Spinner } from 'components'
+import { CheckBox, DropDown, Input, Spinner, OnboardingForms } from 'components'
+import Button from 'components/Button'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { AuthRegistration } from 'modules/Auth/Auth.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
 import { colors, Colors } from 'styles'
-import ButtonStyles from 'styles/button.styles'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
 
@@ -80,74 +79,71 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
       onSubmit={async values => onRegisterUser(values)}
     >
       {(formikHandlers: FormikProps<FormikValues>) => (
-        <View style={styles.form}>
-          <Spinner visible={formikHandlers.isSubmitting} />
-          <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
-          <Input name={'lastName'} label={t('lastName')} handlers={formikHandlers} />
-          <Input
-            name={'email'}
-            label={t('email')}
-            handlers={formikHandlers}
-            keyboardType="email-address"
-            autoCapitalize="none"
-          />
-          <DropDown
-            items={countries.map(c => ({
-              label: c.name,
-              value: c.code,
-            }))}
-            onChangeItem={itemValue => {
-              formikHandlers.handleChange('countryAlpha2')
-              formikHandlers.handleBlur('countryAlpha2')
-              formikHandlers.setFieldValue('countryAlpha2', itemValue.value)
-              setCountry(itemValue.value)
-            }}
-            defaultValue={country}
-            searchable={true}
-            searchablePlaceholder="Search for country"
-            searchablePlaceholderTextColor={colors[Colors.menuGrey]}
-            placeholder={t('country')}
-            isTouched={formikHandlers.touched.countryAlpha2}
-            error={formikHandlers.errors.countryAlpha2}
-            showTitle={formikHandlers.values.countryAlpha2 !== ''}
-            fieldName={'Country'}
-          />
-          <Input
-            name={'password'}
-            label={t('createPassword')}
-            handlers={formikHandlers}
-            autoCapitalize="none"
-            secureTextEntry
-          />
-          <Input
-            name={'confirmPassword'}
-            label={t('confirmPassword')}
-            handlers={formikHandlers}
-            autoCapitalize="none"
-            secureTextEntry
-          />
-          <CheckBox
-            isChecked={checked}
-            label={
-              <>
-                {t('I agree')}&nbsp;
-                <Span color={Colors.menuGrey} style={styles.privacy} onPress={() => {}}>
-                  {t('Yoma’s Privacy Policy')}
-                </Span>
-              </>
-            }
-            onPress={() => {
-              formikHandlers.setFieldValue('privacyInd', !checked)
-              setChecked(!checked)
-            }}
-          />
-          <ButtonContainer
-            disabled={formikHandlers.isSubmitting}
-            buttonText={t<string>('getStarted')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
-            onPress={formikHandlers.handleSubmit}
-          />
-        </View>
+        <>
+          <OnboardingForms>
+            <Spinner visible={formikHandlers.isSubmitting} />
+            <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
+            <Input name={'lastName'} label={t('lastName')} handlers={formikHandlers} />
+            <Input
+              name={'email'}
+              label={t('email')}
+              handlers={formikHandlers}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            <DropDown
+              items={countries.map(c => ({
+                label: c.name,
+                value: c.code,
+              }))}
+              onChangeItem={itemValue => {
+                formikHandlers.handleChange('countryAlpha2')
+                formikHandlers.handleBlur('countryAlpha2')
+                formikHandlers.setFieldValue('countryAlpha2', itemValue.value)
+                setCountry(itemValue.value)
+              }}
+              defaultValue={country}
+              searchable
+              searchablePlaceholder="Search for country"
+              searchablePlaceholderTextColor={colors[Colors.menuGrey]}
+              placeholder={t('country')}
+              isTouched={formikHandlers.touched.countryAlpha2}
+              error={formikHandlers.errors.countryAlpha2}
+              showTitle={formikHandlers.values.countryAlpha2 !== ''}
+              fieldName={'Country'}
+            />
+            <Input
+              name={'password'}
+              label={t('createPassword')}
+              handlers={formikHandlers}
+              autoCapitalize="none"
+              secureTextEntry
+            />
+            <Input
+              name={'confirmPassword'}
+              label={t('confirmPassword')}
+              handlers={formikHandlers}
+              autoCapitalize="none"
+              secureTextEntry
+            />
+            <CheckBox
+              isChecked={checked}
+              label={
+                <>
+                  {t('I agree')}&nbsp;
+                  <Span color={Colors.menuGrey} style={styles.privacy} onPress={() => {}}>
+                    {t('Yoma’s Privacy Policy')}
+                  </Span>
+                </>
+              }
+              onPress={() => {
+                formikHandlers.setFieldValue('privacyInd', !checked)
+                setChecked(!checked)
+              }}
+            />
+          </OnboardingForms>
+          <Button label={t('getStarted')} onPress={formikHandlers.handleSubmit} style={styles.button} />
+        </>
       )}
     </Formik>
   )
