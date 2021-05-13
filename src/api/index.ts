@@ -2,13 +2,11 @@ import axios from 'axios'
 import { AUTH_TOKEN } from 'helpers/helpers'
 
 import Env from '../env.json'
+import * as apiConfig from './api.config'
+import { FALLBACK_MESSAGE, REFRESH_TOKEN_FAILED_MESSAGE, UNAUTHORIZED_STATUS_CODE } from './api.constants'
 import auth from './auth/auth'
 import digitalCv from './digitalCv'
 import users from './users'
-
-const FALLBACK_MESSAGE = 'Unable to reach server'
-const REFRESH_TOKEN_FAILED_MESSAGE = 'Unable to refresh your session'
-const UNAUTHORIZED_STATUS_CODE = 401
 
 const instance = axios.create({
   baseURL: Env.YOMA_API_BASE_PATH,
@@ -48,3 +46,5 @@ export default {
   users: users(instance),
   digitalCv: digitalCv(instance),
 }
+
+export { apiConfig }
