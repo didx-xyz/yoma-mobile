@@ -1,4 +1,6 @@
-export const USER_RESPONSE = {
+import { UserResponse } from 'modules/Auth/Auth.types'
+
+export const USER_RESPONSE: UserResponse = {
   id: '',
   firstName: '',
   lastName: '',

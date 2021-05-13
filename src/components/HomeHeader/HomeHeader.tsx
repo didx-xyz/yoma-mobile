@@ -13,24 +13,24 @@ import styles from './HomeHeader.styles'
 
 type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes>
-  percentCompleted: number
-  tokens: number
+  profileProgressPercentage: number
+  rewardPoints: number
 }
 
-const HomeHeader = ({ navigation, percentCompleted = 0, tokens = 0 }: Props) => {
+const HomeHeader = ({ navigation, profileProgressPercentage = 0, rewardPoints = 0 }: Props) => {
   return (
     <View style={styles.container}>
       <ProfilePhoto
         borderWidth={PROFILE_IMAGE_BORDER_WIDTH}
         onPress={() => navigation.navigate(NavigationRoutes.Profile)}
         outerRadius={PROFILE_IMAGE_RADIUS}
-        percent={percentCompleted}
+        percent={profileProgressPercentage}
         profileInnerStyle={styles.profileContainer}
       />
       <TouchableOpacity style={styles.tokensView}>
         <ZIcon />
         <Text.Body style={styles.tokenAmount}>
-          <Bold color={Colors.primaryYellow}>{tokens}</Bold>
+          <Bold color={Colors.primaryYellow}>{rewardPoints}</Bold>
         </Text.Body>
       </TouchableOpacity>
     </View>

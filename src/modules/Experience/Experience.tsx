@@ -11,6 +11,7 @@ import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
+import { CARD_SPACER } from 'styles/styles.constants'
 
 import styles from './Experience.styles'
 import { ExperienceType } from './Experience.types'
@@ -59,7 +60,7 @@ const Experience = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={experience}
-            ListHeaderComponent={<Spacer height={10} />}
+            ListHeaderComponent={<Spacer height={CARD_SPACER} />}
             renderItem={({ item }) => renderItem(item)}
             keyExtractor={(item, index) => index.toString()}
           />

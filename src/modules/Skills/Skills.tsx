@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, ListCard, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import { Card, ListCardHeader, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
@@ -39,7 +39,7 @@ const Skills = ({ navigation }: Props) => {
           <Card style={styles.outerCard}>
             <FlatList
               data={skills}
-              ListHeaderComponent={<ListCard color={Colors.primaryBlue} value={60} label={t('Top skills')} />}
+              ListHeaderComponent={<ListCardHeader color={Colors.primaryBlue} count={60} header={t('Top skills')} />}
               renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
               keyExtractor={item => item.skill}
             />

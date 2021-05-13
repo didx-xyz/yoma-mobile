@@ -27,7 +27,7 @@ const InfoCard = ({ description, startDate, endDate, logo, subtitle, title, onEd
     <View style={styles.container}>
       <View style={styles.row}>
         <Optional
-          condition={logo !== ''}
+          condition={!!logo}
           fallback={<Avatar size="small" rounded title={getUppercasedHead(title)} containerStyle={styles.avatar} />}
         >
           <Image source={{ uri: logo }} style={styles.image} />

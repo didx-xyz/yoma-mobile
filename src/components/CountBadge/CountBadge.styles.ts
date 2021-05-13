@@ -1,13 +1,15 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
 
+const BADGE_SIZE = 22
+
 const styles = {
   container: {
-    height: 30,
-    width: 30,
+    height: BADGE_SIZE,
+    width: BADGE_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 30 / CIRCULAR_RADIUS_DIVISOR,
+    borderRadius: BADGE_SIZE / CIRCULAR_RADIUS_DIVISOR,
   } as ViewStyle,
 }
 
