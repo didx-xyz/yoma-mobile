@@ -1,10 +1,9 @@
 import api from 'api'
-import { Input, ButtonContainer } from 'components'
+import { Input, OnboardingForms } from 'components'
+import Button from 'components/Button'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
-import ButtonStyles from 'styles/button.styles'
 import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
@@ -37,21 +36,18 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
       }}
     >
       {(formikHandlers: FormikProps<FormikValues>) => (
-        <View style={styles.form}>
-          <Input
-            name={'email'}
-            label={t('email')}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            handlers={formikHandlers}
-          />
-          <ButtonContainer
-            disabled={formikHandlers.isSubmitting}
-            buttonText={t<string>('sendInstruction')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
-            onPress={formikHandlers.handleSubmit}
-          />
-        </View>
+        <>
+          <OnboardingForms>
+            <Input
+              name={'email'}
+              label={t('email')}
+              keyboardType="email-address"
+              autoCapitalize="none"
+              handlers={formikHandlers}
+            />
+          </OnboardingForms>
+          <Button label={t('sendInstruction')} onPress={formikHandlers.handleSubmit} style={styles.button} />
+        </>
       )}
     </Formik>
   )

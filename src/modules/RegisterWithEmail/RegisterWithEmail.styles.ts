@@ -10,16 +10,15 @@ const styles = {
     left: 0,
     bottom: 0,
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
+  card: {
     marginTop: '-30%',
-    marginHorizontal: 10,
-    borderRadius: 12,
-    paddingVertical: 20,
-    elevation: 3,
   } as ViewStyle,
+  registerText: {
+    marginTop: 18,
+    marginBottom: 8,
+  },
   notice: {
-    marginVertical: 30,
+    marginVertical: 35,
   } as TextStyle,
 }
 

@@ -35,3 +35,11 @@ export const defaultUserLoginResponseData: AuthLoginSuccessResponse = {
 
 export const createSuccessfulLoginResponseFixture = (data: Partial<AuthLoginSuccessResponse> = {}) =>
   mergeDeepRight(defaultUserLoginResponseData)(data)
+
+export const defaultUserRegistrationResponseData = {
+  meta: {
+    success: true,
+    code: 201,
+    message: 'Account created.',
+  },
+}
