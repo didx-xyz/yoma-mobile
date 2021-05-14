@@ -1,6 +1,7 @@
 import { StackActions } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { AddIcon, BackIconGrey } from 'assets/images'
+import Button, { ButtonVariants } from 'components/Button'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect } from 'react'
@@ -15,7 +16,7 @@ import styles from './NormalHeader.styles'
 type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes>
   headerText: string | React.ReactNode
-  onSave?: () => void
+  onSave: () => void
   showAddButton?: boolean
   onAdd?: () => void
 }
@@ -45,11 +46,14 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
       <Optional
         condition={showAddButton}
         fallback={
-          <TouchableOpacity onPress={onSave} style={styles.button}>
-            <Text.Body>
-              <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
-            </Text.Body>
-          </TouchableOpacity>
+          <Button
+            variant={ButtonVariants.Clear}
+            label={t('Save')}
+            color={Colors.primaryGreen}
+            onPress={onSave}
+            style={styles.button}
+            isFullWidth={false}
+          />
         }
       >
         <TouchableOpacity onPress={onAdd} style={styles.button}>

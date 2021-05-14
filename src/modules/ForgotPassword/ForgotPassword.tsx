@@ -8,7 +8,7 @@ import { ScrollView, View } from 'react-native'
 import { openInbox } from 'react-native-email-link'
 import { colors, Colors } from 'styles'
 
-import Text, { HeaderLevels, Link, TextAlign } from '../../components/Typography'
+import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './ForgotPassword.styles'
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
 
@@ -55,15 +55,15 @@ const ForgotPassword = ({ navigation }: Props) => {
               {t('passwordSentText')}
             </Text.Body>
             <Button label={t('openEmail')} onPress={openInbox} />
-            <Link
+            <Text.Header
               onPress={() => navigation.navigate(NavigationRoutes.Login)}
+              level={HeaderLevels.h5}
+              color={Colors.primaryGreen}
               align={TextAlign.center}
               style={styles.skipButton}
             >
-              <Text.Header level={HeaderLevels.h5} color={Colors.primaryGreen}>
-                {t('skipComplete')}
-              </Text.Header>
-            </Link>
+              {t('skipComplete')}
+            </Text.Header>
           </Card>
         </Optional>
       </ScrollView>

@@ -204,11 +204,16 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             </TouchableOpacity>
             <Text.Body>{t('Request verification of employment from company')}</Text.Body>
           </View>
-          <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottom}>
-            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
+          <View style={styles.bottom}>
+            <Text.Meta
+              level={MetaLevels.smallBold}
+              color={Colors.primaryGreen}
+              style={styles.bottomText}
+              onPress={() => setShowInfoModal(true)}
+            >
               {t('Find inspiration on how to write a great profile.')}
             </Text.Meta>
-          </TouchableOpacity>
+          </View>
         </View>
       )}
     </Formik>

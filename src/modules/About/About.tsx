@@ -5,7 +5,7 @@ import { USER_ID } from 'helpers/helpers'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View, TextInput } from 'react-native'
+import { View, TextInput } from 'react-native'
 import { Colors } from 'styles'
 
 import styles from './About.styles'
@@ -67,11 +67,11 @@ const About = ({ navigation }: Props) => {
           }}
           returnKeyType="done"
         />
-        <TouchableOpacity onPress={() => setInfoModal(true)}>
-          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
-            {t('Find inspiration on how to write a great profile.')}
+        <View style={styles.bottom}>
+          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} onPress={() => setInfoModal(true)}>
+            {t('Find inspiration on how to write a great education description.')}
           </Text.Meta>
-        </TouchableOpacity>
+        </View>
       </View>
     </ViewContainer>
   )

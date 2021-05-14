@@ -22,7 +22,7 @@ const styles = {
     marginLeft: 10,
     elevation: 3,
     borderRadius: 10,
-  },
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

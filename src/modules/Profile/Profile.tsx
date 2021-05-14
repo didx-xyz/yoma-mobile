@@ -1,7 +1,7 @@
 import api from 'api'
 import { EditIcon } from 'assets/images'
 import { NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
-import Text, { Bold, TextAlign } from 'components/Typography'
+import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import React, { useEffect, useRef, useState } from 'react'
@@ -103,17 +103,13 @@ const Profile = ({ navigation }: Props) => {
           </Optional>
           <ProfileForm ref={childRef} navigation={navigation} />
         </View>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.reset({
-              routes: [{ name: 'Authentication' }],
-            })
-          }
-        >
-          <Text.Body align={TextAlign.center} style={styles.logout}>
-            <Bold color={Colors.menuGrey}>{t('Log Out')}</Bold>
-          </Text.Body>
-        </TouchableOpacity>
+        <Button
+          variant={ButtonVariants.Clear}
+          label={t('Log Out')}
+          color={Colors.menuGrey}
+          onPress={() => {}}
+          style={styles.logout}
+        />
       </ScrollView>
     </ViewContainer>
   )
