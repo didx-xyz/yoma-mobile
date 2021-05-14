@@ -45,6 +45,9 @@ const styles = {
     backgroundColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
     marginTop: 10,
   } as ViewStyle,
+  save: {
+    paddingRight: 10,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

@@ -1,10 +1,10 @@
 import { EditIcon } from 'assets/images'
 import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
+import { formatDistance } from 'date-fns'
 import React from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { Colors } from 'styles'
-import { calculateDifferenceInDate } from 'utils/dates.utils'
 import { getUppercasedHead } from 'utils/strings.utils'
 
 import DateDisplay from '../DateDisplay'
@@ -44,7 +44,7 @@ const InfoCard = ({ description, startDate, endDate, logo, subtitle, title, onEd
             </DateDisplay>
             <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate}>
               {' • '}
-              {calculateDifferenceInDate(startDate, endDate)}
+              {formatDistance(new Date(endDate), new Date(startDate))}
             </DateDisplay>
           </View>
         </View>
