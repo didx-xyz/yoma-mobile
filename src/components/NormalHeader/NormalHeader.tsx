@@ -10,7 +10,7 @@ import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Optional from '../Optional'
-import Text, { Bold, HeaderLevels } from '../Typography'
+import Text, { HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
 
 type Props = {
@@ -56,14 +56,18 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
           />
         }
       >
-        <TouchableOpacity onPress={onAdd} style={styles.button}>
-          <Text.Body>
-            <Bold color={Colors.primaryGreen}>{t('Add')}</Bold>
-          </Text.Body>
+        <Button
+          variant={ButtonVariants.Clear}
+          label={t('Add')}
+          color={Colors.primaryGreen}
+          onPress={onAdd!}
+          style={styles.addButton}
+          isFullWidth={false}
+        >
           <View style={styles.addIcon}>
             <AddIcon />
           </View>
-        </TouchableOpacity>
+        </Button>
       </Optional>
     </View>
   )

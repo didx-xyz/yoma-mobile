@@ -17,11 +17,19 @@ const styles = {
     flexDirection: 'row',
     paddingRight: 20,
   } as ViewStyle,
+  addButton: {
+    flexDirection: 'row',
+    paddingRight: 40,
+  } as ViewStyle,
   addIcon: {
     backgroundColor: colors[Colors.white],
-    marginLeft: 10,
     elevation: 3,
     borderRadius: 10,
+    position: 'absolute',
+    right: 0,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    marginRight: 10,
   } as ViewStyle,
 }
 
