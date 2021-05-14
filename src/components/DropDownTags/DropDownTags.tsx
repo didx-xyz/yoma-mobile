@@ -1,5 +1,6 @@
 import { FormikProps, FormikValues } from 'formik'
 import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
@@ -7,7 +8,7 @@ import { GetComponentProps } from 'types/react.types'
 import { dropElement, textOrSpace } from 'utils/strings.utils'
 
 import Tag from '../Tag'
-import Text, { MetaLevels, TextAlign } from '../Typography'
+import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDownTags.styles'
 
 type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
@@ -23,6 +24,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
   const [dropDownValue, setDropdownValue] = useState([])
   const { handleChange, handleBlur, errors, values, touched, setFieldValue } = handlers
+  const { t } = useTranslation()
 
   useEffect(() => {
     setDropdownValue(values[name])
@@ -52,6 +54,12 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         setOpen={setIsOpen}
         setValue={setDropdownValue}
         showArrowIcon={false}
+        CloseIconComponent={() => (
+          <Text.Body align={TextAlign.center} weight={FontWeights.bold_700} color={Colors.primaryGreen}>
+            {t('Done')}
+          </Text.Body>
+        )}
+        closeIconContainerStyle={styles.save}
         {...props}
       />
       <View style={styles.tagsContainer}>{renderTags(dropDownValue, deleteSkill)}</View>
