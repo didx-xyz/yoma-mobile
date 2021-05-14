@@ -48,7 +48,7 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
         {...props}
       />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
-        {textOrSpace(errors[name] && touched[name], errors[name])}
+        {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
     </>
   )

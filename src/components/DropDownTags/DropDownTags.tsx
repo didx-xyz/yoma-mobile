@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 import { GetComponentProps } from 'types/react.types'
-import { filterStringArray, textOrSpace } from 'utils/strings.utils'
+import { dropElement, textOrSpace } from 'utils/strings.utils'
 
 import Tag from '../Tag'
 import Text, { MetaLevels, TextAlign } from '../Typography'
@@ -28,7 +28,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
     setDropdownValue(values[name])
   }, [name, values])
 
-  const deleteSkill = (tag: string) => setDropdownValue(filterStringArray(tag, dropDownValue))
+  const deleteSkill = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
 
   return (
     <>
