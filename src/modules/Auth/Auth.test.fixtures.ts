@@ -43,3 +43,13 @@ export const defaultUserRegistrationResponseData = {
     message: 'Account created.',
   },
 }
+
+export const userRegistrationData = {
+  firstName: 'FIRST NAME',
+  lastName: 'LAST NAME',
+  email: 'USER EMAIL',
+  countryAlpha2: 'COUNTRY CODE',
+  password: 'USER PASSWORD',
+  confirmPassword: 'USER PASSWORD',
+  privacyInd: true,
+}
