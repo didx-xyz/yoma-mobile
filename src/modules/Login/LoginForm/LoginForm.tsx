@@ -1,12 +1,13 @@
-import { Input, ButtonContainer } from 'components'
-import { Formik } from 'formik'
+import { Input, OnboardingForms } from 'components'
+import Button from 'components/Button'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import ButtonStyles from 'styles/button.styles'
 import * as yup from 'yup'
 
 import { AuthCredentials } from '../../Auth/Auth.types'
+import { INITIAL_VALUES } from './LoginForm.constants'
 import styles from './LoginForm.styles'
 
 interface Props {
@@ -17,10 +18,7 @@ const LoginForm = ({ onLoginUser }: Props) => {
   const { t } = useTranslation()
   return (
     <Formik
-      initialValues={{
-        email: '',
-        password: '',
-      }}
+      initialValues={INITIAL_VALUES}
       validationSchema={yup.object().shape({
         email: yup
           .string()
@@ -35,34 +33,22 @@ const LoginForm = ({ onLoginUser }: Props) => {
         onLoginUser(values)
       }}
     >
-      {({ handleChange, handleBlur, handleSubmit, values, touched, errors, isSubmitting }) => (
-        <View>
-          <Input
-            onChangeText={handleChange('email')}
-            onBlur={handleBlur('email')}
-            value={values.email}
-            label={t('email')}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            isTouched={touched.email}
-            error={errors.email}
-          />
-          <Input
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            value={values.password}
-            label={t('password')}
-            isTouched={touched.password}
-            error={errors.password}
-            secureTextEntry
-          />
-          <ButtonContainer
-            disabled={isSubmitting}
-            buttonText={t<string>('login')}
-            buttonStyle={[ButtonStyles.largeTertiary3Button, styles.button]}
-            onPress={handleSubmit}
-          />
-        </View>
+      {(formikHandlers: FormikProps<FormikValues>) => (
+        <>
+          <OnboardingForms>
+            <Input
+              name={'email'}
+              label={t('email')}
+              handlers={formikHandlers}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            <Input name={'password'} label={t('password')} handlers={formikHandlers} secureTextEntry />
+          </OnboardingForms>
+          <View style={styles.buttonContainer}>
+            <Button label={t('login')} onPress={formikHandlers.handleSubmit} />
+          </View>
+        </>
       )}
     </Formik>
   )

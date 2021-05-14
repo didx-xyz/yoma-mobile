@@ -2,8 +2,8 @@ import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
   button: {
-    marginVertical: 15,
-    alignSelf: 'center',
+    marginTop: 15,
+    marginBottom: 36,
   } as ViewStyle,
 }
 

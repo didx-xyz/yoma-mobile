@@ -52,3 +52,19 @@ export interface AuthCredentials {
   email: string
   password: string
 }
+
+export interface AuthRegistration {
+  firstName: string
+  lastName: string
+  email: string
+  countryAlpha2: string
+  password: string
+  confirmPassword: string
+  privacyInd: boolean
+}
+
+export type AuthRegistrationSuccessResponse = {
+  meta: ApiMetaResponse
+}
+
+export type AuthRegistrationFailureResponse = string

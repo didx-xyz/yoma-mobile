@@ -1,8 +1,8 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
-  buttonContainer: {
-    marginVertical: 15,
+  container: {
+    paddingHorizontal: 20,
   } as ViewStyle,
 }
 

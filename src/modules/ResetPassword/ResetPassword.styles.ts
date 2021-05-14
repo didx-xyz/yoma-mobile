@@ -1,5 +1,4 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
@@ -10,17 +9,11 @@ const styles = {
     right: 0,
     bottom: 0,
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
-    marginHorizontal: 13,
+  card: {
     marginTop: '-20%',
-    borderRadius: 12,
-    paddingVertical: 10,
-    elevation: 3,
   } as ViewStyle,
   cardHeader: {
-    paddingTop: 10,
-    paddingBottom: 15,
+    marginTop: 17,
   },
   bodyText: {
     marginVertical: 15,
