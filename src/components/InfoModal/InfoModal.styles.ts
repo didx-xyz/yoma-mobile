@@ -1,27 +1,25 @@
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 import { colors, Colors } from '../../styles'
 
 const styles = {
-  centeredView: {
+  container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 22,
+    backgroundColor: applyAlphaToHex(colors[Colors.black])(0.57),
   } as ViewStyle,
-  modalView: {
-    margin: 20,
+  innerContainer: {
+    margin: 10,
     backgroundColor: colors[Colors.white],
     borderRadius: 20,
-    padding: 35,
+    padding: 20,
     alignItems: 'center',
-    elevation: 5,
   } as ViewStyle,
   button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-    backgroundColor: colors[Colors.primaryGreen],
+    marginTop: 20,
+    marginHorizontal: 100,
   } as ViewStyle,
 }
 

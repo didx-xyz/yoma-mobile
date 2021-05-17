@@ -3,14 +3,16 @@ import { colors, Colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 const styles = StyleSheet.create({
-  tag: {
+  container: {
     backgroundColor: applyAlphaToHex(colors[Colors.secondaryBlue])(0.15),
-    borderRadius: 20,
-    padding: 10,
-    margin: 2,
+    borderRadius: 33,
+    paddingHorizontal: 10,
+    marginHorizontal: 5,
+    marginTop: 10,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    height: 20,
   } as ViewStyle,
   crossIcon: {
     marginRight: 5,

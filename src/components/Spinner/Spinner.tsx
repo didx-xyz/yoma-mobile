@@ -12,7 +12,9 @@ const Spinner = ({ visible }: Props) => {
   return (
     <Modal visible={visible} animationType="fade" transparent={true}>
       <View style={styles.container}>
-        <ActivityIndicator size="large" color={colors[Colors.primaryGreen]} />
+        <View style={styles.spinnerContainer}>
+          <ActivityIndicator size="large" color={colors[Colors.primaryGreen]} />
+        </View>
       </View>
     </Modal>
   )
