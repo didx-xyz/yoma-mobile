@@ -36,17 +36,20 @@ const EducationForm = forwardRef(({ navigation, changeButtonState }: Props, ref)
   }))
 
   const validation = () => {
-    const value = compareFormikObject(formRef.current!)
-    changeButtonState(value)
+    setTimeout(() => {
+      const value = compareFormikObject(formRef.current!)
+      changeButtonState(value)
+    }, 10)
   }
 
   return (
     <Formik
       innerRef={formRef}
       initialValues={INITIAL_VALUES}
-      enableReinitialize={true}
+      enableReinitialize
       validate={validation}
       validationSchema={ValidationSchema}
+      validateOnChange
     >
       {formikHandlers => (
         <FormWrapper>

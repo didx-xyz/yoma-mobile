@@ -14,6 +14,6 @@ export default () => {
       .nullable()
       .required('Required'),
     description: yup.string().min(2).max(1000).required('Required'),
-    skillNames: yup.array().min(1).label('Skills developed').required('Required'),
+    skillNames: yup.array(yup.string()).min(1).label('Skills developed').required('Required'),
   })
 }

@@ -21,18 +21,13 @@ const renderTags = (tags: string[], onDelete: (tag: string) => void) =>
 
 const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [dropDownValue, setDropdownValue] = useState([])
-  const { handleChange, handleBlur, errors, values, touched, setFieldValue } = handlers
+  const { errors, values, touched, setFieldValue } = handlers
 
-  useEffect(() => {
-    setDropdownValue(values[name])
-  }, [name, values])
-
-  const deleteSkill = (tag: string) => setDropdownValue(filterStringArray(tag, dropDownValue))
+  const deleteSkill = (tag: string) => setFieldValue(name, filterStringArray(tag, values[name]))
 
   return (
     <>
-      <Text.Meta level={MetaLevels.small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
+      <Text.Meta level={MetaLevels.small}>{textOrSpace(values[name].length > 0, label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
         dropDownContainerStyle={styles.dropDownView}
@@ -42,19 +37,22 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         searchTextInputStyle={styles.search}
         searchContainerStyle={styles.searchContainer}
         listMode={'MODAL'}
-        onChangeValue={itemValue => {
-          handleChange(name)
-          handleBlur(name)
-          setFieldValue(name, itemValue)
-        }}
-        value={dropDownValue}
+        value={values[name]}
         open={isOpen}
         setOpen={setIsOpen}
-        setValue={setDropdownValue}
+        setValue={state => {
+          let newState = state
+
+          if (typeof state === 'function') {
+            newState = state(values[name])
+          }
+
+          setFieldValue(name, newState)
+        }}
         showArrowIcon={false}
         {...props}
       />
-      <View style={styles.tagsContainer}>{renderTags(dropDownValue, deleteSkill)}</View>
+      <View style={styles.tagsContainer}>{renderTags(values[name], deleteSkill)}</View>
       <View style={styles.divider} />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
         {errors[name] && touched[name] ? errors[name] : ' '}

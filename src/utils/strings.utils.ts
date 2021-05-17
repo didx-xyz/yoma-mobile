@@ -17,10 +17,5 @@ export const filterStringArray = (value: string, array: string[]) =>
 
 export const textOrSpace = (condition: boolean, text: string) => (condition ? text : ' ')
 
-export const compareFormikObject = (ref: FormikProps<FormikValues>) => {
-  if (!equals(ref.initialValues, ref.values) || ref.isValid) {
-    return false
-  } else {
-    return true
-  }
-}
+export const compareFormikObject = (ref: FormikProps<FormikValues>) =>
+  !equals(ref.initialValues, ref.values) && ref.isValid
