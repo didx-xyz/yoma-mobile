@@ -97,30 +97,8 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             onPress={() => setIsWorkingHere(!isWorkingHere)}
           />
           <View style={styles.row}>
-            <DatePicker
-              onDateChange={(date: string) => {
-                formikHandlers.handleChange('startDate')
-                formikHandlers.handleBlur('startDate')
-                formikHandlers.setFieldValue('startDate', date)
-              }}
-              value={formikHandlers.values.startDate}
-              label={t('Start date')}
-              isTouched={formikHandlers.touched.startDate}
-              error={formikHandlers.errors.startDate}
-              showTitle={formikHandlers.values.startDate !== ''}
-            />
-            <DatePicker
-              onDateChange={(date: string) => {
-                formikHandlers.handleChange('endDate')
-                formikHandlers.handleBlur('endDate')
-                formikHandlers.setFieldValue('endDate', date)
-              }}
-              value={formikHandlers.values.endDate}
-              label={t('End date')}
-              isTouched={formikHandlers.touched.endDate}
-              error={formikHandlers.errors.endDate}
-              showTitle={formikHandlers.values.endDate !== ''}
-            />
+            <DatePicker name={'startDate'} label={t('Start date')} handlers={formikHandlers} />
+            <DatePicker name={'endDate'} label={t('End date')} handlers={formikHandlers} />
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
