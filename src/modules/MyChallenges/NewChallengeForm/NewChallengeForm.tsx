@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
-import { CustomInput, DatePicker, DropDownTags, Upload, CheckBox } from 'components'
+import { DatePicker, DropDownTags, Upload, CheckBox, Input } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -19,7 +19,6 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [isInProgress, setIsInProgress] = useState(false)
   const [skillsList, setSkillsList] = useState(MOCK_SKILLS)
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
   const [shouldRequestVerification, setShouldRequestVerification] = useState<boolean>(false)
   const formRef = useRef<FormikProps<FormikValues>>()
 
@@ -33,26 +32,10 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
 
   return (
     <Formik innerRef={formRef} initialValues={INITIAL_VALUES} onSubmit={() => {}}>
-      {({ handleChange, handleBlur, values, touched, errors, setFieldValue }) => (
+      {formikHandlers => (
         <View style={styles.form}>
-          <CustomInput
-            onChangeText={handleChange('challenge')}
-            onBlur={handleBlur('challenge')}
-            value={values.challenge}
-            label={t('Challenge')}
-            isTouched={touched.challenge}
-            error={errors.challenge}
-            showTitle={values.challenge !== ''}
-          />
-          <CustomInput
-            onChangeText={handleChange('challengeHostProvider')}
-            onBlur={handleBlur('challengeHostProvider')}
-            value={values.challengeHostProvider}
-            label={t('Challenge host provider')}
-            isTouched={touched.challengeHostProvider}
-            error={errors.challengeHostProvider}
-            showTitle={values.challengeHostProvider !== ''}
-          />
+          <Input name={'challenge'} label={t('Challenge')} handlers={formikHandlers} />
+          <Input name={'challengeHostProvider'} label={t('Challenge host provider')} handlers={formikHandlers} />
           <CheckBox
             isChecked={isInProgress}
             label={t('Challenge is currently in progress')}
@@ -61,60 +44,37 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
           <View style={styles.row}>
             <DatePicker
               onDateChange={(date: string) => {
-                handleChange('startDate')
-                handleBlur('startDate')
-                setFieldValue('startDate', date)
+                formikHandlers.handleChange('startDate')
+                formikHandlers.handleBlur('startDate')
+                formikHandlers.setFieldValue('startDate', date)
               }}
-              value={values.startDate}
+              value={formikHandlers.values.startDate}
               label={t('Start date')}
-              isTouched={touched.startDate}
-              error={errors.startDate}
-              showTitle={values.startDate !== ''}
+              isTouched={formikHandlers.touched.startDate}
+              error={formikHandlers.errors.startDate}
+              showTitle={formikHandlers.values.startDate !== ''}
             />
             <DatePicker
               onDateChange={(date: string) => {
-                handleChange('endDate')
-                handleBlur('endDate')
-                setFieldValue('endDate', date)
+                formikHandlers.handleChange('endDate')
+                formikHandlers.handleBlur('endDate')
+                formikHandlers.setFieldValue('endDate', date)
               }}
-              value={values.endDate}
+              value={formikHandlers.values.endDate}
               label={t('End date')}
-              isTouched={touched.endDate}
-              error={errors.endDate}
-              showTitle={values.endDate !== ''}
+              isTouched={formikHandlers.touched.endDate}
+              error={formikHandlers.errors.endDate}
+              showTitle={formikHandlers.values.endDate !== ''}
             />
           </View>
-          <CustomInput
-            onChangeText={handleChange('description')}
-            onBlur={handleBlur('description')}
-            value={values.description}
-            label={t('Description')}
-            isTouched={touched.description}
-            error={errors.description}
-            multiline
-            showTitle={values.description !== ''}
-          />
+          <Input name={'description'} label={t('description')} handlers={formikHandlers} multiline />
           <DropDownTags
             items={skillsList}
             multiple
-            multipleText={t('Skills developed %d')}
-            min={0}
-            max={10}
-            searchable
-            searchablePlaceholder={t('Search skills')}
-            placeholder={t('Skills developed')}
-            fieldName={t('Skills developed')}
-            placeholderStyle={styles.placeholder}
-            showTitle={values.skillNames.length > 0}
-            defaultValue={selectedSkills}
-            onChangeItem={item => {
-              setSelectedSkills(item)
-              handleChange('skillNames')
-              handleBlur('skillNames')
-              setFieldValue('skillNames', selectedSkills)
-            }}
-            tags={selectedSkills}
-            error={errors.skillNames}
+            searchPlaceholder={t('Search skills')}
+            label={t('Skills developed')}
+            name={'skillNames'}
+            handlers={formikHandlers}
           />
           <Upload onPress={() => {}} />
           <View style={styles.checkBoxRow}>

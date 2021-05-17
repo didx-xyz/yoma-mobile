@@ -1,22 +1,20 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
-import { CustomInput, DropDown, Spinner } from 'components'
-import Text, { Bold, MetaLevels } from 'components/Typography'
+import { DropDown, Input, Spinner } from 'components'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
-import { Colors } from 'styles'
 import { showSimpleMessage } from 'utils/error'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
+import { mapToDropDownArray } from 'utils/strings.utils'
 import * as yup from 'yup'
 
-import styles from './ProfileForm.styles'
-
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Profile>
 }
 
 const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
@@ -29,8 +27,6 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
     phoneNumber: '',
   })
   const formRef = useRef<FormikProps<FormikValues>>()
-  const [country, setCountry] = useState('')
-  const [dropdown, setDropDown] = useState(false)
   const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
   useImperativeHandle(ref, () => ({
@@ -52,8 +48,6 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
         const userData = response.data
         const { firstName, lastName, email, countryAlpha2, phoneNumber } = userData
         setUser({ firstName, lastName, email, countryAlpha2, phoneNumber })
-        setCountry(countryAlpha2)
-        console.log(countryAlpha2)
       })
       .catch(error => {
         console.log('error', error)
@@ -65,15 +59,15 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
     <Formik
       innerRef={formRef}
       initialValues={user}
-      enableReinitialize={true}
+      enableReinitialize
       validationSchema={yup.object().shape({
         firstName: yup
           .string()
           .min(2)
           .max(50)
           .required(t('required'))
-          .test('First name', 'First name cannot include numbers or symbols', (value: any) => {
-            return !nameHasDigitsOrSymbols(value)
+          .test('First name', 'First name cannot include numbers or symbols', value => {
+            return !nameHasDigitsOrSymbols(value!)
           })
           .label('First name'),
         lastName: yup
@@ -81,8 +75,8 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
           .min(2)
           .max(50)
           .required(t('required'))
-          .test('Last name', 'Last name cannot include numbers or symbols', (value: any) => {
-            return !nameHasDigitsOrSymbols(value)
+          .test('Last name', 'Last name cannot include numbers or symbols', value => {
+            return !nameHasDigitsOrSymbols(value!)
           })
           .label('Last name'),
         countryAlpha2: yup.string().required('Required').label('Country'),
@@ -109,85 +103,34 @@ const ProfileForm = forwardRef(({ navigation }: Props, ref) => {
         }
       }}
     >
-      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => {
+      {formikHandlers => {
         return (
-          <View>
-            <Spinner visible={isSubmitting} />
-            <CustomInput
-              onChangeText={handleChange('firstName')}
-              onBlur={handleBlur('firstName')}
-              value={values.firstName}
-              label={t('firstName')}
-              isTouched={touched.firstName}
-              error={errors.firstName}
+          <>
+            <Spinner visible={formikHandlers.isSubmitting} />
+            <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
+            <Input name={'lastName'} label={t('Surname')} handlers={formikHandlers} />
+            <DropDown
+              items={mapToDropDownArray(countries, 'code', 'name')}
+              name={'countryAlpha2'}
+              label={'Country'}
+              handlers={formikHandlers}
+              searchPlaceholder={t('Search country')}
             />
-            <CustomInput
-              onChangeText={handleChange('lastName')}
-              onBlur={handleBlur('lastName')}
-              value={values.lastName}
-              label={t('Surname')}
-              isTouched={touched.lastName}
-              error={errors.lastName}
-            />
-            <CustomInput
-              onChangeText={handleChange('countryAlpha2')}
-              onBlur={handleBlur('countryAlpha2')}
-              value={country}
-              label={t('Country/Region')}
-              isTouched={touched.countryAlpha2}
-              error={errors.countryAlpha2}
-            />
-            {dropdown ? (
-              <DropDown
-                items={countries.map(c => ({
-                  label: c.name,
-                  value: c.code,
-                }))}
-                onChangeItem={itemValue => {
-                  handleChange('countryAlpha2')
-                  handleBlur('countryAlpha2')
-                  setFieldValue('countryAlpha2', itemValue.value)
-                  setCountry(itemValue.label)
-                  setDropDown(false)
-                }}
-                defaultValue={country}
-                searchable={true}
-                searchablePlaceholder="Search for country"
-                searchablePlaceholderTextColor={Colors.menuGrey}
-                placeholder={t('country')}
-                isTouched={touched.countryAlpha2}
-                error={errors.countryAlpha2}
-                isVisible={dropdown}
-              />
-            ) : null}
-            <Text.Meta
-              level={MetaLevels.smallBold}
-              style={styles.currentLocationButton}
-              onPress={() => setDropDown(true)}
-            >
-              <Bold color={Colors.primaryGreen}>Use current location</Bold>
-            </Text.Meta>
-            <CustomInput
-              onChangeText={handleChange('email')}
-              onBlur={handleBlur('email')}
-              value={values.email}
+            <Input
+              name={'email'}
               label={t('email')}
+              handlers={formikHandlers}
               keyboardType="email-address"
               autoCapitalize="none"
-              isTouched={touched.email}
-              error={errors.email}
             />
-            <CustomInput
-              onChangeText={handleChange('phoneNumber')}
-              onBlur={handleBlur('phoneNumber')}
-              value={values.phoneNumber}
+            <Input
+              name={'phoneNumber'}
               label={t('Cellphone')}
+              handlers={formikHandlers}
               keyboardType="phone-pad"
               autoCapitalize="none"
-              isTouched={touched.phoneNumber}
-              error={errors.phoneNumber}
             />
-          </View>
+          </>
         )
       }}
     </Formik>

@@ -1,58 +1,73 @@
-import { CrossIcon } from 'assets/images'
-import { FormikErrors } from 'formik'
-import React from 'react'
-import { ScrollView, TouchableOpacity, View } from 'react-native'
-import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
+import { FormikProps, FormikValues } from 'formik'
+import React, { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { View } from 'react-native'
+import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
+import { GetComponentProps } from 'types/react.types'
+import { dropElement, textOrSpace } from 'utils/strings.utils'
 
-import Optional from '../Optional'
-import Text, { MetaLevels, TextAlign } from '../Typography'
-import { DROP_DOWN_MAX_HEIGHT } from './DropDownTags.constants'
+import Tag from '../Tag'
+import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDownTags.styles'
 
-type Props = DropDownPickerProps & {
-  error?: string | string[] | FormikErrors<any> | FormikErrors<any>[]
-  fieldName?: string
-  showTitle?: boolean
-  tags?: string[]
-  onDelete: (tag: string) => void
+type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
+  name: string
+  label: string
+  handlers: FormikProps<FormikValues>
 }
 
-const rendertags = (tags: string[], onDelete: (tag: string) => void) => {
-  return tags.map((tag, index) => {
-    return (
-      <View key={index} style={styles.tag}>
-        <TouchableOpacity style={styles.crossIcon} onPress={() => onDelete(tag)}>
-          <CrossIcon height={15} width={15} />
-        </TouchableOpacity>
-        <Text.Body color={Colors.primaryBlue} key={index}>
-          {tag}
-        </Text.Body>
-      </View>
-    )
-  })
-}
+const renderTags = (tags: string[], onDelete: (tag: string) => void) =>
+  tags.map((tag, index) => <Tag key={index} tag={tag} onDeleteSkill={onDelete} />)
 
-const DropDownTags = ({ error, fieldName, showTitle = false, tags = [], onDelete, ...props }: Props) => {
+const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [dropDownValue, setDropdownValue] = useState([])
+  const { handleChange, handleBlur, errors, values, touched, setFieldValue } = handlers
+  const { t } = useTranslation()
+
+  useEffect(() => {
+    setDropdownValue(values[name])
+  }, [name, values])
+
+  const deleteSkill = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
+
   return (
-    <View>
-      <Optional condition={showTitle}>
-        <Text.Meta level={MetaLevels.small}>{fieldName}</Text.Meta>
-      </Optional>
+    <>
+      <Text.Meta level={MetaLevels.small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
       <DropDownPicker
-        containerStyle={styles.dropDownContainer}
         style={styles.dropDown}
-        itemStyle={styles.item}
-        dropDownMaxHeight={DROP_DOWN_MAX_HEIGHT}
+        dropDownContainerStyle={styles.dropDownView}
+        placeholder={label}
+        placeholderStyle={styles.placeholder}
+        textStyle={styles.label}
+        searchTextInputStyle={styles.search}
+        searchContainerStyle={styles.searchContainer}
+        listMode={'MODAL'}
+        onChangeValue={itemValue => {
+          handleChange(name)
+          handleBlur(name)
+          setFieldValue(name, itemValue)
+        }}
+        value={dropDownValue}
+        open={isOpen}
+        setOpen={setIsOpen}
+        setValue={setDropdownValue}
+        showArrowIcon={false}
+        CloseIconComponent={() => (
+          <Text.Body align={TextAlign.center} weight={FontWeights.bold_700} color={Colors.primaryGreen}>
+            {t('Done')}
+          </Text.Body>
+        )}
+        closeIconContainerStyle={styles.save}
         {...props}
       />
-      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-        {rendertags(tags, onDelete)}
-      </ScrollView>
-      <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {error}
+      <View style={styles.tagsContainer}>{renderTags(dropDownValue, deleteSkill)}</View>
+      <View style={styles.divider} />
+      <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
+        {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
-    </View>
+    </>
   )
 }
 

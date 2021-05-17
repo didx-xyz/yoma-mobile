@@ -1,9 +1,12 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
 import { EditIcon } from 'assets/images'
-import { NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
-import Text, { Bold, TextAlign } from 'components/Typography'
+import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
+import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
@@ -15,11 +18,11 @@ import styles from './Profile.styles'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Profile>
 }
 
 const Profile = ({ navigation }: Props) => {
-  const [profileImage, setProfileImage] = useState<any>('')
+  const [profileImage, setProfileImage] = useState('')
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 
@@ -78,9 +81,9 @@ const Profile = ({ navigation }: Props) => {
 
   return (
     <ViewContainer style={styles.container}>
-      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={() => childRef.current.handleSubmit()} />
+      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={childRef.current?.handleSubmit} />
       <ScrollView>
-        <View style={styles.whiteCard}>
+        <Card style={styles.card}>
           <Optional
             condition={profileImage !== ''}
             fallback={
@@ -102,18 +105,15 @@ const Profile = ({ navigation }: Props) => {
             </TouchableOpacity>
           </Optional>
           <ProfileForm ref={childRef} navigation={navigation} />
-        </View>
-        <TouchableOpacity
-          onPress={() =>
-            navigation.reset({
-              routes: [{ name: 'Authentication' }],
-            })
-          }
-        >
-          <Text.Body align={TextAlign.center} style={styles.logout}>
-            <Bold color={Colors.menuGrey}>{t('Log Out')}</Bold>
-          </Text.Body>
-        </TouchableOpacity>
+        </Card>
+        <Button
+          variant={ButtonVariants.Clear}
+          color={Colors.menuGrey}
+          label={t('Log Out')}
+          // TODO: navigation to login page
+          onPress={() => {}}
+          style={styles.logout}
+        />
       </ScrollView>
     </ViewContainer>
   )

@@ -1,8 +1,10 @@
-import { BlueHollowCircle, BlueTick } from 'assets/images'
-import { CustomInput, DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Optional } from 'components'
-import Text, { MetaLevels, TextAlign } from 'components/Typography'
-import { Formik } from 'formik'
+import { StackNavigationProp } from '@react-navigation/stack'
+import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox } from 'components'
+import Text, { MetaLevels } from 'components/Typography'
+import countries from 'constants/countries'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
@@ -12,23 +14,21 @@ import { mapToDropDownArray } from 'utils/strings.utils'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
 import { DropDownOrg } from './ExperienceForm.types'
-import { deleteSkill, getOrganizationsList, getSkillsList, submitForm } from './ExperienceForm.utils'
+import { getOrganizationsList, getSkillsList, submitForm } from './ExperienceForm.utils'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Experience>
 }
 
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [organizations, setOrganizations] = useState<DropDownOrg[]>([])
-  const [isWorkingHere, setIsWorkingHere] = useState(false)
+  const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [skillsList, setSkillsList] = useState<DropDownOrg[]>([])
-  const [selectedSkills, setSelectedSkills] = useState<string[]>([])
-  const [requestVerification, setRequestVerification] = useState(false)
-  const [showInfoModal, setShowInfoModal] = useState(false)
+  const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
 
-  const formRef = useRef<string>()
+  const formRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
     const getOrganizations = async () => {
@@ -58,14 +58,14 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
     <Formik
       innerRef={formRef}
       initialValues={INITIAL_VALUES}
-      enableReinitialize={true}
+      enableReinitialize
       validationSchema={ValidationSchema}
       onSubmit={async values => {
         await submitForm(values)
         navigation.navigate(NavigationRoutes.Home)
       }}
     >
-      {({ handleChange, handleBlur, values, touched, errors, isSubmitting, setFieldValue }) => (
+      {formikHandlers => (
         <View style={styles.formView}>
           <InfoModal
             visible={showInfoModal}
@@ -74,138 +74,65 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
             }
           />
-          <Spinner visible={isSubmitting} />
-          <CustomInput
-            onChangeText={handleChange('title')}
-            onBlur={handleBlur('title')}
-            value={values.title}
-            label={t('Title')}
-            isTouched={touched.title}
-            error={errors.title}
-            showTitle={values.title !== ''}
-          />
+          <Spinner visible={formikHandlers.isSubmitting} />
+          <Input name={'title'} label={t('Title')} handlers={formikHandlers} />
           <DropDown
             items={organizations}
-            onChangeItem={itemValue => {
-              handleChange('organisationName')
-              handleBlur('organisationName')
-              setFieldValue('organisationName', itemValue.label)
-              setFieldValue('organisationId', itemValue.value)
-            }}
-            style={styles.formDropDown}
-            searchable={true}
-            searchablePlaceholder="Search organization"
-            searchablePlaceholderTextColor={Colors.menuGrey}
-            placeholderStyle={styles.placeholder}
-            placeholder={t('Company name')}
-            isTouched={touched.organisationName}
-            error={errors.organisationName}
-            fieldName={t('Company Name')}
-            showTitle={values.organisationName !== ''}
+            name={'organisationName'}
+            label={'Company name'}
+            handlers={formikHandlers}
+            searchPlaceholder={t('Search organisation')}
           />
-          <CustomInput
-            onChangeText={handleChange('country')}
-            onBlur={handleBlur('country')}
-            value={values.country}
-            label={t('Country or region')}
-            isTouched={touched.country}
-            error={errors.country}
-            showTitle={values.title !== ''}
+          <DropDown
+            items={mapToDropDownArray(countries, 'code', 'name')}
+            name={'country'}
+            label={'Country'}
+            handlers={formikHandlers}
+            searchPlaceholder={t('Search country')}
+            placeholder={t('Country or region')}
           />
-          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} align={TextAlign.right}>
-            {t('Use current location')}
-          </Text.Meta>
-          <View style={styles.checkBoxView}>
-            <TouchableOpacity
-              onPress={() => {
-                setIsWorkingHere(!isWorkingHere)
-              }}
-              style={styles.checkBox}
-            >
-              <Optional condition={isWorkingHere} fallback={<BlueHollowCircle />}>
-                <BlueTick />
-              </Optional>
-            </TouchableOpacity>
-            <Text.Body>{t('I currently work here')}</Text.Body>
-          </View>
+          <CheckBox
+            isChecked={isWorkingHere}
+            label={t('I currently work here')}
+            onPress={() => setIsWorkingHere(!isWorkingHere)}
+          />
           <View style={styles.row}>
             <DatePicker
-              onChangeDate={(date: string) => {
-                handleChange('startDate')
-                handleBlur('startDate')
-                setFieldValue('startDate', date)
+              onDateChange={(date: string) => {
+                formikHandlers.handleChange('startDate')
+                formikHandlers.handleBlur('startDate')
+                formikHandlers.setFieldValue('startDate', date)
               }}
-              value={values.startDate}
+              value={formikHandlers.values.startDate}
               label={t('Start date')}
-              isTouched={touched.startDate}
-              error={errors.startDate}
-              showTitle={values.startDate !== ''}
+              isTouched={formikHandlers.touched.startDate}
+              error={formikHandlers.errors.startDate}
+              showTitle={formikHandlers.values.startDate !== ''}
             />
             <DatePicker
-              onChangeDate={(date: string) => {
-                handleChange('endDate')
-                handleBlur('endDate')
-                setFieldValue('endDate', date)
+              onDateChange={(date: string) => {
+                formikHandlers.handleChange('endDate')
+                formikHandlers.handleBlur('endDate')
+                formikHandlers.setFieldValue('endDate', date)
               }}
-              value={values.endDate}
+              value={formikHandlers.values.endDate}
               label={t('End date')}
-              isTouched={touched.endDate}
-              error={errors.endDate}
-              showTitle={values.endDate !== ''}
+              isTouched={formikHandlers.touched.endDate}
+              error={formikHandlers.errors.endDate}
+              showTitle={formikHandlers.values.endDate !== ''}
             />
           </View>
-          <CustomInput
-            onChangeText={handleChange('description')}
-            onBlur={handleBlur('description')}
-            value={values.description}
-            label={t('Description')}
-            isTouched={touched.description}
-            error={errors.description}
-            showTitle={values.description !== ''}
-          />
+          <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
             items={skillsList}
-            multiple={true}
-            multipleText={t('Skills developed %d')}
-            min={0}
-            max={10}
-            searchable={true}
-            searchablePlaceholder={t('Search skills')}
-            searchablePlaceholderTextColor={Colors.menuGrey}
-            placeholder={t('Skills developed')}
-            fieldName={t('Skills developed')}
-            placeholderStyle={styles.placeholder}
-            showTitle={values.skillNames.length > 0}
-            defaultValue={selectedSkills}
-            onChangeItem={item => {
-              setSelectedSkills(item)
-              handleChange('skillNames')
-              handleBlur('skillNames')
-              setFieldValue('skillNames', selectedSkills)
-            }}
-            tags={selectedSkills}
-            onDelete={tag => {
-              const filteredSkills = deleteSkill(selectedSkills, tag)
-              setSelectedSkills(filteredSkills)
-              setFieldValue('skillNames', filteredSkills)
-            }}
+            multiple
+            searchPlaceholder={t('Search skills')}
+            label={t('Skills developed')}
+            name={'skillNames'}
+            handlers={formikHandlers}
           />
-          <View style={[styles.checkBoxView]}>
-            <TouchableOpacity
-              onPress={() => {
-                setRequestVerification(!requestVerification)
-                setFieldValue('requestVerificationInd', requestVerification)
-              }}
-              style={styles.checkBox}
-            >
-              <Optional condition={requestVerification} fallback={<BlueHollowCircle />}>
-                <BlueTick />
-              </Optional>
-            </TouchableOpacity>
-            <Text.Body>{t('Request verification of employment from company')}</Text.Body>
-          </View>
-          <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottom}>
-            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
+          <TouchableOpacity onPress={() => setShowInfoModal(true)}>
+            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen}>
               {t('Find inspiration on how to write a great profile.')}
             </Text.Meta>
           </TouchableOpacity>

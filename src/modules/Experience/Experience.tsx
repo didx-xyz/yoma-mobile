@@ -1,3 +1,4 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
 import { EditIcon } from 'assets/images'
 import { Card, DateDisplay, Optional } from 'components'
@@ -7,6 +8,8 @@ import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
 import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
@@ -20,7 +23,7 @@ import { ExperienceType } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Experience>
 }
 
 const Experience = ({ navigation }: Props) => {
@@ -86,12 +89,8 @@ const Experience = ({ navigation }: Props) => {
       <NormalHeader
         navigation={navigation}
         headerText={t('Experience')}
-        onSave={() => {
-          formRef.current.handleSubmit()
-        }}
-        onAdd={() => {
-          setIsSaved(true)
-        }}
+        onSave={formRef.current?.handleSubmit}
+        onAdd={() => setIsSaved(true)}
         showAddButton={!isSaved}
       />
       <Optional
