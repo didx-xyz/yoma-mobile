@@ -10,5 +10,14 @@ describe('styles/styles.utils', () => {
 
       expect(result).toBe(expected)
     })
+
+    it.each([
+      ['#ffffff', 0.5, '#ffffff80'],
+      ['#000000', 0.5, '#00000080'],
+    ])('should be able to be called with both values in a single call', (color, alpha, expected) => {
+      const result = applyAlphaToHex(color, alpha)
+
+      expect(result).toBe(expected)
+    })
   })
 })
