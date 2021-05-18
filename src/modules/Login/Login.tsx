@@ -1,6 +1,8 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
 import { Card, LargeHeader, SocialLogin, ViewContainer } from 'components'
-import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
@@ -12,7 +14,7 @@ import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Login>
   onLoginUser: (details: AuthCredentials) => void
 }
 
@@ -36,7 +38,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
             level={BodyLevels.small}
             align={TextAlign.center}
             style={styles.forgotPassword}
-            onPress={() => navigation.navigate(NavigationRoutes.ForgotPassword)}
+            onPress={() => navigation.navigate(AuthNavigationRoutes.ForgotPassword)}
           >
             {t('forgotPassword')}?
           </Text.Body>
@@ -61,7 +63,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
           style={styles.noAccount}
         >
           {t('noAccount')}
-          <Link onPress={() => navigation.navigate(NavigationRoutes.Register)}>&nbsp;{t('registerHere')}.</Link>
+          <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Register)}>&nbsp;{t('registerHere')}.</Link>
         </Text.Body>
       </ScrollView>
     </ViewContainer>

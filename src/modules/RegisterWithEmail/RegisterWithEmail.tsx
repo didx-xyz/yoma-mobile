@@ -1,6 +1,8 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleRight } from 'assets/images'
 import { Card, LargeHeader, ViewContainer } from 'components'
-import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import { AuthRegistration } from 'modules/Auth/Auth.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +14,7 @@ import RegisterForm from './RegisterForm/RegisterForm'
 import styles from './RegisterWithEmail.styles'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.RegisterWithEmail>
   onRegisterUser: (details: AuthRegistration) => void
 }
 
@@ -36,7 +38,7 @@ const RegisterWithEmail = ({ navigation, onRegisterUser }: Props) => {
         </Card>
         <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.notice}>
           {t('alreadyHaveAccount')}&nbsp;
-          <Link onPress={() => navigation.navigate(NavigationRoutes.Login)}>{t('login')}.</Link>
+          <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}>{t('login')}.</Link>
         </Text.Body>
       </ScrollView>
     </ViewContainer>
