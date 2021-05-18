@@ -1,49 +1,58 @@
-import { FormikErrors, FormikTouched } from 'formik'
-import React from 'react'
-import { View } from 'react-native'
-import DatePicker, { DatePickerProps } from 'react-native-datepicker'
+import DateTimePicker from '@react-native-community/datetimepicker'
+import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
+import { FormikProps, FormikValues } from 'formik'
+import React, { useState, useCallback } from 'react'
+import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
+import { GetComponentProps } from 'types/react.types'
+import { formatDateString } from 'utils/dates.utils'
+import { textOrSpace } from 'utils/strings.utils'
 
-import Optional from '../Optional'
 import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DatePicker.styles'
 
-type Props = DatePickerProps & {
+type Props = Omit<GetComponentProps<typeof DateTimePicker>, 'value'> & {
+  name: string
   label: string
-  isTouched?: boolean | FormikTouched<any> | FormikTouched<any>[]
-  error?: string | string[] | FormikErrors<any> | FormikErrors<any>[]
-  showTitle?: boolean
-  value: string | Date
+  handlers: FormikProps<FormikValues>
 }
 
-const DateTimePicker = ({ label, isTouched, error, value, showTitle = true, ...props }: Props) => {
+const DatePicker = ({ name, label, handlers, ...props }: Props) => {
+  const [date, setDate] = useState(new Date())
+  const [showDatePicker, setShowDatePicker] = useState(false)
+
+  const { values, errors, touched, setFieldValue, setFieldTouched } = handlers
+
+  const onChange = useCallback(
+    (event: Event, selectedDate: Date | undefined) => {
+      setShowDatePicker(false)
+      if (selectedDate) {
+        setDate(date)
+        setFieldValue(name, selectedDate, false)
+      }
+      setTimeout(() => {
+        setFieldTouched(name, true, true)
+      }, 10)
+    },
+    [date, name, setFieldTouched, setFieldValue],
+  )
+
   return (
     <View style={styles.container}>
-      <Optional condition={showTitle}>
-        <Text.Meta level={MetaLevels.small}>{label}</Text.Meta>
-      </Optional>
-      <DatePicker
-        mode="date"
-        placeholder={label}
-        confirmBtnText="Confirm"
-        cancelBtnText="Cancel"
-        format={'DD/MM/YYYY'}
-        customStyles={{
-          dateInput: styles.dateInput,
-          dateText: styles.dateText,
-          placeholderText: styles.placeholder,
-        }}
-        style={styles.textInput}
-        showIcon={false}
-        date={value}
-        maxDate={new Date()}
-        {...props}
-      />
-      <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
-        {isTouched && error}
+      <Text.Meta level={MetaLevels.small}>{textOrSpace(values[name], label)}</Text.Meta>
+      <TouchableOpacity onPress={() => setShowDatePicker(true)} style={styles.dateContainer}>
+        <Text.Body color={values[name] ? Colors.primaryDarkGrey : Colors.menuGrey}>
+          {values[name] ? formatDateString(DATE_TPL_MON_YEAR)(values[name]) : label}
+        </Text.Body>
+      </TouchableOpacity>
+      {showDatePicker && (
+        <DateTimePicker value={date} mode={'date'} onChange={onChange} maximumDate={new Date()} {...props} />
+      )}
+      <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
+        {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
     </View>
   )
 }
 
-export default DateTimePicker
+export default DatePicker
