@@ -1,22 +1,15 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
-import { EditIcon } from 'assets/images'
-import { Card, DateDisplay, Optional } from 'components'
+import { Card, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
-import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
-import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
 import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
-import { Avatar } from 'react-native-elements/dist/avatar/Avatar'
-import { FlatList } from 'react-native-gesture-handler'
-import { Colors, colors } from 'styles'
-import { calculateDifferenceInDate } from 'utils/dates.utils'
+import { FlatList, ScrollView } from 'react-native'
 
 import styles from './Experience.styles'
 import { ExperienceType } from './Experience.types'
@@ -25,6 +18,16 @@ import ExperienceForm from './ExperienceForm/ExperienceForm'
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Experience>
 }
+
+const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
+  <InfoCard
+    title={job.title}
+    description={job.description}
+    startDate={startDate}
+    endDate={endDate}
+    logo={job.organisationLogoURL}
+  />
+)
 
 const Experience = ({ navigation }: Props) => {
   const { t } = useTranslation()
@@ -41,49 +44,6 @@ const Experience = ({ navigation }: Props) => {
     getAllJobs()
   }, [])
 
-  const renderItem = ({ item }: { item: ExperienceType }) => {
-    return (
-      <View style={styles.cardView}>
-        <View style={styles.row}>
-          <Optional
-            condition={!!item.job.organisationLogoURL}
-            fallback={
-              <Avatar
-                size="small"
-                rounded
-                title={item.job.organisationName.charAt(0)}
-                containerStyle={styles.avatar}
-                titleStyle={{ color: colors[Colors.menuGrey] }}
-              />
-            }
-          >
-            <Image source={{ uri: item.job.organisationLogoURL }} style={styles.image} />
-          </Optional>
-          <View>
-            <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
-              {item.job.title}
-            </Text.Header>
-            <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
-              {item.job.organisationName}
-            </Text.Body>
-            <View style={styles.row}>
-              <DateDisplay template={DATE_TPL_MON_YEAR} date={item.startDate}>
-                &nbsp; - &nbsp;
-              </DateDisplay>
-              <DateDisplay template={DATE_TPL_MON_YEAR} date={item.endDate}>
-                &nbsp;{calculateDifferenceInDate(item.startDate, item.endDate)}
-              </DateDisplay>
-            </View>
-          </View>
-          <TouchableOpacity style={styles.editIcon}>
-            <EditIcon />
-          </TouchableOpacity>
-        </View>
-        <Text.Body>{item.job.description}</Text.Body>
-      </View>
-    )
-  }
-
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader
@@ -95,7 +55,14 @@ const Experience = ({ navigation }: Props) => {
       />
       <Optional
         condition={isSaved}
-        fallback={<FlatList data={experience} renderItem={renderItem} keyExtractor={item => item.id} />}
+        fallback={
+          <FlatList
+            data={experience}
+            contentContainerStyle={styles.listContainer}
+            renderItem={({ item }) => renderItem(item)}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        }
       >
         <ScrollView>
           <Card>

@@ -22,12 +22,20 @@ const Education = ({ navigation }: Props) => {
   const [education, setEducation] = useState(MOCKED_EDUCATION_DATA)
   const formRef = useRef<FormikProps<FormikValues>>()
 
-  const renderItem = ({ description, endDate, organisationLogoURL, qualification, school }: EductationEntry) => {
+  const renderItem = ({
+    description,
+    startDate,
+    endDate,
+    organisationLogoURL,
+    qualification,
+    school,
+  }: EductationEntry) => {
     return (
       <InfoCard
         title={school}
         subtitle={qualification}
         description={description}
+        startDate={startDate}
         endDate={endDate}
         logo={organisationLogoURL}
       />
@@ -48,7 +56,12 @@ const Education = ({ navigation }: Props) => {
       <Optional
         condition={isSaved}
         fallback={
-          <FlatList data={education} renderItem={({ item }) => renderItem(item)} keyExtractor={item => item.school} />
+          <FlatList
+            data={education}
+            contentContainerStyle={styles.listContainer}
+            renderItem={({ item }) => renderItem(item)}
+            keyExtractor={item => item.school}
+          />
         }
       >
         <ScrollView>
