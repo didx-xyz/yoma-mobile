@@ -1,8 +1,10 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
 import { Card, FormWrapper, InfoModal, NormalHeader, ViewContainer } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { USER_ID } from 'helpers/helpers'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View, TextInput } from 'react-native'
@@ -11,7 +13,7 @@ import { Colors } from 'styles'
 import styles from './About.styles'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
 }
 
 const About = ({ navigation }: Props) => {
@@ -39,7 +41,7 @@ const About = ({ navigation }: Props) => {
     try {
       const response = await api.users.edit(USER_ID, { biography: summary })
       console.log('response', response)
-      navigation.navigate(NavigationRoutes.Home)
+      navigation.navigate(HomeNavigationRoutes.Home)
     } catch (error) {
       console.log('error', error)
     }

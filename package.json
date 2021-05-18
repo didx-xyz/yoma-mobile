@@ -26,6 +26,7 @@
     "help": "npx package-json-help.js"
   },
   "dependencies": {
+    "@react-native-community/datetimepicker": "^3.4.3",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-google-signin/google-signin": "^6.0.0",
     "@react-navigation/bottom-tabs": "^5.11.9",
@@ -41,7 +42,7 @@
     "react": "16.13.1",
     "react-i18next": "^11.8.12",
     "react-native": "0.63.4",
-    "react-native-datepicker": "^1.7.2",
+    "react-native-autocomplete-input": "^5.0.0",
     "react-native-dropdown-picker": "^5.1.4",
     "react-native-elements": "^3.3.2",
     "react-native-email-link": "^1.11.0",
@@ -72,7 +73,6 @@
     "@types/jest": "^25.2.3",
     "@types/react-native": "^0.63.2",
     "@types/react-native-autocomplete-input": "^4.0.1",
-    "@types/react-native-datepicker": "^1.7.0",
     "@types/react-native-fbsdk": "^3.0.0",
     "@types/react-redux": "^7.1.16",
     "@types/react-test-renderer": "^16.9.2",

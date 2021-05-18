@@ -4,7 +4,7 @@ import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'compo
 import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
 import { UserResponse } from 'modules/Auth/Auth.types'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,7 +17,7 @@ import { captureAndUploadImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Profile>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
 const Profile = ({ navigation }: Props) => {

@@ -1,4 +1,4 @@
-export enum NavigationRoutes {
+export enum HomeNavigationRoutes {
   Home = 'Home',
   Profile = 'Profile',
   DigitalCv = 'DigitalCv',

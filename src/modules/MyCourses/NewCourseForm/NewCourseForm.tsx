@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
 import { Spinner, DatePicker, DropDownTags, Upload, CheckBox, Input, FormWrapper } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyCourses>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCourses>
 }
 
 const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
@@ -34,30 +34,8 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
             onPress={() => setIsCourseActive(!isCourseActive)}
           />
           <View style={styles.row}>
-            <DatePicker
-              onDateChange={(date: string) => {
-                formikHandlers.handleChange('startDate')
-                formikHandlers.handleBlur('startDate')
-                formikHandlers.setFieldValue('startDate', date)
-              }}
-              value={formikHandlers.values.startDate}
-              label={t('Start date')}
-              isTouched={formikHandlers.touched.startDate}
-              error={formikHandlers.errors.startDate}
-              showTitle={formikHandlers.values.startDate !== ''}
-            />
-            <DatePicker
-              onDateChange={(date: string) => {
-                formikHandlers.handleChange('endDate')
-                formikHandlers.handleBlur('endDate')
-                formikHandlers.setFieldValue('endDate', date)
-              }}
-              value={formikHandlers.values.endDate}
-              label={t('End date')}
-              isTouched={formikHandlers.touched.endDate}
-              error={formikHandlers.errors.endDate}
-              showTitle={formikHandlers.values.endDate !== ''}
-            />
+            <DatePicker name={'startDate'} label={t('Start date')} handlers={formikHandlers} />
+            <DatePicker name={'endDate'} label={t('End date')} handlers={formikHandlers} />
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags

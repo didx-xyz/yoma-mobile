@@ -1,6 +1,8 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from 'assets/images'
 import { ViewContainer } from 'components'
-import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -12,7 +14,7 @@ import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './Landing.styles'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Landing>
 }
 
 const Landing = ({ navigation }: Props) => {
@@ -45,14 +47,14 @@ const Landing = ({ navigation }: Props) => {
           <Button
             size={ButtonSizes.Default}
             label={t('register')}
-            onPress={() => navigation.navigate(NavigationRoutes.Register)}
+            onPress={() => navigation.navigate(AuthNavigationRoutes.Register)}
             style={styles.registerButton}
           />
           <Button
             variant={ButtonVariants.Clear}
             color={Colors.white}
             label={t('login')}
-            onPress={() => navigation.navigate(NavigationRoutes.Login)}
+            onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}
             style={styles.loginButton}
           />
         </View>
