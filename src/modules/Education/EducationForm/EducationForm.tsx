@@ -6,7 +6,7 @@ import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View } from 'react-native'
+import { View } from 'react-native'
 import { Colors } from 'styles'
 
 import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
@@ -94,11 +94,16 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             handlers={formikHandlers}
           />
           <Upload onPress={() => {}} />
-          <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottom}>
-            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
+          <View style={styles.bottom}>
+            <Text.Meta
+              level={MetaLevels.smallBold}
+              color={Colors.primaryGreen}
+              style={styles.bottomText}
+              onPress={() => setShowInfoModal(true)}
+            >
               {t('Find inspiration on how to write a great education description.')}
             </Text.Meta>
-          </TouchableOpacity>
+          </View>
         </FormWrapper>
       )}
     </Formik>

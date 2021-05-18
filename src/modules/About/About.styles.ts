@@ -1,5 +1,5 @@
 import textinputStyles from 'components/Input/Input.styles'
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 const styles = {
@@ -16,9 +16,9 @@ const styles = {
     paddingLeft: 0,
     textAlignVertical: 'top',
   } as ViewStyle,
-  bottomText: {
-    marginVertical: 10,
-  } as TextStyle,
+  bottom: {
+    paddingVertical: 16,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
