@@ -3,8 +3,8 @@ export type EducationFields = {
   description: string
   qualificationType: string
   id: string
-  startDate: string
-  endDate: string
+  startDate: Date | null
+  endDate: Date | null
   country: string
   skillNames: string[]
   organisationId: string
