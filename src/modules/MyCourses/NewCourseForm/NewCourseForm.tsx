@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
 import { Spinner, DatePicker, DropDownTags, Upload, CheckBox, Input, FormWrapper } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyCourses>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCourses>
 }
 
 const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {

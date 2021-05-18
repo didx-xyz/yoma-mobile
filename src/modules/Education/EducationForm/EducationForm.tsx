@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +14,7 @@ import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Education>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
 }
 
 const EducationForm = forwardRef(({ navigation }: Props, ref) => {

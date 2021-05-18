@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
 import { DatePicker, DropDownTags, Upload, CheckBox, Input, FormWrapper } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ import { INITIAL_VALUES, MOCK_SKILLS } from './NewChallengeForm.constants'
 import styles from './NewChallengeForm.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyChallenges>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyChallenges>
 }
 
 const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {

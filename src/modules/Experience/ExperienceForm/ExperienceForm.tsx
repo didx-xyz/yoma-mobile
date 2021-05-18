@@ -3,7 +3,7 @@ import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox
 import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -18,7 +18,7 @@ import { getOrganizationsList, getSkillsList, submitForm } from './ExperienceFor
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Experience>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
@@ -62,7 +62,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       validationSchema={ValidationSchema}
       onSubmit={async values => {
         await submitForm(values)
-        navigation.navigate(NavigationRoutes.Home)
+        navigation.navigate(HomeNavigationRoutes.Home)
       }}
     >
       {formikHandlers => (
