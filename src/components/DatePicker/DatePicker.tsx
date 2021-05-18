@@ -1,7 +1,7 @@
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
 import { FormikProps, FormikValues } from 'formik'
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 import { GetComponentProps } from 'types/react.types'
@@ -23,17 +23,20 @@ const DatePicker = ({ name, label, handlers, ...props }: Props) => {
 
   const { values, errors, touched, setFieldValue, setFieldTouched } = handlers
 
-  const onChange = (event: Event, selectedDate: Date | undefined) => {
-    setShowDatePicker(false)
-    const currentDate = selectedDate
-    if (selectedDate) {
-      setDate(date)
-      setFieldValue(name, currentDate, false)
-    }
-    setTimeout(() => {
-      setFieldTouched(name, true, true)
-    }, 10)
-  }
+  const onChange = useCallback(
+    (event: Event, selectedDate: Date | undefined) => {
+      setShowDatePicker(false)
+      const currentDate = selectedDate
+      if (selectedDate) {
+        setDate(date)
+        setFieldValue(name, currentDate, false)
+      }
+      setTimeout(() => {
+        setFieldTouched(name, true, true)
+      }, 10)
+    },
+    [date, name, setFieldTouched, setFieldValue],
+  )
 
   return (
     <View style={styles.container}>
