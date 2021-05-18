@@ -1,32 +1,25 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
 const styles = {
   container: {
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
-    width: '95%',
-    borderRadius: 12,
-    paddingVertical: 5,
-    elevation: 3,
-    marginVertical: 10,
-    alignSelf: 'center',
-    paddingHorizontal: 15,
+  card: {
     flex: 1,
   } as ViewStyle,
   textInput: {
     borderBottomWidth: 1,
     width: '100%',
     flex: 1,
-    borderColor: colors[Colors.backgroundGrey],
+    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
     paddingLeft: 0,
     textAlignVertical: 'top',
   } as ViewStyle,
-  bottomText: {
-    marginVertical: 10,
-  } as TextStyle,
+  bottom: {
+    paddingVertical: 16,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

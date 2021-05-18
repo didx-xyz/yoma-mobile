@@ -1,0 +1,2 @@
+export const PROFILE_IMAGE_RADIUS = 17
+export const PROFILE_IMAGE_BORDER_WIDTH = 3
