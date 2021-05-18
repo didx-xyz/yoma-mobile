@@ -2,7 +2,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
 import { Card, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
-import Spacer from 'components/Spacer'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
@@ -11,7 +10,6 @@ import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
-import { CARD_SPACER } from 'styles/styles.constants'
 
 import styles from './Experience.styles'
 import { ExperienceType } from './Experience.types'
@@ -60,7 +58,7 @@ const Experience = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={experience}
-            ListHeaderComponent={<Spacer height={CARD_SPACER} />}
+            contentContainerStyle={styles.listContainer}
             renderItem={({ item }) => renderItem(item)}
             keyExtractor={(item, index) => index.toString()}
           />
