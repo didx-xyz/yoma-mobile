@@ -1,10 +1,9 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
-  row: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginTop: 10,
+  container: {
+    flex: 1,
+    padding: 12,
   } as ViewStyle,
 }
 
