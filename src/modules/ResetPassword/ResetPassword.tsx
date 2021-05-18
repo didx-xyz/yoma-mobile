@@ -10,11 +10,12 @@ import { Colors } from 'styles'
 
 import Text, { Bold, HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './ResetPassword.styles'
+import { ResetPasswordRoute } from './ResetPassword.types'
 import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
 
 interface Props {
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.ResetPassword>
-  route: any
+  route: ResetPasswordRoute
 }
 
 const ResetPassword = ({ navigation, route }: Props) => {
@@ -26,7 +27,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
     if (!Token || !Id) {
       navigation.navigate(AuthNavigationRoutes.Login)
     }
-  }, [Token, Id])
+  }, [Token, Id, navigation])
   return (
     <ViewContainer>
       <ScrollView contentContainerStyle={styles.container}>
