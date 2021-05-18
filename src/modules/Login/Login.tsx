@@ -3,10 +3,10 @@ import { Card, LargeHeader, SocialLogin, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, TouchableOpacity, View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import { Colors } from 'styles'
 
-import Text, { BodyLevels, HeaderLevels, Span, TextAlign } from '../../components/Typography'
+import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import { AuthCredentials } from '../Auth/Auth.types'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
@@ -32,11 +32,14 @@ const Login = ({ navigation, onLoginUser }: Props) => {
             {t('welcomeBack')}
           </Text.Header>
           <LoginForm onLoginUser={onLoginUser} />
-          <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.ForgotPassword)}>
-            <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.forgotPassword}>
-              {t('forgotPassword')}?
-            </Text.Body>
-          </TouchableOpacity>
+          <Text.Body
+            level={BodyLevels.small}
+            align={TextAlign.center}
+            style={styles.forgotPassword}
+            onPress={() => navigation.navigate(NavigationRoutes.ForgotPassword)}
+          >
+            {t('forgotPassword')}?
+          </Text.Body>
           <View style={styles.horizontalLineView}>
             <View style={styles.horizontalLine} />
             <Text.Body color={Colors.primaryDarkGrey} style={styles.orText}>
@@ -58,13 +61,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
           style={styles.noAccount}
         >
           {t('noAccount')}
-          <Span
-            color={Colors.primaryGreen}
-            align={TextAlign.center}
-            onPress={() => navigation.navigate(NavigationRoutes.Register)}
-          >
-            &nbsp; {t('registerHere')}.
-          </Span>
+          <Link onPress={() => navigation.navigate(NavigationRoutes.Register)}>&nbsp;{t('registerHere')}.</Link>
         </Text.Body>
       </ScrollView>
     </ViewContainer>
