@@ -36,7 +36,7 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
   }
 
   return (
-    <View style={styles.header}>
+    <View style={styles.container}>
       <TouchableOpacity onPress={onNavigateBack}>
         <BackIconGrey />
       </TouchableOpacity>

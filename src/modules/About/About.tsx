@@ -1,5 +1,5 @@
 import api from 'api'
-import { InfoModal, NormalHeader, ViewContainer } from 'components'
+import { Card, FormWrapper, InfoModal, NormalHeader, ViewContainer } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { USER_ID } from 'helpers/helpers'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
@@ -55,24 +55,26 @@ const About = ({ navigation }: Props) => {
         }
       />
       <NormalHeader navigation={navigation} headerText={t('About')} onSave={updateBiography} />
-      <View style={styles.whiteCard}>
-        <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
-        <TextInput
-          style={styles.textInput}
-          value={summary}
-          multiline
-          maxLength={1000}
-          onChangeText={text => {
-            setSummary(text)
-          }}
-          returnKeyType="done"
-        />
-        <View style={styles.bottom}>
-          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} onPress={() => setInfoModal(true)}>
-            {t('Find inspiration on how to write a great education description.')}
-          </Text.Meta>
-        </View>
-      </View>
+      <Card style={styles.card}>
+        <FormWrapper>
+          <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
+          <TextInput
+            style={styles.textInput}
+            value={summary}
+            multiline
+            maxLength={1000}
+            onChangeText={text => {
+              setSummary(text)
+            }}
+            returnKeyType="done"
+          />
+          <View style={styles.bottom}>
+            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} onPress={() => setInfoModal(true)}>
+              {t('Find inspiration on how to write a great education description.')}
+            </Text.Meta>
+          </View>
+        </FormWrapper>
+      </Card>
     </ViewContainer>
   )
 }

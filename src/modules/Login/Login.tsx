@@ -1,10 +1,10 @@
 import { YellowCircleLeft } from 'assets/images'
-import { Card, LargeHeaderContainer, SocialLogin, ViewContainer } from 'components'
+import { Card, LargeHeader, SocialLogin, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import { AuthCredentials } from '../Auth/Auth.types'
@@ -21,10 +21,9 @@ const Login = ({ navigation, onLoginUser }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <ScrollView>
-        <LargeHeaderContainer
+        <LargeHeader
           navigation={navigation}
-          headerText={t('login')}
-          backgroundColor={colors[Colors.primaryPurple]}
+          backgroundColor={Colors.primaryPurple}
           circleImage={<YellowCircleLeft />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
