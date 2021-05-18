@@ -1,35 +1,56 @@
-import React from 'react'
-import { View } from 'react-native'
-import DropDownPicker, { DropDownPickerProps } from 'react-native-dropdown-picker'
+import { FormikProps, FormikValues } from 'formik'
+import React, { useEffect, useState } from 'react'
+import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
+import { GetComponentProps } from 'types/react.types'
+import { textOrSpace } from 'utils/strings.utils'
 
 import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDown.styles'
 
-type Props = DropDownPickerProps & {
-  isTouched?: boolean
-  error?: string
-  fieldName?: string
-  showTitle?: boolean
+type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
+  name: string
+  label: string
+  handlers: FormikProps<FormikValues>
 }
 
-const DropDown = ({ isTouched, error, fieldName, showTitle, ...props }: Props) => {
+const DropDown = ({ name, label, handlers, ...props }: Props) => {
+  const [isOpen, setIsOpen] = useState(false)
+  const [dropDownValue, setDropdownValue] = useState(null)
+  const { handleChange, handleBlur, values, errors, touched, setFieldValue } = handlers
+
+  useEffect(() => {
+    setDropdownValue(values[name])
+  }, [name, values])
+
   return (
-    <View>
-      <Text.Meta level={MetaLevels.small}>{showTitle ? fieldName : ' '}</Text.Meta>
+    <>
+      <Text.Meta level={MetaLevels.small}>{textOrSpace(values[name] !== '', label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
-        dropDownStyle={styles.dropDownView}
-        itemStyle={styles.item}
+        dropDownContainerStyle={styles.dropDownView}
+        placeholder={label}
         placeholderStyle={styles.placeholder}
-        globalTextStyle={styles.label}
-        showArrow={false}
+        textStyle={styles.label}
+        searchTextInputStyle={styles.search}
+        searchContainerStyle={styles.searchContainer}
+        listMode={'SCROLLVIEW'}
+        onChangeValue={itemValue => {
+          handleChange(name)
+          handleBlur(name)
+          setFieldValue(name, itemValue)
+        }}
+        value={dropDownValue}
+        open={isOpen}
+        setOpen={setIsOpen}
+        setValue={setDropdownValue}
+        showArrowIcon={false}
         {...props}
       />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
-        {isTouched && error}
+        {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
-    </View>
+    </>
   )
 }
 

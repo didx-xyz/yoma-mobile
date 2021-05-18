@@ -1,4 +1,7 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, ListCardHeader, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList } from 'react-native'
@@ -9,7 +12,7 @@ import styles from './Skills.styles'
 import SkillsForm from './SkillsForm/SkillsForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Skills>
 }
 
 const Skills = ({ navigation }: Props) => {
@@ -43,7 +46,9 @@ const Skills = ({ navigation }: Props) => {
           </Card>
         }
       >
-        <SkillsForm />
+        <Card>
+          <SkillsForm />
+        </Card>
       </Optional>
     </ViewContainer>
   )

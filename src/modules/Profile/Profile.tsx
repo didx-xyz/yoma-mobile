@@ -1,112 +1,84 @@
-import api from 'api'
+import { StackNavigationProp } from '@react-navigation/stack'
 import { EditIcon } from 'assets/images'
-import { NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
+import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
 import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
-import { USER_ID } from 'helpers/helpers'
-import React, { useEffect, useRef, useState } from 'react'
+import { UserResponse } from 'modules/Auth/Auth.types'
+import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
+import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
-import ImagePicker from 'react-native-image-crop-picker'
 import { Colors } from 'styles'
-import { showSimpleMessage } from 'utils/error'
 
+import { USER_RESPONSE } from './Profile.constants'
 import styles from './Profile.styles'
+import { captureAndUploadImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Profile>
 }
 
 const Profile = ({ navigation }: Props) => {
-  const [profileImage, setProfileImage] = useState<any>('')
+  const [userResponse, setUserResponse] = useState<UserResponse>(USER_RESPONSE)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
-    getUserData()
+    getData()
   }, [])
 
-  const getUserData = async () => {
-    await api.users
-      .getById(USER_ID)
-      .then(async response => {
-        const userData = response.data
-        const { photoURL } = userData
-        setProfileImage(photoURL)
-      })
-      .catch(error => {
-        console.log('error', error)
-        showSimpleMessage('danger', 'Error', error)
-      })
-  }
-
-  async function onSubmit(image: any) {
-    const photo = {
-      name: 'Photo',
-      filename: image.path.substring(image.path.lastIndexOf('/') + 1),
-      type: image.mime,
-      data: image.data,
+  const getData = useCallback(async () => {
+    const user = await getUserData()
+    if (user) {
+      setUserResponse(user)
     }
+  }, [])
+
+  const captureProfileImage = async () => {
     try {
-      const response = await api.users.photo.create(USER_ID, photo)
-      console.log(response)
+      const response = await captureAndUploadImage()
+      if (response.data) {
+        setUserResponse(response.data)
+      }
     } catch (error) {
-      showSimpleMessage('danger', 'Error', error)
+      console.log('error', error)
     }
-  }
-
-  const captureImage = () => {
-    ImagePicker.openCamera({
-      cropping: true,
-      includeBase64: true,
-      freeStyleCropEnabled: true,
-      forceJpg: true,
-      mediaType: 'photo',
-      useFrontCamera: true,
-      cropperCircleOverlay: true,
-      compressImageQuality: 0.5,
-    })
-      .then(async image => {
-        onSubmit(image)
-        setProfileImage(image.data)
-      })
-      .catch(e => {
-        console.log('error in image', e)
-      })
   }
 
   return (
     <ViewContainer style={styles.container}>
-      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={() => childRef.current.handleSubmit()} />
+      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={childRef.current?.handleSubmit} />
       <ScrollView>
-        <View style={styles.whiteCard}>
+        <Card style={styles.card}>
           <Optional
-            condition={profileImage !== ''}
+            condition={!!userResponse.photoURL}
             fallback={
               <ProfilePhoto
                 borderWidth={6}
                 outerRadius={40}
-                onPress={captureImage}
+                onPress={captureProfileImage}
                 percent={5}
                 showEditIcon={true}
-                profileOuterStyle={styles.profileContainer}
+                profileOuterStyle={styles.imagePlaceholder}
               />
             }
           >
-            <TouchableOpacity onPress={captureImage}>
-              <Image source={{ uri: profileImage }} style={styles.profileImage} />
+            <TouchableOpacity onPress={captureProfileImage} style={styles.imageContainer}>
+              <Image source={{ uri: userResponse.photoURL }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>
             </TouchableOpacity>
           </Optional>
-          <ProfileForm ref={childRef} navigation={navigation} />
-        </View>
+          <ProfileForm ref={childRef} navigation={navigation} user={userResponse} />
+        </Card>
         <Button
           variant={ButtonVariants.Clear}
-          label={t('Log Out')}
           color={Colors.menuGrey}
+          label={t('Log Out')}
+          // TODO: navigation to login page
           onPress={() => {}}
           style={styles.logout}
         />

@@ -52,4 +52,23 @@ describe('strings.utils', () => {
       expect(result).toBe(expected)
     })
   })
+  describe('dropElement', () => {
+    it.each([
+      ['skill1', ['skill1', 'skill2', 'skill3'], ['skill2', 'skill3']],
+      ['test', ['skill1', 'skill2', 'skill3'], ['skill1', 'skill2', 'skill3']],
+      ['', ['skill1', 'skill2', 'skill3'], ['skill1', 'skill2', 'skill3']],
+    ])('should drop an element from array', (value, array, expected) => {
+      const result = SUT.dropElement(value, array)
+      expect(result).toEqual(expected)
+    })
+  })
+  describe('textOrSpace', () => {
+    it.each([
+      [true, 'test', 'test'],
+      [false, '', ' '],
+    ])('should return a text if not empty or return space', (condition, data, expected) => {
+      const result = SUT.textOrSpace(condition, data)
+      expect(result).toEqual(expected)
+    })
+  })
 })
