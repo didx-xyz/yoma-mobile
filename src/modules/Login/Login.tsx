@@ -1,6 +1,8 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
 import { Card, LargeHeaderContainer, SocialLogin, ViewContainer } from 'components'
-import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, TouchableOpacity, View } from 'react-native'
@@ -12,7 +14,7 @@ import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Login>
   onLoginUser: (details: AuthCredentials) => void
 }
 
@@ -33,7 +35,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
             {t('welcomeBack')}
           </Text.Header>
           <LoginForm onLoginUser={onLoginUser} />
-          <TouchableOpacity onPress={() => navigation.navigate(NavigationRoutes.ForgotPassword)}>
+          <TouchableOpacity onPress={() => navigation.navigate(AuthNavigationRoutes.ForgotPassword)}>
             <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.forgotPassword}>
               {t('forgotPassword')}?
             </Text.Body>
@@ -62,7 +64,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
           <Span
             color={Colors.primaryGreen}
             align={TextAlign.center}
-            onPress={() => navigation.navigate(NavigationRoutes.Register)}
+            onPress={() => navigation.navigate(AuthNavigationRoutes.Register)}
           >
             &nbsp; {t('registerHere')}.
           </Span>
