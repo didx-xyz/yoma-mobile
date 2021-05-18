@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox } from 'components'
+import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
@@ -41,7 +41,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       validationSchema={ValidationSchema}
     >
       {formikHandlers => (
-        <View style={styles.form}>
+        <FormWrapper>
           <InfoModal
             visible={showInfoModal}
             closeModal={() => setShowInfoModal(false)}
@@ -99,7 +99,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
               {t('Find inspiration on how to write a great education description.')}
             </Text.Meta>
           </TouchableOpacity>
-        </View>
+        </FormWrapper>
       )}
     </Formik>
   )
