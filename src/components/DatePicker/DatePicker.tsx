@@ -30,6 +30,8 @@ const DateTimePicker = ({ label, isTouched, error, value, showTitle = true, ...p
         format={'DD/MM/YYYY'}
         customStyles={{
           dateInput: styles.dateInput,
+          dateText: styles.dateText,
+          placeholderText: styles.placeholder,
         }}
         style={styles.textInput}
         showIcon={false}
