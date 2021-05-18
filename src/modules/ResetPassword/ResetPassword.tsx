@@ -1,10 +1,10 @@
 import { PurpleQuarter } from 'assets/images'
-import { Card, LargeHeaderContainer, ViewContainer } from 'components'
+import { Card, LargeHeader, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import { Colors, colors } from 'styles'
+import { Colors } from 'styles'
 
 import Text, { Bold, HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './ResetPassword.styles'
@@ -29,10 +29,9 @@ const ResetPassword = ({ navigation, route }: Props) => {
   return (
     <ViewContainer>
       <ScrollView contentContainerStyle={styles.container}>
-        <LargeHeaderContainer
+        <LargeHeader
           navigation={navigation}
-          headerText=""
-          backgroundColor={colors[Colors.primaryYellow]}
+          backgroundColor={Colors.primaryYellow}
           circleImage={<PurpleQuarter />}
           circleImageStyle={styles.purpleSemiCircleContainer}
         />

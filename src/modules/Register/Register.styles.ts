@@ -11,7 +11,7 @@ const styles = {
     bottom: 0,
   } as ViewStyle,
   card: {
-    marginTop: '-20%',
+    marginTop: -75,
     alignItems: 'center',
     paddingBottom: 27,
   } as ViewStyle,
