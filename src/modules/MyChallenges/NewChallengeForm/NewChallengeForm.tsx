@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
-import { DatePicker, DropDownTags, Upload, CheckBox, Input } from 'components'
+import { DatePicker, DropDownTags, Upload, CheckBox, Input, FormWrapper } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -33,7 +33,7 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
   return (
     <Formik innerRef={formRef} initialValues={INITIAL_VALUES} onSubmit={() => {}}>
       {formikHandlers => (
-        <View style={styles.form}>
+        <FormWrapper>
           <Input name={'challenge'} label={t('Challenge')} handlers={formikHandlers} />
           <Input name={'challengeHostProvider'} label={t('Challenge host provider')} handlers={formikHandlers} />
           <CheckBox
@@ -65,7 +65,7 @@ const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
               <IconInfo />
             </View>
           </View>
-        </View>
+        </FormWrapper>
       )}
     </Formik>
   )

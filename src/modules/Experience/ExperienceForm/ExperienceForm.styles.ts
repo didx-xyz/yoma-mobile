@@ -1,9 +1,6 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
-  formView: {
-    padding: 12,
-  } as ViewStyle,
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',

@@ -16,7 +16,7 @@ const styles = {
     bottom: 0,
   } as ViewStyle,
   card: {
-    marginTop: '-20%',
+    marginTop: -75,
   } as ViewStyle,
   horizontalLineView: {
     flexDirection: 'row',

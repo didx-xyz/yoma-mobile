@@ -1,20 +1,12 @@
 import textinputStyles from 'components/Input/Input.styles'
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
-    width: '95%',
-    borderRadius: 12,
-    paddingVertical: 5,
-    elevation: 3,
-    marginVertical: 10,
-    alignSelf: 'center',
-    paddingHorizontal: 15,
+  card: {
     flex: 1,
   } as ViewStyle,
   textInput: {
@@ -24,9 +16,9 @@ const styles = {
     paddingLeft: 0,
     textAlignVertical: 'top',
   } as ViewStyle,
-  bottomText: {
-    marginVertical: 10,
-  } as TextStyle,
+  bottom: {
+    paddingVertical: 16,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

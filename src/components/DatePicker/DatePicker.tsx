@@ -26,10 +26,9 @@ const DatePicker = ({ name, label, handlers, ...props }: Props) => {
   const onChange = useCallback(
     (event: Event, selectedDate: Date | undefined) => {
       setShowDatePicker(false)
-      const currentDate = selectedDate
       if (selectedDate) {
         setDate(date)
-        setFieldValue(name, currentDate, false)
+        setFieldValue(name, selectedDate, false)
       }
       setTimeout(() => {
         setFieldTouched(name, true, true)

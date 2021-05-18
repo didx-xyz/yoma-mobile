@@ -1,33 +1,37 @@
-import { StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native'
+import { StyleSheet, ViewStyle, TextStyle } from 'react-native'
+import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 import { colors, Colors } from '../../styles'
 
+const PROFILE_IMAGE_SIZE = 27
+
 const styles = {
-  header: {
+  container: {
     height: 50,
     backgroundColor: colors[Colors.white],
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    paddingHorizontal: 20,
+    paddingHorizontal: 13,
+    elevation: 3,
+    shadowColor: colors[Colors.black],
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   } as ViewStyle,
-  profileInnerView: {
+  profileContainer: {
     backgroundColor: colors[Colors.backgroundGrey],
-    borderRadius: 14,
-    height: 27,
-    width: 27,
+    borderRadius: PROFILE_IMAGE_SIZE / CIRCULAR_RADIUS_DIVISOR,
+    height: PROFILE_IMAGE_SIZE,
+    width: PROFILE_IMAGE_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
   } as ViewStyle,
-  backIconView: {
-    position: 'absolute',
-    left: 20,
-  } as ViewStyle,
-  backIcon: {
-    height: 25,
-  } as ImageStyle,
   tokensView: {
     backgroundColor: applyAlphaToHex(colors[Colors.primaryYellow])(0.15),
     flexDirection: 'row',

@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox } from 'components'
+import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
@@ -66,7 +66,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       }}
     >
       {formikHandlers => (
-        <View style={styles.formView}>
+        <FormWrapper>
           <InfoModal
             visible={showInfoModal}
             closeModal={() => setShowInfoModal(false)}
@@ -114,7 +114,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               {t('Find inspiration on how to write a great profile.')}
             </Text.Meta>
           </TouchableOpacity>
-        </View>
+        </FormWrapper>
       )}
     </Formik>
   )

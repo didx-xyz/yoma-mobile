@@ -1,6 +1,7 @@
 import { StackActions } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { AddIcon, BackIconGrey } from 'assets/images'
+import Button, { ButtonVariants } from 'components/Button'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect } from 'react'
@@ -9,13 +10,13 @@ import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Optional from '../Optional'
-import Text, { Bold, HeaderLevels } from '../Typography'
+import Text, { HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
 
 type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes>
   headerText: string | React.ReactNode
-  onSave?: () => void
+  onSave: () => void
   showAddButton?: boolean
   onAdd?: () => void
 }
@@ -35,7 +36,7 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
   }
 
   return (
-    <View style={styles.header}>
+    <View style={styles.container}>
       <TouchableOpacity onPress={onNavigateBack}>
         <BackIconGrey />
       </TouchableOpacity>
@@ -45,21 +46,28 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
       <Optional
         condition={showAddButton}
         fallback={
-          <TouchableOpacity onPress={onSave} style={styles.button}>
-            <Text.Body>
-              <Bold color={Colors.primaryGreen}>{t('Save')}</Bold>
-            </Text.Body>
-          </TouchableOpacity>
+          <Button
+            variant={ButtonVariants.Clear}
+            label={t('Save')}
+            color={Colors.primaryGreen}
+            onPress={onSave}
+            style={styles.button}
+            isFullWidth={false}
+          />
         }
       >
-        <TouchableOpacity onPress={onAdd} style={styles.button}>
-          <Text.Body>
-            <Bold color={Colors.primaryGreen}>{t('Add')}</Bold>
-          </Text.Body>
+        <Button
+          variant={ButtonVariants.Clear}
+          label={t('Add')}
+          color={Colors.primaryGreen}
+          onPress={onAdd!}
+          style={styles.addButton}
+          isFullWidth={false}
+        >
           <View style={styles.addIcon}>
             <AddIcon />
           </View>
-        </TouchableOpacity>
+        </Button>
       </Optional>
     </View>
   )

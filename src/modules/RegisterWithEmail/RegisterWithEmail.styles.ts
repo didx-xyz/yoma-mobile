@@ -11,7 +11,7 @@ const styles = {
     bottom: 0,
   } as ViewStyle,
   card: {
-    marginTop: '-30%',
+    marginTop: -75,
   } as ViewStyle,
   registerText: {
     marginTop: 18,
