@@ -29,12 +29,21 @@ const styles = {
     flexDirection: 'row',
     paddingRight: 20,
   } as ViewStyle,
+  addButton: {
+    flexDirection: 'row',
+    paddingRight: 40,
+  } as ViewStyle,
   addIcon: {
     ...dropShadow,
     backgroundColor: colors[Colors.white],
     marginLeft: 10,
     borderRadius: 10,
-  },
+    position: 'absolute',
+    right: 0,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+    marginRight: 10,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
