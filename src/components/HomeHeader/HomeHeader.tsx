@@ -1,5 +1,7 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { ZIcon } from 'assets/images'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -9,7 +11,7 @@ import Text, { Bold } from '../Typography'
 import styles from './HomeHeader.styles'
 
 type Props = {
-  navigation: any
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
 }
 
 const HomeHeader = ({ navigation }: Props) => {
@@ -17,7 +19,7 @@ const HomeHeader = ({ navigation }: Props) => {
     <View style={styles.header}>
       <ProfilePhoto
         borderWidth={3}
-        onPress={() => navigation.navigate(NavigationRoutes.Profile)}
+        onPress={() => navigation.navigate(HomeNavigationRoutes.Profile)}
         outerRadius={17}
         percent={10}
         profileInnerStyle={styles.profileInnerView}

@@ -18,10 +18,9 @@ import MyChallenges from '../MyChallenges'
 import MyCourses from '../MyCourses'
 import Profile from '../Profile'
 import Skills from '../Skills'
-import { NavigationRoutes } from './Home.routes'
-import { HomeNavigatorParamsList } from './Home.types'
+import { HomeNavigationRoutes } from './Home.routes'
 
-const Stack = createStackNavigator<HomeNavigatorParamsList>()
+const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const tabBarOptions: BottomTabBarOptions = {
@@ -79,15 +78,15 @@ const HomeTabs = () => {
 const Home = () => {
   return (
     <Stack.Navigator headerMode={'none'}>
-      <Stack.Screen name={NavigationRoutes.Home} component={HomeTabs} />
-      <Stack.Screen name={NavigationRoutes.Profile} component={Profile} />
-      <Stack.Screen name={NavigationRoutes.DigitalCv} component={DigitalCv} />
-      <Stack.Screen name={NavigationRoutes.About} component={About} />
-      <Stack.Screen name={NavigationRoutes.Experience} component={Experience} />
-      <Stack.Screen name={NavigationRoutes.Education} component={Education} />
-      <Stack.Screen name={NavigationRoutes.Skills} component={Skills} />
-      <Stack.Screen name={NavigationRoutes.MyCourses} component={MyCourses} />
-      <Stack.Screen name={NavigationRoutes.MyChallenges} component={MyChallenges} />
+      <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
+      <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
+      <Stack.Screen name={HomeNavigationRoutes.DigitalCv} component={DigitalCv} />
+      <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
+      <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
+      <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
+      <Stack.Screen name={HomeNavigationRoutes.Skills} component={Skills} />
+      <Stack.Screen name={HomeNavigationRoutes.MyCourses} component={MyCourses} />
+      <Stack.Screen name={HomeNavigationRoutes.MyChallenges} component={MyChallenges} />
     </Stack.Navigator>
   )
 }
