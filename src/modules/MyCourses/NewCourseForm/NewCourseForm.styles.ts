@@ -1,10 +1,6 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = StyleSheet.create({
-  form: {
-    flex: 1,
-    padding: 12,
-  } as ViewStyle,
   checkBoxRow: {
     flexDirection: 'row',
     alignItems: 'center',

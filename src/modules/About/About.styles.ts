@@ -5,15 +5,7 @@ const styles = {
   container: {
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
-    width: '95%',
-    borderRadius: 12,
-    paddingVertical: 5,
-    elevation: 3,
-    marginVertical: 10,
-    alignSelf: 'center',
-    paddingHorizontal: 15,
+  card: {
     flex: 1,
   } as ViewStyle,
   textInput: {

@@ -2,8 +2,20 @@ import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
 
+const dropShadow = {
+  elevation: 3,
+  shadowColor: colors[Colors.black],
+  shadowOffset: {
+    width: 0,
+    height: 1,
+  },
+  shadowOpacity: 0.22,
+  shadowRadius: 2.22,
+}
+
 const styles = {
-  header: {
+  container: {
+    ...dropShadow,
     height: 50,
     backgroundColor: colors[Colors.white],
     alignItems: 'center',
@@ -18,9 +30,9 @@ const styles = {
     paddingRight: 20,
   } as ViewStyle,
   addIcon: {
+    ...dropShadow,
     backgroundColor: colors[Colors.white],
     marginLeft: 10,
-    elevation: 3,
     borderRadius: 10,
   },
 }
