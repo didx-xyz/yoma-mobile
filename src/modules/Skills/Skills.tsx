@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, ListCardHeader, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import { AddNewCard, Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import ListCardHeader from 'components/ListCardHeader'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
@@ -36,14 +37,19 @@ const Skills = ({ navigation }: Props) => {
       <Optional
         condition={isEditing}
         fallback={
-          <Card style={styles.outerCard}>
-            <FlatList
-              data={skills}
-              ListHeaderComponent={<ListCardHeader color={Colors.primaryBlue} count={60} header={t('Top skills')} />}
-              renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
-              keyExtractor={item => item.skill}
-            />
-          </Card>
+          <Optional
+            condition={skills.length > 0}
+            fallback={<AddNewCard title={t('Tell us what you are great at.')} onAdd={() => setIsEditing(true)} />}
+          >
+            <Card style={styles.outerCard}>
+              <FlatList
+                data={skills}
+                ListHeaderComponent={<ListCardHeader color={Colors.primaryBlue} count={60} header={t('Top skills')} />}
+                renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
+                keyExtractor={item => item.skill}
+              />
+            </Card>
+          </Optional>
         }
       >
         <Card>

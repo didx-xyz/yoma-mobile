@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
-import { Card, InfoCard, Optional } from 'components'
+import { AddNewCard, Card, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
@@ -56,12 +56,17 @@ const Experience = ({ navigation }: Props) => {
       <Optional
         condition={isSaved}
         fallback={
-          <FlatList
-            data={experience}
-            contentContainerStyle={styles.listContainer}
-            renderItem={({ item }) => renderItem(item)}
-            keyExtractor={(item, index) => index.toString()}
-          />
+          <Optional
+            condition={experience.length > 0}
+            fallback={<AddNewCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
+          >
+            <FlatList
+              data={experience}
+              contentContainerStyle={styles.listContainer}
+              renderItem={({ item }) => renderItem(item)}
+              keyExtractor={(item, index) => index.toString()}
+            />
+          </Optional>
         }
       >
         <ScrollView>

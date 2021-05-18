@@ -1,3 +1,4 @@
+import AddNewCard from './AddNewCard'
 import ButtonContainer from './ButtonContainer'
 import Card from './Card'
 import CheckBox from './CheckBox'
@@ -31,6 +32,7 @@ import Upload from './Upload'
 import ViewContainer from './ViewContainer/ViewContainer'
 
 export {
+  AddNewCard,
   ButtonContainer,
   Card,
   CheckBox,

@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { AddNewCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -50,12 +50,19 @@ const MyChallenges = ({ navigation }: Props) => {
       <Optional
         condition={isEditing}
         fallback={
-          <FlatList
-            data={challenges}
-            contentContainerStyle={styles.listContainer}
-            renderItem={({ item }) => renderChallengeEntry(item)}
-            keyExtractor={item => item.challenge}
-          />
+          <Optional
+            condition={challenges.length > 0}
+            fallback={
+              <AddNewCard title={t('Have you completed any challenges yet?')} onAdd={() => setIsEditing(true)} />
+            }
+          >
+            <FlatList
+              data={challenges}
+              contentContainerStyle={styles.listContainer}
+              renderItem={({ item }) => renderChallengeEntry(item)}
+              keyExtractor={item => item.challenge}
+            />
+          </Optional>
         }
       >
         <ScrollView>
