@@ -1,12 +1,12 @@
 import { Message, YellowCircleRight } from 'assets/images'
-import { Card, LargeHeaderContainer, Optional, ViewContainer } from 'components'
+import { Card, LargeHeader, Optional, ViewContainer } from 'components'
 import Button from 'components/Button'
 import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 import { openInbox } from 'react-native-email-link'
-import { colors, Colors } from 'styles'
+import { Colors } from 'styles'
 
 import Text, { HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import styles from './ForgotPassword.styles'
@@ -23,10 +23,9 @@ const ForgotPassword = ({ navigation }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <ScrollView>
-        <LargeHeaderContainer
+        <LargeHeader
           navigation={navigation}
-          headerText={t('forgotPassword')}
-          backgroundColor={colors[Colors.secondaryPurple]}
+          backgroundColor={Colors.secondaryPurple}
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
