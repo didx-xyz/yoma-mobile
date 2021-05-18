@@ -21,7 +21,6 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    elevation: 3,
   } as ViewStyle,
   saveText: {
     paddingRight: 20,
