@@ -6,11 +6,8 @@ const styles = {
   container: {
     backgroundColor: colors[Colors.backgroundGrey],
   } as ViewStyle,
-  whiteCard: {
-    backgroundColor: colors[Colors.white],
-    borderRadius: 12,
-    elevation: 3,
-    margin: 10,
+  listContainer: {
+    paddingTop: 10,
   } as ViewStyle,
 }
 

@@ -1,13 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
-import Spacer from 'components/Spacer'
 import { FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
-import { CARD_SPACER } from 'styles/styles.constants'
 
 import { MOCKED_EDUCATION_DATA } from './Education.constants'
 import styles from './Education.styles'
@@ -60,7 +58,7 @@ const Education = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={education}
-            ListHeaderComponent={<Spacer height={CARD_SPACER} />}
+            contentContainerStyle={styles.listContainer}
             renderItem={({ item }) => renderItem(item)}
             keyExtractor={item => item.school}
           />
