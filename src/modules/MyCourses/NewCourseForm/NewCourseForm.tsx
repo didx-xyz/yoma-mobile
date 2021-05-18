@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
-import { Spinner, DatePicker, DropDownTags, Upload, CheckBox, Input } from 'components'
+import { Spinner, DatePicker, DropDownTags, Upload, CheckBox, Input, FormWrapper } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -24,7 +24,7 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
   return (
     <Formik initialValues={INITIAL_VALUES} onSubmit={() => {}}>
       {(formikHandlers: FormikProps<FormikValues>) => (
-        <View style={styles.form}>
+        <FormWrapper>
           <Spinner visible={formikHandlers.isSubmitting} />
           <Input name={'course'} label={t('Course name')} handlers={formikHandlers} />
           <Input name={'courseHostProvider'} label={t('Course host provider')} handlers={formikHandlers} />
@@ -79,7 +79,7 @@ const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
               <IconInfo />
             </View>
           </View>
-        </View>
+        </FormWrapper>
       )}
     </Formik>
   )

@@ -8,26 +8,29 @@ import { Colors } from 'styles'
 
 import ProfilePhoto from '../ProfilePhoto'
 import Text, { Bold } from '../Typography'
+import { PROFILE_IMAGE_BORDER_WIDTH, PROFILE_IMAGE_RADIUS } from './HomeHeader.constants'
 import styles from './HomeHeader.styles'
 
 type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
+  profileProgressPercentage: number
+  rewardPoints: number
 }
 
-const HomeHeader = ({ navigation }: Props) => {
+const HomeHeader = ({ navigation, profileProgressPercentage = 0, rewardPoints = 0 }: Props) => {
   return (
-    <View style={styles.header}>
+    <View style={styles.container}>
       <ProfilePhoto
-        borderWidth={3}
+        borderWidth={PROFILE_IMAGE_BORDER_WIDTH}
         onPress={() => navigation.navigate(HomeNavigationRoutes.Profile)}
-        outerRadius={17}
-        percent={10}
-        profileInnerStyle={styles.profileInnerView}
+        outerRadius={PROFILE_IMAGE_RADIUS}
+        percent={profileProgressPercentage}
+        profileInnerStyle={styles.profileContainer}
       />
       <TouchableOpacity style={styles.tokensView}>
         <ZIcon />
         <Text.Body style={styles.tokenAmount}>
-          <Bold color={Colors.primaryYellow}>1000</Bold>
+          <Bold color={Colors.primaryYellow}>{rewardPoints}</Bold>
         </Text.Body>
       </TouchableOpacity>
     </View>

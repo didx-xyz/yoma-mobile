@@ -1,13 +1,13 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
-import { InfoModal, NormalHeader, ViewContainer } from 'components'
+import { Card, FormWrapper, InfoModal, NormalHeader, ViewContainer } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { USER_ID } from 'helpers/helpers'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View, TextInput } from 'react-native'
+import { View, TextInput } from 'react-native'
 import { Colors } from 'styles'
 
 import styles from './About.styles'
@@ -57,24 +57,26 @@ const About = ({ navigation }: Props) => {
         }
       />
       <NormalHeader navigation={navigation} headerText={t('About')} onSave={updateBiography} />
-      <View style={styles.whiteCard}>
-        <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
-        <TextInput
-          style={styles.textInput}
-          value={summary}
-          multiline
-          maxLength={1000}
-          onChangeText={text => {
-            setSummary(text)
-          }}
-          returnKeyType="done"
-        />
-        <TouchableOpacity onPress={() => setInfoModal(true)}>
-          <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
-            {t('Find inspiration on how to write a great profile.')}
-          </Text.Meta>
-        </TouchableOpacity>
-      </View>
+      <Card style={styles.card}>
+        <FormWrapper>
+          <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
+          <TextInput
+            style={styles.textInput}
+            value={summary}
+            multiline
+            maxLength={1000}
+            onChangeText={text => {
+              setSummary(text)
+            }}
+            returnKeyType="done"
+          />
+          <View style={styles.bottom}>
+            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} onPress={() => setInfoModal(true)}>
+              {t('Find inspiration on how to write a great education description.')}
+            </Text.Meta>
+          </View>
+        </FormWrapper>
+      </Card>
     </ViewContainer>
   )
 }
