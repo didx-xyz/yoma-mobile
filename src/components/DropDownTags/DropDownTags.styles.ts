@@ -43,7 +43,7 @@ const styles = {
   divider: {
     height: 1,
     backgroundColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
-    marginTop: 5,
+    marginTop: 10,
   } as ViewStyle,
   save: {
     paddingRight: 10,

@@ -20,6 +20,7 @@ export enum Colors {
   secondaryRed = 'secondaryRed',
   transparent = 'transparent',
   white = 'white',
+  black = 'black',
 }
 
 export enum FontFamily {

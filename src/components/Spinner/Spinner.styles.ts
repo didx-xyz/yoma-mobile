@@ -1,13 +1,22 @@
-import { Dimensions, StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, ViewStyle } from 'react-native'
+import { colors, Colors } from 'styles'
+import { applyAlphaToHex } from 'styles/styles.utils'
 
-const { width, height } = Dimensions.get('window')
+const SPINNER_CONTAINER_SIZE = 70
 
 const styles = {
   container: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    height: '100%',
+  } as ViewStyle,
+  spinnerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: SPINNER_CONTAINER_SIZE,
+    width: SPINNER_CONTAINER_SIZE,
+    borderRadius: 16,
+    backgroundColor: applyAlphaToHex(colors[Colors.white])(0.75),
   } as ViewStyle,
 }
 

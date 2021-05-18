@@ -3,7 +3,7 @@ declare module 'ramda' {
   export function always(...rest: any[]): any[]
   export function append(...rest: any[]): any
   export function concat(...rest: any[]): any[]
-  export function curry(...rest: any[]): any[]
+  export function curry(...rest: any[]): any
   export function complement(...rest: any[]): any
   export function equals(...rest: any[]): any
   export function evolve(...rest: any[]): any
