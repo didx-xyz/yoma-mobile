@@ -21,6 +21,7 @@ const SECONDARY_PURPLE = '#5F65B9'
 const SECONDARY_RED = '#A33232'
 const TRANSPARENT = 'transparent'
 const WHITE = '#FFFFFF'
+const BLACK = '#000000'
 
 export default {
   [Colors.backgroundGrey]: BACKGROUND_GREY,
@@ -44,4 +45,5 @@ export default {
   [Colors.secondaryRed]: SECONDARY_RED,
   [Colors.transparent]: TRANSPARENT,
   [Colors.white]: WHITE,
+  [Colors.black]: BLACK,
 }
