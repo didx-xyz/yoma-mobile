@@ -16,6 +16,13 @@ const styles = {
     flexDirection: 'row',
     paddingHorizontal: 13,
     elevation: 3,
+    shadowColor: colors[Colors.black],
+    shadowOffset: {
+      width: 0,
+      height: 1,
+    },
+    shadowOpacity: 0.22,
+    shadowRadius: 2.22,
   } as ViewStyle,
   profileContainer: {
     backgroundColor: colors[Colors.backgroundGrey],

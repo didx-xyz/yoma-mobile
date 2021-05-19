@@ -1,8 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
-import Spacer from 'components/Spacer'
 import { FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +13,7 @@ import { EductationEntry } from './Education.types'
 import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Education>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
 }
 
 const Education = ({ navigation }: Props) => {
@@ -65,7 +64,7 @@ const Education = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={education}
-            ListHeaderComponent={<Spacer height={10} />}
+            contentContainerStyle={styles.listContainer}
             renderItem={({ item }) => renderItem(item)}
             keyExtractor={item => item.school}
           />

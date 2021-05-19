@@ -3,7 +3,7 @@ export type CourseFields = {
   courseHostProvider: string
   description: string
   id: string
-  startDate: string
-  endDate: string
+  startDate: Date | null
+  endDate: Date | null
   skillNames: string[]
 }

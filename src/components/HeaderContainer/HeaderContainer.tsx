@@ -1,5 +1,5 @@
-import { StackActions } from '@react-navigation/native'
 import { BackIcon } from 'assets/images'
+import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import React, { useEffect } from 'react'
 import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -23,7 +23,14 @@ const HeaderContainer = ({ headerText, navigation }: Props) => {
   }, [])
 
   const goBack = () => {
-    navigation.dispatch(StackActions.pop(1))
+    const canGoBack = navigation.canGoBack()
+    if (canGoBack) {
+      navigation.goBack()
+    } else {
+      navigation.reset({
+        routes: [{ name: NavigationRoutes.Landing }],
+      })
+    }
   }
 
   return (

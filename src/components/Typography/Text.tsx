@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { StyleSheet, Text as RNText, TextProps, TextStyle } from 'react-native'
 
 import { colors, Colors } from '../../styles'
@@ -17,14 +17,10 @@ type Props = TextProps &
   }>
 
 const Text = ({ presetStyle, weight, align, color, style, children, ...props }: Props) => {
-  const [textStyles, setTextStyles] = useState<TextStyle>({})
-
-  useEffect(() => {
-    const colorStyle = color ? { color: colors[color] } : {}
-    const fontWeightStyle = weight ? fontWeights[weight] : {}
-    const textAlignStyle = align ? { textAlign: align } : {}
-    setTextStyles(StyleSheet.flatten([styles.base, presetStyle, colorStyle, fontWeightStyle, textAlignStyle, style]))
-  }, [presetStyle, color, weight, align, style])
+  const colorStyle = color ? { color: colors[color] } : {}
+  const fontWeightStyle = weight ? fontWeights[weight] : {}
+  const textAlignStyle = align ? { textAlign: align } : {}
+  const textStyles = StyleSheet.flatten([styles.base, presetStyle, colorStyle, fontWeightStyle, textAlignStyle, style])
 
   return (
     <RNText maxFontSizeMultiplier={1.3} minimumFontScale={0.8} style={textStyles} {...props} testID="text">

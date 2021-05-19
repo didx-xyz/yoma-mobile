@@ -1,6 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, ListCard, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import ListCardHeader from 'components/ListCardHeader'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +13,7 @@ import styles from './Skills.styles'
 import SkillsForm from './SkillsForm/SkillsForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Skills>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Skills>
 }
 
 const Skills = ({ navigation }: Props) => {
@@ -39,7 +40,7 @@ const Skills = ({ navigation }: Props) => {
           <Card style={styles.outerCard}>
             <FlatList
               data={skills}
-              ListHeaderComponent={<ListCard color={Colors.primaryBlue} value={60} label={t('Top skills')} />}
+              ListHeaderComponent={<ListCardHeader color={Colors.primaryBlue} count={60} header={t('Top skills')} />}
               renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
               keyExtractor={item => item.skill}
             />

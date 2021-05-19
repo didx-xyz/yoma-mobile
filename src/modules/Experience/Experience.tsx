@@ -2,11 +2,10 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
 import { Card, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
-import Spacer from 'components/Spacer'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
 import { USER_ID } from 'helpers/helpers'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,7 +16,7 @@ import { ExperienceType } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Experience>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
 const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
@@ -59,7 +58,7 @@ const Experience = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={experience}
-            ListHeaderComponent={<Spacer height={10} />}
+            contentContainerStyle={styles.listContainer}
             renderItem={({ item }) => renderItem(item)}
             keyExtractor={(item, index) => index.toString()}
           />

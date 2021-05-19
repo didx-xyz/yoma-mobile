@@ -5,8 +5,8 @@ export const INITIAL_VALUES: ChallengeFields = {
   challengeHostProvider: '',
   description: '',
   id: '',
-  startDate: '',
-  endDate: '',
+  startDate: null,
+  endDate: null,
   skillNames: [],
 }
 
