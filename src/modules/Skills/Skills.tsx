@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { AddNewCard, Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
+import { EmptyCard, Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import ListCardHeader from 'components/ListCardHeader'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -39,7 +39,7 @@ const Skills = ({ navigation }: Props) => {
         fallback={
           <Optional
             condition={skills.length > 0}
-            fallback={<AddNewCard title={t('Tell us what you are great at.')} onAdd={() => setIsEditing(true)} />}
+            fallback={<EmptyCard title={t('Tell us what you are great at.')} onAdd={() => setIsEditing(true)} />}
           >
             <Card style={styles.outerCard}>
               <FlatList

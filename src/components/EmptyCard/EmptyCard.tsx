@@ -6,14 +6,14 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
 
-import styles from './AddNewCard.styles'
+import styles from './EmptyCard.styles'
 
 type Props = {
   title: string
   onAdd: () => void
 }
 
-const AddNewCard = ({ title, onAdd }: Props) => {
+const EmptyCard = ({ title, onAdd }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
@@ -31,4 +31,4 @@ const AddNewCard = ({ title, onAdd }: Props) => {
   )
 }
 
-export default AddNewCard
+export default EmptyCard

@@ -1,4 +1,3 @@
-import AddNewCard from './AddNewCard'
 import ButtonContainer from './ButtonContainer'
 import Card from './Card'
 import CheckBox from './CheckBox'
@@ -9,6 +8,7 @@ import DateDisplay from './DateDisplay'
 import DatePicker from './DatePicker'
 import DropDown from './DropDown'
 import DropDownTags from './DropDownTags'
+import EmptyCard from './EmptyCard'
 import FirstTimeCard from './FirstTimeCard'
 import FormWrapper from './FormWrapper'
 import HeaderContainer from './HeaderContainer'
@@ -32,7 +32,6 @@ import Upload from './Upload'
 import ViewContainer from './ViewContainer/ViewContainer'
 
 export {
-  AddNewCard,
   ButtonContainer,
   Card,
   CheckBox,
@@ -43,6 +42,7 @@ export {
   DatePicker,
   DropDown,
   DropDownTags,
+  EmptyCard,
   FirstTimeCard,
   FormWrapper,
   OnboardingForms,

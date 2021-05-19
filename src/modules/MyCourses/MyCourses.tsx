@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { AddNewCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
@@ -50,7 +50,7 @@ const MyCourses = ({ navigation }: Props) => {
         fallback={
           <Optional
             condition={courses.length > 0}
-            fallback={<AddNewCard title={t('Have you completed any courses yet?')} onAdd={() => setIsEditing(true)} />}
+            fallback={<EmptyCard title={t('Have you completed any courses yet?')} onAdd={() => setIsEditing(true)} />}
           >
             <FlatList
               data={courses}

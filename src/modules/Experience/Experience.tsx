@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
-import { AddNewCard, Card, InfoCard, Optional } from 'components'
+import { EmptyCard, Card, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
@@ -58,7 +58,7 @@ const Experience = ({ navigation }: Props) => {
         fallback={
           <Optional
             condition={experience.length > 0}
-            fallback={<AddNewCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
+            fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
           >
             <FlatList
               data={experience}

@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { AddNewCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
 import { NavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -59,7 +59,7 @@ const Education = ({ navigation }: Props) => {
           <Optional
             condition={education.length > 0}
             fallback={
-              <AddNewCard
+              <EmptyCard
                 title={t('Which school, university or college did you attend?')}
                 onAdd={() => setIsSaved(true)}
               />
