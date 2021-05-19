@@ -1,12 +1,12 @@
 import { EditIcon } from 'assets/images'
 import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
+import { formatDistance } from 'date-fns'
 import React from 'react'
 import { Image, TouchableOpacity, View } from 'react-native'
 import { Avatar } from 'react-native-elements'
 import { Colors } from 'styles'
 import { getUppercasedHead } from 'utils/strings.utils'
 
-import Card from '../Card'
 import DateDisplay from '../DateDisplay'
 import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
@@ -16,29 +16,36 @@ type Props = {
   title: string
   subtitle?: string
   description: string
+  startDate: string
   endDate: string
   logo: string
   onEdit?: () => void
 }
 
-const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props) => {
+const InfoCard = ({ description, startDate, endDate, logo, subtitle, title, onEdit }: Props) => {
   return (
-    <Card style={styles.cardView}>
+    <View style={styles.container}>
       <View style={styles.row}>
         <Optional
-          condition={logo !== ''}
+          condition={!!logo}
           fallback={<Avatar size="small" rounded title={getUppercasedHead(title)} containerStyle={styles.avatar} />}
         >
           <Image source={{ uri: logo }} style={styles.image} />
         </Optional>
         <View>
-          <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+          <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey} style={styles.title}>
             <Optional condition={!!subtitle} fallback={<>{title}</>}>
               {subtitle + ' : ' + title}
             </Optional>
           </Text.Header>
           <View style={styles.row}>
-            <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate} />
+            <DateDisplay template={DATE_TPL_MON_YEAR} date={startDate}>
+              {' - '}
+            </DateDisplay>
+            <DateDisplay template={DATE_TPL_MON_YEAR} date={endDate}>
+              {' • '}
+              {formatDistance(new Date(endDate), new Date(startDate))}
+            </DateDisplay>
           </View>
         </View>
         <TouchableOpacity style={styles.editIcon} onPress={onEdit}>
@@ -46,9 +53,9 @@ const InfoCard = ({ description, endDate, logo, subtitle, title, onEdit }: Props
         </TouchableOpacity>
       </View>
       <Optional condition={description !== ''}>
-        <Text.Body>{description}</Text.Body>
+        <Text.Body style={styles.description}>{description}</Text.Body>
       </Optional>
-    </Card>
+    </View>
   )
 }
 

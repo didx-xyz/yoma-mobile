@@ -1,12 +1,12 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox } from 'components'
+import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View } from 'react-native'
+import { View } from 'react-native'
 import { Colors } from 'styles'
 
 import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
@@ -14,7 +14,7 @@ import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Education>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
 }
 
 const EducationForm = forwardRef(({ navigation }: Props, ref) => {
@@ -41,7 +41,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       validationSchema={ValidationSchema}
     >
       {formikHandlers => (
-        <View style={styles.form}>
+        <FormWrapper>
           <InfoModal
             visible={showInfoModal}
             closeModal={() => setShowInfoModal(false)}
@@ -59,30 +59,8 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             onPress={() => setIsStudying(!isStudying)}
           />
           <View style={styles.row}>
-            <DatePicker
-              onDateChange={(date: string) => {
-                formikHandlers.handleChange('startDate')
-                formikHandlers.handleBlur('startDate')
-                formikHandlers.setFieldValue('startDate', date)
-              }}
-              value={formikHandlers.values.startDate}
-              label={t('Start date')}
-              isTouched={formikHandlers.touched.startDate}
-              error={formikHandlers.errors.startDate}
-              showTitle={formikHandlers.values.startDate !== ''}
-            />
-            <DatePicker
-              onDateChange={(date: string) => {
-                formikHandlers.handleChange('endDate')
-                formikHandlers.handleBlur('endDate')
-                formikHandlers.setFieldValue('endDate', date)
-              }}
-              value={formikHandlers.values.endDate}
-              label={t('End date')}
-              isTouched={formikHandlers.touched.endDate}
-              error={formikHandlers.errors.endDate}
-              showTitle={formikHandlers.values.endDate !== ''}
-            />
+            <DatePicker name={'startDate'} label={t('Start date')} handlers={formikHandlers} />
+            <DatePicker name={'endDate'} label={t('End date')} handlers={formikHandlers} />
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
@@ -94,12 +72,17 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             handlers={formikHandlers}
           />
           <Upload onPress={() => {}} />
-          <TouchableOpacity onPress={() => setShowInfoModal(true)} style={styles.bottom}>
-            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} style={styles.bottomText}>
+          <View style={styles.bottom}>
+            <Text.Meta
+              level={MetaLevels.smallBold}
+              color={Colors.primaryGreen}
+              style={styles.bottomText}
+              onPress={() => setShowInfoModal(true)}
+            >
               {t('Find inspiration on how to write a great education description.')}
             </Text.Meta>
-          </TouchableOpacity>
-        </View>
+          </View>
+        </FormWrapper>
       )}
     </Formik>
   )

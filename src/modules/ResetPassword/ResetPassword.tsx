@@ -1,18 +1,21 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
-import { Card, LargeHeaderContainer, ViewContainer } from 'components'
-import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { Card, LargeHeader, ViewContainer } from 'components'
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import { Colors, colors } from 'styles'
+import { Colors } from 'styles'
 
 import Text, { Bold, HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './ResetPassword.styles'
+import { ResetPasswordRoute } from './ResetPassword.types'
 import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
 
 interface Props {
-  navigation: any
-  route: any
+  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.ResetPassword>
+  route: ResetPasswordRoute
 }
 
 const ResetPassword = ({ navigation, route }: Props) => {
@@ -22,16 +25,15 @@ const ResetPassword = ({ navigation, route }: Props) => {
   } = route
   useEffect(() => {
     if (!Token || !Id) {
-      navigation.navigate(NavigationRoutes.Login)
+      navigation.navigate(AuthNavigationRoutes.Login)
     }
-  }, [Token, Id])
+  }, [Token, Id, navigation])
   return (
     <ViewContainer>
       <ScrollView contentContainerStyle={styles.container}>
-        <LargeHeaderContainer
+        <LargeHeader
           navigation={navigation}
-          headerText=""
-          backgroundColor={colors[Colors.primaryYellow]}
+          backgroundColor={Colors.primaryYellow}
           circleImage={<PurpleQuarter />}
           circleImageStyle={styles.purpleSemiCircleContainer}
         />

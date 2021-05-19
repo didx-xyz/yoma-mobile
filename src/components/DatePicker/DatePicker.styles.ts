@@ -5,15 +5,14 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 const styles = {
   container: {
     flex: 1,
+    marginRight: 15,
   } as ViewStyle,
-  textInput: {
-    height: 40,
+  dateContainer: {
+    height: 30,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
     borderBottomWidth: 1,
     borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
-  } as ViewStyle,
-  dateInput: {
-    alignItems: 'flex-start',
-    borderWidth: 0,
   } as ViewStyle,
 }
 

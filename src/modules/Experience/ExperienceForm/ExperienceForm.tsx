@@ -1,9 +1,9 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox } from 'components'
+import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -18,7 +18,7 @@ import { getOrganizationsList, getSkillsList, submitForm } from './ExperienceFor
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Experience>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
 const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
@@ -62,11 +62,11 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       validationSchema={ValidationSchema}
       onSubmit={async values => {
         await submitForm(values)
-        navigation.navigate(NavigationRoutes.Home)
+        navigation.navigate(HomeNavigationRoutes.Home)
       }}
     >
       {formikHandlers => (
-        <View style={styles.formView}>
+        <FormWrapper>
           <InfoModal
             visible={showInfoModal}
             closeModal={() => setShowInfoModal(false)}
@@ -97,30 +97,8 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
             onPress={() => setIsWorkingHere(!isWorkingHere)}
           />
           <View style={styles.row}>
-            <DatePicker
-              onDateChange={(date: string) => {
-                formikHandlers.handleChange('startDate')
-                formikHandlers.handleBlur('startDate')
-                formikHandlers.setFieldValue('startDate', date)
-              }}
-              value={formikHandlers.values.startDate}
-              label={t('Start date')}
-              isTouched={formikHandlers.touched.startDate}
-              error={formikHandlers.errors.startDate}
-              showTitle={formikHandlers.values.startDate !== ''}
-            />
-            <DatePicker
-              onDateChange={(date: string) => {
-                formikHandlers.handleChange('endDate')
-                formikHandlers.handleBlur('endDate')
-                formikHandlers.setFieldValue('endDate', date)
-              }}
-              value={formikHandlers.values.endDate}
-              label={t('End date')}
-              isTouched={formikHandlers.touched.endDate}
-              error={formikHandlers.errors.endDate}
-              showTitle={formikHandlers.values.endDate !== ''}
-            />
+            <DatePicker name={'startDate'} label={t('Start date')} handlers={formikHandlers} />
+            <DatePicker name={'endDate'} label={t('End date')} handlers={formikHandlers} />
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
@@ -136,7 +114,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
               {t('Find inspiration on how to write a great profile.')}
             </Text.Meta>
           </TouchableOpacity>
-        </View>
+        </FormWrapper>
       )}
     </Formik>
   )

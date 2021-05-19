@@ -1,17 +1,19 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
-import { Card, LargeHeaderContainer, SocialRegistration, ViewContainer } from 'components'
+import { Card, LargeHeader, SocialRegistration, ViewContainer } from 'components'
 import Button from 'components/Button'
-import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors, colors } from 'styles'
+import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import styles from './Register.styles'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Register>
 }
 
 const Register = ({ navigation }: Props) => {
@@ -19,10 +21,9 @@ const Register = ({ navigation }: Props) => {
 
   return (
     <ViewContainer style={styles.container}>
-      <LargeHeaderContainer
+      <LargeHeader
         navigation={navigation}
-        headerText={t<string>('register')}
-        backgroundColor={colors[Colors.primaryYellow]}
+        backgroundColor={Colors.primaryYellow}
         circleImage={<PurpleQuarter />}
         circleImageStyle={styles.purpleSemiCircleContainer}
       />
@@ -32,7 +33,7 @@ const Register = ({ navigation }: Props) => {
         </Text.Header>
         <Button
           label={t('registerWithEmail')}
-          onPress={() => navigation.navigate(NavigationRoutes.RegisterWithEmail)}
+          onPress={() => navigation.navigate(AuthNavigationRoutes.RegisterWithEmail)}
           style={styles.button}
         />
         <View style={styles.horizontalLineView}>
@@ -47,7 +48,7 @@ const Register = ({ navigation }: Props) => {
       </Card>
       <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.bottomText}>
         {t('alreadyHaveAccount')}&nbsp;
-        <Link onPress={() => navigation.navigate(NavigationRoutes.Login)}>{t('login')}.</Link>
+        <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}>{t('login')}.</Link>
       </Text.Body>
     </ViewContainer>
   )

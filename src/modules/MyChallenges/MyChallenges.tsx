@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,11 +13,19 @@ import { ChallengeEntry } from './MyChallenges.types'
 import NewChallengeForm from './NewChallengeForm/NewChallengeForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyChallenges>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyChallenges>
 }
 
-const renderChallengeEntry = ({ challenge, description, endDate, organisationLogoUrl }: ChallengeEntry) => {
-  return <InfoCard title={challenge} description={description} endDate={endDate} logo={organisationLogoUrl} />
+const renderChallengeEntry = ({ challenge, description, startDate, endDate, organisationLogoUrl }: ChallengeEntry) => {
+  return (
+    <InfoCard
+      title={challenge}
+      description={description}
+      startDate={startDate}
+      endDate={endDate}
+      logo={organisationLogoUrl}
+    />
+  )
 }
 
 const MyChallenges = ({ navigation }: Props) => {
@@ -44,6 +52,7 @@ const MyChallenges = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={challenges}
+            contentContainerStyle={styles.listContainer}
             renderItem={({ item }) => renderChallengeEntry(item)}
             keyExtractor={item => item.challenge}
           />

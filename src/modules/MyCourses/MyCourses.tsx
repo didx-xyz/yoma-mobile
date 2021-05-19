@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,11 +12,19 @@ import { CourseEntry } from './MyCourses.types'
 import NewCourseForm from './NewCourseForm/NewCourseForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.MyCourses>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCourses>
 }
 
-const renderCourseEntry = ({ course, description, endDate, organisationLogoUrl }: CourseEntry) => {
-  return <InfoCard title={course} description={description} endDate={endDate} logo={organisationLogoUrl} />
+const renderCourseEntry = ({ course, description, startDate, endDate, organisationLogoUrl }: CourseEntry) => {
+  return (
+    <InfoCard
+      title={course}
+      description={description}
+      startDate={startDate}
+      endDate={endDate}
+      logo={organisationLogoUrl}
+    />
+  )
 }
 
 const MyCourses = ({ navigation }: Props) => {
@@ -42,6 +50,7 @@ const MyCourses = ({ navigation }: Props) => {
         fallback={
           <FlatList
             data={courses}
+            contentContainerStyle={styles.listContainer}
             renderItem={({ item }) => renderCourseEntry(item)}
             keyExtractor={item => item.course}
           />

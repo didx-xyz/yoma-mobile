@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,7 +13,7 @@ import { EductationEntry } from './Education.types'
 import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Education>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
 }
 
 const Education = ({ navigation }: Props) => {
@@ -22,12 +22,20 @@ const Education = ({ navigation }: Props) => {
   const [education, setEducation] = useState(MOCKED_EDUCATION_DATA)
   const formRef = useRef<FormikProps<FormikValues>>()
 
-  const renderItem = ({ description, endDate, organisationLogoURL, qualification, school }: EductationEntry) => {
+  const renderItem = ({
+    description,
+    startDate,
+    endDate,
+    organisationLogoURL,
+    qualification,
+    school,
+  }: EductationEntry) => {
     return (
       <InfoCard
         title={school}
         subtitle={qualification}
         description={description}
+        startDate={startDate}
         endDate={endDate}
         logo={organisationLogoURL}
       />
@@ -48,7 +56,12 @@ const Education = ({ navigation }: Props) => {
       <Optional
         condition={isSaved}
         fallback={
-          <FlatList data={education} renderItem={({ item }) => renderItem(item)} keyExtractor={item => item.school} />
+          <FlatList
+            data={education}
+            contentContainerStyle={styles.listContainer}
+            renderItem={({ item }) => renderItem(item)}
+            keyExtractor={item => item.school}
+          />
         }
       >
         <ScrollView>
