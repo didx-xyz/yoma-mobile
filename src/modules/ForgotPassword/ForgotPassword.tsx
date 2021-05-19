@@ -1,7 +1,9 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { Message, YellowCircleRight } from 'assets/images'
 import { Card, LargeHeader, Optional, ViewContainer } from 'components'
 import Button from 'components/Button'
-import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
@@ -13,7 +15,7 @@ import styles from './ForgotPassword.styles'
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
 
 interface Props {
-  navigation: any
+  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.ForgotPassword>
 }
 
 const ForgotPassword = ({ navigation }: Props) => {
@@ -55,7 +57,7 @@ const ForgotPassword = ({ navigation }: Props) => {
             </Text.Body>
             <Button label={t('openEmail')} onPress={openInbox} />
             <Text.Header
-              onPress={() => navigation.navigate(NavigationRoutes.Login)}
+              onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}
               level={HeaderLevels.h5}
               color={Colors.primaryGreen}
               align={TextAlign.center}

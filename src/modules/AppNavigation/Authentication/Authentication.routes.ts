@@ -1,4 +1,4 @@
-export enum NavigationRoutes {
+export enum AuthNavigationRoutes {
   Landing = 'Landing',
   Register = 'Register',
   RegisterWithEmail = 'RegisterWithEmail',

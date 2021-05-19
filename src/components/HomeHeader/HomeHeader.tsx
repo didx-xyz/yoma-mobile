@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { ZIcon } from 'assets/images'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
@@ -12,7 +12,7 @@ import { PROFILE_IMAGE_BORDER_WIDTH, PROFILE_IMAGE_RADIUS } from './HomeHeader.c
 import styles from './HomeHeader.styles'
 
 type Props = {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
   profileProgressPercentage: number
   rewardPoints: number
 }
@@ -22,7 +22,7 @@ const HomeHeader = ({ navigation, profileProgressPercentage = 0, rewardPoints = 
     <View style={styles.container}>
       <ProfilePhoto
         borderWidth={PROFILE_IMAGE_BORDER_WIDTH}
-        onPress={() => navigation.navigate(NavigationRoutes.Profile)}
+        onPress={() => navigation.navigate(HomeNavigationRoutes.Profile)}
         outerRadius={PROFILE_IMAGE_RADIUS}
         percent={profileProgressPercentage}
         profileInnerStyle={styles.profileContainer}

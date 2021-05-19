@@ -1,8 +1,10 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import api from 'api'
 import { Input, OnboardingForms } from 'components'
 import Button from 'components/Button'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { showSimpleMessage } from 'utils/error'
@@ -10,13 +12,13 @@ import * as yup from 'yup'
 
 import styles from './ResetPasswordForm.styles'
 
-interface ResetPasswordFormProps {
+interface Props {
   id: string
   token: string
-  navigation: any
+  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.ResetPassword>
 }
 
-const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) => {
+const ResetPasswordForm = ({ id, token, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <Formik
@@ -47,7 +49,7 @@ const ResetPasswordForm = ({ id, token, navigation }: ResetPasswordFormProps) =>
           .edit(id, { ...values, token })
           .then(response => {
             showSimpleMessage('success', 'Password reset successful')
-            navigation.navigate(NavigationRoutes.Login)
+            navigation.navigate(AuthNavigationRoutes.Login)
           })
           .catch(error => {
             console.log('Error =>', error)

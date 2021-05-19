@@ -1,13 +1,13 @@
-import { NavigationRoutes } from './Home.routes'
+import { HomeNavigationRoutes } from './Home.routes'
 
 export type HomeNavigatorParamsList = {
-  [NavigationRoutes.Home]: undefined
-  [NavigationRoutes.Profile]: undefined
-  [NavigationRoutes.DigitalCv]: undefined
-  [NavigationRoutes.About]: undefined
-  [NavigationRoutes.Experience]: undefined
-  [NavigationRoutes.Education]: undefined
-  [NavigationRoutes.Skills]: undefined
-  [NavigationRoutes.MyCourses]: undefined
-  [NavigationRoutes.MyChallenges]: undefined
+  [HomeNavigationRoutes.Home]: undefined
+  [HomeNavigationRoutes.Profile]: undefined
+  [HomeNavigationRoutes.DigitalCv]: undefined
+  [HomeNavigationRoutes.About]: undefined
+  [HomeNavigationRoutes.Experience]: undefined
+  [HomeNavigationRoutes.Education]: undefined
+  [HomeNavigationRoutes.Skills]: undefined
+  [HomeNavigationRoutes.MyCourses]: undefined
+  [HomeNavigationRoutes.MyChallenges]: undefined
 }

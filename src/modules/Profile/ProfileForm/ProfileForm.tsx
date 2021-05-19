@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { DropDown, Input, Spinner } from 'components'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,7 +12,7 @@ import { editProfile } from './ProfileForm.utils'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Profile>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
   user: {
     firstName: string
     lastName: string
@@ -43,7 +43,7 @@ const ProfileForm = forwardRef(({ navigation, user }: Props, ref) => {
       onSubmit={async values => {
         const response = await editProfile(values)
         if (response) {
-          navigation.navigate(NavigationRoutes.Home)
+          navigation.navigate(HomeNavigationRoutes.Home)
         }
       }}
     >

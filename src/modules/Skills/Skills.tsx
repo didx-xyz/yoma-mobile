@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { EmptyCard, Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import ListCardHeader from 'components/ListCardHeader'
-import { NavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -13,7 +13,7 @@ import styles from './Skills.styles'
 import SkillsForm from './SkillsForm/SkillsForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, NavigationRoutes.Skills>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Skills>
 }
 
 const Skills = ({ navigation }: Props) => {
