@@ -43,8 +43,8 @@ const Education = ({ navigation }: Props) => {
     )
   }
 
-  const toggleSaveButtonState = (saveButtonState: boolean) => {
-    setIsSaveButtonActive(saveButtonState)
+  const handleOnFormChange = (hasFormChanged: boolean) => {
+    setIsSaveButtonActive(hasFormChanged)
   }
 
   return (
@@ -72,7 +72,7 @@ const Education = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <EducationForm navigation={navigation} ref={formRef} changeButtonState={toggleSaveButtonState} />
+            <EducationForm navigation={navigation} ref={formRef} onFormChanged={handleOnFormChange} />
           </Card>
         </ScrollView>
       </Optional>

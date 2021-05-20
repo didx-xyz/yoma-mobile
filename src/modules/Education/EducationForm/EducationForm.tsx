@@ -16,10 +16,10 @@ import ValidationSchema from './ValidationSchema'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
-  changeButtonState: (value: boolean) => void
+  onFormChanged: (value: boolean) => void
 }
 
-const EducationForm = forwardRef(({ navigation, changeButtonState }: Props, ref) => {
+const EducationForm = forwardRef(({ navigation, onFormChanged }: Props, ref) => {
   const { t } = useTranslation()
   const [isStudying, setIsStudying] = useState(false)
   const [skillsList, setSkillsList] = useState(MOCKED_SKILLS_DATA)
@@ -42,7 +42,7 @@ const EducationForm = forwardRef(({ navigation, changeButtonState }: Props, ref)
         formRef.current!.values,
         formRef.current!.isValid,
       )
-      changeButtonState(value)
+      onFormChanged(value)
     }, 10)
   }
 
