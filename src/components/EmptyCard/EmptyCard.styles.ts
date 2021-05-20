@@ -13,22 +13,18 @@ const styles = {
   text: {
     marginTop: 50,
     marginHorizontal: 35,
-    zIndex: 1,
   } as TextStyle,
   yellowCircle: {
     position: 'absolute',
     right: 0,
-    zIndex: 0,
   } as ViewStyle,
   purpleCircle: {
     position: 'absolute',
     top: 136,
-    zIndex: 0,
   } as ViewStyle,
   button: {
     marginTop: 20,
     marginHorizontal: 90,
-    zIndex: 1,
   } as ViewStyle,
 }
 

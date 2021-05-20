@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
 
+import Background from '../Background/Background'
 import styles from './EmptyCard.styles'
 
 type Props = {
@@ -17,16 +18,18 @@ const EmptyCard = ({ title, onAdd }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
-      <View style={styles.yellowCircle}>
-        <YellowBottomLeftCircle />
-      </View>
+      <Background color={Colors.white}>
+        <View style={styles.yellowCircle}>
+          <YellowBottomLeftCircle />
+        </View>
+        <View style={styles.purpleCircle}>
+          <PurpleTopRightCircle />
+        </View>
+      </Background>
       <Text.Body style={styles.text} color={Colors.primaryDarkGrey} align={TextAlign.center}>
         {title}
       </Text.Body>
       <Button size={ButtonSizes.Slim} label={t('Add')} onPress={onAdd} style={styles.button} />
-      <View style={styles.purpleCircle}>
-        <PurpleTopRightCircle />
-      </View>
     </View>
   )
 }
