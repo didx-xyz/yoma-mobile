@@ -16,7 +16,7 @@ import ValidationSchema from './ValidationSchema'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
-  onFormChanged: (value: boolean) => void
+  onFormChanged: (hasFormChanged: boolean) => void
 }
 
 const EducationForm = forwardRef(({ navigation, onFormChanged }: Props, ref) => {
@@ -37,12 +37,12 @@ const EducationForm = forwardRef(({ navigation, onFormChanged }: Props, ref) => 
 
   const validation = () => {
     setTimeout(() => {
-      const value = getHasValuesChanged(
+      const hasFormChanged = getHasValuesChanged(
         formRef.current!.initialValues,
         formRef.current!.values,
         formRef.current!.isValid,
       )
-      onFormChanged(value)
+      onFormChanged(hasFormChanged)
     }, 10)
   }
 
