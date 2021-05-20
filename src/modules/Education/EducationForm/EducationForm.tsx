@@ -8,7 +8,7 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
-import { compareFormikObject } from 'utils/strings.utils'
+import { getHasValuesChanged } from 'utils/form.utils'
 
 import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
 import styles from './EducationForm.styles'
@@ -37,7 +37,11 @@ const EducationForm = forwardRef(({ navigation, changeButtonState }: Props, ref)
 
   const validation = () => {
     setTimeout(() => {
-      const value = compareFormikObject(formRef.current!)
+      const value = getHasValuesChanged(
+        formRef.current!.initialValues,
+        formRef.current!.values,
+        formRef.current!.isValid,
+      )
       changeButtonState(value)
     }, 10)
   }
