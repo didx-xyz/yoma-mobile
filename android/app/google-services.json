@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1007644634835",
+    "project_id": "yoma-mobile",
+    "storage_bucket": "yoma-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1007644634835:android:8825d8828e786999602e26",
+        "android_client_info": {
+          "package_name": "com.yomamobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1007644634835-8b7vl8u89o7ah0d6pbhbtajarp23h3j0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADeo72hhHeXmTxCP12w9FuUHagv2h7Os4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1007644634835-8b7vl8u89o7ah0d6pbhbtajarp23h3j0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
