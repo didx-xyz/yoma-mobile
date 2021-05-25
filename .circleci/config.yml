@@ -57,8 +57,6 @@ commands:
   setup-ruby:
     description: 'Setup ruby and install packages'
     steps:
-      - ruby/install:
-          version: '2.7'
       - ruby/install-deps:
           key: gems-v1-{{ arch }}
   install-firebase-cli:
