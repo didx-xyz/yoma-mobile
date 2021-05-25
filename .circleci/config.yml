@@ -14,10 +14,7 @@ executors:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
     resource_class: large
-  macos:
-    macos:
-      xcode: 12.4.0
-    working_directory: ~/project
+
 # --------------------------------
 # common : commands
 # --------------------------------
@@ -94,7 +91,9 @@ jobs:
       - bundle
 
   deploy-android-alpha:
-    executor: macos
+    working_directory: ~/project
+    docker:
+      - image: circleci/android:api-29-node
     steps:
       - checkout
       - setup-node
