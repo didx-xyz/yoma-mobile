@@ -53,7 +53,7 @@ commands:
 # --------------------------------
 
 jobs:
-  pull-request:
+  push-checks:
     executor: node
     steps:
       - checkout
@@ -87,13 +87,12 @@ jobs:
 
 workflows:
   version: 2
-  pull-request:
+  push-validation:
     jobs:
-      - pull-request:
+      - push-checks:
           filters:
             branches:
               ignore:
-                - YOMA-346_setup_playstore
                 - develop
                 - main
 #  deploy-android-alpha:
