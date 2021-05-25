@@ -51,8 +51,6 @@ commands:
   setup-node:
     description: 'Setup the node environment'
     steps:
-      - node/install:
-          node-version: '14.16.0'
       - node/install-packages:
           cache-version: v1-{{ arch }}
   setup-ruby:
