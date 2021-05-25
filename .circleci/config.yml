@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1.0
+  ruby: circleci/ruby@1.1.2
 
 # --------------------------------
 # common : executors
@@ -42,11 +43,17 @@ commands:
           name: 'Create Test Env'
           command: npm run env:test
   bundle:
-    description: 'Bundle the Android js code'
+    description: 'Bundle Android JS code'
     steps:
       - run:
-          name: 'Bundle the android js code'
+          name: 'Bundle Android JS code'
           command: npm run bundle:android
+  deploy-android-alpha:
+    description: 'Deploy the Android app to Firebase App Distribution'
+    steps:
+      - run:
+          name: 'Deploy the Android app to Firebase App Distribution'
+          command: npm run deploy:alpha:android
 
 # --------------------------------
 # common : jobs
@@ -64,22 +71,25 @@ jobs:
       - test
       - bundle
 
-#  deploy-android-alpha:
-#    executor: node
-#    steps:
-#      - checkout
-#      - node/install-packages
-#      - run:
-#          name: Configure Build
-#          command: npm run configure:beta:android
-#      - run:
-#          name: 'Install Firebase CLI'
-#          command: |
-#            curl -sL firebase.tools | bash
-#      - run:
-#          name: 'Deploy alpha build to Firebase'
-#          command: |
-#            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
+  deploy-android-alpha:
+    executor: node
+    steps:
+      - checkout
+      - setup_node
+      - setup_ruby
+      - env
+      -
+      - run:
+          name: Configure Build
+          command: npm run configure:beta:android
+      - run:
+          name: 'Install Firebase CLI'
+          command: |
+            curl -sL firebase.tools | bash
+      - run:
+          name: 'Deploy alpha build to Firebase'
+          command: |
+            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
 
 # --------------------------------
 # common : workflows
@@ -87,22 +97,23 @@ jobs:
 
 workflows:
   version: 2
-  push-validation:
+  validate-branch:
     jobs:
       - push-checks:
           filters:
             branches:
               ignore:
+                - YOMA-346_setup_playstore
                 - develop
                 - main
-#  deploy-android-alpha:
-#    jobs:
-#      - pull-request:
-#          filters:
-#            branches:
-#              only:
-#                - YOMA-346_setup_playstore
-#                - develop
-#      - deploy-android-alpha:
-#          requires:
-#            - pull-request
+  deploy-android-alpha:
+    jobs:
+      - pull-request:
+          filters:
+            branches:
+              only:
+                - YOMA-346_setup_playstore
+                - develop
+      - deploy-android-alpha:
+          requires:
+            - pull-request
