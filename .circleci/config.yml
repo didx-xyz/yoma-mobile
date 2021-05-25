@@ -16,7 +16,41 @@ executors:
 # --------------------------------
 # common : commands
 # --------------------------------
-#commands:
+commands:
+  audit:
+    description: 'Audit CI'
+    steps:
+      - run: npm run npm:audit
+  lint:
+    description: 'Lint'
+    steps:
+      - run:
+          name: 'Lint'
+          command: npm run code:lint
+  test:
+    description: 'Test'
+    steps:
+      - run:
+          name: 'Test'
+          command: npm run test
+          environment:
+            - NODE_OPTIONS: --max_old_space_size=8192
+  env:
+    description: 'Setup Env File'
+    steps:
+      - run:
+          name: 'Create Test Env'
+          command: npm run env:test
+  bundle:
+    description: 'Bundle the Android js code'
+    steps:
+      - run:
+          name: 'Bundle the android js code'
+          command: npm run bundle:android
+
+# --------------------------------
+# common : jobs
+# --------------------------------
 
 jobs:
   pull-request:
@@ -24,30 +58,33 @@ jobs:
     steps:
       - checkout
       - node/install-packages
-      - run: npm run env:test
-      - run: npm run code:lint
-      - run:
-          name: Unit Tests
-          command: npm run test
-          environment:
-            - NODE_OPTIONS: --max_old_space_size=8192
-      - run: npm run npm:audit
-  deploy-android-alpha:
-    executor: node
-    steps:
-      - checkout
-      - node/install-packages
-      - run:
-          name: Configure Build
-          command: npm run configure:beta:android
-      - run:
-          name: 'Install Firebase CLI'
-          command: |
-            curl -sL firebase.tools | bash
-      - run:
-          name: 'Deploy alpha build to Firebase'
-          command: |
-            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
+      - audit
+      - lint
+      - env
+      - test
+      - bundle
+
+#  deploy-android-alpha:
+#    executor: node
+#    steps:
+#      - checkout
+#      - node/install-packages
+#      - run:
+#          name: Configure Build
+#          command: npm run configure:beta:android
+#      - run:
+#          name: 'Install Firebase CLI'
+#          command: |
+#            curl -sL firebase.tools | bash
+#      - run:
+#          name: 'Deploy alpha build to Firebase'
+#          command: |
+#            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
+
+# --------------------------------
+# common : workflows
+# --------------------------------
+
 workflows:
   version: 2
   pull-request:
@@ -59,14 +96,14 @@ workflows:
                 - YOMA-346_setup_playstore
                 - develop
                 - main
-  deploy-android-alpha:
-    jobs:
-      - pull-request:
-          filters:
-            branches:
-              only:
-                - YOMA-346_setup_playstore
-                - develop
-      - deploy-android-alpha:
-          requires:
-            - pull-request
+#  deploy-android-alpha:
+#    jobs:
+#      - pull-request:
+#          filters:
+#            branches:
+#              only:
+#                - YOMA-346_setup_playstore
+#                - develop
+#      - deploy-android-alpha:
+#          requires:
+#            - pull-request
