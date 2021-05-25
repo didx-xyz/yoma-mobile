@@ -48,12 +48,30 @@ commands:
       - run:
           name: 'Bundle Android JS code'
           command: npm run bundle:android
+  setup-node:
+    description: 'Setup the node environment'
+    steps:
+      - node/install:
+          node-version: '14.16.0'
+      - node/install-packages:
+          cache-version: v1-{{ arch }}
+  setup-ruby:
+    description: 'Setup ruby and install packages'
+    steps:
+      - ruby/install-deps:
+          key: gems-v1-{{ arch }}
+  install-firebase-cli:
+    description: 'Install the FireBase CLI'
+    steps:
+      - run: |
+          curl -sL firebase.tools | bash
   deploy-android-alpha:
     description: 'Deploy the Android app to Firebase App Distribution'
     steps:
       - run:
           name: 'Deploy the Android app to Firebase App Distribution'
-          command: npm run deploy:alpha:android
+          command: |
+            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
 
 # --------------------------------
 # common : jobs
@@ -75,21 +93,11 @@ jobs:
     executor: node
     steps:
       - checkout
-      - setup_node
-      - setup_ruby
+      - setup-node
+      - setup-ruby
       - env
-      -
-      - run:
-          name: Configure Build
-          command: npm run configure:beta:android
-      - run:
-          name: 'Install Firebase CLI'
-          command: |
-            curl -sL firebase.tools | bash
-      - run:
-          name: 'Deploy alpha build to Firebase'
-          command: |
-            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
+      - install-firebase-cli
+      - deploy-android-alpha
 
 # --------------------------------
 # common : workflows
@@ -108,7 +116,7 @@ workflows:
                 - main
   deploy-android-alpha:
     jobs:
-      - pull-request:
+      - push-checks:
           filters:
             branches:
               only:
@@ -116,4 +124,4 @@ workflows:
                 - develop
       - deploy-android-alpha:
           requires:
-            - pull-request
+            - push-checks
