@@ -68,9 +68,9 @@ commands:
     steps:
       - run:
           name: 'Deploy the Android app to Firebase App Distribution'
-          command: |
-            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
-
+          #          command: |
+          #            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
+          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
 # --------------------------------
 # common : jobs
 # --------------------------------
