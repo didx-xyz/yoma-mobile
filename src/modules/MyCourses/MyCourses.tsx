@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
@@ -48,12 +48,17 @@ const MyCourses = ({ navigation }: Props) => {
       <Optional
         condition={isEditing}
         fallback={
-          <FlatList
-            data={courses}
-            contentContainerStyle={styles.listContainer}
-            renderItem={({ item }) => renderCourseEntry(item)}
-            keyExtractor={item => item.course}
-          />
+          <Optional
+            condition={courses.length > 0}
+            fallback={<EmptyCard title={t('Have you completed any courses yet?')} onAdd={() => setIsEditing(true)} />}
+          >
+            <FlatList
+              data={courses}
+              contentContainerStyle={styles.listContainer}
+              renderItem={({ item }) => renderCourseEntry(item)}
+              keyExtractor={item => item.course}
+            />
+          </Optional>
         }
       >
         <ScrollView>

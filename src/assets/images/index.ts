@@ -23,6 +23,8 @@ import EditIcon from './icon-edit.svg'
 import IconInfo from './icon-info.svg'
 import ProfileIcon from './icon-profile.svg'
 import MarketplaceIcon from './marketplaceIcon.svg'
+import PurpleTopRightCircle from './purple-top-right-shade.svg'
+import YellowBottomLeftCircle from './yellow-bottom-left-shade.svg'
 import ZIcon from './zIcon.svg'
 
 export {
@@ -46,9 +48,11 @@ export {
   ProfileIcon,
   PurpleQuarter,
   PurpleSemiCircle,
+  PurpleTopRightCircle,
   RedSemiCircle,
   RLabsLogo,
   WhiteLogo,
+  YellowBottomLeftCircle,
   YellowCircleLeft,
   YellowCircleRight,
   ZIcon,

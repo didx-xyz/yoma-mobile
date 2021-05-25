@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -62,12 +62,22 @@ const Education = ({ navigation }: Props) => {
       <Optional
         condition={isSaved}
         fallback={
-          <FlatList
-            data={education}
-            contentContainerStyle={styles.listContainer}
-            renderItem={({ item }) => renderItem(item)}
-            keyExtractor={item => item.school}
-          />
+          <Optional
+            condition={education.length > 0}
+            fallback={
+              <EmptyCard
+                title={t('Which school, university or college did you attend?')}
+                onAdd={() => setIsSaved(true)}
+              />
+            }
+          >
+            <FlatList
+              data={education}
+              contentContainerStyle={styles.listContainer}
+              renderItem={({ item }) => renderItem(item)}
+              keyExtractor={item => item.school}
+            />
+          </Optional>
         }
       >
         <ScrollView>
