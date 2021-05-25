@@ -1,6 +1,10 @@
 version: 2.1
 orbs:
   node: circleci/node@4.1.0
+
+# --------------------------------
+# common : executors
+# --------------------------------
 executors:
   node:
     docker:
@@ -8,6 +12,12 @@ executors:
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
+
+# --------------------------------
+# common : commands
+# --------------------------------
+#commands:
+
 jobs:
   pull-request:
     executor: node
@@ -22,12 +32,40 @@ jobs:
           environment:
             - NODE_OPTIONS: --max_old_space_size=8192
       - run: npm run npm:audit
+  deploy-android-alpha:
+    executor: node
+    steps:
+      - checkout
+      - run:
+          name: Configure Build
+          command: npm run configure:beta:android
+      - run:
+          name: 'Install Firebase CLI'
+          command: |
+            curl -sL firebase.tools | bash
+      - run:
+          name: 'Deploy alpha build to Firebase'
+          command: |
+            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
 workflows:
+  version: 2
   pull-request:
     jobs:
       - pull-request:
           filters:
             branches:
               ignore:
+                - YOMA-346_setup_playstore
                 - develop
                 - main
+  deploy-android-alpha:
+    jobs:
+      - pull-request:
+          filters:
+            branches:
+              only:
+                - YOMA-346_setup_playstore
+                - develop
+      - deploy-android-alpha:
+          requires:
+            - pull-request
