@@ -13,7 +13,11 @@ executors:
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
-
+    resource_class: large
+  macos:
+    macos:
+      xcode: 12.4.0
+    working_directory: ~/project
 # --------------------------------
 # common : commands
 # --------------------------------
@@ -56,6 +60,8 @@ commands:
   setup-ruby:
     description: 'Setup ruby and install packages'
     steps:
+      - ruby/install:
+          version: '2.7'
       - ruby/install-deps:
           key: gems-v1-{{ arch }}
   install-firebase-cli:
@@ -88,7 +94,7 @@ jobs:
       - bundle
 
   deploy-android-alpha:
-    executor: node
+    executor: macos
     steps:
       - checkout
       - setup-node
