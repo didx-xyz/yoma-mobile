@@ -78,22 +78,20 @@ commands:
   setup-ruby:
     description: 'Setup ruby and install packages'
     steps:
+      - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
+      - run: gem update bundler
       - ruby/install-deps:
           key: gems-v1-{{ arch }}
-  bundle-install:
-    description: 'Run bundle install'
-    steps:
-      - run: bundle install
   install-firebase-cli:
     description: 'Install the FireBase CLI'
     steps:
-      - run: |
-          curl -sL firebase.tools | bash
+      - run: sudo curl -sL firebase.tools | bash
   deploy-android-alpha:
     description: 'Deploy the Android app to Firebase App Distribution'
     steps:
       - run:
           name: 'Deploy the Android app to Firebase App Distribution'
+          working_directory: ~/code/yoma-mobile
           command: bundle exec fastlane android distribute
 
 # --------------------------------
@@ -119,7 +117,6 @@ jobs:
       - checkout
       - setup-node
       - setup-ruby
-      - bundle-install
       - env
       - install-firebase-cli
       - deploy-android-alpha
