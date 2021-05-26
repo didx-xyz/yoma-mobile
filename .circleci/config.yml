@@ -6,6 +6,7 @@ orbs:
 # --------------------------------
 # common : executors
 # --------------------------------
+
 executors:
   node:
     docker:
@@ -14,10 +15,17 @@ executors:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
     resource_class: large
+  android:
+    docker:
+      - image: circleci/android:api-30-node
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_PASSWORD
 
 # --------------------------------
 # common : commands
 # --------------------------------
+
 commands:
   audit:
     description: 'Audit CI'
@@ -49,9 +57,22 @@ commands:
       - run:
           name: 'Bundle Android JS code'
           command: npm run bundle:android
+  #  setup-node:
+  #    description: 'Setup the node environment'
+  #    steps:
+  #      - node/install-packages:
+  #          cache-version: v1-{{ arch }}
+  #  setup-ruby:
+  #    description: 'Setup ruby and install packages'
+  #    steps:
+  #      - ruby/install-deps:
+  #          key: gems-v1-{{ arch }}
   setup-node:
     description: 'Setup the node environment'
     steps:
+      - node/install:
+          node-version: 14.16.0
+          install-npm: false
       - node/install-packages:
           cache-version: v1-{{ arch }}
   setup-ruby:
@@ -59,6 +80,10 @@ commands:
     steps:
       - ruby/install-deps:
           key: gems-v1-{{ arch }}
+  bundle-install:
+    description: 'Run bundle install'
+    steps:
+      - run: bundle install
   install-firebase-cli:
     description: 'Install the FireBase CLI'
     steps:
@@ -69,9 +94,8 @@ commands:
     steps:
       - run:
           name: 'Deploy the Android app to Firebase App Distribution'
-          #          command: |
-          #            bundle exec fastlane stage flavor:alpha branch:${CIRCLE_BRANCH} app_id:$FIREBASE_APP_ID_ALPHA firebase_token:$FIREBASE_TOKEN
-          command: ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN
+          command: bundle exec fastlane android distribute
+
 # --------------------------------
 # common : jobs
 # --------------------------------
@@ -90,12 +114,12 @@ jobs:
 
   deploy-android-alpha:
     working_directory: ~/project
-    docker:
-      - image: circleci/android:api-29-node
+    executor: android
     steps:
       - checkout
       - setup-node
       - setup-ruby
+      - bundle-install
       - env
       - install-firebase-cli
       - deploy-android-alpha

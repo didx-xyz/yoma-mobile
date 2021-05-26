@@ -1,0 +1,22 @@
+fastlane_require 'dotenv'
+before_all do
+  Dotenv.overload('.env')
+end
+platform :android do
+  desc "Yoma Android App"
+  lane :distribute do
+    gradle(task: 'clean assembleRelease', project_dir: './android', print_command: false, properties: {
+      'YOMA_UPLOAD_STORE_FILE' => ENV['YOMA_UPLOAD_STORE_FILE'],
+      'YOMA_UPLOAD_STORE_PASSWORD' => ENV['YOMA_UPLOAD_STORE_PASSWORD'],
+      'YOMA_UPLOAD_KEY_ALIAS' => ENV['YOMA_UPLOAD_KEY_ALIAS'],
+      'YOMA_UPLOAD_KEY_PASSWORD' => ENV['YOMA_UPLOAD_KEY_PASSWORD']
+    })
+
+    firebase_app_distribution(
+    app: '1:1007644634835:android:8825d8828e786999602e26',
+    groups: 'yoma-testers',
+    firebase_cli_token: ENV['FIREBASE_TOKEN'],
+    release_notes: 'Testing builds via fastlane',
+    )
+  end
+end
