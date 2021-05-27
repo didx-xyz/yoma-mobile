@@ -113,7 +113,6 @@ jobs:
       - setup-node
       - setup-ruby
       - env
-      - run: ./gradlew build
       - install-firebase-cli
       - deploy-android-alpha
 
