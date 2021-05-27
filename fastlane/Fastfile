@@ -1,16 +1,12 @@
 default_platform(:android)
 
 platform :android do
-  before_all do
-    setup_circle_ci
-    app_store_api_key
-  end
-
   desc "Android beta deploy"
 
   lane :clean do
     build_android_app(task: 'clean', project_dir: './android')
   end
+
   lane :build do
     build_android_app(task: 'assemble', build_type: 'Release', project_dir: './android', print_command: false, properties: {
         "android.injected.signing.store.file" => ENV['YOMA_UPLOAD_STORE_FILE'],
@@ -19,7 +15,6 @@ platform :android do
         "android.injected.signing.key.password" => ENV['YOMA_UPLOAD_KEY_PASSWORD']
       })
   end
-
 
   lane :distribute do
     clean
