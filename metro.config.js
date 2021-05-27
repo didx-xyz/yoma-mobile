@@ -20,6 +20,7 @@ module.exports = (async () => {
       experimentalImportSupport: false,
       inlineRequires: false,
     },
+    maxWorkers: 2,
     resolver: {
       assetExts: assetExts.filter(ext => ext !== "svg"),
       sourceExts: [...sourceExts, "svg"]
