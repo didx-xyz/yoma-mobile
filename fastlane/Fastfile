@@ -1,22 +1,36 @@
-fastlane_require 'dotenv'
-before_all do
-  Dotenv.overload('.env')
-end
+default_platform(:android)
+
 platform :android do
-  desc "Yoma Android App"
+  before_all do
+    setup_circle_ci
+    app_store_api_key
+  end
+
+  desc "Android beta deploy"
+
+  lane :clean do
+    build_android_app(task: 'clean', project_dir: './android')
+  end
+  lane :build do
+    build_android_app(task: 'assemble', build_type: 'Release', project_dir: './android', print_command: false, properties: {
+        "android.injected.signing.store.file" => ENV['YOMA_UPLOAD_STORE_FILE'],
+        "android.injected.signing.store.password" => ENV['YOMA_UPLOAD_STORE_PASSWORD'],
+        "android.injected.signing.key.alias" => ENV['YOMA_UPLOAD_KEY_ALIAS'],
+        "android.injected.signing.key.password" => ENV['YOMA_UPLOAD_KEY_PASSWORD']
+      })
+  end
+
+
   lane :distribute do
-    gradle(task: 'clean', project_dir: './android', print_command: false)
-    gradle(task: 'assemble', build_type: 'Release', project_dir: './android', print_command: false, properties: {
-      "android.injected.signing.store.file" => ENV['YOMA_UPLOAD_STORE_FILE'],
-      "android.injected.signing.store.password" => ENV['YOMA_UPLOAD_STORE_PASSWORD'],
-      "android.injected.signing.key.alias" => ENV['YOMA_UPLOAD_KEY_ALIAS'],
-      "android.injected.signing.key.password" => ENV['YOMA_UPLOAD_KEY_PASSWORD']
-    })
+    clean
+    build
     firebase_app_distribution(
       app: '1:1007644634835:android:8825d8828e786999602e26',
       groups: 'yoma-testers',
       firebase_cli_token: ENV['FIREBASE_TOKEN'],
       release_notes: 'Testing builds via fastlane',
+      android_artifact_type:'APK',
+      debug: true,
     )
   end
 end
