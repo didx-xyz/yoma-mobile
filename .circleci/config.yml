@@ -86,8 +86,8 @@ commands:
     steps:
       - run:
           name: 'Deploy the Android app to Firebase App Distribution'
-          working_directory: ~/code/yoma-mobile
-          command: fastlane android distribute
+          working_directory: ~/project
+          command: bundle exec fastlane android distribute
 
 # --------------------------------
 # common : jobs
