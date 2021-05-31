@@ -9,7 +9,7 @@ platform :android do
 
   lane :build do
     build_android_app(task: 'assemble', build_type: 'Release', project_dir: './android', print_command: false, properties: {
-        "android.injected.signing.store.file" => file(ENV['YOMA_UPLOAD_STORE_FILE']),
+        "android.injected.signing.store.file" => ENV['YOMA_UPLOAD_STORE_FILE'],
         "android.injected.signing.store.password" => ENV['YOMA_UPLOAD_STORE_PASSWORD'],
         "android.injected.signing.key.alias" => ENV['YOMA_UPLOAD_KEY_ALIAS'],
         "android.injected.signing.key.password" => ENV['YOMA_UPLOAD_KEY_PASSWORD']
