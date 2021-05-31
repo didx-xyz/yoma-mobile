@@ -81,6 +81,15 @@ commands:
     description: 'Install the FireBase CLI'
     steps:
       - run: sudo curl -sL firebase.tools | bash
+  create_keystore_properties: &create_keystore_properties
+    run:
+      name: Create keystore.properties
+      command: printf 'releaseKeyAlias=%s\nreleaseKeyPassword=%s\nreleaseKeyStore=%s\nreleaseStorePassword=%s' \
+        $YOMA_UPLOAD_KEY_ALIAS $YOMA_UPLOAD_KEY_PASSWORD $YOMA_UPLOAD_STORE_FILE $YOMA_UPLOAD_STORE_PASSWORD > keystore.properties
+  decode_android_key: &decode_android_key
+    run:
+      name: Decode Android key store
+      command: echo $YOMA_UPLOAD_KEYSTORE_BASE64 | base64 -d | tee keystore app/keystore > /dev/null
   deploy-android-alpha:
     description: 'Deploy the Android app to Firebase App Distribution'
     steps:
@@ -113,6 +122,8 @@ jobs:
       - setup-node
       - setup-ruby
       - env
+      - *create_keystore_properties
+      - *decode_android_key
       - install-firebase-cli
       - deploy-android-alpha
 
