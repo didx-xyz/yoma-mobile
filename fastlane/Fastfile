@@ -20,7 +20,7 @@ platform :android do
   lane :distribute do
 
     increment_version_code(
-      gradle_file_path: "./app/build.gradle"
+      gradle_file_path: "./android/app/build.gradle"
     )
 
     clean
