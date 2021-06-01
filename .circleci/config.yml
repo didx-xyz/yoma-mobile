@@ -81,7 +81,7 @@ commands:
     description: 'Install the FireBase CLI'
     steps:
       - run: sudo curl -sL firebase.tools | bash
-  decode_keystore:
+  create_keystore:
     description: 'Create Keystore Properties'
     steps:
       - run:
@@ -89,10 +89,11 @@ commands:
           command: npm run create:keystore
   deploy-android-alpha:
     description: 'Deploy the Android app to Firebase App Distribution'
+    working_directory: ~/project/yoma-mobile
+    executor: android
     steps:
       - run:
           name: 'Deploy the Android app to Firebase App Distribution'
-          working_directory: ~/project
           command: bundle exec fastlane android distribute
 
 # --------------------------------
@@ -115,11 +116,12 @@ jobs:
     working_directory: ~/project
     executor: android/android
     steps:
-      - checkout
+      - checkout:
+          path: ~/project
       - setup-node
       - setup-ruby
       - env
-      - decode_keystore
+      - create-keystore
       - install-firebase-cli
       - deploy-android-alpha
 
