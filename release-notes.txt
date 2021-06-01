@@ -1,0 +1,3 @@
+- Testing Release notes
+- Adding APP ID from Env variables
+- Adding app version incrementing (hopefullly)

@@ -18,13 +18,18 @@ platform :android do
   end
 
   lane :distribute do
+
+    increment_version_code(
+      gradle_file_path: "./app/build.gradle"
+    )
+
     clean
     build
     firebase_app_distribution(
-      app: '1:1007644634835:android:8825d8828e786999602e26',
+      app: ENV[]'FIREBASE_APP_ID_ALPHA'],
       groups: 'yoma-testers',
       firebase_cli_token: ENV['FIREBASE_TOKEN'],
-      release_notes: 'Testing builds via fastlane',
+      release_notes_file: './release-notes.txt',
       android_artifact_type:'APK',
       debug: true,
     )
