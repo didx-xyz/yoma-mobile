@@ -26,7 +26,7 @@ platform :android do
     clean
     build
     firebase_app_distribution(
-      app: ENV[]'FIREBASE_APP_ID_ALPHA'],
+      app: ENV['FIREBASE_APP_ID_ALPHA'],
       groups: 'yoma-testers',
       firebase_cli_token: ENV['FIREBASE_TOKEN'],
       release_notes_file: './release-notes.txt',
