@@ -2,7 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@4.1.0
   ruby: circleci/ruby@1.1.3
-#  android: circleci/android@1.0.3
+  android: circleci/android@1.0.3
 
 # --------------------------------
 # common : executors
@@ -16,12 +16,6 @@ executors:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
     resource_class: large
-  android:
-    docker:
-      - image: circleci/android:api-30-node
-        auth:
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
 
 # --------------------------------
 # common : commands
@@ -87,7 +81,7 @@ commands:
     description: 'Install the FireBase CLI'
     steps:
       - run: sudo curl -sL firebase.tools | bash
-  create-keystore:
+  create_keystore:
     description: 'Create Keystore Properties'
     steps:
       - run:
@@ -98,6 +92,7 @@ commands:
     steps:
       - run:
           name: 'Deploy the Android app to Firebase App Distribution'
+          working_directory: ~/project/yoma-mobile
           command: bundle exec fastlane android distribute
 
 # --------------------------------
@@ -117,15 +112,14 @@ jobs:
       - bundle
 
   deploy-android-alpha:
-    working_directory: ~/project/yoma-mobile
-    executor: android
+    working_directory: ~/project
+    executor: android/android
     steps:
-      - checkout:
-          path: ~/project
+      - checkout
       - setup-node
       - setup-ruby
       - env
-      - create-keystore
+      - create_keystore
       - install-firebase-cli
       - deploy-android-alpha
 
