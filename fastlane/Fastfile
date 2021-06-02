@@ -4,10 +4,13 @@ platform :android do
   desc "Android beta deploy"
 
   lane :clean do
-    build_android_app(task: 'clean', project_dir: './android')
+    gradle(task: 'clean', project_dir: './android')
   end
 
   lane :build do
+    increment_version_code(
+      gradle_file_path: "./android/app/build.gradle"
+    )
     gradle(
         task: "assemble",
         build_type: "Release",
@@ -19,11 +22,6 @@ platform :android do
 
   lane :distribute do
     clean
-
-    increment_version_code(
-      gradle_file_path: "./android/app/build.gradle"
-    )
-
     build
     firebase_app_distribution(
       app: ENV['FIREBASE_APP_ID_ALPHA'],
@@ -33,5 +31,6 @@ platform :android do
       android_artifact_type:'APK',
       debug: true,
     )
+    slack(message: 'Successfully distributed a new beta build')
   end
 end
