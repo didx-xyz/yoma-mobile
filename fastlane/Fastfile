@@ -18,12 +18,12 @@ platform :android do
   end
 
   lane :distribute do
+    clean
 
     increment_version_code(
       gradle_file_path: "./android/app/build.gradle"
     )
 
-    clean
     build
     firebase_app_distribution(
       app: ENV['FIREBASE_APP_ID_ALPHA'],
