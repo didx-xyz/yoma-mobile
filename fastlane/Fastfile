@@ -35,7 +35,6 @@ platform :android do
         task: "assemble",
         build_type: "Release",
         project_dir: './android',
-        properties: gradle_properties,
         print_command: false,
         flags: "--no-daemon --max-workers 2"
       )
