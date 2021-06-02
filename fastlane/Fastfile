@@ -8,14 +8,6 @@ platform :android do
   end
 
   lane :build do
-    properties = {
-        "versionCode" => new_version_code,
-        "versionName" => new_version_name,
-    }
-
-    increment_version_code(
-      gradle_file_path: "./app/build.gradle"
-    )
     gradle(
         task: "assemble",
         build_type: "Release",
@@ -36,6 +28,5 @@ platform :android do
       android_artifact_type:'APK',
       debug: true,
     )
-    slack(message: 'Successfully distributed a new beta build')
   end
 end
