@@ -28,6 +28,7 @@ export const authRegistrationFailure = createAction<AuthRegistrationFailureRespo
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setAuthCredentials, (state, action) => mergeDeepRight(state)(action.payload))
+  builder.addCase(authLoginSuccess, (state, action) => mergeDeepRight(state)(action.payload))
 })
 
 export default authReducer

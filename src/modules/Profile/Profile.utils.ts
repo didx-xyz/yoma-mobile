@@ -14,12 +14,11 @@ const CAPTURE_IMAGE_OPTIONS: Options = {
   compressImageQuality: 0.2,
 }
 
-export const getUserData = async () => {
+export const getUserData = async (userId: string) => {
   try {
-    const response = await api.users.getById(USER_ID)
+    const response = await api.users.getById(userId)
     return response.data
   } catch (error) {
-    console.log('error', error)
     showSimpleMessage('danger', 'Error', error)
   }
 }
