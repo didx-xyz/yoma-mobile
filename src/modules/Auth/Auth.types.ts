@@ -10,6 +10,7 @@ export interface AuthCredentialsResponse {
   refreshToken: string
   token: string
   expiresAt: string
+  user: UserResponse | null
 }
 
 export interface UserResponse {

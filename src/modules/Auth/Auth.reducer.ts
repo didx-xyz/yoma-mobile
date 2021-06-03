@@ -16,6 +16,7 @@ export const INITIAL_STATE = {
   refreshToken: '',
   token: '',
   expiresAt: '',
+  user: null,
 } as AuthState
 
 export const authLogin = createAction<AuthCredentials>(`${name} Login`)
@@ -28,7 +29,6 @@ export const authRegistrationFailure = createAction<AuthRegistrationFailureRespo
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setAuthCredentials, (state, action) => mergeDeepRight(state)(action.payload))
-  builder.addCase(authLoginSuccess, (state, action) => mergeDeepRight(state)(action.payload))
 })
 
 export default authReducer
