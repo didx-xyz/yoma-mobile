@@ -16,36 +16,11 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android clean
-```
-fastlane android clean
-```
-Android beta deploy
-### android version_name
-```
-fastlane android version_name
-```
-
-### android version_code
-```
-fastlane android version_code
-```
-
-### android gradle_properties
-```
-fastlane android gradle_properties
-```
-
-### android build
-```
-fastlane android build
-```
-
 ### android distribute
 ```
 fastlane android distribute
 ```
-
+Yoma Android App
 
 ----
 
