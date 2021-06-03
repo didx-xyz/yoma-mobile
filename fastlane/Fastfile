@@ -7,29 +7,6 @@ platform :android do
     gradle(task: 'clean', project_dir: './android')
   end
 
-  lane :version_name do
-    package = load_json(json_path: "./package.json")
-    new_version_name = package["version"]
-    puts "new version code is #{new_version_name}"
-    new_version_name
-  end
-
-  lane :version_code do
-    current_version_code = android_get_version_code(gradle_file: "./android/app/build.gradle").to_i
-    new_version_code = current_version_code + 1
-    puts "new version code is #{new_version_code}"
-    new_version_code
-  end
-
-  lane :gradle_properties do
-    properties = {
-     version_name: version_name,
-     version_code: version_code,
-   }
-   puts "new properties are #{properties}"
-   properties
-  end
-
   lane :build do
     gradle(
         task: "assemble",
@@ -39,8 +16,6 @@ platform :android do
         flags: "--no-daemon --max-workers 2"
       )
   end
-
-
 
   lane :distribute do
     clean
