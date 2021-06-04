@@ -3,7 +3,6 @@ import { EditIcon } from 'assets/images'
 import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
 import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
-import { USER_ID } from 'helpers/helpers'
 import { UserResponse } from 'modules/Auth/Auth.types'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -18,11 +17,12 @@ import { captureAndUploadImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
+  onLogoutUser: () => void
   user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, user }: Props) => {
+const Profile = ({ navigation, onLogoutUser, user }: Props) => {
   const [userResponse, setUserResponse] = useState<UserResponse>(USER_RESPONSE)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
@@ -80,8 +80,7 @@ const Profile = ({ navigation, user }: Props) => {
           variant={ButtonVariants.Clear}
           color={Colors.menuGrey}
           label={t('Log Out')}
-          // TODO: navigation to login page
-          onPress={() => {}}
+          onPress={onLogoutUser}
           style={styles.logout}
         />
       </ScrollView>

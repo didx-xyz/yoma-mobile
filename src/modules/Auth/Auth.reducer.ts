@@ -22,6 +22,8 @@ export const INITIAL_STATE = {
 export const authLogin = createAction<AuthCredentials>(`${name} Login`)
 export const authLoginSuccess = createAction<AuthLoginSuccessResponse>(`${name} Login Success`)
 export const authLoginFailure = createAction<AuthLoginFailureResponse>(`${name} Login Failure`)
+export const authLogout = createAction(`${name} Logout`)
+export const authLogoutSuccess = createAction(`${name} Logout Success`)
 export const setAuthCredentials = createAction<AuthState>(`${name} Set Auth Credentials`)
 export const authRegistration = createAction<AuthRegistration>(`${name} Registration`)
 export const authRegistrationSuccess = createAction<AuthRegistrationSuccessResponse>(`${name} Registration Success`)
@@ -29,6 +31,7 @@ export const authRegistrationFailure = createAction<AuthRegistrationFailureRespo
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setAuthCredentials, (state, action) => mergeDeepRight(state)(action.payload))
+  builder.addCase(authLogout, (state, action) => mergeDeepRight(state)(INITIAL_STATE))
 })
 
 export default authReducer
