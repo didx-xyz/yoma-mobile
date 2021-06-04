@@ -28,15 +28,11 @@ const Profile = ({ navigation, user }: Props) => {
   const childRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
-    getData()
+    getUpdatedData(user.id)
   }, [])
 
-  const getData = useCallback(async () => {
-    setUserResponse(user)
-  }, [])
-
-  const getUpdatedData = useCallback(async () => {
-    const user = await getUserData(USER_ID)
+  const getUpdatedData = useCallback(async userId => {
+    const user = await getUserData(userId)
     if (user) {
       setUserResponse(user)
     }

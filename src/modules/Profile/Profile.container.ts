@@ -1,16 +1,15 @@
+import { AuthCredentialsResponse } from 'modules/Auth/Auth.types'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+import { RootState } from 'redux/redux.types'
 
-import { AuthLoginSuccessData } from './../Auth/Auth.types'
+import { AuthLoginSuccessData, UserResponse } from './../Auth/Auth.types'
 import Profile from './Profile'
 
-interface AuthData {
-  auth: { data: AuthLoginSuccessData }
-}
-const mapStateToProps = ({ auth }: AuthData, props: any) => {
+const mapStateToProps = (state: RootState, props: any) => {
   return {
     ...props,
-    user: auth.data.user,
+    user: state.auth.user,
   }
 }
 const mapDispatchToProps = (dispatch: Dispatch) => {
