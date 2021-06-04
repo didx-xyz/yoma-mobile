@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { AUTH_TOKEN } from 'helpers/helpers'
+import { tokenSelector } from 'modules/Auth/Auth.selector'
+import { store } from 'redux/store'
 
 import Env from '../env.json'
 import * as apiConfig from './api.config'
@@ -18,10 +19,11 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async request => {
+    const token = tokenSelector(store.getState())
     request.headers = {
       ...request.headers,
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${AUTH_TOKEN}`,
+      Authorization: `Bearer ${token}`,
     }
     return request
   },
