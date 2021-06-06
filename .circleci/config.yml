@@ -100,7 +100,7 @@ commands:
 # --------------------------------
 
 jobs:
-  push-checks:
+  pull-request:
     executor: node
     steps:
       - checkout
@@ -131,7 +131,7 @@ workflows:
   version: 2
   validate-branch:
     jobs:
-      - push-checks:
+      - pull-request:
           filters:
             branches:
               ignore:
@@ -139,11 +139,12 @@ workflows:
                 - main
   deploy-android-alpha:
     jobs:
-      - push-checks:
+      - pull-request:
           filters:
             branches:
               only:
                 - develop
+                - main
       - deploy-android-alpha:
           requires:
             - push-checks
