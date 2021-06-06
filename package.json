@@ -103,11 +103,9 @@
   },
   "jest": {
     "preset": "react-native",
-    "transformIgnorePatterns": [
-      "node_modules/(?!(@?react-native)/)",
-      "node_modules/(?!(jest-)?react-native|@?react-navigation)",
-      "node_modules/(?!rn-fetch-blob)"
-    ],
+    "moduleNameMapper": {
+      "\\.svg": "<rootDir>/__mocks__/svgMock.js"
+    },
     "setupFiles": [
       "./node_modules/react-native-gesture-handler/jestSetup.js"
     ],
