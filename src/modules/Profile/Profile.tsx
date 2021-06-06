@@ -25,16 +25,18 @@ const Profile = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 
-  useEffect(() => {
-    getData()
-  }, [])
-
   const getData = useCallback(async () => {
     const user = await getUserData()
     if (user) {
       setUserResponse(user)
     }
   }, [])
+
+  useEffect(() => {
+    getData().then(data => {
+      console.log(data)
+    })
+  }, [getData])
 
   const captureProfileImage = async () => {
     try {
@@ -66,7 +68,7 @@ const Profile = ({ navigation }: Props) => {
             }
           >
             <TouchableOpacity onPress={captureProfileImage} style={styles.imageContainer}>
-              <Image source={{ uri: userResponse.photoURL }} style={styles.profileImage} />
+              <Image source={{ uri: userResponse.photoURL as string }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>

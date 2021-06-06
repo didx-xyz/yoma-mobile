@@ -31,7 +31,6 @@ const renderChallengeEntry = ({ challenge, description, startDate, endDate, orga
 const MyChallenges = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
-  const [challenges, setChallenges] = useState(MOCKED_CHALLENGES)
   const formRef = useRef<FormikProps<FormikValues>>()
 
   return (
@@ -51,13 +50,13 @@ const MyChallenges = ({ navigation }: Props) => {
         condition={isEditing}
         fallback={
           <Optional
-            condition={challenges.length > 0}
+            condition={MOCKED_CHALLENGES.length > 0}
             fallback={
               <EmptyCard title={t('Have you completed any challenges yet?')} onAdd={() => setIsEditing(true)} />
             }
           >
             <FlatList
-              data={challenges}
+              data={MOCKED_CHALLENGES}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }) => renderChallengeEntry(item)}
               keyExtractor={item => item.challenge}
@@ -67,7 +66,7 @@ const MyChallenges = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <NewChallengeForm navigation={navigation} ref={formRef} />
+            <NewChallengeForm ref={formRef} />
           </Card>
         </ScrollView>
       </Optional>
