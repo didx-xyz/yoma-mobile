@@ -10,6 +10,7 @@ import {
   setAuthCredentials,
 } from './Auth.reducer'
 import {
+  defaultUserData,
   defaultUserLoginResponseData,
   defaultUserRegistrationResponseData,
   userRegistrationData,
@@ -109,21 +110,6 @@ describe('modules/Auth/Auth.middleware', () => {
       // then ... we should correctly catch the action
       expect(store.dispatch).toHaveBeenCalled()
     })
-    it('should correctly send a notification to the user', async () => {
-      // given ... the authLogin action is fired
-      const create = createMiddlewareMock(jest)
-      // @ts-ignore
-      const action = authLoginSuccess(defaultUserLoginResponseData)
-      const mockNotification = jest.fn()
-      // @ts-ignore
-      const { invoke } = create(SUT.authSetCredentialsFlow({ notification: mockNotification }))
-
-      // when ... we respond to the authLogin action
-      await invoke(action)
-
-      // then ... the login API should be called
-      expect(mockNotification).toHaveBeenCalled()
-    })
     it('should dispatch the setAuthCredentials action with the correct data', async () => {
       // given ... the authLogin action is fired
       const create = createMiddlewareMock(jest)
@@ -138,7 +124,12 @@ describe('modules/Auth/Auth.middleware', () => {
 
       // then ... the login API should be called
       expect(store.dispatch).toHaveBeenCalledWith(
-        setAuthCredentials({ refreshToken: 'REFRESH_TOKEN', token: 'USER_TOKEN', expiresAt: 'EXPIRY_DATE' }),
+        setAuthCredentials({
+          refreshToken: 'REFRESH_TOKEN',
+          token: 'USER_TOKEN',
+          expiresAt: 'EXPIRY_DATE',
+          user: defaultUserData,
+        }),
       )
     })
   })
