@@ -5,11 +5,7 @@ import { useTranslation } from 'react-i18next'
 import ViewContainer from '../../components/ViewContainer/ViewContainer'
 import styles from './Marketplace.styles'
 
-interface Props {
-  navigation: any
-}
-
-const Marketplace = ({ navigation }: Props) => {
+const Marketplace = () => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
