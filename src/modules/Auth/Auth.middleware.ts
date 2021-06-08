@@ -35,6 +35,10 @@ export const authLoginFlow: Middleware = ({ dispatch }) => next => action => {
   return result
 }
 
+// TODO: add middleware to just get the auth values from authLoginSuccess
+// TODO: Then add middleware to get the middleware for state
+// TODO: Then add middleware to store the refresh token in secure storage
+// TODO: also add middleware in the User section to catch the user data returned in successful auth
 export const authSetCredentialsFlow = ({ notification }: { notification: typeof showSimpleMessage }): Middleware => ({
   dispatch,
 }) => next => async action => {
