@@ -33,9 +33,7 @@ const Profile = ({ navigation }: Props) => {
   }, [])
 
   useEffect(() => {
-    getData().then(data => {
-      console.log(data)
-    })
+    getData().then(() => {})
   }, [getData])
 
   const captureProfileImage = async () => {
