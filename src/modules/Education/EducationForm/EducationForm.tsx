@@ -1,9 +1,6 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
-import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -13,18 +10,16 @@ import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
 import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
-interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
-}
-
-const EducationForm = forwardRef(({ navigation }: Props, ref) => {
+const EducationForm = forwardRef(ref => {
   const { t } = useTranslation()
   const [isStudying, setIsStudying] = useState(false)
-  const [skillsList, setSkillsList] = useState(MOCKED_SKILLS_DATA)
+  const [skillsList] = useState(MOCKED_SKILLS_DATA)
   const [showInfoModal, setShowInfoModal] = useState(false)
 
   const formRef = useRef<FormikProps<FormikValues>>()
 
+  // TODO: We need to refactor and fix this
+  // @ts-ignore
   useImperativeHandle(ref, () => ({
     handleSubmit() {
       if (formRef.current) {
@@ -35,10 +30,13 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
 
   return (
     <Formik
+      // @ts-ignore
+      // TODO - we will refactor this when we get everything working
       innerRef={formRef}
       initialValues={INITIAL_VALUES}
       enableReinitialize={true}
       validationSchema={ValidationSchema}
+      onSubmit={() => {}}
     >
       {formikHandlers => (
         <FormWrapper>

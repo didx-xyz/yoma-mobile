@@ -47,7 +47,7 @@ const ResetPasswordForm = ({ id, token, navigation }: Props) => {
         console.log('Login values: ', values)
         await api.users.password
           .edit(id, { ...values, token })
-          .then(response => {
+          .then(() => {
             showSimpleMessage('success', 'Password reset successful')
             navigation.navigate(AuthNavigationRoutes.Login)
           })

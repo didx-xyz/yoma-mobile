@@ -13,10 +13,14 @@ import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
 
+const onNavigateBack = (navigation: any) => {
+  navigation.dispatch(StackActions.pop(1))
+}
+
 type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
   headerText: string | React.ReactNode
-  onSave: () => void
+  onSave?: () => void
   showAddButton?: boolean
   onAdd?: () => void
 }
@@ -25,15 +29,11 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
   const { t } = useTranslation()
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      onNavigateBack()
+      onNavigateBack(navigation)
       return true
     })
     return () => backHandler.remove()
-  }, [])
-
-  const onNavigateBack = () => {
-    navigation.dispatch(StackActions.pop(1))
-  }
+  }, [navigation])
 
   return (
     <View style={styles.container}>
