@@ -5,9 +5,8 @@ import { RootState } from 'redux/redux.types'
 
 import AppNavigation from './AppNavigation'
 
-const mapStateToProps = (state: RootState, props: any) => {
+const mapStateToProps = (state: RootState) => {
   return {
-    ...props,
     isAuthenticated: isAuthenticatedSelector(state),
   }
 }
@@ -16,4 +15,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return {}
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppNavigation)
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavigation as any)
