@@ -1,13 +1,11 @@
 import { StyleSheet, ViewStyle, Dimensions, ImageStyle } from 'react-native'
 
-import { colors, Colors } from '../../styles'
-
-const { width, height } = Dimensions.get('window')
+const { height } = Dimensions.get('window')
 
 const styles = {
   header: {
     width: '100%',
-    height: height / 12,
+    height: height / 12, // TODO: use a set height
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
