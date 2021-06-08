@@ -58,7 +58,8 @@ export const authLoginFailureFlow = ({
 
   if (authLoginFailure.match(action)) {
     // TODO: this should be handled by the notification module
-    notification('danger', 'Error', action.payload)
+    console.log(action.payload)
+    notification('danger', 'An error occurred.', action.payload.message)
   }
 
   return result
