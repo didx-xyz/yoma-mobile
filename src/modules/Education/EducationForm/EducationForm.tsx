@@ -10,7 +10,7 @@ import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
 import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
-const EducationForm = forwardRef(ref => {
+const EducationForm = forwardRef((_props, ref) => {
   const { t } = useTranslation()
   const [isStudying, setIsStudying] = useState(false)
   const [skillsList] = useState(MOCKED_SKILLS_DATA)

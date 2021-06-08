@@ -1,5 +1,8 @@
+import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
+import { actions as ApiActions } from '../../api'
+import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
 import {
   authLogin,
@@ -10,27 +13,23 @@ import {
   authRegistrationSuccess,
   setAuthCredentials,
 } from './Auth.reducer'
-import {
-  AuthLoginFailureResponse,
-  AuthLoginSuccessResponse,
-  AuthRegistrationFailureResponse,
-  AuthRegistrationSuccessResponse,
-} from './Auth.types'
+import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
 import { getCredentialsFromAuthSuccess } from './Auth.utils'
 
-export const authLoginFlow = ({ api }: { api: any }): Middleware => ({ dispatch }) => next => async action => {
+export const authLoginFlow: Middleware = ({ dispatch }) => next => action => {
   const result = next(action)
 
-  // TODO: Abstract the api calls into a single api middleware
   if (authLogin.match(action)) {
-    await api.auth
-      .login(action.payload)
-      .then((response: AuthLoginSuccessResponse) => {
-        dispatch(authLoginSuccess(response))
-      })
-      .catch((error: AuthLoginFailureResponse) => {
-        dispatch(authLoginFailure(error))
-      })
+    dispatch(
+      ApiActions.apiRequest(
+        mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+          isTokenRequired: false,
+          onSuccess: authLoginSuccess,
+          onFailure: authLoginFailure,
+        }),
+        action.payload,
+      ),
+    )
   }
 
   return result
