@@ -149,4 +149,4 @@ workflows:
                 - YOMA-346_setup_playstore
       - deploy-android-alpha:
           requires:
-            - push-checks
+            - pull-request
