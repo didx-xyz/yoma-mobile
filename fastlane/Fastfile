@@ -4,7 +4,7 @@ platform :android do
   desc "Android beta deploy"
 
   lane :clean do
-    build_android_app(task: 'clean', project_dir: './android')
+    gradle(task: 'clean', project_dir: './android')
   end
 
   lane :build do
@@ -24,7 +24,7 @@ platform :android do
       app: '1:1007644634835:android:8825d8828e786999602e26',
       groups: 'yoma-testers',
       firebase_cli_token: ENV['FIREBASE_TOKEN'],
-      release_notes: 'Testing builds via fastlane',
+      release_notes_file: './release-notes.txt',
       android_artifact_type:'APK',
       debug: true,
     )
