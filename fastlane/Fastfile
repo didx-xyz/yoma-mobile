@@ -28,8 +28,5 @@ platform :android do
       android_artifact_type:'APK',
       debug: true,
     )
-    slack(
-      message: "Build successfully deployed to Firebase App Distribution."
-    )
   end
 end
