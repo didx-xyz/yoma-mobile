@@ -36,15 +36,11 @@ export const authLoginFlow = ({ api }: { api: any }): Middleware => ({ dispatch 
   return result
 }
 
-export const authSetCredentialsFlow = ({ notification }: { notification: typeof showSimpleMessage }): Middleware => ({
-  dispatch,
-}) => next => async action => {
+export const authSetCredentialsFlow = (): Middleware => ({ dispatch }) => next => async action => {
   const result = next(action)
 
   if (authLoginSuccess.match(action)) {
     const credentials = getCredentialsFromAuthSuccess(action)
-    // TODO: this should be handled by the notification module
-    notification('success', 'Login Successful')
     dispatch(setAuthCredentials(credentials))
   }
   return result

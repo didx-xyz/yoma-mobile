@@ -1,6 +1,6 @@
 module.exports = {
   presets: ['module:metro-react-native-babel-preset'],
-  plugins: [
+  plugins: [   
     ['transform-inline-environment-variables'],
     [
       'module-resolver',

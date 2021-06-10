@@ -9,6 +9,7 @@ describe('modules/Auth/Auth.reducer', () => {
         refreshToken: 'REFRESH_TOKEN',
         token: 'TOKEN',
         expiresAt: 'DATE OF EXPIRY',
+        user: {},
       }
       // when ... we set the Auth credentials
       const action = setAuthCredentials(credentials)
