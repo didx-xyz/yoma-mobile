@@ -16,6 +16,7 @@ export const INITIAL_STATE = {
   refreshToken: '',
   token: '',
   expiresAt: '',
+  user: null,
 } as AuthState
 
 export const authLogin = createAction<AuthCredentials>(`${name} Login`)

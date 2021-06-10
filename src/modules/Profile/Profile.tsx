@@ -3,6 +3,7 @@ import { EditIcon } from 'assets/images'
 import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'components'
 import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
+import { USER_ID } from 'helpers/helpers'
 import { UserResponse } from 'modules/Auth/Auth.types'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
@@ -17,20 +18,21 @@ import { captureAndUploadImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
+  user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation }: Props) => {
+const Profile = ({ navigation, user }: Props) => {
   const [userResponse, setUserResponse] = useState<UserResponse>(USER_RESPONSE)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
-    getData()
+    getUpdatedData(user.id)
   }, [])
 
-  const getData = useCallback(async () => {
-    const user = await getUserData()
+  const getUpdatedData = useCallback(async userId => {
+    const user = await getUserData(userId)
     if (user) {
       setUserResponse(user)
     }

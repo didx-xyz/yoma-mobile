@@ -8,8 +8,6 @@ target 'YomaMobile' do
 
   use_react_native!(:path => config["reactNativePath"])
 
-  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-async-storage/async-storage'
-
   target 'YomaMobileTests' do
     inherit! :complete
     # Pods for testing
