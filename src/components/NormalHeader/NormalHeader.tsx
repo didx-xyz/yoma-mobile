@@ -13,35 +13,27 @@ import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
 
+const onNavigateBack = (navigation: any) => {
+  navigation.dispatch(StackActions.pop(1))
+}
+
 type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
   headerText: string | React.ReactNode
-  onSave: () => void
+  onSave?: () => void
   showAddButton?: boolean
   onAdd?: () => void
-  isSaveButtonEnabled?: boolean
 }
 
-const NormalHeader = ({
-  navigation,
-  headerText,
-  onSave,
-  showAddButton = false,
-  isSaveButtonEnabled = false,
-  onAdd,
-}: Props) => {
+const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, onAdd }: Props) => {
   const { t } = useTranslation()
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      onNavigateBack()
+      onNavigateBack(navigation)
       return true
     })
     return () => backHandler.remove()
-  }, [])
-
-  const onNavigateBack = () => {
-    navigation.dispatch(StackActions.pop(1))
-  }
+  }, [navigation])
 
   return (
     <View style={styles.container}>
@@ -57,7 +49,7 @@ const NormalHeader = ({
           <Button
             variant={ButtonVariants.Clear}
             label={t('Save')}
-            color={isSaveButtonEnabled ? Colors.primaryGreen : Colors.menuGrey}
+            color={Colors.primaryGreen}
             onPress={onSave}
             style={styles.button}
             isFullWidth={false}

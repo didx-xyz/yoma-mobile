@@ -11,9 +11,6 @@ export const getUppercasedHead = (data: string) => pipe(trim, head, toUpper)(dat
 
 export const capitalize = pipe(juxt([pipe(head, toUpper), tail]), join(''))
 
-export const filterStringArray = (value: string, array: string[]) =>
-  filter((element: string) => element !== value)(array)
+export const dropElement = (value: string, array: string[]) => filter((element: string) => element !== value)(array)
 
 export const textOrSpace = (condition: boolean, text: string) => (condition ? text : ' ')
-
-export const dropElement = (value: string, array: string[]) => filter((element: string) => element !== value)(array)
