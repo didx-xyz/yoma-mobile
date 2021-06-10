@@ -1,12 +1,11 @@
 import axios from 'axios'
-import { AUTH_TOKEN } from 'helpers/helpers'
+import { tokenSelector } from 'modules/Auth/Auth.selector'
 import { store } from 'redux/store'
 
 import Env from '../env.json'
 import * as apiConfig from './api.config'
 import { FALLBACK_MESSAGE, REFRESH_TOKEN_FAILED_MESSAGE, UNAUTHORIZED_STATUS_CODE } from './api.constants'
 import * as middleware from './api.middleware'
-import { getTokenIfRequired } from './api.utils'
 import auth from './auth/auth'
 import digitalCv from './digitalCv'
 import users from './users'
@@ -20,11 +19,11 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async request => {
-    const { auth } = store.getState()
+    const token = tokenSelector(store.getState())
     request.headers = {
       ...request.headers,
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${auth.token}`,
+      Authorization: `Bearer ${token}`,
     }
     return request
   },
