@@ -19,8 +19,6 @@ interface Props {
 const Education = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  const [isSaveButtonActive, setIsSaveButtonActive] = useState(false)
-  const [education, setEducation] = useState(MOCKED_EDUCATION_DATA)
   const formRef = useRef<FormikProps<FormikValues>>()
 
   const renderItem = ({
@@ -63,7 +61,7 @@ const Education = ({ navigation }: Props) => {
         condition={isSaved}
         fallback={
           <Optional
-            condition={education.length > 0}
+            condition={MOCKED_EDUCATION_DATA.length > 0}
             fallback={
               <EmptyCard
                 title={t('Which school, university or college did you attend?')}
@@ -72,7 +70,7 @@ const Education = ({ navigation }: Props) => {
             }
           >
             <FlatList
-              data={education}
+              data={MOCKED_EDUCATION_DATA}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }) => renderItem(item)}
               keyExtractor={item => item.school}
@@ -82,7 +80,7 @@ const Education = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <EducationForm navigation={navigation} ref={formRef} onFormChanged={handleOnFormChange} />
+            <EducationForm ref={formRef} />
           </Card>
         </ScrollView>
       </Optional>
