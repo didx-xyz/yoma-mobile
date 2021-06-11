@@ -1,6 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { EmptyCard, Card, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
-
+import { Card, EmptyCard, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
 import ListCardHeader from 'components/ListCardHeader'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
