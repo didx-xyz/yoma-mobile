@@ -1,17 +1,13 @@
-import 'react-native-gesture-handler'
 import React from 'react'
 import { AppRegistry } from 'react-native'
-import { Provider } from 'react-redux'
-
+import 'react-native-gesture-handler'
 import { config } from './config'
 import App from './src/modules/App'
-import { store } from './src/redux/store'
 
 
-const Root = () => (
-  <Provider store={store}>
-    <App />
-  </Provider>
+
+const Root = () => ( 
+    <App /> 
 )
 
 AppRegistry.registerComponent(config.application.name, () => Root)
