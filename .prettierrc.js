@@ -1,5 +1,4 @@
 module.exports = {
-  allowParens: 'avoid',
   bracketSpacing: false,
   jsxBracketSameLine: true,
   singleQuote: true,

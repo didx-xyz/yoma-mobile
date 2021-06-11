@@ -38,14 +38,10 @@ const ProgressCircle = ({
         },
       ]}
     >
-      <View
-        // eslint-disable-next-line react-native/no-inline-styles
-        style={[styles.leftWrap, { height: diameter, left: 0, width: radius }]}
-      >
+      <View style={[styles.leftWrap, { height: diameter, left: 0, width: radius }]}>
         <View
           style={[
             styles.loader,
-            // eslint-disable-next-line react-native/no-inline-styles
             {
               backgroundColor: color,
               borderBottomLeftRadius: 0,
@@ -66,7 +62,6 @@ const ProgressCircle = ({
         <View
           style={[
             styles.loader,
-            // eslint-disable-next-line react-native/no-inline-styles
             {
               backgroundColor: color,
               borderBottomRightRadius: 0,

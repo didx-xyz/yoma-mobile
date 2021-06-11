@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "YomaMobile.app"
-               BlueprintName = "YomaMobile"
+               BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+               BuildableName = "YomaMobile-tvOS.app"
+               BlueprintName = "YomaMobile-tvOS"
                ReferencedContainer = "container:YomaMobile.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +32,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "YomaMobileTests.xctest"
-               BlueprintName = "YomaMobileTests"
+               BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
+               BuildableName = "YomaMobile-tvOSTests.xctest"
+               BlueprintName = "YomaMobile-tvOSTests"
                ReferencedContainer = "container:YomaMobile.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -54,9 +54,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "YomaMobile.app"
-            BlueprintName = "YomaMobile"
+            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+            BuildableName = "YomaMobile-tvOS.app"
+            BlueprintName = "YomaMobile-tvOS"
             ReferencedContainer = "container:YomaMobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -71,9 +71,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "YomaMobile.app"
-            BlueprintName = "YomaMobile"
+            BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
+            BuildableName = "YomaMobile-tvOS.app"
+            BlueprintName = "YomaMobile-tvOS"
             ReferencedContainer = "container:YomaMobile.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

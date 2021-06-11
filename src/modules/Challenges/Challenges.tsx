@@ -5,7 +5,11 @@ import { useTranslation } from 'react-i18next'
 import ViewContainer from '../../components/ViewContainer/ViewContainer'
 import styles from './Challenges.styles'
 
-const Challenges = () => {
+interface Props {
+  navigation: any
+}
+
+const Challenges = ({ navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>

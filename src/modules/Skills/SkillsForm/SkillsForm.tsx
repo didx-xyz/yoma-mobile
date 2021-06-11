@@ -1,6 +1,6 @@
 import { DropDownTags } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import React from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
@@ -9,13 +9,14 @@ import styles from './SkillsForm.styles'
 
 const SkillsForm = () => {
   const { t } = useTranslation()
+  const [skillsList, setSkillsList] = useState(MOCK_SKILLS_LIST)
 
   return (
-    <Formik initialValues={SKILLS_INITIAL_VALUES} onSubmit={() => {}}>
+    <Formik initialValues={SKILLS_INITIAL_VALUES}>
       {(formikHandlers: FormikProps<FormikValues>) => (
         <View style={styles.form}>
           <DropDownTags
-            items={MOCK_SKILLS_LIST}
+            items={skillsList}
             multiple
             searchPlaceholder={t('Search skills')}
             label={t('Skills developed')}

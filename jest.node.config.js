@@ -5,7 +5,7 @@ const config = {
     '^.+\\.ts?$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(@react-native|react-native)/.*)(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)',
+    'node_modules/(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)',
   ],
   roots: ['<rootDir>/src'],
   testRegex: '(.+)[^ui]\\.test\\.ts[x]{0,1}$',

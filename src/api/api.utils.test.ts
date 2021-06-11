@@ -141,7 +141,7 @@ describe('api/api.utils', () => {
       // when ... we provide a token
       const result = SUT.setAuthTokenHeader(token)
       // then ... should give the correct header string with the provided auth token
-      expect(result).toEqual({ Authorization: 'Bearer A_TOKEN' })
+      expect(result).toEqual({ Authorization: `Bearer A_TOKEN` })
     })
     it('should pass through if null or undefined', () => {
       // when ... we don't provide a token

@@ -1,6 +1,9 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
 import { DatePicker, DropDownTags, Upload, CheckBox, Input, FormWrapper } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -8,15 +11,17 @@ import { View } from 'react-native'
 import { INITIAL_VALUES, MOCK_SKILLS } from './NewChallengeForm.constants'
 import styles from './NewChallengeForm.styles'
 
-const NewChallengeForm = forwardRef(ref => {
+interface Props {
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyChallenges>
+}
+
+const NewChallengeForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [isInProgress, setIsInProgress] = useState(false)
-  const [skillsList] = useState(MOCK_SKILLS)
+  const [skillsList, setSkillsList] = useState(MOCK_SKILLS)
   const [shouldRequestVerification, setShouldRequestVerification] = useState<boolean>(false)
   const formRef = useRef<FormikProps<FormikValues>>()
 
-  // TODO: We need to refactor and fix this
-  // @ts-ignore
   useImperativeHandle(ref, () => ({
     handleSubmit() {
       if (formRef.current) {
@@ -26,13 +31,7 @@ const NewChallengeForm = forwardRef(ref => {
   }))
 
   return (
-    <Formik
-      // TODO - we will refactor this when we get everything working
-      // @ts-ignore
-      innerRef={formRef}
-      initialValues={INITIAL_VALUES}
-      onSubmit={() => {}}
-    >
+    <Formik innerRef={formRef} initialValues={INITIAL_VALUES} onSubmit={() => {}}>
       {formikHandlers => (
         <FormWrapper>
           <Input name={'challenge'} label={t('Challenge')} handlers={formikHandlers} />

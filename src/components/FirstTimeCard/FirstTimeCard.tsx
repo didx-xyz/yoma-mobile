@@ -9,7 +9,11 @@ import Button, { ButtonSizes } from '../Button'
 import Text, { Bold, FontWeights, HeaderLevels, Span } from '../Typography'
 import styles from './FirstTimeCard.styles'
 
-const FirstTimeCard = () => {
+type Props = {
+  navigation: any
+}
+
+const FirstTimeCard = ({ navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
@@ -35,7 +39,14 @@ const FirstTimeCard = () => {
         <RLabsLogo />
       </View>
       <View style={styles.progressBar}>
-        <View style={styles.innerProgressbar} />
+        <View
+          style={[
+            styles.innerProgressbar,
+            {
+              width: '50%',
+            },
+          ]}
+        />
       </View>
       <Text.Header level={HeaderLevels.h6} weight={FontWeights.bold_700} style={styles.percentText}>
         {t('1% complete')}

@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { CheckBox, DatePicker, DropDownTags, FormWrapper, InfoModal, Input, Spinner, Upload } from 'components'
+import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
@@ -22,13 +22,11 @@ interface Props {
 const EducationForm = forwardRef(({ navigation, onFormChanged }: Props, ref) => {
   const { t } = useTranslation()
   const [isStudying, setIsStudying] = useState(false)
-  const [skillsList] = useState(MOCKED_SKILLS_DATA)
+  const [skillsList, setSkillsList] = useState(MOCKED_SKILLS_DATA)
   const [showInfoModal, setShowInfoModal] = useState(false)
 
   const formRef = useRef<FormikProps<FormikValues>>()
 
-  // TODO: We need to refactor and fix this
-  // @ts-ignore
   useImperativeHandle(ref, () => ({
     handleSubmit() {
       if (formRef.current) {
@@ -50,8 +48,6 @@ const EducationForm = forwardRef(({ navigation, onFormChanged }: Props, ref) => 
 
   return (
     <Formik
-      // @ts-ignore
-      // TODO - we will refactor this when we get everything working
       innerRef={formRef}
       initialValues={INITIAL_VALUES}
       enableReinitialize

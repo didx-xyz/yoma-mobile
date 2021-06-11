@@ -10,7 +10,7 @@ import { ButtonSizes, ButtonVariants } from './Button.types'
 
 type Props = WithChildren<{
   label: string
-  onPress?: () => void
+  onPress: () => void
   variant?: ButtonVariants
   size?: ButtonSizes
   color?: Colors

@@ -1,4 +1,4 @@
-import { TextStyle } from 'react-native'
+import { StyleSheet, TextStyle } from 'react-native'
 
 import { FontWeights } from './Text.types'
 

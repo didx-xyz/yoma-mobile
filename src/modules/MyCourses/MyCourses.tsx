@@ -30,6 +30,7 @@ const renderCourseEntry = ({ course, description, startDate, endDate, organisati
 const MyCourses = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
+  const [courses, setCourses] = useState(MOCK_COURSES)
 
   return (
     <ViewContainer style={styles.container}>
@@ -48,11 +49,11 @@ const MyCourses = ({ navigation }: Props) => {
         condition={isEditing}
         fallback={
           <Optional
-            condition={MOCK_COURSES.length > 0}
+            condition={courses.length > 0}
             fallback={<EmptyCard title={t('Have you completed any courses yet?')} onAdd={() => setIsEditing(true)} />}
           >
             <FlatList
-              data={MOCK_COURSES}
+              data={courses}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }) => renderCourseEntry(item)}
               keyExtractor={item => item.course}

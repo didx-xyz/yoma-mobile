@@ -6,11 +6,6 @@ import { Colors, colors } from 'styles'
 
 import styles from './LargeHeader.styles'
 
-// TODO: refactor to use correct typing
-const onNavigationBack = (navigation: any) => {
-  navigation.dispatch(StackActions.pop(1))
-}
-
 type Props = {
   circleImage: SVGElement
   circleImageStyle: ViewStyle
@@ -28,15 +23,19 @@ const LargeHeader = ({ circleImage, circleImageStyle, backgroundColor, navigatio
 
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      onNavigationBack(navigation)
+      goBack()
       return true
     })
     return () => backHandler.remove()
-  }, [navigation])
+  }, [])
+
+  const goBack = () => {
+    navigation.dispatch(StackActions.pop(1))
+  }
 
   return (
     <View style={style}>
-      <TouchableOpacity style={styles.backIcon} onPress={onNavigationBack}>
+      <TouchableOpacity style={styles.backIcon} onPress={goBack}>
         <BackIcon />
       </TouchableOpacity>
       <View style={styles.logo}>

@@ -1,6 +1,9 @@
+import { StackNavigationProp } from '@react-navigation/stack'
 import { IconInfo } from 'assets/images'
 import { Spinner, DatePicker, DropDownTags, Upload, CheckBox, Input, FormWrapper } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -8,9 +11,14 @@ import { View } from 'react-native'
 import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
 
-const NewCourseForm = forwardRef(() => {
+interface Props {
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCourses>
+}
+
+const NewCourseForm = forwardRef(({ navigation }: Props, ref) => {
   const { t } = useTranslation()
   const [isCourseActive, setIsCourseActive] = useState<boolean>(false)
+  const [skillsList, setSkillsList] = useState(MOCK_SKILLS_LIST)
   const [shouldRequestVerification, setShouldRequestVerification] = useState<boolean>(false)
 
   return (
@@ -31,7 +39,7 @@ const NewCourseForm = forwardRef(() => {
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
-            items={MOCK_SKILLS_LIST}
+            items={skillsList}
             multiple
             searchPlaceholder={t('Search skills')}
             label={t('Skills developed')}

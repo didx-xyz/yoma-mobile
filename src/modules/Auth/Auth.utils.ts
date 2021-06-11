@@ -1,4 +1,4 @@
-import { path, pick, pipe } from 'ramda'
+import { path, pick, pipe, tap } from 'ramda'
 
 export const getCredentialsFromAuthSuccess = pipe(
   path(['payload', 'data']),
