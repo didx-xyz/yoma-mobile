@@ -55,9 +55,10 @@ const NormalHeader = ({
         condition={showAddButton}
         fallback={
           <Button
+            isDisabled={!isSaveButtonEnabled}
             variant={ButtonVariants.Clear}
             label={t('Save')}
-            color={isSaveButtonEnabled ? Colors.primaryGreen : Colors.menuGrey}
+            color={Colors.primaryGreen}
             onPress={onSave}
             style={styles.button}
             isFullWidth={false}

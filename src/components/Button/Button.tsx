@@ -43,8 +43,9 @@ const Button = ({
   }, [isFullWidth, variant, size, style])
 
   useEffect(() => {
-    const labelVariantColor = MAP_VARIANT_TO_LABEL_COLOR[variant]
-    setLabelColor(color || labelVariantColor)
+    const defaultVariantColor = MAP_VARIANT_TO_LABEL_COLOR[variant]
+    const labelVariantColor = color || defaultVariantColor
+    setLabelColor(isDisabled ? Colors.menuGrey : labelVariantColor)
   }, [variant, color])
 
   return (
