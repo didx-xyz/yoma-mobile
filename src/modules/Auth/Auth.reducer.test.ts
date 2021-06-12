@@ -1,4 +1,4 @@
-import SUT, { INITIAL_STATE, setAuthCredentials } from './Auth.reducer'
+import SUT, { INITIAL_STATE, setAuthCredentials, authLogout } from './Auth.reducer'
 
 describe('modules/Auth/Auth.reducer', () => {
   describe('setAuthCredentials', () => {
@@ -33,6 +33,16 @@ describe('modules/Auth/Auth.reducer', () => {
       const result = SUT(state, action)
       // then ... should update the credentials correctly
       expect(result).toEqual(credentials)
+    })
+  })
+  describe('authLogout', () => {
+    it('should set the default Auth state', () => {
+      // give ... there are no credentials in state
+      const state = INITIAL_STATE
+      const action = authLogout()
+      const result = SUT(state, action)
+      // then ... should set the default Auth state
+      expect(result).toEqual(state)
     })
   })
 })
