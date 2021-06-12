@@ -81,7 +81,7 @@ const Education = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <EducationForm navigation={navigation} ref={formRef} changeButtonState={toggleSaveButtonState} />
+            <EducationForm ref={formRef} changeButtonState={toggleSaveButtonState} />
           </Card>
         </ScrollView>
       </Optional>
