@@ -5,9 +5,9 @@ import {
   AuthCredentials,
   AuthLoginFailureResponse,
   AuthLoginSuccessResponse,
+  AuthRegistration,
   AuthRegistrationFailureResponse,
   AuthRegistrationSuccessResponse,
-  AuthRegistration,
   AuthState,
 } from './Auth.types'
 
@@ -29,7 +29,7 @@ export const authRegistrationFailure = createAction<AuthRegistrationFailureRespo
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setAuthCredentials, (state, action) => mergeDeepRight(state)(action.payload))
-  builder.addCase(authLogout, (state, action) => INITIAL_STATE)
+  builder.addCase(authLogout, () => INITIAL_STATE)
 })
 
 export default authReducer

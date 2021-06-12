@@ -1,6 +1,5 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { RootState } from 'redux/redux.types'
 
 import * as AuthActions from '../Auth/Auth.reducer'
 import Profile from './Profile'
