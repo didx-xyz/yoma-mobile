@@ -17,10 +17,11 @@ import { captureAndUploadImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
+  onLogoutUser: () => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation }: Props) => {
+const Profile = ({ navigation, onLogoutUser }: Props) => {
   const [userResponse, setUserResponse] = useState<UserResponse>(USER_RESPONSE)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
@@ -80,8 +81,7 @@ const Profile = ({ navigation }: Props) => {
           variant={ButtonVariants.Clear}
           color={Colors.menuGrey}
           label={t('Log Out')}
-          // TODO: navigation to login page
-          onPress={() => {}}
+          onPress={onLogoutUser}
           style={styles.logout}
         />
       </ScrollView>
