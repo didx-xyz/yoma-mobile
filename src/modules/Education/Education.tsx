@@ -19,6 +19,7 @@ interface Props {
 const Education = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
+  const [isSaveButtonActive, setIsSaveButtonActive] = useState(false)
   const formRef = useRef<FormikProps<FormikValues>>()
 
   const renderItem = ({
@@ -41,7 +42,7 @@ const Education = ({ navigation }: Props) => {
     )
   }
 
-  const handleOnFormChange = (hasFormChanged: boolean) => {
+  const toggleSaveButtonState = (hasFormChanged: boolean) => {
     setIsSaveButtonActive(hasFormChanged)
   }
 
@@ -80,7 +81,7 @@ const Education = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <EducationForm ref={formRef} />
+            <EducationForm navigation={navigation} ref={formRef} changeButtonState={toggleSaveButtonState} />
           </Card>
         </ScrollView>
       </Optional>
