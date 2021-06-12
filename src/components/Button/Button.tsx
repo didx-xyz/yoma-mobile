@@ -46,7 +46,7 @@ const Button = ({
     const defaultVariantColor = MAP_VARIANT_TO_LABEL_COLOR[variant]
     const labelVariantColor = color || defaultVariantColor
     setLabelColor(isDisabled ? Colors.menuGrey : labelVariantColor)
-  }, [variant, color])
+  }, [variant, color, isDisabled])
 
   return (
     <TouchableOpacity onPress={onPress} disabled={isDisabled} style={buttonStyle}>

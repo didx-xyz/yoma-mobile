@@ -1,9 +1,6 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import { CheckBox, DatePicker, DropDownTags, FormWrapper, InfoModal, Input, Spinner, Upload } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
-import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -15,11 +12,10 @@ import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
   changeButtonState: (value: boolean) => void
 }
 
-const EducationForm = forwardRef(({ navigation, changeButtonState }: Props, ref) => {
+const EducationForm = forwardRef(({ changeButtonState }: Props, ref) => {
   const { t } = useTranslation()
   const [isStudying, setIsStudying] = useState(false)
   const [skillsList] = useState(MOCKED_SKILLS_DATA)
