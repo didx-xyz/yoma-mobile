@@ -1,8 +1,8 @@
-import selectIsAuthenticated from './AppNavigation.selector'
+import selector from './AppNavigation.selector'
 
 describe('modules/AppNavigation/AppNavigation.selector', () => {
-  describe('selectIsAuthenticated ', () => {
-    it('should set isAuthenticated property value to true', () => {
+  describe('selector ', () => {
+    it('should set isAuthorised property value to true', () => {
       const state = {
         auth: {
           refreshToken: 'REFRESH_TOKEN',
@@ -11,23 +11,30 @@ describe('modules/AppNavigation/AppNavigation.selector', () => {
         },
       }
       // when ... we call the selector
-      const result = selectIsAuthenticated(state)
+      const result = selector(state)
       // then ... should return result as expected
-      expect(result).toEqual({ isAuthenticated: true })
+      expect(result).toEqual({ isAuthorised: true })
     })
-  })
 
-  it('should set isAuthenticated property value to false', () => {
-    const state = {
-      auth: {
-        refreshToken: '',
-        token: '',
-        expiresAt: '',
-      },
-    }
-    // when ... we call the selector
-    const result = selectIsAuthenticated(state)
-    // then ... should return result as expected
-    expect(result).toEqual({ isAuthenticated: false })
+    it('should set isAuthorised property value to false', () => {
+      const state = {
+        auth: {
+          refreshToken: '',
+          token: '',
+          expiresAt: '',
+        },
+      }
+      // when ... we call the selector
+      const result = selector(state)
+      // then ... should return result as expected
+      expect(result).toEqual({ isAuthorised: false })
+    })
+    it('should set isAuthorised property value to false', () => {
+      const state = {}
+      // when ... we call the selector
+      const result = selector(state)
+      // then ... should return result as expected
+      expect(result).toEqual({ isAuthorised: false })
+    })
   })
 })

@@ -11,7 +11,7 @@ describe('modules/Auth/Auth.selector', () => {
         },
       }
       // when ... we call the selector
-      const result = SUT.selectIsAuthorised(state)
+      const result = SUT.selectIsAuthenticated(state)
       // then ... should return result as expected
       expect(result).toEqual(true)
     })
@@ -25,7 +25,15 @@ describe('modules/Auth/Auth.selector', () => {
         },
       }
       // when ... we call the selector
-      const result = SUT.selectIsAuthorised(state)
+      const result = SUT.selectIsAuthenticated(state)
+      // then ... should return result as expected
+      expect(result).toEqual(false)
+    })
+
+    it('it should check if the auth is not available.', () => {
+      const state = {}
+      // when ... we call the selector
+      const result = SUT.selectIsAuthenticated(state)
       // then ... should return result as expected
       expect(result).toEqual(false)
     })

@@ -1,9 +1,6 @@
-import { selectIsAuthorised } from 'modules/Auth/Auth.selector'
-import { RootState } from 'redux/redux.types'
+import { createSelector } from '@reduxjs/toolkit'
+import * as AuthSelectors from 'modules/Auth/Auth.selector'
 
-const selectIsAuthenticated = (state: RootState) => {
-  return {
-    isAuthenticated: selectIsAuthorised(state),
-  }
-}
-export default selectIsAuthenticated
+export default createSelector(AuthSelectors.selectIsAuthenticated, isAuthorised => ({
+  isAuthorised,
+}))

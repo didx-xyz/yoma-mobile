@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 
 import AppNavigation from './AppNavigation'
-import selectIsAuthenticated from './AppNavigation.selector'
+import selector from './AppNavigation.selector'
 
-const mapStateToProps = selectIsAuthenticated
+const mapStateToProps = selector
 const mapDispatchToProps = null
 
-export default connect(mapStateToProps, mapDispatchToProps)(AppNavigation as any)
+export default connect(mapStateToProps, mapDispatchToProps)(AppNavigation)
