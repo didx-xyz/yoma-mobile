@@ -29,6 +29,7 @@ platform :android do
       debug: true,
     )
     slack(
-      message: "New test build has been deployed to Firebase App Distribution"
+      message: "New test build has been deployed to Firebase App Distribution",
     )
+  end
 end

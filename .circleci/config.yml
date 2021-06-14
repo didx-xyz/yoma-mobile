@@ -93,6 +93,7 @@ commands:
       - run:
           name: 'Deploy the Android app to Firebase App Distribution'
           working_directory: ~/project
+          resource_class: large
           command: bundle exec fastlane android distribute
 
 # --------------------------------
