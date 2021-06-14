@@ -28,5 +28,8 @@ platform :android do
       android_artifact_type:'APK',
       debug: true,
     )
+    slack(
+      message: "New test build has been deployed to Firebase App Distribution"
+    )
   end
 end
