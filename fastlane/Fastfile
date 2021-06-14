@@ -31,5 +31,4 @@ platform :android do
     slack(
       message: "New test build has been deployed to Firebase App Distribution"
     )
-  end
 end
