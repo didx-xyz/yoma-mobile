@@ -1,16 +1,21 @@
-import { Spinner, DatePicker, DropDownTags, InfoModal, Upload, Input, CheckBox, FormWrapper } from 'components'
+import { CheckBox, DatePicker, DropDownTags, FormWrapper, InfoModal, Input, Spinner, Upload } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
+import { getHasValuesChanged } from 'utils/form.utils'
 
 import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
 import styles from './EducationForm.styles'
 import ValidationSchema from './ValidationSchema'
 
-const EducationForm = forwardRef(ref => {
+interface Props {
+  changeButtonState: (value: boolean) => void
+}
+
+const EducationForm = forwardRef(({ changeButtonState }: Props, ref) => {
   const { t } = useTranslation()
   const [isStudying, setIsStudying] = useState(false)
   const [skillsList] = useState(MOCKED_SKILLS_DATA)
@@ -28,15 +33,27 @@ const EducationForm = forwardRef(ref => {
     },
   }))
 
+  const validation = () => {
+    setTimeout(() => {
+      const hasFormChanged = getHasValuesChanged(
+        formRef.current!.initialValues,
+        formRef.current!.values,
+        formRef.current!.isValid,
+      )
+      changeButtonState(hasFormChanged)
+    }, 10)
+  }
+
   return (
     <Formik
       // @ts-ignore
       // TODO - we will refactor this when we get everything working
       innerRef={formRef}
       initialValues={INITIAL_VALUES}
-      enableReinitialize={true}
+      enableReinitialize
+      validate={validation}
       validationSchema={ValidationSchema}
-      onSubmit={() => {}}
+      validateOnChange
     >
       {formikHandlers => (
         <FormWrapper>
