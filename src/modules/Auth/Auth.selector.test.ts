@@ -39,5 +39,20 @@ describe('modules/Auth/Auth.selector', () => {
       // then ... should return result as expected
       expect(typeof result).toBe('string')
     })
+
+    it('it should check incorrect auth properties.', () => {
+      // mock incorrect properties from the server
+      const state = {
+        auth: {
+          refreshToken: 'REFRESH_TOKEN',
+          userToken: 'USER_TOKEN',
+          expires: 'EXPIRY_DATE',
+        },
+      }
+      // when ... we call the selector
+      const result = SUT.selectIsAuthenticated(state)
+      // then ... should return result as expected
+      expect(result).toEqual(false)
+    })
   })
 })
