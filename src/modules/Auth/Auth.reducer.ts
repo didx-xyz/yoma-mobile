@@ -12,11 +12,7 @@ import {
 } from './Auth.types'
 
 const name = '[Auth]'
-export const INITIAL_STATE = {
-  refreshToken: '',
-  token: '',
-  expiresAt: '',
-} as AuthState
+export const INITIAL_STATE = {}
 
 export const authLogin = createAction<AuthCredentials>(`${name} Login`)
 export const authLoginSuccess = createAction<AuthLoginSuccessResponse>(`${name} Login Success`)

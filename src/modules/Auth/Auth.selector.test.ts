@@ -1,7 +1,17 @@
+import { INITIAL_STATE } from './Auth.reducer'
 import * as SUT from './Auth.selector'
 
 describe('modules/Auth/Auth.selector', () => {
   describe('selectIsAuthorised', () => {
+    it('it should check if the auth is not available.', () => {
+      const state = {
+        auth: INITIAL_STATE,
+      }
+      // when ... we call the selector
+      const result = SUT.selectIsAuthenticated(state)
+      // then ... should return result as expected
+      expect(result).toEqual(false)
+    })
     it('it should check if the user is authenticated.', () => {
       const state = {
         auth: {
@@ -16,26 +26,18 @@ describe('modules/Auth/Auth.selector', () => {
       expect(result).toEqual(true)
     })
 
-    it('it should check if the user is not authenticated.', () => {
+    it('it should return a valid user token', () => {
       const state = {
         auth: {
-          refreshToken: '',
-          token: '',
-          expiresAt: '',
+          refreshToken: 'REFRESH_TOKEN',
+          token: 'USER_TOKEN',
+          expiresAt: 'EXPIRY_DATE',
         },
       }
       // when ... we call the selector
-      const result = SUT.selectIsAuthenticated(state)
+      const result = SUT.selectToken(state)
       // then ... should return result as expected
-      expect(result).toEqual(false)
-    })
-
-    it('it should check if the auth is not available.', () => {
-      const state = {}
-      // when ... we call the selector
-      const result = SUT.selectIsAuthenticated(state)
-      // then ... should return result as expected
-      expect(result).toEqual(false)
+      expect(typeof result).toBe('string')
     })
   })
 })
