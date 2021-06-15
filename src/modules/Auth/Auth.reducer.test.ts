@@ -36,7 +36,7 @@ describe('modules/Auth/Auth.reducer', () => {
     })
   })
   describe('authLogout', () => {
-    it('should set the default Auth state', () => {
+    it('should log out the user', () => {
       // give ... there are no credentials in state
       const state = {
         refreshToken: 'REFRESH_TOKEN',
