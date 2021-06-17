@@ -1,9 +1,9 @@
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
 
-import api from '../api'
-import { middleware as apiMiddleware, apiConfig } from '../api'
+import api, { apiConfig, middleware as apiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
+import * as appMiddleware from '../modules/App/App.middleware'
 import { middleware as authMiddleware } from '../modules/Auth'
 import { showSimpleMessage } from '../utils/error'
 
@@ -13,6 +13,7 @@ const devMiddleware = [createDebugger()]
 
 const commonMiddleware: Middleware[] = [
   apiMiddleware.apiFlow({ api: apiConfig.createApiClient, prepArgs: prepareApiRequest }),
+  appMiddleware.appResetFlow([]),
 ]
 
 const featureModuleMiddleware = [
@@ -22,6 +23,7 @@ const featureModuleMiddleware = [
   authMiddleware.authRegistrationFlow({ api }),
   authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
+  authMiddleware.authLogoutFlow(),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

@@ -1,10 +1,12 @@
 import { Middleware } from 'redux'
 
 import { showSimpleMessage } from '../../utils/error'
+import { resetAppData } from './../App/App.reducer'
 import {
   authLogin,
   authLoginFailure,
   authLoginSuccess,
+  authLogout,
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
@@ -108,6 +110,15 @@ export const authRegistrationFailureFlow = ({
   if (authRegistrationFailure.match(action)) {
     // TODO: this should be handled by the notification module
     notification('danger', 'Error', action.payload)
+  }
+
+  return result
+}
+
+export const authLogoutFlow = (): Middleware => ({ dispatch }) => next => async action => {
+  const result = next(action)
+  if (authLogout.match(action)) {
+    dispatch(resetAppData())
   }
 
   return result
