@@ -13,7 +13,7 @@ describe('modules/AppNavigation/AppNavigation.selector', () => {
       // then ... should return result as expected
       expect(result).toEqual({ isAuthorised: false })
     })
-    it('should check that if the auth state is populated', () => {
+    it('should check if the auth state is populated', () => {
       const state = {
         auth: {
           refreshToken: 'REFRESH_TOKEN',
