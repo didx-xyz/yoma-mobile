@@ -4,7 +4,7 @@ import * as SUT from './AppNavigation.selector'
 
 describe('modules/AppNavigation/AppNavigation.selector', () => {
   describe('selector ', () => {
-    it('should set isAuthorised property value to false', () => {
+    it('should correctly handle an empty auth state', () => {
       const state = {
         auth: INITIAL_STATE,
       }
@@ -13,7 +13,7 @@ describe('modules/AppNavigation/AppNavigation.selector', () => {
       // then ... should return result as expected
       expect(result).toEqual({ isAuthorised: false })
     })
-    it('should set isAuthorised property value to true', () => {
+    it('should check that if the auth state is populated', () => {
       const state = {
         auth: {
           refreshToken: 'REFRESH_TOKEN',
