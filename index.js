@@ -6,8 +6,8 @@ import App from './src/modules/App'
 
 
 
-const Root = () => ( 
-    <App /> 
+const Root = () => (
+    <App />
 )
 
 AppRegistry.registerComponent(config.application.name, () => Root)
