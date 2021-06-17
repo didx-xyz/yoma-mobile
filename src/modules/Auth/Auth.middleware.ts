@@ -1,5 +1,8 @@
+import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
+import { actions as ApiActions } from '../../api'
+import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
 import {
   authLogin,
@@ -10,32 +13,32 @@ import {
   authRegistrationSuccess,
   setAuthCredentials,
 } from './Auth.reducer'
-import {
-  AuthLoginFailureResponse,
-  AuthLoginSuccessResponse,
-  AuthRegistrationFailureResponse,
-  AuthRegistrationSuccessResponse,
-} from './Auth.types'
+import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
 import { getCredentialsFromAuthSuccess } from './Auth.utils'
 
-export const authLoginFlow = ({ api }: { api: any }): Middleware => ({ dispatch }) => next => async action => {
+export const authLoginFlow: Middleware = ({ dispatch }) => next => action => {
   const result = next(action)
 
-  // TODO: Abstract the api calls into a single api middleware
   if (authLogin.match(action)) {
-    await api.auth
-      .login(action.payload)
-      .then((response: AuthLoginSuccessResponse) => {
-        dispatch(authLoginSuccess(response))
-      })
-      .catch((error: AuthLoginFailureResponse) => {
-        dispatch(authLoginFailure(error))
-      })
+    dispatch(
+      ApiActions.apiRequest(
+        mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+          isTokenRequired: false,
+          onSuccess: authLoginSuccess,
+          onFailure: authLoginFailure,
+        }),
+        action.payload,
+      ),
+    )
   }
 
   return result
 }
 
+// TODO: add middleware to just get the auth values from authLoginSuccess
+// TODO: Then add middleware to get the middleware for state
+// TODO: Then add middleware to store the refresh token in secure storage
+// TODO: also add middleware in the User section to catch the user data returned in successful auth
 export const authSetCredentialsFlow = ({ notification }: { notification: typeof showSimpleMessage }): Middleware => ({
   dispatch,
 }) => next => async action => {
@@ -59,7 +62,8 @@ export const authLoginFailureFlow = ({
 
   if (authLoginFailure.match(action)) {
     // TODO: this should be handled by the notification module
-    notification('danger', 'Error', action.payload)
+    // @ts-ignore
+    notification('danger', 'An error occurred.', action.payload.message)
   }
 
   return result

@@ -1,4 +1,5 @@
 apply plugin: "com.android.application"
+apply plugin: 'com.google.gms.google-services'
 
 import com.android.build.OutputFile
 
@@ -129,13 +130,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+  lintOptions {
+    checkReleaseBuilds false
+    abortOnError false
+  }
 
     defaultConfig {
         applicationId "com.yomamobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "0.0.1"
         multiDexEnabled true
     }
     splits {
@@ -147,6 +152,14 @@ android {
         }
     }
     signingConfigs {
+      release {
+        if (System.getenv("YOMA_UPLOAD_STORE_FILE") != null) {
+          storeFile file(System.getenv("YOMA_UPLOAD_STORE_FILE"))
+          storePassword System.getenv("YOMA_UPLOAD_STORE_PASSWORD")
+          keyAlias System.getenv("YOMA_UPLOAD_KEY_ALIAS")
+          keyPassword System.getenv("YOMA_UPLOAD_KEY_PASSWORD")
+        }
+      }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -159,11 +172,9 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            // Caution! In production, you need to generate your own keystore file.
-            // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
-            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+          signingConfig signingConfigs.release
+          minifyEnabled enableProguardInReleaseBuilds
+          proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
 
@@ -185,16 +196,20 @@ android {
 }
 
 dependencies {
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
-    implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
     implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
 
+    // Firebase setup:
+    implementation platform('com.google.firebase:firebase-bom:28.0.1')
+    //    implementation 'com.google.firebase:firebase-analytics'
+
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
-      exclude group:'com.facebook.fbjni'
-    }
+        exclude group:'com.facebook.fbjni'
+     }
 
     debugImplementation("com.facebook.flipper:flipper-network-plugin:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.flipper'
@@ -222,4 +237,3 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
-apply plugin: 'com.google.gms.google-services'

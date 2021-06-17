@@ -26,7 +26,7 @@ help.json
 jest.node.config.js
 metro.config.js
 rn-cli.config.js
-index.tsx
+index.js
 
 # Markdown
 #
