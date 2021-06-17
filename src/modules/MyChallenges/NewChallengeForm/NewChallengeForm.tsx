@@ -8,7 +8,7 @@ import { View } from 'react-native'
 import { INITIAL_VALUES, MOCK_SKILLS } from './NewChallengeForm.constants'
 import styles from './NewChallengeForm.styles'
 
-const NewChallengeForm = forwardRef(ref => {
+const NewChallengeForm = forwardRef((_props, ref) => {
   const { t } = useTranslation()
   const [isInProgress, setIsInProgress] = useState(false)
   const [skillsList] = useState(MOCK_SKILLS)
