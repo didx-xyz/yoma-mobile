@@ -16,6 +16,13 @@ describe('modules/Auth/Auth.selector', () => {
       // then ... should return result as expected
       expect(result).toEqual(state.auth)
     })
+    it('should return the default auth state', () => {
+      const state = { auth: INITIAL_STATE }
+      // when ... we call the selector
+      const result = SUT.selectAuthState(state)
+      // then ... should return result as expected
+      expect(result).toEqual(state.auth)
+    })
   })
   describe('selectToken', () => {
     it('should return a valid user token', () => {
@@ -31,7 +38,7 @@ describe('modules/Auth/Auth.selector', () => {
       // then ... should return result as expected
       expect(result).toBe('USER_TOKEN')
     })
-    it('should return an invalid user token', () => {
+    it('should return null if the token does not exist', () => {
       const state = {
         auth: INITIAL_STATE,
       }
@@ -42,7 +49,7 @@ describe('modules/Auth/Auth.selector', () => {
     })
   })
   describe('selectIsAuthenticated', () => {
-    it('should check if user is logged in', () => {
+    it('Should correctly handle a default state', () => {
       const state = {
         auth: INITIAL_STATE,
       }

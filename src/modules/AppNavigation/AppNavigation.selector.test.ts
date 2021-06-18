@@ -4,7 +4,7 @@ import * as SUT from './AppNavigation.selector'
 
 describe('modules/AppNavigation/AppNavigation.selector', () => {
   describe('selector ', () => {
-    it('should correctly handle an empty auth state', () => {
+    it('should return expected prop values from initial states', () => {
       const state = {
         auth: INITIAL_STATE,
       }
@@ -13,7 +13,7 @@ describe('modules/AppNavigation/AppNavigation.selector', () => {
       // then ... should return result as expected
       expect(result).toEqual({ isAuthorised: false })
     })
-    it('should check if the auth state is populated', () => {
+    it('should select props as expected when available in state', () => {
       const state = {
         auth: {
           refreshToken: 'REFRESH_TOKEN',
