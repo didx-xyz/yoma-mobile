@@ -3,7 +3,6 @@ import { Middleware } from 'redux'
 
 import api, { apiConfig, middleware as apiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
-import * as appMiddleware from '../modules/App/App.middleware'
 import { middleware as authMiddleware } from '../modules/Auth'
 import { showSimpleMessage } from '../utils/error'
 

@@ -1,4 +1,4 @@
-import { createAction, createReducer } from '@reduxjs/toolkit'
+import { createAction } from '@reduxjs/toolkit'
 
 const name = '[App]'
 
