@@ -1,6 +1,5 @@
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import * as SUT from './Auth.middleware'
-import { setSecureRefreshTokenFlow } from './Auth.middleware'
 import {
   authLogin,
   authLoginFailure,
