@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "_git:pre-commit": "pretty-quick --staged",
-    "_git:pre-push": "code:lint",
+    "_git:pre-push": "npm-run-all code:lint",
     "env:dev": "node env/generate.js dev",
     "env:test": "node env/generate.js test",
     "init:ios": "npx pod-install",
