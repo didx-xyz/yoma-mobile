@@ -1,4 +1,4 @@
-import { AuthClientApi } from '../../api/auth/auth.types'
+import { AuthEndpoints } from '../../api/auth/auth.types'
 
 export interface ApiMetaResponse {
   success: boolean
@@ -45,7 +45,7 @@ export type AuthLoginFailureResponse = string
 export type AuthState = AuthCredentialsResponse
 
 export type AuthLoginMiddleware = {
-  client: AuthClientApi
+  client: AuthEndpoints
 }
 
 export interface AuthCredentials {

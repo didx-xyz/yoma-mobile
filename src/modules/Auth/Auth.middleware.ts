@@ -9,6 +9,8 @@ import {
   authRegistrationFailure,
   authRegistrationSuccess,
   setAuthCredentials,
+  setSecureRefreshTokenFailure,
+  setSecureRefreshTokenSuccess,
 } from './Auth.reducer'
 import {
   AuthLoginFailureResponse,
@@ -16,7 +18,7 @@ import {
   AuthRegistrationFailureResponse,
   AuthRegistrationSuccessResponse,
 } from './Auth.types'
-import { getCredentialsFromAuthSuccess } from './Auth.utils'
+import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
 
 export const authLoginFlow =
   ({ api }: { api: any }): Middleware =>
@@ -48,10 +50,26 @@ export const authSetCredentialsFlow =
     const result = next(action)
 
     if (authLoginSuccess.match(action)) {
-      const credentials = getCredentialsFromAuthSuccess(action)
-      // TODO: this should be handled by the notification module
+      const credentials = selectCredentialsFromLoginPayload(action)
       notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
+    }
+    return result
+  }
+
+export const setSecureRefreshTokenFlow =
+  (setSecureItem: any): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  async action => {
+    const result = next(action)
+    if (authLoginSuccess.match(action)) {
+      const refreshToken = selectRefreshTokenFromLoginPayload(action)
+      await setSecureItem('refreshToken', refreshToken)
+        .then(() => dispatch(setSecureRefreshTokenSuccess()))
+        .catch((error: any) => {
+          dispatch(setSecureRefreshTokenFailure(error))
+        })
     }
     return result
   }

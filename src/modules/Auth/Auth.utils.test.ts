@@ -1,11 +1,11 @@
 import * as SUT from './Auth.utils'
 
 describe('modules/Auth/Auth.utils', () => {
-  describe('getCredentialsFromAuthSuccess', () => {
-    it('should return the auth credentials from the server payload', () => {
+  describe('selectCredentialsFromLoginPayload', () => {
+    it('should return the auth credentials from the login payload', () => {
       // given ... an object in the shape of the successful login response
       const mockedAction = {
-        type: 'SOME ACTION',
+        type: 'LOGIN ACTION',
         payload: {
           data: {
             refreshToken: 'REFRESH_TOKEN',
@@ -17,9 +17,30 @@ describe('modules/Auth/Auth.utils', () => {
         },
       }
       // when ... we want to extract the credentials from the rest of the payload
-      const result = SUT.getCredentialsFromAuthSuccess(mockedAction)
+      const result = SUT.selectCredentialsFromLoginPayload(mockedAction)
       // then ... the credentials should be extracted correctly
-      expect(result).toEqual({ refreshToken: 'REFRESH_TOKEN', token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
+      expect(result).toEqual({ token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
+    })
+  })
+  describe('selectRefreshTokenFromLoginPayload', () => {
+    it('should return the refresh token from the login payload', () => {
+      // given ... an object in the shape of the successful login response
+      const mockedAction = {
+        type: 'LOGIN ACTION',
+        payload: {
+          data: {
+            refreshToken: 'REFRESH_TOKEN',
+            token: 'USER_TOKEN',
+            expiresAt: 'EXPIRES_AT',
+            otherProperty: 'SOME OTHER PROPERTY',
+          },
+          meta: {},
+        },
+      }
+      // when ... we want to extract the credentials from the rest of the payload
+      const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
+      // then ... the credentials should be extracted correctly
+      expect(result).toEqual({ refreshToken: 'REFRESH_TOKEN' })
     })
   })
 })
