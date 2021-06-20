@@ -251,6 +251,7 @@ describe('modules/Auth/Auth.middleware', () => {
       // then ... the success action should be dispatched with the response
       expect(store.dispatch).toHaveBeenCalledWith(authRegistrationSuccess(response))
     })
+
     it('should correctly handle a failed registration', async () => {
       // given ... the register api is called and returns a failure
       const create = createMiddlewareMock(jest)
