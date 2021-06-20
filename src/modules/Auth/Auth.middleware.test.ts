@@ -4,7 +4,6 @@ import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import * as SUT from './Auth.middleware'
-import { authLoginSuccessFlow } from './Auth.middleware'
 import {
   authLogin,
   authLoginFailure,
