@@ -1,4 +1,8 @@
+import { mergeRight } from 'ramda'
+
 import { createMiddlewareMock } from '../../../tests/tests.utils'
+import { actions as ApiActions } from '../../api'
+import { constants as ApiAuthConstants } from '../../api/auth'
 import * as SUT from './Auth.middleware'
 import {
   authLogin,
@@ -17,83 +21,68 @@ import {
   userRegistrationData,
 } from './Auth.test.fixtures'
 
+jest.mock('rn-fetch-blob', () => ({
+  DocumentDir: () => {},
+  ImageCache: {
+    get: {
+      clear: () => {},
+    },
+  },
+  fs: {
+    exists: jest.fn().mockReturnValueOnce({ then: jest.fn() }),
+    dirs: {
+      MainBundleDir: () => {},
+      CacheDir: () => {},
+      DocumentDir: () => {},
+    },
+  },
+}))
+
 describe('modules/Auth/Auth.middleware', () => {
   describe('authLoginFlow', () => {
-    it('should ignore other actions', async () => {
-      // given ... an action is fired
-      const create = createMiddlewareMock(jest)
-      const mockApi = jest.fn()
-      const action = { type: 'TEST', payload: {} }
-      // @ts-ignore
-      const { invoke, next } = create(SUT.authLoginFlow(mockApi))
-
-      // when ... we invoke another action
-      await invoke(action)
-
-      // then ... next should have been called with the action
-      expect(next).toHaveBeenCalledWith(action)
-      expect(mockApi).not.toHaveBeenCalled()
-    })
-
-    it('should correctly call the api with the given credentials', async () => {
+    it('should correctly handle being called', async () => {
       // given ... the authLogin action is fired
       const create = createMiddlewareMock(jest)
       const credentials = {
         email: 'USER EMAIL',
         password: 'USER PASSWORD',
       }
-      const mockApi = { api: { auth: { login: jest.fn((_x: any) => Promise.resolve('RESOLVED VALUE')) } } }
       const action = authLogin(credentials)
       // @ts-ignore
-      const { invoke, next } = create(SUT.authLoginFlow(mockApi))
+      const { invoke, next, store } = create(SUT.authLoginFlow)
 
       // when ... we respond to the authLogin action
       await invoke(action)
 
       // then ... the login API should be called
       expect(next).toHaveBeenCalledWith(action)
-      expect(mockApi.api.auth.login).toHaveBeenCalled()
+      expect(store.dispatch).toHaveBeenCalled()
     })
-
-    it('should correctly handle a successful login', async () => {
-      // given ... the login api is called and returns successfully
+    it('should correctly login the user in', async () => {
+      // given ... the authLogin action is fired
       const create = createMiddlewareMock(jest)
       const credentials = {
         email: 'USER EMAIL',
         password: 'USER PASSWORD',
       }
-      const response = defaultUserLoginResponseData
-      const mockApi = { api: { auth: { login: jest.fn((_x: any) => Promise.resolve(response)) } } }
       const action = authLogin(credentials)
-
       // @ts-ignore
-      const { store, invoke } = create(SUT.authLoginFlow(mockApi))
+      const { invoke, store } = create(SUT.authLoginFlow)
 
-      // when ... we respond to the successful state
+      // when ... we respond to the authLogin action
       await invoke(action)
 
-      // then ... the success action should be dispatched with the response
-      expect(store.dispatch).toHaveBeenCalledWith(authLoginSuccess(response))
-    })
-    it('should correctly handle a failed login', async () => {
-      // given ... the login api is called and returns a failure
-      const create = createMiddlewareMock(jest)
-      const credentials = {
-        email: 'USER EMAIL',
-        password: 'USER PASSWORD',
-      }
-      const response = 'ERROR: FAILED FOR A REASON'
-      const mockApi = { api: { auth: { login: jest.fn((_x: any) => Promise.reject(response)) } } }
-      const action = authLogin(credentials)
-
-      // @ts-ignore
-      const { store, invoke } = create(SUT.authLoginFlow(mockApi))
-
-      // when ... we respond to the failure state
-      await invoke(action)
-
-      // then ... the failure action should be called with the error response
-      expect(store.dispatch).toHaveBeenCalledWith(authLoginFailure(response))
+      // then ... the login API should be called
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authLoginSuccess,
+            onFailure: authLoginFailure,
+          }),
+          credentials,
+        ),
+      )
     })
   })
   describe('authSetCredentialsFlow', () => {

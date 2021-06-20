@@ -1,5 +1,8 @@
+import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
+import { actions as ApiActions } from '../../api'
+import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
@@ -21,23 +24,23 @@ import {
 } from './Auth.types'
 import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
 
-export const authLoginFlow =
-  ({ api }: { api: any }): Middleware =>
+export const authLoginFlow: Middleware =
   ({ dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
-    // TODO: Abstract the api calls into a single api middleware
     if (authLogin.match(action)) {
-      await api.auth
-        .login(action.payload)
-        .then((response: AuthLoginSuccessResponse) => {
-          dispatch(authLoginSuccess(response))
-        })
-        .catch((error: AuthLoginFailureResponse) => {
-          dispatch(authLoginFailure(error))
-        })
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authLoginSuccess,
+            onFailure: authLoginFailure,
+          }),
+          action.payload,
+        ),
+      )
     }
 
     return result
@@ -86,7 +89,8 @@ export const authLoginFailureFlow =
 
     if (authLoginFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'Error', action.payload)
+      // @ts-ignore
+      notification('danger', 'An error occurred.', action.payload.message)
     }
 
     return result

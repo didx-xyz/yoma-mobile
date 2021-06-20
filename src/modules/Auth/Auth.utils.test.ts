@@ -11,11 +11,11 @@ describe('modules/Auth/Auth.utils', () => {
             refreshToken: 'REFRESH_TOKEN',
             token: 'USER_TOKEN',
             expiresAt: 'EXPIRES_AT',
-            otherProperty: 'SOME OTHER PROPERTY',
           },
           meta: {},
         },
       }
+
       // when ... we want to extract the credentials from the rest of the payload
       const result = SUT.selectCredentialsFromLoginPayload(mockedAction)
       // then ... the credentials should be extracted correctly
