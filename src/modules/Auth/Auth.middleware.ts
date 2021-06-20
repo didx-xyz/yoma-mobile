@@ -12,6 +12,7 @@ import {
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
+  authSocialRegistration,
   setAuthCredentials,
   setSecureRefreshToken,
   setSecureRefreshTokenFailure,
@@ -38,7 +39,6 @@ export const authLoginFlow: Middleware =
         ),
       )
     }
-
     return result
   }
 
@@ -77,22 +77,6 @@ export const setSecureRefreshTokenFlow =
     return result
   }
 
-export const authLoginFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  async action => {
-    const result = next(action)
-
-    if (authLoginFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      // @ts-ignore
-      notification('danger', 'An error occurred.', action.payload.message)
-    }
-
-    return result
-  }
-
 export const authRegistrationFlow =
   ({ api }: { api: any }): Middleware =>
   ({ dispatch }) =>
@@ -110,6 +94,27 @@ export const authRegistrationFlow =
         .catch((error: AuthRegistrationFailureResponse) => {
           dispatch(authRegistrationFailure(error))
         })
+    }
+
+    return result
+  }
+
+export const authSocialRegistrationFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (authSocialRegistration.match(action)) {
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authRegistrationSuccess,
+            onFailure: authRegistrationFailure,
+          }),
+          action.payload,
+        ),
+      )
     }
 
     return result

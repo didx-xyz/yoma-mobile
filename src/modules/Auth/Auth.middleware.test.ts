@@ -11,6 +11,7 @@ import {
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
+  authSocialRegistration,
   setAuthCredentials,
   setSecureRefreshToken,
   setSecureRefreshTokenFailure,
@@ -20,6 +21,7 @@ import {
   defaultUserLoginResponseData,
   defaultUserRegistrationResponseData,
   userRegistrationData,
+  userSocialRegistrationData,
 } from './Auth.test.fixtures'
 
 jest.mock('rn-fetch-blob', () => ({
@@ -270,6 +272,76 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(authRegistrationFailure(response))
     })
   })
+  describe('authSocialRegistrationFlow', () => {
+    it('should ignore other actions', async () => {
+      // given ... an action is fired
+      const create = createMiddlewareMock(jest)
+      const action = { type: 'TEST', payload: {} }
+      // @ts-ignore
+      const { invoke, next } = create(SUT.authSocialRegistrationFlow)
+
+      // when ... we invoke another action
+      await invoke(action)
+
+      // then ... next should have been called with the action
+      expect(next).toHaveBeenCalledWith(action)
+    })
+
+    it('should correctly call the api with the given social registration data', async () => {
+      // given ... the authRegistration action is fired
+      const create = createMiddlewareMock(jest)
+      const action = authSocialRegistration(userSocialRegistrationData)
+      // @ts-ignore
+      const { store, invoke } = create(SUT.authSocialRegistrationFlow)
+
+      // when ... we respond to the authRegistration action
+      await invoke(action)
+
+      // then ... the register API should be called
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authRegistrationSuccess,
+            onFailure: authRegistrationFailure,
+          }),
+          userSocialRegistrationData,
+        ),
+      )
+    })
+    it('should correctly handle a successful social registration', async () => {
+      // given ... the authRegistration action is fired
+      const create = createMiddlewareMock(jest)
+      // @ts-ignore
+      const response = defaultUserRegistrationResponseData
+      const action = authRegistrationSuccess(response)
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.authRegistrationSuccessFlow({ notification: mockNotification }))
+
+      // when ... we respond to the authRegistration action
+      await invoke(action)
+
+      // then ... the notification should be calleds
+      expect(mockNotification).toHaveBeenCalled()
+    })
+    it('should correctly handle a failed social registration', async () => {
+      // given ... the register api is called and returns a failure
+      const create = createMiddlewareMock(jest)
+      const mockNotification = jest.fn()
+      const response = 'ERROR: FAILED FOR A REASON'
+      const action = authRegistrationFailure(response)
+
+      // @ts-ignore
+      const { invoke } = create(SUT.authRegistrationFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the failure state
+      await invoke(action)
+
+      // then ... the failure action should be called with the error response
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
 
   describe('authRegistrationSuccessFlow', () => {
     it('should correctly send a notification to the user', async () => {
@@ -285,7 +357,7 @@ describe('modules/Auth/Auth.middleware', () => {
       // when ... we respond to the authRegistration action
       await invoke(action)
 
-      // then ... the notification should be called
+      // then ... the notification should be calleds
       expect(mockNotification).toHaveBeenCalled()
     })
   })

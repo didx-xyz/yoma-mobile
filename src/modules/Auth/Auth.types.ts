@@ -66,6 +66,14 @@ export interface AuthRegistration {
   privacyInd: boolean
 }
 
+export interface AuthSocialRegistrationCredentials {
+  firstName: string
+  lastName: string
+  email: string
+  provider: string
+  providerKey: string
+  token: string
+}
 export type AuthRegistrationSuccessResponse = {
   meta: ApiMetaResponse
 }

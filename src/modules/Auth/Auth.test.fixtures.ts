@@ -55,3 +55,12 @@ export const userRegistrationData = {
   confirmPassword: 'USER PASSWORD',
   privacyInd: true,
 }
+
+export const userSocialRegistrationData = {
+  firstName: 'FIRST NAME',
+  lastName: 'LAST NAME',
+  email: 'USER EMAIL',
+  provider: 'PROVIDER',
+  providerKey: 'PROVIDER_KEY',
+  token: 'USER_TOKEN',
+}
