@@ -5,14 +5,14 @@ import {
   AuthCredentials,
   AuthLoginFailureResponse,
   AuthLoginSuccessResponse,
+  AuthRegistration,
   AuthRegistrationFailureResponse,
   AuthRegistrationSuccessResponse,
-  AuthRegistration,
   AuthState,
 } from './Auth.types'
 
 const name = '[Auth]'
-export const INITIAL_STATE = {}
+export const INITIAL_STATE = {} as AuthState
 
 export const authLogin = createAction<AuthCredentials>(`${name} Login`)
 export const authLoginSuccess = createAction<AuthLoginSuccessResponse>(`${name} Login Success`)
