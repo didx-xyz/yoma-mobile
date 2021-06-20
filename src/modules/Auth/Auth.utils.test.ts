@@ -8,9 +8,11 @@ describe('modules/Auth/Auth.utils', () => {
         type: 'LOGIN ACTION',
         payload: {
           data: {
-            refreshToken: 'REFRESH_TOKEN',
-            token: 'USER_TOKEN',
-            expiresAt: 'EXPIRES_AT',
+            data: {
+              refreshToken: 'REFRESH_TOKEN',
+              token: 'USER_TOKEN',
+              expiresAt: 'EXPIRES_AT',
+            },
           },
           meta: {},
         },
@@ -29,10 +31,12 @@ describe('modules/Auth/Auth.utils', () => {
         type: 'LOGIN ACTION',
         payload: {
           data: {
-            refreshToken: 'REFRESH_TOKEN',
-            token: 'USER_TOKEN',
-            expiresAt: 'EXPIRES_AT',
-            otherProperty: 'SOME OTHER PROPERTY',
+            data: {
+              refreshToken: 'REFRESH_TOKEN',
+              token: 'USER_TOKEN',
+              expiresAt: 'EXPIRES_AT',
+              otherProperty: 'SOME OTHER PROPERTY',
+            },
           },
           meta: {},
         },
@@ -53,7 +57,7 @@ describe('modules/Auth/Auth.utils', () => {
       // when ... we want to extract the credentials from the rest of the payload
       const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
       // then ... the credentials should be extracted correctly
-      expect(result).toEqual(null)
+      expect(result).toEqual('')
     })
   })
 })

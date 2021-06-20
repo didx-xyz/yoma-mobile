@@ -1,12 +1,11 @@
+import { omit } from 'ramda'
 import { Middleware } from 'redux'
 
 import { apiRequest } from './api.reducer'
-import { ApiClient } from './api.types'
-import { prepareApiRequest } from './api.utils'
+import { ApiFlowDependencies } from './api.types'
 
-type Deps = { api: ApiClient; prepArgs: typeof prepareApiRequest }
 export const apiFlow =
-  ({ api, prepArgs }: Deps): Middleware =>
+  ({ api, prepArgs }: ApiFlowDependencies): Middleware =>
   ({ getState, dispatch }) =>
   next =>
   async action => {
@@ -16,13 +15,13 @@ export const apiFlow =
       const state = getState()
       //@ts-ignore
       const { onSuccess, onFailure, apiArgs } = prepArgs(state, action)
-
       await api(apiArgs)
         .then((response: any) => {
-          dispatch(onSuccess(response))
+          const serializableResponse = omit(['config', 'request'], response)
+          dispatch(onSuccess(serializableResponse))
         })
         .catch((error: any) => {
-          dispatch(onFailure(error))
+          dispatch(onFailure(error.message))
         })
     }
 

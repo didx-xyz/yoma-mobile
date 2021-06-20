@@ -6,8 +6,11 @@ export interface ApiMetaResponse {
   message: string | null
 }
 
-export interface AuthCredentialsResponse {
+export interface AuthRefreshTokenResponse {
   refreshToken: string
+}
+
+export interface AuthCredentialsResponse {
   token: string
   expiresAt: string
 }
@@ -31,12 +34,12 @@ export interface UserResponse {
   lastLogin: string
 }
 
-export interface AuthLoginSuccessData extends AuthCredentialsResponse {
+export interface AuthLoginSuccessData extends AuthCredentialsResponse, AuthRefreshTokenResponse {
   user: UserResponse
 }
 
 export interface AuthLoginSuccessResponse {
-  data: AuthLoginSuccessData
+  data: { data: AuthLoginSuccessData }
   meta: ApiMetaResponse
 }
 

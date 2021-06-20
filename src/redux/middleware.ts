@@ -18,7 +18,7 @@ const commonMiddleware: Middleware[] = [
 
 const featureModuleMiddleware = [
   authMiddleware.authLoginFlow,
-  authMiddleware.authSetCredentialsFlow({ notification: showSimpleMessage }),
+  authMiddleware.authLoginSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authLoginFailureFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFlow({ api }),
   authMiddleware.setSecureRefreshTokenFlow(setItemAsync),

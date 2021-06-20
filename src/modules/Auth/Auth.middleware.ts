@@ -13,6 +13,7 @@ import {
   authRegistrationFailure,
   authRegistrationSuccess,
   setAuthCredentials,
+  setSecureRefreshToken,
   setSecureRefreshTokenFailure,
   setSecureRefreshTokenSuccess,
 } from './Auth.reducer'
@@ -41,7 +42,7 @@ export const authLoginFlow: Middleware =
     return result
   }
 
-export const authSetCredentialsFlow =
+export const authLoginSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
@@ -50,8 +51,10 @@ export const authSetCredentialsFlow =
 
     if (authLoginSuccess.match(action)) {
       const credentials = selectCredentialsFromLoginPayload(action)
+      const refreshToken = selectRefreshTokenFromLoginPayload(action)
       notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
+      dispatch(setSecureRefreshToken(refreshToken))
     }
     return result
   }
@@ -62,9 +65,8 @@ export const setSecureRefreshTokenFlow =
   next =>
   async action => {
     const result = next(action)
-    if (authLoginSuccess.match(action)) {
-      const refreshToken = selectRefreshTokenFromLoginPayload(action)
-      await setSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY, refreshToken)
+    if (setSecureRefreshToken.match(action)) {
+      await setSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY, action.payload)
         .then(() => {
           dispatch(setSecureRefreshTokenSuccess())
         })
