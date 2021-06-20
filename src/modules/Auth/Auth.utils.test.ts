@@ -40,7 +40,20 @@ describe('modules/Auth/Auth.utils', () => {
       // when ... we want to extract the credentials from the rest of the payload
       const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
       // then ... the credentials should be extracted correctly
-      expect(result).toEqual({ refreshToken: 'REFRESH_TOKEN' })
+      expect(result).toEqual('REFRESH_TOKEN')
+    })
+    it('should handle the refresh token not being available', () => {
+      // given ... an object in the shape of the successful login response
+      const mockedAction = {
+        type: 'LOGIN ACTION',
+        payload: {
+          meta: {},
+        },
+      }
+      // when ... we want to extract the credentials from the rest of the payload
+      const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
+      // then ... the credentials should be extracted correctly
+      expect(result).toEqual(null)
     })
   })
 })

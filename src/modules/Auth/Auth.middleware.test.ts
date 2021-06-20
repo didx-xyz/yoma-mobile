@@ -175,6 +175,7 @@ describe('modules/Auth/Auth.middleware', () => {
 
       // then ...
       // ... we should notify of the success
+      expect(setSecureItemStub).toHaveBeenCalledWith('refreshToken', defaultUserLoginResponseData.data.refreshToken)
       expect(store.dispatch).toHaveBeenCalledWith(setSecureRefreshTokenSuccess())
     })
     it('should log an error if it fails to set the refresh token', async () => {
@@ -190,6 +191,7 @@ describe('modules/Auth/Auth.middleware', () => {
 
       // then ...
       // ... we should log the error in a failure action
+      expect(setSecureItemStub).toHaveBeenCalledWith('refreshToken', defaultUserLoginResponseData.data.refreshToken)
       expect(store.dispatch).toHaveBeenCalledWith(setSecureRefreshTokenFailure('SOME ERROR'))
     })
   })
