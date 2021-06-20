@@ -115,7 +115,7 @@ export const authRegistrationFailureFlow = ({
   return result
 }
 
-export const authLogoutFlow = (): Middleware => ({ dispatch }) => next => async action => {
+export const authLogoutFlow: Middleware = ({ dispatch }) => next => async action => {
   const result = next(action)
   if (authLogout.match(action)) {
     dispatch(resetAppData)

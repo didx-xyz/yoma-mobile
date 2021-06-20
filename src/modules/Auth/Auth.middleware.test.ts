@@ -168,7 +168,7 @@ describe('modules/Auth/Auth.middleware', () => {
       const create = createMiddlewareMock(jest)
       const action = authLogout()
       // @ts-ignore
-      const { invoke, next } = create(SUT.authLogoutFlow())
+      const { invoke, next } = create(SUT.authLogoutFlow)
 
       // when ... we invoke another action
       await invoke(action)
@@ -181,7 +181,7 @@ describe('modules/Auth/Auth.middleware', () => {
       const create = createMiddlewareMock(jest)
       const action = authLogout()
       // @ts-ignore
-      const { invoke, store } = create(SUT.authLogoutFlow())
+      const { invoke, store } = create(SUT.authLogoutFlow)
 
       // when ... we invoke another action
       await invoke(action)
