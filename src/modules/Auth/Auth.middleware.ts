@@ -1,6 +1,7 @@
 import { Middleware } from 'redux'
 
 import { showSimpleMessage } from '../../utils/error'
+import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authLogin,
   authLoginFailure,
@@ -65,8 +66,10 @@ export const setSecureRefreshTokenFlow =
     const result = next(action)
     if (authLoginSuccess.match(action)) {
       const refreshToken = selectRefreshTokenFromLoginPayload(action)
-      await setSecureItem('refreshToken', refreshToken)
-        .then(() => dispatch(setSecureRefreshTokenSuccess()))
+      await setSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY, refreshToken)
+        .then(() => {
+          dispatch(setSecureRefreshTokenSuccess())
+        })
         .catch((error: any) => {
           dispatch(setSecureRefreshTokenFailure(error))
         })
