@@ -41,22 +41,22 @@ describe('modules/Auth/Auth.utils', () => {
           meta: {},
         },
       }
-      // when ... we want to extract the credentials from the rest of the payload
+      // when ... we want to extract the refresh token from the rest of the payload
       const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
-      // then ... the credentials should be extracted correctly
+      // then ... the refresh token should be extracted correctly
       expect(result).toEqual('REFRESH_TOKEN')
     })
     it('should handle the refresh token not being available', () => {
-      // given ... an object in the shape of the successful login response
+      // given ... a data without a refresh token
       const mockedAction = {
         type: 'LOGIN ACTION',
         payload: {
           meta: {},
         },
       }
-      // when ... we want to extract the credentials from the rest of the payload
+      // when ... we want to extract the refresh token but it doesn't exists
       const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
-      // then ... the credentials should be extracted correctly
+      // then ... we should return the fallback value of an empty string
       expect(result).toEqual('')
     })
   })

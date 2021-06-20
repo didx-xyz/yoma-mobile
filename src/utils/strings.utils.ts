@@ -17,6 +17,3 @@ export const filterStringArray = (value: string, array: string[]) =>
 export const textOrSpace = (condition: boolean, text: string) => (condition ? text : ' ')
 
 export const dropElement = (value: string, array: string[]) => filter((element: string) => element !== value)(array)
-
-export const toJSON = (val: any) => JSON.stringify(val)
-export const parseJSON = (val: string) => JSON.parse(val)
