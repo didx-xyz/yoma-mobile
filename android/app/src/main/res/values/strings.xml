@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">YomaMobile</string>
-    <string name="facebook_app_id">286197613064906</string>
+    <string name="app_name">YomaMobile</string>     
+    <string name="facebook_app_id">581656496154188</string>
+    <string name="fb_login_protocol_scheme">fb581656496154188</string>
 </resources>
