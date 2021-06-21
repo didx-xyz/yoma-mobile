@@ -8,7 +8,7 @@ import { View } from 'react-native'
 import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
 
-const NewCourseForm = forwardRef(() => {
+const NewCourseForm = forwardRef((_props, _ref) => {
   const { t } = useTranslation()
   const [isCourseActive, setIsCourseActive] = useState<boolean>(false)
   const [shouldRequestVerification, setShouldRequestVerification] = useState<boolean>(false)

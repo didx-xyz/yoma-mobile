@@ -1,0 +1,2 @@
+Ver 0.0.1 (build 2)
+- App now deploys automatically to firebase app dist on merge into develop or main branches

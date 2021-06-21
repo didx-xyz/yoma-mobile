@@ -23,9 +23,17 @@ type Props = {
   onSave?: () => void
   showAddButton?: boolean
   onAdd?: () => void
+  isSaveButtonEnabled?: boolean
 }
 
-const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, onAdd }: Props) => {
+const NormalHeader = ({
+  navigation,
+  headerText,
+  onSave,
+  showAddButton = false,
+  isSaveButtonEnabled = false,
+  onAdd,
+}: Props) => {
   const { t } = useTranslation()
   useEffect(() => {
     const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
@@ -47,6 +55,7 @@ const NormalHeader = ({ navigation, headerText, onSave, showAddButton = false, o
         condition={showAddButton}
         fallback={
           <Button
+            isDisabled={!isSaveButtonEnabled}
             variant={ButtonVariants.Clear}
             label={t('Save')}
             color={Colors.primaryGreen}

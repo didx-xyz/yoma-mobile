@@ -55,6 +55,7 @@ buck-out/
 */fastlane/report.xml
 */fastlane/Preview.html
 */fastlane/screenshots
+fastlane/.env
 
 # Bundle artifact
 *.jsbundle
@@ -62,6 +63,8 @@ buck-out/
 # CocoaPods
 /ios/Pods/
 
+# circle ci
+process.yml
 
 .xgitconfig
 src/env.json

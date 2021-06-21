@@ -1,6 +1,7 @@
 declare module 'ramda' {
   export function __(...rest: any[]): any[]
   export function always(...rest: any[]): any[]
+  export function and(...rest: any[]): any
   export function append(...rest: any[]): any
   export function concat(...rest: any[]): any[]
   export function curry(...rest: any[]): any
