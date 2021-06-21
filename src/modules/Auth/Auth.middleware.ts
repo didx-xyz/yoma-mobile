@@ -12,6 +12,9 @@ import {
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
+  getSecureRefreshToken,
+  getSecureRefreshTokenFailure,
+  getSecureRefreshTokenSuccess,
   setAuthCredentials,
   setSecureRefreshToken,
   setSecureRefreshTokenFailure,
@@ -20,7 +23,54 @@ import {
 import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
 import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
 
-export const authLoginFlow: Middleware =
+export const authorizeFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (authLogin.match(action)) {
+      dispatch(getSecureRefreshToken())
+    }
+    return result
+  }
+
+export const getSecureRefreshTokenFlow =
+  (getSecureItem: any): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (authLogin.match(action)) {
+      getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
+        .then((data: string) => dispatch(getSecureRefreshTokenSuccess(data)))
+        .catch((error: any) => dispatch(getSecureRefreshTokenFailure(error.message)))
+    }
+    return result
+  }
+
+export const authorizeWithRefreshTokenFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (authLogin.match(action)) {
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authLoginSuccess,
+            onFailure: authLoginFailure,
+          }),
+          action.payload,
+        ),
+      )
+    }
+
+    return result
+  }
+
+export const loginFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {

@@ -20,13 +20,24 @@ export const INITIAL_STATE = {
 export const authLogin = createAction<AuthCredentials>(`${name} Login`)
 export const authLoginSuccess = createAction<AuthLoginSuccessResponse>(`${name} Login Success`)
 export const authLoginFailure = createAction<AuthLoginFailureResponse>(`${name} Login Failure`)
-export const setAuthCredentials = createAction<AuthState>(`${name} Set Auth Credentials`)
-export const authRegistration = createAction<AuthRegistration>(`${name} Registration`)
+
+export const authRegistration = createAction<AuthRegistration>(`${name} authRegistration`)
+export const authRegistrationSuccess = createAction<AuthRegistrationSuccessResponse>(
+  `${name} AuthRegistrationSuccessResponse`,
+)
+export const authRegistrationFailure = createAction<AuthRegistrationFailureResponse>(
+  `${name} AuthRegistrationFailureResponse`,
+)
+
 export const setSecureRefreshToken = createAction<string>(`${name} setSecureRefreshToken`)
 export const setSecureRefreshTokenSuccess = createAction(`${name} setSecureRefreshTokenSuccess`)
-export const setSecureRefreshTokenFailure = createAction<any>(`${name} setSecureRefreshTokenFailure`)
-export const authRegistrationSuccess = createAction<AuthRegistrationSuccessResponse>(`${name} Registration Success`)
-export const authRegistrationFailure = createAction<AuthRegistrationFailureResponse>(`${name} Registration Failure`)
+export const setSecureRefreshTokenFailure = createAction<string>(`${name} setSecureRefreshTokenFailure`)
+
+export const getSecureRefreshToken = createAction(`${name} getSecureRefreshToken`)
+export const getSecureRefreshTokenSuccess = createAction<string>(`${name} getSecureRefreshTokenSuccess`)
+export const getSecureRefreshTokenFailure = createAction<string>(`${name} getSecureRefreshTokenFailure`)
+
+export const setAuthCredentials = createAction<AuthState>(`${name} Set Auth Credentials`)
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setAuthCredentials, (state, action) => mergeDeepRight(state)(action.payload))
