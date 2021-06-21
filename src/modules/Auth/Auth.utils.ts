@@ -1,6 +1,5 @@
-import { path, pick, pipe } from 'ramda'
+import { path, pathOr, pick, pipe } from 'ramda'
 
-export const getCredentialsFromAuthSuccess = pipe(
-  path(['payload', 'data']),
-  pick(['refreshToken', 'token', 'expiresAt']),
-)
+export const selectCredentialsFromLoginPayload = pipe(path(['payload', 'data', 'data']), pick(['token', 'expiresAt']))
+
+export const selectRefreshTokenFromLoginPayload = pathOr('', ['payload', 'data', 'data', 'refreshToken'])

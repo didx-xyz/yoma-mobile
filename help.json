@@ -5,6 +5,7 @@
   "init:ios": "init app for ios",
   "ios": "serve app on ios simulator",
   "android": "serve app on android emulator",
+  "clean:android": "runs gradle clean on the project",
   "start": "start app bundler",
   "start:reset": "reset and start app bundler",
   "test": "run all unit tests",

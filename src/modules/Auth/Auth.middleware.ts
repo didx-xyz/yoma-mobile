@@ -4,6 +4,7 @@ import { Middleware } from 'redux'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
+import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authLogin,
   authLoginFailure,
@@ -12,9 +13,12 @@ import {
   authRegistrationFailure,
   authRegistrationSuccess,
   setAuthCredentials,
+  setSecureRefreshToken,
+  setSecureRefreshTokenFailure,
+  setSecureRefreshTokenSuccess,
 } from './Auth.reducer'
 import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
-import { getCredentialsFromAuthSuccess } from './Auth.utils'
+import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
 
 export const authLoginFlow: Middleware =
   ({ dispatch }) =>
@@ -38,11 +42,7 @@ export const authLoginFlow: Middleware =
     return result
   }
 
-// TODO: add middleware to just get the auth values from authLoginSuccess
-// TODO: Then add middleware to get the middleware for state
-// TODO: Then add middleware to store the refresh token in secure storage
-// TODO: also add middleware in the User section to catch the user data returned in successful auth
-export const authSetCredentialsFlow =
+export const authLoginSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
@@ -50,10 +50,29 @@ export const authSetCredentialsFlow =
     const result = next(action)
 
     if (authLoginSuccess.match(action)) {
-      const credentials = getCredentialsFromAuthSuccess(action)
-      // TODO: this should be handled by the notification module
+      const credentials = selectCredentialsFromLoginPayload(action)
+      const refreshToken = selectRefreshTokenFromLoginPayload(action)
       notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
+      dispatch(setSecureRefreshToken(refreshToken))
+    }
+    return result
+  }
+
+export const setSecureRefreshTokenFlow =
+  (setSecureItem: any): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  async action => {
+    const result = next(action)
+    if (setSecureRefreshToken.match(action)) {
+      await setSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY, action.payload)
+        .then(() => {
+          dispatch(setSecureRefreshTokenSuccess())
+        })
+        .catch((error: any) => {
+          dispatch(setSecureRefreshTokenFailure(error))
+        })
     }
     return result
   }
