@@ -1,45 +1,29 @@
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import * as SUT from './App.middleware'
 import { resetAppData } from './App.reducer'
-import { AppResetActions } from './App.types'
 
 describe('modules/App/App.middleware', () => {
   describe('appResetFlow', () => {
-    it('should correctly call reset actions ', async () => {
-      const mockResetActions: AppResetActions = [{ payload: { data: 'DATA' }, type: 'RESET A' }]
-
+    it('should correctly call app reset action', async () => {
       const create = createMiddlewareMock(jest)
       // given ... the resetAppData action is fired
       const action = resetAppData()
-      const { store, invoke } = create(SUT.appResetFlow(mockResetActions))
+      const { next, invoke } = create(SUT.appResetFlow)
 
       await invoke(action)
       // ... we validate that our actions were triggered
-      mockResetActions.forEach(resetAction => expect(store.dispatch).toHaveBeenCalledWith(resetAction))
+      expect(next).toHaveBeenCalledWith(action)
     })
-    it('should handle reset actions accurately', async () => {
-      const mockResetActions: AppResetActions = [{ payload: { data: 'DATA' }, type: 'RESET A' }]
-
+    it('should handle app reset action accurately', async () => {
       const create = createMiddlewareMock(jest)
+
       // given ... the resetAppData action is fired
       const action = resetAppData()
-      const { store, invoke } = create(SUT.appResetFlow(mockResetActions))
+      const { store, invoke } = create(SUT.appResetFlow)
 
       await invoke(action)
-      // ... we validate that our actions were triggered x times
-      expect(store.dispatch).toBeCalledTimes(1)
-    })
-    it('should not handle any actions', async () => {
-      const mockResetActions: AppResetActions = []
-
-      const create = createMiddlewareMock(jest)
-      // given ... the resetAppData action is fired
-      const action = resetAppData()
-      const { store, invoke } = create(SUT.appResetFlow(mockResetActions))
-
-      await invoke(action)
-      // ... we validate that our actions were triggered x times
-      expect(store.dispatch).toBeCalledTimes(0)
+      // ... we validate that our actions were triggered
+      expect(store.dispatch).toBeCalled()
     })
   })
 })

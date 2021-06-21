@@ -1,4 +1,4 @@
-import SUT, { authLogout, INITIAL_STATE, setAuthCredentials } from './Auth.reducer'
+import SUT, { clearAuthState, INITIAL_STATE, setAuthCredentials } from './Auth.reducer'
 
 describe('modules/Auth/Auth.reducer', () => {
   describe('setAuthCredentials', () => {
@@ -35,7 +35,7 @@ describe('modules/Auth/Auth.reducer', () => {
       expect(result).toEqual(credentials)
     })
   })
-  describe('authLogout', () => {
+  describe('clearAuthState', () => {
     it('should log out the user', () => {
       // give ... there are no credentials in state
       const state = {
@@ -43,7 +43,7 @@ describe('modules/Auth/Auth.reducer', () => {
         token: 'USER_TOKEN',
         expiresAt: 'EXPIRY_DATE',
       }
-      const action = authLogout()
+      const action = clearAuthState()
       const result = SUT(state, action)
       // then ... should set the default Auth state
       expect(result).toEqual(INITIAL_STATE)

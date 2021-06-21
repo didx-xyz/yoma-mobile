@@ -1,11 +1,9 @@
 import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { resetAppData } from './../App/App.reducer'
 import * as SUT from './Auth.middleware'
 import {
   authLogin,
   authLoginFailure,
   authLoginSuccess,
-  authLogout,
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
@@ -160,34 +158,6 @@ describe('modules/Auth/Auth.middleware', () => {
 
       // then ... the login API should be called
       expect(mockNotification).toHaveBeenCalled()
-    })
-  })
-  describe('authLogoutFlow', () => {
-    it('should handle logging out the user', async () => {
-      // given ... an action is fired
-      const create = createMiddlewareMock(jest)
-      const action = authLogout()
-      // @ts-ignore
-      const { invoke, next } = create(SUT.authLogoutFlow)
-
-      // when ... we invoke another action
-      await invoke(action)
-
-      // then ... next should have been called with the action
-      expect(next).toHaveBeenCalledWith(action)
-    })
-    it('should reset the app state', async () => {
-      // given ... an action is fired
-      const create = createMiddlewareMock(jest)
-      const action = authLogout()
-      // @ts-ignore
-      const { invoke, store } = create(SUT.authLogoutFlow)
-
-      // when ... we invoke another action
-      await invoke(action)
-
-      // then ... next should have been called with the action
-      expect(store.dispatch).toHaveBeenCalledWith(resetAppData)
     })
   })
 
