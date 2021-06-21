@@ -13,7 +13,6 @@ import {
 
 const name = '[Auth]'
 export const INITIAL_STATE = {
-  refreshToken: '',
   token: '',
   expiresAt: '',
 } as AuthState
@@ -23,6 +22,9 @@ export const authLoginSuccess = createAction<AuthLoginSuccessResponse>(`${name} 
 export const authLoginFailure = createAction<AuthLoginFailureResponse>(`${name} Login Failure`)
 export const setAuthCredentials = createAction<AuthState>(`${name} Set Auth Credentials`)
 export const authRegistration = createAction<AuthRegistration>(`${name} Registration`)
+export const setSecureRefreshToken = createAction<string>(`${name} setSecureRefreshToken`)
+export const setSecureRefreshTokenSuccess = createAction(`${name} setSecureRefreshTokenSuccess`)
+export const setSecureRefreshTokenFailure = createAction<any>(`${name} setSecureRefreshTokenFailure`)
 export const authRegistrationSuccess = createAction<AuthRegistrationSuccessResponse>(`${name} Registration Success`)
 export const authRegistrationFailure = createAction<AuthRegistrationFailureResponse>(`${name} Registration Failure`)
 

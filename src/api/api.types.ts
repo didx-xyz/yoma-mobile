@@ -2,6 +2,7 @@ import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ActionCreator } from 'redux'
 
 import { StdObj } from '../types/general.types'
+import { prepareApiRequest } from './api.utils'
 import { types as AuthTypes } from './auth/'
 import { types as OrgTypes } from './organisations'
 import { types as SkillsTypes } from './skills'
@@ -57,3 +58,5 @@ export interface ApiMeta extends ApiClientMetaOverlap {
 export type PrepareApiRequestData = Pick<ApiMeta, 'onSuccess' | 'onFailure'> & {
   apiArgs: ApiClientArgs
 }
+
+export type ApiFlowDependencies = { api: ApiClient; prepArgs: typeof prepareApiRequest }

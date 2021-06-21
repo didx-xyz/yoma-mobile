@@ -28,7 +28,9 @@ describe('authWithWebAuthFlow', () => {
   it('should correctly handle a successful api call', async () => {
     // given ... a request
     const create = createMiddlewareMock(jest)
-    const apiClientStub = jest.fn().mockResolvedValue('SUCCESSFUL RESPONSE')
+    const apiClientStub = jest
+      .fn()
+      .mockResolvedValue({ config: 'CONFIG', request: 'REQUEST', data: 'SUCCESSFUL RESPONSE' })
     const onSuccessStub = jest.fn(x => ({ type: 'onSuccess', payload: x }))
     const onFailureStub = jest.fn(x => ({ type: 'onFailure', payload: x }))
     const prepArgsStub = jest
@@ -45,12 +47,12 @@ describe('authWithWebAuthFlow', () => {
     expect.hasAssertions()
 
     // ... should correctly send provided data
-    expect(store.dispatch).toHaveBeenCalledWith(onSuccessStub('SUCCESSFUL RESPONSE'))
+    expect(store.dispatch).toHaveBeenCalledWith(onSuccessStub({ data: 'SUCCESSFUL RESPONSE' }))
   })
   it('should correctly handle when the api fails', async () => {
     // given ... a request
     const create = createMiddlewareMock(jest)
-    const apiClientStub = jest.fn().mockRejectedValue('ERROR')
+    const apiClientStub = jest.fn().mockRejectedValue({ message: 'ERROR' })
     const onSuccessStub = jest.fn(x => ({ type: 'onSuccess', payload: x }))
     const onFailureStub = jest.fn(x => ({ type: 'onFailure', payload: x }))
     const prepArgsStub = jest

@@ -12,6 +12,9 @@ import {
   authRegistrationFailure,
   authRegistrationSuccess,
   setAuthCredentials,
+  setSecureRefreshToken,
+  setSecureRefreshTokenFailure,
+  setSecureRefreshTokenSuccess,
 } from './Auth.reducer'
 import {
   defaultUserLoginResponseData,
@@ -83,19 +86,20 @@ describe('modules/Auth/Auth.middleware', () => {
       )
     })
   })
-  describe('authSetCredentialsFlow', () => {
-    it('should catch a successful login action', async () => {
+  describe('authLoginSuccessFlow', () => {
+    it('should correctly catch a successful login action', async () => {
       // given ... the authLoginSuccess action is fired
       const create = createMiddlewareMock(jest)
       const action = authLoginSuccess(defaultUserLoginResponseData)
       const mockNotification = jest.fn()
       // @ts-ignore
-      const { store, invoke } = create(SUT.authSetCredentialsFlow({ notification: mockNotification }))
+      const { store, invoke, next } = create(SUT.authLoginSuccessFlow({ notification: mockNotification }))
 
       // when ... we respond to the authLoginSuccess action
       await invoke(action)
 
       // then ... we should correctly catch the action
+      expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalled()
     })
     it('should correctly send a notification to the user', async () => {
@@ -105,7 +109,7 @@ describe('modules/Auth/Auth.middleware', () => {
       const action = authLoginSuccess(defaultUserLoginResponseData)
       const mockNotification = jest.fn()
       // @ts-ignore
-      const { invoke } = create(SUT.authSetCredentialsFlow({ notification: mockNotification }))
+      const { invoke } = create(SUT.authLoginSuccessFlow({ notification: mockNotification }))
 
       // when ... we respond to the authLogin action
       await invoke(action)
@@ -113,22 +117,72 @@ describe('modules/Auth/Auth.middleware', () => {
       // then ... the login API should be called
       expect(mockNotification).toHaveBeenCalled()
     })
-    it('should dispatch the setAuthCredentials action with the correct data', async () => {
+    it('should extract and transmit auth credentials and refresh token', async () => {
       // given ... the authLogin action is fired
       const create = createMiddlewareMock(jest)
       // @ts-ignore
       const action = authLoginSuccess(defaultUserLoginResponseData)
       const mockNotification = jest.fn()
-      // @ts-ignore
-      const { store, invoke } = create(SUT.authSetCredentialsFlow({ notification: mockNotification }))
+      // @ts-ignores
+      const { store, invoke } = create(SUT.authLoginSuccessFlow({ notification: mockNotification }))
 
       // when ... we respond to the authLogin action
       await invoke(action)
 
       // then ... the login API should be called
-      expect(store.dispatch).toHaveBeenCalledWith(
-        setAuthCredentials({ refreshToken: 'REFRESH_TOKEN', token: 'USER_TOKEN', expiresAt: 'EXPIRY_DATE' }),
-      )
+      expect(store.dispatch).toHaveBeenCalledWith(setAuthCredentials({ token: 'USER_TOKEN', expiresAt: 'EXPIRY_DATE' }))
+      expect(store.dispatch).toHaveBeenCalledWith(setSecureRefreshToken('REFRESH_TOKEN'))
+    })
+  })
+  describe('setSecureRefreshTokenFlow', () => {
+    it('should correctly handle being called', async () => {
+      // given ... the authLoginSuccess action is fired
+      const create = createMiddlewareMock(jest)
+      const action = setSecureRefreshToken('REFRESH_TOKEN')
+      const setSecureItemStub = jest.fn().mockResolvedValue(true)
+      // @ts-ignore
+      const { next, invoke } = create(SUT.setSecureRefreshTokenFlow(setSecureItemStub))
+
+      // when ... we respond to the authLoginSuccess action
+      await invoke(action)
+
+      // then ...
+      // ... we should correctly attempt to store the token
+      expect(setSecureItemStub).toHaveBeenCalled()
+      // ... and should call next with the action
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly save the refresh token in secure store', async () => {
+      // given ... the authLoginSuccess action is fired
+      const create = createMiddlewareMock(jest)
+      const action = setSecureRefreshToken('REFRESH_TOKEN')
+      const setSecureItemStub = jest.fn().mockResolvedValue(true)
+      // @ts-ignore
+      const { store, invoke } = create(SUT.setSecureRefreshTokenFlow(setSecureItemStub))
+
+      // when ... we successfully store the refresh token
+      await invoke(action)
+
+      // then ...
+      // ... we should notify of the success
+      expect(setSecureItemStub).toHaveBeenCalledWith('refreshToken', 'REFRESH_TOKEN')
+      expect(store.dispatch).toHaveBeenCalledWith(setSecureRefreshTokenSuccess())
+    })
+    it('should log an error if it fails to set the refresh token', async () => {
+      // given ... the authLoginSuccess action is fired
+      const create = createMiddlewareMock(jest)
+      const action = setSecureRefreshToken('REFRESH_TOKEN')
+      const setSecureItemStub = jest.fn().mockRejectedValue('SOME ERROR')
+      // @ts-ignore
+      const { store, invoke } = create(SUT.setSecureRefreshTokenFlow(setSecureItemStub))
+
+      // when ... we fail to save the refresh token
+      await invoke(action)
+
+      // then ...
+      // ... we should log the error in a failure action
+      expect(setSecureItemStub).toHaveBeenCalledWith('refreshToken', 'REFRESH_TOKEN')
+      expect(store.dispatch).toHaveBeenCalledWith(setSecureRefreshTokenFailure('SOME ERROR'))
     })
   })
   describe('authLoginFailureFlow', () => {
@@ -198,6 +252,7 @@ describe('modules/Auth/Auth.middleware', () => {
       // then ... the success action should be dispatched with the response
       expect(store.dispatch).toHaveBeenCalledWith(authRegistrationSuccess(response))
     })
+
     it('should correctly handle a failed registration', async () => {
       // given ... the register api is called and returns a failure
       const create = createMiddlewareMock(jest)

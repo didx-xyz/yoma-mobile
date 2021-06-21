@@ -1,26 +1,63 @@
 import * as SUT from './Auth.utils'
 
 describe('modules/Auth/Auth.utils', () => {
-  describe('getCredentialsFromAuthSuccess', () => {
-    it('should return the auth credentials from the server payload', () => {
+  describe('selectCredentialsFromLoginPayload', () => {
+    it('should return the auth credentials from the login payload', () => {
       // given ... an object in the shape of the successful login response
       const mockedAction = {
-        type: 'SOME ACTION',
+        type: 'LOGIN ACTION',
         payload: {
           data: {
-            refreshToken: 'REFRESH_TOKEN',
-            token: 'USER_TOKEN',
-            expiresAt: 'EXPIRES_AT',
+            data: {
+              refreshToken: 'REFRESH_TOKEN',
+              token: 'USER_TOKEN',
+              expiresAt: 'EXPIRES_AT',
+            },
           },
           meta: {},
         },
       }
 
       // when ... we want to extract the credentials from the rest of the payload
-      const result = SUT.getCredentialsFromAuthSuccess(mockedAction)
-
+      const result = SUT.selectCredentialsFromLoginPayload(mockedAction)
       // then ... the credentials should be extracted correctly
-      expect(result).toEqual({ refreshToken: 'REFRESH_TOKEN', token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
+      expect(result).toEqual({ token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
+    })
+  })
+  describe('selectRefreshTokenFromLoginPayload', () => {
+    it('should return the refresh token from the login payload', () => {
+      // given ... an object in the shape of the successful login response
+      const mockedAction = {
+        type: 'LOGIN ACTION',
+        payload: {
+          data: {
+            data: {
+              refreshToken: 'REFRESH_TOKEN',
+              token: 'USER_TOKEN',
+              expiresAt: 'EXPIRES_AT',
+              otherProperty: 'SOME OTHER PROPERTY',
+            },
+          },
+          meta: {},
+        },
+      }
+      // when ... we want to extract the refresh token from the rest of the payload
+      const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
+      // then ... the refresh token should be extracted correctly
+      expect(result).toEqual('REFRESH_TOKEN')
+    })
+    it('should handle the refresh token not being available', () => {
+      // given ... a data without a refresh token
+      const mockedAction = {
+        type: 'LOGIN ACTION',
+        payload: {
+          meta: {},
+        },
+      }
+      // when ... we want to extract the refresh token but it doesn't exists
+      const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
+      // then ... we should return the fallback value of an empty string
+      expect(result).toEqual('')
     })
   })
 })
