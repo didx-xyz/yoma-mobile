@@ -25,6 +25,7 @@ declare module 'ramda' {
   export function not(...rest: any[]): number
   export function objOf(...rest: any[]): any
   export function of(...rest: any[]): any[]
+  export function omit(...rest: any[]): any[]
   export function pipe(...rest: any[]): any
   export function path(...rest: any[]): any
   export function pathOr(...rest: any[]): any
