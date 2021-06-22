@@ -1,6 +1,6 @@
 import { createMiddlewareMock } from '../../../tests/tests.utils'
+import { resetAppData } from './App.actions'
 import * as SUT from './App.middleware'
-import { resetAppData } from './App.reducer'
 
 describe('modules/App/App.middleware', () => {
   describe('appResetFlow', () => {

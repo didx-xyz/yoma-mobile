@@ -23,7 +23,6 @@ const featureModuleMiddleware = [
   authMiddleware.authRegistrationFlow({ api }),
   authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
-  authMiddleware.authLogoutFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

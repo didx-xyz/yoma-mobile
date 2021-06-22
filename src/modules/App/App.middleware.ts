@@ -1,7 +1,7 @@
 import { Middleware } from 'redux'
 
 import * as AuthActions from './../Auth/Auth.reducer'
-import { resetAppData } from './App.reducer'
+import { resetAppData } from './App.actions'
 
 export const appResetFlow: Middleware = ({ dispatch }) => next => async action => {
   const result = next(action)

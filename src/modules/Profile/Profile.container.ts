@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
-import * as AppActions from './../App/App.reducer'
+import * as AppActions from '../App/App.actions'
 import Profile from './Profile'
 
 const mapStateToProps = null
