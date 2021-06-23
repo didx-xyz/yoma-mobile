@@ -1,7 +1,8 @@
 import { nameHasDigitsOrSymbols } from 'utils/regex'
 import * as yup from 'yup'
 
-const PHONE_NUMBER_REG_EX = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+const PHONE_NUMBER_REG_EX =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
 
 export const ValidationSchema = () =>
   yup.object().shape({

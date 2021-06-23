@@ -6,8 +6,6 @@ import { config } from './config'
 import App from './src/modules/App'
 import { store } from './src/redux/store'
 
-
-
 const Root = () => (
   <Provider store={store}>
     <App />
