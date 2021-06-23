@@ -1,9 +1,11 @@
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
+import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authLogin,
@@ -18,7 +20,11 @@ import {
   setSecureRefreshTokenSuccess,
 } from './Auth.reducer'
 import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
-import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
+import {
+  selectCredentialsFromLoginPayload,
+  selectLoginCredentialsFromRegistration,
+  selectRefreshTokenFromLoginPayload,
+} from './Auth.utils'
 
 export const authLoginFlow: Middleware =
   ({ dispatch }) =>
@@ -102,9 +108,11 @@ export const authRegistrationFlow =
 
     // TODO: Abstract the api calls into a single api middleware
     if (authRegistration.match(action)) {
+      const credentials = selectLoginCredentialsFromRegistration(action.payload)
       await api.auth
         .register(action.payload)
         .then((response: AuthRegistrationSuccessResponse) => {
+          dispatch(authLogin(credentials))
           dispatch(authRegistrationSuccess(response))
         })
         .catch((error: AuthRegistrationFailureResponse) => {
@@ -117,16 +125,18 @@ export const authRegistrationFlow =
 
 export const authRegistrationSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
+  ({ getState, dispatch }) =>
   next =>
   async action => {
     const result = next(action)
+    const credentials = selectLoginCredentialsFromRegistration(getState())
 
     if (authRegistrationSuccess.match(action)) {
+      NavigationActions.navigate(AuthNavigationRoutes.Login)
       // TODO: this should be handled by the notification module
       notification('success', 'Registration Successful')
+      dispatch(authLogin(credentials))
     }
-
     return result
   }
 
@@ -136,8 +146,8 @@ export const authRegistrationFailureFlow =
   next =>
   async action => {
     const result = next(action)
-
     if (authRegistrationFailure.match(action)) {
+      NavigationActions.navigate(AuthNavigationRoutes.Register)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', action.payload)
     }
