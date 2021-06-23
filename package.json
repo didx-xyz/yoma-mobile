@@ -30,10 +30,10 @@
     "code:lint": "npm-run-all _code:lint:prettier _code:lint:eslint",
     "help": "npx package-json-help.js"
   },
-  "dependencies": { 
+  "dependencies": {
     "@react-native-community/datetimepicker": "^3.4.3",
     "@react-native-community/masked-view": "^0.1.10",
-    "@react-native-firebase/app": "^12.1.0",
+    "@react-native-firebase/app": "^12.0.0",
     "@react-native-google-signin/google-signin": "^6.0.0",
     "@react-navigation/bottom-tabs": "^5.11.9",
     "@react-navigation/native": "^5.9.3",
@@ -66,7 +66,6 @@
     "react-native-vector-icons": "^8.1.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
-    "redux-persist": "^6.0.0",
     "rn-fetch-blob": "^0.12.0",
     "yup": "^0.32.9"
   },
