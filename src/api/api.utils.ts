@@ -58,14 +58,21 @@ export const prepareApiRequest = (state: RootState, action: any): PrepareApiRequ
   return { onSuccess, onFailure, apiArgs }
 }
 
-export const apiCall: ApiCall =
-  instance =>
-  ({ client, endpoint, method, token, data, params, headers, config = {} }: ApiClientArgs) =>
-    instance.request({
-      method,
-      url: generateSanitisedEndpoint([client, endpoint]),
-      data,
-      headers: addHeaders({})([headers, setAuthTokenHeader(token)]),
-      params,
-      ...config,
-    })
+export const apiCall: ApiCall = instance => ({
+  client,
+  endpoint,
+  method,
+  token,
+  data,
+  params,
+  headers,
+  config = {},
+}: ApiClientArgs) =>
+  instance.request({
+    method,
+    url: generateSanitisedEndpoint([client, endpoint]),
+    data,
+    headers: addHeaders({})([headers, setAuthTokenHeader(token)]),
+    params,
+    ...config,
+  })
