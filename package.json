@@ -30,8 +30,7 @@
     "code:lint": "npm-run-all _code:lint:prettier _code:lint:eslint",
     "help": "npx package-json-help.js"
   },
-  "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.15.5",
+  "dependencies": { 
     "@react-native-community/datetimepicker": "^3.4.3",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/app": "^12.1.0",

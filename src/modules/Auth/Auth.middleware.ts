@@ -20,125 +20,112 @@ import {
 import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
 import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
 
-export const authLoginFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
+export const authLoginFlow: Middleware = ({ dispatch }) => next => action => {
+  const result = next(action)
 
-    if (authLogin.match(action)) {
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            isTokenRequired: false,
-            onSuccess: authLoginSuccess,
-            onFailure: authLoginFailure,
-          }),
-          action.payload,
-        ),
-      )
-    }
-    return result
+  if (authLogin.match(action)) {
+    dispatch(
+      ApiActions.apiRequest(
+        mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+          isTokenRequired: false,
+          onSuccess: authLoginSuccess,
+          onFailure: authLoginFailure,
+        }),
+        action.payload,
+      ),
+    )
   }
-export const authLoginSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  ({ dispatch }) =>
-  next =>
-  async action => {
-    const result = next(action)
+  return result
+}
+export const authLoginSuccessFlow = ({ notification }: { notification: typeof showSimpleMessage }): Middleware => ({
+  dispatch,
+}) => next => async action => {
+  const result = next(action)
 
-    if (authLoginSuccess.match(action)) {
-      const credentials = selectCredentialsFromLoginPayload(action)
-      const refreshToken = selectRefreshTokenFromLoginPayload(action)
-      notification('success', 'Login Successful')
-      dispatch(setAuthCredentials(credentials))
-      dispatch(setSecureRefreshToken(refreshToken))
-    }
-    return result
+  if (authLoginSuccess.match(action)) {
+    const credentials = selectCredentialsFromLoginPayload(action)
+    const refreshToken = selectRefreshTokenFromLoginPayload(action)
+    notification('success', 'Login Successful')
+    dispatch(setAuthCredentials(credentials))
+    dispatch(setSecureRefreshToken(refreshToken))
   }
+  return result
+}
 
-export const setSecureRefreshTokenFlow =
-  (setSecureItem: any): Middleware =>
-  ({ dispatch }) =>
-  next =>
-  async action => {
-    const result = next(action)
-    if (setSecureRefreshToken.match(action)) {
-      await setSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY, action.payload)
-        .then(() => {
-          dispatch(setSecureRefreshTokenSuccess())
-        })
-        .catch((error: any) => {
-          dispatch(setSecureRefreshTokenFailure(error))
-        })
-    }
-    return result
+export const setSecureRefreshTokenFlow = (setSecureItem: any): Middleware => ({ dispatch }) => next => async action => {
+  const result = next(action)
+  if (setSecureRefreshToken.match(action)) {
+    await setSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY, action.payload)
+      .then(() => {
+        dispatch(setSecureRefreshTokenSuccess())
+      })
+      .catch((error: any) => {
+        dispatch(setSecureRefreshTokenFailure(error))
+      })
   }
+  return result
+}
 
-export const authLoginFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  async action => {
-    const result = next(action)
+export const authLoginFailureFlow = ({
+  notification,
+}: {
+  notification: typeof showSimpleMessage
+}): Middleware => _store => next => async action => {
+  const result = next(action)
 
-    if (authLoginFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      // @ts-ignore
-      notification('danger', 'An error occurred.', action.payload.message)
-    }
-
-    return result
+  if (authLoginFailure.match(action)) {
+    // TODO: this should be handled by the notification module
+    // @ts-ignore
+    notification('danger', 'An error occurred.', action.payload.message)
   }
 
-export const authRegistrationFlow =
-  ({ api }: { api: any }): Middleware =>
-  ({ dispatch }) =>
-  next =>
-  async action => {
-    const result = next(action)
+  return result
+}
 
-    // TODO: Abstract the api calls into a single api middleware
-    if (authRegistration.match(action)) {
-      await api.auth
-        .register(action.payload)
-        .then((response: AuthRegistrationSuccessResponse) => {
-          dispatch(authRegistrationSuccess(response))
-        })
-        .catch((error: AuthRegistrationFailureResponse) => {
-          dispatch(authRegistrationFailure(error))
-        })
-    }
+export const authRegistrationFlow = ({ api }: { api: any }): Middleware => ({ dispatch }) => next => async action => {
+  const result = next(action)
 
-    return result
+  // TODO: Abstract the api calls into a single api middleware
+  if (authRegistration.match(action)) {
+    await api.auth
+      .register(action.payload)
+      .then((response: AuthRegistrationSuccessResponse) => {
+        dispatch(authRegistrationSuccess(response))
+      })
+      .catch((error: AuthRegistrationFailureResponse) => {
+        dispatch(authRegistrationFailure(error))
+      })
   }
 
-export const authRegistrationSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  async action => {
-    const result = next(action)
+  return result
+}
 
-    if (authRegistrationSuccess.match(action)) {
-      // TODO: this should be handled by the notification module
-      notification('success', 'Registration Successful')
-    }
+export const authRegistrationSuccessFlow = ({
+  notification,
+}: {
+  notification: typeof showSimpleMessage
+}): Middleware => _store => next => async action => {
+  const result = next(action)
 
-    return result
+  if (authRegistrationSuccess.match(action)) {
+    // TODO: this should be handled by the notification module
+    notification('success', 'Registration Successful')
   }
 
-export const authRegistrationFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  async action => {
-    const result = next(action)
+  return result
+}
 
-    if (authRegistrationFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      notification('danger', 'Error', action.payload)
-    }
+export const authRegistrationFailureFlow = ({
+  notification,
+}: {
+  notification: typeof showSimpleMessage
+}): Middleware => _store => next => async action => {
+  const result = next(action)
 
-    return result
+  if (authRegistrationFailure.match(action)) {
+    // TODO: this should be handled by the notification module
+    notification('danger', 'Error', action.payload)
   }
+
+  return result
+}
