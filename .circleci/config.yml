@@ -1,13 +1,6 @@
 version: 2.1
 orbs:
-  node: circleci/node@4.1.0
-  ruby: circleci/ruby@1.1.3
-  android: circleci/android@1.0.3
-
-# --------------------------------
-# common : executors
-# --------------------------------
-
+  node: circleci/node@3.0.0
 executors:
   node:
     docker:
@@ -15,122 +8,22 @@ executors:
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
-    resource_class: large
-
-# --------------------------------
-# common : commands
-# --------------------------------
-
-commands:
-  audit:
-    description: 'Audit CI'
-    steps:
-      - run: npm run npm:audit
-  lint:
-    description: 'Lint'
-    steps:
-      - run:
-          name: 'Lint'
-          command: npm run code:lint
-  test:
-    description: 'Test'
-    steps:
-      - run:
-          name: 'Test'
-          command: npm run test
-          environment:
-            - NODE_OPTIONS: --max_old_space_size=8192
-  env:
-    description: 'Setup Env File'
-    steps:
-      - run:
-          name: 'Create Test Env'
-          command: npm run env:test
-  bundle:
-    description: 'Bundle Android JS code'
-    steps:
-      - run:
-          name: 'Bundle Android JS code'
-          command: npm run bundle:android
-  #  setup-node:
-  #    description: 'Setup the node environment'
-  #    steps:
-  #      - node/install-packages:
-  #          cache-version: v1-{{ arch }}
-  #  setup-ruby:
-  #    description: 'Setup ruby and install packages'
-  #    steps:
-  #      - ruby/install-deps:
-  #          key: gems-v1-{{ arch }}
-  setup-node:
-    description: 'Setup the node environment'
-    steps:
-      - node/install:
-          node-version: 14.16.0
-          install-npm: false
-      - node/install-packages:
-          cache-version: v1-{{ arch }}
-  setup-ruby:
-    description: 'Setup ruby and install packages'
-    steps:
-      - run: echo 'chruby ruby-2.7' >> ~/.bash_profile
-      - run: gem update bundler
-      - ruby/install-deps:
-          key: gems-v1-{{ arch }}
-  install-firebase-cli:
-    description: 'Install the FireBase CLI'
-    steps:
-      - run: sudo curl -sL firebase.tools | bash
-  create_keystore:
-    description: 'Create Keystore Properties'
-    steps:
-      - run:
-          name: Create keystore properties
-          command: npm run create:keystore
-  deploy-android-alpha:
-    description: 'Deploy the Android app to Firebase App Distribution'
-    steps:
-      - run:
-          name: 'Deploy the Android app to Firebase App Distribution'
-          working_directory: ~/project
-          resource_class: large
-          command: bundle exec fastlane android distribute
-
-# --------------------------------
-# common : jobs
-# --------------------------------
-
 jobs:
   pull-request:
     executor: node
     steps:
       - checkout
       - node/install-packages
-      - audit
-      - lint
-      - env
-      - test
-      - bundle
-
-  deploy-android-alpha:
-    working_directory: ~/project
-    executor: android/android
-    steps:
-      - checkout
-      - setup-node
-      - setup-ruby
-      - env
-      - create_keystore
-      - install-firebase-cli
-      - deploy-android-alpha
-
-# --------------------------------
-# common : workflows
-# --------------------------------
-
+      - run: npm run env:test
+      - run: npm run code:lint
+      - run:
+          name: Unit Tests
+          command: npm run test
+          environment:
+            - NODE_OPTIONS: --max_old_space_size=8192
+      - run: npm run npm:audit
 workflows:
-  version: 2
-  validate-branch:
+  pull-request:
     jobs:
       - pull-request:
           filters:
@@ -138,16 +31,3 @@ workflows:
               ignore:
                 - develop
                 - main
-                - YOMA-346_setup_playstore
-  deploy-android-alpha:
-    jobs:
-      - pull-request:
-          filters:
-            branches:
-              only:
-                - develop
-                - main
-                - YOMA-346_setup_playstore
-      - deploy-android-alpha:
-          requires:
-            - pull-request
