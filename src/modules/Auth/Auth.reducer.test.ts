@@ -36,7 +36,7 @@ describe('modules/Auth/Auth.reducer', () => {
     })
   })
   describe('clearAuth', () => {
-    it('should log out the user', () => {
+    it('should clear auth state', () => {
       // give ... there are no credentials in state
       const state = {
         refreshToken: 'REFRESH_TOKEN',
