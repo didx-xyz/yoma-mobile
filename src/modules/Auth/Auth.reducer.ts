@@ -25,11 +25,11 @@ export const setAuthCredentials = createAction<AuthState>(`${name} Set Auth Cred
 export const authRegistration = createAction<AuthRegistration>(`${name} Registration`)
 export const authRegistrationSuccess = createAction<AuthRegistrationSuccessResponse>(`${name} Registration Success`)
 export const authRegistrationFailure = createAction<AuthRegistrationFailureResponse>(`${name} Registration Failure`)
-export const clearAuthState = createAction(`${name} Clear`)
+export const clearAuth = createAction(`${name} clearAuth`)
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setAuthCredentials, (state, action) => mergeDeepRight(state)(action.payload))
-  builder.addCase(clearAuthState, () => INITIAL_STATE)
+  builder.addCase(clearAuth, () => INITIAL_STATE)
 })
 
 export default authReducer
