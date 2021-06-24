@@ -1,4 +1,3 @@
-import SSO from 'modules/Auth/Social'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -13,6 +12,8 @@ import {
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
+  authSocialLogin,
+  authSocialLoginSuccess,
   authSocialRegistration,
   authSocialRegistrationSuccess,
   setAuthCredentials,
@@ -22,6 +23,7 @@ import {
 } from './Auth.reducer'
 import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
 import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
+import { selectLoginCredentials, selectRegistrationCredentials } from './Social/Social.utils'
 
 export const authLoginFlow: Middleware =
   ({ dispatch }) =>
@@ -45,19 +47,59 @@ export const authLoginFlow: Middleware =
     return result
   }
 
-export const authSocialregistrationFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+export const authSocialLoginFlow =
+  ({ socialAuth, notification }: { socialAuth: Function; notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
     const result = next(action)
+    if (authSocialLogin.match(action)) {
+      try {
+        const authProvider = action.payload
+        const authdata = await socialAuth(authProvider)
+        const credentials = selectLoginCredentials(authProvider, authdata)
+        dispatch(authSocialLoginSuccess(credentials))
+      } catch (error) {
+        notification('danger', 'Error', error)
+      }
+    }
+    return result
+  }
 
+export const authSocialLoginSuccessFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (authSocialLoginSuccess.match(action)) {
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_SOCIAL_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authLoginSuccess,
+            onFailure: authLoginFailure,
+          }),
+          action.payload,
+        ),
+      )
+    }
+
+    return result
+  }
+
+export const authSocialRegistrationFlow =
+  ({ socialAuth, notification }: { socialAuth: Function; notification: typeof showSimpleMessage }): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  async action => {
+    const result = next(action)
     if (authSocialRegistration.match(action)) {
       try {
-        const details = await SSO(action.payload)
-        if (details) {
-          dispatch(authSocialRegistrationSuccess(details))
-        }
+        const authProvider = action.payload
+        const authdata = await socialAuth(authProvider)
+        const credentials = selectRegistrationCredentials(authProvider, authdata)
+        dispatch(authSocialRegistrationSuccess(credentials))
       } catch (error) {
         notification('danger', 'Error', error)
       }

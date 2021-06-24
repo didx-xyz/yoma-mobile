@@ -5,7 +5,7 @@ import { SocialVariants } from '../SocialButton/SocialButton.types'
 import Spacer from '../Spacer'
 
 type Props = {
-  onRegisterWithSocial: (type: string) => void
+  onRegisterWithSocial: (authProvider: string) => void
 }
 const SocialRegistration = ({ onRegisterWithSocial }: Props) => {
   return (

@@ -2,7 +2,6 @@ import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-si
 import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next'
 
 import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './Social.constants'
-import { selectUserDataFromFacebookAuth, selectUserDataFromGoogleAuth } from './Social.utils'
 
 export const facebookSignIn = async () => {
   try {
@@ -11,7 +10,7 @@ export const facebookSignIn = async () => {
     const accessToken = await AccessToken.getCurrentAccessToken()
     // do nothing when cancelled
     if (!result.isCancelled) {
-      const details = selectUserDataFromFacebookAuth(currentProfile, accessToken)
+      const details = Object.assign({}, currentProfile, accessToken)
       return details
     }
   } catch (error) {
@@ -27,7 +26,7 @@ export const googleSignIn = async () => {
     })
     await GoogleSignin.hasPlayServices()
     const authData = await GoogleSignin.signIn()
-    const details = selectUserDataFromGoogleAuth(authData)
+    const details = Object.assign({}, authData)
     return details
   } catch (error) {
     let errorMessage

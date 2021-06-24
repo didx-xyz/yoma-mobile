@@ -1,27 +1,52 @@
-import { User } from '@react-native-google-signin/google-signin'
-import { FBAccessToken } from 'react-native-fbsdk-next/types/FBAccessToken'
-import { FBProfile } from 'react-native-fbsdk-next/types/FBProfile'
+import { curry, lensPath, map, view } from 'ramda'
 
-import { AuthSocialRegistrationCredentials } from '../Auth.types'
+import { Providers } from './Social.types'
 
-export const selectUserDataFromFacebookAuth = (user: FBProfile | null, token: FBAccessToken | null | undefined) =>
-  user && token
-    ? ({
-        provider: 'facebook',
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        providerKey: user.userID,
-        token: token.accessToken,
-      } as AuthSocialRegistrationCredentials)
-    : null
+const remap = curry((desc: any, obj: any) => map((path: any) => view(lensPath(path), obj), desc))
 
-export const selectUserDataFromGoogleAuth = (data: User) =>
-  ({
-    provider: 'google',
-    email: data.user.email,
-    firstName: data.user.givenName,
-    lastName: data.user.familyName,
-    providerKey: data.user.id,
-    token: data.idToken,
-  } as AuthSocialRegistrationCredentials)
+export const mapFacebookRegistrationData = remap({
+  email: ['email'],
+  firstName: ['firstName'],
+  lastName: ['lastName'],
+  provider: Providers.Facebook,
+  providerKey: ['applicationID'],
+  token: ['accessToken'],
+})
+
+export const mapGoogleRegistrationData = remap({
+  provider: Providers.Google,
+  email: ['user', 'email'],
+  firstName: ['user', 'givenName'],
+  lastName: ['user', 'familyName'],
+  providerKey: ['user', 'userId'],
+  token: ['idToken'],
+})
+
+export const mapFacebookLoginData = remap({
+  provider: Providers.Facebook,
+  providerKey: ['applicationID'],
+  token: ['accessToken'],
+})
+
+export const mapGoogleLoginData = remap({
+  provider: Providers.Google,
+  providerKey: ['userId'],
+  token: ['idToken'],
+})
+
+export const selectLoginCredentials = (authProvider: string, authData: {}) => {
+  switch (authProvider) {
+    case Providers.Facebook:
+      return mapFacebookLoginData(authData)
+    case Providers.Google:
+      return mapGoogleLoginData(authData)
+  }
+}
+export const selectRegistrationCredentials = (authProvider: string, authData: {}) => {
+  switch (authProvider) {
+    case Providers.Facebook:
+      return mapFacebookRegistrationData(authData)
+    case Providers.Google:
+      return mapGoogleRegistrationData(authData)
+  }
+}

@@ -7,8 +7,8 @@ import Register from './Register'
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onRegisterWithSocial: (type: string) => {
-      dispatch(AuthActions.authSocialRegistration(type))
+    onRegisterWithSocial: (authProvider: string) => {
+      dispatch(AuthActions.authSocialRegistration(authProvider))
     },
   }
 }

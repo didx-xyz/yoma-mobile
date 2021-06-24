@@ -64,3 +64,9 @@ export const userSocialRegistrationData = {
   providerKey: 'PROVIDER_KEY',
   token: 'USER_TOKEN',
 }
+
+export const userSocialLoginData = {
+  provider: 'PROVIDER',
+  providerKey: 'PROVIDER_KEY',
+  token: 'USER_TOKEN',
+}

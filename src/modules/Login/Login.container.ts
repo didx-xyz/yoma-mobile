@@ -8,9 +8,8 @@ import Login from './Login'
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onLoginWithSocial: (type: string) => {
-      console.log('type', type)
-      // dispatch(AuthActions.authLogin({}))
+    onLoginWithSocial: (authProvider: string) => {
+      dispatch(AuthActions.authSocialLogin(authProvider))
     },
     onLoginUser: (details: AuthCredentials) => {
       dispatch(AuthActions.authLogin(details))

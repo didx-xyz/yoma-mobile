@@ -11,7 +11,10 @@ import {
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
+  authSocialLogin,
+  authSocialLoginSuccess,
   authSocialRegistration,
+  authSocialRegistrationSuccess,
   setAuthCredentials,
   setSecureRefreshToken,
   setSecureRefreshTokenFailure,
@@ -21,6 +24,7 @@ import {
   defaultUserLoginResponseData,
   defaultUserRegistrationResponseData,
   userRegistrationData,
+  userSocialLoginData,
   userSocialRegistrationData,
 } from './Auth.test.fixtures'
 
@@ -84,6 +88,156 @@ describe('modules/Auth/Auth.middleware', () => {
             onFailure: authLoginFailure,
           }),
           credentials,
+        ),
+      )
+    })
+  })
+  describe('authSocialLoginFlow', () => {
+    it('should correctly handle being called', async () => {
+      // given ... the action is fired
+      const create = createMiddlewareMock(jest)
+      const mockNotification = jest.fn()
+      const mockSocialLogin = jest.fn().mockResolvedValue(true)
+      const action = authSocialRegistration('provider')
+      // @ts-ignore
+      const { invoke, next } = create(
+        SUT.authSocialRegistrationFlow({ socialAuth: mockSocialLogin, notification: mockNotification }),
+      )
+      await invoke(action)
+
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should provide feedback on login failure', async () => {
+      // given ... the action is fired
+      const create = createMiddlewareMock(jest)
+      const mockNotification = jest.fn()
+      const mockSocialLogin = jest.fn().mockRejectedValue(true)
+      const action = authSocialLogin('provider')
+      // @ts-ignore
+      const { invoke } = create(
+        SUT.authSocialLoginFlow({ socialAuth: mockSocialLogin, notification: mockNotification }),
+      )
+      await invoke(action)
+
+      expect(mockNotification).toHaveBeenCalled()
+    })
+    it('should correctly get user data from the provider', async () => {
+      const create = createMiddlewareMock(jest)
+      const mockNotification = jest.fn()
+      const mockSocialLogin = jest.fn().mockResolvedValue(true)
+      // given ... the action is fired
+      const action = authSocialLogin('provider')
+      // @ts-ignore
+      const { invoke } = create(
+        SUT.authSocialLoginFlow({ socialAuth: mockSocialLogin, notification: mockNotification }),
+      )
+      await invoke(action)
+
+      expect(mockSocialLogin).toHaveBeenCalled()
+    })
+  })
+  describe('authSocialLoginSuccessFlow', () => {
+    it('should correctly handle being called', async () => {
+      const create = createMiddlewareMock(jest)
+      // given ... the action is fired
+      const action = authSocialLoginSuccess(userSocialRegistrationData)
+      // @ts-ignore
+      const { invoke, next } = create(SUT.authSocialLoginSuccessFlow)
+      await invoke(action)
+
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly login the user', async () => {
+      // given ... the action is fired
+      const create = createMiddlewareMock(jest)
+      const action = authSocialLoginSuccess(userSocialLoginData)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.authSocialLoginSuccessFlow)
+      await invoke(action)
+
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_SOCIAL_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authLoginSuccess,
+            onFailure: authLoginFailure,
+          }),
+          userSocialLoginData,
+        ),
+      )
+    })
+  })
+  describe('authSocialRegistrationFlow', () => {
+    it('should correctly handle being called', async () => {
+      // given ... the action is fired
+      const create = createMiddlewareMock(jest)
+      const mockNotification = jest.fn()
+      const mockSocialRegistration = jest.fn().mockResolvedValue(true)
+      const action = authSocialRegistration('provider')
+      // @ts-ignore
+      const { invoke, next } = create(
+        SUT.authSocialRegistrationFlow({ socialAuth: mockSocialRegistration, notification: mockNotification }),
+      )
+      await invoke(action)
+
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should provide feedback on registration failure', async () => {
+      // given ... the action is fired
+      const create = createMiddlewareMock(jest)
+      const mockNotification = jest.fn()
+      const mockSocialRegistration = jest.fn().mockRejectedValue(true)
+      const action = authSocialRegistration('provider')
+      // @ts-ignore
+      const { invoke } = create(
+        SUT.authSocialRegistrationFlow({ socialAuth: mockSocialRegistration, notification: mockNotification }),
+      )
+      await invoke(action)
+
+      expect(mockNotification).toHaveBeenCalled()
+    })
+    it('should correctly get user data from the provider', async () => {
+      const create = createMiddlewareMock(jest)
+      const mockNotification = jest.fn()
+      const mockSocialRegistration = jest.fn().mockResolvedValue(true)
+      // given ... the action is fired
+      const action = authSocialRegistration('provider')
+      // @ts-ignore
+      const { invoke } = create(
+        SUT.authSocialRegistrationFlow({ socialAuth: mockSocialRegistration, notification: mockNotification }),
+      )
+      await invoke(action)
+
+      expect(mockSocialRegistration).toHaveBeenCalled()
+    })
+  })
+  describe('authSocialRegistrationSuccessFlow', () => {
+    it('should correctly handle being called', async () => {
+      const create = createMiddlewareMock(jest)
+      // given ... the action is fired
+      const action = authSocialRegistrationSuccess(userSocialRegistrationData)
+      // @ts-ignore
+      const { invoke, next } = create(SUT.authSocialRegistrationSuccessFlow)
+      await invoke(action)
+
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly register the user', async () => {
+      // given ... the action is fired
+      const create = createMiddlewareMock(jest)
+      const action = authSocialRegistrationSuccess(userSocialRegistrationData)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.authSocialRegistrationSuccessFlow)
+      await invoke(action)
+
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authRegistrationSuccess,
+            onFailure: authRegistrationFailure,
+          }),
+          userSocialRegistrationData,
         ),
       )
     })
@@ -272,77 +426,6 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(authRegistrationFailure(response))
     })
   })
-  describe('authSocialRegistrationFlow', () => {
-    it('should ignore other actions', async () => {
-      // given ... an action is fired
-      const create = createMiddlewareMock(jest)
-      const action = { type: 'TEST', payload: {} }
-      // @ts-ignore
-      const { invoke, next } = create(SUT.authSocialRegistrationFlow)
-
-      // when ... we invoke another action
-      await invoke(action)
-
-      // then ... next should have been called with the action
-      expect(next).toHaveBeenCalledWith(action)
-    })
-
-    it('should correctly call the api with the given social registration data', async () => {
-      // given ... the authRegistration action is fired
-      const create = createMiddlewareMock(jest)
-      const action = authSocialRegistration('facebook')
-      // @ts-ignore
-      const { store, invoke } = create(SUT.authSocialRegistrationFlow)
-
-      // when ... we respond to the authRegistration action
-      await invoke(action)
-
-      // then ... the register API should be called
-      expect(store.dispatch).toHaveBeenCalledWith(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
-            isTokenRequired: false,
-            onSuccess: authRegistrationSuccess,
-            onFailure: authRegistrationFailure,
-          }),
-          userSocialRegistrationData,
-        ),
-      )
-    })
-    it('should correctly handle a successful social registration', async () => {
-      // given ... the authRegistration action is fired
-      const create = createMiddlewareMock(jest)
-      // @ts-ignore
-      const response = defaultUserRegistrationResponseData
-      const action = authRegistrationSuccess(response)
-      const mockNotification = jest.fn()
-      // @ts-ignore
-      const { invoke } = create(SUT.authRegistrationSuccessFlow({ notification: mockNotification }))
-
-      // when ... we respond to the authRegistration action
-      await invoke(action)
-
-      // then ... the notification should be calleds
-      expect(mockNotification).toHaveBeenCalled()
-    })
-    it('should correctly handle a failed social registration', async () => {
-      // given ... the register api is called and returns a failure
-      const create = createMiddlewareMock(jest)
-      const mockNotification = jest.fn()
-      const response = 'ERROR: FAILED FOR A REASON'
-      const action = authRegistrationFailure(response)
-
-      // @ts-ignore
-      const { invoke } = create(SUT.authRegistrationFailureFlow({ notification: mockNotification }))
-
-      // when ... we respond to the failure state
-      await invoke(action)
-
-      // then ... the failure action should be called with the error response
-      expect(mockNotification).toHaveBeenCalled()
-    })
-  })
-
   describe('authRegistrationSuccessFlow', () => {
     it('should correctly send a notification to the user', async () => {
       // given ... the authRegistration action is fired
@@ -361,7 +444,6 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(mockNotification).toHaveBeenCalled()
     })
   })
-
   describe('authRegistrationFailureFlow', () => {
     it('should correctly send a notification to the user', async () => {
       // given ... the authRegistration action is fired

@@ -1,4 +1,5 @@
 import { setItemAsync } from 'expo-secure-store'
+import socialAuth from 'modules/Auth/Social'
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -18,7 +19,8 @@ const commonMiddleware: Middleware[] = [
 const featureModuleMiddleware = [
   authMiddleware.authLoginFlow,
   authMiddleware.authSocialRegistrationSuccessFlow,
-  authMiddleware.authSocialregistrationFlow({ notification: showSimpleMessage }),
+  authMiddleware.authSocialLoginFlow({ socialAuth: socialAuth, notification: showSimpleMessage }),
+  authMiddleware.authSocialRegistrationFlow({ socialAuth: socialAuth, notification: showSimpleMessage }),
   authMiddleware.authLoginSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authLoginFailureFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFlow({ api }),
