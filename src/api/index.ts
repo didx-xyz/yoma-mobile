@@ -5,6 +5,7 @@ import Env from '../env.json'
 import * as apiConfig from './api.config'
 import { FALLBACK_MESSAGE, REFRESH_TOKEN_FAILED_MESSAGE, UNAUTHORIZED_STATUS_CODE } from './api.constants'
 import * as middleware from './api.middleware'
+import * as actions from './api.reducer'
 import auth from './auth/auth'
 import digitalCv from './digitalCv'
 import users from './users'
@@ -48,4 +49,4 @@ export default {
   digitalCv: digitalCv(instance),
 }
 
-export { apiConfig, middleware }
+export { apiConfig, middleware, actions }

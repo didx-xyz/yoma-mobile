@@ -1,6 +1,6 @@
 import { StackActions } from '@react-navigation/native'
 import { BackIcon, WhiteLogo } from 'assets/images'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, ReactSVGElement } from 'react'
 import { BackHandler, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
@@ -12,7 +12,7 @@ const onNavigationBack = (navigation: any) => {
 }
 
 type Props = {
-  circleImage: SVGElement
+  circleImage: ReactSVGElement
   circleImageStyle: ViewStyle
   backgroundColor: Colors
   navigation: any
