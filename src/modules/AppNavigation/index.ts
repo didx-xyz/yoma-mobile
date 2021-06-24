@@ -1,3 +1,3 @@
-import AppNavigation from './AppNavigation'
+import AppNavigation from './AppNavigation.container'
 
 export default AppNavigation

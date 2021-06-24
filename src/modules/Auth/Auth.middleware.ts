@@ -43,7 +43,6 @@ export const authLoginFlow: Middleware =
         ),
       )
     }
-
     return result
   }
 

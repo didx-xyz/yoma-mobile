@@ -13,6 +13,7 @@ declare module 'ramda' {
   export function flatten(...rest: any[]): any[]
   export function head(...rest: any[]): any
   export function identity(...rest: any[]): any
+  export function propOr(...rest: any[]): any
   export function ifElse(...rest: any[]): any
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
