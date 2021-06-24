@@ -1,9 +1,11 @@
 import { curry, lensPath, map, view } from 'ramda'
 
+import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './Social.constants'
 import { Providers } from './Social.types'
 
-const remap = curry((desc: any, obj: any) => map((path: any) => view(lensPath(path), obj), desc))
-
+const remap = curry((desc: any, obj: any) =>
+  map((path: any) => (typeof path === 'string' ? path : view(lensPath(path), obj)), desc),
+)
 export const mapFacebookRegistrationData = remap({
   email: ['email'],
   firstName: ['firstName'],
@@ -18,7 +20,7 @@ export const mapGoogleRegistrationData = remap({
   email: ['user', 'email'],
   firstName: ['user', 'givenName'],
   lastName: ['user', 'familyName'],
-  providerKey: ['user', 'userId'],
+  providerKey: GOOGLE_SIGNIN_WEBCLIENT_ID,
   token: ['idToken'],
 })
 
@@ -30,11 +32,11 @@ export const mapFacebookLoginData = remap({
 
 export const mapGoogleLoginData = remap({
   provider: Providers.Google,
-  providerKey: ['userId'],
+  providerKey: GOOGLE_SIGNIN_WEBCLIENT_ID,
   token: ['idToken'],
 })
 
-export const selectLoginCredentials = (authProvider: string, authData: {}) => {
+export const selectLoginCredentials = (authProvider: string, authData: any) => {
   switch (authProvider) {
     case Providers.Facebook:
       return mapFacebookLoginData(authData)
@@ -42,7 +44,7 @@ export const selectLoginCredentials = (authProvider: string, authData: {}) => {
       return mapGoogleLoginData(authData)
   }
 }
-export const selectRegistrationCredentials = (authProvider: string, authData: {}) => {
+export const selectRegistrationCredentials = (authProvider: string, authData: any) => {
   switch (authProvider) {
     case Providers.Facebook:
       return mapFacebookRegistrationData(authData)

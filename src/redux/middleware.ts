@@ -19,6 +19,7 @@ const commonMiddleware: Middleware[] = [
 const featureModuleMiddleware = [
   authMiddleware.authLoginFlow,
   authMiddleware.authSocialRegistrationSuccessFlow,
+  authMiddleware.authSocialLoginSuccessFlow,
   authMiddleware.authSocialLoginFlow({ socialAuth: socialAuth, notification: showSimpleMessage }),
   authMiddleware.authSocialRegistrationFlow({ socialAuth: socialAuth, notification: showSimpleMessage }),
   authMiddleware.authLoginSuccessFlow({ notification: showSimpleMessage }),
