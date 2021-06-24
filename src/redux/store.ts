@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { configureStore } from '@reduxjs/toolkit'
-import { persistReducer, persistStore } from 'redux-persist'
+import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, REGISTER } from 'redux-persist'
 
 import { actions as apiActions } from '../api'
 import middleware from './middleware'
@@ -18,7 +18,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [apiActions.apiRequest.type],
+        ignoredActions: [FLUSH, PAUSE, PERSIST, REGISTER, apiActions.apiRequest.type],
       },
     }).concat(middleware),
 })
