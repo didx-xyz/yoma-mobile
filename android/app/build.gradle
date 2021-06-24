@@ -208,8 +208,8 @@ dependencies {
     addUnimodulesDependencies()
 
     // Firebase setup:
-    implementation platform('com.google.firebase:firebase-bom:28.0.1')
-    //    implementation 'com.google.firebase:firebase-analytics'
+    implementation platform('com.google.firebase:firebase-bom:28.1.0')
+    implementation 'com.google.firebase:firebase-analytics'
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'
