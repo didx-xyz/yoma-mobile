@@ -106,6 +106,13 @@
     "redux-flipper": "^1.4.2",
     "typescript": "^3.8.3"
   },
+  "react-native-unimodules": {
+    "android": {
+      "modulesPaths": [
+        "./node_modules"
+      ]
+    }
+  },
   "resolutions": {
     "@types/react": "^16"
   },
