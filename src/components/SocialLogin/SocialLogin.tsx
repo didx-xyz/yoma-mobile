@@ -10,9 +10,9 @@ type Props = {
 const SocialLogin = ({ onLoginWithSocial }: Props) => {
   return (
     <>
-      <SocialButton variant={SocialVariants.Facebook} onPress={() => onLoginWithSocial('facebook')} />
+      <SocialButton variant={SocialVariants.Facebook} onPress={() => onLoginWithSocial(SocialVariants.Facebook)} />
       <Spacer height={20} />
-      <SocialButton variant={SocialVariants.Google} onPress={() => onLoginWithSocial('google')} />
+      <SocialButton variant={SocialVariants.Google} onPress={() => onLoginWithSocial(SocialVariants.Google)} />
     </>
   )
 }
