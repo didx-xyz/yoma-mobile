@@ -13,10 +13,11 @@ import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../component
 import styles from './Register.styles'
 
 interface Props {
+  onRegisterWithSocial: (type: string) => void
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Register>
 }
 
-const Register = ({ navigation }: Props) => {
+const Register = ({ navigation, onRegisterWithSocial }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -44,7 +45,7 @@ const Register = ({ navigation }: Props) => {
         <Text.Body level={BodyLevels.small} style={styles.bodyText}>
           {t('registerSocial')}
         </Text.Body>
-        <SocialRegistration />
+        <SocialRegistration onRegisterWithSocial={onRegisterWithSocial} />
       </Card>
       <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.bottomText}>
         {t('alreadyHaveAccount')}&nbsp;

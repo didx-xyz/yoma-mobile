@@ -6,6 +6,7 @@ declare module 'ramda' {
   export function concat(...rest: any[]): any[]
   export function curry(...rest: any[]): any
   export function complement(...rest: any[]): any
+  export function curry(...rest: any[]): any
   export function equals(...rest: any[]): any
   export function evolve(...rest: any[]): any
   export function filter(...rest: any[]): any
@@ -15,6 +16,7 @@ declare module 'ramda' {
   export function ifElse(...rest: any[]): any
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
+  export function lensPath(...rest: any[]): any
   export function isNil(...rest: any[]): any[]
   export function map(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
@@ -37,6 +39,7 @@ declare module 'ramda' {
   export function toUpper(...rest: any[]): any
   export function trim(...rest: any[]): any
   export function unless(...rest: any[]): any
+  export function view(...rest: any[]): any
   export function when(...rest: any[]): any
   export function mergeDeepRight(...rest: any[]): any[]
 }

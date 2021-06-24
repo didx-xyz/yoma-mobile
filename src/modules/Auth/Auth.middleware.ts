@@ -1,3 +1,4 @@
+import SSO from 'modules/Auth/Social'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -13,6 +14,7 @@ import {
   authRegistrationFailure,
   authRegistrationSuccess,
   authSocialRegistration,
+  authSocialRegistrationSuccess,
   setAuthCredentials,
   setSecureRefreshToken,
   setSecureRefreshTokenFailure,
@@ -34,6 +36,48 @@ export const authLoginFlow: Middleware =
             isTokenRequired: false,
             onSuccess: authLoginSuccess,
             onFailure: authLoginFailure,
+          }),
+          action.payload,
+        ),
+      )
+    }
+
+    return result
+  }
+
+export const authSocialregistrationFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  async action => {
+    const result = next(action)
+
+    if (authSocialRegistration.match(action)) {
+      try {
+        const details = await SSO(action.payload)
+        if (details) {
+          dispatch(authSocialRegistrationSuccess(details))
+        }
+      } catch (error) {
+        notification('danger', 'Error', error)
+      }
+    }
+    return result
+  }
+
+export const authSocialRegistrationSuccessFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  async action => {
+    const result = next(action)
+
+    if (authSocialRegistrationSuccess.match(action)) {
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authRegistrationSuccess,
+            onFailure: authRegistrationFailure,
           }),
           action.payload,
         ),
@@ -77,6 +121,22 @@ export const setSecureRefreshTokenFlow =
     return result
   }
 
+export const authLoginFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  async action => {
+    const result = next(action)
+
+    if (authLoginFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      // @ts-ignore
+      notification('danger', 'An error occurred.', action.payload.message)
+    }
+
+    return result
+  }
+
 export const authRegistrationFlow =
   ({ api }: { api: any }): Middleware =>
   ({ dispatch }) =>
@@ -94,27 +154,6 @@ export const authRegistrationFlow =
         .catch((error: AuthRegistrationFailureResponse) => {
           dispatch(authRegistrationFailure(error))
         })
-    }
-
-    return result
-  }
-
-export const authSocialRegistrationFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (authSocialRegistration.match(action)) {
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
-            isTokenRequired: false,
-            onSuccess: authRegistrationSuccess,
-            onFailure: authRegistrationFailure,
-          }),
-          action.payload,
-        ),
-      )
     }
 
     return result

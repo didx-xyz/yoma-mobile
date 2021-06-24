@@ -9,17 +9,19 @@ import { ScrollView, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
-import { AuthCredentials } from '../Auth/Auth.types'
+import { AuthCredentials, AuthSocialRegistrationCredentials } from '../Auth/Auth.types'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Login>
+  onLoginWithSocial: (details: AuthSocialRegistrationCredentials) => void
   onLoginUser: (details: AuthCredentials) => void
 }
 
-const Login = ({ navigation, onLoginUser }: Props) => {
+const Login = ({ navigation, onLoginWithSocial, onLoginUser }: Props) => {
   const { t } = useTranslation()
+
   return (
     <ViewContainer style={styles.container}>
       <ScrollView>
@@ -53,7 +55,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
             {t('loginSocial')}
           </Text.Body>
           <View style={styles.social}>
-            <SocialLogin />
+            <SocialLogin onLoginWithSocial={onLoginWithSocial} />
           </View>
         </Card>
         <Text.Body

@@ -290,7 +290,7 @@ describe('modules/Auth/Auth.middleware', () => {
     it('should correctly call the api with the given social registration data', async () => {
       // given ... the authRegistration action is fired
       const create = createMiddlewareMock(jest)
-      const action = authSocialRegistration(userSocialRegistrationData)
+      const action = authSocialRegistration('facebook')
       // @ts-ignore
       const { store, invoke } = create(SUT.authSocialRegistrationFlow)
 

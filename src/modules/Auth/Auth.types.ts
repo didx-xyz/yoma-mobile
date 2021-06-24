@@ -74,6 +74,7 @@ export interface AuthSocialRegistrationCredentials {
   providerKey: string
   token: string
 }
+
 export type AuthRegistrationSuccessResponse = {
   meta: ApiMetaResponse
 }
