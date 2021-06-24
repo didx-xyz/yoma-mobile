@@ -12,6 +12,8 @@ import {
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
+  authWithRefreshTokenFailure,
+  authWithRefreshTokenSuccess,
   getSecureRefreshToken,
   getSecureRefreshTokenFailure,
   getSecureRefreshTokenSuccess,
@@ -49,20 +51,21 @@ export const getSecureRefreshTokenFlow =
   }
 
 export const authorizeWithRefreshTokenFlow: Middleware =
-  ({ dispatch }) =>
+  ({ dispatch, getState }) =>
   next =>
   action => {
     const result = next(action)
-
-    if (authLogin.match(action)) {
+    if (getSecureRefreshTokenSuccess.match(action)) {
+      const state = getState()
+      const userId = selectUserId(state)
+      const refreshToken = action.payload
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            isTokenRequired: false,
-            onSuccess: authLoginSuccess,
-            onFailure: authLoginFailure,
+          mergeRight(ApiAuthConstants.SESSION_CONFIG, {
+            onSuccess: authWithRefreshTokenSuccess,
+            onFailure: authWithRefreshTokenFailure,
           }),
-          action.payload,
+          { userId, refreshToken },
         ),
       )
     }
@@ -80,7 +83,6 @@ export const loginFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            isTokenRequired: false,
             onSuccess: authLoginSuccess,
             onFailure: authLoginFailure,
           }),

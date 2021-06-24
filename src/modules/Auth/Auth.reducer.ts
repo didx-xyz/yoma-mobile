@@ -34,6 +34,9 @@ export const getSecureRefreshToken = createAction(`${name} getSecureRefreshToken
 export const getSecureRefreshTokenSuccess = createAction<string>(`${name} getSecureRefreshTokenSuccess`)
 export const getSecureRefreshTokenFailure = createAction<string>(`${name} getSecureRefreshTokenFailure`)
 
+export const authWithRefreshTokenSuccess = createAction<string>(`${name} authWithRefreshTokenSuccess`)
+export const authWithRefreshTokenFailure = createAction<string>(`${name} authWithRefreshTokenFailure`)
+
 export const setAuthCredentials = createAction<AuthState>(`${name} Set Auth Credentials`)
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
