@@ -138,7 +138,7 @@ workflows:
               ignore:
                 - develop
                 - main
-                - YOMA-346_setup_playstore
+                - fixing_parsing_error
   deploy-android-alpha:
     jobs:
       - pull-request:
@@ -147,7 +147,7 @@ workflows:
               only:
                 - develop
                 - main
-                - YOMA-346_setup_playstore
+                - fixing_parsing_error
       - deploy-android-alpha:
           requires:
             - pull-request
