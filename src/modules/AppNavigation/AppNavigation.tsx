@@ -9,13 +9,15 @@ import linking from './Linking'
 
 const Stack = createStackNavigator()
 
-const AppNavigation = () => {
-  const isAuthenticated = false
+type Props = {
+  isAuthorised: boolean
+}
 
+const AppNavigation = ({ isAuthorised }: Props) => {
   return (
     <NavigationContainer ref={navigationRef} linking={linking}>
       <Stack.Navigator headerMode="none">
-        {isAuthenticated ? (
+        {isAuthorised ? (
           <Stack.Screen name="Home" component={Home} />
         ) : (
           <Stack.Screen name="Authentication" component={Authentication} />

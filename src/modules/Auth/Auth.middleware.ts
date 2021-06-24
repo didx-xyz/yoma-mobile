@@ -44,10 +44,8 @@ export const authLoginFlow: Middleware =
         ),
       )
     }
-
     return result
   }
-
 export const authLoginSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
