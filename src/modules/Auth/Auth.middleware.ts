@@ -18,8 +18,9 @@ import {
   setSecureRefreshToken,
   setSecureRefreshTokenFailure,
   setSecureRefreshTokenSuccess,
+  setUserLoginCredentials,
 } from './Auth.reducer'
-import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
+import { selectLoginCredentials } from './Auth.selector'
 import {
   selectCredentialsFromLoginPayload,
   selectLoginCredentialsFromRegistration,
@@ -97,8 +98,7 @@ export const authLoginFailureFlow =
     return result
   }
 
-export const authRegistrationFlow =
-  ({ api }: { api: any }): Middleware =>
+export const authRegistrationFlow: Middleware =
   ({ dispatch }) =>
   next =>
   async action => {
@@ -107,15 +107,17 @@ export const authRegistrationFlow =
     // TODO: Abstract the api calls into a single api middleware
     if (authRegistration.match(action)) {
       const credentials = selectLoginCredentialsFromRegistration(action.payload)
-      await api.auth
-        .register(action.payload)
-        .then((response: AuthRegistrationSuccessResponse) => {
-          dispatch(authLogin(credentials))
-          dispatch(authRegistrationSuccess(response))
-        })
-        .catch((error: AuthRegistrationFailureResponse) => {
-          dispatch(authRegistrationFailure(error))
-        })
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.REGISTER_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: authRegistrationSuccess,
+            onFailure: authRegistrationFailure,
+          }),
+          action.payload,
+        ),
+      )
+      dispatch(setUserLoginCredentials(credentials))
     }
 
     return result
@@ -127,12 +129,11 @@ export const authRegistrationSuccessFlow =
   next =>
   async action => {
     const result = next(action)
-    const credentials = selectLoginCredentialsFromRegistration(getState())
 
     if (authRegistrationSuccess.match(action)) {
-      NavigationActions.navigate(AuthNavigationRoutes.Login)
       // TODO: this should be handled by the notification module
       notification('success', 'Registration Successful')
+      const credentials = selectLoginCredentials(getState())
       dispatch(authLogin(credentials))
     }
     return result

@@ -2,7 +2,6 @@ import { setItemAsync } from 'expo-secure-store'
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
 
-import api from '../api'
 import { middleware as apiMiddleware, apiConfig } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
 import { middleware as authMiddleware } from '../modules/Auth'
@@ -20,7 +19,7 @@ const featureModuleMiddleware = [
   authMiddleware.authLoginFlow,
   authMiddleware.authLoginSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authLoginFailureFlow({ notification: showSimpleMessage }),
-  authMiddleware.authRegistrationFlow({ api }),
+  authMiddleware.authRegistrationFlow,
   authMiddleware.setSecureRefreshTokenFlow(setItemAsync),
   authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
