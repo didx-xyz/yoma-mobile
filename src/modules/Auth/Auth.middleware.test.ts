@@ -7,8 +7,7 @@ import * as SUT from './Auth.middleware'
 import {
   authLogin,
   authLoginFailure,
-  authLoginSuccess,
-  authRegistration,
+  authLoginSuccess, // authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
   setAuthCredentials,
@@ -16,11 +15,7 @@ import {
   setSecureRefreshTokenFailure,
   setSecureRefreshTokenSuccess,
 } from './Auth.reducer'
-import {
-  defaultUserLoginResponseData,
-  defaultUserRegistrationResponseData,
-  userRegistrationData,
-} from './Auth.test.fixtures'
+import { defaultUserLoginResponseData, defaultUserRegistrationResponseData } from './Auth.test.fixtures'
 
 describe('modules/Auth/Auth.middleware', () => {
   describe('authLoginFlow', () => {

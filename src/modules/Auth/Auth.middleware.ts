@@ -17,7 +17,6 @@ import {
   setSecureRefreshTokenFailure,
   setSecureRefreshTokenSuccess,
 } from './Auth.reducer'
-import { AuthRegistrationFailureResponse, AuthRegistrationSuccessResponse } from './Auth.types'
 import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
 
 export const authLoginFlow: Middleware =
