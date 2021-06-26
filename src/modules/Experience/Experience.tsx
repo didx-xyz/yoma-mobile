@@ -5,7 +5,7 @@ import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
