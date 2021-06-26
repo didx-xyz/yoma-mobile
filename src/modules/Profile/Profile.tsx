@@ -12,9 +12,9 @@ import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
 import { USER_RESPONSE } from './Profile.constants'
+import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
 import { captureAndUploadImage, getUserData } from './Profile.utils'
-import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>

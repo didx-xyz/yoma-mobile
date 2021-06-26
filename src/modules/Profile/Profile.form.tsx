@@ -8,7 +8,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
-import { validationSchema } from './ValidationSchema'
+import { profileValidationSchema } from './Profile.validationSchema'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
@@ -38,7 +38,7 @@ const ProfileForm = forwardRef(({ user }: Props, ref) => {
       innerRef={formRef}
       initialValues={user}
       enableReinitialize
-      validationSchema={validationSchema}
+      validationSchema={profileValidationSchema}
       onSubmit={() => {}}
     >
       {formikHandlers => {
