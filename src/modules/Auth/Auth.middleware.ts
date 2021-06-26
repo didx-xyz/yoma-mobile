@@ -91,27 +91,15 @@ export const authLoginFailureFlow =
     return result
   }
 
-export const authRegistrationFlow =
-  ({ api }: { api: any }): Middleware =>
-  ({ dispatch }) =>
-  next =>
-  async action => {
-    const result = next(action)
+export const authRegistrationFlow: Middleware = _store => next => async action => {
+  const result = next(action)
 
+  if (authRegistration.match(action)) {
     // TODO: Abstract the api calls into a single api middleware
-    if (authRegistration.match(action)) {
-      await api.auth
-        .register(action.payload)
-        .then((response: AuthRegistrationSuccessResponse) => {
-          dispatch(authRegistrationSuccess(response))
-        })
-        .catch((error: AuthRegistrationFailureResponse) => {
-          dispatch(authRegistrationFailure(error))
-        })
-    }
-
-    return result
   }
+
+  return result
+}
 
 export const authRegistrationSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>

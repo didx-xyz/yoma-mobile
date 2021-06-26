@@ -23,6 +23,7 @@
     "bundle:android": "react-native bundle --platform android --entry-file index.js --bundle-output android.bundle --verbose",
     "create:keystore": "echo $YOMA_UPLOAD_KEYSTORE_BASE64 | openssl base64 -d -A > android/app/$YOMA_UPLOAD_STORE_FILE",
     "lint": "eslint . --ignore-path .gitignore --ignore-path .eslintignore",
+    "reset": "npx rimraf node_modules && npm i && npx pod-install",
     "format": "prettier --write .",
     "npm:audit": "audit-ci --critical",
     "_code:lint:prettier": "prettier --check .",

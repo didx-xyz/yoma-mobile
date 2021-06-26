@@ -6,7 +6,7 @@ import { FormikProps, FormikValues } from 'formik'
 import { UserResponse } from 'modules/Auth/Auth.types'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
-import React, { useCallback, useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -14,40 +14,15 @@ import { Colors } from 'styles'
 import { USER_RESPONSE } from './Profile.constants'
 import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
-import { captureAndUploadImage, getUserData } from './Profile.utils'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
 const Profile = ({ navigation }: Props) => {
-  const [userResponse, setUserResponse] = useState<UserResponse>(USER_RESPONSE)
+  const [userResponse] = useState<UserResponse>(USER_RESPONSE)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
-
-  const getData = useCallback(async () => {
-    const user = await getUserData()
-    if (user) {
-      setUserResponse(user)
-    }
-  }, [])
-
-  useEffect(() => {
-    getData().then(data => {
-      console.log(data)
-    })
-  }, [getData])
-
-  const captureProfileImage = async () => {
-    try {
-      const response = await captureAndUploadImage()
-      if (response.data) {
-        setUserResponse(response.data)
-      }
-    } catch (error) {
-      console.log('error', error)
-    }
-  }
 
   return (
     <ViewContainer style={styles.container}>
@@ -60,14 +35,14 @@ const Profile = ({ navigation }: Props) => {
               <ProfilePhoto
                 borderWidth={6}
                 outerRadius={40}
-                onPress={captureProfileImage}
+                onPress={() => {}}
                 percent={5}
                 showEditIcon={true}
                 profileOuterStyle={styles.imagePlaceholder}
               />
             }
           >
-            <TouchableOpacity onPress={captureProfileImage} style={styles.imageContainer}>
+            <TouchableOpacity onPress={() => {}} style={styles.imageContainer}>
               <Image source={{ uri: userResponse.photoURL as string }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
