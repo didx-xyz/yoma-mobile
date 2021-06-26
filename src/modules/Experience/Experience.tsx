@@ -30,7 +30,7 @@ const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
 const Experience = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  const [experience, setExperience] = useState([])
+  const [experience] = useState([])
   const formRef = useRef<FormikProps<FormikValues>>()
 
   return (

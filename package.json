@@ -22,7 +22,7 @@
     "deploy:release:android": "cd android && bundle exec fastlane production_deploy",
     "bundle:android": "react-native bundle --platform android --entry-file index.js --bundle-output android.bundle --verbose",
     "create:keystore": "echo $YOMA_UPLOAD_KEYSTORE_BASE64 | openssl base64 -d -A > android/app/$YOMA_UPLOAD_STORE_FILE",
-    "lint": "eslint --ignore-path .gitignore --ignore-path .eslintignore .",
+    "lint": "eslint . --ignore-path .gitignore --ignore-path .eslintignore",
     "format": "prettier --write .",
     "npm:audit": "audit-ci --critical",
     "_code:lint:prettier": "prettier --check .",
