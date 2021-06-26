@@ -1,10 +1,8 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import api from 'api'
 import { EmptyCard, Card, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
-import { USER_ID } from 'helpers/helpers'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useEffect, useRef, useState } from 'react'
@@ -32,17 +30,8 @@ const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
 const Experience = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  const [experience, setExperience] = useState([])
+  const [experience] = useState([])
   const formRef = useRef<FormikProps<FormikValues>>()
-
-  useEffect(() => {
-    const getAllJobs = async () => {
-      // TODO: added static type
-      const response = await api.users.credentials.getByType(USER_ID, 'Job')
-      setExperience(response.data)
-    }
-    getAllJobs()
-  }, [])
 
   return (
     <ViewContainer style={styles.container}>

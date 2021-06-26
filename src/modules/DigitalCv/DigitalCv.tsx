@@ -19,7 +19,7 @@ const DigitalCv = ({ navigation }: Props) => {
     <ViewContainer style={styles.container}>
       <HomeHeader navigation={navigation} profileProgressPercentage={10} rewardPoints={1000} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
-        <FirstTimeCard navigation={navigation} />
+        <FirstTimeCard />
         <CvCard
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}

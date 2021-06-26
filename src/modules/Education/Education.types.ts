@@ -1,4 +1,4 @@
-export type EductationEntry = {
+export type EducationEntry = {
   qualification: string
   organisationLogoURL: string
   school: string

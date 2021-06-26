@@ -1,4 +1,3 @@
-import { FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { TextInput, TextInputProps } from 'react-native'
 import { colors, Colors } from 'styles'
@@ -9,7 +8,7 @@ import styles from './Input.styles'
 type Props = TextInputProps & {
   name: string
   label: string
-  handlers: FormikProps<FormikValues>
+  handlers: any
 }
 
 const Input = ({ name, label, handlers, ...props }: Props) => {
