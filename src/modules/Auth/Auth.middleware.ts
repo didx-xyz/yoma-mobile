@@ -37,7 +37,6 @@ export const authLoginFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            isTokenRequired: false,
             onSuccess: authLoginSuccess,
             onFailure: authLoginFailure,
           }),
@@ -110,7 +109,6 @@ export const authRegistrationFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.REGISTER_CONFIG, {
-            isTokenRequired: false,
             onSuccess: authRegistrationSuccess,
             onFailure: authRegistrationFailure,
           }),
@@ -127,7 +125,7 @@ export const authRegistrationSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ getState, dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authRegistrationSuccess.match(action)) {
