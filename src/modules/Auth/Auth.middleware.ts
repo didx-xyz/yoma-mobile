@@ -50,7 +50,7 @@ export const authLoginSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authLoginSuccess.match(action)) {
@@ -85,7 +85,7 @@ export const authLoginFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authLoginFailure.match(action)) {
@@ -100,7 +100,7 @@ export const authLoginFailureFlow =
 export const authRegistrationFlow: Middleware =
   ({ dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     // TODO: Abstract the api calls into a single api middleware
@@ -141,7 +141,7 @@ export const authRegistrationFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
     if (authRegistrationFailure.match(action)) {
       NavigationActions.navigate(AuthNavigationRoutes.Register)
