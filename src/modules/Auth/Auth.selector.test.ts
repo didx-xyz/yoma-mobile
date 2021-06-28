@@ -72,4 +72,15 @@ describe('modules/Auth/Auth.selector', () => {
       expect(result).toEqual(true)
     })
   })
+  describe('selectLoginCredentials', () => {
+    it('should return user login credentials.', () => {
+      const state = {
+        auth: { ...INITIAL_STATE, email: 'EMAIL', password: 'PASSWORD' },
+      }
+      // when ... we call the selector
+      const result = SUT.selectLoginCredentials(state)
+      // then ... should return result as expected
+      expect(result).toEqual({ email: 'EMAIL', password: 'PASSWORD' })
+    })
+  })
 })

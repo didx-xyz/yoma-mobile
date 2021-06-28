@@ -1,13 +1,11 @@
-import { CheckBox, DropDown, Input, Spinner, OnboardingForms } from 'components'
+import { CheckBox, Input, OnboardingForms, Spinner } from 'components'
 import Button from 'components/Button'
-import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { AuthRegistration } from 'modules/Auth/Auth.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Colors } from 'styles'
 import { nameHasDigitsOrSymbols } from 'utils/regex'
-import { mapToDropDownArray } from 'utils/strings.utils'
 import * as yup from 'yup'
 
 import { Span } from '../../../components/Typography'
@@ -27,7 +25,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
         firstName: '',
         lastName: '',
         email: '',
-        countryAlpha2: '',
+        countryAlpha2: 'ZA', //TODO: Remove this value after DropDown component is fixed
         privacyInd: false,
         password: '',
         confirmPassword: '',
@@ -91,13 +89,13 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
               keyboardType="email-address"
               autoCapitalize="none"
             />
-            <DropDown
+            {/* <DropDown //TODO: Fix DropDown component re-rendering issue
               items={mapToDropDownArray(countries, 'code', 'name')}
               name={'countryAlpha2'}
               label={'Country'}
               handlers={formikHandlers}
               searchPlaceholder={t('Search country')}
-            />
+            /> */}
             <Input
               name={'password'}
               label={t('createPassword')}
