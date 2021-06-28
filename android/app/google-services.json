@@ -14,6 +14,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "1007644634835-3nv5fpud2eo4kefljhpb75a30pktuprl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yomamobile",
+            "certificate_hash": "39cf4532459e09e2d0cdcf4bbb68b4b0a62f1cc3"
+          }
+        },
+        {
+          "client_id": "1007644634835-j6eed9bphs9jdvgi1jt2tdjk5006jopc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.yomamobile",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "1007644634835-8b7vl8u89o7ah0d6pbhbtajarp23h3j0.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +45,13 @@
             {
               "client_id": "1007644634835-8b7vl8u89o7ah0d6pbhbtajarp23h3j0.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1007644634835-3ch3ke86lmui5cvvqc0ufibndr637qat.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.yomamobile"
+              }
             }
           ]
         }
