@@ -25,23 +25,6 @@ import {
   userRegistrationData,
 } from './Auth.test.fixtures'
 
-jest.mock('rn-fetch-blob', () => ({
-  DocumentDir: () => {},
-  ImageCache: {
-    get: {
-      clear: () => {},
-    },
-  },
-  fs: {
-    exists: jest.fn().mockReturnValueOnce({ then: jest.fn() }),
-    dirs: {
-      MainBundleDir: () => {},
-      CacheDir: () => {},
-      DocumentDir: () => {},
-    },
-  },
-}))
-
 describe('modules/Auth/Auth.middleware', () => {
   describe('authLoginFlow', () => {
     it('should correctly handle being called', async () => {

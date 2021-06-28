@@ -1,15 +1,6 @@
 import * as SUT from './api.utils'
 
 describe('api/api.utils', () => {
-  describe('generateEndpoint', () => {
-    it.each([
-      [['user', 'cred'], 'user/cred'],
-      [['test', '123'], 'test/123'],
-    ])('should behave same as array added with / ', (values, expected) => {
-      const result = SUT.generateEndpoint(values)
-      expect(result).toBe(expected)
-    })
-  })
   describe('addValueWithGivenKeyToConfig', () => {
     it('should add a key value pair to the provided config when we provide a key and a value, given we have a default config object', () => {
       // given ... given we have a default config object
