@@ -3,7 +3,7 @@ import SUT, { clearAuth, INITIAL_STATE, setAuthCredentials } from './Auth.reduce
 describe('modules/Auth/Auth.reducer', () => {
   describe('setAuthCredentials', () => {
     it('should set the Auth credentials correctly', () => {
-      // give ... there are no credentials in state
+      // given ....
       const state = INITIAL_STATE
       const credentials = {
         refreshToken: 'REFRESH_TOKEN',
