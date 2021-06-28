@@ -1,9 +1,11 @@
+import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
+import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authLogin,
@@ -16,8 +18,14 @@ import {
   setSecureRefreshToken,
   setSecureRefreshTokenFailure,
   setSecureRefreshTokenSuccess,
+  setUserLoginCredentials,
 } from './Auth.reducer'
-import { selectCredentialsFromLoginPayload, selectRefreshTokenFromLoginPayload } from './Auth.utils'
+import { selectLoginCredentials } from './Auth.selector'
+import {
+  selectCredentialsFromLoginPayload,
+  selectLoginCredentialsFromRegistration,
+  selectRefreshTokenFromLoginPayload,
+} from './Auth.utils'
 
 export const authLoginFlow: Middleware =
   ({ dispatch }) =>
@@ -29,7 +37,6 @@ export const authLoginFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            isTokenRequired: false,
             onSuccess: authLoginSuccess,
             onFailure: authLoginFailure,
           }),
@@ -43,7 +50,7 @@ export const authLoginSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authLoginSuccess.match(action)) {
@@ -78,7 +85,7 @@ export const authLoginFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authLoginFailure.match(action)) {
@@ -90,28 +97,43 @@ export const authLoginFailureFlow =
     return result
   }
 
-export const authRegistrationFlow: Middleware = _store => next => async action => {
-  const result = next(action)
+export const authRegistrationFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
 
-  if (authRegistration.match(action)) {
     // TODO: Abstract the api calls into a single api middleware
-  }
+    if (authRegistration.match(action)) {
+      const credentials = selectLoginCredentialsFromRegistration(action.payload)
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.REGISTER_CONFIG, {
+            onSuccess: authRegistrationSuccess,
+            onFailure: authRegistrationFailure,
+          }),
+          action.payload,
+        ),
+      )
+      dispatch(setUserLoginCredentials(credentials))
+    }
 
-  return result
-}
+    return result
+  }
 
 export const authRegistrationSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
+  ({ getState, dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authRegistrationSuccess.match(action)) {
       // TODO: this should be handled by the notification module
       notification('success', 'Registration Successful')
+      const credentials = selectLoginCredentials(getState())
+      dispatch(authLogin(credentials))
     }
-
     return result
   }
 
@@ -119,10 +141,10 @@ export const authRegistrationFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
-
     if (authRegistrationFailure.match(action)) {
+      NavigationActions.navigate(AuthNavigationRoutes.Register)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', action.payload)
     }
