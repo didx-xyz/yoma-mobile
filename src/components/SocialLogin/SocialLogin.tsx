@@ -4,7 +4,7 @@ import Spacer from 'components/Spacer'
 import React from 'react'
 
 type Props = {
-  onLoginWithSocial: (authProvider: string) => void
+  onLoginWithSocial: (authProvider: SocialVariants) => void
 }
 
 const SocialLogin = ({ onLoginWithSocial }: Props) => {

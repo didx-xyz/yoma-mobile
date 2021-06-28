@@ -3,108 +3,99 @@ import { Providers } from './Social.types'
 import * as SUT from './Social.utils'
 
 describe('modules/Social/Social.utils', () => {
-  describe('mapFacebookRegistrationData', () => {
+  describe('selectRegistrationCredentialsFromFacebook', () => {
     it('should return the user registration credentials from facebook auth payload', () => {
       const mockAuthData = {
-        firstName: 'DATA',
-        lastName: 'DATA',
-        email: 'DATA',
-        imageURL: 'DATA',
-        applicationID: 'DATA',
-        middleName: 'DATA',
-        name: 'DATA',
-        userID: 'DATA',
+        firstName: 'FIRST_NAME',
+        lastName: 'LAST_NAME',
+        email: 'EMAIL',
+        imageURL: 'IMAGE_URL',
+        applicationID: 'APPLICATION_ID',
+        middleName: 'MIDDLENAME',
+        name: 'NAME',
+        userID: 'USER_ID',
         accessToken: 'TOKEN',
       }
-
-      const mockMappedData = {
-        firstName: 'DATA',
-        lastName: 'DATA',
-        email: 'DATA',
+      const result = SUT.selectRegistrationCredentialsFromFacebook(mockAuthData)
+      expect(result).toEqual({
+        firstName: 'FIRST_NAME',
+        lastName: 'LAST_NAME',
+        email: 'EMAIL',
         provider: Providers.Facebook,
-        providerKey: 'DATA',
+        providerKey: 'APPLICATION_ID',
         token: 'TOKEN',
-      }
-
-      const result = SUT.mapFacebookRegistrationData(mockAuthData)
-      expect(result).toEqual(mockMappedData)
+      })
     })
   })
-  describe('mapGoogleRegistrationData', () => {
+  describe('selectRegistrationCredentialsFromGoogle', () => {
     it('should return the user registration credentials from google auth payload', () => {
       const mockAuthData = {
         idToken: 'TOKEN',
         user: {
-          email: 'DATA',
-          familyName: 'DATA',
-          givenName: 'DATA',
-          id: 'DATA',
-          userId: 'DATA',
-          name: 'DATA',
-          photo: 'DATA',
+          email: 'EMAIL',
+          familyName: 'LAST_NAME',
+          givenName: 'FIRST_NAME',
+          id: 'ID',
+          userId: 'USER_ID',
+          name: 'NAME',
+          photo: 'PHOTO',
         },
       }
 
-      const mockMappedData = {
-        firstName: 'DATA',
-        lastName: 'DATA',
-        email: 'DATA',
+      const result = SUT.selectRegistrationCredentialsFromGoogle(mockAuthData)
+      expect(result).toEqual({
         provider: Providers.Google,
+        email: 'EMAIL',
+        firstName: 'FIRST_NAME',
+        lastName: 'LAST_NAME',
         providerKey: GOOGLE_SIGNIN_WEBCLIENT_ID,
         token: 'TOKEN',
-      }
-
-      const result = SUT.mapGoogleRegistrationData(mockAuthData)
-      expect(result).toEqual(mockMappedData)
+      })
     })
   })
-  describe('mapFacebookLoginData', () => {
+  describe('selectLoginCredentialsFromFacebook', () => {
     it('should return the user login credentials from facebook auth payload', () => {
       const mockAuthData = {
-        firstName: 'DATA',
-        lastName: 'DATA',
-        email: 'DATA',
-        imageURL: 'DATA',
-        applicationID: 'DATA',
-        middleName: 'DATA',
-        name: 'DATA',
-        userID: 'DATA',
+        firstName: 'FIRST_NAME',
+        lastName: 'LAST_NAME',
+        email: 'EMAIL',
+        imageURL: 'IMAGE_URL',
+        applicationID: 'APPLICATION_ID',
+        middleName: 'MIDDLENAME',
+        name: 'NAME',
+        userID: 'USER_ID',
         accessToken: 'TOKEN',
       }
 
-      const mockMappedData = {
+      const result = SUT.selectLoginCredentialsFromFacebook(mockAuthData)
+      expect(result).toEqual({
         provider: Providers.Facebook,
-        providerKey: 'DATA',
+        providerKey: 'APPLICATION_ID',
         token: 'TOKEN',
-      }
-
-      const result = SUT.mapFacebookLoginData(mockAuthData)
-      expect(result).toEqual(mockMappedData)
+      })
     })
   })
-  describe('mapGoogleLoginData', () => {
+  describe('selectLoginCredentialsFromGoogle', () => {
     it('should return the user login credentials from google auth payload', () => {
       const mockAuthData = {
         idToken: 'TOKEN',
         user: {
-          email: 'DATA',
-          familyName: 'DATA',
-          givenName: 'DATA',
-          id: 'DATA',
-          userId: 'DATA',
-          name: 'DATA',
-          photo: 'DATA',
+          email: 'EMAIL',
+          familyName: 'LAST_NAME',
+          givenName: 'FIRST_NAME',
+          id: 'ID',
+          userId: 'USER_ID',
+          name: 'NAME',
+          photo: 'PHOTO',
         },
       }
 
-      const mockMappedData = {
+      const result = SUT.selectLoginCredentialsFromGoogle(mockAuthData)
+      expect(result).toEqual({
         provider: Providers.Google,
         providerKey: GOOGLE_SIGNIN_WEBCLIENT_ID,
         token: 'TOKEN',
-      }
-
-      const result = SUT.mapGoogleLoginData(mockAuthData)
-      expect(result).toEqual(mockMappedData)
+      })
     })
   })
 })

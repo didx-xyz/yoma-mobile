@@ -17,12 +17,10 @@ export const apiFlow =
       const { onSuccess, onFailure, apiArgs } = prepArgs(state, action)
       await api(apiArgs)
         .then((response: any) => {
-          console.log('response', response)
           const serializableResponse = omit(['config', 'request'], response)
           dispatch(onSuccess(serializableResponse))
         })
         .catch((error: any) => {
-          console.log('error', error)
           dispatch(onFailure(error.message))
         })
     }

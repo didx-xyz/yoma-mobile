@@ -1,3 +1,4 @@
+import { SocialVariants } from 'components/SocialButton/SocialButton.types'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
@@ -8,7 +9,7 @@ import Login from './Login'
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onLoginWithSocial: (authProvider: string) => {
+    onLoginWithSocial: (authProvider: SocialVariants) => {
       dispatch(AuthActions.authSocialLogin(authProvider))
     },
     onLoginUser: (details: AuthCredentials) => {

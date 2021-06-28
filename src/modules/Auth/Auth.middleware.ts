@@ -75,7 +75,6 @@ export const authSocialLoginSuccessFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.LOGIN_SOCIAL_CONFIG, {
-            isTokenRequired: false,
             onSuccess: authLoginSuccess,
             onFailure: authLoginFailure,
           }),
@@ -109,14 +108,13 @@ export const authSocialRegistrationFlow =
 export const authSocialRegistrationSuccessFlow: Middleware =
   ({ dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authSocialRegistrationSuccess.match(action)) {
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
-            isTokenRequired: false,
             onSuccess: authRegistrationSuccess,
             onFailure: authRegistrationFailure,
           }),
@@ -131,7 +129,7 @@ export const authLoginSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authLoginSuccess.match(action)) {
@@ -166,7 +164,7 @@ export const authLoginFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authLoginFailure.match(action)) {
@@ -204,7 +202,7 @@ export const authRegistrationSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authRegistrationSuccess.match(action)) {
@@ -219,7 +217,7 @@ export const authRegistrationFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
 
     if (authRegistrationFailure.match(action)) {

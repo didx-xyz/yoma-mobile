@@ -1,6 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
 import { Card, LargeHeader, SocialLogin, ViewContainer } from 'components'
+import { SocialVariants } from 'components/SocialButton/SocialButton.types'
 import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React from 'react'
@@ -9,13 +10,13 @@ import { ScrollView, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
-import { AuthCredentials, AuthSocialRegistrationCredentials } from '../Auth/Auth.types'
+import { AuthCredentials } from '../Auth/Auth.types'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Login>
-  onLoginWithSocial: (details: AuthSocialRegistrationCredentials) => void
+  onLoginWithSocial: (provider: SocialVariants) => void
   onLoginUser: (details: AuthCredentials) => void
 }
 

@@ -1,54 +1,51 @@
-import { curry, lensPath, map, view } from 'ramda'
+import { always, applySpec, path, prop } from 'ramda'
 
 import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './Social.constants'
 import { Providers } from './Social.types'
 
-const remap = curry((desc: any, obj: any) =>
-  map((path: any) => (typeof path === 'string' ? path : view(lensPath(path), obj)), desc),
-)
-export const mapFacebookRegistrationData = remap({
-  email: ['email'],
-  firstName: ['firstName'],
-  lastName: ['lastName'],
-  provider: Providers.Facebook,
-  providerKey: ['applicationID'],
-  token: ['accessToken'],
+export const selectRegistrationCredentialsFromFacebook = applySpec({
+  email: prop('email'),
+  firstName: prop('firstName'),
+  lastName: prop('lastName'),
+  provider: always(Providers.Facebook),
+  providerKey: prop('applicationID'),
+  token: prop('accessToken'),
 })
 
-export const mapGoogleRegistrationData = remap({
-  provider: Providers.Google,
-  email: ['user', 'email'],
-  firstName: ['user', 'givenName'],
-  lastName: ['user', 'familyName'],
-  providerKey: GOOGLE_SIGNIN_WEBCLIENT_ID,
-  token: ['idToken'],
+export const selectRegistrationCredentialsFromGoogle = applySpec({
+  email: path(['user', 'email']),
+  firstName: path(['user', 'givenName']),
+  lastName: path(['user', 'familyName']),
+  provider: always(Providers.Google),
+  providerKey: always(GOOGLE_SIGNIN_WEBCLIENT_ID),
+  token: prop('idToken'),
 })
 
-export const mapFacebookLoginData = remap({
-  provider: Providers.Facebook,
-  providerKey: ['applicationID'],
-  token: ['accessToken'],
+export const selectLoginCredentialsFromFacebook = applySpec({
+  provider: always(Providers.Facebook),
+  providerKey: prop('applicationID'),
+  token: prop('accessToken'),
 })
 
-export const mapGoogleLoginData = remap({
-  provider: Providers.Google,
-  providerKey: GOOGLE_SIGNIN_WEBCLIENT_ID,
-  token: ['idToken'],
+export const selectLoginCredentialsFromGoogle = applySpec({
+  provider: always(Providers.Google),
+  providerKey: always(GOOGLE_SIGNIN_WEBCLIENT_ID),
+  token: prop('idToken'),
 })
 
-export const selectLoginCredentials = (authProvider: string, authData: any) => {
+export const selectLoginCredentials = (authProvider: Providers, authData: any) => {
   switch (authProvider) {
     case Providers.Facebook:
-      return mapFacebookLoginData(authData)
+      return selectLoginCredentialsFromFacebook(authData)
     case Providers.Google:
-      return mapGoogleLoginData(authData)
+      return selectLoginCredentialsFromGoogle(authData)
   }
 }
-export const selectRegistrationCredentials = (authProvider: string, authData: any) => {
+export const selectRegistrationCredentials = (authProvider: Providers, authData: any) => {
   switch (authProvider) {
     case Providers.Facebook:
-      return mapFacebookRegistrationData(authData)
+      return selectRegistrationCredentialsFromFacebook(authData)
     case Providers.Google:
-      return mapGoogleRegistrationData(authData)
+      return selectRegistrationCredentialsFromGoogle(authData)
   }
 }
