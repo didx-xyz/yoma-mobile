@@ -17,6 +17,7 @@ import { captureAndUploadImage, getUserData } from './Profile.utils'
 import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
+  user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
