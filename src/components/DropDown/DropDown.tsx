@@ -1,5 +1,5 @@
 import { FormikProps, FormikValues } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 import { GetComponentProps } from 'types/react.types'
