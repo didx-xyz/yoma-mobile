@@ -19,9 +19,9 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
   const [dropDownValue, setDropdownValue] = useState(null)
   const { handleChange, handleBlur, values, errors, touched, setFieldValue } = handlers
 
-  useEffect(() => {
-    setDropdownValue(values[name])
-  }, [name, values])
+  // useEffect(() => {
+  //   setDropdownValue(values[name])
+  // }, [name, values])
 
   return (
     <>
