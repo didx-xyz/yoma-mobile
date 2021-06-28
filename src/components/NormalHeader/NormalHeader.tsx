@@ -35,17 +35,10 @@ const NormalHeader = ({
   onAdd,
 }: Props) => {
   const { t } = useTranslation()
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      onNavigateBack(navigation)
-      return true
-    })
-    return () => backHandler.remove()
-  }, [navigation])
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onNavigateBack}>
+      <TouchableOpacity onPress={navigation.goBack}>
         <BackIconGrey />
       </TouchableOpacity>
       <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
