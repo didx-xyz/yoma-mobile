@@ -1,5 +1,5 @@
 import { FormikProps, FormikValues } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 import { GetComponentProps } from 'types/react.types'
@@ -19,9 +19,9 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
   const [dropDownValue, setDropdownValue] = useState(null)
   const { handleChange, handleBlur, values, errors, touched, setFieldValue } = handlers
 
-  useEffect(() => {
-    setDropdownValue(values[name])
-  }, [name, values])
+  // useEffect(() => {
+  //   setDropdownValue(values[name])
+  // }, [name, values])
 
   return (
     <>

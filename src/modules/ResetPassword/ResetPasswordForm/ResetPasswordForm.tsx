@@ -1,24 +1,13 @@
-import { StackNavigationProp } from '@react-navigation/stack'
-import api from 'api'
 import { Input, OnboardingForms } from 'components'
 import Button from 'components/Button'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
-import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
 import styles from './ResetPasswordForm.styles'
 
-interface Props {
-  id: string
-  token: string
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.ResetPassword>
-}
-
-const ResetPasswordForm = ({ id, token, navigation }: Props) => {
+const ResetPasswordForm = () => {
   const { t } = useTranslation()
   return (
     <Formik
@@ -43,19 +32,7 @@ const ResetPasswordForm = ({ id, token, navigation }: Props) => {
           .required(t('required'))
           .label('Confirm password'),
       })}
-      onSubmit={async values => {
-        console.log('Login values: ', values)
-        await api.users.password
-          .edit(id, { ...values, token })
-          .then(() => {
-            showSimpleMessage('success', 'Password reset successful')
-            navigation.navigate(AuthNavigationRoutes.Login)
-          })
-          .catch(error => {
-            console.log('Error =>', error)
-            showSimpleMessage('danger', 'Error', error)
-          })
-      }}
+      onSubmit={() => {}}
     >
       {(formikHandlers: FormikProps<FormikValues>) => (
         <>
