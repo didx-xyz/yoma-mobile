@@ -2,6 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 
+import { navigationRef } from '../AppNavigation/AppNavigation.actions'
 import Home from '../Home/Home'
 import Authentication from './Authentication/Authentication'
 import linking from './Linking'
@@ -14,7 +15,7 @@ type Props = {
 
 const AppNavigation = ({ isAuthorised }: Props) => {
   return (
-    <NavigationContainer linking={linking}>
+    <NavigationContainer ref={navigationRef} linking={linking}>
       <Stack.Navigator headerMode="none">
         {isAuthorised ? (
           <Stack.Screen name="Home" component={Home} />
