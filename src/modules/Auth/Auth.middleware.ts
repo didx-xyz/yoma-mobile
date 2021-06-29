@@ -112,8 +112,7 @@ export const authLogoutFlow: Middleware =
     return result
   }
 
-export const authRegistrationFlow =
-  ({ api }: { api: any }): Middleware =>
+export const authRegistrationFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
