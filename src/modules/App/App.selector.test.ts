@@ -1,13 +1,10 @@
-import { INITIAL_STATE } from 'modules/Auth/Auth.reducer'
-
+import { rootStateFixture } from '../../redux/redux.test.fixtures'
 import * as SUT from './App.selector'
 
 describe('modules/App/App.selector', () => {
   describe('selector ', () => {
     it('should return expected prop values from initial states', () => {
-      const state = {
-        auth: INITIAL_STATE,
-      }
+      const state = rootStateFixture({})
       // when ... we call the selector
       const result = SUT.default(state)
       // then ... should return result as expected
