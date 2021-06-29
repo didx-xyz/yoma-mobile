@@ -3,9 +3,6 @@ import { actions as AuthActions } from '../Auth'
 import * as SUT from './App.middleware'
 import { resetAppData } from './App.reducer'
 
-// !FIX Error Jest encountered an unexpected token if not adding below function
-jest.mock('rn-fetch-blob', () => {})
-
 describe('modules/App/App.middleware', () => {
   describe('appResetFlow', () => {
     it('should correctly handle an app reset action', () => {
