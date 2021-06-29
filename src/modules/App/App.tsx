@@ -5,11 +5,15 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from 'redux/store'
 
-import AppNavigation from '../Navigation/Navigation.container'
+import Navigation from '../Navigation/Navigation.container'
 
 setI18nConfig()
 
-const App = () => {
+interface Props {
+  isAuthorised: boolean
+}
+
+const App = ({ isAuthorised }: Props) => {
   useEffect(() => {
     RNLocalize.addEventListener('change', setI18nConfig)
     return () => {
@@ -20,7 +24,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <AppNavigation />
+        <Navigation isAuthorised={isAuthorised} />
         <FlashMessage position="top" />
       </PersistGate>
     </Provider>

@@ -1,8 +1,8 @@
 import { INITIAL_STATE } from 'modules/Auth/Auth.reducer'
 
-import * as SUT from './Navigation.selector'
+import * as SUT from './App.selector'
 
-describe('modules/Navigation/Navigation.selector', () => {
+describe('modules/App/App.selector', () => {
   describe('selector ', () => {
     it('should return expected prop values from initial states', () => {
       const state = {

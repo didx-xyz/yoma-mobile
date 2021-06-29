@@ -1,4 +1,4 @@
-import { HomeNavigationRoutes } from './Home.routes'
+import { HomeNavigationRoutes } from './HomeNavigation.routes'
 
 export type HomeNavigatorParamsList = {
   [HomeNavigationRoutes.Home]: undefined
