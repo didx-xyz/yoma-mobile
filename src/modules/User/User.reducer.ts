@@ -1,13 +1,14 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
+import { UserResponse } from 'modules/Auth/Auth.types'
 import { mergeDeepRight } from 'ramda'
 
 const name = '[User]'
 export const INITIAL_STATE = {}
 
-export const User = createAction(`${name}`)
+export const setUserData = createAction<UserResponse>(`${name}`)
 
 const UserReducer = createReducer(INITIAL_STATE, builder => {
-  builder.addCase(User, (state, action) => mergeDeepRight(state)(action.payload))
+  builder.addCase(setUserData, (state, action) => mergeDeepRight(state)(action.payload))
 })
 
 export default UserReducer

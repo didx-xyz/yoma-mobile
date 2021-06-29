@@ -1,4 +1,4 @@
 import * as middleware from './User.middleware'
-import userReducer, * as actions from './User.reducer'
+import reducer, * as actions from './User.reducer'
 
-export { actions, userReducer, middleware }
+export { actions, reducer, middleware }
