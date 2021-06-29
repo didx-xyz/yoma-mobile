@@ -23,7 +23,7 @@ interface Props {
 
 const ProfileForm = forwardRef(({ user }: Props, ref) => {
   const { t } = useTranslation()
-  const formRef = useRef<FormikProps<FormikValues>>()
+  const formRef = useRef<FormikProps<FormikValues>>(null)
 
   useImperativeHandle(ref, () => ({
     handleSubmit() {
