@@ -1,8 +1,8 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from 'assets/images'
 import { ViewContainer } from 'components'
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
-import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
+import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
+import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -14,7 +14,7 @@ import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './Landing.styles'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Landing>
+  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.Landing>
 }
 
 const Landing = ({ navigation }: Props) => {

@@ -1,8 +1,8 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
 import { Card, LargeHeader, SocialLogin, ViewContainer } from 'components'
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
-import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
+import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
+import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
@@ -14,7 +14,7 @@ import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Login>
+  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.Login>
   onLoginUser: (details: AuthCredentials) => void
 }
 

@@ -2,8 +2,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
 import { Card, LargeHeader, SocialRegistration, ViewContainer } from 'components'
 import Button from 'components/Button'
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
-import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
+import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
+import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -13,7 +13,7 @@ import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../component
 import styles from './Register.styles'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Register>
+  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.Register>
 }
 
 const Register = ({ navigation }: Props) => {

@@ -1,6 +1,6 @@
-import { AuthNavigationRoutes } from './Authentication.routes'
+import { AuthNavigationRoutes } from './AuthNavigation.routes'
 
-export type AuthNavigatorParamsList = {
+export type AuthNavigationParamsList = {
   [AuthNavigationRoutes.Landing]: undefined
   [AuthNavigationRoutes.Register]: undefined
   [AuthNavigationRoutes.RegisterWithEmail]: undefined

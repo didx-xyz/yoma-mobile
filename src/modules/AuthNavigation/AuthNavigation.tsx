@@ -7,11 +7,11 @@ import RegisterWithEmail from 'modules/RegisterWithEmail'
 import ResetPassword from 'modules/ResetPassword/ResetPassword'
 import React from 'react'
 
-import { AuthNavigationRoutes } from './Authentication.routes'
+import { AuthNavigationRoutes } from './AuthNavigation.routes'
 
 const Stack = createStackNavigator()
 
-const Authentication = () => (
+const AuthNavigation = () => (
   <Stack.Navigator headerMode={'none'}>
     <Stack.Screen name={AuthNavigationRoutes.Landing} component={Landing} />
     <Stack.Screen name={AuthNavigationRoutes.Register} component={Register} />
@@ -22,4 +22,4 @@ const Authentication = () => (
   </Stack.Navigator>
 )
 
-export default Authentication
+export default AuthNavigation

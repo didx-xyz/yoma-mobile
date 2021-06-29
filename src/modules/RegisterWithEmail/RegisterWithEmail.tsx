@@ -1,9 +1,9 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleRight } from 'assets/images'
 import { Card, LargeHeader, ViewContainer } from 'components'
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
-import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
 import { AuthRegistration } from 'modules/Auth/Auth.types'
+import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
+import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
@@ -14,7 +14,7 @@ import RegisterForm from './RegisterForm/RegisterForm'
 import styles from './RegisterWithEmail.styles'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.RegisterWithEmail>
+  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.RegisterWithEmail>
   onRegisterUser: (details: AuthRegistration) => void
 }
 

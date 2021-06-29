@@ -1,11 +1,11 @@
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
-import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
+import * as NavigationActions from '../Navigation/Navigation.actions'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authLogin,

@@ -1,8 +1,8 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
 import { Card, LargeHeader, ViewContainer } from 'components'
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
-import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
+import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
+import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
@@ -14,7 +14,7 @@ import { ResetPasswordRoute } from './ResetPassword.types'
 import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.ResetPassword>
+  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.ResetPassword>
   route: ResetPasswordRoute
 }
 

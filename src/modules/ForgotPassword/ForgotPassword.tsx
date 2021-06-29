@@ -2,8 +2,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { Message, YellowCircleRight } from 'assets/images'
 import { Card, LargeHeader, Optional, ViewContainer } from 'components'
 import Button from 'components/Button'
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
-import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
+import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
+import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
@@ -15,7 +15,7 @@ import styles from './ForgotPassword.styles'
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.ForgotPassword>
+  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.ForgotPassword>
 }
 
 const ForgotPassword = ({ navigation }: Props) => {
