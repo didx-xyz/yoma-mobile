@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, REGISTER } from 'redux-persist'
 
 import { actions as apiActions } from '../api'
+import { actions as authActions } from '../modules/Auth'
 import middleware from './middleware'
 import rootReducer from './reducers'
 
@@ -18,7 +19,17 @@ const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, PAUSE, PERSIST, REGISTER, apiActions.apiRequest.type],
+        ignoredActions: [
+          FLUSH,
+          PAUSE,
+          PERSIST,
+          REGISTER,
+          apiActions.apiRequest.type,
+          authActions.authLoginSuccess.type,
+          authActions.authLoginFailure.type,
+          authActions.authRegistrationSuccess.type,
+          authActions.authRegistrationFailure.type,
+        ],
       },
     }).concat(middleware),
 })

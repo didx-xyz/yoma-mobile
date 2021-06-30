@@ -1,4 +1,3 @@
-import { SocialVariants } from './../../components/SocialButton/SocialButton.types';
 import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
@@ -31,7 +30,8 @@ import {
   selectLoginCredentialsFromRegistration,
   selectRefreshTokenFromLoginPayload,
 } from './Auth.utils'
-import { selectRegistrationCredentials } from './Social/Social.utils'
+import { Providers } from './Social/Social.types'
+import { selectRegistrationCredentials, selectSocialLoginCredentials } from './Social/Social.utils'
 
 export const authLoginFlow: Middleware =
   ({ dispatch }) =>
@@ -61,9 +61,9 @@ export const authSocialLoginFlow =
     const result = next(action)
     if (authSocialLogin.match(action)) {
       try {
-        const authProvider = action.payload
+        const authProvider = action.payload as Providers
         const authdata = await socialAuth(authProvider)
-        const credentials = selectLoginCredentials(authProvider, authdata)
+        const credentials = selectSocialLoginCredentials(authProvider, authdata)
         dispatch(authSocialLoginSuccess(credentials))
       } catch (error) {
         notification('danger', 'Error', error)
@@ -101,7 +101,7 @@ export const authSocialRegistrationFlow =
     const result = next(action)
     if (authSocialRegistration.match(action)) {
       try {
-        const authProvider = action.payload
+        const authProvider = action.payload as Providers
         const authdata = await socialAuth(authProvider)
         const credentials = selectRegistrationCredentials(authProvider, authdata)
         dispatch(authSocialRegistrationSuccess(credentials))

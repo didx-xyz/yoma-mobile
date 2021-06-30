@@ -33,7 +33,7 @@ export const selectLoginCredentialsFromGoogle = applySpec({
   token: prop('idToken'),
 })
 
-export const selectLoginCredentials = (authProvider: Providers, authData: any) => {
+export const selectSocialLoginCredentials = (authProvider: Providers, authData: any) => {
   switch (authProvider) {
     case Providers.Facebook:
       return selectLoginCredentialsFromFacebook(authData)
