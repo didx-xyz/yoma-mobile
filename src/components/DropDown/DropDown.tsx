@@ -31,7 +31,7 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
         searchTextInputStyle={styles.search}
         searchContainerStyle={styles.searchContainer}
         listMode={'MODAL'}
-        onChangeValue={itemValue => {
+        onChangeValue={(itemValue: any) => {
           if (values[name] !== itemValue) {
             handleChange(name)
             handleBlur(name)
