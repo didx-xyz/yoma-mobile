@@ -1,14 +1,9 @@
-import { selectUserState } from 'modules/User/User.selector'
 import { connect } from 'react-redux'
-import { RootState } from 'redux/redux.types'
 
 import Profile from './Profile'
+import selector from './Profile.selector'
 
-const mapStateToProps = (state: RootState) => {
-  return {
-    user: selectUserState(state),
-  }
-}
+const mapStateToProps = selector
 const mapDispatchToProps = null
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile)
