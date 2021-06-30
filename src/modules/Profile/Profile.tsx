@@ -12,34 +12,19 @@ import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
 import { USER_RESPONSE } from './Profile.constants'
+import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
 import { captureAndUploadImage } from './Profile.utils'
-import ProfileForm from './ProfileForm/ProfileForm'
 
 interface Props {
   user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, user }: Props) => {
-  const [userResponse, setUserResponse] = useState<UserResponse>(USER_RESPONSE)
+const Profile = ({ navigation }: Props) => {
+  const [userResponse] = useState<UserResponse>(USER_RESPONSE)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
-
-  useEffect(() => {
-    setUserResponse(user)
-  }, [user])
-
-  const captureProfileImage = async () => {
-    try {
-      const response = await captureAndUploadImage()
-      if (response.data) {
-        setUserResponse(response.data)
-      }
-    } catch (error) {
-      console.log('error', error)
-    }
-  }
 
   return (
     <ViewContainer style={styles.container}>
@@ -52,15 +37,15 @@ const Profile = ({ navigation, user }: Props) => {
               <ProfilePhoto
                 borderWidth={6}
                 outerRadius={40}
-                onPress={captureProfileImage}
+                onPress={() => {}}
                 percent={5}
                 showEditIcon={true}
                 profileOuterStyle={styles.imagePlaceholder}
               />
             }
           >
-            <TouchableOpacity onPress={captureProfileImage} style={styles.imageContainer}>
-              <Image source={{ uri: userResponse?.photoURL as string }} style={styles.profileImage} />
+            <TouchableOpacity onPress={() => {}} style={styles.imageContainer}>
+              <Image source={{ uri: userResponse.photoURL as string }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>

@@ -20,9 +20,7 @@ import {
 
 import { RootState } from '../redux/redux.types'
 import { StdObj } from '../types/general.types'
-import { ApiClientArgs, ApiMeta, ApiCall, GenerateEndpoint, PrepareApiRequestData } from './api.types'
-
-export const generateEndpoint: GenerateEndpoint = join('/')
+import { ApiClientArgs, ApiMeta, ApiCall, PrepareApiRequestData } from './api.types'
 
 export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<ApiMeta>) =>
   pipe(objOf(key), mergeDeepRight(config))

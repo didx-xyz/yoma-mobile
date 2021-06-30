@@ -62,7 +62,7 @@ const MyCourses = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <NewCourseForm navigation={navigation} />
+            <NewCourseForm />
           </Card>
         </ScrollView>
       </Optional>
