@@ -1,10 +1,12 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Input, Spinner } from 'components'
+import { DropDown, Input, Spinner } from 'components'
+import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
+import { mapToDropDownArray } from 'utils/strings.utils'
 
 import { profileValidationSchema } from './Profile.validationSchema'
 
@@ -45,13 +47,13 @@ const ProfileForm = forwardRef(({ user }: Props, ref) => {
             <Spinner visible={formikHandlers.isSubmitting} />
             <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
             <Input name={'lastName'} label={t('Surname')} handlers={formikHandlers} />
-            {/* <DropDown />/TODO: Fix component, causing re-render
+            <DropDown
               items={mapToDropDownArray(countries, 'code', 'name')}
               name={'countryAlpha2'}
               label={'Country'}
               handlers={formikHandlers}
               searchPlaceholder={t('Search country')}
-            /> */}
+            />
             <Input
               name={'email'}
               label={t('email')}

@@ -6,7 +6,7 @@ import { FormikProps, FormikValues } from 'formik'
 import { UserResponse } from 'modules/Auth/Auth.types'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -14,10 +14,8 @@ import { Colors } from 'styles'
 import { USER_RESPONSE } from './Profile.constants'
 import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
-import { captureAndUploadImage } from './Profile.utils'
 
 interface Props {
-  user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
@@ -32,7 +30,7 @@ const Profile = ({ navigation }: Props) => {
       <ScrollView>
         <Card style={styles.card}>
           <Optional
-            condition={!!userResponse?.photoURL}
+            condition={!!userResponse.photoURL}
             fallback={
               <ProfilePhoto
                 borderWidth={6}
