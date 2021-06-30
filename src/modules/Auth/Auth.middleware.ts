@@ -15,8 +15,10 @@ import {
   authRegistrationFailure,
   authRegistrationSuccess,
   authSocialLogin,
+  authSocialLoginFailure,
   authSocialLoginSuccess,
   authSocialRegistration,
+  authSocialRegistrationFailure,
   authSocialRegistrationSuccess,
   setAuthCredentials,
   setSecureRefreshToken,
@@ -54,7 +56,7 @@ export const authLoginFlow: Middleware =
   }
 
 export const authSocialLoginFlow =
-  ({ socialAuth, notification }: { socialAuth: Function; notification: typeof showSimpleMessage }): Middleware =>
+  ({ socialAuth }: { socialAuth: Function; notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
@@ -66,7 +68,7 @@ export const authSocialLoginFlow =
         const credentials = selectSocialLoginCredentials(authProvider, authdata)
         dispatch(authSocialLoginSuccess(credentials))
       } catch (error) {
-        notification('danger', 'Error', error)
+        dispatch(authSocialLoginFailure)
       }
     }
     return result
@@ -94,7 +96,7 @@ export const authSocialLoginSuccessFlow: Middleware =
   }
 
 export const authSocialRegistrationFlow =
-  ({ socialAuth, notification }: { socialAuth: Function; notification: typeof showSimpleMessage }): Middleware =>
+  ({ socialAuth }: { socialAuth: Function; notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
@@ -106,7 +108,7 @@ export const authSocialRegistrationFlow =
         const credentials = selectRegistrationCredentials(authProvider, authdata)
         dispatch(authSocialRegistrationSuccess(credentials))
       } catch (error) {
-        notification('danger', 'Error', error)
+        dispatch(authSocialRegistrationFailure)
       }
     }
     return result
@@ -129,6 +131,38 @@ export const authSocialRegistrationSuccessFlow: Middleware =
         ),
       )
     }
+    return result
+  }
+
+export const authSocialRegistrationFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (authSocialRegistrationFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      // @ts-ignore
+      notification('danger', 'An error occurred.', action.payload.message)
+    }
+
+    return result
+  }
+
+export const authSocialLoginFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (authSocialLoginFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      // @ts-ignore
+      notification('danger', 'An error occurred.', action.payload.message)
+    }
+
     return result
   }
 

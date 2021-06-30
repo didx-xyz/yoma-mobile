@@ -1,4 +1,4 @@
-import { INITIAL_STATE } from 'modules/Auth/Auth.reducer'
+import { authSocialLoginFailure, authSocialRegistrationFailure, INITIAL_STATE } from 'modules/Auth/Auth.reducer'
 import { mergeRight } from 'ramda'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
@@ -432,6 +432,42 @@ describe('modules/Auth/Auth.middleware', () => {
       const mockNotification = jest.fn()
       // @ts-ignore
       const { invoke } = create(SUT.authRegistrationFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the authRegistration action
+      await invoke(action)
+
+      // then ... the notification should be called
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('authSocialLoginFailureFlow', () => {
+    it('should correctly send a notification to the user', async () => {
+      // given ... the authRegistration action is fired
+      const create = createMiddlewareMock(jest)
+      // @ts-ignore
+      const response = 'ERROR: FAILED FOR A REASON'
+      const action = authSocialLoginFailure(response)
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.authSocialLoginFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the authRegistration action
+      await invoke(action)
+
+      // then ... the notification should be called
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('authSocialRegistrationFailureFlow', () => {
+    it('should correctly send a notification to the user', async () => {
+      // given ... the authRegistration action is fired
+      const create = createMiddlewareMock(jest)
+      // @ts-ignore
+      const response = 'ERROR: FAILED FOR A REASON'
+      const action = authSocialRegistrationFailure(response)
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.authSocialRegistrationFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the authRegistration action
       await invoke(action)
