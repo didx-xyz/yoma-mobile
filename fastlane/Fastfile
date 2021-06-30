@@ -1,7 +1,7 @@
 default_platform(:android)
 
 platform :android do
-  desc "Android beta deploy"
+  desc "Android alpha deploy"
 
   lane :clean do
     gradle(task: 'clean', project_dir: './android')

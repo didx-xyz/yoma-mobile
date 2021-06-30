@@ -1,21 +1,16 @@
-import { StackActions } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { AddIcon, BackIconGrey } from 'assets/images'
 import Button, { ButtonVariants } from 'components/Button'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { BackHandler, TouchableOpacity, View } from 'react-native'
+import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
-
-const onNavigateBack = (navigation: any) => {
-  navigation.dispatch(StackActions.pop(1))
-}
 
 type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
@@ -35,17 +30,10 @@ const NormalHeader = ({
   onAdd,
 }: Props) => {
   const { t } = useTranslation()
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      onNavigateBack(navigation)
-      return true
-    })
-    return () => backHandler.remove()
-  }, [navigation])
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={onNavigateBack}>
+      <TouchableOpacity onPress={navigation.goBack}>
         <BackIconGrey />
       </TouchableOpacity>
       <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>

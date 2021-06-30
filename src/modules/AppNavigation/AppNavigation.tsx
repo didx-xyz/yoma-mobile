@@ -12,18 +12,16 @@ type Props = {
   isAuthorised: boolean
 }
 
-const AppNavigation = ({ isAuthorised }: Props) => {
-  return (
-    <NavigationContainer linking={linking}>
-      <Stack.Navigator headerMode="none">
-        {isAuthorised ? (
-          <Stack.Screen name="Home" component={Home} />
-        ) : (
-          <Stack.Screen name="Authentication" component={Authentication} />
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  )
-}
+const AppNavigation = ({ isAuthorised }: Props) => (
+  <NavigationContainer linking={linking}>
+    <Stack.Navigator headerMode="none">
+      {isAuthorised ? (
+        <Stack.Screen name="Home" component={Home} />
+      ) : (
+        <Stack.Screen name="Authentication" component={Authentication} />
+      )}
+    </Stack.Navigator>
+  </NavigationContainer>
+)
 
 export default AppNavigation

@@ -8,8 +8,6 @@ import { types as OrgTypes } from './organisations'
 import { types as SkillsTypes } from './skills'
 import { types as UsersTypes } from './users'
 
-export type GenerateEndpoint = (arr: string[]) => string
-
 export type ApiEndpoints =
   | AuthTypes.AuthEndpoints
   | UsersTypes.UsersEndpoints

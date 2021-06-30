@@ -22,14 +22,6 @@
           }
         },
         {
-          "client_id": "1007644634835-850kjoqn7na19m31tino4hdhi1ef1hvq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.yomamobile",
-            "certificate_hash": "05c2a8adb6ef2a3a9554c1ef29ff1fe9449f9111"
-          }
-        },
-        {
           "client_id": "1007644634835-j6eed9bphs9jdvgi1jt2tdjk5006jopc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

@@ -7,9 +7,9 @@ import { View } from 'react-native'
 import { Colors } from 'styles'
 import { getHasValuesChanged } from 'utils/form.utils'
 
+import ValidationSchema from './Education.validationSchema'
 import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
 import styles from './EducationForm.styles'
-import ValidationSchema from './ValidationSchema'
 
 interface Props {
   changeButtonState: (value: boolean) => void
@@ -54,6 +54,7 @@ const EducationForm = forwardRef(({ changeButtonState }: Props, ref) => {
       validate={validation}
       validationSchema={ValidationSchema}
       validateOnChange
+      onSubmit={() => {}}
     >
       {formikHandlers => (
         <FormWrapper>

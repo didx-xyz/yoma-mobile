@@ -27,6 +27,7 @@ declare module 'ramda' {
   export function multiply(...rest: any[]): number
   export function not(...rest: any[]): number
   export function objOf(...rest: any[]): any
+  export function omit(...rest: any[]): any
   export function of(...rest: any[]): any[]
   export function omit(...rest: any[]): any[]
   export function pipe(...rest: any[]): any
@@ -34,6 +35,7 @@ declare module 'ramda' {
   export function path(...rest: any[]): any
   export function pathOr(...rest: any[]): any
   export function pick(...rest: any[]): any
+  export function propOr(...rest: any[]): any
   export function prepend(...rest: any[]): any
   export function reduce(...rest: any[]): any[]
   export function reduceRight(...rest: any[]): any[]

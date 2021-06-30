@@ -8,8 +8,7 @@ import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
-import { editProfile } from './ProfileForm.utils'
-import { ValidationSchema } from './ValidationSchema'
+import { profileValidationSchema } from './Profile.validationSchema'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
@@ -22,9 +21,9 @@ interface Props {
   }
 }
 
-const ProfileForm = forwardRef(({ navigation, user }: Props, ref) => {
+const ProfileForm = forwardRef(({ user }: Props, ref) => {
   const { t } = useTranslation()
-  const formRef = useRef<FormikProps<FormikValues>>()
+  const formRef = useRef<FormikProps<FormikValues>>(null)
 
   useImperativeHandle(ref, () => ({
     handleSubmit() {
@@ -39,13 +38,8 @@ const ProfileForm = forwardRef(({ navigation, user }: Props, ref) => {
       innerRef={formRef}
       initialValues={user}
       enableReinitialize
-      validationSchema={ValidationSchema}
-      onSubmit={async values => {
-        const response = await editProfile(values)
-        if (response) {
-          navigation.navigate(HomeNavigationRoutes.Home)
-        }
-      }}
+      validationSchema={profileValidationSchema}
+      onSubmit={() => {}}
     >
       {formikHandlers => {
         return (
