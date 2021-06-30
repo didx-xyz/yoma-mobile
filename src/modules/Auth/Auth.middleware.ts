@@ -96,7 +96,7 @@ export const authSocialLoginSuccessFlow: Middleware =
   }
 
 export const authSocialRegistrationFlow =
-  ({ socialAuth }: { socialAuth: Function; notification: typeof showSimpleMessage }): Middleware =>
+  ({ socialAuth }: { socialAuth: Function }): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
