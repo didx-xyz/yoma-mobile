@@ -1,3 +1,4 @@
+import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import { FormikProps, FormikValues } from 'formik'
 import React, { useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -5,7 +6,6 @@ import { Colors } from 'styles'
 import { GetComponentProps } from 'types/react.types'
 import { textOrSpace } from 'utils/strings.utils'
 
-import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDown.styles'
 
 type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
@@ -19,10 +19,6 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
   const [dropDownValue, setDropdownValue] = useState(null)
   const { handleChange, handleBlur, values, errors, touched, setFieldValue } = handlers
 
-  // useEffect(() => {
-  //   setDropdownValue(values[name])
-  // }, [name, values])
-
   return (
     <>
       <Text.Meta level={MetaLevels.small}>{textOrSpace(values[name] !== '', label)}</Text.Meta>
@@ -34,17 +30,18 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
         textStyle={styles.label}
         searchTextInputStyle={styles.search}
         searchContainerStyle={styles.searchContainer}
-        listMode={'SCROLLVIEW'}
+        listMode={'MODAL'}
         onChangeValue={itemValue => {
-          handleChange(name)
-          handleBlur(name)
-          setFieldValue(name, itemValue)
+          if (values[name] !== itemValue) {
+            handleChange(name)
+            handleBlur(name)
+            setFieldValue(name, itemValue)
+          }
         }}
         value={dropDownValue}
         open={isOpen}
-        setOpen={setIsOpen}
+        setOpen={() => setIsOpen(!isOpen)}
         setValue={setDropdownValue}
-        showArrowIcon={false}
         {...props}
       />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>

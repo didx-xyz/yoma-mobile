@@ -1,6 +1,6 @@
 import { FormikProps, FormikValues } from 'formik'
 import React from 'react'
-import { TextInput, TextInputProps } from 'react-native'
+import { Keyboard, TextInput, TextInputProps } from 'react-native'
 import { colors, Colors } from 'styles'
 
 import Text, { MetaLevels, TextAlign } from '../Typography'
@@ -20,6 +20,7 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
       <TextInput
         placeholderTextColor={colors[Colors.menuGrey]}
         placeholder={label}
+        onSubmitEditing={Keyboard.dismiss}
         style={styles.textInput}
         value={values[name]}
         onChangeText={handleChange(name)}
