@@ -1,3 +1,4 @@
+import { resetAppData } from 'modules/App/App.reducer'
 import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
@@ -11,6 +12,7 @@ import {
   authLogin,
   authLoginFailure,
   authLoginSuccess,
+  authLogout,
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
@@ -92,6 +94,19 @@ export const authLoginFailureFlow =
       // TODO: this should be handled by the notification module
       // @ts-ignore
       notification('danger', 'An error occurred.', action.payload.message)
+    }
+
+    return result
+  }
+
+export const authLogoutFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (authLogout.match(action)) {
+      dispatch(resetAppData())
     }
 
     return result
