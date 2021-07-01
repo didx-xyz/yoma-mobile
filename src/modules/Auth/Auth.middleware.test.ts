@@ -1,3 +1,4 @@
+import { resetAppData } from 'modules/App/App.reducer'
 import { authSocialLoginFailure, authSocialRegistrationFailure, INITIAL_STATE } from 'modules/Auth/Auth.reducer'
 import { mergeRight } from 'ramda'
 
@@ -9,6 +10,7 @@ import {
   authLogin,
   authLoginFailure,
   authLoginSuccess,
+  authLogout,
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
@@ -326,6 +328,21 @@ describe('modules/Auth/Auth.middleware', () => {
 
       // then ... the login API should be called
       expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('authLogoutFlow', () => {
+    it('should correctly logout the user', async () => {
+      // given ... the authLogout action is fired
+      const create = createMiddlewareMock(jest)
+      const action = authLogout()
+      // @ts-ignore
+      const { store, invoke } = create(SUT.authLogoutFlow)
+
+      // when ... we respond to the authLogout action
+      await invoke(action)
+
+      // then ... the reset APP should be called
+      expect(store.dispatch).toHaveBeenCalledWith(resetAppData())
     })
   })
   describe('authRegistrationFlow', () => {
