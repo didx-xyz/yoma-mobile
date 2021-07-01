@@ -4,19 +4,21 @@ import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'compo
 import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
 import { UserResponse } from 'modules/Auth/Auth.types'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.routes'
-import { HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
+import { types as HomeNavigationTypes } from '../HomeNavigation'
 import { USER_RESPONSE } from './Profile.constants'
 import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.Profile
+  >
 }
 
 const Profile = ({ navigation }: Props) => {

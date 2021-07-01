@@ -18,7 +18,7 @@ import MyChallenges from '../MyChallenges'
 import MyCourses from '../MyCourses'
 import Profile from '../Profile'
 import Skills from '../Skills'
-import { HomeNavigationRoutes } from './HomeNavigation.routes'
+import { HomeNavigationRoutes } from './HomeNavigation.types'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()

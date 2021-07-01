@@ -1,20 +1,22 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
 import { Card, LargeHeader, ViewContainer } from 'components'
-import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
-import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 import { Colors } from 'styles'
 
 import Text, { Bold, HeaderLevels, TextAlign } from '../../components/Typography'
+import { types as AuthNavigationTypes } from '../AuthNavigation'
 import styles from './ResetPassword.styles'
 import { ResetPasswordRoute } from './ResetPassword.types'
 import ResetPasswordForm from './ResetPasswordForm/ResetPasswordForm'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.ResetPassword>
+  navigation: StackNavigationProp<
+    AuthNavigationTypes.AuthNavigationParamsList,
+    AuthNavigationTypes.AuthNavigationRoutes.ResetPassword
+  >
   route: ResetPasswordRoute
 }
 
@@ -25,7 +27,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
   } = route
   useEffect(() => {
     if (!Token || !Id) {
-      navigation.navigate(AuthNavigationRoutes.Login)
+      navigation.navigate(AuthNavigationTypes.AuthNavigationRoutes.Login)
     }
   }, [Token, Id, navigation])
   return (
@@ -47,7 +49,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
             {t('resetPasswordBody3')}
             <Bold>{t('resetPasswordBody4')}.</Bold>
           </Text.Body>
-          <ResetPasswordForm id={Id} token={Token} navigation={navigation} />
+          <ResetPasswordForm />
         </Card>
       </ScrollView>
     </ViewContainer>

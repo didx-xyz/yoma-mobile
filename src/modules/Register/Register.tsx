@@ -2,18 +2,20 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
 import { Card, LargeHeader, SocialRegistration, ViewContainer } from 'components'
 import Button from 'components/Button'
-import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
-import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
+import { types as AuthNavigationTypes } from '../AuthNavigation'
 import styles from './Register.styles'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.Register>
+  navigation: StackNavigationProp<
+    AuthNavigationTypes.AuthNavigationParamsList,
+    AuthNavigationTypes.AuthNavigationRoutes.Register
+  >
 }
 
 const Register = ({ navigation }: Props) => {
@@ -33,7 +35,7 @@ const Register = ({ navigation }: Props) => {
         </Text.Header>
         <Button
           label={t('registerWithEmail')}
-          onPress={() => navigation.navigate(AuthNavigationRoutes.RegisterWithEmail)}
+          onPress={() => navigation.navigate(AuthNavigationTypes.AuthNavigationRoutes.RegisterWithEmail)}
           style={styles.button}
         />
         <View style={styles.horizontalLineView}>
@@ -48,7 +50,7 @@ const Register = ({ navigation }: Props) => {
       </Card>
       <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.bottomText}>
         {t('alreadyHaveAccount')}&nbsp;
-        <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}>{t('login')}.</Link>
+        <Link onPress={() => navigation.navigate(AuthNavigationTypes.AuthNavigationRoutes.Login)}>{t('login')}.</Link>
       </Text.Body>
     </ViewContainer>
   )

@@ -4,7 +4,7 @@ import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 import { WithChildren } from 'types/react.types'
 
-import { AuthNavigationRoutes } from '../../modules/AuthNavigation/AuthNavigation.routes'
+import { types as AuthNavigationTypes } from '../../modules/AuthNavigation'
 import Text, { HeaderLevels } from '../Typography'
 import styles from './HeaderContainer.styles'
 
@@ -15,7 +15,7 @@ const onNavigationBack = (navigation: any) => {
     navigation.goBack()
   } else {
     navigation.reset({
-      routes: [{ name: AuthNavigationRoutes.Landing }],
+      routes: [{ name: AuthNavigationTypes.AuthNavigationRoutes.Landing }],
     })
   }
 }

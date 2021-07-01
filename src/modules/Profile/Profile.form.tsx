@@ -2,16 +2,18 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { DropDown, Input, Spinner } from 'components'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.routes'
-import { HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { forwardRef, useImperativeHandle, useRef } from 'react'
 import { useTranslation } from 'react-i18next'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
+import { types as HomeNavigationTypes } from '../HomeNavigation'
 import { profileValidationSchema } from './Profile.validationSchema'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.Profile
+  >
   user: {
     firstName: string
     lastName: string

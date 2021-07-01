@@ -7,7 +7,7 @@ import RegisterWithEmail from 'modules/RegisterWithEmail'
 import ResetPassword from 'modules/ResetPassword/ResetPassword'
 import React from 'react'
 
-import { AuthNavigationRoutes } from './AuthNavigation.routes'
+import { AuthNavigationRoutes } from './AuthNavigation.types'
 
 const Stack = createStackNavigator()
 

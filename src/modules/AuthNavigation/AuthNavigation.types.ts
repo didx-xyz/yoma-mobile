@@ -1,4 +1,11 @@
-import { AuthNavigationRoutes } from './AuthNavigation.routes'
+export enum AuthNavigationRoutes {
+  Landing = 'Landing',
+  Register = 'Register',
+  RegisterWithEmail = 'RegisterWithEmail',
+  Login = 'Login',
+  ForgotPassword = 'ForgotPassword',
+  ResetPassword = 'ResetPassword',
+}
 
 export type AuthNavigationParamsList = {
   [AuthNavigationRoutes.Landing]: undefined

@@ -3,8 +3,7 @@ import { EmptyCard, Card, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.routes'
-import { HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
+import { types as HomeNavigationTypes } from 'modules/HomeNavigation'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -14,7 +13,10 @@ import { ExperienceType } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.Experience
+  >
 }
 
 const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
@@ -60,7 +62,7 @@ const Experience = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <ExperienceForm navigation={navigation} ref={formRef} />
+            <ExperienceForm ref={formRef} />
           </Card>
         </ScrollView>
       </Optional>

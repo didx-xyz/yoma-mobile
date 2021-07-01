@@ -1,7 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.routes'
-import { HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
+import { types as HomeNavigationTypes } from 'modules/HomeNavigation'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -12,7 +11,10 @@ import { CourseEntry } from './MyCourses.types'
 import NewCourseForm from './NewCourseForm/NewCourseForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCourses>
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.MyCourses
+  >
 }
 
 const renderCourseEntry = ({ course, description, startDate, endDate, organisationLogoUrl }: CourseEntry) => {

@@ -1,10 +1,10 @@
-import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
+import { types as AuthNavigationTypes } from '../AuthNavigation'
 import * as NavigationActions from '../Navigation/Navigation.actions'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
@@ -144,7 +144,7 @@ export const authRegistrationFailureFlow =
   action => {
     const result = next(action)
     if (authRegistrationFailure.match(action)) {
-      NavigationActions.navigate(AuthNavigationRoutes.Register)
+      NavigationActions.navigate(AuthNavigationTypes.AuthNavigationRoutes.Register)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', action.payload)
     }

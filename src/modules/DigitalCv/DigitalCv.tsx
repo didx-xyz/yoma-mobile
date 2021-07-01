@@ -1,16 +1,18 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { ViewContainer, HomeHeader, FirstTimeCard, CvCard } from 'components'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.routes'
-import { HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 import { Colors } from 'styles'
 
+import { types as HomeNavigationTypes } from '../HomeNavigation'
 import styles from './DigitalCv.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.DigitalCv>
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.DigitalCv
+  >
 }
 
 const DigitalCv = ({ navigation }: Props) => {
@@ -24,42 +26,42 @@ const DigitalCv = ({ navigation }: Props) => {
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
           hasCountBadge={false}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.About)}
+          onEdit={() => navigation.navigate(HomeNavigationTypes.HomeNavigationRoutes.About)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.primaryBlue}
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.Experience)}
+          onEdit={() => navigation.navigate(HomeNavigationTypes.HomeNavigationRoutes.Experience)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.primaryRed}
           cardTitle={t('Education')}
           defaultText={t('Which school, university or college did you attend?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.Education)}
+          onEdit={() => navigation.navigate(HomeNavigationTypes.HomeNavigationRoutes.Education)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.primaryGreen}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.Skills)}
+          onEdit={() => navigation.navigate(HomeNavigationTypes.HomeNavigationRoutes.Skills)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.primaryYellow}
           cardTitle={t('Completed courses')}
           defaultText={t('Have you completed any courses yet?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.MyCourses)}
+          onEdit={() => navigation.navigate(HomeNavigationTypes.HomeNavigationRoutes.MyCourses)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.secondaryPurple}
           cardTitle={t('Completed challenges')}
           defaultText={t('Have you completed any challenges yet?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.MyChallenges)}
+          onEdit={() => navigation.navigate(HomeNavigationTypes.HomeNavigationRoutes.MyChallenges)}
         />
       </ScrollView>
     </ViewContainer>

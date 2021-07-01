@@ -1,19 +1,21 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.routes'
-import { HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import { types as HomeNavigationTypes } from '../HomeNavigation'
 import { MOCKED_CHALLENGES } from './MyChallenges.constants'
 import styles from './MyChallenges.styles'
 import { ChallengeEntry } from './MyChallenges.types'
 import NewChallengeForm from './NewChallengeForm/NewChallengeForm'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyChallenges>
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.MyChallenges
+  >
 }
 
 const renderChallengeEntry = ({ challenge, description, startDate, endDate, organisationLogoUrl }: ChallengeEntry) => {

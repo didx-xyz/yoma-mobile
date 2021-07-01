@@ -1,11 +1,8 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox, FormWrapper } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.routes'
-import { HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
+import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -14,37 +11,16 @@ import { mapToDropDownArray } from 'utils/strings.utils'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
 import { DropDownOrg } from './ExperienceForm.types'
-import { getOrganizationsList, getSkillsList, submitForm } from './ExperienceForm.utils'
 import { ValidationSchema } from './ValidationSchema'
 
-interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
-}
-
-const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
+const ExperienceForm = forwardRef((_props, ref) => {
   const { t } = useTranslation()
-  const [organizations, setOrganizations] = useState<DropDownOrg[]>([])
+  const [organizations] = useState<DropDownOrg[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
-  const [skillsList, setSkillsList] = useState<DropDownOrg[]>([])
+  const [skillsList] = useState<DropDownOrg[]>([])
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
 
-  const formRef = useRef<FormikProps<FormikValues>>()
-
-  useEffect(() => {
-    const getOrganizations = async () => {
-      const organizationsList = await getOrganizationsList()
-      setOrganizations(mapToDropDownArray(organizationsList.data))
-    }
-    getOrganizations()
-  }, [])
-
-  useEffect(() => {
-    const getSkills = async () => {
-      const skills = await getSkillsList()
-      setSkillsList(mapToDropDownArray(skills.data, 'value'))
-    }
-    getSkills()
-  }, [])
+  const formRef = useRef<FormikProps<FormikValues>>(null)
 
   useImperativeHandle(ref, () => ({
     handleSubmit() {
@@ -60,10 +36,7 @@ const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
       initialValues={INITIAL_VALUES}
       enableReinitialize
       validationSchema={ValidationSchema}
-      onSubmit={async values => {
-        await submitForm(values)
-        navigation.navigate(HomeNavigationRoutes.Home)
-      }}
+      onSubmit={() => {}}
     >
       {formikHandlers => (
         <FormWrapper>

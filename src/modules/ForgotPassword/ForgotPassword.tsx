@@ -2,8 +2,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { Message, YellowCircleRight } from 'assets/images'
 import { Card, LargeHeader, Optional, ViewContainer } from 'components'
 import Button from 'components/Button'
-import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
-import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
@@ -11,11 +9,15 @@ import { openInbox } from 'react-native-email-link'
 import { Colors } from 'styles'
 
 import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
+import { types as AuthNavigationTypes } from '../AuthNavigation/'
 import styles from './ForgotPassword.styles'
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.ForgotPassword>
+  navigation: StackNavigationProp<
+    AuthNavigationTypes.AuthNavigationParamsList,
+    AuthNavigationTypes.AuthNavigationRoutes.ForgotPassword
+  >
 }
 
 const ForgotPassword = ({ navigation }: Props) => {
@@ -57,7 +59,7 @@ const ForgotPassword = ({ navigation }: Props) => {
             </Text.Body>
             <Button label={t('openEmail')} onPress={openInbox} />
             <Text.Header
-              onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}
+              onPress={() => navigation.navigate(AuthNavigationTypes.AuthNavigationRoutes.Login)}
               level={HeaderLevels.h5}
               color={Colors.primaryGreen}
               align={TextAlign.center}

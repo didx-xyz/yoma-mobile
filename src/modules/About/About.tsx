@@ -1,17 +1,19 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, FormWrapper, InfoModal, NormalHeader, ViewContainer } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.routes'
-import { HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View, TextInput } from 'react-native'
 import { Colors } from 'styles'
 
+import { types as HomeNavigationTypes } from '../HomeNavigation'
 import styles from './About.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.About
+  >
 }
 
 const About = ({ navigation }: Props) => {

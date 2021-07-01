@@ -1,8 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
 import { Card, LargeHeader, SocialLogin, ViewContainer } from 'components'
-import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
-import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
@@ -10,11 +8,15 @@ import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import { AuthCredentials } from '../Auth/Auth.types'
+import { types as AuthNavigationTypes } from '../AuthNavigation'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.Login>
+  navigation: StackNavigationProp<
+    AuthNavigationTypes.AuthNavigationParamsList,
+    AuthNavigationTypes.AuthNavigationRoutes.Login
+  >
   onLoginUser: (details: AuthCredentials) => void
 }
 
@@ -38,7 +40,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
             level={BodyLevels.small}
             align={TextAlign.center}
             style={styles.forgotPassword}
-            onPress={() => navigation.navigate(AuthNavigationRoutes.ForgotPassword)}
+            onPress={() => navigation.navigate(AuthNavigationTypes.AuthNavigationRoutes.ForgotPassword)}
           >
             {t('forgotPassword')}?
           </Text.Body>
@@ -63,7 +65,9 @@ const Login = ({ navigation, onLoginUser }: Props) => {
           style={styles.noAccount}
         >
           {t('noAccount')}
-          <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Register)}>&nbsp;{t('registerHere')}.</Link>
+          <Link onPress={() => navigation.navigate(AuthNavigationTypes.AuthNavigationRoutes.Register)}>
+            &nbsp;{t('registerHere')}.
+          </Link>
         </Text.Body>
       </ScrollView>
     </ViewContainer>

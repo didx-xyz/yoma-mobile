@@ -2,7 +2,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 
-import AuthNavigation from '../AuthNavigation/AuthNavigation'
+import AuthNavigation from '../AuthNavigation'
 import HomeNavigation from '../HomeNavigation'
 import linking from './Linking'
 

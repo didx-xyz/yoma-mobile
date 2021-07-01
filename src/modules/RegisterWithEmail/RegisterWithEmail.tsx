@@ -2,19 +2,21 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleRight } from 'assets/images'
 import { Card, LargeHeader, ViewContainer } from 'components'
 import { AuthRegistration } from 'modules/Auth/Auth.types'
-import { AuthNavigationRoutes } from 'modules/AuthNavigation/AuthNavigation.routes'
-import { AuthNavigationParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
+import { types as AuthNavigationTypes } from '../AuthNavigation'
 import RegisterForm from './RegisterForm/RegisterForm'
 import styles from './RegisterWithEmail.styles'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigationParamsList, AuthNavigationRoutes.RegisterWithEmail>
+  navigation: StackNavigationProp<
+    AuthNavigationTypes.AuthNavigationParamsList,
+    AuthNavigationTypes.AuthNavigationRoutes.RegisterWithEmail
+  >
   onRegisterUser: (details: AuthRegistration) => void
 }
 
@@ -38,7 +40,7 @@ const RegisterWithEmail = ({ navigation, onRegisterUser }: Props) => {
         </Card>
         <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.notice}>
           {t('alreadyHaveAccount')}&nbsp;
-          <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}>{t('login')}.</Link>
+          <Link onPress={() => navigation.navigate(AuthNavigationTypes.AuthNavigationRoutes.Login)}>{t('login')}.</Link>
         </Text.Body>
       </ScrollView>
     </ViewContainer>
