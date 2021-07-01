@@ -8,6 +8,7 @@ import Text, { TextAlign } from '../Typography'
 import styles from './CvCard.styles'
 
 type Props = {
+  text: string
   cardTitle: string
   defaultText: string
   count?: number
@@ -17,6 +18,7 @@ type Props = {
 }
 
 const CvCard = ({
+  text,
   cardTitle,
   defaultText,
   count = 0,
@@ -34,7 +36,7 @@ const CvCard = ({
       </View>
       <View style={styles.dividerLine} />
       <View style={styles.bodyView}>
-        <Text.Body align={TextAlign.center}>{defaultText}</Text.Body>
+        <Text.Body align={TextAlign.center}>{text || defaultText}</Text.Body>
       </View>
     </View>
   )
