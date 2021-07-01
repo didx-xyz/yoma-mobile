@@ -5,18 +5,19 @@ import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View, TextInput } from 'react-native'
+import { TextInput, View } from 'react-native'
 import { Colors } from 'styles'
 
 import styles from './About.styles'
 
 interface Props {
+  biography: string
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
 }
 
-const About = ({ navigation }: Props) => {
+const About = ({ navigation, biography }: Props) => {
   const { t } = useTranslation()
-  const [summary, setSummary] = useState('')
+  const [summary, setSummary] = useState(biography)
   const [infoModal, setInfoModal] = useState(false)
 
   return (
