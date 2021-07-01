@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { CvCard, FirstTimeCard, HomeHeader, ViewContainer } from 'components'
+import { ViewContainer, HomeHeader, FirstTimeCard, CvCard } from 'components'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
 import React from 'react'
@@ -10,11 +10,10 @@ import { Colors } from 'styles'
 import styles from './DigitalCv.styles'
 
 interface Props {
-  biography: string
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.DigitalCv>
 }
 
-const DigitalCv = ({ navigation, biography }: Props) => {
+const DigitalCv = ({ navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
@@ -24,7 +23,6 @@ const DigitalCv = ({ navigation, biography }: Props) => {
         <CvCard
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
-          text={biography}
           hasCountBadge={false}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.About)}
         />
