@@ -1,6 +1,6 @@
 import { USER_RESPONSE } from 'modules/Profile/Profile.constants'
 
-import SUT, { setUserData } from './User.reducer'
+import SUT, { setUserCredentials } from './User.reducer'
 
 describe('modules/User/User.reducer', () => {
   describe('setUserCredentials', () => {
@@ -11,7 +11,7 @@ describe('modules/User/User.reducer', () => {
         ...USER_RESPONSE,
       }
       // when ... we set the response credentials
-      const action = setUserData(mockReponseData)
+      const action = setUserCredentials(mockReponseData)
       const result = SUT(state, action)
       // then ... user state should equal the credentials
       expect(result).toEqual(mockReponseData)

@@ -3,7 +3,7 @@ import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import * as SUT from './User.middleware'
-import { setUserData } from './User.reducer'
+import { setUserCredentials } from './User.reducer'
 import { selectUserCredentialsFromLoginPayload } from './User.utils'
 
 describe('modules/User/User.middleware', () => {
@@ -34,8 +34,8 @@ describe('modules/User/User.middleware', () => {
       // when ... we respond to the authLoginSuccess action
       await invoke(action)
 
-      // then ... setUserData should be called
-      expect(store.dispatch).toHaveBeenCalledWith(setUserData(userData))
+      // then ... setUserCredentials should be called
+      expect(store.dispatch).toHaveBeenCalledWith(setUserCredentials(userData))
     })
   })
 })
