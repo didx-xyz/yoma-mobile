@@ -1,3 +1,4 @@
+import { resetAppData } from 'modules/App/App.reducer'
 import { INITIAL_STATE } from 'modules/Auth/Auth.reducer'
 import { mergeRight } from 'ramda'
 
@@ -9,6 +10,7 @@ import {
   authLogin,
   authLoginFailure,
   authLoginSuccess,
+  authLogout,
   authRegistration,
   authRegistrationFailure,
   authRegistrationSuccess,
@@ -187,6 +189,21 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(mockNotification).toHaveBeenCalled()
     })
   })
+  describe('authLogoutFlow', () => {
+    it('should correctly logout the user', async () => {
+      // given ... the authLogout action is fired
+      const create = createMiddlewareMock(jest)
+      const action = authLogout()
+      // @ts-ignore
+      const { store, invoke } = create(SUT.authLogoutFlow)
+
+      // when ... we respond to the authLogout action
+      await invoke(action)
+
+      // then ... the reset APP should be called
+      expect(store.dispatch).toHaveBeenCalledWith(resetAppData())
+    })
+  })
   describe('authRegistrationFlow', () => {
     it('should ignore other actions', async () => {
       // given ... an action is fired
@@ -242,7 +259,6 @@ describe('modules/Auth/Auth.middleware', () => {
       )
     })
   })
-
   describe('authRegistrationSuccessFlow', () => {
     it('should correctly send a notification to the user', async () => {
       // middleware is dependent on a populated state
@@ -267,7 +283,6 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(mockNotification).toHaveBeenCalled()
     })
   })
-
   describe('authRegistrationFailureFlow', () => {
     it('should correctly send a notification to the user', async () => {
       // given ... the authRegistration action is fired
