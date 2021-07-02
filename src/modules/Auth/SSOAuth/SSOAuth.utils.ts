@@ -1,7 +1,7 @@
 import { always, applySpec, path, prop } from 'ramda'
 
-import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './Social.constants'
-import { Providers } from './Social.types'
+import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './SSOAuth.constants'
+import { Providers } from './SSOAuth.types'
 
 export const selectRegistrationCredentialsFromFacebook = applySpec({
   email: prop('email'),

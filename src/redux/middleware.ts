@@ -1,5 +1,5 @@
 import { setItemAsync } from 'expo-secure-store'
-import socialAuth from 'modules/Auth/Social'
+import socialAuth from 'modules/Auth/SSOAuth'
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
 

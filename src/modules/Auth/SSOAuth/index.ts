@@ -1,5 +1,5 @@
-import { facebookSignIn, googleSignIn } from './Social.config'
-import { Providers } from './Social.types'
+import { facebookSignIn, googleSignIn } from './SSOAuth.config'
+import { Providers } from './SSOAuth.types'
 
 export default (provider: string) => {
   switch (provider) {

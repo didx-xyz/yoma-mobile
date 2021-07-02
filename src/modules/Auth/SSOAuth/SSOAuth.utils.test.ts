@@ -1,10 +1,11 @@
-import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './Social.constants'
-import { Providers } from './Social.types'
-import * as SUT from './Social.utils'
+import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './SSOAuth.constants'
+import { Providers } from './SSOAuth.types'
+import * as SUT from './SSOAuth.utils'
 
-describe('modules/Social/Social.utils', () => {
+describe('modules/SSOAuth/SSOAuth.utils', () => {
   describe('selectRegistrationCredentialsFromFacebook', () => {
     it('should return the user registration credentials from facebook auth payload', () => {
+      //given ...
       const mockAuthData = {
         firstName: 'FIRST_NAME',
         lastName: 'LAST_NAME',
@@ -16,7 +17,9 @@ describe('modules/Social/Social.utils', () => {
         userID: 'USER_ID',
         accessToken: 'TOKEN',
       }
+      //when .. selectRegistrationCredentialsFromFacebook
       const result = SUT.selectRegistrationCredentialsFromFacebook(mockAuthData)
+      //then result should equal user registration data
       expect(result).toEqual({
         firstName: 'FIRST_NAME',
         lastName: 'LAST_NAME',
@@ -29,6 +32,7 @@ describe('modules/Social/Social.utils', () => {
   })
   describe('selectRegistrationCredentialsFromGoogle', () => {
     it('should return the user registration credentials from google auth payload', () => {
+      //given ...
       const mockAuthData = {
         idToken: 'TOKEN',
         user: {
@@ -42,7 +46,9 @@ describe('modules/Social/Social.utils', () => {
         },
       }
 
+      //when .. selectRegistrationCredentialsFromFacebook
       const result = SUT.selectRegistrationCredentialsFromGoogle(mockAuthData)
+      //then result should equal user registration data
       expect(result).toEqual({
         provider: Providers.Google,
         email: 'EMAIL',
@@ -55,6 +61,7 @@ describe('modules/Social/Social.utils', () => {
   })
   describe('selectLoginCredentialsFromFacebook', () => {
     it('should return the user login credentials from facebook auth payload', () => {
+      //given ...
       const mockAuthData = {
         firstName: 'FIRST_NAME',
         lastName: 'LAST_NAME',
@@ -67,7 +74,9 @@ describe('modules/Social/Social.utils', () => {
         accessToken: 'TOKEN',
       }
 
+      //when .. selectLoginCredentialsFromFacebook
       const result = SUT.selectLoginCredentialsFromFacebook(mockAuthData)
+      //then result should equal facebook login data
       expect(result).toEqual({
         provider: Providers.Facebook,
         providerKey: 'APPLICATION_ID',
@@ -77,6 +86,7 @@ describe('modules/Social/Social.utils', () => {
   })
   describe('selectLoginCredentialsFromGoogle', () => {
     it('should return the user login credentials from google auth payload', () => {
+      //given ...
       const mockAuthData = {
         idToken: 'TOKEN',
         user: {
@@ -89,8 +99,9 @@ describe('modules/Social/Social.utils', () => {
           photo: 'PHOTO',
         },
       }
-
+      //when .. selectLoginCredentialsFromFacebook
       const result = SUT.selectLoginCredentialsFromGoogle(mockAuthData)
+      //then result should equal facebook login data
       expect(result).toEqual({
         provider: Providers.Google,
         providerKey: GOOGLE_SIGNIN_WEBCLIENT_ID,

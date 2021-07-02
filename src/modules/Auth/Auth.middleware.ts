@@ -34,8 +34,8 @@ import {
   selectLoginCredentialsFromRegistration,
   selectRefreshTokenFromLoginPayload,
 } from './Auth.utils'
-import { Providers } from './Social/Social.types'
-import { selectRegistrationCredentials, selectSocialLoginCredentials } from './Social/Social.utils'
+import { Providers } from './SSOAuth/SSOAuth.types'
+import { selectRegistrationCredentials, selectSocialLoginCredentials } from './SSOAuth/SSOAuth.utils'
 
 export const authLoginFlow: Middleware =
   ({ dispatch }) =>

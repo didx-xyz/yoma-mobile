@@ -1,7 +1,7 @@
 import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next'
 
-import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './Social.constants'
+import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './SSOAuth.constants'
 
 export const facebookSignIn = async () => {
   try {
