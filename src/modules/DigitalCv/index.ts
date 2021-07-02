@@ -1,3 +1,3 @@
-import DigitalCv from './DigitalCv'
+import DigitalCv from './DigitalCv.container'
 
 export default DigitalCv
