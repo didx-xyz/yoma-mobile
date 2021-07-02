@@ -5,7 +5,7 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { persistor, store } from 'redux/store'
 
-import AppNavigation from '../AppNavigation'
+import Navigation from '../Navigation'
 
 setI18nConfig()
 
@@ -20,7 +20,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <AppNavigation />
+        <Navigation />
         <FlashMessage position="top" />
       </PersistGate>
     </Provider>
