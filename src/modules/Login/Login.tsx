@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
-import { Card, LargeHeader, SocialSSO, ViewContainer } from 'components'
+import { Card, LargeHeader, SSO, ViewContainer } from 'components'
 import { SocialVariants } from 'components/SocialButton/SocialButton.types'
 import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
@@ -56,7 +56,7 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
             {t('loginSocial')}
           </Text.Body>
           <View style={styles.social}>
-            <SocialSSO onAuthWithSocial={onAuthWithSocial} />
+            <SSO onAuthWithSocial={onAuthWithSocial} />
           </View>
         </Card>
         <Text.Body

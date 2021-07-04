@@ -7,7 +7,7 @@ import Spacer from '../Spacer'
 type Props = {
   onAuthWithSocial: (authProvider: SocialVariants) => void
 }
-const SocialSSO = ({ onAuthWithSocial }: Props) => {
+const SSO = ({ onAuthWithSocial }: Props) => {
   return (
     <>
       <SocialButton variant={SocialVariants.Facebook} onPress={() => onAuthWithSocial(SocialVariants.Facebook)} />
@@ -17,4 +17,4 @@ const SocialSSO = ({ onAuthWithSocial }: Props) => {
   )
 }
 
-export default SocialSSO
+export default SSO

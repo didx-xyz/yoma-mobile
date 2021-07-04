@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
-import { Card, LargeHeader, SocialSSO, ViewContainer } from 'components'
+import { Card, LargeHeader, SSO, ViewContainer } from 'components'
 import Button from 'components/Button'
 import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
@@ -45,7 +45,7 @@ const Register = ({ navigation, onAuthWithSocial }: Props) => {
         <Text.Body level={BodyLevels.small} style={styles.bodyText}>
           {t('registerSocial')}
         </Text.Body>
-        <SocialSSO onAuthWithSocial={onAuthWithSocial} />
+        <SSO onAuthWithSocial={onAuthWithSocial} />
       </Card>
       <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.bottomText}>
         {t('alreadyHaveAccount')}&nbsp;
