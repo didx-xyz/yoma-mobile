@@ -2,7 +2,7 @@ import React from 'react'
 import { AppRegistry } from 'react-native'
 import 'react-native-gesture-handler'
 import { config } from './config'
-import App from './src/modules/App'
+import App from './src/modules/App/App'
 
 const Root = () => (<App />)
 
