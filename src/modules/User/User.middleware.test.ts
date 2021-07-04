@@ -14,13 +14,14 @@ describe('modules/User/User.middleware', () => {
       const credentials = defaultUserLoginResponseData
       const action = authLoginSuccess(credentials)
       // @ts-ignore
-      const { invoke, next } = create(SUT.setUserOnAuthFlow)
+      const { store, invoke, next } = create(SUT.setUserOnAuthFlow)
 
       // when ... we respond to the authLoginSuccess action
       await invoke(action)
 
       // then ...validate setUserOnAuthFlow
       expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalled()
     })
     it('should correctly set the user data', async () => {
       // given ... the authLogin action is fired

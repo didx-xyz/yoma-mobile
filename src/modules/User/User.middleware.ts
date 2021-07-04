@@ -7,7 +7,7 @@ import { selectUserCredentialsFromLoginPayload } from './User.utils'
 export const setUserOnAuthFlow: Middleware =
   ({ dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
     if (authLoginSuccess.match(action)) {
       const credentials = selectUserCredentialsFromLoginPayload(action)
