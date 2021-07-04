@@ -1,7 +1,7 @@
-import selector from 'modules/About/About.selector'
 import { connect } from 'react-redux'
 
 import About from './About'
+import selector from './About.selector'
 
 const mapStateToProps = selector
 const mapDispatchToProps = null

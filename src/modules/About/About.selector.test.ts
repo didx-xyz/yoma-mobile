@@ -29,5 +29,13 @@ describe('modules/About/About.selector', () => {
       // then ... should return result as expected
       expect(result).toEqual({ biography: 'BIOGRAPHY' })
     })
+    it('should handle empty state if props not available', () => {
+      // given ...
+      const state = {}
+      // when ... we call the selector
+      const result = SUT.default(state)
+      // then ... should return result as expected
+      expect(result).toEqual({ biography: '' })
+    })
   })
 })
