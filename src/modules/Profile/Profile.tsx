@@ -17,11 +17,12 @@ import styles from './Profile.styles'
 
 interface Props {
   onLogoutUser: () => void
+  user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, onLogoutUser }: Props) => {
-  const [userResponse] = useState<UserResponse>(USER_RESPONSE)
+const Profile = ({ navigation, onLogoutUser, user }: Props) => {
+  const [userResponse] = useState<UserResponse>(user)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 
