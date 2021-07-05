@@ -1,5 +1,4 @@
 import selector from 'modules/About/About.selector'
-import { UserCredentialsPayload } from 'modules/User/User.types'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
@@ -9,8 +8,8 @@ import About from './About'
 const mapStateToProps = selector
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onUpdateUserCredentials: (biography: UserCredentialsPayload) => {
-      dispatch(UserActions.updateUserCredentials(biography))
+    onUpdateUserCredentials: (biography: string) => {
+      dispatch(UserActions.updateUserCredentials({ biography }))
     },
   }
 }

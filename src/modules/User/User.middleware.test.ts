@@ -1,4 +1,3 @@
-import { addIdBeforeEndpointInConfig } from 'api/api.utils'
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 import { mergeRight } from 'ramda'
@@ -14,7 +13,11 @@ import {
   updateUserCredentialsSuccess,
 } from './User.reducer'
 import { selectUserUpdateCredentials } from './User.selector'
-import { selectUserCredentialsFromLoginPayload, selectUserIdFromUserCredentials } from './User.utils'
+import {
+  selectUserCredentialsFromLoginPayload,
+  selectUserCredentialsFromUpdatePayload,
+  selectUserIdFromUserCredentials,
+} from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
@@ -88,12 +91,12 @@ describe('modules/User/User.middleware', () => {
       // then ...validate updateUserCredentialsFlow
       const userId = selectUserIdFromUserCredentials(mockState)
       const userUpdateCredentials = selectUserUpdateCredentials(mockAction)(mockState)
-      const USERS_EDIT_CONFIG = addIdBeforeEndpointInConfig(ApiUserConstants.USERS_EDIT_CONFIG)(userId)
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(USERS_EDIT_CONFIG, {
+          mergeRight(ApiUserConstants.USERS_EDIT_CONFIG, {
             onSuccess: updateUserCredentialsSuccess,
             onFailure: updateUserCredentialsFailure,
+            endpoint: userId,
           }),
           userUpdateCredentials,
         ),
@@ -104,49 +107,8 @@ describe('modules/User/User.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareMock(jest)
-      const credentials = {
+      const mockResponseData = {
         data: {
-          data: {
-            refreshToken: 'REFRESH_TOKEN',
-            token: 'USER_TOKEN',
-            expiresAt: 'EXPIRY_DATE',
-            user: {
-              id: 'USER_ID',
-              firstName: 'FIRST_NAME',
-              lastName: 'LAST_NAME',
-              phoneNumber: 'PHONE_NUMBER',
-              biography: 'BIOGRAPHY',
-              countryAlpha2: 'COUNTRY_ALPHA2',
-              email: 'USER_EMAIL@SOMEWHERE.TEST',
-              zltoWalletId: 'ZLTO_WALLET_ID',
-              zltoBalance: 1000,
-              covidChallengeCertificateURL: 'COVID_CHALLENGE_CERTIFICATE_URL',
-              tideChallengeCertificateURL: 'TIDE_CHALLENGE_CERTIFICATE_URL',
-              photoURL: 'PHOTO_URL',
-              role: 'ROLE',
-              organisation: 'ORGANISATION',
-              createdAt: 'CREATED_AT',
-              lastLogin: 'LAST_LOGIN',
-            },
-          },
-        },
-        meta: {
-          success: true,
-          code: 200,
-          message: null,
-        },
-      }
-
-      const mockNotification = jest.fn()
-      const action = updateUserCredentialsSuccess(credentials)
-      // @ts-ignore
-      const { store, invoke, next } = create(SUT.updateUserCredentialsSuccessFlow({ notification: mockNotification }))
-      // when ... we respond to the updateUserCredentialsSuccess action
-      invoke(action)
-      // then ...validate updateUserCredentialsSuccessFlow
-      expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalledWith(
-        setUserData({
           id: 'USER_ID',
           firstName: 'FIRST_NAME',
           lastName: 'LAST_NAME',
@@ -163,8 +125,24 @@ describe('modules/User/User.middleware', () => {
           organisation: 'ORGANISATION',
           createdAt: 'CREATED_AT',
           lastLogin: 'LAST_LOGIN',
-        }),
-      )
+        },
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const mockNotification = jest.fn()
+      const action = updateUserCredentialsSuccess(mockResponseData)
+      // @ts-ignore
+      const { store, invoke, next } = create(SUT.updateUserCredentialsSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the updateUserCredentialsSuccess action
+      invoke(action)
+      // then ...validate updateUserCredentialsSuccessFlow
+      const credentials = selectUserCredentialsFromUpdatePayload(action)
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalledWith(setUserData(credentials))
       expect(mockNotification).toHaveBeenCalled()
     })
   })
