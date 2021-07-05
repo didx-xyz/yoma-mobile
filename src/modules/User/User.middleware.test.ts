@@ -143,7 +143,7 @@ describe('modules/User/User.middleware', () => {
       // then ...validate updateUserCredentialsSuccessFlow
       const credentials = selectUserCredentialsFromUpdatePayload(action)
       expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalledWith(setUserData(credentials))
+      expect(store.dispatch).toHaveBeenCalledWith(setUserCredentials(credentials))
       expect(mockNotification).toHaveBeenCalled()
     })
   })
