@@ -39,7 +39,6 @@ export const updateUserCredentialsFlow: Middleware =
       const state = getState()
       const userId = selectUserIdFromUserCredentials(state)
       const credentials = selectUserUpdateCredentials(action)(state)
-
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiUserConstants.USERS_EDIT_CONFIG, {

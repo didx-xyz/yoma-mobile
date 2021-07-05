@@ -1,7 +1,7 @@
-import { ApiMetaResponse, AuthLoginSuccessData } from 'modules/Auth/Auth.types'
+import { ApiMetaResponse, UserResponse } from 'modules/Auth/Auth.types'
 
 export interface UpdateUserCredentialsResponse {
-  data: { data: AuthLoginSuccessData }
+  data: UserResponse
   meta: ApiMetaResponse
 }
 export type UpdateUserCredentialsFailureResponse = string

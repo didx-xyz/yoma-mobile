@@ -12,14 +12,14 @@ import { Colors } from 'styles'
 import styles from './About.styles'
 
 interface Props {
-  biography: UserCredentialsPayload
+  biography: string
   onUpdateUserCredentials: (biography: UserCredentialsPayload) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
 }
 
 const About = ({ navigation, onUpdateUserCredentials, biography }: Props) => {
   const { t } = useTranslation()
-  const [summary] = useState(biography)
+  const [summary, setSummary] = useState(biography)
   const [infoModal, setInfoModal] = useState(false)
 
   return (
@@ -31,7 +31,12 @@ const About = ({ navigation, onUpdateUserCredentials, biography }: Props) => {
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
         }
       />
-      <NormalHeader navigation={navigation} headerText={t('About')} onSave={() => {}} />
+      <NormalHeader
+        isSaveButtonEnabled
+        navigation={navigation}
+        headerText={t('About')}
+        onSave={() => onUpdateUserCredentials(summary)}
+      />
       <Card style={styles.card}>
         <FormWrapper>
           <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
@@ -40,9 +45,7 @@ const About = ({ navigation, onUpdateUserCredentials, biography }: Props) => {
             value={summary}
             multiline
             maxLength={1000}
-            onChangeText={(biography: string) => {
-              onUpdateUserCredentials({ biography })
-            }}
+            onChangeText={setSummary}
             returnKeyType="done"
           />
           <View style={styles.bottom}>
