@@ -11,6 +11,7 @@ export const USERS_CONFIG: Partial<ApiMeta> = {
 
 export const USERS_EDIT_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   method: ApiMethods.Patch,
+  endpoint: UsersEndpoints.default,
 })
 export const USERS_GET_BY_ID_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {})
 export const USERS_CREDENTIALS_GET_BY_ID_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
