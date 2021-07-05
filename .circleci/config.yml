@@ -137,6 +137,7 @@ workflows:
             branches:
               ignore:
                 - develop
+                - YOMA-480_error_running_app_module_app_registry_is_not_a_registered_callable_module
                 - main
   deploy-android-alpha:
     jobs:
@@ -145,6 +146,7 @@ workflows:
             branches:
               only:
                 - develop
+                - YOMA-480_error_running_app_module_app_registry_is_not_a_registered_callable_module
                 - main
       - deploy-android-alpha:
           requires:
