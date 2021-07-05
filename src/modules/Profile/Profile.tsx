@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import { USER_RESPONSE } from './Profile.constants'
 import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
 
