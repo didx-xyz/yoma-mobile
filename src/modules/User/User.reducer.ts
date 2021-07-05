@@ -5,7 +5,7 @@ import { mergeDeepRight } from 'ramda'
 const name = '[User]'
 export const INITIAL_STATE = {}
 
-export const setUserCredentials = createAction<UserResponse>(`${name} Set User Credentials`)
+export const setUserCredentials = createAction<UserResponse>(`${name} setUserCredentials`)
 
 const UserReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserCredentials, (state, action) => mergeDeepRight(state)(action.payload))
