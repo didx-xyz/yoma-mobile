@@ -1,10 +1,12 @@
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
+import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
+import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
 import {
   setUserCredentials,
   updateUserCredentials,
@@ -63,6 +65,7 @@ export const updateUserCredentialsSuccessFlow =
     if (updateUserCredentialsSuccess.match(action)) {
       const credentials = selectUserCredentialsFromUpdatePayload(action)
       dispatch(setUserCredentials(credentials))
+      NavigationActions.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
       notification('success', 'Details Updated')
     }
@@ -78,7 +81,7 @@ export const updateUserCredentialsFailureFlow =
 
     if (updateUserCredentialsFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', action.payload)
+      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
     }
     return result
   }
