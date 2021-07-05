@@ -1,6 +1,7 @@
 declare module 'ramda' {
   export function __(...rest: any[]): any[]
   export function always(...rest: any[]): any[]
+  export function applySpec(...rest: any[]): any[]
   export function and(...rest: any[]): any
   export function append(...rest: any[]): any
   export function concat(...rest: any[]): any[]
@@ -32,6 +33,7 @@ declare module 'ramda' {
   export function pathOr(...rest: any[]): any
   export function pick(...rest: any[]): any
   export function propOr(...rest: any[]): any
+  export function prop(...rest: any[]): any
   export function prepend(...rest: any[]): any
   export function reduce(...rest: any[]): any[]
   export function reduceRight(...rest: any[]): any[]

@@ -3,6 +3,7 @@ import { Card, FormWrapper, InfoModal, NormalHeader, ViewContainer } from 'compo
 import Text, { MetaLevels } from 'components/Typography'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
+import { UserCredentialsPayload } from 'modules/User/User.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextInput, View } from 'react-native'
@@ -11,13 +12,14 @@ import { Colors } from 'styles'
 import styles from './About.styles'
 
 interface Props {
-  biography: string
+  biography: UserCredentialsPayload
+  onUpdateUserCredentials: (biography: UserCredentialsPayload) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
 }
 
-const About = ({ navigation, biography }: Props) => {
+const About = ({ navigation, onUpdateUserCredentials, biography }: Props) => {
   const { t } = useTranslation()
-  const [summary, setSummary] = useState(biography)
+  const [summary] = useState(biography)
   const [infoModal, setInfoModal] = useState(false)
 
   return (
@@ -38,8 +40,8 @@ const About = ({ navigation, biography }: Props) => {
             value={summary}
             multiline
             maxLength={1000}
-            onChangeText={text => {
-              setSummary(text)
+            onChangeText={(biography: string) => {
+              onUpdateUserCredentials({ biography })
             }}
             returnKeyType="done"
           />

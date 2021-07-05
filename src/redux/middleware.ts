@@ -28,6 +28,9 @@ const featureModuleMiddleware = [
   authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.setUserOnAuthFlow,
+  userMiddleware.updateUserCredentialsFlow,
+  userMiddleware.updateUserCredentialsSuccessFlow({ notification: showSimpleMessage }),
+  userMiddleware.updateUserCredentialsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
