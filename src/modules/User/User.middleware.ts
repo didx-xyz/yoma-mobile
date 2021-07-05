@@ -1,4 +1,3 @@
-import { addIdBeforeEndpointInConfig } from 'api/api.utils'
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
@@ -40,13 +39,13 @@ export const updateUserCredentialsFlow: Middleware =
       const state = getState()
       const userId = selectUserIdFromUserCredentials(state)
       const credentials = selectUserUpdateCredentials(action)(state)
-      const USERS_EDIT_CONFIG = addIdBeforeEndpointInConfig(ApiUserConstants.USERS_EDIT_CONFIG)(userId)
 
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(USERS_EDIT_CONFIG, {
+          mergeRight(ApiUserConstants.USERS_EDIT_CONFIG, {
             onSuccess: updateUserCredentialsSuccess,
             onFailure: updateUserCredentialsFailure,
+            endpoint: userId,
           }),
           credentials,
         ),
