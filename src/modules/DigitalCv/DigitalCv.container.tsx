@@ -1,7 +1,7 @@
-import selector from 'modules/About/About.selector'
 import { connect } from 'react-redux'
 
 import DigitalCv from './DigitalCv'
+import selector from './DigitalCv.selector'
 
 const mapStateToProps = selector
 const mapDispatchToProps = null
