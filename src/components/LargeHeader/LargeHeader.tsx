@@ -1,14 +1,13 @@
-import { StackActions } from '@react-navigation/native'
 import { BackIcon, WhiteLogo } from 'assets/images'
-import React, { useEffect, useState, ReactElement } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import { BackHandler, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 import styles from './LargeHeader.styles'
 
-// TODO: refactor to use correct typing
+// TODO: remove back icon on (UI)
 const onNavigationBack = (navigation: any) => {
-  navigation.dispatch(StackActions.pop(1))
+  navigation.goBack
 }
 
 type Props = {

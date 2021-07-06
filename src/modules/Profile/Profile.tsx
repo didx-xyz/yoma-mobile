@@ -11,17 +11,17 @@ import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import { USER_RESPONSE } from './Profile.constants'
 import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
 
 interface Props {
   onLogoutUser: () => void
+  user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, onLogoutUser }: Props) => {
-  const [userResponse] = useState<UserResponse>(USER_RESPONSE)
+const Profile = ({ navigation, onLogoutUser, user }: Props) => {
+  const [userResponse] = useState<UserResponse>(user)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 

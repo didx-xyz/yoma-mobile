@@ -31,7 +31,7 @@ export const clearAuth = createAction(`${name} clearAuth`)
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setAuthCredentials, (state, action) => mergeDeepRight(state)(action.payload))
-  builder.addCase(clearAuth, () => INITIAL_STATE)
+  builder.addCase(clearAuth, (_state, _action) => INITIAL_STATE)
   builder.addCase(setUserLoginCredentials, (state, action) => mergeDeepRight(state)(action.payload))
 })
 
