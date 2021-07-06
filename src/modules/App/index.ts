@@ -1,6 +1,6 @@
 import App from './App'
-import * as appMiddleware from './App.middleware'
+import * as middleware from './App.middleware'
 import * as actions from './App.reducer'
 
-export { actions, appMiddleware }
+export { actions, middleware }
 export default App
