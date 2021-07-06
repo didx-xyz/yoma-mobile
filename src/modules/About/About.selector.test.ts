@@ -1,3 +1,4 @@
+import { INITIAL_STATE } from '../User/User.reducer'
 import * as SUT from './About.selector'
 
 describe('modules/About/About.selector', () => {
@@ -28,6 +29,16 @@ describe('modules/About/About.selector', () => {
       const result = SUT.default(state)
       // then ... should return result as expected
       expect(result).toEqual({ biography: 'BIOGRAPHY' })
+    })
+    it('should handle empty user state', () => {
+      // given ...
+      const state = {
+        user: INITIAL_STATE,
+      }
+      // when ... we call the selector
+      const result = SUT.default(state)
+      // then ... should return result as expected
+      expect(result).toEqual({ biography: '' })
     })
     it('should handle empty state if props not available', () => {
       // given ...
