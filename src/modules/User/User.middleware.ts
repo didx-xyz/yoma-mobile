@@ -3,7 +3,6 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { prependIdToEndpointInConfig } from '../../api/api.utils'
 import { constants as ApiUsersConstants } from '../../api/users'
 import {
   fetchUserCredentials,
