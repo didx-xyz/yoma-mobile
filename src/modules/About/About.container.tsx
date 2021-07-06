@@ -1,15 +1,15 @@
-import selector from 'modules/About/About.selector'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
-import * as UserActions from '../User/User.reducer'
+import { actions as UserActions } from '../User'
 import About from './About'
+import selector from './About.selector'
 
 const mapStateToProps = selector
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onUpdateUserCredentials: (biography: string) => {
-      dispatch(UserActions.updateUserCredentials({ biography }))
+    onUpdateUser: (biography: string) => {
+      dispatch(UserActions.updateUser({ biography }))
     },
   }
 }

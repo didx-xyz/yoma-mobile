@@ -1,3 +1,5 @@
+import { USER_RESPONSE } from './../Profile/Profile.constants'
+import { INITIAL_STATE } from './User.reducer'
 import * as SUT from './User.selector'
 
 describe('modules/User/User.selector', () => {
@@ -59,7 +61,7 @@ describe('modules/User/User.selector', () => {
         },
       }
       // when selectUserUpdateCredentials
-      const result = SUT.selectUserUpdateCredentials(mockPayload)(mockState)
+      const result = SUT.selectUserUpdate(mockPayload)(mockState)
 
       //then expect user request data
       expect(result).toEqual({
@@ -69,6 +71,22 @@ describe('modules/User/User.selector', () => {
         phoneNumber: 'PHONE_NUMBER',
         countryAlpha2: 'COUNTRY_ALPHA2',
       })
+  describe('selectUser ', () => {
+    it('should return user property of the root state', () => {
+      const state = {
+        user: USER_RESPONSE,
+      }
+      // when ... we call the selector
+      const result = SUT.selectUser(state)
+      // then ... should return result as expected
+      expect(result).toEqual(state.user)
+    })
+    it('should return the default user state', () => {
+      const state = { user: INITIAL_STATE }
+      // when ... we call the selector
+      const result = SUT.selectUser(state)
+      // then ... should return result as expected
+      expect(result).toEqual(state.user)
     })
   })
 })

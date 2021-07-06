@@ -1,10 +1,10 @@
 import { setItemAsync } from 'expo-secure-store'
+import { middleware as appMiddleware } from 'modules/App'
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
 
 import { apiConfig, middleware as apiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
-import { appMiddleware } from '../modules/App'
 import { middleware as authMiddleware } from '../modules/Auth'
 import { middleware as userMiddleware } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
@@ -28,9 +28,9 @@ const featureModuleMiddleware = [
   authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.setUserOnAuthFlow,
-  userMiddleware.updateUserCredentialsFlow,
-  userMiddleware.updateUserCredentialsSuccessFlow({ notification: showSimpleMessage }),
-  userMiddleware.updateUserCredentialsFailureFlow({ notification: showSimpleMessage }),
+  userMiddleware.updateUserFlow,
+  userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
+  userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

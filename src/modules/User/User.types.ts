@@ -1,12 +1,12 @@
 import { ApiMetaResponse, UserResponse } from 'modules/Auth/Auth.types'
 
-export interface UpdateUserCredentialsResponse {
+export interface UpdateUserResponse {
   data: UserResponse
   meta: ApiMetaResponse
 }
-export type UpdateUserCredentialsFailureResponse = string
+export type UpdateUserFailureResponse = string
 
-export interface UserCredentialsPayload {
+export interface UserPayload {
   firstName?: string
   lastName?: string
   phoneNumber?: string

@@ -3,7 +3,7 @@ import { Card, FormWrapper, InfoModal, NormalHeader, ViewContainer } from 'compo
 import Text, { MetaLevels } from 'components/Typography'
 import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
 import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
-import { UserCredentialsPayload } from 'modules/User/User.types'
+import { UserPayload } from 'modules/User/User.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextInput, View } from 'react-native'
@@ -13,11 +13,11 @@ import styles from './About.styles'
 
 interface Props {
   biography: string
-  onUpdateUserCredentials: (biography: UserCredentialsPayload) => void
+  onUpdateUser: (biography: UserPayload) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
 }
 
-const About = ({ navigation, onUpdateUserCredentials, biography }: Props) => {
+const About = ({ navigation, onUpdateUser, biography }: Props) => {
   const { t } = useTranslation()
   const [summary, setSummary] = useState(biography)
   const [infoModal, setInfoModal] = useState(false)
@@ -35,7 +35,7 @@ const About = ({ navigation, onUpdateUserCredentials, biography }: Props) => {
         isSaveButtonEnabled
         navigation={navigation}
         headerText={t('About')}
-        onSave={() => onUpdateUserCredentials(summary)}
+        onSave={() => onUpdateUser(summary)}
       />
       <Card style={styles.card}>
         <FormWrapper>

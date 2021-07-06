@@ -7,18 +7,8 @@ import { showSimpleMessage } from 'utils/error'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
 import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
-import {
-  setUserCredentials,
-  updateUserCredentials,
-  updateUserCredentialsFailure,
-  updateUserCredentialsSuccess,
-} from './User.reducer'
-import { selectUserUpdateCredentials } from './User.selector'
-import {
-  selectUserCredentialsFromLoginPayload,
-  selectUserCredentialsFromUpdatePayload,
-  selectUserIdFromUserCredentials,
-} from './User.utils'
+import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
+import { extractUser, selectUserFromLoginPayload, selectUserFromUpdatePayload, selectUserId } from './User.utils'
 
 export const setUserOnAuthFlow: Middleware =
   ({ dispatch }) =>
@@ -26,45 +16,45 @@ export const setUserOnAuthFlow: Middleware =
   action => {
     const result = next(action)
     if (authLoginSuccess.match(action)) {
-      const credentials = selectUserCredentialsFromLoginPayload(action)
-      dispatch(setUserCredentials(credentials))
+      const credentials = selectUserFromLoginPayload(action)
+      dispatch(setUser(credentials))
     }
     return result
   }
 
-export const updateUserCredentialsFlow: Middleware =
+export const updateUserFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
-  async action => {
+  action => {
     const result = next(action)
-    if (updateUserCredentials.match(action)) {
+    if (updateUser.match(action)) {
       const state = getState()
-      const userId = selectUserIdFromUserCredentials(state)
-      const credentials = selectUserUpdateCredentials(action)(state)
+      const userId = selectUserId(state)
+      const user = extractUser(action)(state)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiUserConstants.USERS_EDIT_CONFIG, {
-            onSuccess: updateUserCredentialsSuccess,
-            onFailure: updateUserCredentialsFailure,
+            onSuccess: updateUserSuccess,
+            onFailure: updateUserFailure,
             endpoint: userId,
           }),
-          credentials,
+          user,
         ),
       )
     }
     return result
   }
 
-export const updateUserCredentialsSuccessFlow =
+export const updateUserSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (updateUserCredentialsSuccess.match(action)) {
-      const credentials = selectUserCredentialsFromUpdatePayload(action)
-      dispatch(setUserCredentials(credentials))
+    if (updateUserSuccess.match(action)) {
+      const credentials = selectUserFromUpdatePayload(action)
+      dispatch(setUser(credentials))
       NavigationActions.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
       notification('success', 'Details Updated')
@@ -72,14 +62,14 @@ export const updateUserCredentialsSuccessFlow =
     return result
   }
 
-export const updateUserCredentialsFailureFlow =
+export const updateUserFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
   action => {
     const result = next(action)
 
-    if (updateUserCredentialsFailure.match(action)) {
+    if (updateUserFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
     }

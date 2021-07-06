@@ -1,27 +1,19 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { UserResponse } from 'modules/Auth/Auth.types'
 import { mergeDeepRight } from 'ramda'
 
-import {
-  UpdateUserCredentialsFailureResponse,
-  UpdateUserCredentialsResponse,
-  UserCredentialsPayload,
-} from './User.types'
+import { UserResponse } from '../Auth/Auth.types'
+import { UpdateUserFailureResponse, UpdateUserResponse, UserPayload } from './User.types'
 
 const name = '[User]'
 export const INITIAL_STATE = {}
 
-export const setUserCredentials = createAction<UserResponse>(`${name} setUserCredentials`)
-export const updateUserCredentials = createAction<UserCredentialsPayload>(`${name} updateUserCredentials`)
-export const updateUserCredentialsSuccess = createAction<UpdateUserCredentialsResponse>(
-  `${name} updateUserCredentialsSuccess`,
-)
-export const updateUserCredentialsFailure = createAction<UpdateUserCredentialsFailureResponse>(
-  `${name} updateUserCredentialsFailure`,
-)
+export const setUser = createAction<UserResponse>(`${name} setUser`)
+export const updateUser = createAction<UserPayload>(`${name} updateUser`)
+export const updateUserSuccess = createAction<UpdateUserResponse>(`${name} updateUserSuccess`)
+export const updateUserFailure = createAction<UpdateUserFailureResponse>(`${name} updateUserFailure`)
 
 const UserReducer = createReducer(INITIAL_STATE, builder => {
-  builder.addCase(setUserCredentials, (state, action) => mergeDeepRight(state)(action.payload))
+  builder.addCase(setUser, (state, action) => mergeDeepRight(state)(action.payload))
 })
 
 export default UserReducer

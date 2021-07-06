@@ -1,9 +1,6 @@
 import { RNLocalize, setI18nConfig } from 'locales/i18n'
 import React, { useEffect } from 'react'
 import FlashMessage from 'react-native-flash-message'
-import { Provider } from 'react-redux'
-import { PersistGate } from 'redux-persist/integration/react'
-import { persistor, store } from 'redux/store'
 
 import AppNavigation from '../AppNavigation'
 
@@ -18,12 +15,10 @@ const App = () => {
   }, [])
 
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <AppNavigation />
-        <FlashMessage position="top" />
-      </PersistGate>
-    </Provider>
+    <>
+      <AppNavigation />
+      <FlashMessage position="top" />
+    </>
   )
 }
 

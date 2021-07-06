@@ -6,22 +6,12 @@ import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
 import * as SUT from './User.middleware'
-import {
-  setUserCredentials,
-  updateUserCredentials,
-  updateUserCredentialsFailure,
-  updateUserCredentialsSuccess,
-} from './User.reducer'
-import { selectUserUpdateCredentials } from './User.selector'
-import {
-  selectUserCredentialsFromLoginPayload,
-  selectUserCredentialsFromUpdatePayload,
-  selectUserIdFromUserCredentials,
-} from './User.utils'
+import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
+import { extractUser, selectUserFromLoginPayload, selectUserFromUpdatePayload } from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
-    it('should correctly handle being called', async () => {
+    it('should correctly handle being called', () => {
       // given ... the authLogin action is fired
       const create = createMiddlewareMock(jest)
       const credentials = defaultUserLoginResponseData
@@ -30,30 +20,30 @@ describe('modules/User/User.middleware', () => {
       const { store, invoke, next } = create(SUT.setUserOnAuthFlow)
 
       // when ... we respond to the authLoginSuccess action
-      await invoke(action)
+      invoke(action)
 
       // then ...validate setUserOnAuthFlow
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalled()
     })
-    it('should correctly set the user data', async () => {
+    it('should correctly set the user data', () => {
       // given ... the authLogin action is fired
       const create = createMiddlewareMock(jest)
       const credentials = defaultUserLoginResponseData
       const action = authLoginSuccess(credentials)
       // @ts-ignore
       const { invoke, store } = create(SUT.setUserOnAuthFlow)
-      const userData = selectUserCredentialsFromLoginPayload(action)
+      const userData = selectUserFromLoginPayload(action)
 
       // when ... we respond to the authLoginSuccess action
-      await invoke(action)
+      invoke(action)
 
-      // then ... setUserCredentials should be called
-      expect(store.dispatch).toHaveBeenCalledWith(setUserCredentials(userData))
+      // then ... setUser should be called
+      expect(store.dispatch).toHaveBeenCalledWith(setUser(userData))
     })
   })
-  describe('updateUserCredentialsFlow', () => {
-    it('should correctly handle being called', async () => {
+  describe('updateUserFlow', () => {
+    it('should correctly handle being called', () => {
       // given ...
       const mockState = {
         user: {
@@ -75,36 +65,37 @@ describe('modules/User/User.middleware', () => {
           lastLogin: 'LAST_LOGIN',
         },
       }
-      const create = createMiddlewareMock(jest, mockState)
-      const updateCredentials = {
-        biography: 'BIOGRAPHY',
-      }
+
       const mockAction = {
-        payload: updateCredentials,
+        payload: {
+          biography: 'BIOGRAPHY',
+        },
       }
-      const action = updateUserCredentials(updateCredentials)
+
+      const create = createMiddlewareMock(jest, mockState)
+      const action = updateUser(mockAction.payload)
       // @ts-ignore
-      const { invoke, store } = create(SUT.updateUserCredentialsFlow)
+      const { invoke, store } = create(SUT.updateUserFlow)
 
-      // when ... we respond to the updateUserCredentials action
-      await invoke(action)
+      // when ... we respond to the updateUser action
+      invoke(action)
 
-      // then ...validate updateUserCredentialsFlow
-      const userId = selectUserIdFromUserCredentials(mockState)
-      const userUpdateCredentials = selectUserUpdateCredentials(mockAction)(mockState)
+      // then ...validate updateUserFlow
+      const user = extractUser(mockAction.payload)(mockState)
+
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
           mergeRight(ApiUserConstants.USERS_EDIT_CONFIG, {
-            onSuccess: updateUserCredentialsSuccess,
-            onFailure: updateUserCredentialsFailure,
-            endpoint: userId,
+            onSuccess: updateUserSuccess,
+            onFailure: updateUserFailure,
+            endpoint: 'USER_ID',
           }),
-          userUpdateCredentials,
+          user,
         ),
       )
     })
   })
-  describe('updateUserCredentialsSuccessFlow', () => {
+  describe('updateUserSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareMock(jest)
@@ -135,26 +126,26 @@ describe('modules/User/User.middleware', () => {
       }
 
       const mockNotification = jest.fn()
-      const action = updateUserCredentialsSuccess(mockResponseData)
+      const action = updateUserSuccess(mockResponseData)
       // @ts-ignore
-      const { store, invoke, next } = create(SUT.updateUserCredentialsSuccessFlow({ notification: mockNotification }))
-      // when ... we respond to the updateUserCredentialsSuccess action
+      const { store, invoke, next } = create(SUT.updateUserSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the updateUserSuccess action
       invoke(action)
-      // then ...validate updateUserCredentialsSuccessFlow
-      const credentials = selectUserCredentialsFromUpdatePayload(action)
+      // then ...validate updateUserSuccessFlow
+      const credentials = selectUserFromUpdatePayload(action)
       expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalledWith(setUserCredentials(credentials))
+      expect(store.dispatch).toHaveBeenCalledWith(setUser(credentials))
       expect(mockNotification).toHaveBeenCalled()
     })
   })
-  describe('updateUserCredentialsFailureFlow', () => {
+  describe('updateUserFailureFlow', () => {
     it('should correctly handle user update failure', () => {
       // given ...
       const create = createMiddlewareMock(jest)
-      const action = updateUserCredentialsFailure('FAILED')
+      const action = updateUserFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore
-      const { invoke } = create(SUT.updateUserCredentialsFailureFlow({ notification: mockNotification }))
+      const { invoke } = create(SUT.updateUserFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the authLoginSuccess action
       invoke(action)
