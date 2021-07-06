@@ -26,7 +26,7 @@ export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<Ap
   pipe(objOf(key), mergeDeepRight(config))
 
 export const addIdAsEndpointToConfig = addValueWithGivenKeyToConfig('endpoint')
-export const addIdBeforeEndpointInConfig = (config: Partial<ApiMeta>) => (id: number) =>
+export const prependIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: number) =>
   evolve({
     endpoint: pipe(of, concat([id])),
   })(config)

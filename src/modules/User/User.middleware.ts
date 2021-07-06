@@ -3,7 +3,7 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { addIdBeforeEndpointInConfig } from '../../api/api.utils'
+import { prependIdToEndpointInConfig } from '../../api/api.utils'
 import { constants as ApiUsersConstants } from '../../api/users'
 import {
   fetchUserCredentials,
@@ -28,8 +28,9 @@ export const setUserOnAuthFlow: Middleware =
 
 // TODO: add tests,
 // TODO: add selector tests,
-// TODO: wire this up to middleware.ts, and
-// TODO: add some App middleware that runs on successful auth
+// TODO: wire this up to middleware.ts, and ✅
+// TODO: add some App middleware ✅
+// TODO: ensure that the App middleware runs on successful auth
 export const fetchUserCredentialsFlow: Middleware =
   ({ dispatch, getState }) =>
   next =>
@@ -38,7 +39,7 @@ export const fetchUserCredentialsFlow: Middleware =
     if (fetchUserCredentials.match(action)) {
       const state = getState()
       const userId = selectUserId(state)
-      const config = ApiUtils.addIdBeforeEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
