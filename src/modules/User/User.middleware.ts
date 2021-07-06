@@ -2,7 +2,8 @@ import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
-import { actions as ApiActions } from '../../api'
+import { actions as ApiActions, utils as ApiUtils } from '../../api'
+import { addIdBeforeEndpointInConfig } from '../../api/api.utils'
 import { constants as ApiUsersConstants } from '../../api/users'
 import {
   fetchUserCredentials,
@@ -25,6 +26,10 @@ export const setUserOnAuthFlow: Middleware =
     return result
   }
 
+// TODO: add tests,
+// TODO: add selector tests,
+// TODO: wire this up to middleware.ts, and
+// TODO: add some App middleware that runs on successful auth
 export const fetchUserCredentialsFlow: Middleware =
   ({ dispatch, getState }) =>
   next =>
@@ -33,12 +38,12 @@ export const fetchUserCredentialsFlow: Middleware =
     if (fetchUserCredentials.match(action)) {
       const state = getState()
       const userId = selectUserId(state)
+      const config = ApiUtils.addIdBeforeEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG, {
+          mergeRight(config, {
             onSuccess: fetchUserCredentialsSuccess,
             onFailure: fetchUserCredentialsFailure,
-            endpoint: [userId, ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG.endpoint],
           }),
           action.payload,
         ),

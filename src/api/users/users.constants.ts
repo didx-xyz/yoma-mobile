@@ -1,6 +1,7 @@
-import { mergeRight } from 'ramda'
+import { mergeLeft, mergeRight, pipe } from 'ramda'
 
 import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
+import { addIdBeforeEndpointInConfig } from '../api.utils'
 import { UsersEndpoints } from './users.types'
 
 export const USERS_CONFIG: Partial<ApiMeta> = {
@@ -13,9 +14,13 @@ export const USERS_EDIT_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   method: ApiMethods.Patch,
 })
 export const USERS_GET_BY_ID_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {})
-export const USERS_CREDENTIALS_GET_BY_ID_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
-  endpoint: UsersEndpoints.Credentials,
-})
+
+export const USERS_CREDENTIALS_GET_BY_ID_CONFIG: Partial<ApiMeta> = pipe(
+  mergeLeft({
+    endpoint: UsersEndpoints.Credentials,
+  }),
+  addIdBeforeEndpointInConfig,
+)(USERS_CONFIG)
 export const USERS_CREDENTIALS_GET_BY_TYPE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   endpoint: UsersEndpoints.Credentials,
 })
