@@ -8,7 +8,12 @@ import { actions as ApiActions } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
 import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
 import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
-import { extractUser, selectUserFromLoginPayload, selectUserFromUpdatePayload, selectUserId } from './User.utils'
+import {
+  extractUserFromUserUpdateSuccess,
+  prepareUserPatch,
+  selectUserFromLoginPayload,
+  selectUserId,
+} from './User.utils'
 
 export const setUserOnAuthFlow: Middleware =
   ({ dispatch }) =>
@@ -30,7 +35,8 @@ export const updateUserFlow: Middleware =
     if (updateUser.match(action)) {
       const state = getState()
       const userId = selectUserId(state)
-      const user = extractUser(action)(state)
+      const user = prepareUserPatch(action)(state)
+
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiUserConstants.USERS_EDIT_CONFIG, {
@@ -53,8 +59,8 @@ export const updateUserSuccessFlow =
     const result = next(action)
 
     if (updateUserSuccess.match(action)) {
-      const credentials = selectUserFromUpdatePayload(action)
-      dispatch(setUser(credentials))
+      const user = extractUserFromUserUpdateSuccess(action)
+      dispatch(setUser(user))
       NavigationActions.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
       notification('success', 'Details Updated')

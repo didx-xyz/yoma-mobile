@@ -1,6 +1,6 @@
 import { USER_RESPONSE } from './../Profile/Profile.constants'
 import * as SUT from './User.utils'
-import { extractUser } from './User.utils'
+import { prepareUserPatch } from './User.utils'
 
 describe('modules/User/User.utils', () => {
   describe('selectUserFromLoginPayload', () => {
@@ -21,7 +21,7 @@ describe('modules/User/User.utils', () => {
       expect(result).toEqual(USER_RESPONSE)
     })
   })
-  describe('extractUser', () => {
+  describe('prepareUserPatch', () => {
     it('should return user data merged with update payload', () => {
       // given ...
       const mockState = {
@@ -47,8 +47,8 @@ describe('modules/User/User.utils', () => {
       const mockPayload = {
         biography: 'BIOGRAPHY',
       }
-      // when extractUser
-      const result = extractUser(mockPayload)(mockState)
+      // when prepareUserPatch
+      const result = prepareUserPatch(mockPayload)(mockState)
 
       //then expect user request data
       expect(result).toEqual({
