@@ -6,4 +6,4 @@ import selector from './Navigation.selector'
 const mapStateToProps = selector
 const mapDispatchToProps = null
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation)
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation as any)
