@@ -61,7 +61,7 @@ export const authLoginSuccessFlow =
       notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
       dispatch(setSecureRefreshToken(refreshToken))
-      dispatch(AppActions.fetchInitial)
+      dispatch(AppActions.hydrateApp())
     }
     return result
   }

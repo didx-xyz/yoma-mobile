@@ -16,7 +16,7 @@ const devMiddleware = [createDebugger()]
 const commonMiddleware: Middleware[] = [
   apiMiddleware.apiFlow({ api: apiConfig.createApiClient, prepArgs: prepareApiRequest }),
   appMiddleware.appResetFlow,
-  appMiddleware.fetchInitialFlow,
+  appMiddleware.hydrateAppFlow,
 ]
 
 const featureModuleMiddleware = [

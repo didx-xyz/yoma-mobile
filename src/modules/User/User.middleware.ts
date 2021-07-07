@@ -27,8 +27,8 @@ export const setUserOnAuthFlow: Middleware =
 
 // TODO: add tests,
 // TODO: add selector tests,
-// TODO: wire this up to middleware.ts, and ✅
-// TODO: add some App middleware ✅
+// TODO: ✅ wire this up to middleware.ts, and
+// TODO: ✅ add some App middleware
 // TODO: ensure that the App middleware runs on successful auth
 export const fetchUserCredentialsFlow: Middleware =
   ({ dispatch, getState }) =>

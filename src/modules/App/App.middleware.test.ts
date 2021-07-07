@@ -2,7 +2,7 @@ import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as AuthActions } from '../Auth'
 import { actions as UserActions } from '../User'
 import * as SUT from './App.middleware'
-import { fetchInitial, resetAppData } from './App.reducer'
+import { hydrateApp, resetAppData } from './App.reducer'
 
 describe('modules/App/App.middleware', () => {
   describe('appResetFlow', () => {
@@ -29,14 +29,14 @@ describe('modules/App/App.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(AuthActions.clearAuth())
     })
   })
-  describe('fetchInitialFlow', () => {
+  describe('hydrateAppFlow', () => {
     it('should correctly handle being called', () => {
       const create = createMiddlewareStub(jest)
       // given ...
 
       // when ... we want to populate the required app data
-      const action = fetchInitial()
-      const { store, next, invoke } = create(SUT.fetchInitialFlow)
+      const action = hydrateApp()
+      const { store, next, invoke } = create(SUT.hydrateAppFlow)
 
       invoke(action)
 
@@ -44,7 +44,7 @@ describe('modules/App/App.middleware', () => {
       // ... the action should be passed through
       expect(next).toHaveBeenCalledWith(action)
 
-      // ... we should ensure that we are handling our action
+      // ... we should ensure that we populating the app data
       // ... by expecting that an action will be dispatched
       expect(store.dispatch).toHaveBeenCalled()
     })
@@ -53,8 +53,8 @@ describe('modules/App/App.middleware', () => {
 
       // when ... we want to populate the required app data
       const create = createMiddlewareStub(jest)
-      const action = fetchInitial()
-      const { store, invoke } = create(SUT.fetchInitialFlow)
+      const action = hydrateApp()
+      const { store, invoke } = create(SUT.hydrateAppFlow)
 
       invoke(action)
 

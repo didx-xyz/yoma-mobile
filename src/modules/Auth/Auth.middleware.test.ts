@@ -5,6 +5,7 @@ import { mergeRight } from 'ramda'
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
+import { actions as AppActions } from '../App'
 import * as SUT from './Auth.middleware'
 import {
   authLogin,
@@ -118,6 +119,7 @@ describe('modules/Auth/Auth.middleware', () => {
       // then ... the login API should be called
       expect(store.dispatch).toHaveBeenCalledWith(setAuthCredentials({ token: 'USER_TOKEN', expiresAt: 'EXPIRY_DATE' }))
       expect(store.dispatch).toHaveBeenCalledWith(setSecureRefreshToken('REFRESH_TOKEN'))
+      expect(store.dispatch).toHaveBeenCalledWith(AppActions.hydrateApp())
     })
   })
   describe('setSecureRefreshTokenFlow', () => {

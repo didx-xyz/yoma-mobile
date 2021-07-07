@@ -2,7 +2,7 @@ import { Middleware } from 'redux'
 
 import { actions as AuthActions } from '../Auth'
 import { actions as UserActions } from '../User'
-import { fetchInitial, resetAppData } from './App.reducer'
+import { hydrateApp, resetAppData } from './App.reducer'
 
 export const appResetFlow: Middleware =
   ({ dispatch }) =>
@@ -17,12 +17,12 @@ export const appResetFlow: Middleware =
     return result
   }
 
-export const fetchInitialFlow: Middleware =
+export const hydrateAppFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (fetchInitial.match(action)) {
+    if (hydrateApp.match(action)) {
       dispatch(UserActions.fetchUserCredentials())
     }
     return result
