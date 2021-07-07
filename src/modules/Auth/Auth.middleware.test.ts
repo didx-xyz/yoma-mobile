@@ -83,9 +83,9 @@ describe('modules/Auth/Auth.middleware', () => {
       // given ... the action is fired
       const create = createMiddlewareMock(jest)
       const mockSocialLogin = jest.fn().mockResolvedValue(true)
-      const action = authSocialRegistration('provider')
+      const action = authSocialLogin('provider')
       // @ts-ignore
-      const { invoke, next } = create(SUT.authSocialRegistrationFlow({ socialAuth: mockSocialLogin }))
+      const { invoke, next } = create(SUT.authSocialLoginFlow({ socialAuth: mockSocialLogin }))
       invoke(action)
 
       expect(next).toHaveBeenCalledWith(action)

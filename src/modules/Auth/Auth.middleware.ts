@@ -66,8 +66,8 @@ export const authSocialLoginFlow =
     if (authSocialLogin.match(action)) {
       try {
         const authProvider = action.payload as Providers
-        const authdata = await socialAuth(authProvider)
-        const credentials = selectSocialLoginCredentials(authProvider, authdata)
+        const authData = await socialAuth(authProvider)
+        const credentials = selectSocialLoginCredentials(authProvider, authData)
         dispatch(authSocialLoginSuccess(credentials))
       } catch (error) {
         dispatch(authSocialLoginFailure)
@@ -98,7 +98,7 @@ export const authSocialLoginSuccessFlow: Middleware =
   }
 
 export const authSocialRegistrationFlow =
-  ({ socialAuth }: { socialAuth: Function }): Middleware =>
+  ({ socialAuth }: { socialAuth: any }): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
@@ -106,8 +106,8 @@ export const authSocialRegistrationFlow =
     if (authSocialRegistration.match(action)) {
       try {
         const authProvider = action.payload as Providers
-        const authdata = await socialAuth(authProvider)
-        const credentials = selectRegistrationCredentials(authProvider, authdata)
+        const authData = await socialAuth(authProvider)
+        const credentials = selectRegistrationCredentials(authProvider, authData)
         dispatch(authSocialRegistrationSuccess(credentials))
       } catch (error) {
         dispatch(authSocialRegistrationFailure)

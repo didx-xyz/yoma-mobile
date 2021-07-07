@@ -33,7 +33,7 @@ export const googleSignIn = async () => {
     if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
       errorMessage = 'Play Services not available or outdated'
     } else {
-      errorMessage = 'An error occured'
+      errorMessage = 'An error occurred'
     }
     throw new Error(errorMessage)
   }

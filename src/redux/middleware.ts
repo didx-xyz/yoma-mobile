@@ -24,7 +24,6 @@ const featureModuleMiddleware = [
   authMiddleware.authRegistrationFlow,
   authMiddleware.authSocialRegistrationSuccessFlow,
   authMiddleware.authSocialLoginSuccessFlow,
-  authMiddleware.authSocialRegistrationSuccessFlow,
   authMiddleware.authSocialLoginFlow({ socialAuth, notification: showSimpleMessage }),
   authMiddleware.authSocialRegistrationFlow({ socialAuth }),
   authMiddleware.authLoginSuccessFlow({ notification: showSimpleMessage }),
