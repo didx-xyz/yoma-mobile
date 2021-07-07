@@ -10,8 +10,8 @@ export const setUserOnAuthFlow: Middleware =
   action => {
     const result = next(action)
     if (authLoginSuccess.match(action)) {
-      const credentials = selectUserFromLoginPayload(action)
-      dispatch(setUser(credentials))
+      const user = selectUserFromLoginPayload(action)
+      dispatch(setUser(user))
     }
     return result
   }
