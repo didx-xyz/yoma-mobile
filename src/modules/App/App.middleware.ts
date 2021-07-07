@@ -23,7 +23,7 @@ export const fetchInitialFlow: Middleware =
   action => {
     const result = next(action)
     if (fetchInitial.match(action)) {
-      dispatch(UserActions.fetchUserCredentials)
+      dispatch(UserActions.fetchUserCredentials())
     }
     return result
   }

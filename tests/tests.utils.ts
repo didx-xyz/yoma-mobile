@@ -1,6 +1,6 @@
 import { Action, Middleware } from 'redux'
 
-export const createMiddlewareMock = (jest: any, state?: {}) => (middleware: Middleware) => {
+export const createMiddlewareStub = (jest: any, state?: {}) => (middleware: Middleware) => {
   const store = {
     getState: jest.fn(() => state),
     dispatch: jest.fn(),

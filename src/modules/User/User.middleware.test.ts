@@ -1,7 +1,7 @@
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 
-import { createMiddlewareMock } from '../../../tests/tests.utils'
+import { createMiddlewareStub } from '../../../tests/tests.utils'
 import * as SUT from './User.middleware'
 import { setUserCredentials } from './User.reducer'
 import { selectUserCredentialsFromLoginPayload } from './User.utils'
@@ -10,7 +10,7 @@ describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
     it('should correctly handle being called', async () => {
       // given ... the authLogin action is fired
-      const create = createMiddlewareMock(jest)
+      const create = createMiddlewareStub(jest)
       const credentials = defaultUserLoginResponseData
       const action = authLoginSuccess(credentials)
       // @ts-ignore
@@ -25,7 +25,7 @@ describe('modules/User/User.middleware', () => {
     })
     it('should correctly set the user data', async () => {
       // given ... the authLogin action is fired
-      const create = createMiddlewareMock(jest)
+      const create = createMiddlewareStub(jest)
       const credentials = defaultUserLoginResponseData
       const action = authLoginSuccess(credentials)
       // @ts-ignore
