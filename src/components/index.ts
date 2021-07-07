@@ -23,7 +23,6 @@ import OnboardingForms from './OnboardingForms'
 import Optional from './Optional'
 import ProfilePhoto from './ProfilePhoto'
 import ProgressCircle from './ProgressCircle'
-import SocialRegistration from './SSO'
 import SSO from './SSO'
 import SkillCard from './SkillCard'
 import Spinner from './Spinner'
@@ -59,7 +58,6 @@ export {
   ProgressCircle,
   SkillCard,
   SSO,
-  SocialRegistration,
   Spinner,
   Tag,
   Upload,

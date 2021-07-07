@@ -1,3 +1,3 @@
-import SocialRegistration from './SSO'
+import SSO from './SSO'
 
-export default SocialRegistration
+export default SSO
