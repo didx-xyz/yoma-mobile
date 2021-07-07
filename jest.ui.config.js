@@ -6,7 +6,7 @@ const config = {
   },
   roots: ['<rootDir>/src'],
   testMatch: ['**/*.ui.test.ts?(x)'],
-  setupFiles: ['./node_modules/react-native-gesture-handler/jestSetup.js'],
+  setupFiles: ['<rootDir>/tests/jestSetup.js', './node_modules/react-native-gesture-handler/jestSetup.js'],
   setupFilesAfterEnv: ['@testing-library/jest-native/extend-expect'],
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
   transformIgnorePatterns: [
