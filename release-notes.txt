@@ -1,2 +1,2 @@
-Ver 0.0.1 (build 8)
-- Fix for app crashes
+Ver 0.0.1 (build 9)
+- User data in profile view
