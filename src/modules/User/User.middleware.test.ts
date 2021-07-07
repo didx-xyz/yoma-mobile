@@ -8,7 +8,7 @@ import { constants as ApiUserConstants } from '../../api/users'
 import { USER_RESPONSE } from './../Profile/Profile.constants'
 import * as SUT from './User.middleware'
 import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
-import { extractUserFromUserUpdateSuccess, prepareUserPatch, selectUserFromLoginPayload } from './User.utils'
+import { extractUserFromUserUpdateSuccess, selectUserFromLoginPayload } from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
@@ -121,7 +121,6 @@ describe('modules/User/User.middleware', () => {
       invoke(action)
 
       // then ...validate updateUserFlow
-      const user = prepareUserPatch(mockAction.payload)(mockState)
 
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
@@ -130,7 +129,7 @@ describe('modules/User/User.middleware', () => {
             onFailure: updateUserFailure,
             endpoint: 'USER_ID',
           }),
-          user,
+          mockAction.payload,
         ),
       )
     })
