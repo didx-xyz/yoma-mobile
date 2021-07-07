@@ -140,7 +140,6 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.LOGIN_SOCIAL_CONFIG, {
-            isTokenRequired: false,
             onSuccess: authLoginSuccess,
             onFailure: authLoginFailure,
           }),

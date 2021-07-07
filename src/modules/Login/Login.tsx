@@ -1,6 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
-import { Card, LargeHeader, SSO, ViewContainer } from 'components'
+import { Card, LargeHeader, ViewContainer } from 'components'
+import SSO from 'components/SSO'
 import { SocialVariants } from 'components/SocialButton/SocialButton.types'
 import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { AuthNavigatorParamsList } from 'modules/AppNavigation/Authentication/Authentication.types'
