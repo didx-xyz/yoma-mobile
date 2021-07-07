@@ -11,8 +11,8 @@ const config = {
   testRegex: '(.+)[^ui]\\.test\\.ts[x]{0,1}$',
   watchPlugins: ['jest-watch-typeahead/filename', 'jest-watch-typeahead/testname'],
   setupFiles: [
-    '<rootDir>/tests/jestSetup.js',
-    './node_modules/react-native-gesture-handler/jestSetup.js',
+    '<rootDir>/tests/jest.setup.js',
+    '<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js',
   ],
 }
 

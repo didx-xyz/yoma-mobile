@@ -127,7 +127,7 @@
 
     "setupFiles": [
       "<rootDir>/tests/jest.setup.js",
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
+      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "moduleFileExtensions": [
       "ts",
