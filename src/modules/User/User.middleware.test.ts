@@ -84,7 +84,7 @@ describe('modules/User/User.middleware', () => {
       // then ...validate updateUserFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly handle updating the user', () => {
+    it('should correctly handle updating the user data', () => {
       // given ...
       const mockState = {
         user: {

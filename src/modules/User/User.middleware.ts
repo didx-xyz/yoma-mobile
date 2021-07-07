@@ -35,7 +35,7 @@ export const updateUserFlow: Middleware =
     if (updateUser.match(action)) {
       const state = getState()
       const userId = selectUserId(state)
-      const user = prepareUserPatch(action)(state)
+      const user = prepareUserPatch(action.payload)(state)
 
       dispatch(
         ApiActions.apiRequest(
