@@ -14,18 +14,14 @@ import {
 const name = '[Auth]'
 export const INITIAL_STATE = {} as AuthState
 
-export const authLogin = createAction<AuthCredentials>(`${name} Login`)
-export const authLoginSuccess = createAction<AuthLoginSuccessResponse>(`${name} Login Success`)
-export const authLoginFailure = createAction<AuthLoginFailureResponse>(`${name} Login Failure`)
-export const authLogout = createAction(`${name} Logout`)
+export const login = createAction<AuthCredentials>(`${name} login`)
+export const loginSuccess = createAction<AuthLoginSuccessResponse>(`${name} loginSuccess`)
+export const loginFailure = createAction<AuthLoginFailureResponse>(`${name} loginFailure`)
+export const logout = createAction(`${name} Logout`)
 
-export const authRegistration = createAction<AuthRegistration>(`${name} authRegistration`)
-export const authRegistrationSuccess = createAction<AuthRegistrationSuccessResponse>(
-  `${name} AuthRegistrationSuccessResponse`,
-)
-export const authRegistrationFailure = createAction<AuthRegistrationFailureResponse>(
-  `${name} AuthRegistrationFailureResponse`,
-)
+export const register = createAction<AuthRegistration>(`${name} register`)
+export const registerSuccess = createAction<AuthRegistrationSuccessResponse>(`${name} registerSuccess`)
+export const registerFailure = createAction<AuthRegistrationFailureResponse>(`${name} registerFailure`)
 
 export const setSecureRefreshToken = createAction<string>(`${name} setSecureRefreshToken`)
 export const setSecureRefreshTokenSuccess = createAction(`${name} setSecureRefreshTokenSuccess`)

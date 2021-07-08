@@ -1,4 +1,4 @@
-import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
+import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { Middleware } from 'redux'
 
 import { setUser } from './User.reducer'
@@ -9,7 +9,7 @@ export const setUserOnAuthFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    if (authLoginSuccess.match(action)) {
+    if (loginSuccess.match(action)) {
       const user = selectUserFromLoginPayload(action)
       dispatch(setUser(user))
     }

@@ -19,14 +19,14 @@ const commonMiddleware: Middleware[] = [
 ]
 
 const featureModuleMiddleware = [
-  authMiddleware.authLoginFlow,
-  authMiddleware.authLogoutFlow,
-  authMiddleware.authLoginSuccessFlow({ notification: showSimpleMessage }),
-  authMiddleware.authLoginFailureFlow({ notification: showSimpleMessage }),
-  authMiddleware.authRegistrationFlow,
+  authMiddleware.authorizeFlow,
+  authMiddleware.logoutFlow,
+  authMiddleware.loginSuccessFlow({ notification: showSimpleMessage }),
+  authMiddleware.loginFailureFlow({ notification: showSimpleMessage }),
+  authMiddleware.registrationFlow,
   authMiddleware.setSecureRefreshTokenFlow(setItemAsync),
-  authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
-  authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
+  authMiddleware.registrationSuccessFlow({ notification: showSimpleMessage }),
+  authMiddleware.registrationFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.setUserOnAuthFlow,
 ]
 

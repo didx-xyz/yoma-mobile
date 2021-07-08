@@ -9,7 +9,7 @@ const mapStateToProps = null
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onLoginUser: (details: AuthCredentials) => {
-      dispatch(AuthActions.authLogin(details))
+      dispatch(AuthActions.login(details))
     },
   }
 }

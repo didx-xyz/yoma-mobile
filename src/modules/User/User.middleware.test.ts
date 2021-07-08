@@ -1,4 +1,4 @@
-import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
+import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
@@ -9,14 +9,14 @@ import { selectUserFromLoginPayload } from './User.utils'
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
     it('should correctly handle being called', () => {
-      // given ... the authLogin action is fired
+      // given ... the login action is fired
       const create = createMiddlewareMock(jest)
       const credentials = defaultUserLoginResponseData
-      const action = authLoginSuccess(credentials)
+      const action = loginSuccess(credentials)
       // @ts-ignore
       const { store, invoke, next } = create(SUT.setUserOnAuthFlow)
 
-      // when ... we respond to the authLoginSuccess action
+      // when ... we respond to the loginSuccess action
       invoke(action)
 
       // then ...validate setUserOnAuthFlow
@@ -24,15 +24,15 @@ describe('modules/User/User.middleware', () => {
       expect(store.dispatch).toHaveBeenCalled()
     })
     it('should correctly set the user data', () => {
-      // given ... the authLogin action is fired
+      // given ... the login action is fired
       const create = createMiddlewareMock(jest)
       const credentials = defaultUserLoginResponseData
-      const action = authLoginSuccess(credentials)
+      const action = loginSuccess(credentials)
       // @ts-ignore
       const { invoke, store } = create(SUT.setUserOnAuthFlow)
       const userData = selectUserFromLoginPayload(action)
 
-      // when ... we respond to the authLoginSuccess action
+      // when ... we respond to the loginSuccess action
       invoke(action)
 
       // then ... setUser should be called

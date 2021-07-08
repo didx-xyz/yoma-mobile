@@ -9,7 +9,7 @@ const mapStateToProps = selector
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onLogoutUser: () => {
-      dispatch(AuthActions.authLogout())
+      dispatch(AuthActions.logout())
     },
   }
 }
