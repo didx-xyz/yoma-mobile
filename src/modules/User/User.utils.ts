@@ -1,3 +1,3 @@
-import { path, pipe } from 'ramda'
+import { path } from 'ramda'
 
-export const selectUserCredentialsFromLoginPayload = pipe(path(['payload', 'data', 'data', 'user']))
+export const selectUserFromLoginPayload = path(['payload', 'data', 'data', 'user'])

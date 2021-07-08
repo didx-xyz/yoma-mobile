@@ -1,4 +1,14 @@
-import { HomeNavigationRoutes } from './Home.routes'
+export enum HomeNavigationRoutes {
+  Home = 'Home',
+  Profile = 'Profile',
+  DigitalCv = 'DigitalCv',
+  About = 'About',
+  Experience = 'Experience',
+  Education = 'Education',
+  Skills = 'Skills',
+  MyCourses = 'MyCourses',
+  MyChallenges = 'MyChallenges',
+}
 
 export type HomeNavigatorParamsList = {
   [HomeNavigationRoutes.Home]: undefined

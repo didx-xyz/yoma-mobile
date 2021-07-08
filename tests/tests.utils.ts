@@ -1,3 +1,4 @@
+import { mergeDeepRight } from 'ramda'
 import { Action, Middleware } from 'redux'
 
 export const createMiddlewareStub = (jest: any, state?: {}) => (middleware: Middleware) => {
@@ -11,3 +12,5 @@ export const createMiddlewareStub = (jest: any, state?: {}) => (middleware: Midd
 
   return { store, next, invoke }
 }
+
+export const createFixture = mergeDeepRight
