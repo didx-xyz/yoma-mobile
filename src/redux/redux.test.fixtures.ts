@@ -8,4 +8,4 @@ export const defaultRootState: RootState = {
   user: USER_INITIAL_STATE,
 }
 
-export const rootStateFixture = (override = {}) => createFixture(defaultRootState)(override)
+export const rootStateFixture = createFixture(defaultRootState)

@@ -1,8 +1,8 @@
 import { rootStateFixture } from '../../redux/redux.test.fixtures'
 import { INITIAL_STATE } from '../User/User.reducer'
-import { USER_RESPONSE } from './../Profile/Profile.constants'
 import * as SUT from './User.selector'
 import { selectUserId } from './User.selector'
+import { USER_RESPONSE } from './User.test.fixtures'
 
 describe('modules/User/User.selector', () => {
   describe('selectUser ', () => {
