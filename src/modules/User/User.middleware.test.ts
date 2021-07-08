@@ -50,7 +50,7 @@ describe('modules/User/User.middleware', () => {
   describe('fetchUserCredentialsFlow', () => {
     it('should correctly handle being called', async () => {
       // given ... a user object with an id in state
-      const userId = 0
+      const userId = 'A USER ID'
       const create = createMiddlewareStub(jest, { user: { id: userId } })
       const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
 

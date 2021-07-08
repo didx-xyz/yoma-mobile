@@ -21,6 +21,7 @@ export const apiFlow =
           dispatch(onSuccess(serializableResponse))
         })
         .catch((error: any) => {
+          console.log(error)
           dispatch(onFailure(error.message))
         })
     }
