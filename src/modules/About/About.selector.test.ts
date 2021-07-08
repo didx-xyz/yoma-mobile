@@ -1,10 +1,9 @@
-import { USER_RESPONSE } from './../Profile/Profile.constants'
-import { INITIAL_STATE } from './User.reducer'
-import * as SUT from './User.selector'
+import { INITIAL_STATE } from '../User/User.reducer'
+import * as SUT from './About.selector'
 
-describe('modules/User/User.selector', () => {
-  describe('selectBiography ', () => {
-    it('should return expected prop value from user data', () => {
+describe('modules/About/About.selector', () => {
+  describe('selector ', () => {
+    it('should select props as expected when available in state', () => {
       // given ...
       const state = {
         user: {
@@ -27,27 +26,27 @@ describe('modules/User/User.selector', () => {
         },
       }
       // when ... we call the selector
-      const result = SUT.selectBiography(state)
+      const result = SUT.default(state)
       // then ... should return result as expected
-      expect(result).toEqual('BIOGRAPHY')
+      expect(result).toEqual({ biography: 'BIOGRAPHY' })
     })
-  })
-  describe('selectUser ', () => {
-    it('should return user property of the root state', () => {
+    it('should handle empty user state', () => {
+      // given ...
       const state = {
-        user: USER_RESPONSE,
+        user: INITIAL_STATE,
       }
       // when ... we call the selector
-      const result = SUT.selectUser(state)
+      const result = SUT.default(state)
       // then ... should return result as expected
-      expect(result).toEqual(state.user)
+      expect(result).toEqual({ biography: '' })
     })
-    it('should return the default user state', () => {
-      const state = { user: INITIAL_STATE }
+    it('should handle empty state if props not available', () => {
+      // given ...
+      const state = {}
       // when ... we call the selector
-      const result = SUT.selectUser(state)
+      const result = SUT.default(state)
       // then ... should return result as expected
-      expect(result).toEqual(state.user)
+      expect(result).toEqual({ biography: '' })
     })
   })
 })
