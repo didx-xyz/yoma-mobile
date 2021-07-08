@@ -1,12 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { CvCard, FirstTimeCard, HomeHeader, ViewContainer } from 'components'
-import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
-import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
+import { FirstTimeCard, HomeHeader, ViewContainer } from 'components'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import { Colors } from 'styles'
 
+import { Colors } from '../../styles'
 import styles from './DigitalCv.styles'
 
 interface Props {

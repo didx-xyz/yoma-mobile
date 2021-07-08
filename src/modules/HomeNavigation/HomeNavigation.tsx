@@ -18,7 +18,7 @@ import MyChallenges from '../MyChallenges'
 import MyCourses from '../MyCourses'
 import Profile from '../Profile'
 import Skills from '../Skills'
-import { HomeNavigationRoutes } from './Home.routes'
+import { HomeNavigationRoutes } from './HomeNavigation.types'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -75,7 +75,7 @@ const HomeTabs = () => {
   )
 }
 
-const Home = () => {
+const HomeNavigation = () => {
   return (
     <Stack.Navigator headerMode={'none'}>
       <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
@@ -91,4 +91,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default HomeNavigation

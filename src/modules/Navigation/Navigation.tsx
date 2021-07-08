@@ -2,26 +2,26 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 
-import Home from '../Home/Home'
-import Authentication from './Authentication/Authentication'
+import AuthNavigation from '../AuthNavigation/AuthNavigation'
+import HomeNavigation from '../HomeNavigation/HomeNavigation'
 import linking from './Linking'
 
 const Stack = createStackNavigator()
 
-type Props = {
+interface Props {
   isAuthorised: boolean
 }
 
-const AppNavigation = ({ isAuthorised }: Props) => (
+const Navigation = ({ isAuthorised }: Props) => (
   <NavigationContainer linking={linking}>
     <Stack.Navigator headerMode="none">
       {isAuthorised ? (
-        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Home" component={HomeNavigation} />
       ) : (
-        <Stack.Screen name="Authentication" component={Authentication} />
+        <Stack.Screen name="Authentication" component={AuthNavigation} />
       )}
     </Stack.Navigator>
   </NavigationContainer>
 )
 
-export default AppNavigation
+export default Navigation
