@@ -13,6 +13,8 @@ export interface AuthRefreshTokenResponse {
 export interface AuthCredentialsResponse {
   token: string
   expiresAt: string
+  email?: string
+  password?: string
 }
 
 export interface UserResponse {

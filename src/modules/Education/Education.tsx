@@ -1,15 +1,14 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
-import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import { MOCKED_EDUCATION_DATA } from './Education.constants'
 import styles from './Education.styles'
-import { EductationEntry } from './Education.types'
+import { EducationEntry } from './Education.types'
 import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
@@ -29,7 +28,7 @@ const Education = ({ navigation }: Props) => {
     organisationLogoURL,
     qualification,
     school,
-  }: EductationEntry) => {
+  }: EducationEntry) => {
     return (
       <InfoCard
         title={school}

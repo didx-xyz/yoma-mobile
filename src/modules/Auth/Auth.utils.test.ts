@@ -60,4 +60,27 @@ describe('modules/Auth/Auth.utils', () => {
       expect(result).toEqual('')
     })
   })
+  describe('selectLoginCredentialsFromRegistration', () => {
+    it('should return the user email address and password from registration data', () => {
+      // given ... an object in the shape of the successful reegistration
+      const mockState = {
+        firstName: 'FIRST NAME',
+        lastName: 'LAST NAME',
+        email: 'USER EMAIL',
+        countryAlpha2: 'COUNTRY CODE',
+        password: 'USER PASSWORD',
+        confirmPassword: 'USER PASSWORD',
+        privacyInd: true,
+      }
+      const result = SUT.selectLoginCredentialsFromRegistration(mockState)
+      // then ... should return email and password
+      expect(result).toEqual({ email: 'USER EMAIL', password: 'USER PASSWORD' })
+    })
+    it('should handle the empty registration credentials', () => {
+      const mockState = {}
+      const result = SUT.selectLoginCredentialsFromRegistration(mockState)
+      // then ... we should return the fallback value of an empty object
+      expect(result).toEqual({})
+    })
+  })
 })

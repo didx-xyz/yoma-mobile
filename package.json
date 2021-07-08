@@ -3,40 +3,41 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "_code:lint:eslint": "eslint .",
+    "_code:lint:prettier": "prettier --check .",
     "_git:pre-commit": "pretty-quick --staged",
     "_git:pre-push": "npm-run-all code:lint",
+    "android": "react-native run-android",
+    "bundle:android": "react-native bundle --platform android --entry-file index.js --bundle-output android.bundle --verbose",
+    "clean:android": "cd android && ./gradlew clean && cd ..",
+    "code:lint": "npm-run-all _code:lint:prettier _code:lint:eslint",
+    "create:keystore": "echo $YOMA_UPLOAD_KEYSTORE_BASE64 | openssl base64 -d -A > android/app/$YOMA_UPLOAD_STORE_FILE",
+    "deploy:alpha:android": "cd android && bundle exec fastlane beta_deploy",
+    "deploy:release:android": "cd android && bundle exec fastlane production_deploy",
     "env:dev": "node env/generate.js dev",
     "env:test": "node env/generate.js test",
-    "init:ios": "npx pod-install",
+    "format": "prettier --write .",
+    "help": "npx package-json-help.js",
     "init": "npm-run-all env:dev init:ios",
-    "clean:android": "cd android && ./gradlew clean && cd ..",
-    "android": "react-native run-android",
+    "init:ios": "npx pod-install",
     "ios": "react-native run-ios",
+    "lint": "eslint . --ignore-path .gitignore --ignore-path .eslintignore",
+    "npm:audit": "audit-ci --critical",
+    "reset": "npx rimraf node_modules && npm i && npx pod-install",
     "start": "react-native start",
     "start:reset": "react-native start --reset-cache",
     "test": "jest --ci --config jest.node.config.js --verbose -w 1",
-    "test:watch": "npm run test -- --watch",
     "test:ui": "jest --ci --config jest.ui.config.js --verbose",
     "test:ui:watch": "npm run test:ui -- --watch",
-    "deploy:alpha:android": "cd android && bundle exec fastlane beta_deploy",
-    "deploy:release:android": "cd android && bundle exec fastlane production_deploy",
-    "bundle:android": "react-native bundle --platform android --entry-file index.js --bundle-output android.bundle --verbose",
-    "create:keystore": "echo $YOMA_UPLOAD_KEYSTORE_BASE64 | openssl base64 -d -A > android/app/$YOMA_UPLOAD_STORE_FILE",
-
-    "lint": "eslint 'src/**/*.{ts,tsx}' --ignore-path .gitignore --ignore-path .eslintignore",
+    "test:watch": "npm run test -- --watch",
     "lint:check": "eslint 'src/**/*.{ts,tsx}' --ignore-path .gitignore --ignore-path .eslintignore",
     "lint:fix": "eslint 'src/**/*.{ts,tsx}' --ignore-path .gitignore --ignore-path .eslintignore --fix",
     "prettier:check": "prettier --check 'src/**/*.{ts,tsx}'",
-    "prettier:fix": "prettier --write 'src/**/*.{ts,tsx}'",
-
-    "format": "prettier --write .",
-    "npm:audit": "audit-ci --critical",
-    "_code:lint:prettier": "prettier --check .",
-    "_code:lint:eslint": "eslint .",
-    "code:lint": "npm-run-all _code:lint:prettier _code:lint:eslint",
-    "help": "npx package-json-help.js"
+    "prettier:fix": "prettier --write 'src/**/*.{ts,tsx}'"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.14.7",
+    "@react-native-async-storage/async-storage": "^1.15.5",
     "@react-native-community/datetimepicker": "^3.4.3",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/app": "^12.0.0",
@@ -72,7 +73,7 @@
     "react-native-vector-icons": "^8.1.0",
     "react-redux": "^7.2.2",
     "redux": "^4.0.5",
-    "rn-fetch-blob": "^0.12.0",
+    "redux-persist": "^6.0.0",
     "yup": "^0.32.9"
   },
   "devDependencies": {
@@ -111,6 +112,13 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-flipper": "^1.4.2",
     "typescript": "^3.8.3"
+  },
+  "react-native-unimodules": {
+    "android": {
+      "modulesPaths": [
+        "../../node_modules"
+      ]
+    }
   },
   "resolutions": {
     "@types/react": "^16"

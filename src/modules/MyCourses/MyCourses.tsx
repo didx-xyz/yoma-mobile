@@ -1,7 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
-import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
-import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -62,7 +61,7 @@ const MyCourses = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <NewCourseForm navigation={navigation} />
+            <NewCourseForm />
           </Card>
         </ScrollView>
       </Optional>

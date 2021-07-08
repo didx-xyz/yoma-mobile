@@ -1,4 +1,4 @@
-import { CheckBox, DropDown, Input, Spinner, OnboardingForms } from 'components'
+import { CheckBox, DropDown, Input, OnboardingForms, Spinner } from 'components'
 import Button from 'components/Button'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'

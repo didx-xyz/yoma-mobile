@@ -1,7 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { ZIcon } from 'assets/images'
-import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
-import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
