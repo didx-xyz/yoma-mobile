@@ -7,6 +7,7 @@ import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
 import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
 import * as NavigationActions from '../Navigation/Navigation.actions'
+import { selectUserId } from '../User/User.selector'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authLogin,
