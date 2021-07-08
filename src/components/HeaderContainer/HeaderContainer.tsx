@@ -4,7 +4,7 @@ import { BackHandler, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 import { WithChildren } from 'types/react.types'
 
-import { AuthNavigationRoutes } from '../../modules/AppNavigation/Authentication/Authentication.routes'
+import { AuthNavigationRoutes } from '../../modules/AuthNavigation/AuthNavigation.types'
 import Text, { HeaderLevels } from '../Typography'
 import styles from './HeaderContainer.styles'
 
