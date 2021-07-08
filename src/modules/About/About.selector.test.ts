@@ -46,7 +46,7 @@ describe('modules/About/About.selector', () => {
       // when ... we call the selector
       const result = SUT.default(state)
       // then ... should return result as expected
-      expect(result).toEqual({ biography: '' })
+      expect(result).toEqual({ biography: undefined })
     })
   })
 })

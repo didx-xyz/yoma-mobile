@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
   email: '',
   countryAlpha2: '',
   phoneNumber: null,
-  biography: null,
+  biography: '',
   zltoWalletId: null,
   zltoBalance: 0,
   covidChallengeCertificateURL: null,
