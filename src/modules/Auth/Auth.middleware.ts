@@ -1,5 +1,4 @@
 import { actions as AppActions } from 'modules/App'
-import { resetAppData } from 'modules/App/App.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 

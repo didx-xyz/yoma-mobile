@@ -1,82 +1,78 @@
-import { INITIAL_STATE } from './Auth.reducer'
+import { rootStateFixture } from '../../redux/redux.test.fixtures'
 import * as SUT from './Auth.selector'
 
 describe('modules/Auth/Auth.selector', () => {
   describe('selectAuthState', () => {
     it('should return auth property of the root state', () => {
-      const state = {
+      const stateMock = rootStateFixture({
         auth: {
           refreshToken: 'REFRESH_TOKEN',
           token: 'USER_TOKEN',
           expiresAt: 'EXPIRY_DATE',
         },
-      }
+      })
       // when ... we call the selector
-      const result = SUT.selectAuthState(state)
+      const result = SUT.selectAuthState(stateMock)
       // then ... should return result as expected
-      expect(result).toEqual(state.auth)
+      expect(result).toEqual(stateMock.auth)
     })
     it('should return the default auth state', () => {
-      const state = { auth: INITIAL_STATE }
+      const stateMock = rootStateFixture()
       // when ... we call the selector
-      const result = SUT.selectAuthState(state)
+      const result = SUT.selectAuthState(stateMock)
       // then ... should return result as expected
-      expect(result).toEqual(state.auth)
+      expect(result).toEqual(stateMock.auth)
     })
   })
   describe('selectToken', () => {
     it('should return a valid user token', () => {
-      const state = {
+      const stateMock = rootStateFixture({
         auth: {
           refreshToken: 'REFRESH_TOKEN',
           token: 'USER_TOKEN',
           expiresAt: 'EXPIRY_DATE',
         },
-      }
+      })
       // when ... we call the selector
-      const result = SUT.selectToken(state)
+      const result = SUT.selectToken(stateMock)
       // then ... should return result as expected
       expect(result).toBe('USER_TOKEN')
     })
     it('should return null if the token does not exist', () => {
-      const state = {
-        auth: INITIAL_STATE,
-      }
+      const stateMock = rootStateFixture()
       // when ... we call the selector
-      const result = SUT.selectToken(state)
+      const result = SUT.selectToken(stateMock)
       // then ... should return result as expected
       expect(result).toBeNull()
     })
   })
   describe('selectIsAuthenticated', () => {
     it('Should correctly handle a default state', () => {
-      const state = {
-        auth: INITIAL_STATE,
-      }
+      const stateMock = rootStateFixture()
       // when ... we call the selector
-      const result = SUT.selectIsAuthenticated(state)
+      const result = SUT.selectIsAuthenticated(stateMock)
       // then ... should return result as expected
       expect(result).toEqual(false)
     })
     it('should check if the user is authenticated.', () => {
-      const state = {
+      const stateMock = rootStateFixture({
         auth: {
           refreshToken: 'REFRESH_TOKEN',
           token: 'USER_TOKEN',
           expiresAt: 'EXPIRY_DATE',
         },
-      }
+      })
       // when ... we call the selector
-      const result = SUT.selectIsAuthenticated(state)
+      const result = SUT.selectIsAuthenticated(stateMock)
       // then ... should return result as expected
       expect(result).toEqual(true)
     })
   })
   describe('selectLoginCredentials', () => {
     it('should return user login credentials.', () => {
-      const state = {
-        auth: { ...INITIAL_STATE, email: 'EMAIL', password: 'PASSWORD' },
-      }
+      const state = rootStateFixture({
+        auth: { email: 'EMAIL', password: 'PASSWORD' },
+      })
       // when ... we call the selector
       const result = SUT.selectLoginCredentials(state)
       // then ... should return result as expected
