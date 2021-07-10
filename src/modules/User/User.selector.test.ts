@@ -50,12 +50,12 @@ describe('modules/User/User.selector', () => {
       expect(result).toEqual('BIOGRAPHY')
     })
   })
-  describe('selectUserId ', () => {
+  describe('selectId ', () => {
     it('should return the default value for the id if none exists', () => {
       // given ... no user data available
       const stateMock = rootStateFixture()
       // when ... we get the user's id
-      const result = SUT.selectUserId(stateMock)
+      const result = SUT.selectId(stateMock)
       // then ... should return an empty string
       expect(result).toBe('')
     })
@@ -65,7 +65,7 @@ describe('modules/User/User.selector', () => {
         user: { ...USER_RESPONSE, id: 'A USER ID' },
       })
       // when ... we get the user's id
-      const result = SUT.selectUserId(stateMock)
+      const result = SUT.selectId(stateMock)
       // then ... we should the user's id returned
       expect(result).toBe('A USER ID')
     })

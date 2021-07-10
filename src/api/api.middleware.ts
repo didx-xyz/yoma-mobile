@@ -1,7 +1,6 @@
 import { omit } from 'ramda'
 import { Middleware } from 'redux'
 
-import { devLog } from '../utils/dev.utils'
 import { apiRequest } from './api.reducer'
 import { ApiFlowDependencies } from './api.types'
 
@@ -14,7 +13,7 @@ export const apiFlow =
 
     if (apiRequest.match(action)) {
       const state = getState()
-      // @ts-ignore
+      //@ts-ignore
       const { onSuccess, onFailure, apiArgs } = prepArgs(state, action)
       await api(apiArgs)
         .then((response: any) => {
@@ -22,7 +21,6 @@ export const apiFlow =
           dispatch(onSuccess(serializableResponse))
         })
         .catch((error: any) => {
-          devLog({ error })
           dispatch(onFailure(error.message))
         })
     }
