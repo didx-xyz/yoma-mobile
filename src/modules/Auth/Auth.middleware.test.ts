@@ -189,7 +189,7 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(mockNotification).toHaveBeenCalled()
     })
   })
-  describe('authLogoutFlow', () => {
+  describe('logoutFlow', () => {
     it('should correctly logout the user', async () => {
       // given ... the logout action is fired
       const create = createMiddlewareMock(jest)
@@ -204,7 +204,7 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(resetAppData())
     })
   })
-  describe('authRegistrationFlow', () => {
+  describe('registrationFlow', () => {
     it('should ignore other actions', async () => {
       // given ... an action is fired
       const create = createMiddlewareMock(jest)
@@ -259,7 +259,7 @@ describe('modules/Auth/Auth.middleware', () => {
       )
     })
   })
-  describe('authRegistrationSuccessFlow', () => {
+  describe('registrationSuccessFlow', () => {
     it('should correctly send a notification to the user', async () => {
       // middleware is dependent on a populated state
       const state = {
@@ -283,7 +283,7 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(mockNotification).toHaveBeenCalled()
     })
   })
-  describe('authRegistrationFailureFlow', () => {
+  describe('registrationFailureFlow', () => {
     it('should correctly send a notification to the user', async () => {
       // given ... the register action is fired
       const create = createMiddlewareMock(jest)
