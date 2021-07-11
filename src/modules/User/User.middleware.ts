@@ -1,12 +1,12 @@
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
-import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
+import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
+import Navigation from 'modules/Navigation'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
-import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
 import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
 import { selectUserId } from './User.selector'
 import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
@@ -56,7 +56,7 @@ export const updateUserSuccessFlow =
     if (updateUserSuccess.match(action)) {
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
-      NavigationActions.navigate(HomeNavigationRoutes.Home)
+      Navigation.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
       notification('success', 'Details Updated')
     }

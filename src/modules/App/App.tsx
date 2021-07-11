@@ -2,7 +2,7 @@ import { RNLocalize, setI18nConfig } from 'locales/i18n'
 import React, { useEffect } from 'react'
 import FlashMessage from 'react-native-flash-message'
 
-import AppNavigation from '../AppNavigation'
+import Navigation from '../Navigation'
 
 setI18nConfig()
 
@@ -16,7 +16,7 @@ const App = () => {
 
   return (
     <>
-      <AppNavigation />
+      <Navigation />
       <FlashMessage position="top" />
     </>
   )

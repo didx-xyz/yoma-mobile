@@ -5,7 +5,25 @@ import { UserResponse } from '../Auth/Auth.types'
 import { UpdateUserFailureResponse, UpdateUserResponse, UserPayload } from './User.types'
 
 const name = '[User]'
-export const INITIAL_STATE = {}
+export const INITIAL_STATE = {
+  id: '',
+  firstName: '',
+  lastName: '',
+  email: '',
+  countryAlpha2: '',
+  phoneNumber: null,
+  biography: '',
+  zltoWalletId: null,
+  zltoBalance: 0,
+  covidChallengeCertificateURL: null,
+  tideChallengeCertificateURL: null,
+  photoURL: null,
+  organisationId: null,
+  organisation: null,
+  organisationVerified: false,
+  createdAt: null,
+  lastLogin: null,
+}
 
 export const setUser = createAction<UserResponse>(`${name} setUser`)
 export const updateUser = createAction<UserPayload>(`${name} updateUser`)
