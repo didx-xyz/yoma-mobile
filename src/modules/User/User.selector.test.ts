@@ -1,3 +1,5 @@
+import { rootStateFixture } from 'redux/redux.test.fixtures'
+
 import { USER_RESPONSE } from './../Profile/Profile.constants'
 import { INITIAL_STATE } from './User.reducer'
 import * as SUT from './User.selector'
@@ -41,6 +43,23 @@ describe('modules/User/User.selector', () => {
       const result = SUT.selectUser(state)
       // then ... should return result as expected
       expect(result).toEqual(state.user)
+    })
+    it('should return the default user state', () => {
+      const state = { user: INITIAL_STATE }
+      // when ... we call the selector
+      const result = SUT.selectUser(state)
+      // then ... should return result as expected
+      expect(result).toEqual(state.user)
+    })
+  })
+  describe('selectUserId ', () => {
+    it('should return user id property from user state', () => {
+      // given ...
+      const state = rootStateFixture({})
+      // when ... we call the selector
+      const result = SUT.selectUserId(state)
+      // then ... should return user id as expected
+      expect(result).toEqual('USER_ID')
     })
     it('should return the default user state', () => {
       const state = { user: INITIAL_STATE }

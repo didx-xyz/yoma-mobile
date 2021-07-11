@@ -8,7 +8,8 @@ import { actions as ApiActions } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
 import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
 import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
-import { extractUserFromUserUpdateSuccess, selectUserFromLoginPayload, selectUserId } from './User.utils'
+import { selectUserId } from './User.selector'
+import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
 
 export const setUserOnAuthFlow: Middleware =
   ({ dispatch }) =>
@@ -16,7 +17,7 @@ export const setUserOnAuthFlow: Middleware =
   action => {
     const result = next(action)
     if (authLoginSuccess.match(action)) {
-      const credentials = selectUserFromLoginPayload(action)
+      const credentials = extractUserFromLoginPayload(action)
       dispatch(setUser(credentials))
     }
     return result

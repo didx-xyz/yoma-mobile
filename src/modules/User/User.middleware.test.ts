@@ -8,7 +8,7 @@ import { constants as ApiUserConstants } from '../../api/users'
 import { USER_RESPONSE } from './../Profile/Profile.constants'
 import * as SUT from './User.middleware'
 import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
-import { extractUserFromUserUpdateSuccess, selectUserFromLoginPayload } from './User.utils'
+import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
@@ -34,7 +34,7 @@ describe('modules/User/User.middleware', () => {
       const action = authLoginSuccess(credentials)
       // @ts-ignore
       const { invoke, store } = create(SUT.setUserOnAuthFlow)
-      const userData = selectUserFromLoginPayload(action)
+      const userData = extractUserFromLoginPayload(action)
 
       // when ... we respond to the authLoginSuccess action
       invoke(action)
