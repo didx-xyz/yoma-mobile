@@ -1,11 +1,11 @@
-import { facebookSignIn, googleSignIn } from './SSOAuth.config'
 import { Providers } from './SSOAuth.types'
+import { onFacebookAuth, onGoogleAuth } from './SSOAuth.utils'
 
 export default (provider: string) => {
   switch (provider) {
     case Providers.Facebook:
-      return facebookSignIn()
+      return onFacebookAuth()
     case Providers.Google:
-      return googleSignIn()
+      return onGoogleAuth()
   }
 }

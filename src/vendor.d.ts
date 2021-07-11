@@ -21,6 +21,7 @@ declare module 'ramda' {
   export function lensPath(...rest: any[]): any
   export function isNil(...rest: any[]): any[]
   export function map(...rest: any[]): any
+  export function merge(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
   export function mergeRight(...rest: any[]): any
   export function mergeDeepRight(...rest: any[]): any
