@@ -4,24 +4,23 @@ import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'compo
 import Button, { ButtonVariants } from 'components/Button'
 import { FormikProps, FormikValues } from 'formik'
 import { UserResponse } from 'modules/Auth/Auth.types'
-import { HomeNavigationRoutes } from 'modules/Home/Home.routes'
-import { HomeNavigatorParamsList } from 'modules/Home/Home.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import { USER_RESPONSE } from './Profile.constants'
 import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
 
 interface Props {
   onLogoutUser: () => void
+  user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, onLogoutUser }: Props) => {
-  const [userResponse] = useState<UserResponse>(USER_RESPONSE)
+const Profile = ({ navigation, onLogoutUser, user }: Props) => {
+  const [userResponse] = useState<UserResponse>(user)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 

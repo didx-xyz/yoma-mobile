@@ -3,7 +3,6 @@ import Card from './Card'
 import CheckBox from './CheckBox'
 import CountBadge from './CountBadge'
 import CustomInput from './CustomInput'
-import CvCard from './CvCard'
 import DateDisplay from './DateDisplay'
 import DatePicker from './DatePicker'
 import DropDown from './DropDown'
@@ -35,7 +34,6 @@ export {
   CheckBox,
   CountBadge,
   CustomInput,
-  CvCard,
   DateDisplay,
   DatePicker,
   DropDown,

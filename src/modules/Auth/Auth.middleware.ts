@@ -1,12 +1,12 @@
 import { resetAppData } from 'modules/App/App.reducer'
-import { AuthNavigationRoutes } from 'modules/AppNavigation/Authentication/Authentication.routes'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
-import * as NavigationActions from '../AppNavigation/AppNavigation.actions'
+import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
+import * as NavigationActions from '../Navigation/Navigation.actions'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authLogin,
