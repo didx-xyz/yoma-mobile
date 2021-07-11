@@ -1,12 +1,12 @@
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
-import Navigation from 'modules/Navigation'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
+import * as Navigation from '../Navigation/Navigation.actions'
 import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
 import { selectUserId } from './User.selector'
 import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'

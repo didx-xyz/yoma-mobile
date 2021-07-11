@@ -67,7 +67,26 @@ describe('updateUserFlow', () => {
   })
   it('should correctly handle updating the user data', () => {
     // given ...
-    const mockState = rootStateFixture({})
+    const mockState = rootStateFixture({
+      user: {
+        id: 'USER_ID',
+        firstName: 'FIRST_NAME',
+        lastName: 'LAST_NAME',
+        phoneNumber: 'PHONE_NUMBER',
+        biography: 'BIOGRAPHY',
+        countryAlpha2: 'COUNTRY_ALPHA2',
+        email: 'USER_EMAIL@SOMEWHERE.TEST',
+        zltoWalletId: 'ZLTO_WALLET_ID',
+        zltoBalance: 1000,
+        covidChallengeCertificateURL: 'COVID_CHALLENGE_CERTIFICATE_URL',
+        tideChallengeCertificateURL: 'TIDE_CHALLENGE_CERTIFICATE_URL',
+        photoURL: 'PHOTO_URL',
+        role: 'ROLE',
+        organisation: 'ORGANISATION',
+        createdAt: 'CREATED_AT',
+        lastLogin: 'LAST_LOGIN',
+      },
+    })
 
     const mockAction = {
       payload: {
