@@ -1,11 +1,11 @@
-import { INITIAL_STATE } from '../User/User.reducer'
+import { rootStateFixture } from './../../redux/redux.test.fixtures'
 import * as SUT from './About.selector'
 
 describe('modules/About/About.selector', () => {
   describe('selector ', () => {
     it('should select props as expected when available in state', () => {
       // given ...
-      const state = {
+      const stateMock = rootStateFixture({
         user: {
           id: 'USER_ID',
           firstName: 'FIRST_NAME',
@@ -24,29 +24,19 @@ describe('modules/About/About.selector', () => {
           createdAt: 'CREATED_AT',
           lastLogin: 'LAST_LOGIN',
         },
-      }
+      })
       // when ... we call the selector
-      const result = SUT.default(state)
+      const result = SUT.default(stateMock)
       // then ... should return result as expected
       expect(result).toEqual({ biography: 'BIOGRAPHY' })
     })
     it('should handle empty user state', () => {
       // given ...
-      const state = {
-        user: INITIAL_STATE,
-      }
+      const stateMock = rootStateFixture({})
       // when ... we call the selector
-      const result = SUT.default(state)
+      const result = SUT.default(stateMock)
       // then ... should return result as expected
       expect(result).toEqual({ biography: '' })
-    })
-    it('should handle empty state if props not available', () => {
-      // given ...
-      const state = {}
-      // when ... we call the selector
-      const result = SUT.default(state)
-      // then ... should return result as expected
-      expect(result).toEqual({ biography: undefined })
     })
   })
 })
