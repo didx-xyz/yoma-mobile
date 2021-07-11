@@ -36,4 +36,26 @@ describe('modules/User/User.utils', () => {
       expect(result).toEqual(USER_RESPONSE)
     })
   })
+  describe('extractUserPatchPayload', () => {
+    it('should return user patch payload from user update data', () => {
+      // given ...
+      const userUpdateData = {
+        firstName: 'FIRST_NAME',
+        lastName: 'LAST_NAME',
+        photoURL: 'PHOTO_URL',
+        countryAlpha2: 'COUNTRY_ALPHA2',
+        otherKey: 'OTHER_KEY',
+      }
+      const userPatchPayload = {
+        firstName: 'FIRST_NAME',
+        lastName: 'LAST_NAME',
+        countryAlpha2: 'COUNTRY_ALPHA2',
+      }
+      // when extractUserPatchPayload
+      const result = SUT.extractUserPatchPayload(userUpdateData)
+
+      //then expect user patch payload be returned
+      expect(result).toEqual(userPatchPayload)
+    })
+  })
 })

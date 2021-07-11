@@ -10,6 +10,7 @@ import { mapToDropDownArray } from 'utils/strings.utils'
 import { profileValidationSchema } from './Profile.validationSchema'
 
 interface Props {
+  onPatchUserData: (user: any) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
   user: {
     firstName: string
@@ -20,12 +21,12 @@ interface Props {
   }
 }
 
-const ProfileForm = forwardRef(({ user }: Props, ref) => {
+const ProfileForm = forwardRef(({ user, onPatchUserData }: Props, ref) => {
   const { t } = useTranslation()
   const formRef = useRef<FormikProps<FormikValues>>(null)
 
   useImperativeHandle(ref, () => ({
-    handleSubmit() {
+    handleSubmit: () => {
       if (formRef.current) {
         formRef.current.handleSubmit()
       }
@@ -38,7 +39,7 @@ const ProfileForm = forwardRef(({ user }: Props, ref) => {
       initialValues={user}
       enableReinitialize
       validationSchema={profileValidationSchema}
-      onSubmit={() => {}}
+      onSubmit={onPatchUserData}
     >
       {formikHandlers => {
         return (

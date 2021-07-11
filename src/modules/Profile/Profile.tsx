@@ -15,22 +15,28 @@ import styles from './Profile.styles'
 
 interface Props {
   onLogoutUser: () => void
-  user: UserResponse
+  onPatchUserData: (user: any) => void
+  user: any
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, onLogoutUser, user }: Props) => {
-  const [userResponse] = useState<UserResponse>(user)
+const Profile = ({ navigation, onLogoutUser, onPatchUserData, user }: Props) => {
+  const [userData] = useState<UserResponse>(user)
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>()
 
   return (
     <ViewContainer style={styles.container}>
-      <NormalHeader navigation={navigation} headerText={'Profile'} onSave={childRef.current?.handleSubmit} />
+      <NormalHeader
+        isSaveButtonEnabled
+        navigation={navigation}
+        headerText={'Profile'}
+        onSave={childRef.current?.handleSubmit}
+      />
       <ScrollView>
         <Card style={styles.card}>
           <Optional
-            condition={!!userResponse.photoURL}
+            condition={!!userData.photoURL}
             fallback={
               <ProfilePhoto
                 borderWidth={6}
@@ -43,13 +49,13 @@ const Profile = ({ navigation, onLogoutUser, user }: Props) => {
             }
           >
             <TouchableOpacity onPress={() => {}} style={styles.imageContainer}>
-              <Image source={{ uri: userResponse.photoURL as string }} style={styles.profileImage} />
+              <Image source={{ uri: userData.photoURL as string }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>
             </TouchableOpacity>
           </Optional>
-          <ProfileForm ref={childRef} navigation={navigation} user={userResponse} />
+          <ProfileForm onPatchUserData={onPatchUserData} ref={childRef} navigation={navigation} user={userData} />
         </Card>
         <Button
           variant={ButtonVariants.Clear}
