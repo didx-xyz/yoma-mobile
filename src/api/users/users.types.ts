@@ -3,3 +3,10 @@ export enum UsersEndpoints {
   Credentials = 'credentials',
   Photo = 'photo',
 }
+
+export enum UserCredentialTypes {
+  Assignment = 'Assignment',
+  Challenge = 'Challenge',
+  Job = 'Job',
+  Qualification = 'Qualification',
+}
