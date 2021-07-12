@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { DropDown, Input, Spinner } from 'components'
+import { DropDown, Input } from 'components'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
@@ -42,7 +42,7 @@ const ProfileForm = forwardRef(({ user, onPatchUserData }: Props, ref) => {
       {formikHandlers => {
         return (
           <>
-            <Spinner visible={formikHandlers.isSubmitting} />
+            {/* <Spinner visible={formikHandlers.isSubmitting} /> */}
             <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
             <Input name={'lastName'} label={t('Surname')} handlers={formikHandlers} />
             <DropDown
