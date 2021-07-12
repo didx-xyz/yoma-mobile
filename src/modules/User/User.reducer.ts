@@ -1,7 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeDeepRight } from 'ramda'
 
-import { UserResponse } from '../Auth/Auth.types'
+import { UserResponse } from './User.types'
 
 const name = '[User]'
 export const INITIAL_STATE = {
@@ -23,6 +23,10 @@ export const INITIAL_STATE = {
   createdAt: null,
   lastLogin: null,
 }
+
+export const fetchUserCredentials = createAction(`${name} fetchUserCredentials`)
+export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserCredentialsSuccess`)
+export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
 
 export const setUser = createAction<UserResponse>(`${name} setUser`)
 
