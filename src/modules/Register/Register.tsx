@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
-import { Card, LargeHeader, SocialRegistration, ViewContainer } from 'components'
+import { Card, SocialRegistration, ViewContainer } from 'components'
 import Button from 'components/Button'
 import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import { Colors } from 'styles'
 
+import LargeHeader from '../../components/LargeHeader'
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import styles from './Register.styles'
 
