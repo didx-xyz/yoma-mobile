@@ -45,7 +45,7 @@
     "validEmailError": "Email must be a valid email",
     "passwordMinCharError": "password must be at least 8 characters",
     "passwordRegexError": "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and one special case Character",
-    "myCv": "My Cv",
+    "myCv": "My CV",
     "courses": "Courses",
     "challenges": "Challenges",
     "marketplace": "Marketplace",
