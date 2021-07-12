@@ -10,7 +10,6 @@ import DropDownTags from './DropDownTags'
 import EmptyCard from './EmptyCard'
 import FirstTimeCard from './FirstTimeCard'
 import FormWrapper from './FormWrapper'
-import HeaderContainer from './HeaderContainer'
 import HomeHeader from './HomeHeader'
 import InfoCard from './InfoCard'
 import InfoModal from './InfoModal'
@@ -44,7 +43,6 @@ export {
   FirstTimeCard,
   FormWrapper,
   OnboardingForms,
-  HeaderContainer,
   HomeHeader,
   InfoCard,
   InfoModal,
