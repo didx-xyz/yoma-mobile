@@ -39,7 +39,6 @@ const Profile = ({ navigation, onLogoutUser, onPatchUserData, user }: Props) => 
             condition={!!userData.photoURL}
             fallback={
               <ProfilePhoto
-                ref={childRef}
                 borderWidth={6}
                 outerRadius={40}
                 onPress={() => {}}
