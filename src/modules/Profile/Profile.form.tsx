@@ -27,9 +27,7 @@ const ProfileForm = forwardRef(({ user, onPatchUserData }: Props, ref) => {
 
   useImperativeHandle(ref, () => ({
     handleSubmit: () => {
-      if (formRef.current) {
-        formRef.current.handleSubmit()
-      }
+      formRef.current?.handleSubmit()
     },
   }))
 

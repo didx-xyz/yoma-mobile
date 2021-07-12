@@ -23,7 +23,7 @@ interface Props {
 const Profile = ({ navigation, onLogoutUser, onPatchUserData, user }: Props) => {
   const [userData] = useState<UserResponse>(user)
   const { t } = useTranslation()
-  const childRef = useRef<FormikProps<FormikValues>>()
+  const childRef = useRef<FormikProps<FormikValues>>(null)
 
   return (
     <ViewContainer style={styles.container}>
@@ -39,6 +39,7 @@ const Profile = ({ navigation, onLogoutUser, onPatchUserData, user }: Props) => 
             condition={!!userData.photoURL}
             fallback={
               <ProfilePhoto
+                ref={childRef}
                 borderWidth={6}
                 outerRadius={40}
                 onPress={() => {}}
@@ -55,6 +56,7 @@ const Profile = ({ navigation, onLogoutUser, onPatchUserData, user }: Props) => 
               </View>
             </TouchableOpacity>
           </Optional>
+
           <ProfileForm onPatchUserData={onPatchUserData} ref={childRef} navigation={navigation} user={userData} />
         </Card>
         <Button
