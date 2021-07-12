@@ -1,2 +1,4 @@
-Ver 0.0.1 (build 9)
-- User data in profile view
+Ver 0.0.1 (build 10)
+- fetch credential data (this shouldn't have any impact on the app yet)
+- hotfix to remove some legacy code
+
