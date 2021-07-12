@@ -1,8 +1,7 @@
-import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin'
 import { always, applySpec, merge, path, prop } from 'ramda'
-import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next'
 
-import { GOOGLE_SIGNIN_WEBCLIENT_ID } from './SSOAuth.constants'
+import { facebookAuthDependencies, googleAuthDependencies } from './../../SSOAuth/SSOAuth.types'
+import { FACEBOOK_PERMISSIONS, GOOGLE_AUTH_CONFIG, GOOGLE_SIGNIN_WEBCLIENT_ID } from './SSOAuth.constants'
 import { Providers } from './SSOAuth.types'
 
 export const extractRegistrationCredentialsFromFacebook = applySpec({
@@ -52,42 +51,39 @@ export const selectRegistrationCredentials = (authProvider: Providers, authData:
   }
 }
 
-export const onFacebookAuth = async () => {
+export const onFacebookAuth = async ({ fbLoginManager, fbProfile, fbAccessToken }: facebookAuthDependencies) => {
   try {
-    const result = await LoginManager.logInWithPermissions(['email', 'public_profile'])
-    const currentProfile = await Profile.getCurrentProfile()
-    const accessToken = await AccessToken.getCurrentAccessToken()
+    const loginResponse = await fbLoginManager.logInWithPermissions(FACEBOOK_PERMISSIONS)
 
-    if (!result.isCancelled) {
-      const authResponse = merge(currentProfile, accessToken)
-      return authResponse
+    const userProfile = await fbProfile.getCurrentProfile()
+    const accessToken = await fbAccessToken.getCurrentAccessToken()
+
+    if (!loginResponse.isCancelled) {
+      const authResponse = merge(userProfile, accessToken)
+      return authResponse as object
     }
   } catch (error) {
     throw new Error(error)
   }
 }
 
-export const onGoogleAuth = async () => {
+export const onGoogleAuth = async ({ googleSignIn, googleStatusCodes }: googleAuthDependencies) => {
   try {
-    await GoogleSignin.configure({
-      webClientId: GOOGLE_SIGNIN_WEBCLIENT_ID,
-      offlineAccess: true,
-    })
-    await GoogleSignin.hasPlayServices()
-    const authData = await GoogleSignin.signIn()
-    const authResponse = authData as object
-    return authResponse
+    await googleSignIn.configure(GOOGLE_AUTH_CONFIG)
+    await googleSignIn.hasPlayServices()
+    const authResponse = await googleSignIn.signIn()
+    return authResponse as object
   } catch (error) {
     let errorMessage
-    if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-      errorMessage = 'Play Services not available or outdated'
-    } else if (error.code === statusCodes.SIGN_IN_REQUIRED) {
-      errorMessage = 'Please sign in with your google account'
-    } else if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-      errorMessage = 'Authentication cancelled'
-    } else {
-      errorMessage = 'An error occurred'
+    if (error.code !== googleStatusCodes.SIGN_IN_CANCELLED) {
+      if (error.code === googleStatusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        errorMessage = 'Play Services not available or outdated'
+      } else if (error.code === googleStatusCodes.SIGN_IN_REQUIRED) {
+        errorMessage = 'Please sign in with your google account'
+      } else {
+        errorMessage = 'An error occurred'
+      }
+      throw new Error(errorMessage)
     }
-    throw new Error(errorMessage)
   }
 }

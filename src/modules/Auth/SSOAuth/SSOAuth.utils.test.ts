@@ -112,11 +112,30 @@ describe('modules/SSOAuth/SSOAuth.utils', () => {
   describe('onFacebookAuth', () => {
     it('should correctly return user authentication credentials from facebook', async () => {
       //given .. mocked auth response credentials
-      const authResponse = { profile: 'USER_PROFILE', token: 'TOKEN' }
+      const authResponse = { profile: 'USER_PROFILE', token: 'FACEBOOK_TOKEN' }
+
       //when user authenticates with facebook
-      const result = await SUT.onFacebookAuth()
+      const mockFacebookConfigStub = {
+        fbLoginManager: { logInWithPermissions: jest.fn().mockResolvedValue({ isCancelled: false }) },
+        fbProfile: { getCurrentProfile: jest.fn().mockResolvedValue({ profile: 'USER_PROFILE' }) },
+        fbAccessToken: { getCurrentAccessToken: jest.fn().mockResolvedValue({ token: 'FACEBOOK_TOKEN' }) },
+      }
+      const result = await SUT.onFacebookAuth(mockFacebookConfigStub)
+
       //then return response credentials
       expect(result).toEqual(authResponse)
+    })
+    it('should correctly handle cancelled facebook auth', async () => {
+      //when user cancels authenticating with facebook
+      const mockFacebookConfigStub = {
+        fbLoginManager: { logInWithPermissions: jest.fn().mockResolvedValue({ isCancelled: true }) },
+        fbProfile: { getCurrentProfile: jest.fn().mockResolvedValue({ profile: 'USER_PROFILE' }) },
+        fbAccessToken: { getCurrentAccessToken: jest.fn().mockResolvedValue({ token: 'FACEBOOK_TOKEN' }) },
+      }
+      const result = await SUT.onFacebookAuth(mockFacebookConfigStub)
+
+      //then return undefined
+      expect(result).toBeUndefined()
     })
   })
   describe('onGoogleAuth', () => {
@@ -129,9 +148,41 @@ describe('modules/SSOAuth/SSOAuth.utils', () => {
       }
 
       ///when ... user authenticate with google
-      const result = await SUT.onGoogleAuth()
+      const mockGoogleConfigStub = {
+        googleSignIn: {
+          configure: jest.fn(),
+          hasPlayServices: jest.fn(),
+          signIn: jest.fn().mockResolvedValue(authResponse),
+        },
+        googleStatusCodes: {
+          PLAY_SERVICES_NOT_AVAILABLE: false,
+          SIGN_IN_REQUIRED: false,
+          SIGN_IN_CANCELLED: false,
+        },
+      }
+      const result = await SUT.onGoogleAuth(mockGoogleConfigStub)
       //then ... validate user authentication data is returned
       expect(result).toEqual(authResponse)
+    })
+    it('should correctly handle cancelled google auth', async () => {
+      ///when ... user cancels authenticating with google
+      const statusCodes = {
+        PLAY_SERVICES_NOT_AVAILABLE: 'PLAY_SERVICES_NOT_AVAILABLE',
+        SIGN_IN_REQUIRED: 'SIGN_IN_REQUIRED',
+        SIGN_IN_CANCELLED: 'SIGN_IN_CANCELLED',
+      }
+      const mockGoogleConfigStub = {
+        googleSignIn: {
+          configure: jest.fn(),
+          hasPlayServices: jest.fn(),
+          signIn: jest.fn().mockRejectedValue({ code: statusCodes.SIGN_IN_CANCELLED }),
+        },
+        googleStatusCodes: statusCodes,
+      }
+      const result = await SUT.onGoogleAuth(mockGoogleConfigStub)
+
+      //then return undefined
+      expect(result).toBeUndefined()
     })
   })
 })
