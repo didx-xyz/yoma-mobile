@@ -6,12 +6,12 @@ export enum Providers {
   Facebook = 'facebook',
 }
 
-export type facebookAuthDependencies = {
+export type FacebookAuthDependencies = {
   fbLoginManager: typeof LoginManager
   fbProfile: typeof Profile
-  fbToken: typeof AccessToken
+  fbAccessToken: typeof AccessToken
 }
-export type googleAuthDependencies = {
+export type GoogleAuthDependencies = {
   googleSignIn: typeof GoogleSignin
   googleStatusCodes: typeof statusCodes
 }

@@ -1,6 +1,6 @@
 import { always, applySpec, merge, path, prop } from 'ramda'
 
-import { facebookAuthDependencies, googleAuthDependencies } from './../../SSOAuth/SSOAuth.types'
+import { FacebookAuthDependencies, GoogleAuthDependencies } from '../SSOAuth/SSOAuth.types'
 import { FACEBOOK_PERMISSIONS, GOOGLE_AUTH_CONFIG, GOOGLE_SIGNIN_WEBCLIENT_ID } from './SSOAuth.constants'
 import { Providers } from './SSOAuth.types'
 
@@ -51,7 +51,7 @@ export const selectRegistrationCredentials = (authProvider: Providers, authData:
   }
 }
 
-export const onFacebookAuth = async ({ fbLoginManager, fbProfile, fbAccessToken }: facebookAuthDependencies) => {
+export const onFacebookAuth = async ({ fbLoginManager, fbProfile, fbAccessToken }: FacebookAuthDependencies) => {
   try {
     const loginResponse = await fbLoginManager.logInWithPermissions(FACEBOOK_PERMISSIONS)
 
@@ -67,7 +67,7 @@ export const onFacebookAuth = async ({ fbLoginManager, fbProfile, fbAccessToken 
   }
 }
 
-export const onGoogleAuth = async ({ googleSignIn, googleStatusCodes }: googleAuthDependencies) => {
+export const onGoogleAuth = async ({ googleSignIn, googleStatusCodes }: GoogleAuthDependencies) => {
   try {
     await googleSignIn.configure(GOOGLE_AUTH_CONFIG)
     await googleSignIn.hasPlayServices()

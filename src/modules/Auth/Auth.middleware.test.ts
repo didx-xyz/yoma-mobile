@@ -85,7 +85,7 @@ describe('modules/Auth/Auth.middleware', () => {
       const mockSocialLogin = jest.fn().mockResolvedValue(true)
       const action = authSocialLogin('provider')
       // @ts-ignore
-      const { invoke, next } = create(SUT.authSocialLoginFlow({ SSOAuth: mockSocialLogin }))
+      const { invoke, next } = create(SUT.authSocialLoginFlow({ ssoAuth: mockSocialLogin }))
       invoke(action)
 
       expect(next).toHaveBeenCalledWith(action)
@@ -98,7 +98,7 @@ describe('modules/Auth/Auth.middleware', () => {
       })
       const action = authSocialLogin('provider')
       // @ts-ignore
-      const { store, invoke } = create(SUT.authSocialLoginFlow({ SSOAuth: mockSocialLogin }))
+      const { store, invoke } = create(SUT.authSocialLoginFlow({ ssoAuth: mockSocialLogin }))
       invoke(action)
 
       expect(store.dispatch).toHaveBeenCalledWith(authSocialLoginFailure)
@@ -110,7 +110,7 @@ describe('modules/Auth/Auth.middleware', () => {
       // given ... the action is fired
       const action = authSocialLogin('provider')
       // @ts-ignore
-      const { invoke } = create(SUT.authSocialLoginFlow({ SSOAuth: mockSocialLogin, notification: mockNotification }))
+      const { invoke } = create(SUT.authSocialLoginFlow({ ssoAuth: mockSocialLogin, notification: mockNotification }))
       invoke(action)
 
       expect(mockSocialLogin).toHaveBeenCalled()
@@ -153,7 +153,7 @@ describe('modules/Auth/Auth.middleware', () => {
       const mockSocialRegistration = jest.fn().mockResolvedValue(true)
       const action = authSocialRegistration('provider')
       // @ts-ignore
-      const { invoke, next } = create(SUT.authSocialRegistrationFlow({ SSOAuth: mockSocialRegistration }))
+      const { invoke, next } = create(SUT.authSocialRegistrationFlow({ ssoAuth: mockSocialRegistration }))
       invoke(action)
 
       expect(next).toHaveBeenCalledWith(action)
@@ -166,7 +166,7 @@ describe('modules/Auth/Auth.middleware', () => {
       })
       const action = authSocialRegistration('provider')
       // @ts-ignore
-      const { invoke, store } = create(SUT.authSocialRegistrationFlow({ SSOAuth: mockSocialRegistration }))
+      const { invoke, store } = create(SUT.authSocialRegistrationFlow({ ssoAuth: mockSocialRegistration }))
       invoke(action)
 
       expect(store.dispatch).toHaveBeenCalledWith(authSocialRegistrationFailure)
@@ -177,7 +177,7 @@ describe('modules/Auth/Auth.middleware', () => {
       // given ... the action is fired
       const action = authSocialRegistration('provider')
       // @ts-ignore
-      const { invoke } = create(SUT.authSocialRegistrationFlow({ SSOAuth: mockSocialRegistration }))
+      const { invoke } = create(SUT.authSocialRegistrationFlow({ ssoAuth: mockSocialRegistration }))
       invoke(action)
 
       expect(mockSocialRegistration).toHaveBeenCalled()
