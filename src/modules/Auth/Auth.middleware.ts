@@ -1,4 +1,4 @@
-import { resetAppData } from 'modules/App/App.reducer'
+import { actions as AppActions } from 'modules/App'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -7,7 +7,7 @@ import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
 import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
 import * as NavigationActions from '../Navigation/Navigation.actions'
-import { selectUserId } from '../User/User.selector'
+import { selectId } from '../User/User.selector'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   login,
@@ -67,7 +67,7 @@ export const authorizeWithRefreshTokenFlow: Middleware =
     const result = next(action)
     if (getSecureRefreshTokenSuccess.match(action)) {
       const state = getState()
-      const userId = selectUserId(state)
+      const userId = selectId(state)
       const refreshToken = action.payload
       dispatch(
         ApiActions.apiRequest(
@@ -117,6 +117,7 @@ export const loginSuccessFlow =
       notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
       dispatch(setSecureRefreshToken(refreshToken))
+      dispatch(AppActions.hydrateApp())
     }
     return result
   }
@@ -162,7 +163,7 @@ export const logoutFlow: Middleware =
     const result = next(action)
 
     if (logout.match(action)) {
-      dispatch(resetAppData())
+      dispatch(AppActions.resetAppData())
     }
 
     return result

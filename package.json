@@ -21,12 +21,10 @@
     "init": "npm-run-all env:dev init:ios",
     "init:ios": "npx pod-install",
     "ios": "react-native run-ios",
-    "lint": "eslint . --ignore-path .gitignore",
-    "lint:check": "eslint 'src/**/*.{ts,tsx}' --ignore-path .gitignore",
-    "lint:fix": "eslint 'src/**/*.{ts,tsx}' --ignore-path .gitignore --fix",
+    "lint": "eslint . --ignore-path .gitignore --ignore-path .eslintignore",
+    "lint:check": "npm run lint",
+    "lint:fix": "npm run lint --fix",
     "npm:audit": "audit-ci --critical",
-    "prettier:check": "prettier --check 'src/**/*.{ts,tsx}'",
-    "prettier:fix": "prettier --write 'src/**/*.{ts,tsx}'",
     "reset": "npx rimraf node_modules && npm i && npx pod-install",
     "start": "react-native start",
     "start:reset": "react-native start --reset-cache",
@@ -78,12 +76,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.14.7",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "@testing-library/jest-native": "^4.0.1",
     "@testing-library/react-native": "^7.2.0",
     "@trivago/prettier-plugin-sort-imports": "^1.4.4",
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.2",
     "@types/react-native-fbsdk": "^3.0.0",
     "@types/react-redux": "^7.1.16",
@@ -106,7 +105,7 @@
     "metro-react-native-babel-preset": "^0.64.0",
     "npm-run-all": "^4.1.5",
     "package-json-help": "0.0.10",
-    "prettier": "^2.3.1",
+    "prettier": "^2.0.5",
     "pretty-quick": "^3.1.0",
     "react-test-renderer": "17.0.1",
     "redux-devtools-extension": "^2.13.8",
@@ -125,11 +124,12 @@
   },
   "jest": {
     "preset": "react-native",
-    "moduleNameMapper": {
-      "\\.svg": "<rootDir>/__mocks__/svgMock.js"
-    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@react-native|react-native)/.*)(?!(@react-native-google-signin)/.*)(?!(@react-navigation|react-navigation)/.*)(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ],
     "setupFiles": [
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
+      "<rootDir>/tests/jest.setup.js",
+      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "moduleFileExtensions": [
       "ts",

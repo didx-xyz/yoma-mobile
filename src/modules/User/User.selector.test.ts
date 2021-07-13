@@ -1,7 +1,6 @@
 import { rootStateFixture } from '../../redux/redux.test.fixtures'
-import { USER_RESPONSE } from '../Profile/Profile.constants'
-import { INITIAL_STATE } from './User.reducer'
 import * as SUT from './User.selector'
+import { USER_RESPONSE } from './User.test.fixtures'
 
 describe('modules/User/User.selector', () => {
   describe('selectUser ', () => {
@@ -15,7 +14,7 @@ describe('modules/User/User.selector', () => {
       expect(result).toEqual(stateMock.user)
     })
     it('should return the default user state', () => {
-      const stateMock = rootStateFixture({ user: INITIAL_STATE })
+      const stateMock = rootStateFixture()
       // when ... we call the selector
       const result = SUT.selectUser(stateMock)
       // then ... should return result as expected
@@ -51,12 +50,12 @@ describe('modules/User/User.selector', () => {
       expect(result).toEqual('BIOGRAPHY')
     })
   })
-  describe('selectUserId ', () => {
+  describe('selectId ', () => {
     it('should return the default value for the id if none exists', () => {
       // given ... no user data available
       const stateMock = rootStateFixture()
       // when ... we get the user's id
-      const result = SUT.selectUserId(stateMock)
+      const result = SUT.selectId(stateMock)
       // then ... should return an empty string
       expect(result).toBe('')
     })
@@ -66,7 +65,7 @@ describe('modules/User/User.selector', () => {
         user: { ...USER_RESPONSE, id: 'A USER ID' },
       })
       // when ... we get the user's id
-      const result = SUT.selectUserId(stateMock)
+      const result = SUT.selectId(stateMock)
       // then ... we should the user's id returned
       expect(result).toBe('A USER ID')
     })
