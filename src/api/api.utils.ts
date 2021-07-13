@@ -20,15 +20,13 @@ import {
 
 import { RootState } from '../redux/redux.types'
 import { StdObj } from '../types/general.types'
-import { ApiCall, ApiClientArgs, ApiMeta, GenerateEndpoint, PrepareApiRequestData } from './api.types'
-
-export const generateEndpoint: GenerateEndpoint = join('/')
+import { ApiCall, ApiClientArgs, ApiMeta, PrepareApiRequestData } from './api.types'
 
 export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<ApiMeta>) =>
   pipe(objOf(key), mergeDeepRight(config))
 
 export const addIdAsEndpointToConfig = addValueWithGivenKeyToConfig('endpoint')
-export const addIdBeforeEndpointInConfig = (config: Partial<ApiMeta>) => (id: number) =>
+export const prependIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: string) =>
   evolve({
     endpoint: pipe(of, concat([id])),
   })(config)
