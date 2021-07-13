@@ -14,6 +14,7 @@ import {
 const name = '[Auth]'
 export const INITIAL_STATE = {} as AuthState
 
+export const authorize = createAction<AuthCredentials>(`${name} authorize`)
 export const login = createAction<AuthCredentials>(`${name} login`)
 export const loginSuccess = createAction<AuthLoginSuccessResponse>(`${name} loginSuccess`)
 export const loginFailure = createAction<AuthLoginFailureResponse>(`${name} loginFailure`)
@@ -30,6 +31,12 @@ export const setSecureRefreshTokenFailure = createAction<any>(`${name} setSecure
 export const getSecureRefreshToken = createAction(`${name} getSecureRefreshToken`)
 export const getSecureRefreshTokenSuccess = createAction<string>(`${name} getSecureRefreshTokenSuccess`)
 export const getSecureRefreshTokenFailure = createAction<string>(`${name} getSecureRefreshTokenFailure`)
+
+export const noRefreshTokenInSecureStore = createAction(`${name} noRefreshTokenInSecureStore`)
+
+export const deleteSecureRefreshToken = createAction(`${name} deleteSecureRefreshToken`)
+export const deleteSecureRefreshTokenSuccess = createAction(`${name} deleteSecureRefreshTokenSuccess`)
+export const deleteSecureRefreshTokenFailure = createAction<string>(`${name} deleteSecureRefreshTokenFailure`)
 
 export const authWithRefreshTokenSuccess = createAction<string>(`${name} authWithRefreshTokenSuccess`)
 export const authWithRefreshTokenFailure = createAction<string>(`${name} authWithRefreshTokenFailure`)

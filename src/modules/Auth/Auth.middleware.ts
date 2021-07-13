@@ -1,5 +1,6 @@
+import { isAnyOf } from '@reduxjs/toolkit'
 import { actions as AppActions } from 'modules/App'
-import { mergeRight } from 'ramda'
+import { isNil, mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
@@ -7,7 +8,7 @@ import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
 import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
 import * as NavigationActions from '../Navigation/Navigation.actions'
-import { selectId } from '../User/User.selector'
+import { selectors as UserSelectors } from '../User'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   login,
@@ -27,12 +28,18 @@ import {
   setSecureRefreshTokenFailure,
   setSecureRefreshTokenSuccess,
   setUserLoginCredentials,
+  authorize,
+  noRefreshTokenInSecureStore,
+  deleteSecureRefreshToken,
+  deleteSecureRefreshTokenSuccess,
+  deleteSecureRefreshTokenFailure,
 } from './Auth.reducer'
 import { selectLoginCredentials } from './Auth.selector'
+import { SecureStorageRefreshToken } from './Auth.types'
 import {
-  selectCredentialsFromLoginPayload,
+  extractCredentialsFromAuthorizedPayload,
   selectLoginCredentialsFromRegistration,
-  selectRefreshTokenFromLoginPayload,
+  extractRefreshTokenFromAuthorizedPayload,
 } from './Auth.utils'
 
 export const authorizeFlow: Middleware =
@@ -40,7 +47,7 @@ export const authorizeFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    if (login.match(action)) {
+    if (authorize.match(action)) {
       dispatch(getSecureRefreshToken())
     }
     return result
@@ -50,11 +57,13 @@ export const getSecureRefreshTokenFlow =
   (getSecureItem: any): Middleware =>
   ({ dispatch }) =>
   next =>
-  action => {
+  async action => {
     const result = next(action)
-    if (login.match(action)) {
-      getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
-        .then((data: string) => dispatch(getSecureRefreshTokenSuccess(data)))
+    if (getSecureRefreshToken.match(action)) {
+      await getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
+        .then((data: SecureStorageRefreshToken) => {
+          data === null ? dispatch(noRefreshTokenInSecureStore()) : dispatch(getSecureRefreshTokenSuccess(data))
+        })
         .catch((error: any) => dispatch(getSecureRefreshTokenFailure(error.message)))
     }
     return result
@@ -67,7 +76,7 @@ export const authorizeWithRefreshTokenFlow: Middleware =
     const result = next(action)
     if (getSecureRefreshTokenSuccess.match(action)) {
       const state = getState()
-      const userId = selectId(state)
+      const userId = UserSelectors.selectId(state)
       const refreshToken = action.payload
       dispatch(
         ApiActions.apiRequest(
@@ -78,6 +87,19 @@ export const authorizeWithRefreshTokenFlow: Middleware =
           { userId, refreshToken },
         ),
       )
+    }
+
+    return result
+  }
+
+export const authWithRefreshTokenFailureFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (isAnyOf(authWithRefreshTokenFailure, noRefreshTokenInSecureStore, getSecureRefreshTokenFailure)(action)) {
+      dispatch(logout())
     }
 
     return result
@@ -104,16 +126,16 @@ export const loginFlow: Middleware =
     return result
   }
 
-export const loginSuccessFlow =
+export const authorizeSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (loginSuccess.match(action)) {
-      const credentials = selectCredentialsFromLoginPayload(action)
-      const refreshToken = selectRefreshTokenFromLoginPayload(action)
+    if (isAnyOf(loginSuccess, authWithRefreshTokenSuccess)(action)) {
+      const credentials = extractCredentialsFromAuthorizedPayload(action)
+      const refreshToken = extractRefreshTokenFromAuthorizedPayload(action)
       notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
       dispatch(setSecureRefreshToken(refreshToken))
@@ -164,6 +186,27 @@ export const logoutFlow: Middleware =
 
     if (logout.match(action)) {
       dispatch(AppActions.resetAppData())
+      dispatch(deleteSecureRefreshToken())
+    }
+
+    return result
+  }
+
+export const deleteSecureRefreshTokenFlow =
+  (deleteSecureItem: any): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  async action => {
+    const result = next(action)
+
+    if (deleteSecureRefreshToken.match(action)) {
+      await deleteSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
+        .then(() => {
+          dispatch(deleteSecureRefreshTokenSuccess())
+        })
+        .catch((error: any) => {
+          dispatch(deleteSecureRefreshTokenFailure(error))
+        })
     }
 
     return result
