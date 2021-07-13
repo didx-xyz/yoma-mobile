@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { CvCard, FirstTimeCard, HomeHeader, ViewContainer } from 'components'
+import { FirstTimeCard, HomeHeader, ViewContainer } from 'components'
+import CvCard from 'components/CvCard'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -23,7 +24,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
         <CvCard
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
-          text={biography}
+          content={biography}
           hasCountBadge={false}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.About)}
         />
