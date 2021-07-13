@@ -1,6 +1,6 @@
 import { setItemAsync } from 'expo-secure-store'
 import { middleware as appMiddleware } from 'modules/App'
-import ssoAuth from 'modules/Auth/SSOAuth'
+import ssoAuth from 'modules/SSOAuth'
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
 

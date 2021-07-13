@@ -101,7 +101,7 @@ describe('modules/Auth/Auth.middleware', () => {
       const { store, invoke } = create(SUT.authSocialLoginFlow({ ssoAuth: mockSocialLogin }))
       invoke(action)
 
-      expect(store.dispatch).toHaveBeenCalledWith(authSocialLoginFailure)
+      expect(store.dispatch).toHaveBeenCalledWith(authSocialLoginFailure('FAILURE'))
     })
     it('should correctly get user data from the provider', () => {
       const create = createMiddlewareMock(jest)
@@ -169,7 +169,7 @@ describe('modules/Auth/Auth.middleware', () => {
       const { invoke, store } = create(SUT.authSocialRegistrationFlow({ ssoAuth: mockSocialRegistration }))
       invoke(action)
 
-      expect(store.dispatch).toHaveBeenCalledWith(authSocialRegistrationFailure)
+      expect(store.dispatch).toHaveBeenCalledWith(authSocialRegistrationFailure('FAILURE'))
     })
     it('should correctly get user data from the provider', () => {
       const create = createMiddlewareMock(jest)

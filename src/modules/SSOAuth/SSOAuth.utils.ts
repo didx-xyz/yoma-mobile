@@ -1,8 +1,7 @@
 import { always, applySpec, merge, path, prop } from 'ramda'
 
-import { FacebookAuthDependencies, GoogleAuthDependencies } from '../SSOAuth/SSOAuth.types'
 import { FACEBOOK_PERMISSIONS, GOOGLE_AUTH_CONFIG, GOOGLE_SIGNIN_WEBCLIENT_ID } from './SSOAuth.constants'
-import { Providers } from './SSOAuth.types'
+import { FacebookAuthDependencies, GoogleAuthDependencies, Providers } from './SSOAuth.types'
 
 export const extractRegistrationCredentialsFromFacebook = applySpec({
   email: prop('email'),
@@ -51,7 +50,12 @@ export const selectRegistrationCredentials = (authProvider: Providers, authData:
   }
 }
 
-export const onFacebookAuth = async ({ fbLoginManager, fbProfile, fbAccessToken }: FacebookAuthDependencies) => {
+export const onFacebookAuth = async ({
+  fbLoginManager,
+  fbProfile,
+  fbAccessToken,
+  fbAuthCancelledErrorMessage = 'Sign in cancelled',
+}: FacebookAuthDependencies) => {
   try {
     const loginResponse = await fbLoginManager.logInWithPermissions(FACEBOOK_PERMISSIONS)
 
@@ -61,29 +65,21 @@ export const onFacebookAuth = async ({ fbLoginManager, fbProfile, fbAccessToken 
     if (!loginResponse.isCancelled) {
       const authResponse = merge(userProfile, accessToken)
       return authResponse as object
+    } else {
+      throw new Error(fbAuthCancelledErrorMessage)
     }
   } catch (error) {
-    throw new Error(error)
+    throw new Error(error.message)
   }
 }
 
-export const onGoogleAuth = async ({ googleSignIn, googleStatusCodes }: GoogleAuthDependencies) => {
+export const onGoogleAuth = async ({ googleSignIn }: GoogleAuthDependencies) => {
   try {
     await googleSignIn.configure(GOOGLE_AUTH_CONFIG)
     await googleSignIn.hasPlayServices()
     const authResponse = await googleSignIn.signIn()
     return authResponse as object
   } catch (error) {
-    let errorMessage
-    if (error.code !== googleStatusCodes.SIGN_IN_CANCELLED) {
-      if (error.code === googleStatusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
-        errorMessage = 'Play Services not available or outdated'
-      } else if (error.code === googleStatusCodes.SIGN_IN_REQUIRED) {
-        errorMessage = 'Please sign in with your google account'
-      } else {
-        errorMessage = 'An error occurred'
-      }
-      throw new Error(errorMessage)
-    }
+    throw new Error(error.message)
   }
 }

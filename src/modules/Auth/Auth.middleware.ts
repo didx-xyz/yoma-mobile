@@ -7,6 +7,8 @@ import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
 import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
 import * as NavigationActions from '../Navigation/Navigation.actions'
+import { Providers } from '../SSOAuth/SSOAuth.types'
+import { selectRegistrationCredentials, selectSocialLoginCredentials } from '../SSOAuth/SSOAuth.utils'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authLogin,
@@ -34,8 +36,6 @@ import {
   selectLoginCredentialsFromRegistration,
   selectRefreshTokenFromLoginPayload,
 } from './Auth.utils'
-import { Providers } from './SSOAuth/SSOAuth.types'
-import { selectRegistrationCredentials, selectSocialLoginCredentials } from './SSOAuth/SSOAuth.utils'
 
 export const authLoginFlow: Middleware =
   ({ dispatch }) =>
@@ -70,7 +70,7 @@ export const authSocialLoginFlow =
         const credentials = selectSocialLoginCredentials(authProvider, authData)
         dispatch(authSocialLoginSuccess(credentials))
       } catch (error) {
-        dispatch(authSocialLoginFailure)
+        dispatch(authSocialLoginFailure(error.message))
       }
     }
     return result
@@ -110,7 +110,7 @@ export const authSocialRegistrationFlow =
         const credentials = selectRegistrationCredentials(authProvider, authData)
         dispatch(authSocialRegistrationSuccess(credentials))
       } catch (error) {
-        dispatch(authSocialRegistrationFailure)
+        dispatch(authSocialRegistrationFailure(error.message))
       }
     }
     return result
@@ -146,7 +146,7 @@ export const authSocialRegistrationFailureFlow =
     if (authSocialRegistrationFailure.match(action)) {
       // TODO: this should be handled by the notification module
       // @ts-ignore
-      notification('danger', 'An error occurred.', action.payload.message)
+      notification('danger', 'An error occurred.', action.payload)
     }
 
     return result
@@ -162,7 +162,7 @@ export const authSocialLoginFailureFlow =
     if (authSocialLoginFailure.match(action)) {
       // TODO: this should be handled by the notification module
       // @ts-ignore
-      notification('danger', 'An error occurred.', action.payload.message)
+      notification('danger', 'An error occurred.', action.payload)
     }
 
     return result
