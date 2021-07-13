@@ -50,12 +50,7 @@ export const selectRegistrationCredentials = (authProvider: Providers, authData:
   }
 }
 
-export const onFacebookAuth = async ({
-  fbLoginManager,
-  fbProfile,
-  fbAccessToken,
-  fbAuthCancelledErrorMessage = 'Sign in cancelled',
-}: FacebookAuthDependencies) => {
+export const onFacebookAuth = async ({ fbLoginManager, fbProfile, fbAccessToken }: FacebookAuthDependencies) => {
   try {
     const loginResponse = await fbLoginManager.logInWithPermissions(FACEBOOK_PERMISSIONS)
 
@@ -66,20 +61,24 @@ export const onFacebookAuth = async ({
       const authResponse = merge(userProfile, accessToken)
       return authResponse as object
     } else {
-      throw new Error(fbAuthCancelledErrorMessage)
+      return false
     }
   } catch (error) {
     throw new Error(error.message)
   }
 }
 
-export const onGoogleAuth = async ({ googleSignIn }: GoogleAuthDependencies) => {
+export const onGoogleAuth = async ({ googleSignIn, googleStatusCodes }: GoogleAuthDependencies) => {
   try {
     await googleSignIn.configure(GOOGLE_AUTH_CONFIG)
     await googleSignIn.hasPlayServices()
     const authResponse = await googleSignIn.signIn()
     return authResponse as object
   } catch (error) {
-    throw new Error(error.message)
+    if (error.code === googleStatusCodes.SIGN_IN_CANCELLED) {
+      return false
+    } else {
+      throw new Error(error.message)
+    }
   }
 }

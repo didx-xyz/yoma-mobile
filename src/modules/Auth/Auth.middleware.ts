@@ -67,8 +67,10 @@ export const authSocialLoginFlow =
       try {
         const authProvider = action.payload as Providers
         const authData = await ssoAuth(authProvider)
-        const credentials = selectSocialLoginCredentials(authProvider, authData)
-        dispatch(authSocialLoginSuccess(credentials))
+        if (authData !== false) {
+          const credentials = selectSocialLoginCredentials(authProvider, authData)
+          dispatch(authSocialLoginSuccess(credentials))
+        }
       } catch (error) {
         dispatch(authSocialLoginFailure(error.message))
       }
@@ -107,8 +109,10 @@ export const authSocialRegistrationFlow =
       try {
         const authProvider = action.payload as Providers
         const authData = await ssoAuth(authProvider)
-        const credentials = selectRegistrationCredentials(authProvider, authData)
-        dispatch(authSocialRegistrationSuccess(credentials))
+        if (authData !== false) {
+          const credentials = selectRegistrationCredentials(authProvider, authData)
+          dispatch(authSocialRegistrationSuccess(credentials))
+        }
       } catch (error) {
         dispatch(authSocialRegistrationFailure(error.message))
       }

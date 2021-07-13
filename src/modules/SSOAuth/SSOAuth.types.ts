@@ -1,17 +1,14 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin'
-import { AccessToken, LoginManager, Profile } from 'react-native-fbsdk-next'
-
 export enum Providers {
   Google = 'google',
   Facebook = 'facebook',
 }
 
 export type FacebookAuthDependencies = {
-  fbLoginManager: typeof LoginManager | any
-  fbProfile: typeof Profile | any
-  fbAccessToken: typeof AccessToken | any
-  fbAuthCancelledErrorMessage?: string
+  fbLoginManager: any
+  fbProfile: any
+  fbAccessToken: any
 }
 export type GoogleAuthDependencies = {
-  googleSignIn: typeof GoogleSignin | any
+  googleSignIn: any
+  googleStatusCodes: any
 }

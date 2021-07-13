@@ -131,14 +131,11 @@ describe('modules/SSOAuth/SSOAuth.utils', () => {
         fbLoginManager: { logInWithPermissions: jest.fn().mockResolvedValue({ isCancelled: true }) },
         fbProfile: { getCurrentProfile: jest.fn().mockResolvedValue({ profile: 'USER_PROFILE' }) },
         fbAccessToken: { getCurrentAccessToken: jest.fn().mockResolvedValue({ token: 'FACEBOOK_TOKEN' }) },
-        fbAuthCancelledErrorMessage: 'ERROR',
       }
-      try {
-        await SUT.onFacebookAuth(mockFacebookConfigStub)
-      } catch (e) {
-        //then throw cancelled error
-        expect(e.message).toMatch('ERROR')
-      }
+
+      const result = await SUT.onFacebookAuth(mockFacebookConfigStub)
+      //then return false
+      expect(result).toBe(false)
     })
   })
   describe('onGoogleAuth', () => {
@@ -157,6 +154,9 @@ describe('modules/SSOAuth/SSOAuth.utils', () => {
           hasPlayServices: jest.fn(),
           signIn: jest.fn().mockResolvedValue(authResponse),
         },
+        googleStatusCodes: {
+          SIGN_IN_CANCELLED: 'SIGN_IN_CANCELLED',
+        },
       }
       const result = await SUT.onGoogleAuth(mockGoogleConfigStub)
       //then ... validate user authentication data is returned
@@ -169,14 +169,16 @@ describe('modules/SSOAuth/SSOAuth.utils', () => {
         googleSignIn: {
           configure: jest.fn(),
           hasPlayServices: jest.fn(),
-          signIn: jest.fn().mockRejectedValue({ message: 'ERROR' }),
+          signIn: jest.fn().mockRejectedValue({ message: 'ERROR', code: 'SIGN_IN_CANCELLED' }),
+        },
+        googleStatusCodes: {
+          SIGN_IN_CANCELLED: 'SIGN_IN_CANCELLED',
         },
       }
-      try {
-        await SUT.onGoogleAuth(mockGoogleConfigStub)
-      } catch (e) {
-        expect(e.message).toMatch('ERROR')
-      }
+
+      const result = await SUT.onGoogleAuth(mockGoogleConfigStub)
+      //then return false
+      expect(result).toBe(false)
     })
   })
 })
