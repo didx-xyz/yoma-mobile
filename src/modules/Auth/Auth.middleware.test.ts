@@ -28,6 +28,7 @@ import {
 } from './Auth.test.fixtures'
 
 describe('modules/Auth/Auth.middleware', () => {
+  // TODO: Add tests:
   describe('authorizeFlow', () => {
     it('should correctly handle being called', async () => {
       // given ... the login action is fired
@@ -74,6 +75,7 @@ describe('modules/Auth/Auth.middleware', () => {
       )
     })
   })
+  // TODO: Add tests:
   describe('getSecureRefreshTokenFlow', () => {
     it('should correctly handle being called', async () => {
       // given ... the login action is fired
@@ -120,6 +122,7 @@ describe('modules/Auth/Auth.middleware', () => {
       )
     })
   })
+  // TODO: Add tests:
   describe('authorizeWithRefreshTokenFlow', () => {
     it('should correctly handle being called', async () => {
       // given ... the login action is fired
@@ -166,6 +169,7 @@ describe('modules/Auth/Auth.middleware', () => {
       )
     })
   })
+  // TODO: Add tests:
   describe('authorizeWithRefreshTokenFailureFlow', () => {
     it('should correctly handle being called', async () => {
       // given ... the login action is fired
@@ -391,6 +395,7 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(resetAppData())
     })
   })
+  // TODO: Add tests:
   describe('deleteSecureRefreshTokenFlow', () => {
     it('should correctly logout the user', async () => {
       // given ... the logout action is fired
