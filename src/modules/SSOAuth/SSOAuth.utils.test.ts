@@ -137,6 +137,21 @@ describe('modules/SSOAuth/SSOAuth.utils', () => {
       //then return false
       expect(result).toBe(false)
     })
+    it('should correctly handle facebook auth errors', async () => {
+      //when user cancels authenticating with facebook
+      const mockFacebookConfigStub = {
+        fbLoginManager: { logInWithPermissions: jest.fn().mockRejectedValue({ message: 'ERROR' }) },
+        fbProfile: { getCurrentProfile: jest.fn().mockResolvedValue({ profile: 'USER_PROFILE' }) },
+        fbAccessToken: { getCurrentAccessToken: jest.fn().mockResolvedValue({ token: 'FACEBOOK_TOKEN' }) },
+      }
+
+      try {
+        await SUT.onFacebookAuth(mockFacebookConfigStub)
+      } catch (error) {
+        //then return thrown error
+        expect(error.message).toMatch('ERROR')
+      }
+    })
   })
   describe('onGoogleAuth', () => {
     it('should correctly return user authentication credentials from google', async () => {
@@ -179,6 +194,26 @@ describe('modules/SSOAuth/SSOAuth.utils', () => {
       const result = await SUT.onGoogleAuth(mockGoogleConfigStub)
       //then return false
       expect(result).toBe(false)
+    })
+    it('should correctly handle google auth errors', async () => {
+      ///when ... user cancels authenticating with google
+
+      const mockGoogleConfigStub = {
+        googleSignIn: {
+          configure: jest.fn(),
+          hasPlayServices: jest.fn(),
+          signIn: jest.fn().mockRejectedValue({ message: 'PLAY_SERVICES_NOT_AVAILABLE' }),
+        },
+        googleStatusCodes: {
+          PLAY_SERVICES_NOT_AVAILABLE: 'PLAY_SERVICES_NOT_AVAILABLE',
+        },
+      }
+      try {
+        await SUT.onGoogleAuth(mockGoogleConfigStub)
+      } catch (error) {
+        //then return thrown error
+        expect(error.message).toMatch('PLAY_SERVICES_NOT_AVAILABLE')
+      }
     })
   })
 })
