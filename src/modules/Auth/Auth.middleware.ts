@@ -1,6 +1,6 @@
 import { isAnyOf } from '@reduxjs/toolkit'
 import { actions as AppActions } from 'modules/App'
-import { isNil, mergeRight } from 'ramda'
+import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
