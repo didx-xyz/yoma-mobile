@@ -1,12 +1,13 @@
-import { setItemAsync } from 'expo-secure-store'
-import { middleware as appMiddleware } from 'modules/App'
+import * as SecureStore from 'expo-secure-store'
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
 
-import { apiConfig, middleware as apiMiddleware } from '../api'
+import { apiConfig, middleware as ApiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
-import { middleware as authMiddleware } from '../modules/Auth'
-import { middleware as userMiddleware } from '../modules/User'
+import { middleware as AppMiddleware } from '../modules/App'
+import { middleware as AuthMiddleware } from '../modules/Auth'
+import { middleware as ErrorMiddleware } from '../modules/Error'
+import { middleware as UserMiddleware } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -14,26 +15,29 @@ const createDebugger = require('redux-flipper').default
 const devMiddleware = [createDebugger()]
 
 const commonMiddleware: Middleware[] = [
-  apiMiddleware.apiFlow({ api: apiConfig.createApiClient, prepArgs: prepareApiRequest }),
-  appMiddleware.appResetFlow,
-  appMiddleware.hydrateAppFlow,
+  ApiMiddleware.apiFlow({ api: apiConfig.createApiClient, prepArgs: prepareApiRequest }),
+  AppMiddleware.appResetFlow,
+  AppMiddleware.hydrateAppFlow,
 ]
 
 const featureModuleMiddleware = [
-  authMiddleware.authorizeFlow,
-  authMiddleware.getSecureRefreshTokenFlow,
-  authMiddleware.authorizeWithRefreshTokenFlow,
-  authMiddleware.authWithRefreshTokenFailureFlow,
-  authMiddleware.loginFlow,
-  authMiddleware.logoutFlow,
-  authMiddleware.authorizeSuccessFlow({ notification: showSimpleMessage }),
-  authMiddleware.loginFailureFlow({ notification: showSimpleMessage }),
-  authMiddleware.registrationFlow,
-  authMiddleware.setSecureRefreshTokenFlow(setItemAsync),
-  authMiddleware.registrationSuccessFlow({ notification: showSimpleMessage }),
-  authMiddleware.registrationFailureFlow({ notification: showSimpleMessage }),
-  userMiddleware.setUserOnAuthFlow,
-  userMiddleware.fetchUserCredentialsFlow,
+  AuthMiddleware.authorizeFlow,
+  AuthMiddleware.authorizeSuccessFlow({ notification: showSimpleMessage }),
+  AuthMiddleware.authorizeWithRefreshTokenFailureFlow,
+  AuthMiddleware.authorizeWithRefreshTokenFlow,
+  AuthMiddleware.deleteSecureRefreshTokenFlow(SecureStore.deleteItemAsync),
+  AuthMiddleware.getSecureRefreshTokenFlow(SecureStore.getItemAsync),
+  AuthMiddleware.loginFailureFlow({ notification: showSimpleMessage }),
+  AuthMiddleware.loginFlow,
+  AuthMiddleware.logoutFlow,
+  AuthMiddleware.reAuthorizeFlow,
+  AuthMiddleware.registrationFailureFlow({ notification: showSimpleMessage }),
+  AuthMiddleware.registrationFlow,
+  AuthMiddleware.registrationSuccessFlow({ notification: showSimpleMessage }),
+  AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
+  ErrorMiddleware.unauthorizedErrorFlow,
+  UserMiddleware.fetchUserCredentialsFlow,
+  UserMiddleware.setUserOnAuthFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

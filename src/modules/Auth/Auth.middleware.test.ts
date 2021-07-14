@@ -1,11 +1,12 @@
 import { resetAppData } from 'modules/App/App.reducer'
-import { INITIAL_STATE } from 'modules/Auth/Auth.reducer'
+import { authorize, INITIAL_STATE } from 'modules/Auth/Auth.reducer'
 import { mergeRight } from 'ramda'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import { actions as AppActions } from '../App'
+import { actions as ErrorActions } from '../Error'
 import * as SUT from './Auth.middleware'
 import {
   login,
@@ -27,6 +28,190 @@ import {
 } from './Auth.test.fixtures'
 
 describe('modules/Auth/Auth.middleware', () => {
+  describe('authorizeFlow', () => {
+    it('should correctly handle being called', async () => {
+      // given ... the login action is fired
+      const create = createMiddlewareStub(jest)
+      const credentials = {
+        email: 'USER EMAIL',
+        password: 'USER PASSWORD',
+      }
+      const action = login(credentials)
+      // @ts-ignore
+      const { invoke, next, store } = create(SUT.loginFlow)
+
+      // when ... we respond to the login action
+      await invoke(action)
+
+      // then ... the login API should be called
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalled()
+    })
+    it('should correctly login the user in', async () => {
+      // given ... the login action is fired
+      const create = createMiddlewareStub(jest)
+      const credentials = {
+        email: 'USER EMAIL',
+        password: 'USER PASSWORD',
+      }
+      const action = login(credentials)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.loginFlow)
+
+      // when ... we respond to the login action
+      await invoke(action)
+
+      // then ... the login API should be called
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: loginSuccess,
+            onFailure: loginFailure,
+          }),
+          credentials,
+        ),
+      )
+    })
+  })
+  describe('getSecureRefreshTokenFlow', () => {
+    it('should correctly handle being called', async () => {
+      // given ... the login action is fired
+      const create = createMiddlewareStub(jest)
+      const credentials = {
+        email: 'USER EMAIL',
+        password: 'USER PASSWORD',
+      }
+      const action = login(credentials)
+      // @ts-ignore
+      const { invoke, next, store } = create(SUT.loginFlow)
+
+      // when ... we respond to the login action
+      await invoke(action)
+
+      // then ... the login API should be called
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalled()
+    })
+    it('should correctly login the user in', async () => {
+      // given ... the login action is fired
+      const create = createMiddlewareStub(jest)
+      const credentials = {
+        email: 'USER EMAIL',
+        password: 'USER PASSWORD',
+      }
+      const action = login(credentials)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.loginFlow)
+
+      // when ... we respond to the login action
+      await invoke(action)
+
+      // then ... the login API should be called
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: loginSuccess,
+            onFailure: loginFailure,
+          }),
+          credentials,
+        ),
+      )
+    })
+  })
+  describe('authorizeWithRefreshTokenFlow', () => {
+    it('should correctly handle being called', async () => {
+      // given ... the login action is fired
+      const create = createMiddlewareStub(jest)
+      const credentials = {
+        email: 'USER EMAIL',
+        password: 'USER PASSWORD',
+      }
+      const action = login(credentials)
+      // @ts-ignore
+      const { invoke, next, store } = create(SUT.loginFlow)
+
+      // when ... we respond to the login action
+      await invoke(action)
+
+      // then ... the login API should be called
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalled()
+    })
+    it('should correctly login the user in', async () => {
+      // given ... the login action is fired
+      const create = createMiddlewareStub(jest)
+      const credentials = {
+        email: 'USER EMAIL',
+        password: 'USER PASSWORD',
+      }
+      const action = login(credentials)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.loginFlow)
+
+      // when ... we respond to the login action
+      await invoke(action)
+
+      // then ... the login API should be called
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: loginSuccess,
+            onFailure: loginFailure,
+          }),
+          credentials,
+        ),
+      )
+    })
+  })
+  describe('authorizeWithRefreshTokenFailureFlow', () => {
+    it('should correctly handle being called', async () => {
+      // given ... the login action is fired
+      const create = createMiddlewareStub(jest)
+      const credentials = {
+        email: 'USER EMAIL',
+        password: 'USER PASSWORD',
+      }
+      const action = login(credentials)
+      // @ts-ignore
+      const { invoke, next, store } = create(SUT.loginFlow)
+
+      // when ... we respond to the login action
+      await invoke(action)
+
+      // then ... the login API should be called
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalled()
+    })
+    it('should correctly login the user in', async () => {
+      // given ... the login action is fired
+      const create = createMiddlewareStub(jest)
+      const credentials = {
+        email: 'USER EMAIL',
+        password: 'USER PASSWORD',
+      }
+      const action = login(credentials)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.loginFlow)
+
+      // when ... we respond to the login action
+      await invoke(action)
+
+      // then ... the login API should be called
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
+            isTokenRequired: false,
+            onSuccess: loginSuccess,
+            onFailure: loginFailure,
+          }),
+          credentials,
+        ),
+      )
+    })
+  })
   describe('loginFlow', () => {
     it('should correctly handle being called', async () => {
       // given ... the login action is fired
@@ -206,6 +391,21 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(resetAppData())
     })
   })
+  describe('deleteSecureRefreshTokenFlow', () => {
+    it('should correctly logout the user', async () => {
+      // given ... the logout action is fired
+      const create = createMiddlewareStub(jest)
+      const action = logout()
+      // @ts-ignore
+      const { store, invoke } = create(SUT.logoutFlow)
+
+      // when ... we respond to the logout action
+      await invoke(action)
+
+      // then ... the reset APP should be called
+      expect(store.dispatch).toHaveBeenCalledWith(resetAppData())
+    })
+  })
   describe('registrationFlow', () => {
     it('should ignore other actions', async () => {
       // given ... an action is fired
@@ -301,6 +501,24 @@ describe('modules/Auth/Auth.middleware', () => {
 
       // then ... the notification should be called
       expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('reAuthorizeFlow', () => {
+    it('should authorize the user if the user is un-authed', async () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = ErrorActions.unauthorizedError()
+
+      // when ... the user is unauthorized
+      // @ts-ignore
+      const { invoke, next, store } = create(SUT.reAuthorizeFlow)
+      await invoke(action)
+
+      // then ...
+      // ... we should correctly pass the action on
+      expect(next).toHaveBeenCalledWith(action)
+      // ... we should re-authorize the user
+      expect(store.dispatch).toHaveBeenCalledWith(authorize())
     })
   })
 })

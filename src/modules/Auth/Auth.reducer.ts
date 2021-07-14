@@ -14,7 +14,7 @@ import {
 const name = '[Auth]'
 export const INITIAL_STATE = {} as AuthState
 
-export const authorize = createAction<AuthCredentials>(`${name} authorize`)
+export const authorize = createAction(`${name} authorize`)
 export const login = createAction<AuthCredentials>(`${name} login`)
 export const loginSuccess = createAction<AuthLoginSuccessResponse>(`${name} loginSuccess`)
 export const loginFailure = createAction<AuthLoginFailureResponse>(`${name} loginFailure`)

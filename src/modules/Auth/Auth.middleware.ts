@@ -8,7 +8,8 @@ import { showSimpleMessage } from '../../utils/error'
 // avoiding circular dependencies:
 import * as AppActions from '../App/App.reducer'
 import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
-import * as NavigationActions from '../Navigation/Navigation.actions'
+import { actions as ErrorActions } from '../Error'
+import * as Navigation from '../Navigation/Navigation.actions'
 import { selectors as UserSelectors } from '../User'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
@@ -63,6 +64,7 @@ export const getSecureRefreshTokenFlow =
     if (getSecureRefreshToken.match(action)) {
       await getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
         .then((data: SecureStorageRefreshToken) => {
+          console.log(data)
           data === null ? dispatch(noRefreshTokenInSecureStore()) : dispatch(getSecureRefreshTokenSuccess(data))
         })
         .catch((error: any) => dispatch(getSecureRefreshTokenFailure(error.message)))
@@ -93,7 +95,7 @@ export const authorizeWithRefreshTokenFlow: Middleware =
     return result
   }
 
-export const authWithRefreshTokenFailureFlow: Middleware =
+export const authorizeWithRefreshTokenFailureFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
@@ -259,9 +261,22 @@ export const registrationFailureFlow =
   action => {
     const result = next(action)
     if (registerFailure.match(action)) {
-      NavigationActions.navigate(AuthNavigationRoutes.Register)
+      Navigation.navigate(AuthNavigationRoutes.Register)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', action.payload)
+    }
+
+    return result
+  }
+
+export const reAuthorizeFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (ErrorActions.unauthorizedError.match(action)) {
+      dispatch(authorize())
     }
 
     return result
