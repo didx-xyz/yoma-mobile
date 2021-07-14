@@ -1,11 +1,12 @@
 import { isAnyOf } from '@reduxjs/toolkit'
-import { actions as AppActions } from 'modules/App'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
+// avoiding circular dependencies:
+import * as AppActions from '../App/App.reducer'
 import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
 import * as NavigationActions from '../Navigation/Navigation.actions'
 import { selectors as UserSelectors } from '../User'

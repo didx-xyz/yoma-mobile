@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
-import { actions as AuthActions } from '../Auth'
+import * as AuthActions from '../Auth/Auth.reducer'
 import Profile from './Profile'
 import selector from './Profile.selector'
 
@@ -14,4 +14,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profile)
+export default connect<any, any, any, any>(mapStateToProps, mapDispatchToProps)(Profile)
