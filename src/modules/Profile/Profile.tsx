@@ -15,13 +15,14 @@ import styles from './Profile.styles'
 
 interface Props {
   onLogoutUser: () => void
-  onPatchUserData: (user: any) => void
-  user: any
+  onProfileSave: (user: any) => void
+  user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, onLogoutUser, onPatchUserData, user }: Props) => {
-  const [userData] = useState<UserResponse>(user)
+const Profile = ({ navigation, onLogoutUser, onProfileSave, user }: Props) => {
+  const [userResponse] = useState<UserResponse>(user)
+
   const { t } = useTranslation()
   const childRef = useRef<FormikProps<FormikValues>>(null)
 
@@ -36,7 +37,7 @@ const Profile = ({ navigation, onLogoutUser, onPatchUserData, user }: Props) => 
       <ScrollView>
         <Card style={styles.card}>
           <Optional
-            condition={!!userData.photoURL}
+            condition={!!userResponse.photoURL}
             fallback={
               <ProfilePhoto
                 borderWidth={6}
@@ -49,14 +50,13 @@ const Profile = ({ navigation, onLogoutUser, onPatchUserData, user }: Props) => 
             }
           >
             <TouchableOpacity onPress={() => {}} style={styles.imageContainer}>
-              <Image source={{ uri: userData.photoURL as string }} style={styles.profileImage} />
+              <Image source={{ uri: userResponse.photoURL as string }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>
             </TouchableOpacity>
           </Optional>
-
-          <ProfileForm onPatchUserData={onPatchUserData} ref={childRef} navigation={navigation} user={userData} />
+          <ProfileForm onProfileSave={onProfileSave} ref={childRef} navigation={navigation} user={userResponse} />
         </Card>
         <Button
           variant={ButtonVariants.Clear}

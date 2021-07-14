@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     onLogoutUser: () => {
       dispatch(AuthActions.authLogout())
     },
-    onPatchUserData: (user: any) => {
+    onProfileSave: (user: any) => {
       dispatch(UserActions.updateUser(user))
     },
   }

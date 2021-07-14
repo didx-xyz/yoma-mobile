@@ -12,11 +12,11 @@ import styles from './About.styles'
 
 interface Props {
   biography: string
-  onPatchUserData: (biography: UserPayload) => void
+  onProfileSave: (biography: UserPayload) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
 }
 
-const About = ({ navigation, onPatchUserData, biography }: Props) => {
+const About = ({ navigation, onProfileSave, biography }: Props) => {
   const { t } = useTranslation()
   const [summary, setSummary] = useState(biography)
   const [infoModal, setInfoModal] = useState(false)
@@ -34,7 +34,7 @@ const About = ({ navigation, onPatchUserData, biography }: Props) => {
         isSaveButtonEnabled
         navigation={navigation}
         headerText={t('About')}
-        onSave={() => onPatchUserData(summary)}
+        onSave={() => onProfileSave(summary)}
       />
       <Card style={styles.card}>
         <FormWrapper>

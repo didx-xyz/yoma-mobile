@@ -8,7 +8,7 @@ import selector from './About.selector'
 const mapStateToProps = selector
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onPatchUserData: (biography: string) => {
+    onProfileSave: (biography: string) => {
       dispatch(UserActions.updateUser({ biography }))
     },
   }
