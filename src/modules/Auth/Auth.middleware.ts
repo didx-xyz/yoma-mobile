@@ -1,4 +1,4 @@
-import { resetAppData } from 'modules/App/App.reducer'
+import { actions as AppActions } from 'modules/App'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -61,6 +61,7 @@ export const authLoginSuccessFlow =
       notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
       dispatch(setSecureRefreshToken(refreshToken))
+      dispatch(AppActions.hydrateApp())
     }
     return result
   }
@@ -106,7 +107,7 @@ export const authLogoutFlow: Middleware =
     const result = next(action)
 
     if (authLogout.match(action)) {
-      dispatch(resetAppData())
+      dispatch(AppActions.resetAppData())
     }
 
     return result

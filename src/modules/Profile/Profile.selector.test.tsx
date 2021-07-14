@@ -1,5 +1,4 @@
-import { rootStateFixture } from 'redux/redux.test.fixtures'
-
+import { rootStateFixture } from '../../redux/redux.test.fixtures'
 import * as SUT from './Profile.selector'
 
 describe('modules/Profile/Profile.selector', () => {

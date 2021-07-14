@@ -1,4 +1,4 @@
-import { USER_RESPONSE } from './../Profile/Profile.constants'
+import { USER_RESPONSE } from './User.test.fixtures'
 import * as SUT from './User.utils'
 
 describe('modules/User/User.utils', () => {
