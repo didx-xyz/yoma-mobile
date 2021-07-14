@@ -5,7 +5,7 @@ import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { constants as ApiUserConstants, constants as ApiUsersConstants } from '../../api/users'
+import { constants as ApiUsersConstants } from '../../api/users'
 import * as Navigation from '../Navigation/Navigation.actions'
 import {
   fetchUserCredentials,
@@ -42,7 +42,7 @@ export const updateUserFlow: Middleware =
 
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiUserConstants.USERS_EDIT_CONFIG, {
+          mergeRight(ApiUsersConstants.USERS_EDIT_CONFIG, {
             onSuccess: updateUserSuccess,
             onFailure: updateUserFailure,
             endpoint: userId,
@@ -84,6 +84,7 @@ export const updateUserSuccessFlow =
     if (updateUserSuccess.match(action)) {
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
+      //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
       notification('success', 'Details Updated')
