@@ -14,6 +14,7 @@ interface Props {
 
 const SocialButton = ({ onPress, variant }: Props) => {
   const { t } = useTranslation()
+  const Icon = MAP_VARIANT_TO_OPTIONS[variant].icon
 
   return (
     <Button
@@ -23,7 +24,9 @@ const SocialButton = ({ onPress, variant }: Props) => {
       style={styles[variant]}
       label={t(MAP_VARIANT_TO_OPTIONS[variant].translationKey)}
     >
-      <View style={styles.iconWrapper}>{MAP_VARIANT_TO_OPTIONS[variant].icon}</View>
+      <View style={styles.iconWrapper}>
+        <Icon />
+      </View>
     </Button>
   )
 }

@@ -47,7 +47,7 @@ describe('api/api.utils', () => {
       }
       // when ... we provide the id
       //@ts-ignore
-      const result = SUT.addIdBeforeEndpointInConfig(config)(10)
+      const result = SUT.prependIdToEndpointInConfig(config)(10)
       // then ... should insert the given id in front of the endpoint value
       expect(result).toEqual({
         aKey: 'aValue',

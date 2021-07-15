@@ -4,11 +4,19 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
-import { actions as ApiActions } from '../../api'
-import { constants as ApiUserConstants } from '../../api/users'
+import { actions as ApiActions, utils as ApiUtils } from '../../api'
+import { constants as ApiUsersConstants } from '../../api/users'
 import * as Navigation from '../Navigation/Navigation.actions'
-import { setUser, updateUser, updateUserFailure, updateUserSuccess } from './User.reducer'
-import { selectUserId } from './User.selector'
+import {
+  fetchUserCredentials,
+  fetchUserCredentialsFailure,
+  fetchUserCredentialsSuccess,
+  setUser,
+  updateUser,
+  updateUserFailure,
+  updateUserSuccess,
+} from './User.reducer'
+import { selectId } from './User.selector'
 import {
   extractUserFromLoginPayload,
   extractUserfromUpdateUserPayload,
@@ -21,8 +29,8 @@ export const setUserOnAuthFlow: Middleware =
   action => {
     const result = next(action)
     if (authLoginSuccess.match(action)) {
-      const credentials = extractUserFromLoginPayload(action)
-      dispatch(setUser(credentials))
+      const user = extractUserFromLoginPayload(action)
+      dispatch(setUser(user))
     }
     return result
   }
@@ -34,12 +42,12 @@ export const updateUserFlow: Middleware =
     const result = next(action)
     if (updateUser.match(action)) {
       const state = getState()
-      const userId = selectUserId(state)
       const patchPayload = extractUserfromUpdateUserPayload(action.payload)
+      const userId = selectId(state)
 
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiUserConstants.USERS_EDIT_CONFIG, {
+          mergeRight(ApiUsersConstants.USERS_EDIT_CONFIG, {
             onSuccess: updateUserSuccess,
             onFailure: updateUserFailure,
             endpoint: userId,
@@ -50,7 +58,6 @@ export const updateUserFlow: Middleware =
     }
     return result
   }
-
 export const updateUserPhotoFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
@@ -58,14 +65,34 @@ export const updateUserPhotoFlow: Middleware =
     const result = next(action)
     if (updateUser.match(action)) {
       const state = getState()
-      const userId = selectUserId(state)
-
+      const userId = selectId(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)(userId)
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiUserConstants.USERS_PHOTO_CREATE_CONFIG, {
+          mergeRight(config, {
             onSuccess: updateUserSuccess,
             onFailure: updateUserFailure,
-            endpoint: `${userId}/photo`,
+          }),
+        ),
+      )
+    }
+    return result
+  }
+
+export const fetchUserCredentialsFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchUserCredentials.match(action)) {
+      const state = getState()
+      const userId = selectId(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: fetchUserCredentialsSuccess,
+            onFailure: fetchUserCredentialsFailure,
           }),
           action.payload,
         ),
@@ -84,6 +111,7 @@ export const updateUserSuccessFlow =
     if (updateUserSuccess.match(action)) {
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
+      //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
       notification('success', 'Details Updated')

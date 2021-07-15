@@ -16,6 +16,7 @@ const devMiddleware = [createDebugger()]
 const commonMiddleware: Middleware[] = [
   apiMiddleware.apiFlow({ api: apiConfig.createApiClient, prepArgs: prepareApiRequest }),
   appMiddleware.appResetFlow,
+  appMiddleware.hydrateAppFlow,
 ]
 
 const featureModuleMiddleware = [
@@ -31,6 +32,7 @@ const featureModuleMiddleware = [
   userMiddleware.updateUserFlow,
   userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
   userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
+  userMiddleware.fetchUserCredentialsFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

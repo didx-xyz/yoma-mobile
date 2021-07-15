@@ -15,5 +15,6 @@
   "lint": "run JS linter",
   "format": "formats the codebase with prettier",
   "code:lint": "runs prettier and eslint linters",
-  "npm:audit": "audit NPM dependencies for critical vulnerabilities"
+  "npm:audit": "audit NPM dependencies for critical vulnerabilities",
+  "reset": "deletes node modules and re-installs modules and pods"
 }
