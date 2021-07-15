@@ -51,6 +51,29 @@ export const updateUserFlow: Middleware =
     return result
   }
 
+export const updateUserPhotoFlow: Middleware =
+  ({ getState, dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (updateUser.match(action)) {
+      const state = getState()
+      const userId = selectUserId(state)
+
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiUserConstants.USERS_PHOTO_CREATE_CONFIG, {
+            onSuccess: updateUserSuccess,
+            onFailure: updateUserFailure,
+            endpoint: `${userId}/photo`,
+          }),
+          action.payload,
+        ),
+      )
+    }
+    return result
+  }
+
 export const updateUserSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>

@@ -12,15 +12,17 @@ import { Colors } from 'styles'
 import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
 import { ProfileFormState } from './Profile.types'
+import { captureImage } from './Profile.utils'
 
 interface Props {
   onLogoutUser: () => void
   onProfileSave: (user: any) => void
+  onPhotoSave: (photo: any) => void
   user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, onLogoutUser, onProfileSave, user }: Props) => {
+const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }: Props) => {
   const [userResponse] = useState<UserResponse>(user)
   const [formState, setFormState] = useState<ProfileFormState>(null)
 
@@ -30,6 +32,11 @@ const Profile = ({ navigation, onLogoutUser, onProfileSave, user }: Props) => {
     if (formState.isValid) {
       onProfileSave(formState.values)
     }
+  }
+  const handleProfilePhoto = () => {
+    captureImage()?.then(image => {
+      onPhotoSave(image.data)
+    })
   }
 
   return (
@@ -43,14 +50,14 @@ const Profile = ({ navigation, onLogoutUser, onProfileSave, user }: Props) => {
               <ProfilePhoto
                 borderWidth={6}
                 outerRadius={40}
-                onPress={() => {}}
+                onPress={handleProfilePhoto}
                 percent={5}
                 showEditIcon={true}
                 profileOuterStyle={styles.imagePlaceholder}
               />
             }
           >
-            <TouchableOpacity onPress={() => {}} style={styles.imageContainer}>
+            <TouchableOpacity onPress={handleProfilePhoto} style={styles.imageContainer}>
               <Image source={{ uri: userResponse.photoURL as string }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
