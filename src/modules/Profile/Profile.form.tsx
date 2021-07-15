@@ -1,17 +1,15 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import { DropDown, Input } from 'components'
 import countries from 'constants/countries'
-import { Formik, FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import React, { forwardRef, useImperativeHandle, useRef } from 'react'
+import { Formik } from 'formik'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
+import { ProfileFormState } from './Profile.types'
 import { profileValidationSchema } from './Profile.validationSchema'
 
 interface Props {
-  onProfileSave: (user: any) => void
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
+  setFormState: ({ values: FormikValues, isValid: boolean }: ProfileFormState) => void
   user: {
     firstName: string
     lastName: string
@@ -21,25 +19,24 @@ interface Props {
   }
 }
 
-const ProfileForm = forwardRef(({ user, onProfileSave }: Props, ref) => {
+const ProfileForm = ({ user, setFormState }: Props) => {
   const { t } = useTranslation()
-  const formRef = useRef<FormikProps<FormikValues>>(null)
-
-  useImperativeHandle(ref, () => ({
-    handleSubmit: () => {
-      formRef.current?.handleSubmit()
-    },
-  }))
 
   return (
     <Formik
-      innerRef={formRef}
       initialValues={user}
       enableReinitialize
+      validate={values => {
+        profileValidationSchema()
+          .isValid(values)
+          .then(isValid => {
+            setFormState({ values, isValid })
+          })
+      }}
       validationSchema={profileValidationSchema}
-      onSubmit={onProfileSave}
+      onSubmit={() => {}}
     >
-      {formikHandlers => {
+      {(formikHandlers: any) => {
         return (
           <>
             {/* <Spinner visible={formikHandlers.isSubmitting} /> */}
@@ -71,6 +68,6 @@ const ProfileForm = forwardRef(({ user, onProfileSave }: Props, ref) => {
       }}
     </Formik>
   )
-})
+}
 
 export default ProfileForm
