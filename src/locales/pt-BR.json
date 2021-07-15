@@ -45,7 +45,7 @@
     "validEmailError": "O e-mail deve ser um e-mail válido",
     "passwordMinCharError": "a senha deve ter pelo menos 8 caracteres",
     "passwordRegexError": "Deve conter 8 caracteres, uma maiúscula, uma minúscula, um número e um caractere de caso especial",
-    "myCv": "O meu Cv",
+    "myCv": "O meu CV",
     "courses": "Cursos",
     "challenges": "Desafios",
     "marketplace": "Mercado",

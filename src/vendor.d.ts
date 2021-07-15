@@ -14,6 +14,7 @@ declare module 'ramda' {
   export function flatten(...rest: any[]): any[]
   export function head(...rest: any[]): any
   export function identity(...rest: any[]): any
+  export function prop(...rest: any[]): any
   export function propOr(...rest: any[]): any
   export function ifElse(...rest: any[]): any
   export function join(...rest: any[]): any
@@ -23,6 +24,7 @@ declare module 'ramda' {
   export function map(...rest: any[]): any
   export function merge(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
+  export function mergeLeft(...rest: any[]): any
   export function mergeRight(...rest: any[]): any
   export function mergeDeepRight(...rest: any[]): any
   export function multiply(...rest: any[]): number
