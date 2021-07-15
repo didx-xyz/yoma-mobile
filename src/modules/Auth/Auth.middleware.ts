@@ -64,7 +64,6 @@ export const getSecureRefreshTokenFlow =
     if (getSecureRefreshToken.match(action)) {
       await getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
         .then((data: SecureStorageRefreshToken) => {
-          console.log(data)
           data === null ? dispatch(noRefreshTokenInSecureStore()) : dispatch(getSecureRefreshTokenSuccess(data))
         })
         .catch((error: any) => dispatch(getSecureRefreshTokenFailure(error.message)))

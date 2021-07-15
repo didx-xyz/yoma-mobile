@@ -1,5 +1,12 @@
 import { resetAppData } from 'modules/App/App.reducer'
-import { authorize, INITIAL_STATE } from 'modules/Auth/Auth.reducer'
+import {
+  authorize,
+  getSecureRefreshToken,
+  getSecureRefreshTokenFailure,
+  getSecureRefreshTokenSuccess,
+  INITIAL_STATE,
+  noRefreshTokenInSecureStore,
+} from 'modules/Auth/Auth.reducer'
 import { mergeRight } from 'ramda'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
@@ -8,6 +15,7 @@ import { constants as ApiAuthConstants } from '../../api/auth'
 import { actions as AppActions } from '../App'
 import { actions as ErrorActions } from '../Error'
 import * as SUT from './Auth.middleware'
+import { authorizeFlow } from './Auth.middleware'
 import {
   login,
   loginFailure,
@@ -28,98 +36,83 @@ import {
 } from './Auth.test.fixtures'
 
 describe('modules/Auth/Auth.middleware', () => {
-  // TODO: Add tests:
   describe('authorizeFlow', () => {
-    it('should correctly handle being called', async () => {
-      // given ... the login action is fired
+    it('should start authorizing the user', async () => {
+      // given ...
       const create = createMiddlewareStub(jest)
-      const credentials = {
-        email: 'USER EMAIL',
-        password: 'USER PASSWORD',
-      }
-      const action = login(credentials)
       // @ts-ignore
-      const { invoke, next, store } = create(SUT.loginFlow)
+      const { invoke, next, store } = create(SUT.authorizeFlow)
 
-      // when ... we respond to the login action
+      // when ... we need to authorize the user
+      const action = authorize()
       await invoke(action)
 
-      // then ... the login API should be called
+      // then ...
+      // ...we should ensure next is called
       expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalled()
-    })
-    it('should correctly login the user in', async () => {
-      // given ... the login action is fired
-      const create = createMiddlewareStub(jest)
-      const credentials = {
-        email: 'USER EMAIL',
-        password: 'USER PASSWORD',
-      }
-      const action = login(credentials)
-      // @ts-ignore
-      const { invoke, store } = create(SUT.loginFlow)
-
-      // when ... we respond to the login action
-      await invoke(action)
-
-      // then ... the login API should be called
-      expect(store.dispatch).toHaveBeenCalledWith(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            isTokenRequired: false,
-            onSuccess: loginSuccess,
-            onFailure: loginFailure,
-          }),
-          credentials,
-        ),
-      )
+      // ...we should check if there is a refresh token to authorize with
+      expect(store.dispatch).toHaveBeenCalledWith(getSecureRefreshToken())
     })
   })
   // TODO: Add tests:
   describe('getSecureRefreshTokenFlow', () => {
     it('should correctly handle being called', async () => {
-      // given ... the login action is fired
+      // given ...
       const create = createMiddlewareStub(jest)
-      const credentials = {
-        email: 'USER EMAIL',
-        password: 'USER PASSWORD',
-      }
-      const action = login(credentials)
+      const action = getSecureRefreshToken()
+      const getSecureItemStub = jest.fn().mockResolvedValue('SOME VALUE')
       // @ts-ignore
-      const { invoke, next, store } = create(SUT.loginFlow)
+      const { invoke, next } = create(SUT.getSecureRefreshTokenFlow(getSecureItemStub))
 
-      // when ... we respond to the login action
+      // when ... we want try retrieve the refresh token
       await invoke(action)
 
-      // then ... the login API should be called
+      // then ...
+      // ... we should make sure that we pass the action on
       expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalled()
+      // ... we should try to retrieve the token
+      expect(getSecureItemStub).toHaveBeenCalled()
     })
-    it('should correctly login the user in', async () => {
-      // given ... the login action is fired
+    it('should continue authorising if a refresh token is available', async () => {
+      // given ...
       const create = createMiddlewareStub(jest)
-      const credentials = {
-        email: 'USER EMAIL',
-        password: 'USER PASSWORD',
-      }
-      const action = login(credentials)
-      // @ts-ignore
-      const { invoke, store } = create(SUT.loginFlow)
+      const action = getSecureRefreshToken()
 
-      // when ... we respond to the login action
+      // when ... try to successfully retrieve the refresh token
+      const getSecureItemStub = jest.fn().mockResolvedValue('REFRESH TOKEN')
+      // @ts-ignore
+      const { invoke, store } = create(SUT.getSecureRefreshTokenFlow(getSecureItemStub))
+      await invoke(action)
+      // then ...we should send the refresh token as a payload
+      expect(store.dispatch).toBeCalledWith(getSecureRefreshTokenSuccess('REFRESH TOKEN'))
+    })
+    it('should handle no refresh token', async () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = getSecureRefreshToken()
+
+      // when ... try to retrieve the refresh token but there isn't one available
+      const getSecureItemStub = jest.fn().mockResolvedValue(null)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.getSecureRefreshTokenFlow(getSecureItemStub))
       await invoke(action)
 
-      // then ... the login API should be called
-      expect(store.dispatch).toHaveBeenCalledWith(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            isTokenRequired: false,
-            onSuccess: loginSuccess,
-            onFailure: loginFailure,
-          }),
-          credentials,
-        ),
-      )
+      // then ...we should send an action notifying that there is no refresh token
+      expect(store.dispatch).toBeCalledWith(noRefreshTokenInSecureStore())
+    })
+    it('should handle a failure while accessing the refresh token', async () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = getSecureRefreshToken()
+
+      // when ... we fail while trying to to retrieve the refresh token
+      const getSecureItemStub = jest.fn().mockRejectedValue({ message: 'AN ERROR' })
+      // @ts-ignore
+      const { invoke, store } = create(SUT.getSecureRefreshTokenFlow(getSecureItemStub))
+      await invoke(action)
+
+      // then ...we should send an action notifying that there is no refresh token
+      expect(store.dispatch).toBeCalledWith(getSecureRefreshTokenFailure('AN ERROR'))
     })
   })
   // TODO: Add tests:
