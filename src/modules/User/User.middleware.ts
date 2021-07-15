@@ -14,6 +14,7 @@ import {
   setUser,
   updateUser,
   updateUserFailure,
+  updateUserPhoto,
   updateUserSuccess,
 } from './User.reducer'
 import { selectId } from './User.selector'
@@ -63,7 +64,7 @@ export const updateUserPhotoFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    if (updateUser.match(action)) {
+    if (updateUserPhoto.match(action)) {
       const state = getState()
       const userId = selectId(state)
       const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)(userId)
@@ -73,6 +74,7 @@ export const updateUserPhotoFlow: Middleware =
             onSuccess: updateUserSuccess,
             onFailure: updateUserFailure,
           }),
+          action.payload,
         ),
       )
     }

@@ -33,6 +33,7 @@ const featureModuleMiddleware = [
   userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
   userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.fetchUserCredentialsFlow,
+  userMiddleware.updateUserPhotoFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

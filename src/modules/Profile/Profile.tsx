@@ -35,7 +35,6 @@ const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }:
   }
   const handleProfilePhoto = () => {
     captureImage()?.then(image => {
-      console.log('image', image)
       onPhotoSave(image.data)
     })
   }
