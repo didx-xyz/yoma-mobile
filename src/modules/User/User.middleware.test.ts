@@ -14,6 +14,7 @@ import {
   setUser,
   updateUser,
   updateUserFailure,
+  updateUserPhoto,
   updateUserSuccess,
 } from './User.reducer'
 import { USER_RESPONSE } from './User.test.fixtures'
@@ -263,6 +264,47 @@ describe('modules/User/User.middleware', () => {
             ),
           )
         })
+      })
+    })
+    describe('updateUserPhotoFlow', () => {
+      it('should correctly handle being called', () => {
+        const userId = 'USER ID'
+        const create = createMiddlewareStub(jest, { user: { id: userId } })
+
+        // given ... the updateUserPhoto action is fired
+        const action = updateUserPhoto('PROFILE_PHOTO')
+        // @ts-ignore
+        const { store, invoke, next } = create(SUT.updateUserPhotoFlow)
+
+        // when ... we respond to the updateUserPhotoFlow action
+        invoke(action)
+
+        // then ...validate updateUserPhotoFlow
+        expect(next).toHaveBeenCalledWith(action)
+        expect(store.dispatch).toHaveBeenCalled()
+      })
+      it('should correctly update user profile photo', () => {
+        const userId = 'USER ID'
+        const create = createMiddlewareStub(jest, { user: { id: userId } })
+        // given ... the updateUserPhoto action is fired
+        const action = updateUserPhoto('PROFILE_PHOTO')
+        // @ts-ignore
+        const { store, invoke } = create(SUT.updateUserPhotoFlow)
+
+        // when ... we respond to the authLoginSuccess action
+        invoke(action)
+
+        // then ...   update user photo API
+        const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)('USER ID')
+        expect(store.dispatch).toHaveBeenCalledWith(
+          ApiActions.apiRequest(
+            mergeRight(config, {
+              onSuccess: updateUserSuccess,
+              onFailure: updateUserFailure,
+            }),
+            action.payload,
+          ),
+        )
       })
     })
   })
