@@ -269,7 +269,7 @@ export const registrationFailureFlow =
     return result
   }
 
-export const reAuthorizeFlow: Middleware =
+export const unauthorizedFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {

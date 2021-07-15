@@ -508,7 +508,7 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(mockNotification).toHaveBeenCalled()
     })
   })
-  describe('reAuthorizeFlow', () => {
+  describe('unauthorizedFlow', () => {
     it('should authorize the user if the user is un-authed', async () => {
       // given ...
       const create = createMiddlewareStub(jest)
@@ -516,7 +516,7 @@ describe('modules/Auth/Auth.middleware', () => {
 
       // when ... the user is unauthorized
       // @ts-ignore
-      const { invoke, next, store } = create(SUT.reAuthorizeFlow)
+      const { invoke, next, store } = create(SUT.unauthorizedFlow)
       await invoke(action)
 
       // then ...

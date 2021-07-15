@@ -4,7 +4,7 @@ import * as SUT from './Error.middleware'
 import { unauthorizedError } from './Error.reducer'
 
 describe('modules/Error/Error.middleware', () => {
-  describe('unauthorizedErrorFlow', () => {
+  describe('categorizeErrorsFlow', () => {
     it('should correctly handle being called', async () => {
       // given ...
       const create = createMiddlewareStub(jest)
@@ -20,7 +20,7 @@ describe('modules/Error/Error.middleware', () => {
 
       // when ... we respond to the login action
       // @ts-ignore
-      const { invoke, next, store } = create(SUT.unauthorizedErrorFlow)
+      const { invoke, next, store } = create(SUT.categorizeErrorsFlow)
       await invoke(action)
 
       // then ... the login API should be called
@@ -42,7 +42,7 @@ describe('modules/Error/Error.middleware', () => {
 
       // when ... we respond to the login action
       // @ts-ignore
-      const { invoke, store } = create(SUT.unauthorizedErrorFlow)
+      const { invoke, store } = create(SUT.categorizeErrorsFlow)
       await invoke(action)
 
       // then ... the login API should be called
@@ -63,7 +63,7 @@ describe('modules/Error/Error.middleware', () => {
 
       // when ... we respond to the login action
       // @ts-ignore
-      const { invoke, store } = create(SUT.unauthorizedErrorFlow)
+      const { invoke, store } = create(SUT.categorizeErrorsFlow)
       await invoke(action)
 
       // then ... the login API should be called

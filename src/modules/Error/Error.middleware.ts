@@ -3,7 +3,7 @@ import { Middleware } from 'redux'
 import { actions as ApiActions } from '../../api'
 import { unauthorizedError } from './Error.reducer'
 
-export const unauthorizedErrorFlow: Middleware =
+export const categorizeErrorsFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
