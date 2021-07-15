@@ -36,7 +36,7 @@ describe('modules/User/User.utils', () => {
       expect(result).toEqual(USER_RESPONSE)
     })
   })
-  describe('extractUserPatchPayload', () => {
+  describe('extractUserfromUpdateUserPayload', () => {
     it('should return user patch payload from user update data', () => {
       // given ...
       const userUpdateData = {
@@ -51,8 +51,8 @@ describe('modules/User/User.utils', () => {
         lastName: 'LAST_NAME',
         countryAlpha2: 'COUNTRY_ALPHA2',
       }
-      // when extractUserPatchPayload
-      const result = SUT.extractUserPatchPayload(userUpdateData)
+      // when extractUserfromUpdateUserPayload
+      const result = SUT.extractUserfromUpdateUserPayload(userUpdateData)
 
       //then expect user patch payload be returned
       expect(result).toEqual(userPatchPayload)
