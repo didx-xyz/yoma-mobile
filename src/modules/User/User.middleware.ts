@@ -1,5 +1,4 @@
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
@@ -7,6 +6,7 @@ import { showSimpleMessage } from 'utils/error'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import * as Navigation from '../Navigation/Navigation.actions'
+import { HomeNavigationRoutes } from './../HomeNavigation/HomeNavigation.types'
 import {
   fetchUserCredentials,
   fetchUserCredentialsFailure,
