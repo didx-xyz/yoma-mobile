@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
+import Card from 'components/Card'
 import LargeHeader from 'components/LargeHeader'
 import SSO from 'components/SSO'
 import { SocialVariants } from 'components/SocialButton/SocialButton.types'
