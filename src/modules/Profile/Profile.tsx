@@ -27,7 +27,7 @@ const Profile = ({ navigation, onLogoutUser, onProfileSave, user }: Props) => {
   const { t } = useTranslation()
 
   const handleProfileForm = () => {
-    if (formState.isValid) {
+    if (formState?.isValid) {
       onProfileSave(formState.values)
     }
   }
