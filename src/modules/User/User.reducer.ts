@@ -1,7 +1,13 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeDeepRight } from 'ramda'
 
-import { UpdateUserFailureResponse, UpdateUserResponse, UserPayload, UserResponse } from './User.types'
+import {
+  UpdateUserFailureResponse,
+  UpdateUserPhotoPayload,
+  UpdateUserResponse,
+  UserPayload,
+  UserResponse,
+} from './User.types'
 
 const name = '[User]'
 export const INITIAL_STATE = {
@@ -31,9 +37,11 @@ export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUs
 export const setUser = createAction<UserResponse>(`${name} setUser`)
 export const clearUser = createAction(`${name} clearUser`)
 export const updateUser = createAction<UserPayload>(`${name} updateUser`)
-export const updateUserPhoto = createAction<string>(`${name} updateUserPhoto`)
 export const updateUserSuccess = createAction<UpdateUserResponse>(`${name} updateUserSuccess`)
 export const updateUserFailure = createAction<UpdateUserFailureResponse>(`${name} updateUserFailure`)
+export const updateUserPhoto = createAction(`${name} updateUserPhoto`)
+export const updateUserPhotoSuccess = createAction<UpdateUserPhotoPayload>(`${name} updateUserPhotoSuccess`)
+export const updateUserPhotoFailure = createAction<UpdateUserFailureResponse>(`${name} updateUserPhotoFailure`)
 
 const UserReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUser, (state, action) => mergeDeepRight(state)(action.payload))

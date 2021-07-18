@@ -6,6 +6,7 @@ import { Middleware } from 'redux'
 import { apiConfig, middleware as apiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
 import { middleware as authMiddleware } from '../modules/Auth'
+import { profileImagePicker } from '../modules/Profile/Profile.utils'
 import { middleware as userMiddleware } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
@@ -33,7 +34,9 @@ const featureModuleMiddleware = [
   userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
   userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.fetchUserCredentialsFlow,
-  userMiddleware.updateUserPhotoFlow,
+  userMiddleware.updateUserPhotoFlow({ captureProfileImage: profileImagePicker }),
+  userMiddleware.updateUserPhotoSuccessFlow,
+  userMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

@@ -15,8 +15,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     onProfileSave: (user: any) => {
       dispatch(UserActions.updateUser(user))
     },
-    onPhotoSave: (photo: string) => {
-      dispatch(UserActions.updateUserPhoto(photo))
+    onPhotoSave: () => {
+      dispatch(UserActions.updateUserPhoto())
     },
   }
 }

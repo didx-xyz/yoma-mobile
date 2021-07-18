@@ -1,5 +1,4 @@
 import ImagePicker, { Options } from 'react-native-image-crop-picker'
-import { showSimpleMessage } from 'utils/error'
 
 const CAPTURE_IMAGE_OPTIONS: Options = {
   cropping: true,
@@ -12,10 +11,4 @@ const CAPTURE_IMAGE_OPTIONS: Options = {
   compressImageQuality: 0.2,
 }
 
-export const captureImage = () => {
-  try {
-    return ImagePicker.openCamera(CAPTURE_IMAGE_OPTIONS)
-  } catch (error) {
-    showSimpleMessage('danger', 'Ann error  occurred')
-  }
-}
+export const profileImagePicker = () => ImagePicker.openCamera(CAPTURE_IMAGE_OPTIONS)

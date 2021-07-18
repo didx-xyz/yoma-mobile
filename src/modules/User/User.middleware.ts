@@ -7,6 +7,7 @@ import { showSimpleMessage } from 'utils/error'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import * as Navigation from '../Navigation/Navigation.actions'
+import { profileImagePicker } from '../Profile/Profile.utils'
 import {
   fetchUserCredentials,
   fetchUserCredentialsFailure,
@@ -15,6 +16,8 @@ import {
   updateUser,
   updateUserFailure,
   updateUserPhoto,
+  updateUserPhotoFailure,
+  updateUserPhotoSuccess,
   updateUserSuccess,
 } from './User.reducer'
 import { selectId } from './User.selector'
@@ -59,28 +62,6 @@ export const updateUserFlow: Middleware =
     }
     return result
   }
-export const updateUserPhotoFlow: Middleware =
-  ({ getState, dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (updateUserPhoto.match(action)) {
-      const state = getState()
-      const userId = selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)(userId)
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(config, {
-            onSuccess: updateUserSuccess,
-            onFailure: updateUserFailure,
-          }),
-          action.payload,
-        ),
-      )
-    }
-    return result
-  }
-
 export const fetchUserCredentialsFlow: Middleware =
   ({ dispatch, getState }) =>
   next =>
@@ -131,6 +112,59 @@ export const updateUserFailureFlow =
     if (updateUserFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+    }
+    return result
+  }
+export const updateUserPhotoFlow =
+  ({ captureProfileImage }: { captureProfileImage: typeof profileImagePicker }): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  async action => {
+    const result = next(action)
+    if (updateUserPhoto.match(action)) {
+      try {
+        const image = await captureProfileImage()
+        dispatch(updateUserPhotoSuccess(image.data))
+      } catch (error: any) {
+        dispatch(updateUserPhotoFailure(error.message))
+      }
+    }
+    return result
+  }
+
+export const updateUserPhotoSuccessFlow: Middleware =
+  ({ getState, dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateUserPhotoSuccess.match(action)) {
+      const state = getState()
+      const userId = selectId(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)(userId)
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: updateUserSuccess,
+            onFailure: updateUserFailure,
+          }),
+          action.payload,
+        ),
+      )
+    }
+    return result
+  }
+
+export const updateUserPhotoFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateUserPhotoFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', action.payload)
     }
     return result
   }
