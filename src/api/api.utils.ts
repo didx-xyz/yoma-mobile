@@ -1,26 +1,26 @@
 import {
+  always,
+  complement,
   concat,
+  equals,
   evolve,
   filter,
   flatten,
+  ifElse,
   isNil,
   join,
+  mergeAll,
   mergeDeepRight,
   objOf,
   of,
   pathOr,
   pipe,
   unless,
-  complement,
-  always,
-  ifElse,
-  equals,
-  mergeAll,
 } from 'ramda'
 
 import { RootState } from '../redux/redux.types'
 import { StdObj } from '../types/general.types'
-import { ApiClientArgs, ApiMeta, ApiCall, PrepareApiRequestData } from './api.types'
+import { ApiCall, ApiClientArgs, ApiMeta, PrepareApiRequestData } from './api.types'
 
 export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<ApiMeta>) =>
   pipe(objOf(key), mergeDeepRight(config))
