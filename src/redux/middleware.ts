@@ -36,6 +36,9 @@ const featureModuleMiddleware = [
   authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.setUserOnAuthFlow,
+  userMiddleware.updateUserFlow,
+  userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
+  userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.fetchUserCredentialsFlow,
 ]
 

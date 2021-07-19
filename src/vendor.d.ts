@@ -26,6 +26,7 @@ declare module 'ramda' {
   export function mergeAll(...rest: any[]): any
   export function mergeLeft(...rest: any[]): any
   export function mergeRight(...rest: any[]): any
+  export function mergeLeft(...rest: any[]): any
   export function mergeDeepRight(...rest: any[]): any
   export function multiply(...rest: any[]): number
   export function not(...rest: any[]): number
@@ -39,6 +40,7 @@ declare module 'ramda' {
   export function pathOr(...rest: any[]): any
   export function pick(...rest: any[]): any
   export function propOr(...rest: any[]): any
+  export function prop(...rest: any[]): any
   export function prepend(...rest: any[]): any
   export function reduce(...rest: any[]): any[]
   export function reduceRight(...rest: any[]): any[]

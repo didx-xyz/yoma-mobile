@@ -1,4 +1,5 @@
-import { rootStateFixture } from '../../redux/redux.test.fixtures'
+import { rootStateFixture } from 'redux/redux.test.fixtures'
+
 import * as SUT from './User.selector'
 import { USER_RESPONSE } from './User.test.fixtures'
 
@@ -48,6 +49,14 @@ describe('modules/User/User.selector', () => {
       const result = SUT.selectBiography(stateMock)
       // then ... should return result as expected
       expect(result).toEqual('BIOGRAPHY')
+    })
+    it('should handle empty user state', () => {
+      // given ...
+      const stateMock = rootStateFixture({})
+      // when ... we call the selector
+      const result = SUT.selectBiography(stateMock)
+      // then ... should return result as expected
+      expect(result).toEqual('')
     })
   })
   describe('selectId ', () => {
