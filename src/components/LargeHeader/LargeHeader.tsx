@@ -1,14 +1,9 @@
 import { BackIcon, WhiteLogo } from 'assets/images'
 import React, { ReactElement, useEffect, useState } from 'react'
-import { BackHandler, StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { Colors, colors } from 'styles'
 
 import styles from './LargeHeader.styles'
-
-// TODO: remove back icon on (UI)
-const onNavigationBack = (navigation: any) => {
-  navigation.goBack
-}
 
 type Props = {
   circleImage: ReactElement
@@ -25,17 +20,9 @@ const LargeHeader = ({ circleImage, circleImageStyle, backgroundColor, navigatio
     setStyle(StyleSheet.flatten([backgroundColorStyle, styles.container]))
   }, [backgroundColor])
 
-  useEffect(() => {
-    const backHandler = BackHandler.addEventListener('hardwareBackPress', () => {
-      onNavigationBack(navigation)
-      return true
-    })
-    return () => backHandler.remove()
-  }, [navigation])
-
   return (
     <View style={style}>
-      <TouchableOpacity style={styles.backIcon} onPress={onNavigationBack}>
+      <TouchableOpacity style={styles.backIcon} onPress={navigation.goBack}>
         <BackIcon />
       </TouchableOpacity>
       <View style={styles.logo}>

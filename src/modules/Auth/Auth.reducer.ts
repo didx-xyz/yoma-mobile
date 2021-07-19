@@ -8,6 +8,8 @@ import {
   AuthRegistration,
   AuthRegistrationFailureResponse,
   AuthRegistrationSuccessResponse,
+  AuthSocialLoginCredentials,
+  AuthSocialRegistrationCredentials,
   AuthState,
 } from './Auth.types'
 
@@ -27,6 +29,14 @@ export const registerFailure = createAction<AuthRegistrationFailureResponse>(`${
 export const setSecureRefreshToken = createAction<string>(`${name} setSecureRefreshToken`)
 export const setSecureRefreshTokenSuccess = createAction(`${name} setSecureRefreshTokenSuccess`)
 export const setSecureRefreshTokenFailure = createAction<any>(`${name} setSecureRefreshTokenFailure`)
+export const authSocialLogin = createAction<string>(`${name} Social Login`)
+export const authSocialRegistration = createAction<string>(`${name} Social Registration`)
+export const authSocialLoginSuccess = createAction<AuthSocialLoginCredentials>(`${name} Social Login Success`)
+export const authSocialLoginFailure = createAction<string>(`${name} Social Login Failure`)
+export const authSocialRegistrationSuccess = createAction<AuthSocialRegistrationCredentials>(
+  `${name} Social Registration Success`,
+)
+export const authSocialRegistrationFailure = createAction<any>(`${name} Social Registration Failure`)
 
 export const getSecureRefreshToken = createAction(`${name} getSecureRefreshToken`)
 export const getSecureRefreshTokenSuccess = createAction<string>(`${name} getSecureRefreshTokenSuccess`)

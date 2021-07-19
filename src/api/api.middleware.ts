@@ -15,6 +15,7 @@ export const apiFlow =
       const state = getState()
       //@ts-ignore
       const { onSuccess, onFailure, apiArgs } = prepArgs(state, action)
+
       await api(apiArgs)
         .then((response: any) => {
           const serializableResponse = omit(['config', 'request'], response)
