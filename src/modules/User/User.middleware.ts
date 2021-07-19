@@ -15,10 +15,10 @@ import {
   setUser,
   updateUser,
   updateUserFailure,
-  updateUserPhoto,
-  updateUserPhotoFailure,
-  updateUserPhotoSuccess,
   updateUserSuccess,
+  uploadUserPhoto,
+  uploadUserPhotoFailure,
+  uploadUserPhotoSuccess,
 } from './User.reducer'
 import { selectId } from './User.selector'
 import {
@@ -115,30 +115,36 @@ export const updateUserFailureFlow =
     }
     return result
   }
-export const updateUserPhotoFlow =
+export const uploadUserPhotoFlow =
   ({ captureProfileImage }: { captureProfileImage: typeof profileImagePicker }): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
     const result = next(action)
-    if (updateUserPhoto.match(action)) {
+    if (uploadUserPhoto.match(action)) {
       try {
         const image = await captureProfileImage()
-        dispatch(updateUserPhotoSuccess(image.data))
+        let photoPayload = new FormData()
+        photoPayload.append('Photo', {
+          uri: image.path,
+          type: image.mime,
+          name: image.filename || 'profile_photo',
+        })
+        dispatch(uploadUserPhotoSuccess(photoPayload))
       } catch (error: any) {
-        dispatch(updateUserPhotoFailure(error.message))
+        dispatch(uploadUserPhotoFailure(error.message))
       }
     }
     return result
   }
 
-export const updateUserPhotoSuccessFlow: Middleware =
+export const uploadUserPhotoSuccessFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (updateUserPhotoSuccess.match(action)) {
+    if (uploadUserPhotoSuccess.match(action)) {
       const state = getState()
       const userId = selectId(state)
       const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)(userId)
@@ -155,14 +161,14 @@ export const updateUserPhotoSuccessFlow: Middleware =
     return result
   }
 
-export const updateUserPhotoFailureFlow =
+export const uploadUserPhotoFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
   action => {
     const result = next(action)
 
-    if (updateUserPhotoFailure.match(action)) {
+    if (uploadUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', action.payload)
     }

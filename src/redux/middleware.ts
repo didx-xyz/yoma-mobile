@@ -34,9 +34,9 @@ const featureModuleMiddleware = [
   userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
   userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.fetchUserCredentialsFlow,
-  userMiddleware.updateUserPhotoFlow({ captureProfileImage: profileImagePicker }),
-  userMiddleware.updateUserPhotoSuccessFlow,
-  userMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
+  userMiddleware.uploadUserPhotoFlow({ captureProfileImage: profileImagePicker }),
+  userMiddleware.uploadUserPhotoSuccessFlow,
+  userMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

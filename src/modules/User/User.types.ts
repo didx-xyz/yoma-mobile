@@ -4,7 +4,7 @@ export interface UpdateUserResponse {
   data: UserResponse
   meta: ApiMetaResponse
 }
-export type UpdateUserPhotoPayload = string | null | undefined
+export type UpdateUserPhotoPayload = any
 export type UpdateUserFailureResponse = string
 
 export interface UserPayload {

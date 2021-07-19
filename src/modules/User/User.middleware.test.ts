@@ -14,8 +14,8 @@ import {
   setUser,
   updateUser,
   updateUserFailure,
-  updateUserPhoto,
   updateUserSuccess,
+  uploadUserPhoto,
 } from './User.reducer'
 import { USER_RESPONSE } from './User.test.fixtures'
 import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
@@ -266,30 +266,30 @@ describe('modules/User/User.middleware', () => {
         })
       })
     })
-    describe('updateUserPhotoFlow', () => {
+    describe('uploadUserPhotoFlow', () => {
       it('should correctly handle being called', () => {
         const userId = 'USER ID'
         const create = createMiddlewareStub(jest, { user: { id: userId } })
 
-        // given ... the updateUserPhoto action is fired
-        const action = updateUserPhoto('PROFILE_PHOTO')
+        // given ... the uploadUserPhoto action is fired
+        const action = uploadUserPhoto('PROFILE_PHOTO')
         // @ts-ignore
-        const { store, invoke, next } = create(SUT.updateUserPhotoFlow)
+        const { store, invoke, next } = create(SUT.uploadUserPhotoFlow)
 
-        // when ... we respond to the updateUserPhotoFlow action
+        // when ... we respond to the uploadUserPhotoFlow action
         invoke(action)
 
-        // then ...validate updateUserPhotoFlow
+        // then ...validate uploadUserPhotoFlow
         expect(next).toHaveBeenCalledWith(action)
         expect(store.dispatch).toHaveBeenCalled()
       })
       it('should correctly update user profile photo', () => {
         const userId = 'USER ID'
         const create = createMiddlewareStub(jest, { user: { id: userId } })
-        // given ... the updateUserPhoto action is fired
-        const action = updateUserPhoto('PROFILE_PHOTO')
+        // given ... the uploadUserPhoto action is fired
+        const action = uploadUserPhoto('PROFILE_PHOTO')
         // @ts-ignore
-        const { store, invoke } = create(SUT.updateUserPhotoFlow)
+        const { store, invoke } = create(SUT.uploadUserPhotoFlow)
 
         // when ... we respond to the authLoginSuccess action
         invoke(action)
