@@ -1,6 +1,10 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
-import { Card, LargeHeader, SocialLogin, ViewContainer } from 'components'
+import Card from 'components/Card'
+import LargeHeader from 'components/LargeHeader'
+import SSO from 'components/SSO'
+import { SocialVariants } from 'components/SocialButton/SocialButton.types'
+import ViewContainer from 'components/ViewContainer'
 import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,11 +18,13 @@ import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Login>
+  onAuthWithSocial: (provider: SocialVariants) => void
   onLoginUser: (details: AuthCredentials) => void
 }
 
-const Login = ({ navigation, onLoginUser }: Props) => {
+const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
   const { t } = useTranslation()
+
   return (
     <ViewContainer style={styles.container}>
       <ScrollView>
@@ -52,7 +58,7 @@ const Login = ({ navigation, onLoginUser }: Props) => {
             {t('loginSocial')}
           </Text.Body>
           <View style={styles.social}>
-            <SocialLogin />
+            <SSO onAuthWithSocial={onAuthWithSocial} />
           </View>
         </Card>
         <Text.Body
