@@ -8,21 +8,13 @@ import { showSimpleMessage } from '../../utils/error'
 // avoiding circular dependencies:
 import * as AppActions from '../App/App.reducer'
 import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
-import * as NavigationActions from '../Navigation/Navigation.actions'
-import { Providers } from '../SSOAuth/SSOAuth.types'
-import { selectRegistrationCredentials, selectSocialLoginCredentials } from '../SSOAuth/SSOAuth.utils'
 import { actions as ErrorActions } from '../Error'
 import * as Navigation from '../Navigation/Navigation.actions'
+import { Providers } from '../SSOAuth/SSOAuth.types'
+import { selectRegistrationCredentials, selectSocialLoginCredentials } from '../SSOAuth/SSOAuth.utils'
 import { selectors as UserSelectors } from '../User'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
-  authLogin,
-  authLoginFailure,
-  authLoginSuccess,
-  authLogout,
-  authRegistration,
-  authRegistrationFailure,
-  authRegistrationSuccess,
   authSocialLogin,
   authSocialLoginFailure,
   authSocialLoginSuccess,
@@ -36,8 +28,8 @@ import {
   register,
   registerFailure,
   registerSuccess,
-  authWithRefreshTokenFailure,
-  authWithRefreshTokenSuccess,
+  authorizeWithRefreshTokenFailure,
+  authorizeWithRefreshTokenSuccess,
   getSecureRefreshToken,
   getSecureRefreshTokenFailure,
   getSecureRefreshTokenSuccess,
@@ -99,8 +91,8 @@ export const authorizeWithRefreshTokenFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.SESSION_CONFIG, {
-            onSuccess: authWithRefreshTokenSuccess,
-            onFailure: authWithRefreshTokenFailure,
+            onSuccess: authorizeWithRefreshTokenSuccess,
+            onFailure: authorizeWithRefreshTokenFailure,
           }),
           { userId, refreshToken },
         ),
@@ -116,7 +108,7 @@ export const authorizeWithRefreshTokenFailureFlow: Middleware =
   action => {
     const result = next(action)
 
-    if (isAnyOf(authWithRefreshTokenFailure, noRefreshTokenInSecureStore, getSecureRefreshTokenFailure)(action)) {
+    if (isAnyOf(authorizeWithRefreshTokenFailure, noRefreshTokenInSecureStore, getSecureRefreshTokenFailure)(action)) {
       dispatch(logout())
     }
 
@@ -175,8 +167,8 @@ export const authSocialLoginSuccessFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.LOGIN_SOCIAL_CONFIG, {
-            onSuccess: authLoginSuccess,
-            onFailure: authLoginFailure,
+            onSuccess: loginSuccess,
+            onFailure: loginFailure,
           }),
           action.payload,
         ),
@@ -217,8 +209,8 @@ export const authSocialRegistrationSuccessFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
-            onSuccess: authRegistrationSuccess,
-            onFailure: authRegistrationFailure,
+            onSuccess: registerSuccess,
+            onFailure: registerFailure,
           }),
           action.payload,
         ),
@@ -259,8 +251,6 @@ export const authSocialLoginFailureFlow =
     return result
   }
 
-export const authLoginSuccessFlow =
-
 export const authorizeSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
@@ -268,7 +258,7 @@ export const authorizeSuccessFlow =
   action => {
     const result = next(action)
 
-    if (isAnyOf(loginSuccess, authWithRefreshTokenSuccess)(action)) {
+    if (isAnyOf(loginSuccess, authorizeWithRefreshTokenSuccess)(action)) {
       const credentials = extractCredentialsFromAuthorizedPayload(action)
       const refreshToken = extractRefreshTokenFromAuthorizedPayload(action)
       notification('success', 'Login Successful')

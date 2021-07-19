@@ -48,8 +48,8 @@ export const deleteSecureRefreshToken = createAction(`${name} deleteSecureRefres
 export const deleteSecureRefreshTokenSuccess = createAction(`${name} deleteSecureRefreshTokenSuccess`)
 export const deleteSecureRefreshTokenFailure = createAction<string>(`${name} deleteSecureRefreshTokenFailure`)
 
-export const authWithRefreshTokenSuccess = createAction<string>(`${name} authWithRefreshTokenSuccess`)
-export const authWithRefreshTokenFailure = createAction<string>(`${name} authWithRefreshTokenFailure`)
+export const authorizeWithRefreshTokenSuccess = createAction<string>(`${name} authWithRefreshTokenSuccess`)
+export const authorizeWithRefreshTokenFailure = createAction<string>(`${name} authWithRefreshTokenFailure`)
 
 export const clearAuth = createAction(`${name} clearAuth`)
 export const setAuthCredentials = createAction<AuthState>(`${name} Set Auth Credentials`)
