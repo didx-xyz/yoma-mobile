@@ -1,4 +1,4 @@
-import { omit, pick } from 'ramda'
+import { omit } from 'ramda'
 import { Middleware } from 'redux'
 
 import { apiError, apiRequest } from './api.reducer'
@@ -21,10 +21,8 @@ export const apiFlow =
           dispatch(onSuccess(serializableResponse))
         })
         .catch((error: any) => {
-          const errorMetaAndMessage = pick(['message', 'meta'], error)
-          dispatch(onFailure(errorMetaAndMessage))
-          const sanitizedError = JSON.parse(JSON.stringify(error))
-          dispatch(apiError(sanitizedError))
+          const serializableResponse = omit(['config', 'request'], error.response)
+          dispatch(apiError({ onFailure }, serializableResponse))
         })
     }
 

@@ -9,14 +9,19 @@ describe('modules/Error/Error.middleware', () => {
       // given ...
       const create = createMiddlewareStub(jest)
 
-      const action = ApiActions.apiError({
-        message: 'ERROR MESSAGE',
-        meta: {
-          success: false,
-          code: 401,
-          message: 'A DETAILED ERROR MESSAGE',
+      const action = ApiActions.apiError(
+        { onFailure: jest.fn() },
+        {
+          data: {
+            message: 'ERROR MESSAGE',
+            meta: {
+              success: false,
+              code: 401,
+              message: 'A DETAILED ERROR MESSAGE',
+            },
+          },
         },
-      })
+      )
 
       // when ... we respond to the login action
       // @ts-ignore
@@ -31,14 +36,19 @@ describe('modules/Error/Error.middleware', () => {
       // given ...
       const create = createMiddlewareStub(jest)
 
-      const action = ApiActions.apiError({
-        message: 'ERROR MESSAGE',
-        meta: {
-          success: false,
-          code: 401,
-          message: 'A DETAILED ERROR MESSAGE',
+      const action = ApiActions.apiError(
+        { onFailure: jest.fn() },
+        {
+          data: {
+            message: 'ERROR MESSAGE',
+            meta: {
+              success: false,
+              code: 401,
+              message: 'A DETAILED ERROR MESSAGE',
+            },
+          },
         },
-      })
+      )
 
       // when ... we respond to the login action
       // @ts-ignore
@@ -48,18 +58,24 @@ describe('modules/Error/Error.middleware', () => {
       // then ... the login API should be called
       expect(store.dispatch).toHaveBeenCalledWith(unauthorizedError())
     })
-    it('should ignore any error that is not unauthorized', async () => {
+    it('should call the failure action for any error that is not unauthorized', async () => {
       // given ...
       const create = createMiddlewareStub(jest)
 
-      const action = ApiActions.apiError({
-        message: 'ERROR MESSAGE',
-        meta: {
-          success: false,
-          code: 500,
-          message: 'A DETAILED ERROR MESSAGE',
+      const onFailure = jest.fn()
+      const action = ApiActions.apiError(
+        { onFailure },
+        {
+          data: {
+            message: 'ERROR MESSAGE',
+            meta: {
+              success: false,
+              code: 500,
+              message: 'A DETAILED ERROR MESSAGE',
+            },
+          },
         },
-      })
+      )
 
       // when ... we respond to the login action
       // @ts-ignore
@@ -67,7 +83,18 @@ describe('modules/Error/Error.middleware', () => {
       await invoke(action)
 
       // then ... the login API should be called
-      expect(store.dispatch).not.toHaveBeenCalled()
+      expect(store.dispatch).toHaveBeenCalledWith(
+        onFailure({
+          data: {
+            message: 'ERROR MESSAGE',
+            meta: {
+              success: false,
+              code: 500,
+              message: 'A DETAILED ERROR MESSAGE',
+            },
+          },
+        }),
+      )
     })
   })
 })

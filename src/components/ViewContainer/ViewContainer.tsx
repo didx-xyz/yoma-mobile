@@ -10,7 +10,7 @@ type Props = StatusBarProps &
   WithChildren<{
     statusHidden?: boolean
     statusBarStyle?: StatusBarStyle
-    backgroundColor: Colors
+    backgroundColor?: Colors
     style?: ViewStyle
   }>
 

@@ -1,6 +1,6 @@
 import { createMiddlewareStub } from '../../tests/tests.utils'
 import * as SUT from './api.middleware'
-import { apiRequest } from './api.reducer'
+import { apiError, apiRequest } from './api.reducer'
 
 describe('api/api.middleware.ts', () => {
   describe('apiFlow', () => {
@@ -53,7 +53,7 @@ describe('api/api.middleware.ts', () => {
     it('should correctly handle when the api fails', async () => {
       // given ... a request
       const create = createMiddlewareStub(jest)
-      const apiClientStub = jest.fn().mockRejectedValue({ message: 'ERROR' })
+      const apiClientStub = jest.fn().mockRejectedValue({ response: { message: 'ERROR' } })
       const onSuccessStub = jest.fn(x => ({ type: 'onSuccess', payload: x }))
       const onFailureStub = jest.fn(x => ({ type: 'onFailure', payload: x }))
       const prepArgsStub = jest
@@ -70,7 +70,7 @@ describe('api/api.middleware.ts', () => {
       expect.hasAssertions()
 
       // ... should correctly send provided data
-      expect(store.dispatch).toHaveBeenCalledWith(onFailureStub({ message: 'ERROR' }))
+      expect(store.dispatch).toHaveBeenCalledWith(apiError({ onFailure: onFailureStub }, { message: 'ERROR' }))
     })
   })
 })

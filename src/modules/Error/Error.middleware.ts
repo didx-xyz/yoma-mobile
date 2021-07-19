@@ -10,9 +10,14 @@ export const categorizeErrorsFlow: Middleware =
     const result = next(action)
 
     if (ApiActions.apiError.match(action)) {
-      if (action.payload.meta.code === 401) {
+      const errorCode = action.payload.data.meta.code
+      if (errorCode === 401) {
         dispatch(unauthorizedError())
+        return result
       }
+      const onFailure = action.meta.onFailure
+      const error = action.payload
+      dispatch(onFailure(error))
     }
 
     return result
