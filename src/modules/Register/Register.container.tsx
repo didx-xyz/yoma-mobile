@@ -3,19 +3,15 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
 import * as AuthActions from '../Auth/Auth.reducer'
-import { AuthCredentials } from '../Auth/Auth.types'
-import Login from './Login'
+import Register from './Register'
 
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onAuthWithSocial: (authProvider: SocialVariants) => {
-      dispatch(AuthActions.authSocialLogin(authProvider))
-    },
-    onLoginUser: (details: AuthCredentials) => {
-      dispatch(AuthActions.authLogin(details))
+      dispatch(AuthActions.authSocialRegistration(authProvider))
     },
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login as any)
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

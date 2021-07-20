@@ -140,7 +140,11 @@ android {
         applicationId "com.yomamobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+<<<<<<< HEAD
         versionCode 11
+=======
+        versionCode 12
+>>>>>>> develop
         versionName "0.0.1"
         multiDexEnabled true
     }
