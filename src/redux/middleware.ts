@@ -1,5 +1,6 @@
 import { setItemAsync } from 'expo-secure-store'
 import { middleware as appMiddleware } from 'modules/App'
+import { photoUploadFormConfig } from 'modules/Profile/Profile.constants'
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -34,7 +35,10 @@ const featureModuleMiddleware = [
   userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
   userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.fetchUserCredentialsFlow,
-  userMiddleware.uploadUserPhotoFlow({ captureProfileImage: profileImagePicker }),
+  userMiddleware.uploadUserPhotoFlow({
+    captureProfileImage: profileImagePicker,
+    formConfig: photoUploadFormConfig,
+  }),
   userMiddleware.uploadUserPhotoSuccessFlow,
   userMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
 ]

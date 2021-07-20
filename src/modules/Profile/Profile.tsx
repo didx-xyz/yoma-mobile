@@ -4,7 +4,7 @@ import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'compo
 import Button, { ButtonVariants } from 'components/Button'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import { UserResponse } from 'modules/User/User.types'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -22,7 +22,7 @@ interface Props {
 }
 
 const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }: Props) => {
-  const [userResponse] = useState<UserResponse>(user)
+  const [userResponse, setUserResponse] = useState<UserResponse>(user)
   const [formState, setFormState] = useState<ProfileFormState | null>(null)
 
   const { t } = useTranslation()
@@ -32,6 +32,10 @@ const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }:
       onProfileSave(formState.values)
     }
   }
+
+  useEffect(() => {
+    setUserResponse(user)
+  }, [user])
 
   return (
     <ViewContainer style={styles.container}>

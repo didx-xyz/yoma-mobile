@@ -14,6 +14,16 @@ export interface UserPayload {
   countryAlpha2?: string
   biography?: string
 }
+export interface PhotoUploadFormConfig {
+  formName: string
+  formInstance: any
+}
+
+export interface PhotoUploadFormData {
+  uri: string
+  name: string | 'default.jpg'
+  type: string
+}
 
 export interface UserResponse {
   id: string

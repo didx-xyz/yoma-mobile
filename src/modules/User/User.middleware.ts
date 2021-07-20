@@ -7,7 +7,6 @@ import { showSimpleMessage } from 'utils/error'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import * as Navigation from '../Navigation/Navigation.actions'
-import { profileImagePicker } from '../Profile/Profile.utils'
 import {
   fetchUserCredentials,
   fetchUserCredentialsFailure,
@@ -21,7 +20,9 @@ import {
   uploadUserPhotoSuccess,
 } from './User.reducer'
 import { selectId } from './User.selector'
+import { PhotoUploadFormConfig } from './User.types'
 import {
+  createPhotoFormPayload,
   extractUserFromLoginPayload,
   extractUserfromUpdateUserPayload,
   extractUserFromUserUpdateSuccess,
@@ -116,20 +117,15 @@ export const updateUserFailureFlow =
     return result
   }
 export const uploadUserPhotoFlow =
-  ({ captureProfileImage }: { captureProfileImage: typeof profileImagePicker }): Middleware =>
+  ({ captureProfileImage, formConfig }: { captureProfileImage: any; formConfig: PhotoUploadFormConfig }): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
     const result = next(action)
     if (uploadUserPhoto.match(action)) {
       try {
-        const image = await captureProfileImage()
-        let photoPayload = new FormData()
-        photoPayload.append('Photo', {
-          uri: image.path,
-          type: image.mime,
-          name: image.filename || 'profile_photo',
-        })
+        const imageData = await captureProfileImage()
+        const photoPayload = createPhotoFormPayload(imageData, formConfig)
         dispatch(uploadUserPhotoSuccess(photoPayload))
       } catch (error: any) {
         dispatch(uploadUserPhotoFailure(error.message))
