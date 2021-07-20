@@ -34,8 +34,15 @@ export const createCredentialsFlow: Middleware =
   action => {
     const result = next(action)
     if (createCredentials.match(action)) {
-      const user = extractCredentialsFromHydratePayload(action)
-      dispatch(setCredentials(user))
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG, {
+            onSuccess: updateCredentialsSuccess,
+            onFailure: updateCredentialsFailure,
+          }),
+          action.payload,
+        ),
+      )
     }
     return result
   }
