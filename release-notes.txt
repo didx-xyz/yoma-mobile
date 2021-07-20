@@ -1,2 +1,3 @@
-Ver 0.0.1 (build 9)
-- User data in profile view
+Ver 0.0.1 (build 12:q)
+- about should correctly save any edits to backend
+

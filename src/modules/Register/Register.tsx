@@ -1,7 +1,9 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
-import { Card, LargeHeader, SocialRegistration, ViewContainer } from 'components'
+import { Card, ViewContainer } from 'components'
 import Button from 'components/Button'
+import LargeHeader from 'components/LargeHeader'
+import SSO from 'components/SSO'
 import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -12,10 +14,11 @@ import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../component
 import styles from './Register.styles'
 
 interface Props {
+  onAuthWithSocial: (type: string) => void
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Register>
 }
 
-const Register = ({ navigation }: Props) => {
+const Register = ({ navigation, onAuthWithSocial }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -43,7 +46,7 @@ const Register = ({ navigation }: Props) => {
         <Text.Body level={BodyLevels.small} style={styles.bodyText}>
           {t('registerSocial')}
         </Text.Body>
-        <SocialRegistration />
+        <SSO onAuthWithSocial={onAuthWithSocial} />
       </Card>
       <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.bottomText}>
         {t('alreadyHaveAccount')}&nbsp;

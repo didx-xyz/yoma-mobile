@@ -22,6 +22,8 @@
     "init:ios": "npx pod-install",
     "ios": "react-native run-ios",
     "lint": "eslint . --ignore-path .gitignore --ignore-path .eslintignore",
+    "lint:check": "npm run lint",
+    "lint:fix": "npm run lint --fix",
     "npm:audit": "audit-ci --critical",
     "reset": "npx rimraf node_modules && npm i && npx pod-install",
     "start": "react-native start",
@@ -37,7 +39,7 @@
     "@react-native-community/datetimepicker": "^3.4.3",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-firebase/app": "^12.0.0",
-    "@react-native-google-signin/google-signin": "^6.0.0",
+    "@react-native-google-signin/google-signin": "^6.0.1",
     "@react-navigation/bottom-tabs": "^5.11.9",
     "@react-navigation/native": "^5.9.3",
     "@react-navigation/stack": "^5.14.3",
@@ -54,7 +56,7 @@
     "react-native-dropdown-picker": "^5.1.4",
     "react-native-elements": "^3.3.2",
     "react-native-email-link": "^1.11.0",
-    "react-native-fbsdk": "^3.0.0",
+    "react-native-fbsdk-next": "^4.3.0",
     "react-native-flash-message": "^0.1.23",
     "react-native-flipper": "^0.81.0",
     "react-native-gesture-handler": "^1.10.3",
@@ -74,12 +76,13 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
+    "@babel/preset-env": "^7.14.7",
     "@babel/runtime": "^7.12.5",
     "@react-native-community/eslint-config": "^2.0.0",
     "@testing-library/jest-native": "^4.0.1",
     "@testing-library/react-native": "^7.2.0",
     "@trivago/prettier-plugin-sort-imports": "^1.4.4",
-    "@types/jest": "^25.2.3",
+    "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.2",
     "@types/react-native-fbsdk": "^3.0.0",
     "@types/react-redux": "^7.1.16",
@@ -121,11 +124,12 @@
   },
   "jest": {
     "preset": "react-native",
-    "moduleNameMapper": {
-      "\\.svg": "<rootDir>/__mocks__/svgMock.js"
-    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@react-native|react-native)/.*)(?!(@react-native-google-signin)/.*)(?!(@react-navigation|react-navigation)/.*)(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)"
+    ],
     "setupFiles": [
-      "./node_modules/react-native-gesture-handler/jestSetup.js"
+      "<rootDir>/tests/jest.setup.js",
+      "<rootDir>/node_modules/react-native-gesture-handler/jestSetup.js"
     ],
     "moduleFileExtensions": [
       "ts",

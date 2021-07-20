@@ -1,4 +1,5 @@
 {
   "YOMA_API_BASE_PATH": "https://staging.api.yoma.africa/api/v1/",
-  "YOMA_WEB_BASE_PATH": "https://staging.app.yoma.africa/"
+  "YOMA_WEB_BASE_PATH": "https://staging.app.yoma.africa/",
+  "GOOGLE_SIGNIN_WEBCLIENT_ID": "1007644634835-8b7vl8u89o7ah0d6pbhbtajarp23h3j0.apps.googleusercontent.com"
 }

@@ -1,4 +1,5 @@
 import { AuthEndpoints } from '../../api/auth/auth.types'
+import { UserResponse } from '../User/User.types'
 
 export interface ApiMetaResponse {
   success: boolean
@@ -15,25 +16,6 @@ export interface AuthCredentialsResponse {
   expiresAt: string
   email?: string
   password?: string
-}
-
-export interface UserResponse {
-  id: string
-  firstName: string
-  lastName: string
-  phoneNumber: string | null
-  biography: string | null
-  countryAlpha2: string
-  email: string
-  zltoWalletId: string | null
-  zltoBalance: number
-  covidChallengeCertificateURL: string | null
-  tideChallengeCertificateURL: string | null
-  photoURL: string | null
-  role: string | null
-  organisation: string | null
-  createdAt: string
-  lastLogin: string
 }
 
 export interface AuthLoginSuccessData extends AuthCredentialsResponse, AuthRefreshTokenResponse {
@@ -66,6 +48,20 @@ export interface AuthRegistration {
   password: string
   confirmPassword: string
   privacyInd: boolean
+}
+
+export interface AuthSocialRegistrationCredentials {
+  firstName: string
+  lastName: string
+  email: string
+  provider: string
+  providerKey: string
+  token: string
+}
+export interface AuthSocialLoginCredentials {
+  provider: string
+  providerKey: string
+  token: string
 }
 
 export type AuthRegistrationSuccessResponse = {
