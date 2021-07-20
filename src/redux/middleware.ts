@@ -46,9 +46,9 @@ const featureModuleMiddleware = [
   credentialMiddleware.updateCredentialsFlow,
   credentialMiddleware.setCredentialsFlow,
   credentialMiddleware.updateCredentialsSuccessFlow({ notification: showSimpleMessage, navigation: Navigation }),
-  credentialMiddleware.updateCredentialsSuccessFlow({ notification: showSimpleMessage, navigation: Navigation }),
+  credentialMiddleware.updateCredentialsFailureFlow({ notification: showSimpleMessage }),
   credentialMiddleware.createCredentialsSuccessFlow({ notification: showSimpleMessage, navigation: Navigation }),
-  credentialMiddleware.createCredentialsSuccessFlow({ notification: showSimpleMessage, navigation: Navigation }),
+  credentialMiddleware.createCredentialsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

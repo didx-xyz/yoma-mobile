@@ -6,4 +6,4 @@ import Experience from './Experience'
 const mapStateToProps = selector
 const mapDispatchToProps = null
 
-export default connect(mapStateToProps, mapDispatchToProps)(Experience as any)
+export default connect(mapStateToProps, mapDispatchToProps)(Experience)
