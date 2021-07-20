@@ -280,6 +280,8 @@ describe('modules/User/User.middleware', () => {
       } as any
       const create = createMiddlewareStub(jest)
       // given ...
+
+      //TODO: Fix mock for image capture
       const capturedProfileImageMock = () =>
         jest.fn().mockReturnValue(
           Promise.resolve({
@@ -307,7 +309,7 @@ describe('modules/User/User.middleware', () => {
       invoke(action)
 
       // then ...  confirm successful image upload
-      //TODO: Fix camera mock
+
       // expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoSuccess(formData))
     })
   })
