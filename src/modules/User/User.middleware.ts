@@ -14,6 +14,8 @@ import {
   setUser,
   updateUser,
   updateUserFailure,
+  updateUserPhotoFailure,
+  updateUserPhotoSuccess,
   updateUserSuccess,
   uploadUserPhoto,
   uploadUserPhotoFailure,
@@ -147,8 +149,8 @@ export const uploadUserPhotoSuccessFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: updateUserSuccess,
-            onFailure: updateUserFailure,
+            onSuccess: updateUserPhotoSuccess,
+            onFailure: updateUserPhotoFailure,
           }),
           action.payload,
         ),
@@ -157,6 +159,21 @@ export const uploadUserPhotoSuccessFlow: Middleware =
     return result
   }
 
+export const updateUserPhotoSuccessFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateUserPhotoSuccess.match(action)) {
+      const user = extractUserFromUserUpdateSuccess(action)
+      dispatch(setUser(user))
+      // TODO: this should be handled by the notification module
+      notification('success', 'Details Updated')
+    }
+    return result
+  }
 export const uploadUserPhotoFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
@@ -165,6 +182,19 @@ export const uploadUserPhotoFailureFlow =
     const result = next(action)
 
     if (uploadUserPhotoFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', action.payload)
+    }
+    return result
+  }
+export const updateUserPhotoFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', action.payload)
     }

@@ -48,6 +48,8 @@ const featureModuleMiddleware = [
   }),
   userMiddleware.uploadUserPhotoSuccessFlow,
   userMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
+  userMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
+  userMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

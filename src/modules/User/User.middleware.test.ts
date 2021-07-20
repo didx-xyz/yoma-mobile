@@ -14,6 +14,8 @@ import {
   setUser,
   updateUser,
   updateUserFailure,
+  updateUserPhotoFailure,
+  updateUserPhotoSuccess,
   updateUserSuccess,
   uploadUserPhoto,
   uploadUserPhotoFailure,
@@ -328,7 +330,7 @@ describe('modules/User/User.middleware', () => {
       // then ...validate uploadUserPhotoSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly update user profile photo', () => {
+    it('should correctly upload user profile photo', () => {
       const userId = 'USER ID'
       const create = createMiddlewareStub(jest, { user: { id: userId } })
 
@@ -344,8 +346,8 @@ describe('modules/User/User.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: updateUserSuccess,
-            onFailure: updateUserFailure,
+            onSuccess: updateUserPhotoSuccess,
+            onFailure: updateUserPhotoFailure,
           }),
           action.payload,
         ),
@@ -354,7 +356,7 @@ describe('modules/User/User.middleware', () => {
   })
 
   describe('uploadUserPhotoFailureFlow', () => {
-    it('should correctly handle user photo update failure', () => {
+    it('should correctly handle user photo upload failure', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const action = uploadUserPhotoFailure('FAILED')
@@ -363,6 +365,38 @@ describe('modules/User/User.middleware', () => {
       const { invoke } = create(SUT.uploadUserPhotoFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the uploadUserPhotoFailure action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('updateUserPhotoSuccessFlow', () => {
+    it('should correctly handle user photo update failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = updateUserPhotoSuccess()
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.updateUserPhotoSuccessFlow({ notification: mockNotification }))
+
+      // when ... we respond to the updateUserPhotoSuccess action
+      invoke(action)
+
+      // then ...validate updateUserPhotoSuccessFlow
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('updateUserPhotoFailureFlow', () => {
+    it('should correctly handle user photo update failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = updateUserPhotoFailure('FAILED')
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.updateUserPhotoFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the updateUserPhotoFailureFlow action
       invoke(action)
 
       // then ...validate failure
