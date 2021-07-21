@@ -4,6 +4,7 @@ import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
+import { OrganisationResponsePayload } from 'modules/Organisations/Organisations.types'
 import { SkillPayload } from 'modules/Skills/Skills.types'
 import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -20,13 +21,13 @@ interface Props {
   fetchOrganizationsList: () => void
   fetchSkillsList: () => void
   skills: SkillPayload[]
-  organization: OrganizationPayload[]
+  organisations: OrganisationResponsePayload[]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
-const ExperienceForm = forwardRef(({ navigation, fetchSkillsList, fetchOrganizationsList }: Props, ref) => {
+const ExperienceForm = forwardRef(({ navigation, skills, organisations }: Props, ref) => {
   const { t } = useTranslation()
-  const [organizations, setOrganizations] = useState<DropDownOrg[]>([])
+  const [organisationsList, setOrganisationsList] = useState<DropDownOrg[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [skillsList, setSkillsList] = useState<DropDownOrg[]>([])
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
@@ -34,20 +35,12 @@ const ExperienceForm = forwardRef(({ navigation, fetchSkillsList, fetchOrganizat
   const formRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
-    const getOrganizations = async () => {
-      const organizationsList = await getOrganizationsList()
-      setOrganizations(mapToDropDownArray(organizationsList.data))
-    }
-    getOrganizations()
-  }, [])
+    setOrganisationsList(organisations)
+  }, [organisations])
 
   useEffect(() => {
-    const getSkills = async () => {
-      const skills = await getSkillsList()
-      setSkillsList(mapToDropDownArray(skills.data, 'value'))
-    }
-    getSkills()
-  }, [])
+    setSkillsList(skills)
+  }, [skills])
 
   useImperativeHandle(ref, () => ({
     handleSubmit() {
@@ -64,7 +57,8 @@ const ExperienceForm = forwardRef(({ navigation, fetchSkillsList, fetchOrganizat
       enableReinitialize
       validationSchema={ValidationSchema}
       onSubmit={async values => {
-        await submitForm(values)
+        console.log('values', values)
+        // await submitForm(values)
         navigation.navigate(HomeNavigationRoutes.Home)
       }}
     >
@@ -80,7 +74,7 @@ const ExperienceForm = forwardRef(({ navigation, fetchSkillsList, fetchOrganizat
           <Spinner visible={formikHandlers.isSubmitting} />
           <Input name={'title'} label={t('Title')} handlers={formikHandlers} />
           <DropDown
-            items={organizations}
+            items={organisationsList}
             name={'organisationName'}
             label={'Company name'}
             handlers={formikHandlers}

@@ -3,7 +3,7 @@ import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
-import { Qualification } from 'modules/Credentials/Credentials.types'
+import { QualificationRequestPayload } from 'modules/Credentials/Credentials.types'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +14,9 @@ import { ExperienceType } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
 
 interface Props {
-  qualifications: Qualification[]
+  qualifications: [QualificationRequestPayload]
+  organisations: []
+  skills: []
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
@@ -28,7 +30,7 @@ const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
   />
 )
 
-const Experience = ({ navigation, qualifications }: Props) => {
+const Experience = ({ navigation, qualifications, organisations, skills }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [qualification, setQualification] = useState(qualifications)
@@ -65,7 +67,7 @@ const Experience = ({ navigation, qualifications }: Props) => {
       >
         <ScrollView>
           <Card>
-            <ExperienceForm navigation={navigation} ref={formRef} />
+            <ExperienceForm skills={skills} organisations={organisations} navigation={navigation} ref={formRef} />
           </Card>
         </ScrollView>
       </Optional>

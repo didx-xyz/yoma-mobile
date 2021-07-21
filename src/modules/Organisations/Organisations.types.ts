@@ -1,4 +1,4 @@
-export type OrganizationResponsePayload = {
+export type OrganisationResponsePayload = {
   id: string
   name: string
   url: string
