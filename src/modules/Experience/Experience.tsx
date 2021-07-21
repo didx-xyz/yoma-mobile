@@ -2,23 +2,23 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
-import { FormikProps, FormikValues } from 'formik'
 import { QualificationRequestPayload } from 'modules/Credentials/Credentials.types'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import { OrganisationResponsePayload } from 'modules/Organisations/Organisations.types'
-import { Skill } from 'modules/Skills/Skills.types'
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import styles from './Experience.styles'
-import { ExperienceType } from './Experience.types'
+import { ExperienceFormState, ExperienceType } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
 
 interface Props {
+  onExperienceSave: (qualification: any) => void
+  fetchOrganizationsList: () => void
+  fetchSkillsList: () => void
   qualifications: [QualificationRequestPayload]
-  organisations: [OrganisationResponsePayload]
-  skills: [Skill]
+  organisations: []
+  skills: []
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
@@ -32,22 +32,35 @@ const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
   />
 )
 
-const Experience = ({ navigation, qualifications, organisations, skills }: Props) => {
+const Experience = ({
+  navigation,
+  onExperienceSave,
+  fetchOrganizationsList,
+  fetchSkillsList,
+  qualifications,
+  organisations,
+  skills,
+}: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [qualification, setQualification] = useState(qualifications)
-  const formRef = useRef<FormikProps<FormikValues>>()
+  const [formState, setFormState] = useState<ExperienceFormState>(null)
 
   useEffect(() => {
     setQualification(qualification)
   }, [qualification])
 
+  const handleExperienceForm = () => {
+    if (formState?.isValid) {
+      onExperienceSave(formState.values)
+    }
+  }
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
         headerText={t('Experience')}
-        onSave={formRef.current?.handleSubmit}
+        onSave={handleExperienceForm}
         onAdd={() => setIsSaved(true)}
         showAddButton={!isSaved}
       />
@@ -69,7 +82,13 @@ const Experience = ({ navigation, qualifications, organisations, skills }: Props
       >
         <ScrollView>
           <Card>
-            <ExperienceForm skills={skills} organisations={organisations} navigation={navigation} ref={formRef} />
+            <ExperienceForm
+              setFormState={setFormState}
+              skills={skills}
+              organisations={organisations}
+              fetchOrganizationsList={fetchOrganizationsList}
+              fetchSkillsList={fetchSkillsList}
+            />
           </Card>
         </ScrollView>
       </Optional>

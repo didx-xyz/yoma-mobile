@@ -1,3 +1,5 @@
+import { FormikValues } from 'formik'
+
 export type ExperienceType = {
   endDate: string
   id: string
@@ -12,4 +14,8 @@ type Job = {
   organisationLogoURL: string
   organisationName: string
   title: string
+}
+export type ExperienceFormState = {
+  values: FormikValues
+  isValid: boolean
 }
