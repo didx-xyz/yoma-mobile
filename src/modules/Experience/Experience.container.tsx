@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import selector from '../Credentials/Credentials.selector'
 import Experience from './Experience'
+import selector from './Experience.selector'
 
 const mapStateToProps = selector
 const mapDispatchToProps = null

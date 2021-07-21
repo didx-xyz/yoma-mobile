@@ -1,5 +1,3 @@
-import { createSelector } from '@reduxjs/toolkit'
-import { selectUser } from 'modules/User/User.selector'
-import { pick } from 'ramda'
+import { RootState } from 'redux/redux.types'
 
-export default createSelector(selectUser, pick([])) //TODO: add path
+export const selectCredentials = (state: RootState) => state.credentials
