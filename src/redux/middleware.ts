@@ -9,6 +9,8 @@ import { apiConfig, middleware as apiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
 import { middleware as authMiddleware } from '../modules/Auth'
 import { middleware as credentialMiddleware } from '../modules/Credentials'
+import { middleware as organisationsMiddleware } from '../modules/Organisations/'
+import { middleware as skillsMiddleware } from '../modules/Skills'
 import { middleware as userMiddleware } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
@@ -37,10 +39,6 @@ const featureModuleMiddleware = [
   authMiddleware.setSecureRefreshTokenFlow(setItemAsync),
   authMiddleware.authRegistrationSuccessFlow({ notification: showSimpleMessage }),
   authMiddleware.authRegistrationFailureFlow({ notification: showSimpleMessage }),
-  userMiddleware.setUserOnAuthFlow,
-  userMiddleware.updateUserFlow,
-  userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
-  userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   credentialMiddleware.fetchUserCredentialsFlow,
   credentialMiddleware.createCredentialsFlow,
   credentialMiddleware.updateCredentialsFlow,
@@ -49,6 +47,16 @@ const featureModuleMiddleware = [
   credentialMiddleware.updateCredentialsFailureFlow({ notification: showSimpleMessage }),
   credentialMiddleware.createCredentialsSuccessFlow({ notification: showSimpleMessage, navigation: Navigation }),
   credentialMiddleware.createCredentialsFailureFlow({ notification: showSimpleMessage }),
+  organisationsMiddleware.fetchOrganisationsFlow,
+  organisationsMiddleware.fetchOrganisationsSuccessFlow,
+  organisationsMiddleware.fetchOrganisationsFailureFlow,
+  skillsMiddleware.fetchSkillsFlow,
+  skillsMiddleware.fetchSkillsSuccessFlow,
+  skillsMiddleware.fetchSkillsFailureFlow,
+  userMiddleware.setUserOnAuthFlow,
+  userMiddleware.updateUserFlow,
+  userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
+  userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

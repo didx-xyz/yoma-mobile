@@ -1,10 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { DropDown, Spinner, DatePicker, DropDownTags, InfoModal, Input, CheckBox, FormWrapper } from 'components'
+import { CheckBox, DatePicker, DropDown, DropDownTags, FormWrapper, InfoModal, Input, Spinner } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect } from 'react'
+import { SkillPayload } from 'modules/Skills/Skills.types'
+import React, { forwardRef, useEffect, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -13,14 +14,17 @@ import { mapToDropDownArray } from 'utils/strings.utils'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
 import { DropDownOrg } from './ExperienceForm.types'
-import { getOrganizationsList, getSkillsList, submitForm } from './ExperienceForm.utils'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
+  fetchOrganizationsList: () => void
+  fetchSkillsList: () => void
+  skills: SkillPayload[]
+  organization: OrganizationPayload[]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
-const ExperienceForm = forwardRef(({ navigation }: Props, ref) => {
+const ExperienceForm = forwardRef(({ navigation, fetchSkillsList, fetchOrganizationsList }: Props, ref) => {
   const { t } = useTranslation()
   const [organizations, setOrganizations] = useState<DropDownOrg[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)

@@ -1,4 +1,4 @@
-export type Qualification = {
+export type QualificationResponsePayload = {
   organisationId: string
   organisationName: string
   organisationLogoURL: string
@@ -18,16 +18,32 @@ export type Qualification = {
   endTime: string
   published: boolean
 }
-export type Credential = {
-  qualification: Qualification
+
+export type QualificationRequestPayload = {
+  organisationId: string
+  organisationName: string
+  organisationLogoURL: string
+  organisationURL: string
+  organisationPrimaryContactName: string
+  organisationPrimaryContactEmail: string
+  organisationPrimaryContactPhone: string
   id: string
-  verifiedAt: string
-  approved: boolean
-  approvalMessage: string
-  startDate: string
-  endDate: string
+  title: string
+  description: string
+  url: string
   createdAt: string
-  fileId: string
-  fileURL: string
+  zltoReward: number
+  createdByAdmin: boolean
+  language: string
+  startTime: string
+  endTime: string
+  published: boolean
+}
+
+export type CredentialRequestPayload = {
+  type: string
+  credentialItemId: string
+  startTime: string
+  endTime: string
   requestVerification: boolean
 }
