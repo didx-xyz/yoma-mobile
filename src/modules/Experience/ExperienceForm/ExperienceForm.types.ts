@@ -2,6 +2,10 @@ export type DropDownOrg = {
   label: string
   value: string
 }
+export type DropDownSkill = {
+  label: string
+  value: string
+}
 
 export type ExperienceFields = {
   title: string

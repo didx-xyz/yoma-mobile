@@ -11,7 +11,7 @@ import { mapToDropDownArray } from 'utils/strings.utils'
 import { ExperienceFormState } from '../Experience.types'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
-import { DropDownOrg } from './ExperienceForm.types'
+import { DropDownOrg, DropDownSkill } from './ExperienceForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
@@ -22,12 +22,17 @@ interface Props {
   setFormState: ({ values: FormikValues, isValid: boolean }: ExperienceFormState) => void
 }
 
-const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
+const ExperienceForm = ({ setFormState, skills, organisations, fetchOrganizationsList, fetchSkillsList }: Props) => {
   const { t } = useTranslation()
   const [organisationsList, setOrganisationsList] = useState<DropDownOrg[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
-  const [skillsList, setSkillsList] = useState<DropDownOrg[]>([])
+  const [skillsList, setSkillsList] = useState<DropDownSkill[]>([])
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
+
+  useEffect(() => {
+    fetchOrganizationsList()
+    fetchSkillsList()
+  }, [fetchOrganizationsList, fetchSkillsList])
 
   useEffect(() => {
     setOrganisationsList(organisations)
@@ -63,7 +68,7 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
           <Spinner visible={formikHandlers.isSubmitting} />
           <Input name={'title'} label={t('Title')} handlers={formikHandlers} />
           <DropDown
-            items={organisationsList}
+            items={mapToDropDownArray(organisationsList, 'value', 'name')}
             name={'organisationName'}
             label={'Company name'}
             handlers={formikHandlers}

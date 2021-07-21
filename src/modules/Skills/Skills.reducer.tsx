@@ -1,9 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-import { Skill } from './Skills.types'
-
 const name = '[Skills]'
-export const INITIAL_STATE = [] as Array<Skill>
+export const INITIAL_STATE = []
 export const setSkills = createAction<any>(`${name} setSkills`)
 
 export const fetchSkills = createAction(`${name} fetchSkills`)

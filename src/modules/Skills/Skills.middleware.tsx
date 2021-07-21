@@ -5,6 +5,7 @@ import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
+import { selectSkillsFromPayload } from './Skills.utils'
 
 export const fetchSkillsFlow: Middleware =
   ({ dispatch }) =>
@@ -18,7 +19,6 @@ export const fetchSkillsFlow: Middleware =
             onSuccess: fetchSkillsSuccess,
             onFailure: fetchSkillsFailure,
           }),
-          action.payload,
         ),
       )
     }
@@ -29,7 +29,8 @@ export const fetchSkillsSuccessFlow: Middleware = _store => next => action => {
   const result = next(action)
 
   if (fetchSkillsSuccess.match(action)) {
-    setSkills(action.payload)
+    const skillsPayload = selectSkillsFromPayload(action)
+    setSkills(skillsPayload)
   }
   return result
 }
