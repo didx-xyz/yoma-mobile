@@ -9,8 +9,8 @@ import { apiConfig, middleware as apiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
 import { middleware as authMiddleware } from '../modules/Auth'
 import { middleware as credentialMiddleware } from '../modules/Credentials'
-import { middleware as organisationsMiddleware } from '../modules/Organisations/'
-import { middleware as skillsMiddleware } from '../modules/Skills'
+import { middleware as organisationsMiddleware } from '../modules/Organisations'
+// import { middleware as skillsMiddleware } from '../modules/Skills'
 import { middleware as userMiddleware } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
@@ -50,9 +50,9 @@ const featureModuleMiddleware = [
   organisationsMiddleware.fetchOrganisationsFlow,
   organisationsMiddleware.fetchOrganisationsSuccessFlow,
   organisationsMiddleware.fetchOrganisationsFailureFlow,
-  skillsMiddleware.fetchSkillsFlow,
-  skillsMiddleware.fetchSkillsSuccessFlow,
-  skillsMiddleware.fetchSkillsFailureFlow,
+  // skillsMiddleware.fetchSkillsFlow,
+  // skillsMiddleware.fetchSkillsSuccessFlow,
+  // skillsMiddleware.fetchSkillsFailureFlow,
   userMiddleware.setUserOnAuthFlow,
   userMiddleware.updateUserFlow,
   userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),

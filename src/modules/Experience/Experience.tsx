@@ -5,6 +5,8 @@ import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { FormikProps, FormikValues } from 'formik'
 import { QualificationRequestPayload } from 'modules/Credentials/Credentials.types'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
+import { OrganisationResponsePayload } from 'modules/Organisations/Organisations.types'
+import { Skill } from 'modules/Skills/Skills.types'
 import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -15,8 +17,8 @@ import ExperienceForm from './ExperienceForm/ExperienceForm'
 
 interface Props {
   qualifications: [QualificationRequestPayload]
-  organisations: []
-  skills: []
+  organisations: [OrganisationResponsePayload]
+  skills: [Skill]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 

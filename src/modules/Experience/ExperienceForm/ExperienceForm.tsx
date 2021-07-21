@@ -35,12 +35,12 @@ const ExperienceForm = forwardRef(({ navigation, skills, organisations }: Props,
   const formRef = useRef<FormikProps<FormikValues>>()
 
   useEffect(() => {
-    setOrganisationsList(organisations)
-  }, [organisations])
+    setOrganisationsList([])
+  }, [])
 
   useEffect(() => {
-    setSkillsList(skills)
-  }, [skills])
+    setSkillsList([])
+  }, [])
 
   useImperativeHandle(ref, () => ({
     handleSubmit() {
