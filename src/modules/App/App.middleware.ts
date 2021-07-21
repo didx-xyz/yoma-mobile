@@ -1,6 +1,7 @@
 import { Middleware } from 'redux'
 
 import { actions as AuthActions } from '../Auth'
+import { actions as CredentialsActions } from '../Credentials'
 import { actions as UserActions } from '../User'
 import { hydrateApp, resetAppData } from './App.reducer'
 
@@ -12,6 +13,8 @@ export const appResetFlow: Middleware =
 
     if (resetAppData.match(action)) {
       dispatch(AuthActions.clearAuth())
+      dispatch(UserActions.clearUser())
+      dispatch(CredentialsActions.clearCredentials())
     }
 
     return result
