@@ -24,10 +24,6 @@ export const INITIAL_STATE = {
   lastLogin: null,
 }
 
-export const fetchUserCredentials = createAction(`${name} fetchUserCredentials`)
-export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserCredentialsSuccess`)
-export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
-
 export const setUser = createAction<UserResponse>(`${name} setUser`)
 export const clearUser = createAction(`${name} clearUser`)
 export const updateUser = createAction<UserPayload>(`${name} updateUser`)

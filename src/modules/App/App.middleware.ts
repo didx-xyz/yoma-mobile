@@ -26,7 +26,7 @@ export const hydrateAppFlow: Middleware =
   action => {
     const result = next(action)
     if (hydrateApp.match(action)) {
-      dispatch(UserActions.fetchUserCredentials())
+      dispatch(CredentialsActions.fetchUserCredentials())
     }
     return result
   }

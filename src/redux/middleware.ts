@@ -41,7 +41,7 @@ const featureModuleMiddleware = [
   userMiddleware.updateUserFlow,
   userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
   userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
-  userMiddleware.fetchUserCredentialsFlow,
+  credentialMiddleware.fetchUserCredentialsFlow,
   credentialMiddleware.createCredentialsFlow,
   credentialMiddleware.updateCredentialsFlow,
   credentialMiddleware.setCredentialsFlow,

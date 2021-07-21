@@ -9,6 +9,11 @@ export const clearCredentials = createAction(`${name} clearCredentials`)
 export const createCredentials = createAction<Credential>(`${name} createCredentials`)
 export const createCredentialsSuccess = createAction<Credential>(`${name} createCredentialsSuccess`)
 export const createCredentialsFailure = createAction<Credential>(`${name} createCredentialsFailure`)
+
+export const fetchUserCredentials = createAction(`${name} fetchUserCredentials`)
+export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserCredentialsSuccess`)
+export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
+
 export const updateCredentials = createAction<Credential>(`${name} updateCredentials`)
 export const updateCredentialsSuccess = createAction(`${name} updateCredentialsSuccess`)
 export const updateCredentialsFailure = createAction<string>(`${name} updateCredentialsFailure`)

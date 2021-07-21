@@ -1,10 +1,16 @@
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
+import {
+  fetchUserCredentials,
+  fetchUserCredentialsFailure,
+  fetchUserCredentialsSuccess,
+} from 'modules/Credentials/Credentials.reducer'
 import Navigation from 'modules/Navigation'
+import { selectId } from 'modules/User/User.selector'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
-import { actions as ApiActions } from '../../api'
+import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import {
@@ -24,6 +30,28 @@ export const setCredentialsFlow: Middleware =
     if (authLoginSuccess.match(action)) {
       const user = extractCredentialsFromHydratePayload(action)
       dispatch(setCredentials(user))
+    }
+    return result
+  }
+
+export const fetchUserCredentialsFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchUserCredentials.match(action)) {
+      const state = getState()
+      const userId = selectId(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: fetchUserCredentialsSuccess,
+            onFailure: fetchUserCredentialsFailure,
+          }),
+          action.payload,
+        ),
+      )
     }
     return result
   }
