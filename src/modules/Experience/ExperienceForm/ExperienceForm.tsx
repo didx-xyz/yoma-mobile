@@ -68,7 +68,7 @@ const ExperienceForm = ({ setFormState, skills, organisations, fetchOrganization
           <Spinner visible={formikHandlers.isSubmitting} />
           <Input name={'title'} label={t('Title')} handlers={formikHandlers} />
           <DropDown
-            items={mapToDropDownArray(organisationsList, 'value', 'name')}
+            items={mapToDropDownArray(organisationsList, 'key', 'value')}
             name={'organisationName'}
             label={'Company name'}
             handlers={formikHandlers}
@@ -93,7 +93,7 @@ const ExperienceForm = ({ setFormState, skills, organisations, fetchOrganization
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
-            items={skillsList}
+            items={mapToDropDownArray(skillsList, 'key', 'value')}
             multiple
             searchPlaceholder={t('Search skills')}
             label={t('Skills developed')}

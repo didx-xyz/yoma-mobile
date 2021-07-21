@@ -1,7 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 const name = '[Organisations]'
-export const INITIAL_STATE = []
+export const INITIAL_STATE = [] as any
 export const setOrganisations = createAction<any>(`${name} setOrganisations`)
 
 export const fetchOrganisations = createAction(`${name} fetchOrganisations`)

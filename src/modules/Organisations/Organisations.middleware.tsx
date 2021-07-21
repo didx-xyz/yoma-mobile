@@ -30,15 +30,18 @@ export const fetchOrganisationsFlow: Middleware =
     return result
   }
 
-export const fetchOrganisationsSuccessFlow: Middleware = _store => next => action => {
-  const result = next(action)
+export const fetchOrganisationsSuccessFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
 
-  if (fetchOrganisationsSuccess.match(action)) {
-    const organisationPayload = selectOrganisationsFromPayload(action)
-    setOrganisations(organisationPayload)
+    if (fetchOrganisationsSuccess.match(action)) {
+      const organisationPayload = selectOrganisationsFromPayload(action)
+      dispatch(setOrganisations(organisationPayload))
+    }
+    return result
   }
-  return result
-}
 
 export const fetchOrganisationsFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>

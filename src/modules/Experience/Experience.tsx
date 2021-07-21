@@ -72,7 +72,7 @@ const Experience = ({
             fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
           >
             <FlatList
-              data={[]}
+              data={qualifications}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }: any) => renderItem(item)}
               keyExtractor={(item: any, index: number) => index.toString()}

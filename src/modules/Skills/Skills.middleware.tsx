@@ -25,15 +25,18 @@ export const fetchSkillsFlow: Middleware =
     return result
   }
 
-export const fetchSkillsSuccessFlow: Middleware = _store => next => action => {
-  const result = next(action)
+export const fetchSkillsSuccessFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
 
-  if (fetchSkillsSuccess.match(action)) {
-    const skillsPayload = selectSkillsFromPayload(action)
-    setSkills(skillsPayload)
+    if (fetchSkillsSuccess.match(action)) {
+      const skillsPayload = selectSkillsFromPayload(action)
+      dispatch(setSkills(skillsPayload))
+    }
+    return result
   }
-  return result
-}
 
 export const fetchSkillsFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>

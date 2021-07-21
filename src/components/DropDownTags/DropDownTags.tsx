@@ -1,5 +1,5 @@
 import { FormikProps, FormikValues } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -26,10 +26,6 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const { handleChange, handleBlur, errors, values, touched, setFieldValue } = handlers
   const { t } = useTranslation()
 
-  useEffect(() => {
-    setDropdownValue(values[name])
-  }, [name, values])
-
   const deleteSkill = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
 
   return (
@@ -45,9 +41,11 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         searchContainerStyle={styles.searchContainer}
         listMode={'MODAL'}
         onChangeValue={itemValue => {
-          handleChange(name)
-          handleBlur(name)
-          setFieldValue(name, itemValue)
+          if (values[name] !== itemValue) {
+            handleChange(name)
+            handleBlur(name)
+            setFieldValue(name, itemValue)
+          }
         }}
         value={dropDownValue}
         open={isOpen}
