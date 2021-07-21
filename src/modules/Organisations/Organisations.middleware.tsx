@@ -19,7 +19,7 @@ export const fetchOrganisationsFlow: Middleware =
     if (fetchOrganisations.match(action)) {
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiOrganisationConstants.ORGANISATIONS_GET_ALL_CONFIG, {
+          mergeRight(ApiOrganisationConstants.ORGANISATIONS_GET_KEY_NAMES_CONFIG, {
             onSuccess: fetchOrganisationsSuccess,
             onFailure: fetchOrganisationsFailure,
           }),

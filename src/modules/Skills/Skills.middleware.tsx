@@ -14,7 +14,7 @@ export const fetchSkillsFlow: Middleware =
     if (fetchSkills.match(action)) {
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiSkillsConstants.SKILLS_GET_ALL_CONFIG, {
+          mergeRight(ApiSkillsConstants.SKILLS_GET_KEY_NAMES_CONFIG, {
             onSuccess: fetchSkillsSuccess,
             onFailure: fetchSkillsFailure,
           }),
