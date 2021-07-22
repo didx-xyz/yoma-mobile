@@ -1,2 +1,3 @@
 Ver 0.0.1 (build 13)
 - save edited user profile data
+- my cv display real data in about
