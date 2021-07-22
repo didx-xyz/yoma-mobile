@@ -1,11 +1,10 @@
-import { rootStateFixture } from '../../redux/redux.test.fixtures'
-import * as SUT from './About.selector'
+import * as SUT from './DigitalCv.selector'
 
-describe('modules/About/About.selector', () => {
+describe('modules/DigitalCv/DigitalCv.selector', () => {
   describe('selector ', () => {
     it('should select props as expected when available in state', () => {
       // given ...
-      const stateMock = rootStateFixture({
+      const state = {
         user: {
           id: 'USER_ID',
           firstName: 'FIRST_NAME',
@@ -24,19 +23,11 @@ describe('modules/About/About.selector', () => {
           createdAt: 'CREATED_AT',
           lastLogin: 'LAST_LOGIN',
         },
-      })
+      }
       // when ... we call the selector
-      const result = SUT.default(stateMock)
+      const result = SUT.default(state)
       // then ... should return result as expected
       expect(result).toEqual({ biography: 'BIOGRAPHY' })
-    })
-    it('should handle empty user state', () => {
-      // given ...
-      const stateMock = rootStateFixture({})
-      // when ... we call the selector
-      const result = SUT.default(stateMock)
-      // then ... should return result as expected
-      expect(result).toEqual({ biography: '' })
     })
   })
 })
