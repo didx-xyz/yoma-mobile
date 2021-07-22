@@ -4,7 +4,7 @@ import { Card, NormalHeader, Optional, ProfilePhoto, ViewContainer } from 'compo
 import Button, { ButtonVariants } from 'components/Button'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import { UserResponse } from 'modules/User/User.types'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -15,15 +15,14 @@ import { ProfileFormState } from './Profile.types'
 
 interface Props {
   onLogoutUser: () => void
-  onProfileSave: (photo: any) => void
-  onPhotoSave: () => void
+  onProfileSave: (user: any) => void
   user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }: Props) => {
-  const [userResponse, setUserResponse] = useState<UserResponse>(user)
-  const [formState, setFormState] = useState<ProfileFormState | null>(null)
+const Profile = ({ navigation, onLogoutUser, onProfileSave, user }: Props) => {
+  const [userResponse] = useState<UserResponse>(user)
+  const [formState, setFormState] = useState<ProfileFormState>(null)
 
   const { t } = useTranslation()
 
@@ -32,10 +31,6 @@ const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }:
       onProfileSave(formState.values)
     }
   }
-
-  useEffect(() => {
-    setUserResponse(user)
-  }, [user])
 
   return (
     <ViewContainer style={styles.container}>
@@ -48,14 +43,14 @@ const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }:
               <ProfilePhoto
                 borderWidth={6}
                 outerRadius={40}
-                onPress={onPhotoSave}
+                onPress={() => {}}
                 percent={5}
                 showEditIcon={true}
                 profileOuterStyle={styles.imagePlaceholder}
               />
             }
           >
-            <TouchableOpacity onPress={onPhotoSave} style={styles.imageContainer}>
+            <TouchableOpacity onPress={() => {}} style={styles.imageContainer}>
               <Image source={{ uri: userResponse.photoURL as string }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />

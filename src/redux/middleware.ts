@@ -1,6 +1,5 @@
 import { setItemAsync } from 'expo-secure-store'
 import { middleware as appMiddleware } from 'modules/App'
-import { photoUploadFormConfig } from 'modules/Profile/Profile.constants'
 import ssoAuth from 'modules/SSOAuth'
 import { concat } from 'ramda'
 import { Middleware } from 'redux'
@@ -8,7 +7,6 @@ import { Middleware } from 'redux'
 import { apiConfig, middleware as apiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
 import { middleware as authMiddleware } from '../modules/Auth'
-import { profileImagePicker } from '../modules/Profile/Profile.utils'
 import { middleware as userMiddleware } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
@@ -42,14 +40,6 @@ const featureModuleMiddleware = [
   userMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
   userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.fetchUserCredentialsFlow,
-  userMiddleware.uploadUserPhotoFlow({
-    captureProfileImage: profileImagePicker,
-    formConfig: photoUploadFormConfig,
-  }),
-  userMiddleware.uploadUserPhotoSuccessFlow,
-  userMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
-  userMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
-  userMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

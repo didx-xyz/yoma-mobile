@@ -4,7 +4,6 @@ export interface UpdateUserResponse {
   data: UserResponse
   meta: ApiMetaResponse
 }
-export type UpdateUserPhotoPayload = any
 export type UpdateUserFailureResponse = string
 
 export interface UserPayload {
@@ -13,16 +12,6 @@ export interface UserPayload {
   phoneNumber?: string
   countryAlpha2?: string
   biography?: string
-}
-export interface PhotoUploadFormConfig {
-  formName: string
-  formInstance: any
-}
-
-export interface PhotoUploadFormData {
-  uri: string
-  name: string | 'default.jpg'
-  type: string
 }
 
 export interface UserResponse {
