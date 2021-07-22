@@ -12,6 +12,9 @@ export const AUTH_CONFIG: Partial<ApiMeta> = {
 export const LOGIN_CONFIG: Partial<ApiMeta> = mergeRight(AUTH_CONFIG, {
   endpoint: AuthEndpoints.Login,
 })
+export const SESSION_CONFIG: Partial<ApiMeta> = mergeRight(AUTH_CONFIG, {
+  endpoint: AuthEndpoints.Session,
+})
 export const LOGIN_SOCIAL_CONFIG: Partial<ApiMeta> = mergeRight(AUTH_CONFIG, {
   endpoint: AuthEndpoints.LoginSocial,
 })

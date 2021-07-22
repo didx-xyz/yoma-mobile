@@ -53,6 +53,19 @@ export interface ApiMeta extends ApiClientMetaOverlap {
   onFailure: ActionCreator<any>
 }
 
+export type ApiRequestResponse = {
+  payload: any | undefined
+  meta: ApiMeta
+}
+
+export type ApiError = {
+  onFailure: any
+}
+export type ApiErrorResponse = {
+  payload: any | undefined
+  meta: ApiError
+}
+
 export type PrepareApiRequestData = Pick<ApiMeta, 'onSuccess' | 'onFailure'> & {
   apiArgs: ApiClientArgs
 }

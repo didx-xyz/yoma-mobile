@@ -8,7 +8,7 @@ import RegisterWithEmail from './RegisterWithEmail'
 const mapStateToProps = null
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onRegisterUser: (details: AuthRegistration) => {
-    dispatch(AuthActions.authRegistration(details))
+    dispatch(AuthActions.register(details))
   },
 })
 

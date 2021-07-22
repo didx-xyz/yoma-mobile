@@ -69,3 +69,5 @@ export type AuthRegistrationSuccessResponse = {
 }
 
 export type AuthRegistrationFailureResponse = string
+
+export type SecureStorageRefreshToken = string | null

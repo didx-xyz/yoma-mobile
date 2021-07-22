@@ -16,6 +16,6 @@ export const createMiddlewareStub = (jest: any, state?: {}) => (middleware: Midd
 }
 
 export const createFixture =
-  (initialState: StdObj) =>
+  (stateMock: StdObj) =>
   (override = {}) =>
-    mergeDeepRight(initialState)(override)
+    mergeDeepRight(stateMock)(override)

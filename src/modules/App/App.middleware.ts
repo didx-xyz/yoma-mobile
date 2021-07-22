@@ -1,5 +1,6 @@
 import { Middleware } from 'redux'
 
+// avoiding circular dependencies:
 import * as AuthActions from './../Auth/Auth.reducer'
 import * as UserActions from './../User/User.reducer'
 import { hydrateApp, resetAppData } from './App.reducer'

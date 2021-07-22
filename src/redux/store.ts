@@ -25,6 +25,7 @@ const store = configureStore({
           PERSIST,
           REGISTER,
           apiActions.apiRequest.type,
+          apiActions.apiError.type,
           userActions.uploadUserPhotoSuccess.type,
         ],
       },
