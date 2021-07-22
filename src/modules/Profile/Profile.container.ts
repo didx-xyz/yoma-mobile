@@ -15,6 +15,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     onProfileSave: (user: any) => {
       dispatch(UserActions.updateUser(user))
     },
+    onPhotoSave: () => {
+      dispatch(UserActions.uploadUserPhoto())
+    },
   }
 }
 

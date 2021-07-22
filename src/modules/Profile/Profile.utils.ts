@@ -1,20 +1,5 @@
-import ImagePicker, { Options } from 'react-native-image-crop-picker'
+import ImagePicker from 'react-native-image-crop-picker'
 
-const CAPTURE_IMAGE_OPTIONS: Options = {
-  cropping: true,
-  includeBase64: true,
-  freeStyleCropEnabled: true,
-  forceJpg: true,
-  mediaType: 'photo',
-  useFrontCamera: true,
-  cropperCircleOverlay: true,
-  compressImageQuality: 0.2,
-}
+import { CAPTURE_IMAGE_OPTIONS } from './Profile.constants'
 
-export const captureImage = () => {
-  try {
-    return ImagePicker.openCamera(CAPTURE_IMAGE_OPTIONS)
-  } catch (error) {
-    console.log('error', error)
-  }
-}
+export const profileImagePicker = async () => await ImagePicker.openCamera(CAPTURE_IMAGE_OPTIONS)
