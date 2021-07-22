@@ -1,3 +1,3 @@
 import { path } from 'ramda'
 
-export const selectOrganisationsFromPayload = path(['payload', 'data', 'data'])
+export const extractOrganisationsFromPayload = path(['payload', 'data', 'data'])

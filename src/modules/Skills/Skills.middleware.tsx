@@ -1,11 +1,11 @@
-import { fetchSkills, fetchSkillsFailure, fetchSkillsSuccess, setSkills } from 'modules/Skills/Skills.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
-import { selectSkillsFromPayload } from './Skills.utils'
+import { fetchSkills, fetchSkillsFailure, fetchSkillsSuccess, setSkills } from './Skills.reducer'
+import { extractSkillsFromPayload } from './Skills.utils'
 
 export const fetchSkillsFlow: Middleware =
   ({ dispatch }) =>
@@ -32,7 +32,7 @@ export const fetchSkillsSuccessFlow: Middleware =
     const result = next(action)
 
     if (fetchSkillsSuccess.match(action)) {
-      const skillsPayload = selectSkillsFromPayload(action)
+      const skillsPayload = extractSkillsFromPayload(action)
       dispatch(setSkills(skillsPayload))
     }
     return result

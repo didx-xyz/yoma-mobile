@@ -1,3 +1,3 @@
 import { path } from 'ramda'
 
-export const selectSkillsFromPayload = path(['payload', 'data', 'data'])
+export const extractSkillsFromPayload = path(['payload', 'data', 'data'])

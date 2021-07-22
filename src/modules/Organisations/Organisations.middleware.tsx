@@ -10,7 +10,7 @@ import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiOrganisationConstants } from '../../api/organisations'
-import { selectOrganisationsFromPayload } from './Organisations.utils'
+import { extractOrganisationsFromPayload } from './Organisations.utils'
 
 export const fetchOrganisationsFlow: Middleware =
   ({ dispatch }) =>
@@ -37,7 +37,7 @@ export const fetchOrganisationsSuccessFlow: Middleware =
     const result = next(action)
 
     if (fetchOrganisationsSuccess.match(action)) {
-      const organisationPayload = selectOrganisationsFromPayload(action)
+      const organisationPayload = extractOrganisationsFromPayload(action)
       dispatch(setOrganisations(organisationPayload))
     }
     return result
