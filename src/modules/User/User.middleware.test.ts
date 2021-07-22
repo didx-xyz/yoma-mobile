@@ -248,12 +248,15 @@ describe('modules/User/User.middleware', () => {
         return this.formData
       } as any
       const create = createMiddlewareStub(jest)
-
-      const capturedProfileImageMock = {
+      const result = {
         filename: 'IMAGE_NAME',
         mime: 'TYPE',
         path: 'IMAGE_PATH',
       }
+      const ImagePickerMock = {
+        openCamera: (_: any) => jest.fn().mockResolvedValue(result),
+      }
+
       const photoUploadFormConfigMock = {
         formName: 'FORM_NAME',
         formInstance: new FormDataMock(),
@@ -263,7 +266,7 @@ describe('modules/User/User.middleware', () => {
       // @ts-ignore
       const { invoke, next } = create(
         SUT.uploadUserPhotoFlow({
-          captureProfileImage: capturedProfileImageMock,
+          imagePicker: ImagePickerMock,
           formConfig: photoUploadFormConfigMock,
         }),
       )
@@ -283,15 +286,14 @@ describe('modules/User/User.middleware', () => {
       const create = createMiddlewareStub(jest)
       // given ...
 
-      //TODO: Fix mock for image capture
-      const capturedProfileImageMock = () =>
-        jest.fn().mockReturnValue(
-          Promise.resolve({
-            filename: 'IMAGE_NAME',
-            mime: 'TYPE',
-            path: 'IMAGE_PATH',
-          }),
-        )
+      const result = {
+        filename: 'IMAGE_NAME',
+        mime: 'TYPE',
+        path: 'IMAGE_PATH',
+      }
+      const ImagePickerMock = {
+        openCamera: (_: any) => jest.fn().mockResolvedValue(result),
+      }
 
       const formData = new FormDataMock()
       const photoUploadFormConfigMock = {
@@ -303,7 +305,7 @@ describe('modules/User/User.middleware', () => {
       // @ts-ignore
       const { invoke } = create(
         SUT.uploadUserPhotoFlow({
-          captureProfileImage: capturedProfileImageMock,
+          imagePicker: ImagePickerMock,
           formConfig: photoUploadFormConfigMock,
         }),
       )
@@ -311,7 +313,6 @@ describe('modules/User/User.middleware', () => {
       invoke(action)
 
       // then ...  confirm successful image upload
-
       // expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoSuccess(formData))
     })
   })

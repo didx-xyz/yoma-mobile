@@ -1,5 +1,6 @@
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
+import { CAPTURE_IMAGE_OPTIONS } from 'modules/Profile/Profile.constants'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
@@ -119,14 +120,14 @@ export const updateUserFailureFlow =
     return result
   }
 export const uploadUserPhotoFlow =
-  ({ captureProfileImage, formConfig }: { captureProfileImage: any; formConfig: PhotoUploadFormConfig }): Middleware =>
+  ({ imagePicker, formConfig }: { imagePicker: any; formConfig: PhotoUploadFormConfig }): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
     const result = next(action)
     if (uploadUserPhoto.match(action)) {
       try {
-        const imageData = await captureProfileImage()
+        const imageData = await imagePicker.openCamera(CAPTURE_IMAGE_OPTIONS)
         const photoPayload = createPhotoFormPayload(imageData, formConfig)
         dispatch(uploadUserPhotoSuccess(photoPayload))
       } catch (error: any) {

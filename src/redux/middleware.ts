@@ -3,12 +3,12 @@ import { middleware as appMiddleware } from 'modules/App'
 import { photoUploadFormConfig } from 'modules/Profile/Profile.constants'
 import ssoAuth from 'modules/SSOAuth'
 import { concat } from 'ramda'
+import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
 
 import { apiConfig, middleware as apiMiddleware } from '../api'
 import { prepareApiRequest } from '../api/api.utils'
 import { middleware as authMiddleware } from '../modules/Auth'
-import { profileImagePicker } from '../modules/Profile/Profile.utils'
 import { middleware as userMiddleware } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
@@ -43,7 +43,7 @@ const featureModuleMiddleware = [
   userMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   userMiddleware.fetchUserCredentialsFlow,
   userMiddleware.uploadUserPhotoFlow({
-    captureProfileImage: profileImagePicker,
+    imagePicker: ImagePicker,
     formConfig: photoUploadFormConfig,
   }),
   userMiddleware.uploadUserPhotoSuccessFlow,

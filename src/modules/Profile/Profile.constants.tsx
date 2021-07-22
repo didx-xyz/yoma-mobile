@@ -1,3 +1,4 @@
+import FormData from 'form-data'
 import { PhotoUploadFormConfig } from 'modules/User/User.types'
 import { Options } from 'react-native-image-crop-picker'
 
