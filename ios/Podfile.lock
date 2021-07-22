@@ -20,7 +20,7 @@ PODS:
   - EXPermissions (12.0.1):
     - UMCore
     - UMPermissionsInterface
-  - EXSecureStore (10.1.0):
+  - EXSecureStore (10.2.0):
     - UMCore
   - FBLazyVector (0.64.2)
   - FBReactNativeSpec (0.64.2):
@@ -469,7 +469,7 @@ PODS:
     - UMCore
   - UMConstantsInterface (6.1.0):
     - UMCore
-  - UMCore (7.1.0)
+  - UMCore (7.1.1)
   - UMFaceDetectorInterface (6.1.0)
   - UMFileSystemInterface (6.1.0)
   - UMFontInterface (6.1.0)

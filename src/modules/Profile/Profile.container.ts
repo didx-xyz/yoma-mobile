@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
 import * as AuthActions from '../Auth/Auth.reducer'
+import { actions as UserActions } from '../User'
 import Profile from './Profile'
 import selector from './Profile.selector'
 
@@ -10,6 +11,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onLogoutUser: () => {
       dispatch(AuthActions.logout())
+    },
+    onProfileSave: (user: any) => {
+      dispatch(UserActions.updateUser(user))
     },
   }
 }

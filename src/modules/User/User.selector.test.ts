@@ -4,24 +4,6 @@ import * as SUT from './User.selector'
 import { USER_RESPONSE } from './User.test.fixtures'
 
 describe('modules/User/User.selector', () => {
-  describe('selectUser ', () => {
-    it('should return user property of the root state', () => {
-      const stateMock = rootStateFixture({
-        user: USER_RESPONSE,
-      })
-      // when ... we call the selector
-      const result = SUT.selectUser(stateMock)
-      // then ... should return result as expected
-      expect(result).toEqual(stateMock.user)
-    })
-    it('should return the default user state', () => {
-      const stateMock = rootStateFixture()
-      // when ... we call the selector
-      const result = SUT.selectUser(stateMock)
-      // then ... should return result as expected
-      expect(result).toEqual(stateMock.user)
-    })
-  })
   describe('selectBiography ', () => {
     it('should return expected prop value from user data', () => {
       // given ...
@@ -57,6 +39,24 @@ describe('modules/User/User.selector', () => {
       const result = SUT.selectBiography(stateMock)
       // then ... should return result as expected
       expect(result).toEqual('')
+    })
+  })
+  describe('selectUser ', () => {
+    it('should return user property of the root state', () => {
+      const stateMock = rootStateFixture({
+        user: USER_RESPONSE,
+      })
+      // when ... we call the selector
+      const result = SUT.selectBiography(stateMock)
+      // then ... should return result as expected
+      expect(result).toEqual('something about me')
+    })
+    it('should return the default user state', () => {
+      const state = rootStateFixture()
+      // when ... we call the selector
+      const result = SUT.selectUser(state)
+      // then ... should return result as expected
+      expect(result).toEqual(state.user)
     })
   })
   describe('selectId ', () => {

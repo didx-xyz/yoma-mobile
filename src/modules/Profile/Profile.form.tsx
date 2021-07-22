@@ -1,16 +1,15 @@
-import { StackNavigationProp } from '@react-navigation/stack'
-import { DropDown, Input, Spinner } from 'components'
+import { DropDown, Input } from 'components'
 import countries from 'constants/countries'
-import { Formik, FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import React, { forwardRef, useImperativeHandle, useRef } from 'react'
+import { Formik } from 'formik'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
+import { ProfileFormState } from './Profile.types'
 import { profileValidationSchema } from './Profile.validationSchema'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
+  setFormState: ({ values: FormikValues, isValid: boolean }: ProfileFormState) => void
   user: {
     firstName: string
     lastName: string
@@ -20,30 +19,27 @@ interface Props {
   }
 }
 
-const ProfileForm = forwardRef(({ user }: Props, ref) => {
+const ProfileForm = ({ user, setFormState }: Props) => {
   const { t } = useTranslation()
-  const formRef = useRef<FormikProps<FormikValues>>(null)
-
-  useImperativeHandle(ref, () => ({
-    handleSubmit() {
-      if (formRef.current) {
-        formRef.current.handleSubmit()
-      }
-    },
-  }))
 
   return (
     <Formik
-      innerRef={formRef}
       initialValues={user}
       enableReinitialize
+      validate={values => {
+        profileValidationSchema()
+          .isValid(values)
+          .then(isValid => {
+            setFormState({ values, isValid })
+          })
+      }}
       validationSchema={profileValidationSchema}
       onSubmit={() => {}}
     >
-      {formikHandlers => {
+      {(formikHandlers: any) => {
         return (
           <>
-            <Spinner visible={formikHandlers.isSubmitting} />
+            {/* <Spinner visible={formikHandlers.isSubmitting} /> */}
             <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
             <Input name={'lastName'} label={t('Surname')} handlers={formikHandlers} />
             <DropDown
@@ -72,6 +68,6 @@ const ProfileForm = forwardRef(({ user }: Props, ref) => {
       }}
     </Formik>
   )
-})
+}
 
 export default ProfileForm

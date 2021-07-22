@@ -29,12 +29,14 @@ export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserC
 export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
 
 export const setUser = createAction<UserResponse>(`${name} setUser`)
+export const clearUser = createAction(`${name} clearUser`)
 export const updateUser = createAction<UserPayload>(`${name} updateUser`)
 export const updateUserSuccess = createAction<UpdateUserResponse>(`${name} updateUserSuccess`)
 export const updateUserFailure = createAction<UpdateUserFailureResponse>(`${name} updateUserFailure`)
 
 const UserReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUser, (state, action) => mergeDeepRight(state)(action.payload))
+  builder.addCase(clearUser, (_state, _action) => INITIAL_STATE)
 })
 
 export default UserReducer
