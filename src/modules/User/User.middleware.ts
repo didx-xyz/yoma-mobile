@@ -1,4 +1,5 @@
 import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
+import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
@@ -6,7 +7,6 @@ import { showSimpleMessage } from 'utils/error'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import * as Navigation from '../Navigation/Navigation.actions'
-import { HomeNavigationRoutes } from './../HomeNavigation/HomeNavigation.types'
 import {
   fetchUserCredentials,
   fetchUserCredentialsFailure,
@@ -17,7 +17,11 @@ import {
   updateUserSuccess,
 } from './User.reducer'
 import { selectId } from './User.selector'
-import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
+import {
+  extractUserFromLoginPayload,
+  extractUserfromUpdateUserPayload,
+  extractUserFromUserUpdateSuccess,
+} from './User.utils'
 
 export const setUserOnAuthFlow: Middleware =
   ({ dispatch }) =>
@@ -38,6 +42,7 @@ export const updateUserFlow: Middleware =
     const result = next(action)
     if (updateUser.match(action)) {
       const state = getState()
+      const patchPayload = extractUserfromUpdateUserPayload(action.payload)
       const userId = selectId(state)
 
       dispatch(
@@ -47,7 +52,7 @@ export const updateUserFlow: Middleware =
             onFailure: updateUserFailure,
             endpoint: userId,
           }),
-          action.payload,
+          patchPayload,
         ),
       )
     }
