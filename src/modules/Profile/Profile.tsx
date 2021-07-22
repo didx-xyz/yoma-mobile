@@ -15,8 +15,8 @@ import { ProfileFormState } from './Profile.types'
 
 interface Props {
   onLogoutUser: () => void
-  onProfileSave: (photo: any) => void
   onPhotoSave: () => void
+  onProfileSave: (user: any) => void
   user: UserResponse
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
