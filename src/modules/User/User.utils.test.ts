@@ -67,9 +67,7 @@ describe('modules/User/User.utils', () => {
         path: 'IMAGE_PATH',
       }
 
-      const FormInstanceMock = function (this: any) {
-        return { formData: 'FORM_DATA', append: jest.fn() }
-      }
+      const FormInstanceMock = () => ({ formData: 'FORM_DATA', append: jest.fn() })
 
       // when createPhotoFormPayload
       const result = SUT.createPhotoFormPayload(FormInstanceMock)(capturedProfileImageStub)
