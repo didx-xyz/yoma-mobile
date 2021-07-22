@@ -1,4 +1,3 @@
-import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
@@ -6,6 +5,7 @@ import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
+import { loginSuccess } from '../Auth/Auth.reducer'
 import * as Navigation from '../Navigation/Navigation.actions'
 import {
   fetchUserCredentials,
@@ -28,7 +28,7 @@ export const setUserOnAuthFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    if (authLoginSuccess.match(action)) {
+    if (loginSuccess.match(action)) {
       const user = extractUserFromLoginPayload(action)
       dispatch(setUser(user))
     }

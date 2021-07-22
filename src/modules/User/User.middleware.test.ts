@@ -1,4 +1,4 @@
-import { authLoginSuccess } from 'modules/Auth/Auth.reducer'
+import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
@@ -22,14 +22,15 @@ import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from '.
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
     it('should correctly handle being called', () => {
-      const create = createMiddlewareStub(jest)
-      const credentials = defaultUserLoginResponseData
       // given ... the authLogin action is fired
-      const action = authLoginSuccess(credentials)
+      const create = createMiddlewareStub(jest)
+      const user = defaultUserLoginResponseData
+      const action = loginSuccess(user)
+
+      // when ... we respond to the loginSuccess action
       // @ts-ignore
       const { store, invoke, next } = create(SUT.setUserOnAuthFlow)
 
-      // when ... we respond to the authLoginSuccess action
       invoke(action)
 
       // then ...validate setUserOnAuthFlow
@@ -37,15 +38,15 @@ describe('modules/User/User.middleware', () => {
       expect(store.dispatch).toHaveBeenCalled()
     })
     it('should correctly set the user data', () => {
-      const create = createMiddlewareStub(jest)
-      const credentials = defaultUserLoginResponseData
       // given ... the authLogin action is fired
-      const action = authLoginSuccess(credentials)
+      const create = createMiddlewareStub(jest)
+      const user = defaultUserLoginResponseData
+      const action = loginSuccess(user)
       // @ts-ignore
+
+      // when ... we respond to the loginSuccess action
       const { invoke, store } = create(SUT.setUserOnAuthFlow)
       const userData = extractUserFromLoginPayload(action)
-
-      // when ... we respond to the authLoginSuccess action
       invoke(action)
 
       // then ... setUser should be called
@@ -190,6 +191,22 @@ describe('modules/User/User.middleware', () => {
       expect(mockNotification).toHaveBeenCalled()
     })
   })
+  describe('updateUserFailureFlow', () => {
+    it('should correctly handle user update failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = updateUserFailure('FAILED')
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.updateUserFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the authLoginSuccess action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
   describe('fetchUserCredentialsFlow', () => {
     it('should correctly handle being called', () => {
       // given ... a user object with an id in state
@@ -217,53 +234,6 @@ describe('modules/User/User.middleware', () => {
           action.payload,
         ),
       )
-    })
-    describe('updateUserFailureFlow', () => {
-      it('should correctly handle user update failure', () => {
-        // given ...
-        const create = createMiddlewareStub(jest)
-        const action = updateUserFailure('FAILED')
-        const mockNotification = jest.fn()
-        // @ts-ignore
-        const { invoke } = create(SUT.updateUserFailureFlow({ notification: mockNotification }))
-
-        // when ... we respond to the authLoginSuccess action
-        invoke(action)
-
-        // then ...validate failure
-        expect(mockNotification).toHaveBeenCalled()
-      })
-      describe('fetchUserCredentialsFlow', () => {
-        it('should correctly handle being called', () => {
-          // given ... a user object with an id in state
-          const userId = 'A USER ID'
-          const create = createMiddlewareStub(jest, { user: { id: userId } })
-          const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(
-            userId,
-          )
-
-          // when ... we request to get all the user's credentials
-          const action = fetchUserCredentials()
-          // @ts-ignore
-          const { store, invoke, next } = create(SUT.fetchUserCredentialsFlow)
-          invoke(action)
-
-          // then ...
-          // ... we should ensure the action continues onto next
-          expect(next).toHaveBeenCalledWith(action)
-
-          // ... we should fetch the users credentials
-          expect(store.dispatch).toHaveBeenCalledWith(
-            ApiActions.apiRequest(
-              mergeRight(config, {
-                onSuccess: fetchUserCredentialsSuccess,
-                onFailure: fetchUserCredentialsFailure,
-              }),
-              action.payload,
-            ),
-          )
-        })
-      })
     })
   })
 })
