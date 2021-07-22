@@ -1,3 +1,2 @@
-Ver 0.0.1 (build 12:q)
-- about should correctly save any edits to backend
-
+Ver 0.0.1 (build 13)
+- save edited user profile data
