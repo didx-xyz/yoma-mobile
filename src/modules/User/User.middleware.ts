@@ -1,5 +1,5 @@
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
-import { CAPTURE_IMAGE_OPTIONS } from 'modules/Profile/Profile.constants'
+import { CAPTURE_IMAGE_OPTIONS } from 'modules/User/User.constants'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
@@ -23,9 +23,8 @@ import {
   uploadUserPhotoSuccess,
 } from './User.reducer'
 import { selectId } from './User.selector'
-import { PhotoUploadFormConfig } from './User.types'
+import { UploadUserPhotoFlowDependencies } from './User.types'
 import {
-  createPhotoFormPayload,
   extractUserFromLoginPayload,
   extractUserfromUpdateUserPayload,
   extractUserFromUserUpdateSuccess,
@@ -119,8 +118,9 @@ export const updateUserFailureFlow =
     }
     return result
   }
+
 export const uploadUserPhotoFlow =
-  ({ imagePicker, formConfig }: { imagePicker: any; formConfig: PhotoUploadFormConfig }): Middleware =>
+  ({ imagePicker, createPayload }: UploadUserPhotoFlowDependencies): Middleware =>
   ({ dispatch }) =>
   next =>
   async action => {
@@ -128,10 +128,10 @@ export const uploadUserPhotoFlow =
     if (uploadUserPhoto.match(action)) {
       try {
         const imageData = await imagePicker.openCamera(CAPTURE_IMAGE_OPTIONS)
-        const photoPayload = createPhotoFormPayload(imageData, formConfig)
+        const photoPayload = createPayload(imageData)
         dispatch(uploadUserPhotoSuccess(photoPayload))
-      } catch (error: any) {
-        dispatch(uploadUserPhotoFailure(error.message))
+      } catch (error) {
+        dispatch(uploadUserPhotoFailure(error))
       }
     }
     return result

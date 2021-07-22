@@ -1,6 +1,5 @@
 import * as SecureStore from 'expo-secure-store'
-import { photoUploadFormConfig } from 'modules/Profile/Profile.constants'
-import ssoAuth from 'modules/SSOAuth'
+import FormData from 'form-data'
 import { concat } from 'ramda'
 import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
@@ -9,7 +8,8 @@ import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../ap
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
-import { middleware as UserMiddleware } from '../modules/User'
+import ssoAuth from '../modules/SSOAuth'
+import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -55,7 +55,7 @@ const featureModuleMiddleware = [
   UserMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.uploadUserPhotoFlow({
     imagePicker: ImagePicker,
-    formConfig: photoUploadFormConfig,
+    createPayload: UserUtils.createPhotoFormPayload(FormData),
   }),
   UserMiddleware.uploadUserPhotoSuccessFlow,
   UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
