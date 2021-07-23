@@ -1,3 +1,7 @@
-Ver 0.0.1 (build 13)
-- Experience - save new/edited experience to backend
+Ver 0.0.1 (build 14)
+- add auth with refresh token
+- automatically re-auth the user on any unauthorised from the api
 
+Ver 0.0.1 (build 13)
+- save edited user profile data
+- my cv display real data in about

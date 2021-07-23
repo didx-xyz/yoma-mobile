@@ -19,7 +19,7 @@ const store = configureStore({
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
-        ignoredActions: [FLUSH, PAUSE, PERSIST, REGISTER, apiActions.apiRequest.type],
+        ignoredActions: [FLUSH, PAUSE, PERSIST, REGISTER, apiActions.apiRequest.type, apiActions.apiError.type],
       },
     }).concat(middleware),
 })

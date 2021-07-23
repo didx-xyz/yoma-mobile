@@ -1,10 +1,11 @@
 import { Middleware } from 'redux'
 
-import { actions as AuthActions } from '../Auth'
-import { actions as CredentialsActions } from '../Credentials'
-import { actions as OrganisationsActions } from '../Organisations'
-import { actions as SkillsActions } from '../Skills'
-import { actions as UserActions } from '../User'
+import * as CredentialsActions from '../Credentials/Credentials.reducer'
+import * as OrganisationsActions from '../Organisations/Organisations.reducer'
+import * as SkillsActions from '../Skills/Skills.reducer'
+// avoiding circular dependencies:
+import * as AuthActions from './../Auth/Auth.reducer'
+import * as UserActions from './../User/User.reducer'
 import { hydrateApp, resetAppData } from './App.reducer'
 
 export const appResetFlow: Middleware =

@@ -4,4 +4,5 @@ export enum AuthEndpoints {
   Register = 'register',
   RegisterSocial = 'register-social',
   ResetPassword = 'reset-password',
+  Session = 'session',
 }
