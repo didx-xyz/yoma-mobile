@@ -25,6 +25,8 @@ export interface PhotoUploadFormData {
   type: string
 }
 
+export type UploadUserPhotoFlowDependencies = { imagePicker: any; createPayload: any }
+
 export interface UserResponse {
   id: string
   firstName: string

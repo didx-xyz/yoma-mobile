@@ -242,79 +242,72 @@ describe('modules/User/User.middleware', () => {
     })
   })
   describe('uploadUserPhotoFlow', () => {
-    it('should correctly handle being called', () => {
-      const FormDataMock = function (this: any) {
-        this.formData = 'FORM_DATA'
-        this.append = jest.fn()
-        return this.formData
-      } as any
+    it('should correctly handle being called', async () => {
+      // given ...
       const create = createMiddlewareStub(jest)
-      const result = {
-        filename: 'IMAGE_NAME',
-        mime: 'TYPE',
-        path: 'IMAGE_PATH',
+      const imagePickerStub = {
+        openCamera: () => jest.fn(),
       }
-      const ImagePickerMock = {
-        openCamera: (_: any) => jest.fn().mockResolvedValue(result),
-      }
-
-      const photoUploadFormConfigMock = {
-        formName: 'FORM_NAME',
-        formInstance: new FormDataMock(),
-      }
-      // given ... the uploadUserPhoto action is fired
+      const createPayloadStub = jest.fn()
       const action = uploadUserPhoto()
       // @ts-ignore
-      const { invoke, next } = create(
+      // when ... we get a request for a user photo to be uploaded
+      const { invoke, next, store } = create(
         SUT.uploadUserPhotoFlow({
-          imagePicker: ImagePickerMock,
-          formConfig: photoUploadFormConfigMock,
+          imagePicker: imagePickerStub,
+          createPayload: createPayloadStub,
         }),
       )
 
-      // when ... we respond to the uploadUserPhotoFlow action
-      invoke(action)
+      await invoke(action)
 
-      // then ...validate uploadUserPhotoFlow
+      // then ...we should respond correctly
+      expect(store.dispatch).toHaveBeenCalled()
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly upload user profile photo', () => {
-      const FormDataMock = function (this: any) {
-        this.formData = 'FORM_DATA'
-        this.append = jest.fn()
-        return this.formData
-      } as any
+    it('should correctly upload user profile photo', async () => {
       const create = createMiddlewareStub(jest)
-      // given ...
-
-      const result = {
-        filename: 'IMAGE_NAME',
-        mime: 'TYPE',
-        path: 'IMAGE_PATH',
+      const imagePickerStub = {
+        openCamera: () => jest.fn(),
       }
-      const ImagePickerMock = {
-        openCamera: (_: any) => jest.fn().mockResolvedValue(result),
-      }
-
-      const formData = new FormDataMock()
-      const photoUploadFormConfigMock = {
-        formName: 'FORM_NAME',
-        formInstance: formData,
-      }
-
+      const createPayloadStub = jest.fn(() => 'PHOTO_PAYLOAD_RESPONSE')
       const action = uploadUserPhoto()
-      // @ts-ignore
-      const { invoke } = create(
+
+      // when ... we successfully upload a users photo
+      const { invoke, store } = create(
         SUT.uploadUserPhotoFlow({
-          imagePicker: ImagePickerMock,
-          formConfig: photoUploadFormConfigMock,
+          imagePicker: imagePickerStub,
+          createPayload: createPayloadStub,
         }),
       )
-      // when ... we respond to the uploadUserPhoto action
-      invoke(action)
 
-      // then ...  confirm successful image upload
-      // expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoSuccess(formData))
+      await invoke(action)
+
+      // then ... we should successfully upload the user image
+      expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoSuccess('PHOTO_PAYLOAD_RESPONSE'))
+    })
+    it('should correctly handle any failure', async () => {
+      const create = createMiddlewareStub(jest)
+      const imagePickerStub = {
+        openCamera: () => jest.fn(),
+      }
+      const createPayloadStub = jest.fn(() => {
+        throw 'SOME ERROR'
+      })
+      const action = uploadUserPhoto()
+
+      // when ... we fail to upload the user
+      const { invoke, store } = create(
+        SUT.uploadUserPhotoFlow({
+          imagePicker: imagePickerStub,
+          createPayload: createPayloadStub,
+        }),
+      )
+
+      await invoke(action)
+
+      // then ... we should successfully upload the user image
+      expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoFailure('SOME ERROR'))
     })
   })
   describe('uploadUserPhotoSuccessFlow', () => {
@@ -325,11 +318,12 @@ describe('modules/User/User.middleware', () => {
       // given ... the uploadUserPhotoSuccess action is fired
       const action = uploadUserPhotoSuccess('PAYLOAD')
       // @ts-ignore
-      const { invoke, next } = create(SUT.uploadUserPhotoSuccessFlow)
+      const { invoke, next, store } = create(SUT.uploadUserPhotoSuccessFlow)
 
       // when ... we respond to the uploadUserPhotoSuccess action
       invoke(action)
       // then ...validate uploadUserPhotoSuccessFlow
+      expect(store.dispatch).toHaveBeenCalled()
       expect(next).toHaveBeenCalledWith(action)
     })
     it('should correctly upload user profile photo', () => {

@@ -2,8 +2,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage'
 import { configureStore } from '@reduxjs/toolkit'
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, REGISTER } from 'redux-persist'
 
-import { actions as apiActions } from '../api'
-import { actions as userActions } from '../modules/User'
+import { actions as ApiActions } from '../api'
+import { actions as UserActions } from '../modules/User'
 import middleware from './middleware'
 import rootReducer from './reducers'
 
@@ -24,9 +24,9 @@ const store = configureStore({
           PAUSE,
           PERSIST,
           REGISTER,
-          apiActions.apiRequest.type,
-          apiActions.apiError.type,
-          userActions.uploadUserPhotoSuccess.type,
+          ApiActions.apiRequest.type,
+          ApiActions.apiError.type,
+          UserActions.uploadUserPhotoSuccess.type,
         ],
       },
     }).concat(middleware),

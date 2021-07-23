@@ -61,24 +61,16 @@ describe('modules/User/User.utils', () => {
   describe('createPhotoFormPayload', () => {
     it('should correctly return user photo form data', () => {
       // given ... image data
-      const capturedProfileImage = {
+      const capturedProfileImageStub = {
         filename: 'IMAGE_NAME',
         mime: 'TYPE',
         path: 'IMAGE_PATH',
       }
 
-      const FormDataMock = function (this: any) {
-        this.formData = 'FORM_DATA'
-        this.append = jest.fn()
-        return this.formData
-      } as any
+      const FormInstanceMock = () => ({ formData: 'FORM_DATA', append: jest.fn() })
 
-      const photoUploadFormConfig = {
-        formName: 'NAME',
-        formInstance: new FormDataMock(),
-      }
       // when createPhotoFormPayload
-      const result = SUT.createPhotoFormPayload(capturedProfileImage, photoUploadFormConfig)
+      const result = SUT.createPhotoFormPayload(FormInstanceMock)(capturedProfileImageStub)
       //then expect photo form data
       expect(result.formData).toBe('FORM_DATA')
     })
