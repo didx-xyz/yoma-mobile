@@ -1,5 +1,7 @@
 import { path, pick } from 'ramda'
 
+import { PHOTO_UPLOAD_FORM_NAME } from './User.constants'
+
 export const extractUserFromLoginPayload = path(['payload', 'data', 'data', 'user'])
 export const extractUserFromUserUpdateSuccess = path(['payload', 'data', 'data'])
 export const extractUserfromUpdateUserPayload = pick([
@@ -9,3 +11,14 @@ export const extractUserfromUpdateUserPayload = pick([
   'countryAlpha2',
   'biography',
 ])
+
+export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any) => {
+  const photoPayload = new formInstance()
+
+  photoPayload.append(PHOTO_UPLOAD_FORM_NAME, {
+    uri: imageResponse.path,
+    name: imageResponse.filename || 'default.jpg',
+    type: imageResponse.mime,
+  })
+  return photoPayload
+}
