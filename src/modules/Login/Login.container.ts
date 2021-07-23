@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch(AuthActions.authSocialLogin(authProvider))
     },
     onLoginUser: (details: AuthCredentials) => {
-      dispatch(AuthActions.authLogin(details))
+      dispatch(AuthActions.login(details))
     },
   }
 }

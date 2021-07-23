@@ -1,3 +1,32 @@
+import { ApiMetaResponse } from 'modules/Auth/Auth.types'
+
+export interface UpdateUserResponse {
+  data: UserResponse
+  meta: ApiMetaResponse
+}
+export type UpdateUserPhotoPayload = any
+export type UpdateUserFailureResponse = string
+
+export interface UserPayload {
+  firstName?: string
+  lastName?: string
+  phoneNumber?: string
+  countryAlpha2?: string
+  biography?: string
+}
+export interface PhotoUploadFormConfig {
+  formName: string
+  formInstance: any
+}
+
+export interface PhotoUploadFormData {
+  uri: string
+  name: string | 'default.jpg'
+  type: string
+}
+
+export type UploadUserPhotoFlowDependencies = { imagePicker: any; createPayload: any }
+
 export interface UserResponse {
   id: string
   firstName: string

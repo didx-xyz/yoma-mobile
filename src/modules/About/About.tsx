@@ -11,12 +11,13 @@ import styles from './About.styles'
 
 interface Props {
   biography: string
+  onBiographySave: (biography: string) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
 }
 
-const About = ({ navigation, biography }: Props) => {
+const About = ({ navigation, onBiographySave, biography }: Props) => {
   const { t } = useTranslation()
-  const [summary, setSummary] = useState(biography)
+  const [userBiography, setUserBiography] = useState(biography)
   const [infoModal, setInfoModal] = useState(false)
 
   return (
@@ -28,18 +29,21 @@ const About = ({ navigation, biography }: Props) => {
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
         }
       />
-      <NormalHeader navigation={navigation} headerText={t('About')} onSave={() => {}} />
+      <NormalHeader
+        isSaveButtonEnabled
+        navigation={navigation}
+        headerText={t('About')}
+        onSave={() => onBiographySave(userBiography)}
+      />
       <Card style={styles.card}>
         <FormWrapper>
           <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
           <TextInput
             style={styles.textInput}
-            value={summary}
+            value={userBiography}
             multiline
             maxLength={1000}
-            onChangeText={text => {
-              setSummary(text)
-            }}
+            onChangeText={setUserBiography}
             returnKeyType="done"
           />
           <View style={styles.bottom}>

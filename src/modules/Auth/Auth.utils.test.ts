@@ -1,7 +1,7 @@
 import * as SUT from './Auth.utils'
 
 describe('modules/Auth/Auth.utils', () => {
-  describe('selectCredentialsFromLoginPayload', () => {
+  describe('extractCredentialsFromAuthorizedPayload', () => {
     it('should return the auth credentials from the login payload', () => {
       // given ... an object in the shape of the successful login response
       const mockedAction = {
@@ -19,12 +19,12 @@ describe('modules/Auth/Auth.utils', () => {
       }
 
       // when ... we want to extract the credentials from the rest of the payload
-      const result = SUT.selectCredentialsFromLoginPayload(mockedAction)
+      const result = SUT.extractCredentialsFromAuthorizedPayload(mockedAction)
       // then ... the credentials should be extracted correctly
       expect(result).toEqual({ token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
     })
   })
-  describe('selectRefreshTokenFromLoginPayload', () => {
+  describe('extractRefreshTokenFromAuthorizedPayload', () => {
     it('should return the refresh token from the login payload', () => {
       // given ... an object in the shape of the successful login response
       const mockedAction = {
@@ -42,7 +42,7 @@ describe('modules/Auth/Auth.utils', () => {
         },
       }
       // when ... we want to extract the refresh token from the rest of the payload
-      const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
+      const result = SUT.extractRefreshTokenFromAuthorizedPayload(mockedAction)
       // then ... the refresh token should be extracted correctly
       expect(result).toEqual('REFRESH_TOKEN')
     })
@@ -55,7 +55,7 @@ describe('modules/Auth/Auth.utils', () => {
         },
       }
       // when ... we want to extract the refresh token but it doesn't exists
-      const result = SUT.selectRefreshTokenFromLoginPayload(mockedAction)
+      const result = SUT.extractRefreshTokenFromAuthorizedPayload(mockedAction)
       // then ... we should return the fallback value of an empty string
       expect(result).toEqual('')
     })

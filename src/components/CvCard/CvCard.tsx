@@ -8,6 +8,7 @@ import Text, { TextAlign } from '../Typography'
 import styles from './CvCard.styles'
 
 type Props = {
+  content?: string | []
   cardTitle: string
   defaultText: string
   count?: number
@@ -16,7 +17,22 @@ type Props = {
   onEdit: () => void
 }
 
+const renderTextContent = (content: string, defaultText: string) => (
+  <Text.Body align={TextAlign.center}>{content || defaultText}</Text.Body>
+)
+const renderListContent = (content: [], defaultText: string) =>
+  content.map(item => renderTextContent(item, defaultText))
+
+const renderContent = (content: string | [], defaultText: string) => {
+  if (Array.isArray(content)) {
+    return renderListContent(content, defaultText)
+  } else {
+    return renderTextContent(content, defaultText)
+  }
+}
+
 const CvCard = ({
+  content = '',
   cardTitle,
   defaultText,
   count = 0,
@@ -33,9 +49,7 @@ const CvCard = ({
         </TouchableOpacity>
       </View>
       <View style={styles.dividerLine} />
-      <View style={styles.bodyView}>
-        <Text.Body align={TextAlign.center}>{defaultText}</Text.Body>
-      </View>
+      <View style={styles.bodyView}>{renderContent(content, defaultText)}</View>
     </View>
   )
 }

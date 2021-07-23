@@ -1,4 +1,10 @@
-Ver 0.0.1 (build 10)
-- fetch credential data (this shouldn't have any impact on the app yet)
-- hotfix to remove some legacy code
+Ver 0.0.1 (build 15)
+- save new profile image
 
+Ver 0.0.1 (build 14)
+- add auth with refresh token
+- automatically re-auth the user on any unauthorised from the api
+
+Ver 0.0.1 (build 13)
+- save edited user profile data
+- my cv display real data in about
