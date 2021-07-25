@@ -58,4 +58,21 @@ describe('modules/User/User.utils', () => {
       expect(result).toEqual(userPatchPayload)
     })
   })
+  describe('createPhotoFormPayload', () => {
+    it('should correctly return user photo form data', () => {
+      // given ... image data
+      const capturedProfileImageStub = {
+        filename: 'IMAGE_NAME',
+        mime: 'TYPE',
+        path: 'IMAGE_PATH',
+      }
+
+      const FormInstanceMock = () => ({ formData: 'FORM_DATA', append: jest.fn() })
+
+      // when createPhotoFormPayload
+      const result = SUT.createPhotoFormPayload(FormInstanceMock)(capturedProfileImageStub)
+      //then expect photo form data
+      expect(result.formData).toBe('FORM_DATA')
+    })
+  })
 })

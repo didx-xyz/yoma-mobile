@@ -1,6 +1,8 @@
 import * as SecureStore from 'expo-secure-store'
+import FormData from 'form-data'
 import Navigation from 'modules/Navigation'
 import { concat } from 'ramda'
+import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
 
 import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../api'
@@ -11,7 +13,7 @@ import { middleware as ErrorMiddleware } from '../modules/Error'
 import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '../modules/Skills'
-import { middleware as UserMiddleware } from '../modules/User'
+import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -72,6 +74,14 @@ const featureModuleMiddleware = [
   UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserFlow,
   UserMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
+  UserMiddleware.uploadUserPhotoFlow({
+    imagePicker: ImagePicker,
+    createPayload: UserUtils.createPhotoFormPayload(FormData),
+  }),
+  UserMiddleware.uploadUserPhotoSuccessFlow,
+  UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
+  UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
+  UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
