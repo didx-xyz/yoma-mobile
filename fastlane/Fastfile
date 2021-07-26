@@ -18,9 +18,7 @@ platform :android do
   end
 
   lane :bump_version do
-    increment_version_code(
-      gradle_file_path: "project/android/app/build.gradle",
-    )
+    increment_version_code
   end
 
   lane :distribute do
