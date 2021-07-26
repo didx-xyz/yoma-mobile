@@ -1,12 +1,13 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { FirstTimeCard, ViewContainer } from 'components'
-import { CvCardOld } from 'components/CvCard'
+import CvCard, { CvCardOld } from 'components/CvCard'
 import HomeHeader from 'components/HomeHeader'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 
+import Text, { TextAlign } from '../../components/Typography'
 import { Colors } from '../../styles'
 import styles from './DigitalCv.styles'
 
@@ -22,6 +23,13 @@ const DigitalCv = ({ navigation, biography }: Props) => {
       <HomeHeader navigation={navigation} profileProgressPercentage={10} rewardPoints={1000} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FirstTimeCard />
+        <CvCard
+          title={t('About')}
+          fallback={t('Your biography is one of the first things recruiters look at. Write a great one!')}
+          onEdit={() => navigation.navigate(HomeNavigationRoutes.About)}
+        >
+          <Text.Body align={TextAlign.center}>{biography}</Text.Body>
+        </CvCard>
         <CvCardOld
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
