@@ -4,7 +4,7 @@ import SUT, { clearOrganisations, INITIAL_STATE, setOrganisations } from './Orga
 
 describe('modules/Organisations/Organisations.reducer', () => {
   describe('setOrganisations', () => {
-    it('should set the Organisations credentials correctly', () => {
+    it('should set organisations correctly', () => {
       // given ....
       const mockState = rootStateFixture({})
       const mockData = [
@@ -21,7 +21,7 @@ describe('modules/Organisations/Organisations.reducer', () => {
     })
   })
   describe('clearOrganisations', () => {
-    it('should clear auth state', () => {
+    it('should clear organisations state', () => {
       // give ... organisations in state
       const mockState = rootStateFixture({
         organisations: [

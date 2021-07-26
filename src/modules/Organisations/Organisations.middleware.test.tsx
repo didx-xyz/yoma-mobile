@@ -71,7 +71,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       // then ...validate fetchOrganisationsSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly set user data on successful update', () => {
+    it('should correctly set organisations on successful fetch', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const mockResponseData = {
@@ -99,7 +99,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
     })
   })
   describe('fetchOrganisationsFailureFlow', () => {
-    it('should correctly handle organisation fetch failure', () => {
+    it('should correctly handle organisations fetch failure', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const action = fetchOrganisationsFailure('FAILED')
