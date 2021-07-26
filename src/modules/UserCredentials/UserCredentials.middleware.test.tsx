@@ -8,7 +8,10 @@ import {
   fetchUserCredentials,
   fetchUserCredentialsFailure,
   fetchUserCredentialsSuccess,
+  setUserCredentials,
 } from './UserCredentials.reducer'
+import { USER_CREDENTIALS_RESPONSE } from './UserCredentials.test.fixtures'
+import { extractUserCredentialsFromPayload } from './UserCredentials.utils'
 
 describe('modules/UserCredentials/UserCredentials.middleware', () => {
   describe('fetchUserCredentialsFlow', () => {
@@ -38,6 +41,58 @@ describe('modules/UserCredentials/UserCredentials.middleware', () => {
           action.payload,
         ),
       )
+    })
+  })
+  describe('fetchUserCredentialsSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockResponseData = USER_CREDENTIALS_RESPONSE
+
+      const action = fetchUserCredentialsSuccess(mockResponseData)
+      // @ts-ignore
+      const { invoke, next } = create(SUT.fetchUserCredentialsSuccessFlow)
+      // when ... we respond to the fetchUserCredentialsSuccess action
+      invoke(action)
+      // then ...validate fetchUserCredentialsSuccessFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly set user credentials on successful fetch', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockResponseData = {
+        data: USER_CREDENTIALS_RESPONSE,
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const action = fetchUserCredentialsSuccess(mockResponseData)
+      // @ts-ignore
+      const { store, invoke } = create(SUT.fetchUserCredentialsSuccessFlow)
+      // when ... we respond to the fetchUserCredentialsSuccess action
+      invoke(action)
+      // then ...validate fetchUserCredentialsSuccessFlow
+      const userCredentials = extractUserCredentialsFromPayload(action)
+      expect(store.dispatch).toHaveBeenCalledWith(setUserCredentials(userCredentials))
+    })
+  })
+  describe('fetchUserCredentialsFailureFlow', () => {
+    it('should correctly handle user credentials fetch failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = fetchUserCredentialsFailure('FAILED')
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.fetchUserCredentialsFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the fetchUserCredentialsFailures action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
     })
   })
 })

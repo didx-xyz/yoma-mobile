@@ -1,4 +1,3 @@
-import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { selectId } from 'modules/User/User.selector'
 import {
   fetchUserCredentials,
@@ -8,22 +7,11 @@ import {
 } from 'modules/UserCredentials/UserCredentials.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
+import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import { extractUserCredentialsFromPayload } from './UserCredentials.utils'
-
-export const setCredentialsFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (loginSuccess.match(action)) {
-      const user = extractUserCredentialsFromPayload(action)
-      dispatch(setUserCredentials(user))
-    }
-    return result
-  }
 
 export const fetchUserCredentialsFlow: Middleware =
   ({ dispatch, getState }) =>
@@ -43,6 +31,33 @@ export const fetchUserCredentialsFlow: Middleware =
           action.payload,
         ),
       )
+    }
+    return result
+  }
+
+export const fetchUserCredentialsSuccessFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserCredentialsSuccess.match(action)) {
+      const userCredentials = extractUserCredentialsFromPayload(action)
+      dispatch(setUserCredentials(userCredentials))
+    }
+    return result
+  }
+
+export const fetchUserCredentialsFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserCredentialsFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
     }
     return result
   }
