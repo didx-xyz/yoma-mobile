@@ -138,7 +138,7 @@ workflows:
               ignore:
                 - develop
                 - main
-                - adding_versioning
+                - YOMA-494_adding_automated_versioning
   deploy-android-alpha:
     jobs:
       - pull-request:
@@ -147,7 +147,7 @@ workflows:
               only:
                 - develop
                 - main
-                - adding_versioning
+                - YOMA-494_adding_automated_versioning
       - wait-approval:
           type: approval
           requires:
