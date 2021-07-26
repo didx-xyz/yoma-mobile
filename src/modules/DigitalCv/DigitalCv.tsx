@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { FirstTimeCard, ViewContainer } from 'components'
-import CvCard from 'components/CvCard'
+import { CvCardOld } from 'components/CvCard'
 import HomeHeader from 'components/HomeHeader'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
@@ -22,42 +22,42 @@ const DigitalCv = ({ navigation, biography }: Props) => {
       <HomeHeader navigation={navigation} profileProgressPercentage={10} rewardPoints={1000} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FirstTimeCard />
-        <CvCard
+        <CvCardOld
           cardTitle={t('About')}
           defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
           content={biography}
           hasCountBadge={false}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.About)}
         />
-        <CvCard
+        <CvCardOld
           count={0}
           badgeColor={Colors.primaryBlue}
           cardTitle={t('Experience')}
           defaultText={t('Where do you currently work?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Experience)}
         />
-        <CvCard
+        <CvCardOld
           count={0}
           badgeColor={Colors.primaryRed}
           cardTitle={t('Education')}
           defaultText={t('Which school, university or college did you attend?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Education)}
         />
-        <CvCard
+        <CvCardOld
           count={0}
           badgeColor={Colors.primaryGreen}
           cardTitle={t('My skills')}
           defaultText={t('Tell us what you are great at.')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Skills)}
         />
-        <CvCard
+        <CvCardOld
           count={0}
           badgeColor={Colors.primaryYellow}
           cardTitle={t('Completed courses')}
           defaultText={t('Have you completed any courses yet?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MyCourses)}
         />
-        <CvCard
+        <CvCardOld
           count={0}
           badgeColor={Colors.secondaryPurple}
           cardTitle={t('Completed challenges')}
