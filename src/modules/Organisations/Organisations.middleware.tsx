@@ -1,15 +1,15 @@
-import {
-  fetchOrganisations,
-  fetchOrganisationsFailure,
-  fetchOrganisationsSuccess,
-  setOrganisations,
-} from 'modules/Organisations/Organisations.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiOrganisationConstants } from '../../api/organisations'
+import {
+  fetchOrganisations,
+  fetchOrganisationsFailure,
+  fetchOrganisationsSuccess,
+  setOrganisations,
+} from './Organisations.reducer'
 import { extractOrganisationsFromPayload } from './Organisations.utils'
 
 export const fetchOrganisationsFlow: Middleware =
