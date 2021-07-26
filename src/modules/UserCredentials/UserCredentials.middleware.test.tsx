@@ -3,10 +3,14 @@ import { mergeRight } from 'ramda'
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
-import * as SUT from './Credentials.middleware'
-import { fetchUserCredentials, fetchUserCredentialsFailure, fetchUserCredentialsSuccess } from './Credentials.reducer'
+import * as SUT from './UserCredentials.middleware'
+import {
+  fetchUserCredentials,
+  fetchUserCredentialsFailure,
+  fetchUserCredentialsSuccess,
+} from './UserCredentials.reducer'
 
-describe('modules/Credential/Credential.middleware', () => {
+describe('modules/UserCredentials/UserCredentials.middleware', () => {
   describe('fetchUserCredentialsFlow', () => {
     it('should correctly handle being called', () => {
       // given ... a user object with an id in state

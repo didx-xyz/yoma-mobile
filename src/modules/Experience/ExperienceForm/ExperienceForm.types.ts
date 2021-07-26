@@ -1,8 +1,4 @@
-export type DropDownOrg = {
-  key: string
-  value: string
-}
-export type DropDownSkill = {
+export type DropDownList = {
   key: string
   value: string
 }

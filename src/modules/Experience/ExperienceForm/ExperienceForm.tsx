@@ -11,28 +11,21 @@ import { mapToDropDownArray } from 'utils/strings.utils'
 import { ExperienceFormState } from '../Experience.types'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
-import { DropDownOrg, DropDownSkill } from './ExperienceForm.types'
+import { DropDownList } from './ExperienceForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  fetchOrganizationsList: () => void
-  fetchSkillsList: () => void
-  skills: []
-  organisations: []
+  skills: DropDownList[]
+  organisations: DropDownList[]
   setFormState: ({ values: FormikValues, isValid: boolean }: ExperienceFormState) => void
 }
 
-const ExperienceForm = ({ setFormState, skills, organisations, fetchOrganizationsList, fetchSkillsList }: Props) => {
+const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
   const { t } = useTranslation()
-  const [organisationsList, setOrganisationsList] = useState<DropDownOrg[]>([])
+  const [organisationsList, setOrganisationsList] = useState<DropDownList[]>([])
+  const [skillsList, setSkillsList] = useState<DropDownList[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
-  const [skillsList, setSkillsList] = useState<DropDownSkill[]>([])
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
-
-  useEffect(() => {
-    fetchOrganizationsList()
-    fetchSkillsList()
-  }, [fetchOrganizationsList, fetchSkillsList])
 
   useEffect(() => {
     setOrganisationsList(organisations)
@@ -72,12 +65,17 @@ const ExperienceForm = ({ setFormState, skills, organisations, fetchOrganization
             name={'organisationName'}
             label={'Company name'}
             handlers={formikHandlers}
+            searchable
             searchPlaceholder={t('Search organisation')}
           />
-          <DropDown
-            items={mapToDropDownArray(countries, 'code', 'name')}
-            name={'country'}
+          <DropDownTags
+            items={mapToDropDownArray(countries, 'name', 'name')}
+            name={'countries'}
             label={'Country'}
+            multiple
+            min={1}
+            max={1}
+            searchable
             handlers={formikHandlers}
             searchPlaceholder={t('Search country')}
             placeholder={t('Country or region')}
@@ -88,13 +86,14 @@ const ExperienceForm = ({ setFormState, skills, organisations, fetchOrganization
             onPress={() => setIsWorkingHere(!isWorkingHere)}
           />
           <View style={styles.row}>
-            <DatePicker name={'startDate'} label={t('Start date')} handlers={formikHandlers} />
-            <DatePicker name={'endDate'} label={t('End date')} handlers={formikHandlers} />
+            <DatePicker name={'startTime'} label={t('Start date')} handlers={formikHandlers} />
+            <DatePicker name={'endTime'} label={t('End date')} handlers={formikHandlers} />
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
-            items={mapToDropDownArray(skillsList, 'key', 'value')}
+            items={mapToDropDownArray(skillsList, 'value', 'value')}
             multiple
+            searchable
             searchPlaceholder={t('Search skills')}
             label={t('Skills developed')}
             name={'skillNames'}

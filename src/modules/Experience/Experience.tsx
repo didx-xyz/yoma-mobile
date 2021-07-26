@@ -2,23 +2,21 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
-import { QualificationRequestPayload } from 'modules/Credentials/Credentials.types'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import styles from './Experience.styles'
-import { ExperienceFormState, ExperienceType } from './Experience.types'
+import { ExperienceFormState, ExperienceType, QualificationRequestPayload } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
+import { DropDownList } from './ExperienceForm/ExperienceForm.types'
 
 interface Props {
   onExperienceSave: (qualification: any) => void
-  fetchOrganizationsList: () => void
-  fetchSkillsList: () => void
   qualifications: [QualificationRequestPayload]
-  organisations: []
-  skills: []
+  organisations: [DropDownList]
+  skills: [DropDownList]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
@@ -32,18 +30,10 @@ const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
   />
 )
 
-const Experience = ({
-  navigation,
-  onExperienceSave,
-  fetchOrganizationsList,
-  fetchSkillsList,
-  qualifications,
-  organisations,
-  skills,
-}: Props) => {
+const Experience = ({ navigation, onExperienceSave, qualifications, organisations, skills }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  const [qualification, setQualification] = useState(qualifications)
+  const [qualification, setQualification] = useState([])
   const [formState, setFormState] = useState<ExperienceFormState>(null)
 
   useEffect(() => {
@@ -82,13 +72,7 @@ const Experience = ({
       >
         <ScrollView>
           <Card>
-            <ExperienceForm
-              setFormState={setFormState}
-              skills={skills}
-              organisations={organisations}
-              fetchOrganizationsList={fetchOrganizationsList}
-              fetchSkillsList={fetchSkillsList}
-            />
+            <ExperienceForm setFormState={setFormState} skills={skills} organisations={organisations} />
           </Card>
         </ScrollView>
       </Optional>

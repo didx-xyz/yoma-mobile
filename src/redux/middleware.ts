@@ -1,6 +1,5 @@
 import * as SecureStore from 'expo-secure-store'
 import FormData from 'form-data'
-import Navigation from 'modules/Navigation'
 import { concat } from 'ramda'
 import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
@@ -8,12 +7,12 @@ import { Middleware } from 'redux'
 import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../api'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
-import { middleware as CredentialMiddleware } from '../modules/Credentials'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
+import { middleware as UserCredentialsMiddleware } from '../modules/UserCredentials'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -51,14 +50,6 @@ const featureModuleMiddleware = [
   AuthMiddleware.registrationSuccessFlow({ notification: showSimpleMessage }),
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
-  CredentialMiddleware.fetchUserCredentialsFlow,
-  CredentialMiddleware.createCredentialsFlow,
-  CredentialMiddleware.updateCredentialsFlow,
-  CredentialMiddleware.setCredentialsFlow,
-  CredentialMiddleware.updateCredentialsSuccessFlow({ notification: showSimpleMessage, navigation: Navigation }),
-  CredentialMiddleware.updateCredentialsFailureFlow({ notification: showSimpleMessage }),
-  CredentialMiddleware.createCredentialsSuccessFlow({ notification: showSimpleMessage, navigation: Navigation }),
-  CredentialMiddleware.createCredentialsFailureFlow({ notification: showSimpleMessage }),
   ErrorMiddleware.categorizeErrorsFlow,
   OrganisationsMiddleware.fetchOrganisationsFlow,
   OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
@@ -82,6 +73,8 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
+  UserCredentialsMiddleware.fetchUserCredentialsFlow,
+  UserCredentialsMiddleware.setCredentialsFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

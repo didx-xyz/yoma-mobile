@@ -47,9 +47,9 @@ describe('modules/User/User.selector', () => {
         user: USER_RESPONSE,
       })
       // when ... we call the selector
-      const result = SUT.selectBiography(stateMock)
+      const result = SUT.selectUser(stateMock)
       // then ... should return result as expected
-      expect(result).toEqual('something about me')
+      expect(result).toEqual(USER_RESPONSE)
     })
     it('should return the default user state', () => {
       const state = rootStateFixture()

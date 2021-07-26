@@ -1,12 +1,12 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import { selector as OrganisationsSelectors } from 'modules/Organisations'
 import { selector as SkillsSelectors } from 'modules/Skills'
+import { actions as CredentialsActions } from 'modules/UserCredentials'
 import { connect } from 'react-redux'
 import { RootState } from 'redux/redux.types'
 
-import { actions as OrganisationActions } from '../Organisations'
-import { actions as SkillsActions } from '../Skills'
 import Experience from './Experience'
+import { QualificationRequestPayload } from './Experience.types'
 
 const mapStateToProps = (state: RootState) => {
   return {
@@ -17,11 +17,8 @@ const mapStateToProps = (state: RootState) => {
 }
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    fetchSkillsList: () => {
-      dispatch(SkillsActions.fetchSkills())
-    },
-    fetchOrganizationsList: () => {
-      dispatch(OrganisationActions.fetchOrganisations())
+    onExperienceSave: (qualification: QualificationRequestPayload) => {
+      dispatch(CredentialsActions.createQualificationCredential(qualification))
     },
   }
 }

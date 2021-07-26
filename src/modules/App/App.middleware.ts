@@ -1,8 +1,8 @@
 import { Middleware } from 'redux'
 
-import * as CredentialsActions from '../Credentials/Credentials.reducer'
 import * as OrganisationsActions from '../Organisations/Organisations.reducer'
 import * as SkillsActions from '../Skills/Skills.reducer'
+import * as CredentialsActions from '../UserCredentials/UserCredentials.reducer'
 // avoiding circular dependencies:
 import * as AuthActions from './../Auth/Auth.reducer'
 import * as UserActions from './../User/User.reducer'
@@ -17,6 +17,8 @@ export const appResetFlow: Middleware =
     if (resetAppData.match(action)) {
       dispatch(AuthActions.clearAuth())
       dispatch(UserActions.clearUser())
+      dispatch(OrganisationsActions.clearOrganisations())
+      dispatch(SkillsActions.clearSkills())
     }
 
     return result

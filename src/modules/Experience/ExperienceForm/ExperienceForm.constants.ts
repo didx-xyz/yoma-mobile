@@ -1,18 +1,16 @@
-import { ExperienceFields } from './ExperienceForm.types'
+import { QualificationRequestPayload } from '../Experience.types'
 
-export const INITIAL_VALUES: ExperienceFields = {
+export const INITIAL_VALUES: QualificationRequestPayload = {
   title: '',
   description: '',
-  id: '',
-  startDate: null,
-  endDate: null,
-  country: '',
-  skillNames: [],
+  url: '',
   organisationId: '',
-  organisationName: '',
-  organisationWebsite: '',
-  primaryContactName: '',
-  primaryContactEmail: '',
-  noResultInd: false,
-  requestVerificationInd: false,
+  zltoReward: 0,
+  skillNames: [],
+  zltoRewardPool: 0,
+  countries: [],
+  language: '',
+  startTime: null,
+  endTime: null,
+  published: false,
 }
