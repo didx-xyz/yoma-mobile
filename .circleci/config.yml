@@ -138,6 +138,7 @@ workflows:
               ignore:
                 - develop
                 - main
+                - adding_versioning
   deploy-android-alpha:
     jobs:
       - pull-request:
@@ -146,6 +147,11 @@ workflows:
               only:
                 - develop
                 - main
+                - adding_versioning
+      - wait-approval:
+          type: approval
+          requires:
+            - pull-request
       - deploy-android-alpha:
           requires:
             - pull-request

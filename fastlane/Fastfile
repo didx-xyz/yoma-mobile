@@ -17,9 +17,16 @@ platform :android do
       )
   end
 
+  lane :bump_version do
+    increment_version_code(
+      gradle_file_path: "project/android/app/build.gradle",
+    )
+  end
+
   lane :distribute do
     clean
     build
+    bump_version
     firebase_app_distribution(
       app: '1:1007644634835:android:8825d8828e786999602e26',
       groups: 'yoma-testers',
