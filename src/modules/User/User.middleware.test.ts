@@ -318,7 +318,6 @@ describe('modules/User/User.middleware', () => {
       )
     })
   })
-
   describe('uploadUserPhotoFailureFlow', () => {
     it('should correctly handle user photo upload failure', () => {
       // given ...
