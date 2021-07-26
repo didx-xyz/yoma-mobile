@@ -15,8 +15,8 @@ import { DropDownList } from './ExperienceForm/ExperienceForm.types'
 interface Props {
   onExperienceSave: (qualification: any) => void
   qualifications: QualificationRequestPayload[]
-  organisations: [DropDownList]
-  skills: [DropDownList]
+  organisations: DropDownList[]
+  skills: DropDownList[]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
