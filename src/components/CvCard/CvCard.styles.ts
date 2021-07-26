@@ -10,6 +10,12 @@ const styles = {
     paddingHorizontal: 10,
     paddingBottom: 10,
   } as ViewStyle,
+  content: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 120,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

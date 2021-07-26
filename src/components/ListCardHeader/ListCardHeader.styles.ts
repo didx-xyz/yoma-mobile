@@ -18,6 +18,7 @@ const styles = {
   } as ViewStyle,
   rightAccessory: {
     marginLeft: 'auto',
+    zIndex: 10,
   } as ViewStyle,
 }
 
