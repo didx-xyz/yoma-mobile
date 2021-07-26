@@ -18,7 +18,7 @@
     "env:test": "node env/generate.js test",
     "format": "prettier --write .",
     "help": "npx package-json-help.js",
-    "init": "npm-run-all env:dev init:ios",
+    "init": "npm i && npm-run-all env:dev init:ios",
     "init:ios": "npx pod-install",
     "ios": "react-native run-ios",
     "lint": "eslint 'src/**/*.{ts,tsx}'",
