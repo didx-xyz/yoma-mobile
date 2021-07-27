@@ -21,7 +21,7 @@
     "init": "npm-run-all env:dev init:ios",
     "init:ios": "npx pod-install",
     "ios": "react-native run-ios",
-    "lint": "eslint 'src/**/*.{ts,tsx}'",
+    "lint": "eslint .  --ignore-path .eslintignore",
     "lint:check": "npm run lint",
     "lint:fix": "npm run lint --fix",
     "npm:audit": "audit-ci --critical",
