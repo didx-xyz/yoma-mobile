@@ -10,7 +10,7 @@ describe('modules/utils/error.utils', () => {
           data: {
             meta: {
               success: true,
-              code: 'NUMBER',
+              code: '1',
               message: 'ERROR_MESSAGE',
             },
           },

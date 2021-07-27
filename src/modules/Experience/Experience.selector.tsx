@@ -1,6 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit'
-import * as CredentialsSelectors from 'modules/UserCredentials/UserCredentials.selector'
+import { RootState } from 'redux/redux.types'
 
-export default createSelector(CredentialsSelectors.selectUserCredentials, qualifications => ({
+export const selectState = (state: RootState) => state
+export default createSelector(selectState, ({ qualifications, skills, organisations }) => ({
   qualifications,
+  skills,
+  organisations,
 }))
