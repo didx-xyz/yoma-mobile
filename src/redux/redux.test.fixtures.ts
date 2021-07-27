@@ -4,7 +4,7 @@ import { INITIAL_STATE as ORGANISATIONS_INITIAL_STATE } from '../modules/Organis
 import { INITIAL_STATE as QUALIFICATIONS_INITIAL_STATE } from '../modules/Qualifications/Qualifications.reducer'
 import { INITIAL_STATE as SKILLS_INITIAL_STATE } from '../modules/Skills/Skills.reducer'
 import { INITIAL_STATE as USER_INITIAL_STATE } from '../modules/User/User.reducer'
-import { INITIAL_STATE as USER_CREDENTIALS_INITIAL_STATE } from '../modules/userCredentials/userCredentials.reducer'
+import { INITIAL_STATE as USER_CREDENTIALS_INITIAL_STATE } from '../modules/UserCredentials/UserCredentials.reducer'
 import { RootState } from './redux.types'
 
 export const defaultRootState: RootState = {
