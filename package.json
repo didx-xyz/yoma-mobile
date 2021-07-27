@@ -24,6 +24,7 @@
     "lint": "eslint 'src/**/*.{ts,tsx}'",
     "lint:check": "npm run lint",
     "lint:fix": "npm run lint --fix",
+    "lint:markdown": "npx markdownlint */*.md",
     "npm:audit": "audit-ci --critical",
     "reset": "npx rimraf node_modules && npm i && npx pod-install",
     "start": "react-native start",
