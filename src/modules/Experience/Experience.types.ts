@@ -16,21 +16,6 @@ export type QualificationResponsePayload = {
   published: boolean
 }
 
-export type QualificationRequestPayload = {
-  title: string
-  description: string
-  url: string
-  organisationId: string
-  zltoReward: number
-  skillNames: Skills
-  zltoRewardPool: number
-  countries: string[]
-  language: string
-  startTime: string | null
-  endTime: string | null
-  published: boolean
-}
-
 export type ExperienceType = {
   endDate: string
   id: string

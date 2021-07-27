@@ -1,4 +1,4 @@
-import { CheckBox, DatePicker, DropDown, DropDownTags, FormWrapper, InfoModal, Input, Spinner } from 'components'
+import { CheckBox, DatePicker, DropDown, FormWrapper, InfoModal, Input } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
@@ -39,6 +39,7 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
     <Formik
       initialValues={INITIAL_VALUES}
       enableReinitialize
+      validateOnMount
       validationSchema={ValidationSchema}
       validate={values => {
         ValidationSchema()
@@ -58,23 +59,20 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
             }
           />
-          <Spinner visible={formikHandlers.isSubmitting} />
+          {/* <Spinner visible={formikHandlers.isSubmitting} /> */}
           <Input name={'title'} label={t('Title')} handlers={formikHandlers} />
           <DropDown
             items={mapToDropDownArray(organisationsList, 'key', 'value')}
-            name={'organisationName'}
+            name={'organisationId'}
             label={'Company name'}
             handlers={formikHandlers}
             searchable
             searchPlaceholder={t('Search organisation')}
           />
-          <DropDownTags
+          <DropDown
             items={mapToDropDownArray(countries, 'name', 'name')}
-            name={'countries'}
+            name={'country'}
             label={'Country'}
-            multiple
-            min={1}
-            max={1}
             searchable
             handlers={formikHandlers}
             searchPlaceholder={t('Search country')}
@@ -90,7 +88,7 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
             <DatePicker name={'endTime'} label={t('End date')} handlers={formikHandlers} />
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
-          <DropDownTags
+          {/* <DropDownTags
             items={mapToDropDownArray(skillsList, 'value', 'value')}
             multiple
             searchable
@@ -98,7 +96,7 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
             label={t('Skills developed')}
             name={'skillNames'}
             handlers={formikHandlers}
-          />
+          /> */}
           <TouchableOpacity onPress={() => setShowInfoModal(true)}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen}>
               {t('Find inspiration on how to write a great profile.')}

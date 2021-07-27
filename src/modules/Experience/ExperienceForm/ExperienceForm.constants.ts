@@ -1,16 +1,15 @@
-import { QualificationRequestPayload } from '../Experience.types'
+import { QualificationRequestPayload } from 'modules/Qualifications/Qualifications.types'
 
+//TODO: Review default values; language, url
 export const INITIAL_VALUES: QualificationRequestPayload = {
   title: '',
   description: '',
-  url: '',
+  url: 'none',
+  language: 'en',
   organisationId: '',
-  zltoReward: 0,
   skillNames: [],
-  zltoRewardPool: 0,
-  countries: [],
-  language: '',
-  startTime: null,
-  endTime: null,
+  country: '',
+  startTime: '',
+  endTime: '',
   published: false,
 }

@@ -8,7 +8,9 @@ import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../ap
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
+import * as Navigation from '../modules/Navigation/Navigation.actions'
 import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
+import { middleware as QualificationsMiddleware } from '../modules/Qualifications'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
@@ -76,6 +78,9 @@ const featureModuleMiddleware = [
   UserCredentialsMiddleware.fetchUserCredentialsFlow,
   UserCredentialsMiddleware.fetchUserCredentialsSuccessFlow,
   UserCredentialsMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
+  QualificationsMiddleware.createQualificationsFlow,
+  QualificationsMiddleware.createQualificationsSuccessFlow({ notification: showSimpleMessage }),
+  QualificationsMiddleware.createQualificationsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

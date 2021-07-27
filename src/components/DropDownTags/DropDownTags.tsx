@@ -1,5 +1,5 @@
 import { FormikProps, FormikValues } from 'formik'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -27,6 +27,10 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const { t } = useTranslation()
 
   const removeTag = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
+
+  useEffect(() => {
+    setDropdownValue(values[name])
+  }, [name, values])
 
   return (
     <>

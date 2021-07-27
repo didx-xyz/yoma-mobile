@@ -3,18 +3,19 @@ import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
+import { QualificationRequestPayload } from 'modules/Qualifications/Qualifications.types'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import styles from './Experience.styles'
-import { ExperienceFormState, ExperienceType, QualificationRequestPayload } from './Experience.types'
+import { ExperienceFormState, ExperienceType } from './Experience.types'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
 import { DropDownList } from './ExperienceForm/ExperienceForm.types'
 
 interface Props {
-  onExperienceSave: (qualification: any) => void
-  qualifications: QualificationRequestPayload[]
+  onExperienceSave: (qualification: QualificationRequestPayload) => void
+  qualifications: []
   organisations: DropDownList[]
   skills: DropDownList[]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
@@ -34,7 +35,7 @@ const Experience = ({ navigation, onExperienceSave, qualifications, organisation
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [qualification, setQualification] = useState([])
-  const [formState, setFormState] = useState<ExperienceFormState>(null)
+  const [formState, setFormState] = useState<ExperienceFormState | null>(null)
 
   useEffect(() => {
     setQualification(qualification)
@@ -42,7 +43,7 @@ const Experience = ({ navigation, onExperienceSave, qualifications, organisation
 
   const handleExperienceForm = () => {
     if (formState?.isValid) {
-      onExperienceSave(formState.values)
+      onExperienceSave(formState.values as QualificationRequestPayload)
     }
   }
   return (
@@ -52,7 +53,7 @@ const Experience = ({ navigation, onExperienceSave, qualifications, organisation
         headerText={t('Experience')}
         onSave={handleExperienceForm}
         onAdd={() => setIsSaved(true)}
-        showAddButton={!isSaved}
+        isSaveButtonEnabled={formState?.isValid}
       />
       <Optional
         condition={isSaved}

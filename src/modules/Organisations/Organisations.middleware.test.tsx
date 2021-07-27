@@ -3,7 +3,7 @@ import { rootStateFixture } from 'redux/redux.test.fixtures'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
-import { constants as ApiOrganisationssConstants } from '../../api/organisations'
+import { constants as ApiOrganisationsConstants } from '../../api/organisations'
 import * as SUT from './Organisations.middleware'
 import {
   fetchOrganisations,
@@ -44,7 +44,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       // then ...validate fetchOrganisationsFlow
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(ApiOrganisationssConstants.ORGANISATIONS_GET_KEY_NAMES_CONFIG, {
+          mergeRight(ApiOrganisationsConstants.ORGANISATIONS_GET_KEY_NAMES_CONFIG, {
             onSuccess: fetchOrganisationsSuccess,
             onFailure: fetchOrganisationsFailure,
           }),
