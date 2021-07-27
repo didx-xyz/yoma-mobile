@@ -6,13 +6,17 @@
 
 - [Node & NPM](https://nodejs.org/en/):
     1. [install NVM](https://github.com/nvm-sh/nvm)
-    1. [install AVN](https://github.com/wbyoung/avn): `npm install -g avn avn-nvm avn-n`
-    1. install version in `.node-version` file: `nvm install <VERSION>` - **Running the correct node version is very
-       important**
-- [Watchman](https://facebook.github.io/watchman/) : ``brew install watchman`` (for Mac, see docs for alternative
-  installation)
-- [CircleCI](https://circleci.com) command line tool : on Mac `brew install circleci` or [alternative installation](<https://circleci>.
-  com/docs/2.0/local-cli/#installation)
+    1. [install AVN](https://github.com/wbyoung/avn):
+       `npm install -g avn avn-nvm avn-n`
+    1. install version in `.node-version` file:
+       `nvm install <VERSION>` - **Running the
+       correct node version is very important**
+- [Watchman](https://facebook.github.io/watchman/) :
+  ``brew install watchman``
+  (for Mac, see docs for alternative installation)
+- [CircleCI](https://circleci.com) command line tool :
+  on Mac `brew install circleci`
+  or [alternative installation](https://circleci.com/docs/2.0/local-cli/#installation)
   
 ------------
 
@@ -57,11 +61,13 @@
 
 1. Setup Emulator
     - Open Android Studio and open this project or start a new project
-    - Once Android Studio has finished it's initialization, ``AVD Manager`` should be available under ``Tools``
+    - Once Android Studio has finished it's initialization,
+      ``AVD Manager`` should be available under ``Tools``
     - Open ``AVD Manager``
     - Click ``create new virtual device``
     - Select target device
     - Download required images
-    - ``Finish`` (you should now be able to start the app on the emulator using ``npm run android``)
+    - ``Finish`` (you should now be able to start the app on the emulator using
+      ``npm run android``)
 
 [reference](https://developer.android.com/studio/run/emulator)
