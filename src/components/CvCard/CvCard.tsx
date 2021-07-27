@@ -24,7 +24,7 @@ const CvCard = ({ title, fallback, count, badgeColor = Colors.white, onEdit, chi
       count={count || 0}
       header={title}
       hasCountBadge={isNotNil(count) as boolean}
-      rightAccessory={<EditButton onPress={onEdit} />}
+      rightComponent={<EditButton onPress={onEdit} />}
       hasBorder
     />
     <View style={styles.content}>
