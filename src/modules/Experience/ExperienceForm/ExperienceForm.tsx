@@ -1,4 +1,5 @@
 import { CheckBox, DatePicker, DropDown, FormWrapper, InfoModal, Input } from 'components'
+import DropDownTags from 'components/DropDownTags'
 import Text, { MetaLevels } from 'components/Typography'
 import countries from 'constants/countries'
 import { Formik } from 'formik'
@@ -88,7 +89,7 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
             <DatePicker name={'endTime'} label={t('End date')} handlers={formikHandlers} />
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
-          {/* <DropDownTags
+          <DropDownTags
             items={mapToDropDownArray(skillsList, 'value', 'value')}
             multiple
             searchable
@@ -96,7 +97,7 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
             label={t('Skills developed')}
             name={'skillNames'}
             handlers={formikHandlers}
-          /> */}
+          />
           <TouchableOpacity onPress={() => setShowInfoModal(true)}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen}>
               {t('Find inspiration on how to write a great profile.')}

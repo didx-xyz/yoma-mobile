@@ -8,7 +8,6 @@ import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../ap
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
-import * as Navigation from '../modules/Navigation/Navigation.actions'
 import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
 import { middleware as QualificationsMiddleware } from '../modules/Qualifications'
 import ssoAuth from '../modules/SSOAuth'
