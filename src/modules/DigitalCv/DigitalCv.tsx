@@ -7,6 +7,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 
+import Text, { TextAlign } from '../../components/Typography'
 import { Colors } from '../../styles'
 import styles from './DigitalCv.styles'
 
@@ -23,45 +24,45 @@ const DigitalCv = ({ navigation, biography }: Props) => {
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FirstTimeCard />
         <CvCard
-          cardTitle={t('About')}
-          defaultText={t('Your biography is one of the first things recruiters look at. Write a great one!')}
-          content={biography}
-          hasCountBadge={false}
+          title={t('About')}
+          fallback={t('Your biography is one of the first things recruiters look at. Write a great one!')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.About)}
-        />
+        >
+          <Text.Body align={TextAlign.center}>{biography}</Text.Body>
+        </CvCard>
         <CvCard
           count={0}
           badgeColor={Colors.primaryBlue}
-          cardTitle={t('Experience')}
-          defaultText={t('Where do you currently work?')}
+          title={t('Experience')}
+          fallback={t('Where do you currently work?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Experience)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.primaryRed}
-          cardTitle={t('Education')}
-          defaultText={t('Which school, university or college did you attend?')}
+          title={t('Education')}
+          fallback={t('Which school, university or college did you attend?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Education)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.primaryGreen}
-          cardTitle={t('My skills')}
-          defaultText={t('Tell us what you are great at.')}
+          title={t('My skills')}
+          fallback={t('Tell us what you are great at.')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Skills)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.primaryYellow}
-          cardTitle={t('Completed courses')}
-          defaultText={t('Have you completed any courses yet?')}
+          title={t('Completed courses')}
+          fallback={t('Have you completed any courses yet?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MyCourses)}
         />
         <CvCard
           count={0}
           badgeColor={Colors.secondaryPurple}
-          cardTitle={t('Completed challenges')}
-          defaultText={t('Have you completed any challenges yet?')}
+          title={t('Completed challenges')}
+          fallback={t('Have you completed any challenges yet?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MyChallenges)}
         />
       </ScrollView>

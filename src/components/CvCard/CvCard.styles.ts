@@ -9,27 +9,12 @@ const styles = {
     marginHorizontal: 10,
     paddingHorizontal: 10,
     paddingBottom: 10,
-    height: 175,
   } as ViewStyle,
-  listCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  } as ViewStyle,
-  dividerLine: {
-    height: 2,
-    backgroundColor: colors[Colors.backgroundGrey],
-  } as ViewStyle,
-  bodyView: {
+  content: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  } as ViewStyle,
-  editIcon: {
-    elevation: 3,
-    backgroundColor: colors[Colors.white],
-    borderRadius: 15,
-    position: 'absolute',
-    right: 0,
+    minHeight: 120,
   } as ViewStyle,
 }
 
