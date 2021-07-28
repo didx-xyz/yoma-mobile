@@ -1,5 +1,3 @@
-import { mergeRight } from 'ramda'
-
 import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
 
 export const QUALIFICATIONS_CONFIG: Partial<ApiMeta> = {
@@ -8,6 +6,4 @@ export const QUALIFICATIONS_CONFIG: Partial<ApiMeta> = {
   isTokenRequired: true,
 }
 
-export const QUALIFICATIONS_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(QUALIFICATIONS_CONFIG, {
-  method: ApiMethods.Post,
-})
+export const QUALIFICATIONS_CREATE_CONFIG: Partial<ApiMeta> = QUALIFICATIONS_CONFIG

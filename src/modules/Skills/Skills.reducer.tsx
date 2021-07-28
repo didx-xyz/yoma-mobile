@@ -11,7 +11,7 @@ export const clearSkills = createAction(`${name} clearSkills`)
 
 const SkillsReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setSkills, (_, action) => action.payload)
-  builder.addCase(clearSkills, () => INITIAL_STATE)
+  builder.addCase(clearSkills, (_state, _action) => INITIAL_STATE)
 })
 
 export default SkillsReducer

@@ -11,7 +11,7 @@ export const clearOrganisations = createAction(`${name} clearOrganisations`)
 
 const OrganisationsReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setOrganisations, (_, action) => action.payload)
-  builder.addCase(clearOrganisations, () => INITIAL_STATE)
+  builder.addCase(clearOrganisations, (_state, _action) => INITIAL_STATE)
 })
 
 export default OrganisationsReducer

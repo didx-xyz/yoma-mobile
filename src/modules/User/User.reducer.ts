@@ -37,7 +37,7 @@ export const updateUserPhotoFailure = createAction<UpdateUserFailureResponse>(`$
 
 const UserReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUser, (state, action) => mergeDeepRight(state)(action.payload))
-  builder.addCase(clearUser, () => INITIAL_STATE)
+  builder.addCase(clearUser, (_state, _action) => INITIAL_STATE)
 })
 
 export default UserReducer

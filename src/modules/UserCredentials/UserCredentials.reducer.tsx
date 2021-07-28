@@ -11,7 +11,7 @@ export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUs
 
 const UserCredentialsReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserCredentials, (state, action) => action.payload)
-  builder.addCase(clearUserCredentials, () => INITIAL_STATE)
+  builder.addCase(clearUserCredentials, (_state, _action) => INITIAL_STATE)
 })
 
 export default UserCredentialsReducer

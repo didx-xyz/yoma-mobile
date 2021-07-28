@@ -15,7 +15,7 @@ export const clearQualifications = createAction(`${name} clearQualifications`)
 
 const QualificationsReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setQualifications, (_, action) => action.payload)
-  builder.addCase(clearQualifications, () => INITIAL_STATE)
+  builder.addCase(clearQualifications, (_state, _action) => INITIAL_STATE)
 })
 
 export default QualificationsReducer
