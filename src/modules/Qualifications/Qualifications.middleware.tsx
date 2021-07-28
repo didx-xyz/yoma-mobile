@@ -1,8 +1,8 @@
+import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
-import { extractErrorMessageFromPayload } from 'utils/error.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiQualificationConstants } from '../../api/qualifications'
