@@ -1,57 +1,38 @@
-import { EditIcon } from 'assets/images'
 import React from 'react'
-import { TouchableOpacity, View } from 'react-native'
-import { Colors } from 'styles'
+import { View } from 'react-native'
 
+import { Colors } from '../../styles'
+import { WithChildren } from '../../types/react.types'
+import { isNotNil } from '../../utils/ramda'
 import ListCardHeader from '../ListCardHeader'
+import Optional from '../Optional'
 import Text, { TextAlign } from '../Typography'
 import styles from './CvCard.styles'
+import EditButton from './EditButton'
 
-type Props = {
-  content?: string | []
-  cardTitle: string
-  defaultText: string
+type Props = WithChildren<{
+  title: string
+  fallback: string
   count?: number
-  hasCountBadge?: boolean
   badgeColor?: Colors
   onEdit: () => void
-}
-
-const renderTextContent = (content: string, defaultText: string) => (
-  <Text.Body align={TextAlign.center}>{content || defaultText}</Text.Body>
-)
-const renderListContent = (content: [], defaultText: string) =>
-  content.map(item => renderTextContent(item, defaultText))
-
-const renderContent = (content: string | [], defaultText: string) => {
-  if (Array.isArray(content)) {
-    return renderListContent(content, defaultText)
-  } else {
-    return renderTextContent(content, defaultText)
-  }
-}
-
-const CvCard = ({
-  content = '',
-  cardTitle,
-  defaultText,
-  count = 0,
-  hasCountBadge = true,
-  badgeColor = Colors.white,
-  onEdit,
-}: Props) => {
-  return (
-    <View style={styles.container}>
-      <View style={styles.listCard}>
-        <ListCardHeader color={badgeColor} count={count} header={cardTitle} hasCountBadge={hasCountBadge} />
-        <TouchableOpacity style={styles.editIcon} onPress={onEdit}>
-          <EditIcon />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.dividerLine} />
-      <View style={styles.bodyView}>{renderContent(content, defaultText)}</View>
+}>
+const CvCard = ({ title, fallback, count, badgeColor = Colors.white, onEdit, children }: Props) => (
+  <View style={styles.container}>
+    <ListCardHeader
+      color={badgeColor}
+      count={count || 0}
+      header={title}
+      hasCountBadge={isNotNil(count) as boolean}
+      rightComponent={<EditButton onPress={onEdit} />}
+      hasBorder
+    />
+    <View style={styles.content}>
+      <Optional condition={!!children} fallback={<Text.Body align={TextAlign.center}>{fallback}</Text.Body>}>
+        {children}
+      </Optional>
     </View>
-  )
-}
+  </View>
+)
 
 export default CvCard
