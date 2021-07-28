@@ -1,6 +1,6 @@
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as AuthActions } from '../Auth'
-import { actions as CredentialsActions } from '../UserCredentials'
+import { actions as UserCredentialsActions } from '../UserCredentials'
 import * as SUT from './App.middleware'
 import { hydrateApp, resetAppData } from './App.reducer'
 
@@ -59,7 +59,7 @@ describe('modules/App/App.middleware', () => {
       invoke(action)
 
       // then ... we should fetch data from all expected endpoints
-      expect(store.dispatch).toHaveBeenCalledWith(CredentialsActions.fetchUserCredentials())
+      expect(store.dispatch).toHaveBeenCalledWith(UserCredentialsActions.fetchUserCredentials())
     })
   })
 })
