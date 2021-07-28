@@ -1,13 +1,13 @@
-Ver 0.0.1 (build 16)
-- testing to automate build numbers
+Ver 0.0.1
 
-Ver 0.0.1 (build 15)
+Latest
+- Adjusted the widgets on MyCv to be able to take different types of content (previously they could only take text)
+
+===
 - save new profile image
-
-Ver 0.0.1 (build 14)
+===
 - add auth with refresh token
 - automatically re-auth the user on any unauthorised from the api
-
-Ver 0.0.1 (build 13)
+===
 - save edited user profile data
 - my cv display real data in about

@@ -18,12 +18,16 @@ platform :android do
   end
 
   lane :bump_version do
-    increment_version_code(
+    # increment_version_code(
+    #   gradle_file_path: "android/app/build.gradle",
+    # )
+    # commit_android_version_bump(
+    #   gradle_file_folder:"android/app/"
+    # )
+    android_set_version_codee(
       gradle_file_path: "android/app/build.gradle",
     )
-    commit_android_version_bump(
-      gradle_file_folder:"android/app/"
-    )
+
   end
 
   lane :distribute do
