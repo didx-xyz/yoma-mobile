@@ -25,7 +25,7 @@ platform :android do
     #   gradle_file_folder:"android/app/"
     # )
     android_set_version_code(
-      gradle_file_path: "android/app/build.gradle",
+      gradle_file: "android/app/build.gradle",
     )
 
   end
