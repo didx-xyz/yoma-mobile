@@ -1,5 +1,8 @@
 Ver 0.0.1
 Latest:
+- docs upgrade, no new features added.
+
+build 16
 - Adjusted the widgets on MyCv to be able to take different types of content (previously they could only take text)
 
 build 15
