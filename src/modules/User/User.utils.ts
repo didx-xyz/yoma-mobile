@@ -1,5 +1,7 @@
-import { path, pick } from 'ramda'
+import { applySpec, map, path, pick, pipe, prop } from 'ramda'
 
+import { UserCredentialTypes } from '../../api/users/users.types'
+import { objFromListWith } from '../../utils/ramda'
 import { PHOTO_UPLOAD_FORM_NAME } from './User.constants'
 
 export const extractUserFromLoginPayload = path(['payload', 'data', 'data', 'user'])
@@ -22,3 +24,14 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
   })
   return photoPayload
 }
+
+export const extractCredential = (type: UserCredentialTypes) => (data: any[]) =>
+  data.filter(item => Object.keys(item).find(key => key === type))
+export const getIds = map(prop('id'))
+export const entitiesById = objFromListWith(prop('id'))
+export const normalise = pipe(
+  applySpec({
+    ids: getIds,
+    entities: entitiesById,
+  }),
+)

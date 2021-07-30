@@ -4,6 +4,7 @@ declare module 'ramda' {
   export function and(...rest: any[]): any
   export function append(...rest: any[]): any
   export function applySpec(...rest: any[]): any
+  export function chain(...rest: any[]): any
   export function complement(...rest: any[]): any
   export function compose(...rest: any[]): any
   export function concat(...rest: any[]): any[]
@@ -53,4 +54,5 @@ declare module 'ramda' {
   export function values(...rest: any[]): any
   export function view(...rest: any[]): any
   export function when(...rest: any[]): any
+  export function zipObj(...rest: any[]): any
 }
