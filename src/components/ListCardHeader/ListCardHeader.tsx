@@ -13,10 +13,10 @@ type Props = {
   header: string
   hasBorder?: boolean
   hasCountBadge?: boolean
-  rightAccessory?: ReactNode
+  rightComponent?: ReactNode
 }
 
-const ListCardHeader = ({ count, color, header, rightAccessory, hasBorder = false, hasCountBadge = true }: Props) => {
+const ListCardHeader = ({ count, color, header, rightComponent, hasBorder = false, hasCountBadge = true }: Props) => {
   const borderStyles = hasBorder ? styles.border : {}
   return (
     <View style={[styles.container, borderStyles]}>
@@ -27,7 +27,7 @@ const ListCardHeader = ({ count, color, header, rightAccessory, hasBorder = fals
         {header}
       </Text.Header>
       <View style={styles.rightAccessory}>
-        <Optional condition={!!rightAccessory}>{rightAccessory}</Optional>
+        <Optional condition={!!rightComponent}>{rightComponent}</Optional>
       </View>
     </View>
   )
