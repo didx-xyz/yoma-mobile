@@ -16,7 +16,7 @@ declare module 'ramda' {
   export function head(...rest: any[]): any
   export function identity(...rest: any[]): any
   export function ifElse(...rest: any[]): any
-  export function isNil(...rest: any[]): any | boolean
+  export function isNil(...rest: any[]): any
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
   export function lensPath(...rest: any[]): any
