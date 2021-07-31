@@ -48,6 +48,7 @@ declare module 'ramda' {
   export function tail(...rest: any[]): any[]
   export function tap(...rest: any[]): any[]
   export function toPairs(...rest: any[]): any
+  export function toLower(...rest: any[]): any
   export function toUpper(...rest: any[]): any
   export function trim(...rest: any[]): any
   export function type(...rest: any[]): any

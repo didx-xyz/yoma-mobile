@@ -1,4 +1,4 @@
-import { path, pick } from 'ramda'
+import { equals, filter, find, keys, path, pick, pipe, toLower, type } from 'ramda'
 
 import { UserCredentialTypes } from '../../api/users/users.types'
 import { PHOTO_UPLOAD_FORM_NAME } from './User.constants'
@@ -24,5 +24,4 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
   return photoPayload
 }
 
-export const extractCredentialsByType = (type: UserCredentialTypes) => (data: any[]) =>
-  data.filter(item => Object.keys(item).find(key => key === type.toLowerCase()))
+export const extractCredentialsByType = (type: UserCredentialTypes) => filter(pipe(keys, find(equals(toLower(type)))))
