@@ -1,4 +1,4 @@
-import { equals, filter, find, keys, path, pick, pipe, toLower, type } from 'ramda'
+import { equals, filter, find, keys, path, pick, pipe, toLower } from 'ramda'
 
 import { UserCredentialTypes } from '../../api/users/users.types'
 import { PHOTO_UPLOAD_FORM_NAME } from './User.constants'
