@@ -1,7 +1,9 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
+import { Challenge } from './types'
+
 const name = '[User Challenges]'
-const INITIAL_STATE = [] as any
+export const INITIAL_STATE = [] as Challenge[]
 
 export const getChallengesSuccess = createAction<any[]>(`${name} getChallengesSuccess`)
 export const prepareChallenges = createAction<any[]>(`${name} prepareChallenges`)

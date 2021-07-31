@@ -1,9 +1,10 @@
 import { Middleware } from 'redux'
+import { normalise } from 'utils/redux.utils'
 
 import { UserCredentialTypes } from '../../../api/users/users.types'
 import * as UserActions from '../User.reducer'
-import { extractCredential, normalise } from '../User.utils'
-import { getChallengesSuccess, normalisedChallenges, setChallenges } from './Challenges.redux'
+import * as UserUtils from '../User.utils'
+import { getChallengesSuccess, normalisedChallenges, setChallenges } from './Challenges.reducer'
 
 export const getChallengesFromFetchCredentialsFlow: Middleware =
   ({ dispatch }) =>
@@ -11,7 +12,7 @@ export const getChallengesFromFetchCredentialsFlow: Middleware =
   action => {
     const result = next(action)
     if (UserActions.fetchUserCredentialsSuccess.match(action)) {
-      const challenges = extractCredential(UserCredentialTypes.Challenge)(action.payload)
+      const challenges = UserUtils.extractCredentialsByType(UserCredentialTypes.Challenge)(action.payload)
       dispatch(getChallengesSuccess(challenges))
     }
     return result
