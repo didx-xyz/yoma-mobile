@@ -26,7 +26,7 @@ import { selectId } from './User.selector'
 import { UploadUserPhotoFlowDependencies } from './User.types'
 import {
   extractUserFromLoginPayload,
-  extractUserfromUpdateUserPayload,
+  extractUserFromUpdateUserPayload,
   extractUserFromUserUpdateSuccess,
 } from './User.utils'
 
@@ -49,7 +49,7 @@ export const updateUserFlow: Middleware =
     const result = next(action)
     if (updateUser.match(action)) {
       const state = getState()
-      const patchPayload = extractUserfromUpdateUserPayload(action.payload)
+      const patchPayload = extractUserFromUpdateUserPayload(action.payload)
       const userId = selectId(state)
 
       dispatch(

@@ -4,6 +4,7 @@ declare module 'ramda' {
   export function and(...rest: any[]): any
   export function append(...rest: any[]): any
   export function applySpec(...rest: any[]): any
+  export function chain(...rest: any[]): any
   export function complement(...rest: any[]): any
   export function compose(...rest: any[]): any
   export function concat(...rest: any[]): any[]
@@ -19,6 +20,7 @@ declare module 'ramda' {
   export function isNil(...rest: any[]): any
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
+  export function keys(...rest: any[]): any
   export function lensPath(...rest: any[]): any
   export function map(...rest: any[]): any
   export function merge(...rest: any[]): any
@@ -46,6 +48,7 @@ declare module 'ramda' {
   export function tail(...rest: any[]): any[]
   export function tap(...rest: any[]): any[]
   export function toPairs(...rest: any[]): any
+  export function toLower(...rest: any[]): any
   export function toUpper(...rest: any[]): any
   export function trim(...rest: any[]): any
   export function type(...rest: any[]): any
@@ -53,4 +56,5 @@ declare module 'ramda' {
   export function values(...rest: any[]): any
   export function view(...rest: any[]): any
   export function when(...rest: any[]): any
+  export function zipObj(...rest: any[]): any
 }
