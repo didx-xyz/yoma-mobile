@@ -3,7 +3,7 @@ import { View } from 'react-native'
 
 import { Colors } from '../../styles'
 import { WithChildren } from '../../types/react.types'
-import { isNotNil } from '../../utils/ramda'
+import { isNotNil } from '../../utils/ramda.utils'
 import ListCardHeader from '../ListCardHeader'
 import Optional from '../Optional'
 import Text, { TextAlign } from '../Typography'

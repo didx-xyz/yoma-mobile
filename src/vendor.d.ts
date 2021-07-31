@@ -20,6 +20,7 @@ declare module 'ramda' {
   export function isNil(...rest: any[]): any
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
+  export function keys(...rest: any[]): any
   export function lensPath(...rest: any[]): any
   export function map(...rest: any[]): any
   export function merge(...rest: any[]): any

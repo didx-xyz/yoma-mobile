@@ -1,3 +1,4 @@
+import { UserCredentialTypes } from '../../api/users/users.types'
 import { USER_RESPONSE } from './User.test.fixtures'
 import * as SUT from './User.utils'
 
@@ -36,7 +37,7 @@ describe('modules/User/User.utils', () => {
       expect(result).toEqual(USER_RESPONSE)
     })
   })
-  describe('extractUserfromUpdateUserPayload', () => {
+  describe('extractUserFromUpdateUserPayload', () => {
     it('should return user patch payload from user update data', () => {
       // given ...
       const userUpdateData = {
@@ -51,8 +52,8 @@ describe('modules/User/User.utils', () => {
         lastName: 'LAST_NAME',
         countryAlpha2: 'COUNTRY_ALPHA2',
       }
-      // when extractUserfromUpdateUserPayload
-      const result = SUT.extractUserfromUpdateUserPayload(userUpdateData)
+      // when extractUserFromUpdateUserPayload
+      const result = SUT.extractUserFromUpdateUserPayload(userUpdateData)
 
       //then expect user patch payload be returned
       expect(result).toEqual(userPatchPayload)
@@ -73,6 +74,50 @@ describe('modules/User/User.utils', () => {
       const result = SUT.createPhotoFormPayload(FormInstanceMock)(capturedProfileImageStub)
       //then expect photo form data
       expect(result.formData).toBe('FORM_DATA')
+    })
+  })
+
+  describe('extractCredential', () => {
+    it.each([
+      [
+        UserCredentialTypes.Challenge,
+        [
+          { challenge: 'CHALLENGE DATA 1', meta: 'META' },
+          { challenge: 'CHALLENGE DATA 2', meta: 'META' },
+        ],
+      ],
+      [
+        UserCredentialTypes.Job,
+        [
+          { job: 'JOB DATA 1', meta: 'META' },
+          { job: 'JOB DATA 2', meta: 'META' },
+        ],
+      ],
+      [
+        UserCredentialTypes.Assignment,
+        [
+          { assignment: 'ASSIGNMENT DATA 1', meta: 'META' },
+          { assignment: 'ASSIGNMENT DATA 2', meta: 'META' },
+        ],
+      ],
+      [UserCredentialTypes.Qualification, [{ qualification: 'QUALIFICATION DATA 1', meta: 'META' }]],
+    ])('should correctly extract all of a given credential type from a list of credentials', (type, expected) => {
+      // given ... an array of all credential data for a user
+      const credentials = [
+        { qualification: 'QUALIFICATION DATA 1', meta: 'META' },
+        { assignment: 'ASSIGNMENT DATA 1', meta: 'META' },
+        { job: 'JOB DATA 1', meta: 'META' },
+        { challenge: 'CHALLENGE DATA 1', meta: 'META' },
+        { job: 'JOB DATA 2', meta: 'META' },
+        { assignment: 'ASSIGNMENT DATA 2', meta: 'META' },
+        { challenge: 'CHALLENGE DATA 2', meta: 'META' },
+      ]
+
+      // when we want to get all the credentials of a given type
+      const result = SUT.extractCredentialsByType(type)(credentials)
+
+      //then expect that we have a list of challenge credentials
+      expect(result).toEqual(expected)
     })
   })
 })
