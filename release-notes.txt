@@ -1,14 +1,12 @@
 Ver 0.0.1
 Latest:
+- adding helper utils for handling MyCV data
+
+Recent:
+- docs upgrade, no new features added.
 - Adjusted the widgets on MyCv to be able to take different types of content (previously they could only take text)
-
-build 15
 - save new profile image
-
-build 14
 - add auth with refresh token
 - automatically re-auth the user on any unauthorised from the api
-
-build 13
 - save edited user profile data
 - my cv display real data in about
