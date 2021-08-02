@@ -4,3 +4,4 @@ import { RootState } from 'redux/redux.types'
 
 export const selectJob = (state: RootState) => state.job
 export const selectJobTmpFormValues = createSelector(selectJob, pick('tmpFormValues'))
+export const selectJobCredentials = createSelector(selectJob, pick('jobEntities'))

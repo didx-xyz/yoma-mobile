@@ -10,7 +10,7 @@ export const INITIAL_STATE = {
   jobEntities: {},
 } as JobState
 
-export const setJobEntities = createAction<JobResponsePayload>(`${name} setJobEntities`)
+export const setJobEntities = createAction<any>(`${name} setJobEntities`)
 export const setTmpFormValues = createAction<JobCredentialsTmpFormValues>(`${name} setTmpFormValues`)
 
 export const createJob = createAction<JobRequestPayload>(`${name} createJob`)
