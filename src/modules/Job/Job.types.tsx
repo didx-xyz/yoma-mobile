@@ -26,7 +26,6 @@ export interface JobOrganisationPayload extends JobPayload {
 export interface JobCredentialsTmpFormValues {
   startTime: string
   endTime: string
-  requestVerification?: false
 }
 
 export interface JobResponsePayload {

@@ -16,7 +16,7 @@ import {
   createJobCredentialsSuccess,
   createJobFailure,
   createJobSuccess,
-  setJobEntities,
+  setTmpFormValues,
 } from './Job.reducer'
 import { extractJobsCredentialTmpValues, extractJobsFromPayload, prepareJobCredentialPayload } from './Job.utils'
 
@@ -37,8 +37,8 @@ export const createJobFlow: Middleware =
         ),
       )
 
-      const jobsCredentialTmpValues = extractJobsCredentialTmpValues(action)
-      setJobEntities(jobsCredentialTmpValues)
+      const tmpFormValues = extractJobsCredentialTmpValues(action)
+      setTmpFormValues(tmpFormValues)
     }
     return result
   }
@@ -51,9 +51,9 @@ export const createJobSuccessFlow: Middleware =
     const state = getState()
     if (createJobSuccess.match(action)) {
       const jobResponsePayload = extractJobsFromPayload(action)
-      const tmpValues = extractJobsCredentialTmpValues(state)
+      const tmpFormValues = extractJobsCredentialTmpValues(state)
 
-      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpValues)(jobResponsePayload)
+      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
       dispatch(createJobCredentials(jobCredentialRequestPayload))
     }
     return result

@@ -32,16 +32,20 @@ describe('modules/Jobs/Jobs.utils', () => {
       // given ... an object in the shape of the successful response
       const mockPayload = {
         payload: {
-          data: 'PAYLOAD DATA',
-          meta: 'META DATA',
+          otherValue: 'OTHER_VALUE',
+          startTime: 'START_TIME',
+          endTime: 'END_TIME',
         },
       }
 
       // when ... we want to extract the data from the rest of the payload
-      const result = SUT.extractJobsFromPayload(mockPayload)
+      const result = SUT.extractJobsCredentialTmpValues(mockPayload)
 
       // then ... the data should be extracted correctly
-      expect(result).toEqual('PAYLOAD DATA')
+      expect(result).toEqual({
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      })
     })
   })
   describe('prepareJobCredentialPayload', () => {
@@ -67,6 +71,7 @@ describe('modules/Jobs/Jobs.utils', () => {
       expect(result).toEqual({
         type: 'Job',
         credentialItemId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        requestVerification: false,
         startTime: 'START_TIME',
         endTime: 'END_TIME',
       })
