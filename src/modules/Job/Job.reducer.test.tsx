@@ -13,10 +13,10 @@ describe('modules/Jobs/Jobs.reducer', () => {
       }
 
       const mockState = rootStateFixture()
-      // when ... we set the Jobs entities
+      // when ... we set the setTmpFormValues
       const action = setTmpFormValues(mockFormValues)
       const result = SUT(mockState, action)
-      // then ... should set the jobs correctly
+      // then ... validate tmpFormValues
       expect(result.tmpFormValues).toEqual({
         startTime: 'START_TIME',
         endTime: 'END_TIME',

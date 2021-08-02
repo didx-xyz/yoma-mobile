@@ -159,7 +159,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
         startTime: 'START_TIME',
         endTime: 'END_TIME',
       }
-      // when ... we request to get all the user's credentials
+      // when ... we create the user's credentials
       const action = createJobCredentials(mockPayload)
       // @ts-ignore
       const { store, invoke, next } = create(SUT.createJobCredentialsFlow)

@@ -52,27 +52,27 @@ describe('modules/Jobs/Jobs.utils', () => {
   })
   describe('prepareJobCredentialPayload', () => {
     it('should return the jobs credentials payload', () => {
-      // given ... an object in the shape of the successful response
+      // given ...
       const mockTmpFormValues = {
         startTime: 'START_TIME',
         endTime: 'END_TIME',
       }
       const mockResponseData = {
-        id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-        title: 'string',
-        description: 'string',
+        id: 'ID',
+        title: 'TITLE',
+        description: 'DESCRIPTION',
         createdAt: '2021-08-02T13:24:27.839Z',
         createdByAdmin: true,
-        language: 'string',
+        language: 'LANGUAGE',
         published: true,
-        skills: ['string'],
+        skills: ['SKILLS'],
       }
       // when ... we want to extract the data for job credential payload
       const result = SUT.prepareJobCredentialPayload(mockTmpFormValues)(mockResponseData)
       // then ... the data should be extracted correctly
       expect(result).toEqual({
         type: 'Job',
-        credentialItemId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+        credentialItemId: 'ID',
         requestVerification: false,
         startTime: 'START_TIME',
         endTime: 'END_TIME',

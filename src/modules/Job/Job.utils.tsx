@@ -10,6 +10,6 @@ export const prepareJobCredentialPayload =
   (tmpFormValues: JobCredentialsTmpFormValues) => (jobPayload: JobPayload) => ({
     type: UserCredentialTypes.Job,
     credentialItemId: jobPayload.id,
-    requestVerification: false, // TODO: refactor if new organisation is created by the user
+    requestVerification: false, // TODO: refactor
     ...tmpFormValues,
   })
