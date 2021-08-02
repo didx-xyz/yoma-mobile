@@ -48,34 +48,4 @@ export const jobsCredentialsResponseData = {
   },
 }
 
-export const jobCredentialsStateData = [
-  {
-    job: {
-      id: '',
-      title: '',
-      description: '',
-      createdAt: '',
-      createdByAdmin: false,
-      language: '',
-      published: true,
-      organisationId: '',
-      organisationName: '',
-      organisationLogoURL: '',
-      organisationURL: '',
-      organisationPrimaryContactName: '',
-      organisationPrimaryContactEmail: '',
-      organisationPrimaryContactPhone: '',
-      skills: [],
-    },
-    id: '',
-    verifiedAt: '',
-    approved: false,
-    approvalMessage: '',
-    startDate: '',
-    endDate: '',
-    createdAt: '',
-    fileId: '',
-    fileURL: '',
-    requestVerification: false,
-  },
-]
+export const jobCredentialsStateData = {}

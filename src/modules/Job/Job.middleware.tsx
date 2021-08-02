@@ -20,7 +20,7 @@ import {
 } from './Job.reducer'
 import { selectJobTmpFormValues } from './Job.selector'
 import { JobCredentialsTmpFormValues } from './Job.types'
-import { extractJobsCredentialTmpValues, extractJobsFromPayload, prepareJobCredentialPayload } from './Job.utils'
+import { extractJobsCredentialTmpFormValues, extractJobsFromPayload, prepareJobCredentialPayload } from './Job.utils'
 
 export const createJobFlow: Middleware =
   ({ dispatch }) =>
@@ -39,7 +39,7 @@ export const createJobFlow: Middleware =
         ),
       )
 
-      const tmpFormValues = extractJobsCredentialTmpValues(action)
+      const tmpFormValues = extractJobsCredentialTmpFormValues(action)
       dispatch(setTmpFormValues(tmpFormValues))
     }
     return result

@@ -83,7 +83,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest, {
-        job: { tmpValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
+        job: { tmpFormValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
       })
       const mockedAction = {
         data: defaultJobsResponseData,
@@ -105,7 +105,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
     it('should correctly create jobs credentials on success', () => {
       // given ...
       const mockState = rootStateFixture({
-        job: { tmpValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
+        job: { tmpFormValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
       })
       const mockedAction = {
         data: defaultJobsResponseData,
