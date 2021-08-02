@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { configureStore } from '@reduxjs/toolkit'
-import { actions as QualificationsActions } from 'modules/Qualifications'
+import { actions as JobActions } from 'modules/Job'
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, REGISTER } from 'redux-persist'
 
 import { actions as ApiActions } from '../api'
@@ -30,8 +30,7 @@ const store = configureStore({
           ApiActions.apiError.type,
           UserActions.uploadUserPhotoSuccess.type,
           //handling unserialized values startTime & endTime
-          QualificationsActions.createQualificationsSuccess.type,
-          QualificationsActions.createQualifications.type,
+          JobActions.setTmpFormValues.type,
         ],
       },
     }).concat(middleware),

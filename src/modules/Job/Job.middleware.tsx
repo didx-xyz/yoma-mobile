@@ -18,6 +18,8 @@ import {
   createJobSuccess,
   setTmpFormValues,
 } from './Job.reducer'
+import { selectJobTmpFormValues } from './Job.selector'
+import { JobCredentialsTmpFormValues } from './Job.types'
 import { extractJobsCredentialTmpValues, extractJobsFromPayload, prepareJobCredentialPayload } from './Job.utils'
 
 export const createJobFlow: Middleware =
@@ -38,7 +40,7 @@ export const createJobFlow: Middleware =
       )
 
       const tmpFormValues = extractJobsCredentialTmpValues(action)
-      setTmpFormValues(tmpFormValues)
+      dispatch(setTmpFormValues(tmpFormValues))
     }
     return result
   }
@@ -48,10 +50,11 @@ export const createJobSuccessFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    const state = getState()
     if (createJobSuccess.match(action)) {
+      const state = getState()
       const jobResponsePayload = extractJobsFromPayload(action)
-      const tmpFormValues = extractJobsCredentialTmpValues(state)
+      const tmpFormValues = selectJobTmpFormValues(state) as JobCredentialsTmpFormValues
+      console.log('tmpFormValues', tmpFormValues)
 
       const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
       dispatch(createJobCredentials(jobCredentialRequestPayload))

@@ -28,4 +28,21 @@ describe('modules/Jobs/Jobs.selector', () => {
       expect(result).toEqual(state.job)
     })
   })
+  describe('selectJobTmpFormValues ', () => {
+    it('should return tmpFormValues object from the job state', () => {
+      const jobStateMock = {
+        tmpFormValues: 'FORM_DATA',
+        jobEntities: jobCredentialsStateData,
+      }
+
+      const mockState = rootStateFixture({
+        job: jobStateMock,
+      })
+      // when ... we call the selector
+      const result = SUT.selectJobTmpFormValues(mockState)
+
+      // then ... should return result as expected
+      expect(result).toEqual('FORM_DATA')
+    })
+  })
 })

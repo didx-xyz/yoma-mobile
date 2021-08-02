@@ -15,8 +15,10 @@ import {
   createJobFailure,
   createJobSuccess,
 } from './Job.reducer'
+import { selectJobTmpFormValues } from './Job.selector'
 import { defaultJobsResponseData } from './Job.test.fixtures'
-import { extractJobsCredentialTmpValues, extractJobsFromPayload, prepareJobCredentialPayload } from './Job.utils'
+import { JobCredentialsTmpFormValues } from './Job.types'
+import { extractJobsFromPayload, prepareJobCredentialPayload } from './Job.utils'
 
 describe('modules/Jobs/Jobs.middleware', () => {
   describe('createJobFlow', () => {
@@ -81,7 +83,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest, {
-        job: { tmpValues: { startTime: 'START_TIME', endTime: 'END_TIME', requestVerification: true } },
+        job: { tmpValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
       })
       const action = createJobSuccess(defaultJobsResponseData)
       // @ts-ignore
@@ -94,19 +96,20 @@ describe('modules/Jobs/Jobs.middleware', () => {
     })
     it('should correctly create jobs credentials on success', () => {
       // given ...
-      const create = createMiddlewareStub(jest, {
-        job: { tmpValues: { startTime: 'START_TIME', endTime: 'END_TIME', requestVerification: true } },
+      const mockState = rootStateFixture({
+        job: { tmpValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
       })
+      const create = createMiddlewareStub(jest, mockState)
       const action = createJobSuccess(defaultJobsResponseData)
       // @ts-ignore
       const { store, invoke } = create(SUT.createJobSuccessFlow)
       // when ... we respond to the createJobSuccessFlow action
       invoke(action)
-      // then ...validate createJobCredentials is called
+      // then ...validate createJobSuccessFlow is called
 
       const jobResponsePayload = extractJobsFromPayload(action)
-      const tmpValues = extractJobsCredentialTmpValues(store.getState())
-      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpValues)(jobResponsePayload)
+      const tmpFormValues = selectJobTmpFormValues(mockState) as JobCredentialsTmpFormValues
+      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
 
       expect(store.dispatch).toHaveBeenCalledWith(createJobCredentials(jobCredentialRequestPayload))
     })
