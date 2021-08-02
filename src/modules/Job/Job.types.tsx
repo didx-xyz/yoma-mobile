@@ -48,5 +48,5 @@ export interface JobCredentials extends UserCredentialMeta {
 }
 export interface JobState {
   tmpFormValues?: any
-  jobEntities: JobCredentials[]
+  jobEntities: any
 }

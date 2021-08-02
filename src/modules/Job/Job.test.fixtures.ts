@@ -41,11 +41,6 @@ export const jobsCredentialsResponseData = {
       countries: ['string'],
     },
   },
-  meta: {
-    success: true,
-    code: 200,
-    message: null,
-  },
 }
 
 export const jobCredentialsStateData = {}
