@@ -4,6 +4,7 @@ const name = '[Skills]'
 export const INITIAL_STATE = [] as any
 export const setSkills = createAction<any>(`${name} setSkills`)
 
+export const fetchSkillsByName = createAction<string>(`${name} fetchSkillsByName`)
 export const fetchSkills = createAction(`${name} fetchSkills`)
 export const fetchSkillsSuccess = createAction<any>(`${name} fetchSkillsSuccess`)
 export const fetchSkillsFailure = createAction<string>(`${name} fetchSkillsFailure`)

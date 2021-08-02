@@ -54,7 +54,7 @@ const featureModuleMiddleware = [
   OrganisationsMiddleware.fetchOrganisationsFlow,
   OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
   OrganisationsMiddleware.fetchOrganisationsFailureFlow({ notification: showSimpleMessage }),
-  SkillsMiddleware.fetchSkillsFlow,
+  SkillsMiddleware.fetchSkillsByNameFlow,
   SkillsMiddleware.fetchSkillsSuccessFlow,
   SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.setUserOnAuthFlow,
@@ -79,6 +79,9 @@ const featureModuleMiddleware = [
   JobMiddleware.createJobFlow,
   JobMiddleware.createJobSuccessFlow,
   JobMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
+  JobMiddleware.createJobCredentialsFlow,
+  JobMiddleware.createJobCredentialsSuccessFlow({ notification: showSimpleMessage }),
+  JobMiddleware.createJobCredentialsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

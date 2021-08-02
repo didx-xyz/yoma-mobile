@@ -5,7 +5,7 @@ export const ValidationSchema = () => {
     title: yup.string().min(2).max(200).required('Required'),
     description: yup.string().min(2).max(1000).required('Required'),
     organisationId: yup.string().required('Required'),
-    country: yup.string().required('Required'),
+    countries: yup.array().min(1).required('Required'),
     startTime: yup.date().nullable().required('Required'),
     endTime: yup
       .date()

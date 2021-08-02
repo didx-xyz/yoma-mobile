@@ -1,3 +1,4 @@
+import { addParamsToConfig } from 'api/api.utils'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
@@ -5,21 +6,21 @@ import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
 import * as SUT from './Skills.middleware'
-import { fetchSkills, fetchSkillsFailure, fetchSkillsSuccess, setSkills } from './Skills.reducer'
+import { fetchSkillsByName, fetchSkillsFailure, fetchSkillsSuccess, setSkills } from './Skills.reducer'
 import { extractSkillsFromPayload } from './Skills.utils'
 
 describe('modules/Skills/Skills.middleware', () => {
-  describe('fetchSkillsFlow', () => {
+  describe('fetchSkillsByNameFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const mockState = rootStateFixture({})
 
       const create = createMiddlewareStub(jest, mockState)
-      const action = fetchSkills()
+      const action = fetchSkillsByName('QUERY')
       // @ts-ignore
-      const { invoke, next } = create(SUT.fetchSkillsFlow)
+      const { invoke, next } = create(SUT.fetchSkillsByNameFlow)
 
-      // when ... we respond to the fetchSkills action
+      // when ... we respond to the fetchSkillsByName action
       invoke(action)
 
       // then ...validate fetchSkillsFlow
@@ -30,16 +31,18 @@ describe('modules/Skills/Skills.middleware', () => {
       const mockState = rootStateFixture({})
 
       const create = createMiddlewareStub(jest, mockState)
-      const action = fetchSkills()
+      const action = fetchSkillsByName('QUERY')
       // @ts-ignore
-      const { invoke, store } = create(SUT.fetchSkillsFlow)
+      const { invoke, store } = create(SUT.fetchSkillsByNameFlow)
       // when ... we respond to the updateSkills action
       invoke(action)
 
-      // then ...validate fetchSkillsFlow
+      // then ...validate fetchSkillsByNameFlow
+      const config = addParamsToConfig(ApiSkillsConstants.SKILLS_GET_BY_NAME_CONFIG)({ q: action.payload })
+
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(ApiSkillsConstants.SKILLS_GET_KEY_NAMES_CONFIG, {
+          mergeRight(config, {
             onSuccess: fetchSkillsSuccess,
             onFailure: fetchSkillsFailure,
           }),

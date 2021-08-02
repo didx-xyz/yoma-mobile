@@ -9,6 +9,9 @@ export const SKILLS_CONFIG: Partial<ApiMeta> = {
   isTokenRequired: true,
 }
 
+export const SKILLS_GET_BY_NAME_CONFIG: Partial<ApiMeta> = mergeRight(SKILLS_CONFIG, {
+  endpoint: SkillsEndpoints.Search,
+})
 export const SKILLS_GET_ALL_CONFIG: Partial<ApiMeta> = mergeRight(SKILLS_CONFIG, {})
 export const SKILLS_GET_KEY_NAMES_CONFIG: Partial<ApiMeta> = mergeRight(SKILLS_CONFIG, {
   endpoint: SkillsEndpoints.Names,

@@ -16,12 +16,13 @@ import { DropDownList } from './ExperienceForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
+  fetchSkillByName: (searchQuery: string) => void
   skills: DropDownList[]
   organisations: DropDownList[]
   setFormState: ({ values: FormikValues, isValid: boolean }: ExperienceFormState) => void
 }
 
-const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
+const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations }: Props) => {
   const { t } = useTranslation()
   const [organisationsList, setOrganisationsList] = useState<DropDownList[]>([])
   const [skillsList, setSkillsList] = useState<DropDownList[]>([])
@@ -70,11 +71,14 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
             searchable
             searchPlaceholder={t('Search organisation')}
           />
-          <DropDown
+          <DropDownTags
             items={mapToDropDownArray(countries, 'name', 'name')}
-            name={'country'}
+            name={'countries'}
             label={'Country'}
+            multiple
             searchable
+            min={1}
+            max={1}
             handlers={formikHandlers}
             searchPlaceholder={t('Search country')}
             placeholder={t('Country or region')}
@@ -94,6 +98,7 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
             multiple
             searchable
             searchPlaceholder={t('Search skills')}
+            onChangeSearchText={fetchSkillByName}
             label={t('Skills developed')}
             name={'skillNames'}
             handlers={formikHandlers}

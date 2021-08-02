@@ -1,21 +1,23 @@
+import { addParamsToConfig } from 'api/api.utils'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
-import { fetchSkills, fetchSkillsFailure, fetchSkillsSuccess, setSkills } from './Skills.reducer'
+import { fetchSkillsByName, fetchSkillsFailure, fetchSkillsSuccess, setSkills } from './Skills.reducer'
 import { extractSkillsFromPayload } from './Skills.utils'
 
-export const fetchSkillsFlow: Middleware =
+export const fetchSkillsByNameFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (fetchSkills.match(action)) {
+    if (fetchSkillsByName.match(action)) {
+      const config = addParamsToConfig(ApiSkillsConstants.SKILLS_GET_BY_NAME_CONFIG)({ q: action.payload })
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiSkillsConstants.SKILLS_GET_KEY_NAMES_CONFIG, {
+          mergeRight(config, {
             onSuccess: fetchSkillsSuccess,
             onFailure: fetchSkillsFailure,
           }),
