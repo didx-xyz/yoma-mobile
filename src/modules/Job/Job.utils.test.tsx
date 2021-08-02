@@ -9,7 +9,6 @@ describe('modules/Jobs/Jobs.utils', () => {
         title: 'TITLE',
         description: 'DESCRIPTION',
         organisationId: 'ORGANISATION_ID',
-        countries: ['COUNTRY'],
         language: 'EN',
         startTime: '2021-07-04T10:45:00Z',
         endTime: '2021-07-18T10:45:00Z',

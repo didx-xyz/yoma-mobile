@@ -1,7 +1,6 @@
 import { CheckBox, DatePicker, DropDown, FormWrapper, InfoModal, Input } from 'components'
 import DropDownTags from 'components/DropDownTags'
 import Text, { MetaLevels } from 'components/Typography'
-import countries from 'constants/countries'
 import { Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -71,7 +70,8 @@ const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations 
             searchable
             searchPlaceholder={t('Search organisation')}
           />
-          <DropDownTags
+          {/* job endpoint doesn't accept countries field, also none existent on web app implementation */}
+          {/* <DropDownTags
             items={mapToDropDownArray(countries, 'name', 'name')}
             name={'countries'}
             label={'Country'}
@@ -82,7 +82,7 @@ const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations 
             handlers={formikHandlers}
             searchPlaceholder={t('Search country')}
             placeholder={t('Country or region')}
-          />
+          /> */}
           <CheckBox
             isChecked={isWorkingHere}
             label={t('I currently work here')}

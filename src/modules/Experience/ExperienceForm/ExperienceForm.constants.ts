@@ -7,8 +7,7 @@ export const INITIAL_VALUES: JobRequestPayload = {
   language: 'en',
   organisationId: '',
   skillNames: [],
-  countries: [],
-  startTime: '',
-  endTime: '',
+  startTime: null,
+  endTime: null,
   published: false,
 }
