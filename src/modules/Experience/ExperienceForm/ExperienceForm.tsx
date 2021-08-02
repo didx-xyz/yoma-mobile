@@ -7,7 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
-import { mapToDropDownArray } from 'utils/strings.utils'
+import { dropDownFromArray, mapToDropDownArray } from 'utils/strings.utils'
 
 import { ExperienceFormState } from '../Experience.types'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
@@ -17,7 +17,7 @@ import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
   fetchSkillByName: (searchQuery: string) => void
-  skills: DropDownList[]
+  skills: []
   organisations: DropDownList[]
   setFormState: ({ values: FormikValues, isValid: boolean }: ExperienceFormState) => void
 }
@@ -25,7 +25,7 @@ interface Props {
 const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations }: Props) => {
   const { t } = useTranslation()
   const [organisationsList, setOrganisationsList] = useState<DropDownList[]>([])
-  const [skillsList, setSkillsList] = useState<DropDownList[]>([])
+  const [skillsList, setSkillsList] = useState<string[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
 
@@ -94,7 +94,7 @@ const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations 
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
-            items={mapToDropDownArray(skillsList, 'value', 'value')}
+            items={dropDownFromArray(skillsList)}
             multiple
             searchable
             searchPlaceholder={t('Search skills')}
