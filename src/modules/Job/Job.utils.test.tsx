@@ -17,7 +17,9 @@ describe('modules/Jobs/Jobs.utils', () => {
       const mockedAction = {
         type: 'ACTION',
         payload: {
-          data: mockPayload,
+          data: {
+            data: mockPayload,
+          },
         },
       }
 

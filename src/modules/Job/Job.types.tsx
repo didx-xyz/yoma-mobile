@@ -29,7 +29,7 @@ export interface JobCredentialsTmpFormValues {
 }
 
 export interface JobResponsePayload {
-  data: JobPayload
+  data: { data: JobPayload }
   meta: ApiMetaResponse
 }
 

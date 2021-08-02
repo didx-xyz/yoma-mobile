@@ -9,11 +9,6 @@ export const defaultJobsResponseData = {
     published: true,
     skills: ['string'],
   },
-  meta: {
-    success: true,
-    code: 200,
-    message: null,
-  },
 }
 export const jobsCredentialsResponseData = {
   data: {

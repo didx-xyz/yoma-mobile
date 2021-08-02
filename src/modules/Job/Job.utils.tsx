@@ -4,7 +4,7 @@ import { path, pick, pipe } from 'ramda'
 import { JobCredentialsTmpFormValues, JobPayload } from './Job.types'
 
 //TODO: move to src/utils as normalizePayload
-export const extractJobsFromPayload = path(['payload', 'data'])
+export const extractJobsFromPayload = path(['payload', 'data', 'data'])
 export const extractJobsCredentialTmpValues = pipe(path(['payload']), pick(['startTime', 'endTime']))
 export const prepareJobCredentialPayload =
   (tmpFormValues: JobCredentialsTmpFormValues) => (jobPayload: JobPayload) => ({

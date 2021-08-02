@@ -85,7 +85,15 @@ describe('modules/Jobs/Jobs.middleware', () => {
       const create = createMiddlewareStub(jest, {
         job: { tmpValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
       })
-      const action = createJobSuccess(defaultJobsResponseData)
+      const mockedAction = {
+        data: defaultJobsResponseData,
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+      const action = createJobSuccess(mockedAction)
       // @ts-ignore
       const { invoke, next } = create(SUT.createJobSuccessFlow)
       // when ... we respond to the createJobSuccess action
@@ -99,8 +107,16 @@ describe('modules/Jobs/Jobs.middleware', () => {
       const mockState = rootStateFixture({
         job: { tmpValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
       })
+      const mockedAction = {
+        data: defaultJobsResponseData,
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
       const create = createMiddlewareStub(jest, mockState)
-      const action = createJobSuccess(defaultJobsResponseData)
+      const action = createJobSuccess(mockedAction)
       // @ts-ignore
       const { store, invoke } = create(SUT.createJobSuccessFlow)
       // when ... we respond to the createJobSuccessFlow action
