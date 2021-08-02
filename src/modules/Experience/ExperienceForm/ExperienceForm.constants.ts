@@ -1,14 +1,13 @@
-import { QualificationRequestPayload } from 'modules/Qualifications/Qualifications.types'
+import { JobRequestPayload } from 'modules/Job/Job.types'
 
 //TODO: Review default values; language, url
-export const INITIAL_VALUES: QualificationRequestPayload = {
+export const INITIAL_VALUES: JobRequestPayload = {
   title: '',
   description: '',
-  url: 'none',
   language: 'en',
   organisationId: '',
   skillNames: [],
-  country: '',
+  countries: [],
   startTime: '',
   endTime: '',
   published: false,

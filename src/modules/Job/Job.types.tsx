@@ -40,6 +40,7 @@ export interface JobRequestPayload {
   language: string
   published: boolean
   skillNames: Skills
+  organisationId: string
   countries: string[]
   startTime: string | null
   endTime: string | null
