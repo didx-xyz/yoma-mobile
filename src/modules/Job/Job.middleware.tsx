@@ -54,7 +54,6 @@ export const createJobSuccessFlow: Middleware =
       const state = getState()
       const jobResponsePayload = extractJobsFromPayload(action)
       const tmpFormValues = selectJobTmpFormValues(state) as JobCredentialsTmpFormValues
-      console.log('tmpFormValues', tmpFormValues)
 
       const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
       dispatch(createJobCredentials(jobCredentialRequestPayload))
