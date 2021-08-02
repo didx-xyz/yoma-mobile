@@ -1,13 +1,18 @@
 import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
+import { setJobEntities } from 'modules/Job/Job.reducer'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
+import { UserCredentialTypes } from './../../api/users/users.types'
 import * as SUT from './User.middleware'
 import {
+  fetchUserCredentials,
+  fetchUserCredentialsFailure,
+  fetchUserCredentialsSuccess,
   setUser,
   updateUser,
   updateUserFailure,
@@ -19,7 +24,11 @@ import {
   uploadUserPhotoSuccess,
 } from './User.reducer'
 import { USER_RESPONSE } from './User.test.fixtures'
-import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
+import {
+  extractUserCredentialsByType,
+  extractUserFromLoginPayload,
+  extractUserFromUserUpdateSuccess,
+} from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
@@ -360,6 +369,97 @@ describe('modules/User/User.middleware', () => {
       const { invoke } = create(SUT.updateUserPhotoFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the updateUserPhotoFailureFlow action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('fetchUserCredentialsFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ... a user object with an id in state
+      const userId = 'A USER ID'
+      const create = createMiddlewareStub(jest, { user: { id: userId } })
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
+
+      // when ... we request to get all the user's credentials
+      const action = fetchUserCredentials()
+      // @ts-ignore
+      const { store, invoke, next } = create(SUT.fetchUserCredentialsFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      expect(next).toHaveBeenCalledWith(action)
+
+      // ... we should fetch the users credentials
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: fetchUserCredentialsSuccess,
+            onFailure: fetchUserCredentialsFailure,
+          }),
+          action.payload,
+        ),
+      )
+    })
+  })
+  describe('fetchUserCredentialsSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockResponseData = [
+        {
+          job: 'JOB DATA 1',
+          id: 'CREDENTIAL_ID',
+        },
+      ]
+
+      const action = fetchUserCredentialsSuccess(mockResponseData)
+      // @ts-ignore
+      const { invoke, next } = create(SUT.fetchUserCredentialsSuccessFlow)
+      // when ... we respond to the fetchUserCredentialsSuccess action
+      invoke(action)
+      // then ...validate fetchUserCredentialsSuccessFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly set user credentials on successful fetch', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockResponseData = {
+        data: [
+          {
+            job: 'JOB DATA 1',
+            id: 'CREDENTIAL_ID',
+          },
+        ],
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const action = fetchUserCredentialsSuccess(mockResponseData)
+      // @ts-ignore
+      const { store, invoke } = create(SUT.fetchUserCredentialsSuccessFlow)
+      // when ... we respond to the fetchUserCredentialsSuccess action
+      invoke(action)
+      // then ...validate fetchUserCredentialsSuccessFlow
+      const jobs = extractUserCredentialsByType(UserCredentialTypes.Job)(action)
+      expect(store.dispatch).toHaveBeenCalledWith(setJobEntities(jobs))
+    })
+  })
+  describe('fetchUserCredentialsFailureFlow', () => {
+    it('should correctly handle user credentials fetch failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = fetchUserCredentialsFailure('FAILED')
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.fetchUserCredentialsFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the fetchUserCredentialsFailures action
       invoke(action)
 
       // then ...validate failure

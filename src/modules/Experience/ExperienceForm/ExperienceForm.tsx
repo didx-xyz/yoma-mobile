@@ -85,8 +85,8 @@ const ExperienceForm = ({ setFormState, skills, organisations }: Props) => {
             onPress={() => setIsWorkingHere(!isWorkingHere)}
           />
           <View style={styles.row}>
-            <DatePicker name={'startTime'} label={t('Start date')} handlers={formikHandlers} />
-            <DatePicker name={'endTime'} label={t('End date')} handlers={formikHandlers} />
+            <DatePicker name="startTime" label={t('Start date')} handlers={formikHandlers} />
+            <DatePicker name="endTime" label={t('End date')} handlers={formikHandlers} />
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags

@@ -24,4 +24,5 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
   return photoPayload
 }
 
-export const extractCredentialsByType = (type: UserCredentialTypes) => filter(pipe(keys, find(equals(toLower(type)))))
+export const extractUserCredentialsByType = (type: UserCredentialTypes) =>
+  filter(pipe(keys, find(equals(toLower(type)))))

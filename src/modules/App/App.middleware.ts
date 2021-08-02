@@ -1,8 +1,8 @@
 import { Middleware } from 'redux'
 
+import * as JobsActions from '../Job/Job.reducer'
 import * as OrganisationsActions from '../Organisations/Organisations.reducer'
 import * as SkillsActions from '../Skills/Skills.reducer'
-import * as UserCredentialsActions from '../UserCredentials/UserCredentials.reducer'
 // avoiding circular dependencies:
 import * as AuthActions from './../Auth/Auth.reducer'
 import * as UserActions from './../User/User.reducer'
@@ -17,8 +17,8 @@ export const appResetFlow: Middleware =
     if (resetAppData.match(action)) {
       dispatch(AuthActions.clearAuth())
       dispatch(UserActions.clearUser())
-      dispatch(UserCredentialsActions.clearUserCredentials())
       dispatch(SkillsActions.clearSkills())
+      dispatch(JobsActions.clearJobs())
     }
 
     return result
@@ -30,7 +30,7 @@ export const hydrateAppFlow: Middleware =
   action => {
     const result = next(action)
     if (hydrateApp.match(action)) {
-      dispatch(UserCredentialsActions.fetchUserCredentials())
+      dispatch(UserActions.fetchUserCredentials())
       dispatch(OrganisationsActions.fetchOrganisations())
       dispatch(SkillsActions.fetchSkills())
     }

@@ -114,9 +114,10 @@ describe('modules/User/User.utils', () => {
       ]
 
       // when we want to get all the credentials of a given type
-      const result = SUT.extractCredentialsByType(type)(credentials)
+      const result = SUT.extractUserCredentialsByType(type)(credentials)
 
       //then expect that we have a list of challenge credentials
+
       expect(result).toEqual(expected)
     })
   })

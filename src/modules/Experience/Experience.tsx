@@ -3,7 +3,7 @@ import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import { QualificationRequestPayload } from 'modules/Qualifications/Qualifications.types'
+import { JobRequestPayload } from 'modules/Job/Job.types'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -14,8 +14,8 @@ import ExperienceForm from './ExperienceForm/ExperienceForm'
 import { DropDownList } from './ExperienceForm/ExperienceForm.types'
 
 interface Props {
-  onExperienceSave: (qualification: QualificationRequestPayload) => void
-  qualifications: []
+  onJobSave: (job: JobRequestPayload) => void
+  jobs: []
   organisations: DropDownList[]
   skills: DropDownList[]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
@@ -31,19 +31,19 @@ const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
   />
 )
 
-const Experience = ({ navigation, onExperienceSave, qualifications, organisations, skills }: Props) => {
+const Experience = ({ navigation, onJobSave, jobs, organisations, skills }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  const [qualification, setQualification] = useState([])
+  const [job, setJob] = useState([])
   const [formState, setFormState] = useState<ExperienceFormState | null>(null)
 
   useEffect(() => {
-    setQualification(qualification)
-  }, [qualification])
+    setJob(job)
+  }, [job])
 
   const handleExperienceForm = () => {
     if (formState?.isValid) {
-      onExperienceSave(formState.values as QualificationRequestPayload)
+      onJobSave(formState.values as JobRequestPayload)
     }
   }
   return (
@@ -59,11 +59,11 @@ const Experience = ({ navigation, onExperienceSave, qualifications, organisation
         condition={isSaved}
         fallback={
           <Optional
-            condition={qualification.length > 0}
+            condition={job.length > 0}
             fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
           >
             <FlatList
-              data={qualifications}
+              data={jobs}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }: any) => renderItem(item)}
               keyExtractor={(item: any, index: number) => index.toString()}

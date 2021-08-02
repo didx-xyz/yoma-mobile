@@ -1,5 +1,5 @@
 import { Dispatch } from '@reduxjs/toolkit'
-import { actions as QualificationsActions, types as QualificationsTypes } from 'modules/Qualifications'
+import { actions as JobActions, types as JobTypes } from 'modules/Job'
 import { connect } from 'react-redux'
 
 import Experience from './Experience'
@@ -8,8 +8,8 @@ import selector from './Experience.selector'
 const mapStateToProps = selector
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onExperienceSave: (qualification: QualificationsTypes.QualificationRequestPayload) => {
-      dispatch(QualificationsActions.createQualifications(qualification))
+    onJobSave: (job: JobTypes.JobRequestPayload) => {
+      dispatch(JobActions.createJob(job))
     },
   }
 }
