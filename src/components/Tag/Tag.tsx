@@ -9,7 +9,7 @@ import styles from './Tag.styles'
 
 type Props = {
   tag: string
-  onDeleteTag: (skill: string) => void
+  onDeleteTag: (tag: string) => void
 }
 
 const Tag = ({ tag, onDeleteTag }: Props) => {
