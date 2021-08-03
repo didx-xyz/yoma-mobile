@@ -1,26 +1,34 @@
-import { addParamsToConfig } from 'api/api.utils'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
+import { searchArrayOfObjByValue } from 'utils/strings.utils'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
 import * as SUT from './Skills.middleware'
-import { fetchSkillsByName, fetchSkillsFailure, fetchSkillsSuccess, setSkills } from './Skills.reducer'
+import {
+  fetchSkills,
+  fetchSkillsFailure,
+  fetchSkillsSuccess,
+  filterSkillsByName,
+  setFilteredSkills,
+  setSkillEntities,
+} from './Skills.reducer'
+import { selectSkillEntities } from './Skills.selector'
 import { extractSkillsFromPayload } from './Skills.utils'
 
 describe('modules/Skills/Skills.middleware', () => {
-  describe('fetchSkillsByNameFlow', () => {
+  describe('fetchSkillsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const mockState = rootStateFixture({})
 
       const create = createMiddlewareStub(jest, mockState)
-      const action = fetchSkillsByName('QUERY')
+      const action = fetchSkills()
       // @ts-ignore
-      const { invoke, next } = create(SUT.fetchSkillsByNameFlow)
+      const { invoke, next } = create(SUT.fetchSkillsFlow)
 
-      // when ... we respond to the fetchSkillsByName action
+      // when ... we respond to the fetchSkills action
       invoke(action)
 
       // then ...validate fetchSkillsFlow
@@ -31,18 +39,16 @@ describe('modules/Skills/Skills.middleware', () => {
       const mockState = rootStateFixture({})
 
       const create = createMiddlewareStub(jest, mockState)
-      const action = fetchSkillsByName('QUERY')
+      const action = fetchSkills()
       // @ts-ignore
-      const { invoke, store } = create(SUT.fetchSkillsByNameFlow)
+      const { invoke, store } = create(SUT.fetchSkillsFlow)
       // when ... we respond to the updateSkills action
       invoke(action)
 
-      // then ...validate fetchSkillsByNameFlow
-      const config = addParamsToConfig(ApiSkillsConstants.SKILLS_GET_BY_NAME_CONFIG)({ q: action.payload })
-
+      // then ...validate fetchSkillsFlow
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(config, {
+          mergeRight(ApiSkillsConstants.SKILLS_GET_KEY_NAMES_CONFIG, {
             onSuccess: fetchSkillsSuccess,
             onFailure: fetchSkillsFailure,
           }),
@@ -50,16 +56,59 @@ describe('modules/Skills/Skills.middleware', () => {
       )
     })
   })
+  describe('filterSkillsByNameFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const mockState = rootStateFixture()
+
+      const create = createMiddlewareStub(jest, mockState)
+      const action = filterSkillsByName('QUERY')
+      // @ts-ignore
+      const { invoke, next } = create(SUT.filterSkillsByNameFlow)
+
+      // when ... we respond to the filterSkillsByName action
+      invoke(action)
+
+      // then ...validate fetchSkillsFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly handle updating the skills state', () => {
+      // given ...
+      const mockState = rootStateFixture({
+        skills: {
+          filteredSkills: [],
+          skillEntities: [{ key: 'KEY', value: 'VALUE' }],
+        },
+      })
+
+      const create = createMiddlewareStub(jest, mockState)
+      const action = filterSkillsByName('QUERY')
+      // @ts-ignore
+      const { invoke, store } = create(SUT.filterSkillsByNameFlow)
+      // when ... we respond to the updateSkills action
+      invoke(action)
+
+      // then ...validate filterSkillsByNameFlow
+      const state = store.getState()
+      const skillEntities = selectSkillEntities(state) as []
+      const filteredSkills = searchArrayOfObjByValue(action.payload, skillEntities)
+      expect(store.dispatch).toHaveBeenCalledWith(setFilteredSkills(filteredSkills))
+    })
+  })
   describe('fetchSkillsSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const mockResponseData = [
-        {
-          key: 'SOME_KEY',
-          value: 'SOME_VALUE',
+      const mockResponseData = {
+        data: {
+          data: [
+            {
+              key: 'SOME_KEY',
+              value: 'SOME_VALUE',
+            },
+          ],
         },
-      ]
+      }
 
       const action = fetchSkillsSuccess(mockResponseData)
       // @ts-ignore
@@ -73,12 +122,18 @@ describe('modules/Skills/Skills.middleware', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const mockResponseData = {
-        data: [
-          {
-            key: 'SOME_KEY',
-            value: 'SOME_VALUE',
-          },
-        ],
+        data: {
+          data: [
+            {
+              key: 'SOME_KEY',
+              value: 'SOME_VALUE',
+            },
+            {
+              key: 'SOME_KEY1',
+              value: 'SOME_VALUE1',
+            },
+          ],
+        },
         meta: {
           success: true,
           code: 200,
@@ -89,11 +144,11 @@ describe('modules/Skills/Skills.middleware', () => {
       const action = fetchSkillsSuccess(mockResponseData)
       // @ts-ignore
       const { store, invoke } = create(SUT.fetchSkillsSuccessFlow)
-      // when ... we respond to the updateSkillsSuccess action
+      // when ... we respond to the fetchSkillsSuccess action
       invoke(action)
-      // then ...validate setSkills
+      // then ...validate setSkillEntities
       const skills = extractSkillsFromPayload(action)
-      expect(store.dispatch).toHaveBeenCalledWith(setSkills(skills))
+      expect(store.dispatch).toHaveBeenCalledWith(setSkillEntities(skills))
     })
   })
   describe('fetchSkillsFailureFlow', () => {

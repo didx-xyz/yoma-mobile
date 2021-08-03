@@ -12,8 +12,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     onJobSave: (job: JobTypes.JobRequestPayload) => {
       dispatch(JobActions.createJob(job))
     },
-    fetchSkillByName: (query: string) => {
-      dispatch(SkillsActions.fetchSkillsByName(query))
+    filterSkillsByName: (query: string) => {
+      dispatch(SkillsActions.filterSkillsByName(query))
     },
   }
 }

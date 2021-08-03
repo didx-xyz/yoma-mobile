@@ -12,7 +12,6 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage: AsyncStorage,
-  blackLists: ['skills'],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

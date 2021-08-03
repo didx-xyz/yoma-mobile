@@ -6,7 +6,7 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
-import { dropDownFromArray, mapToDropDownArray } from 'utils/strings.utils'
+import { mapToDropDownArray } from 'utils/strings.utils'
 
 import { ExperienceFormState } from '../Experience.types'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
@@ -15,16 +15,16 @@ import { DropDownList } from './ExperienceForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  fetchSkillByName: (searchQuery: string) => void
-  skills: []
+  filterSkillsByName: (searchQuery: string) => void
+  skills: DropDownList[]
   organisations: DropDownList[]
   setFormState: ({ values: FormikValues, isValid: boolean }: ExperienceFormState) => void
 }
 
-const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations }: Props) => {
+const ExperienceForm = ({ filterSkillsByName, setFormState, skills, organisations }: Props) => {
   const { t } = useTranslation()
   const [organisationsList, setOrganisationsList] = useState<DropDownList[]>([])
-  const [skillsList, setSkillsList] = useState<string[]>([])
+  const [skillsList, setSkillEntitiesList] = useState<DropDownList[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
 
@@ -33,7 +33,7 @@ const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations 
   }, [organisations])
 
   useEffect(() => {
-    setSkillsList(skills)
+    setSkillEntitiesList(skills)
   }, [skills])
 
   return (
@@ -70,19 +70,6 @@ const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations 
             searchable
             searchPlaceholder={t('Search organisation')}
           />
-          {/* job endpoint doesn't accept countries field, also none existent on web app implementation */}
-          {/* <DropDownTags
-            items={mapToDropDownArray(countries, 'name', 'name')}
-            name={'countries'}
-            label={'Country'}
-            multiple
-            searchable
-            min={1}
-            max={1}
-            handlers={formikHandlers}
-            searchPlaceholder={t('Search country')}
-            placeholder={t('Country or region')}
-          /> */}
           <CheckBox
             isChecked={isWorkingHere}
             label={t('I currently work here')}
@@ -94,11 +81,11 @@ const ExperienceForm = ({ fetchSkillByName, setFormState, skills, organisations 
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
-            items={dropDownFromArray(skillsList)}
+            items={mapToDropDownArray(skillsList, 'value', 'value')}
             multiple
             searchable
             searchPlaceholder={t('Search skills')}
-            onChangeSearchText={fetchSkillByName}
+            onChangeSearchText={filterSkillsByName}
             label={t('Skills developed')}
             name={'skillNames'}
             handlers={formikHandlers}

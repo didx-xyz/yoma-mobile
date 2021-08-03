@@ -15,7 +15,7 @@ import { DropDownList } from './ExperienceForm/ExperienceForm.types'
 
 interface Props {
   onJobSave: (job: JobRequestPayload) => void
-  fetchSkillByName: (searchQuery: string) => void
+  filterSkillsByName: (query: string) => void
   jobs: []
   organisations: DropDownList[]
   skills: DropDownList[]
@@ -32,7 +32,7 @@ const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
   />
 )
 
-const Experience = ({ navigation, onJobSave, fetchSkillByName, jobs, organisations, skills }: Props) => {
+const Experience = ({ navigation, onJobSave, filterSkillsByName, jobs, organisations, skills }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [job, setJob] = useState([])
@@ -75,7 +75,7 @@ const Experience = ({ navigation, onJobSave, fetchSkillByName, jobs, organisatio
         <ScrollView>
           <Card>
             <ExperienceForm
-              fetchSkillByName={fetchSkillByName}
+              filterSkillsByName={filterSkillsByName}
               setFormState={setFormState}
               skills={skills}
               organisations={organisations}

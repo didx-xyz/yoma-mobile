@@ -1,28 +1,49 @@
-import { addParamsToConfig } from 'api/api.utils'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
+import { searchArrayOfObjByValue, sliceArrayByNumber } from 'utils/strings.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
-import { fetchSkillsByName, fetchSkillsFailure, fetchSkillsSuccess, setSkills } from './Skills.reducer'
+import {
+  fetchSkills,
+  fetchSkillsFailure,
+  fetchSkillsSuccess,
+  filterSkillsByName,
+  setFilteredSkills,
+  setSkillEntities,
+} from './Skills.reducer'
+import { selectSkillEntities } from './Skills.selector'
 import { extractSkillsFromPayload } from './Skills.utils'
 
-export const fetchSkillsByNameFlow: Middleware =
+export const fetchSkillsFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (fetchSkillsByName.match(action)) {
-      const config = addParamsToConfig(ApiSkillsConstants.SKILLS_GET_BY_NAME_CONFIG)({ q: action.payload })
+    if (fetchSkills.match(action)) {
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(config, {
+          mergeRight(ApiSkillsConstants.SKILLS_GET_KEY_NAMES_CONFIG, {
             onSuccess: fetchSkillsSuccess,
             onFailure: fetchSkillsFailure,
           }),
         ),
       )
+    }
+    return result
+  }
+
+export const filterSkillsByNameFlow: Middleware =
+  ({ getState, dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (filterSkillsByName.match(action)) {
+      const state = getState()
+      const skillEntities = selectSkillEntities(state) as []
+      const filteredSkills = searchArrayOfObjByValue(action.payload, skillEntities)
+      dispatch(setFilteredSkills(filteredSkills))
     }
     return result
   }
@@ -35,7 +56,9 @@ export const fetchSkillsSuccessFlow: Middleware =
 
     if (fetchSkillsSuccess.match(action)) {
       const skillsPayload = extractSkillsFromPayload(action)
-      dispatch(setSkills(skillsPayload))
+      const truncatedSkills = sliceArrayByNumber(20, skillsPayload)
+      dispatch(setSkillEntities(skillsPayload))
+      dispatch(setFilteredSkills(truncatedSkills))
     }
     return result
   }
