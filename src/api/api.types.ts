@@ -18,7 +18,6 @@ export enum ApiClients {
   Auth = 'auth',
   Users = 'users',
   Organisations = 'organisations',
-  Qualifications = 'qualifications',
   Skills = 'skills',
   Jobs = 'jobs',
 }
