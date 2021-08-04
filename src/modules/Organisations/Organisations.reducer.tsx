@@ -9,9 +9,9 @@ export const fetchOrganisationsSuccess = createAction<any>(`${name} fetchOrganis
 export const fetchOrganisationsFailure = createAction<string>(`${name} fetchOrganisationsFailure`)
 export const clearOrganisations = createAction(`${name} clearOrganisations`)
 
-const OrganisationsReducer = createReducer(INITIAL_STATE, builder => {
+const organisationsReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setOrganisations, (_, action) => action.payload)
   builder.addCase(clearOrganisations, (_state, _action) => INITIAL_STATE)
 })
 
-export default OrganisationsReducer
+export default organisationsReducer
