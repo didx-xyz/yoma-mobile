@@ -8,14 +8,14 @@ describe('modules/Experience/Experience.utils', () => {
       //given ...
       //when .. extractExperienceFormValues
       const result = SUT.extractExperienceFormValues(jobsCredentialsResponseData)
-      //then result should equal user registration data
+      //then result should equal job request payload data
       expect(result).toEqual({
         id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-        title: 'string',
-        description: 'string',
-        language: 'string',
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        language: 'EN',
         published: true,
-        skillNames: ['string'],
+        skillNames: ['SKILL'],
         organisationId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
         startTime: '2021-08-02T10:32:47.330Z',
         endTime: '2021-08-02T10:32:47.330Z',
