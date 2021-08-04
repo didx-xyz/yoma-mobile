@@ -83,6 +83,12 @@ const featureModuleMiddleware = [
   JobMiddleware.createJobCredentialsFlow,
   JobMiddleware.createJobCredentialsSuccessFlow({ notification: showSimpleMessage }),
   JobMiddleware.createJobCredentialsFailureFlow({ notification: showSimpleMessage }),
+  JobMiddleware.updateJobFlow,
+  JobMiddleware.updateJobSuccessFlow,
+  JobMiddleware.updateJobFailureFlow({ notification: showSimpleMessage }),
+  JobMiddleware.updateJobCredentialsFlow,
+  JobMiddleware.updateJobCredentialsSuccessFlow({ notification: showSimpleMessage }),
+  JobMiddleware.updateJobCredentialsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

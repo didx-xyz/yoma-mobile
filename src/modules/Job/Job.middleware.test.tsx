@@ -14,6 +14,12 @@ import {
   createJobCredentialsSuccess,
   createJobFailure,
   createJobSuccess,
+  updateJob,
+  updateJobCredentials,
+  updateJobCredentialsFailure,
+  updateJobCredentialsSuccess,
+  updateJobFailure,
+  updateJobSuccess,
 } from './Job.reducer'
 import { selectJobTmpFormValues } from './Job.selector'
 import { defaultJobsResponseData } from './Job.test.fixtures'
@@ -131,7 +137,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
     })
   })
   describe('createJobFailureFlow', () => {
-    it('should correctly handle jobs fetch failure', () => {
+    it('should correctly handle job create failure', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const action = createJobFailure('FAILED')
@@ -217,6 +223,208 @@ describe('modules/Jobs/Jobs.middleware', () => {
       const { invoke } = create(SUT.createJobCredentialsFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the createJobCredentialsFailures action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('updateJobFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const mockState = rootStateFixture({})
+
+      const create = createMiddlewareStub(jest, mockState)
+      const mockPayload = {
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        organisationId: 'ORGANISATION_ID',
+        skillNames: ['SKILL'],
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+        language: 'EN',
+        published: false,
+      }
+      const action = updateJob(mockPayload)
+      // @ts-ignore
+      const { invoke, next } = create(SUT.updateJobFlow)
+
+      // when ... we respond to the updateJob action
+      invoke(action)
+
+      // then ...validate updateJobFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly handle updating a job', () => {
+      // given ...
+      const mockState = rootStateFixture({})
+      const mockPayload = {
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        organisationId: 'ORGANISATION_ID',
+        skillNames: ['SKILL'],
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+        language: 'EN',
+        published: false,
+      }
+      const create = createMiddlewareStub(jest, mockState)
+      const action = updateJob(mockPayload)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.updateJobFlow)
+      // when ... we respond to the updateJobs action
+      invoke(action)
+
+      // then ...validate updateJobFlow
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiJobsConstants.JOBS_EDIT_CONFIG, {
+            onSuccess: updateJobSuccess,
+            onFailure: updateJobFailure,
+          }),
+          action.payload,
+        ),
+      )
+    })
+  })
+  describe('updateJobSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest, {
+        job: { tmpFormValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
+      })
+      const mockedAction = {
+        data: defaultJobsResponseData,
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+      const action = updateJobSuccess(mockedAction)
+      // @ts-ignore
+      const { invoke, next } = create(SUT.updateJobSuccessFlow)
+      // when ... we respond to the updateJobSuccess action
+      invoke(action)
+
+      // then ...validate updateJobSuccessFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly create jobs credentials on success', () => {
+      // given ...
+      const mockState = rootStateFixture({
+        job: { tmpFormValues: { startTime: 'START_TIME', endTime: 'END_TIME' } },
+      })
+      const mockedAction = {
+        data: defaultJobsResponseData,
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+      const create = createMiddlewareStub(jest, mockState)
+      const action = updateJobSuccess(mockedAction)
+      // @ts-ignore
+      const { store, invoke } = create(SUT.updateJobSuccessFlow)
+      // when ... we respond to the updateJobSuccessFlow action
+      invoke(action)
+      // then ...validate updateJobSuccessFlow is called
+
+      const jobResponsePayload = extractJobsFromPayload(action)
+      const tmpFormValues = selectJobTmpFormValues(mockState) as JobCredentialsTmpFormValues
+      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
+
+      expect(store.dispatch).toHaveBeenCalledWith(updateJobCredentials(jobCredentialRequestPayload))
+    })
+  })
+  describe('updateJobFailureFlow', () => {
+    it('should correctly handle jobs update failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = updateJobFailure('FAILED')
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.updateJobFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the updateJobFailures action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('updateJobCredentialsFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ... a user object with an id in state
+      const userId = 'A USER ID'
+      const create = createMiddlewareStub(jest, { user: { id: userId } })
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const mockPayload = {
+        type: UserCredentialTypes.Job,
+        credentialItemId: 'CREDENTIAL_ITEM_ID',
+        requestVerification: false,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      }
+      // when ... we create the user's credentials
+      const action = updateJobCredentials(mockPayload)
+      // @ts-ignore
+      const { store, invoke, next } = create(SUT.updateJobCredentialsFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: updateJobCredentialsSuccess,
+            onFailure: updateJobCredentialsFailure,
+          }),
+          action.payload,
+        ),
+      )
+    })
+  })
+  describe('updateJobCredentialsSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockNotification = jest.fn()
+
+      const action = updateJobCredentialsSuccess('SUCCESS')
+      // @ts-ignore
+      const { invoke, next } = create(SUT.updateJobCredentialsSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the updateJobCredentialsSuccess action
+      invoke(action)
+      // then ...validate updateJobCredentialsSuccessFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly handle job credential create success', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockNotification = jest.fn()
+      const action = updateJobCredentialsSuccess('SUCCESS')
+      // @ts-ignore
+      const { invoke } = create(SUT.updateJobCredentialsSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the updateJobCredentialsSuccess action
+      invoke(action)
+      // then ...validate updateJobCredentialsSuccessFlow
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('updateJobCredentialsFailureFlow', () => {
+    it('should correctly handle job credentials update failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = updateJobCredentialsFailure('FAILED')
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.updateJobCredentialsFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the updateJobCredentialsFailures action
       invoke(action)
 
       // then ...validate failure

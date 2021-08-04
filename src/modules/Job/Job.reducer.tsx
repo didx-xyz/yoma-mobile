@@ -21,6 +21,14 @@ export const createJobCredentials = createAction<UserCredentialPayload>(`${name}
 export const createJobCredentialsSuccess = createAction<string>(`${name} createJobCredentialsSuccess`)
 export const createJobCredentialsFailure = createAction<string>(`${name} createJobCredentialsFailure`)
 
+export const updateJob = createAction<JobRequestPayload>(`${name} updateJob`)
+export const updateJobSuccess = createAction<JobResponsePayload>(`${name} updateJobSuccess`)
+export const updateJobFailure = createAction<string>(`${name} updateJobFailure`)
+
+export const updateJobCredentials = createAction<UserCredentialPayload>(`${name} updateJobCredentials`)
+export const updateJobCredentialsSuccess = createAction<string>(`${name} updateJobCredentialsSuccess`)
+export const updateJobCredentialsFailure = createAction<string>(`${name} updateJobCredentialsFailure`)
+
 export const clearJobs = createAction(`${name} clearJobs`)
 
 const JobsReducer = createReducer(INITIAL_STATE, builder => {

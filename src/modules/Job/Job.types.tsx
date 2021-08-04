@@ -23,6 +23,7 @@ export interface JobOrganisationPayload extends JobPayload {
 }
 
 export interface JobCredentialsTmpFormValues {
+  credentialId?: string
   startTime: string
   endTime: string
 }

@@ -17,6 +17,12 @@ import {
   createJobFailure,
   createJobSuccess,
   setTmpFormValues,
+  updateJob,
+  updateJobCredentials,
+  updateJobCredentialsFailure,
+  updateJobCredentialsSuccess,
+  updateJobFailure,
+  updateJobSuccess,
 } from './Job.reducer'
 import { selectJobTmpFormValues } from './Job.selector'
 import { JobCredentialsTmpFormValues } from './Job.types'
@@ -124,6 +130,114 @@ export const createJobCredentialsFailureFlow =
     const result = next(action)
 
     if (createJobCredentialsFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+    }
+    return result
+  }
+
+export const updateJobFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateJob.match(action)) {
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiJobConstants.JOBS_EDIT_CONFIG, {
+            onSuccess: updateJobSuccess,
+            onFailure: updateJobFailure,
+          }),
+          action.payload,
+        ),
+      )
+
+      const tmpFormValues = extractJobsCredentialTmpFormValues(action)
+      dispatch(setTmpFormValues(tmpFormValues))
+    }
+    return result
+  }
+
+export const updateJobSuccessFlow: Middleware =
+  ({ getState, dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (updateJobSuccess.match(action)) {
+      const state = getState()
+      const jobResponsePayload = extractJobsFromPayload(action)
+      const tmpFormValues = selectJobTmpFormValues(state) as JobCredentialsTmpFormValues
+
+      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
+      dispatch(updateJobCredentials(jobCredentialRequestPayload))
+    }
+    return result
+  }
+
+export const updateJobFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateJobFailure.match(action)) {
+      const errorMessage = extractErrorMessageFromPayload(action)
+      // TODO: this should be handled by the notification module
+      notification('danger', 'Error', errorMessage)
+    }
+    return result
+  }
+
+export const updateJobCredentialsFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (updateJobCredentials.match(action)) {
+      const state = getState()
+      const userId = selectId(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: updateJobCredentialsSuccess,
+            onFailure: updateJobCredentialsFailure,
+          }),
+          action.payload,
+        ),
+      )
+    }
+    return result
+  }
+
+export const updateJobCredentialsSuccessFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateJobCredentialsSuccess.match(action)) {
+      //TODO: add navigation as a dependency
+      Navigation.navigate(HomeNavigationRoutes.Experience)
+      // TODO: this should be handled by the notification module
+      notification('success', 'Details saved!')
+    }
+
+    return result
+  }
+
+export const updateJobCredentialsFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateJobCredentialsFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
     }
