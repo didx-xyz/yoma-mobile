@@ -5,6 +5,7 @@ import { CAPTURE_IMAGE_OPTIONS } from 'modules/User/User.constants'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
+import { extractPayloadData, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
@@ -213,8 +214,10 @@ export const fetchUserCredentialsSuccessFlow: Middleware =
     const result = next(action)
 
     if (fetchUserCredentialsSuccess.match(action)) {
-      const jobs = extractUserCredentialsByType(UserCredentialTypes.Job)(action)
-      dispatch(setJobEntities(jobs))
+      const userCredentialPayload = extractPayloadData(action)
+      const jobs = extractUserCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
+
+      dispatch(setJobEntities(normalise(jobs)))
     }
     return result
   }

@@ -1,5 +1,4 @@
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
-import { Skills } from 'modules/Skills/Skills.types'
 import { UserCredentialMeta } from 'modules/User/User.types'
 
 export interface JobPayload {
@@ -10,7 +9,7 @@ export interface JobPayload {
   createdByAdmin: boolean
   language: string
   published: boolean
-  skills: Skills
+  skills: string[]
 }
 
 export interface JobOrganisationPayload extends JobPayload {
@@ -34,11 +33,12 @@ export interface JobResponsePayload {
 }
 
 export interface JobRequestPayload {
+  id?: string
   title: string
   description: string
   language: string
   published: boolean
-  skillNames: Skills
+  skillNames: string[]
   organisationId: string
   startTime: string | null
   endTime: string | null

@@ -24,6 +24,10 @@ export const createJobCredentialsFailure = createAction<string>(`${name} createJ
 export const clearJobs = createAction(`${name} clearJobs`)
 
 const JobsReducer = createReducer(INITIAL_STATE, builder => {
+  builder.addCase(setJobEntities, (state, action) => ({
+    ...state,
+    jobEntities: mergeRight(state.jobEntities)(action.payload),
+  }))
   builder.addCase(setTmpFormValues, (state, action) => ({
     ...state,
     tmpFormValues: mergeRight(state.tmpFormValues)(action.payload),

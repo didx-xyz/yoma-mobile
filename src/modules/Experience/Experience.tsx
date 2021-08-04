@@ -3,18 +3,21 @@ import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import { JobRequestPayload } from 'modules/Job/Job.types'
+import { JobCredentials, JobRequestPayload } from 'modules/Job/Job.types'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import styles from './Experience.styles'
 import { ExperienceFormState, ExperienceType } from './Experience.types'
+import { extractExperienceFormValues } from './Experience.utils'
 import ExperienceForm from './ExperienceForm/ExperienceForm'
+import { INITIAL_VALUES } from './ExperienceForm/ExperienceForm.constants'
 import { DropDownList } from './ExperienceForm/ExperienceForm.types'
 
 interface Props {
   onJobSave: (job: JobRequestPayload) => void
+  onJobUpdate: (job: JobRequestPayload) => void
   filterSkillsByName: (query: string) => void
   jobs: []
   organisations: DropDownList[]
@@ -22,49 +25,58 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
-const renderItem = ({ job, startDate, endDate }: ExperienceType) => (
-  <InfoCard
-    title={job.title}
-    description={job.description}
-    startDate={startDate}
-    endDate={endDate}
-    logo={job.organisationLogoURL}
-  />
-)
-
 const Experience = ({ navigation, onJobSave, filterSkillsByName, jobs, organisations, skills }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  const [job, setJob] = useState([])
-  const [formState, setFormState] = useState<ExperienceFormState | null>(null)
+  const [jobsList, setJobsList] = useState([])
+  const [formState, setFormState] = useState<ExperienceFormState>({ isValid: true, values: INITIAL_VALUES })
 
   useEffect(() => {
-    setJob(job)
-  }, [job])
+    setJobsList(Object.values(jobs))
+  }, [jobs])
 
-  const handleExperienceForm = () => {
-    if (formState?.isValid) {
-      onJobSave(formState.values as JobRequestPayload)
-    }
+  const editJob = (item: JobCredentials) => {
+    const values = extractExperienceFormValues(item)
+    setFormState({ ...formState, values })
+    setIsSaved(true)
   }
+  const handleExperienceFormSave = () => {
+    onJobSave(formState.values as JobRequestPayload)
+  }
+
+  const renderItem = (item: JobCredentials) => {
+    const { job, startDate, endDate }: ExperienceType = item
+    return (
+      <InfoCard
+        title={job.title}
+        description={job.description}
+        startDate={startDate}
+        endDate={endDate}
+        logo={job.organisationLogoURL}
+        onEdit={() => editJob(item)}
+      />
+    )
+  }
+
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
         headerText={t('Experience')}
-        onSave={handleExperienceForm}
+        onSave={handleExperienceFormSave}
         onAdd={() => setIsSaved(true)}
+        showAddButton={!isSaved}
         isSaveButtonEnabled={formState?.isValid}
       />
       <Optional
         condition={isSaved}
         fallback={
           <Optional
-            condition={job.length > 0}
+            condition={jobsList.length > 0}
             fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
           >
             <FlatList
-              data={jobs}
+              data={jobsList}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }: any) => renderItem(item)}
               keyExtractor={(item: any, index: number) => index.toString()}
@@ -75,6 +87,7 @@ const Experience = ({ navigation, onJobSave, filterSkillsByName, jobs, organisat
         <ScrollView>
           <Card>
             <ExperienceForm
+              formValues={formState?.values}
               filterSkillsByName={filterSkillsByName}
               setFormState={setFormState}
               skills={skills}

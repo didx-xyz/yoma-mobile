@@ -1,6 +1,7 @@
 import { rootStateFixture } from 'redux/redux.test.fixtures'
+import { normalise } from 'utils/redux.utils'
 
-import SUT, { clearJobs, INITIAL_STATE, setTmpFormValues } from './Job.reducer'
+import SUT, { clearJobs, INITIAL_STATE, setJobEntities, setTmpFormValues } from './Job.reducer'
 import { jobCredentialsStateData } from './Job.test.fixtures'
 
 describe('modules/Jobs/Jobs.reducer', () => {
@@ -20,6 +21,30 @@ describe('modules/Jobs/Jobs.reducer', () => {
       expect(result.tmpFormValues).toEqual({
         startTime: 'START_TIME',
         endTime: 'END_TIME',
+      })
+    })
+  })
+  describe('setJobEntities', () => {
+    it('should set normalised job entities from job credentials payload', () => {
+      // given ....
+      const normalisedPayload = normalise({
+        id: 'id1',
+        other: 'DATA',
+      })
+
+      const mockState = rootStateFixture()
+      // when ... we set the setJobEntities
+      const action = setJobEntities(normalisedPayload)
+      const result = SUT(mockState, action)
+      // then ... validate setJobEntities
+      expect(result.jobEntities).toEqual({
+        entities: {
+          id1: {
+            id: 'id1',
+            other: 'DATA',
+          },
+        },
+        ids: ['id1'],
       })
     })
   })

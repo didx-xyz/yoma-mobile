@@ -1,7 +1,7 @@
 import { CheckBox, DatePicker, DropDown, FormWrapper, InfoModal, Input } from 'components'
 import DropDownTags from 'components/DropDownTags'
 import Text, { MetaLevels } from 'components/Typography'
-import { Formik } from 'formik'
+import { Formik, FormikValues } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
@@ -9,7 +9,6 @@ import { Colors } from 'styles'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
 import { ExperienceFormState } from '../Experience.types'
-import { INITIAL_VALUES } from './ExperienceForm.constants'
 import styles from './ExperienceForm.styles'
 import { DropDownList } from './ExperienceForm.types'
 import { ValidationSchema } from './ValidationSchema'
@@ -18,10 +17,11 @@ interface Props {
   filterSkillsByName: (searchQuery: string) => void
   skills: DropDownList[]
   organisations: DropDownList[]
+  formValues: FormikValues
   setFormState: ({ values: FormikValues, isValid: boolean }: ExperienceFormState) => void
 }
 
-const ExperienceForm = ({ filterSkillsByName, setFormState, skills, organisations }: Props) => {
+const ExperienceForm = ({ formValues, filterSkillsByName, setFormState, skills, organisations }: Props) => {
   const { t } = useTranslation()
   const [organisationsList, setOrganisationsList] = useState<DropDownList[]>([])
   const [skillsList, setSkillEntitiesList] = useState<DropDownList[]>([])
@@ -38,7 +38,7 @@ const ExperienceForm = ({ filterSkillsByName, setFormState, skills, organisation
 
   return (
     <Formik
-      initialValues={INITIAL_VALUES}
+      initialValues={formValues}
       enableReinitialize
       validateOnMount
       validationSchema={ValidationSchema}

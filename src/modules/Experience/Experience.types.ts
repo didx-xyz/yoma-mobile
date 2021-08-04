@@ -1,20 +1,13 @@
 import { FormikValues } from 'formik'
+import { JobOrganisationPayload } from 'modules/Job/Job.types'
 
 export type ExperienceType = {
   endDate: string
   id: string
-  job: Job
+  job: JobOrganisationPayload
   startDate: string
 }
 
-type Job = {
-  description: string
-  id: string
-  organisationId: string
-  organisationLogoURL: string
-  organisationName: string
-  title: string
-}
 export type ExperienceFormState = {
   values: FormikValues
   isValid: boolean

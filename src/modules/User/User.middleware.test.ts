@@ -3,6 +3,7 @@ import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 import { setJobEntities } from 'modules/Job/Job.reducer'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
+import { extractPayloadData, normalise } from 'utils/redux.utils'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
@@ -408,12 +409,21 @@ describe('modules/User/User.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const mockResponseData = [
-        {
-          job: 'JOB DATA 1',
-          id: 'CREDENTIAL_ID',
+      const mockResponseData = {
+        data: {
+          data: [
+            {
+              job: 'JOB DATA 1',
+              id: 'CREDENTIAL_ID',
+            },
+          ],
         },
-      ]
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
 
       const action = fetchUserCredentialsSuccess(mockResponseData)
       // @ts-ignore
@@ -427,12 +437,14 @@ describe('modules/User/User.middleware', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const mockResponseData = {
-        data: [
-          {
-            job: 'JOB DATA 1',
-            id: 'CREDENTIAL_ID',
-          },
-        ],
+        data: {
+          data: [
+            {
+              job: 'JOB DATA 1',
+              id: 'CREDENTIAL_ID',
+            },
+          ],
+        },
         meta: {
           success: true,
           code: 200,
@@ -446,8 +458,10 @@ describe('modules/User/User.middleware', () => {
       // when ... we respond to the fetchUserCredentialsSuccess action
       invoke(action)
       // then ...validate fetchUserCredentialsSuccessFlow
-      const jobs = extractUserCredentialsByType(UserCredentialTypes.Job)(action)
-      expect(store.dispatch).toHaveBeenCalledWith(setJobEntities(jobs))
+      const userCredentialPayload = extractPayloadData(action)
+      const jobs = extractUserCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
+
+      expect(store.dispatch).toHaveBeenCalledWith(setJobEntities(normalise(jobs)))
     })
   })
   describe('fetchUserCredentialsFailureFlow', () => {
