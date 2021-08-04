@@ -1,4 +1,4 @@
-import { always, applySpec, path, prop } from 'ramda'
+import { applySpec, path, prop } from 'ramda'
 
 export const extractExperienceFormValues = applySpec({
   id: path(['job', 'id']),
@@ -6,7 +6,7 @@ export const extractExperienceFormValues = applySpec({
   description: path(['job', 'description']),
   language: path(['job', 'language']),
   published: path(['job', 'published']),
-  skillNames: always([]),
+  skillNames: path(['job', 'skills']),
   organisationId: path(['job', 'organisationId']),
   startTime: prop('startDate'),
   endTime: prop('startDate'),
