@@ -24,7 +24,7 @@ import {
 import { selectJobTmpFormValues } from './Job.selector'
 import { defaultJobsResponseData } from './Job.test.fixtures'
 import { JobCredentialsTmpFormValues } from './Job.types'
-import { extractJobsFromPayload, prepareJobCredentialPayload } from './Job.utils'
+import { extractJobCredentialRequestPayload, extractJobsFromPayload } from './Job.utils'
 
 describe('modules/Jobs/Jobs.middleware', () => {
   describe('createJobFlow', () => {
@@ -131,7 +131,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
 
       const jobResponsePayload = extractJobsFromPayload(action)
       const tmpFormValues = selectJobTmpFormValues(mockState) as JobCredentialsTmpFormValues
-      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
+      const jobCredentialRequestPayload = extractJobCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
 
       expect(store.dispatch).toHaveBeenCalledWith(createJobCredentials(jobCredentialRequestPayload))
     })
@@ -333,7 +333,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
 
       const jobResponsePayload = extractJobsFromPayload(action)
       const tmpFormValues = selectJobTmpFormValues(mockState) as JobCredentialsTmpFormValues
-      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
+      const jobCredentialRequestPayload = extractJobCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
 
       expect(store.dispatch).toHaveBeenCalledWith(updateJobCredentials(jobCredentialRequestPayload))
     })

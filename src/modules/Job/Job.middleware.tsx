@@ -26,7 +26,11 @@ import {
 } from './Job.reducer'
 import { selectJobTmpFormValues } from './Job.selector'
 import { JobCredentialsTmpFormValues } from './Job.types'
-import { extractJobsCredentialTmpFormValues, extractJobsFromPayload, prepareJobCredentialPayload } from './Job.utils'
+import {
+  extractJobCredentialRequestPayload,
+  extractJobsCredentialTmpFormValues,
+  extractJobsFromPayload,
+} from './Job.utils'
 
 export const createJobFlow: Middleware =
   ({ dispatch }) =>
@@ -61,7 +65,7 @@ export const createJobSuccessFlow: Middleware =
       const jobResponsePayload = extractJobsFromPayload(action)
       const tmpFormValues = selectJobTmpFormValues(state) as JobCredentialsTmpFormValues
 
-      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
+      const jobCredentialRequestPayload = extractJobCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
       dispatch(createJobCredentials(jobCredentialRequestPayload))
     }
     return result
@@ -169,7 +173,7 @@ export const updateJobSuccessFlow: Middleware =
       const jobResponsePayload = extractJobsFromPayload(action)
       const tmpFormValues = selectJobTmpFormValues(state) as JobCredentialsTmpFormValues
 
-      const jobCredentialRequestPayload = prepareJobCredentialPayload(tmpFormValues)(jobResponsePayload)
+      const jobCredentialRequestPayload = extractJobCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
       dispatch(updateJobCredentials(jobCredentialRequestPayload))
     }
     return result

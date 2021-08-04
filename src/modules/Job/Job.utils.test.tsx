@@ -50,7 +50,7 @@ describe('modules/Jobs/Jobs.utils', () => {
       })
     })
   })
-  describe('prepareJobCredentialPayload', () => {
+  describe('extractJobCredentialRequestPayload', () => {
     it('should return the jobs credentials payload', () => {
       // given ...
       const mockTmpFormValues = {
@@ -68,7 +68,7 @@ describe('modules/Jobs/Jobs.utils', () => {
         skills: ['SKILLS'],
       }
       // when ... we want to extract the data for job credential payload
-      const result = SUT.prepareJobCredentialPayload(mockTmpFormValues)(mockResponseData)
+      const result = SUT.extractJobCredentialRequestPayload(mockTmpFormValues)(mockResponseData)
       // then ... the data should be extracted correctly
       expect(result).toEqual({
         type: 'Job',

@@ -6,7 +6,7 @@ import { JobCredentialsTmpFormValues, JobPayload } from './Job.types'
 //TODO: move to src/utils as normalizePayload
 export const extractJobsFromPayload = path(['payload', 'data', 'data'])
 export const extractJobsCredentialTmpFormValues = pipe(path(['payload']), pick(['startTime', 'endTime']))
-export const prepareJobCredentialPayload =
+export const extractJobCredentialRequestPayload =
   (tmpFormValues: JobCredentialsTmpFormValues) => (jobPayload: JobPayload) => ({
     type: UserCredentialTypes.Job,
     credentialItemId: jobPayload.id,
