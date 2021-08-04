@@ -9,7 +9,7 @@ import selector from './Experience.selector'
 const mapStateToProps = selector
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    onJobSave: (job: JobTypes.JobRequestPayload) => {
+    onJobCreate: (job: JobTypes.JobRequestPayload) => {
       dispatch(JobActions.createJob(job))
     },
     filterSkillsByName: (query: string) => {

@@ -16,8 +16,7 @@ import { INITIAL_VALUES } from './ExperienceForm/ExperienceForm.constants'
 import { DropDownList } from './ExperienceForm/ExperienceForm.types'
 
 interface Props {
-  onJobSave: (job: JobRequestPayload) => void
-  onJobUpdate: (job: JobRequestPayload) => void
+  onJobCreate: (job: JobRequestPayload) => void
   filterSkillsByName: (query: string) => void
   jobs: []
   organisations: DropDownList[]
@@ -25,7 +24,7 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
-const Experience = ({ navigation, onJobSave, filterSkillsByName, jobs, organisations, skills }: Props) => {
+const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organisations, skills }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [jobsList, setJobsList] = useState([])
@@ -41,7 +40,7 @@ const Experience = ({ navigation, onJobSave, filterSkillsByName, jobs, organisat
     setIsSaved(true)
   }
   const handleExperienceFormSave = () => {
-    onJobSave(formState.values as JobRequestPayload)
+    onJobCreate(formState.values as JobRequestPayload)
   }
 
   const renderItem = (item: JobCredentials) => {
