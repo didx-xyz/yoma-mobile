@@ -24,3 +24,6 @@ export const USER_RESPONSE: UserResponse = {
 
 export const userStateFixture = createFixture(USER_RESPONSE)
 export const userInitialStateFixture = createFixture(INITIAL_STATE)
+
+export const CREDENTIALS_RESPONSE = []
+export const credentialsResponseFixture = createFixture(CREDENTIALS_RESPONSE)
