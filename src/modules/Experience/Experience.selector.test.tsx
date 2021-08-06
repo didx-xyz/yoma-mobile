@@ -9,10 +9,9 @@ describe('modules/Experience/Experience.selector', () => {
       // when ... we call the selector
       const result = SUT.default(state)
       // then ... should return result as expected
-      const { jobs, skills } = result
+      const { jobs } = result
       expect(result).toEqual({
         jobs,
-        skills,
       })
     })
   })

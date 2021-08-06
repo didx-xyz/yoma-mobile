@@ -1,6 +1,5 @@
 import { Dispatch } from '@reduxjs/toolkit'
 import { actions as JobActions, types as JobTypes } from 'modules/Job'
-import { actions as SkillsActions } from 'modules/Skills'
 import { connect } from 'react-redux'
 
 import Experience from './Experience'
@@ -14,9 +13,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     },
     onJobUpdate: (job: JobTypes.JobUpdatePayload) => {
       dispatch(JobActions.updateJob(job))
-    },
-    filterSkillsByName: (query: string) => {
-      dispatch(SkillsActions.filterSkillsByName(query))
     },
   }
 }
