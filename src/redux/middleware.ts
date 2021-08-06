@@ -9,7 +9,6 @@ import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import { middleware as JobMiddleware } from '../modules/Job'
-import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
@@ -51,9 +50,6 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
-  OrganisationsMiddleware.fetchOrganisationsFlow,
-  OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
-  OrganisationsMiddleware.fetchOrganisationsFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFlow,
   SkillsMiddleware.filterSkillsByNameFlow,
   SkillsMiddleware.fetchSkillsSuccessFlow,
