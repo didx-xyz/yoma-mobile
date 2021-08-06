@@ -1,6 +1,5 @@
 import { extractPayloadData } from 'api/api.utils'
 import { UserCredentialTypes } from 'api/users/users.types'
-import { fetchUserCredentialById } from 'modules/User/User.reducer'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
@@ -301,7 +300,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
       const userId = 'A USER ID'
       const create = createMiddlewareStub(jest, { user: { id: userId } })
 
-      // when ... we fetchUserCredentialById
+      // when ... we fetchJobCredentialById
       const action = fetchJobCredentialById('CREDENTIAL_ID')
       // @ts-ignore
       const { store, invoke, next } = create(SUT.fetchJobCredentialByIdFlow)
