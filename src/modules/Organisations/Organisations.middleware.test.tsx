@@ -30,7 +30,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       // then ...validate fetchOrganisationsFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly handle updating the organisations state', () => {
+    it('should correctly handle fetching the organisations via the API', () => {
       // given ...
       const mockState = rootStateFixture({})
 
@@ -91,7 +91,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       const action = fetchOrganisationsSuccess(mockResponseData)
       // @ts-ignore
       const { store, invoke } = create(SUT.fetchOrganisationsSuccessFlow)
-      // when ... we respond to the updateOrganisationsSuccess action
+      // when ... we respond to the fetchOrganisationsSuccess action
       invoke(action)
       // then ...validate setOrganisations
       const organisation = extractOrganisationsFromPayload(action)
