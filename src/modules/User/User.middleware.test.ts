@@ -26,11 +26,7 @@ import {
   uploadUserPhotoSuccess,
 } from './User.reducer'
 import { USER_RESPONSE } from './User.test.fixtures'
-import {
-  extractUserCredentialsByType,
-  extractUserFromLoginPayload,
-  extractUserFromUserUpdateSuccess,
-} from './User.utils'
+import { extractCredentialsByType, extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
@@ -460,7 +456,7 @@ describe('modules/User/User.middleware', () => {
       invoke(action)
       // then ...validate fetchUserCredentialsSuccessFlow
       const userCredentialPayload = extractPayloadData(action)
-      const jobs = extractUserCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
+      const jobs = extractCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
 
       expect(store.dispatch).toHaveBeenCalledWith(setJobEntities(normalise(jobs)))
     })

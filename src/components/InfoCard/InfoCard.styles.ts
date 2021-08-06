@@ -24,7 +24,7 @@ const styles = {
     height: IMAGE_SIZE,
     width: IMAGE_SIZE,
     marginRight: 10,
-    borderRadius: 50,
+    borderRadius: IMAGE_SIZE / CIRCULAR_RADIUS_DIVISOR,
   } as ImageStyle,
   avatar: {
     height: IMAGE_SIZE,

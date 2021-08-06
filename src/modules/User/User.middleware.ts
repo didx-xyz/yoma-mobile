@@ -29,7 +29,7 @@ import {
 import { selectId } from './User.selector'
 import { UploadUserPhotoFlowDependencies } from './User.types'
 import {
-  extractUserCredentialsByType,
+  extractCredentialsByType,
   extractUserFromLoginPayload,
   extractUserFromUpdateUserPayload,
   extractUserFromUserUpdateSuccess,
@@ -215,7 +215,7 @@ export const fetchUserCredentialsSuccessFlow: Middleware =
 
     if (fetchUserCredentialsSuccess.match(action)) {
       const userCredentialPayload = extractPayloadData(action)
-      const jobs = extractUserCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
+      const jobs = extractCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
       dispatch(setJobEntities(normalise(jobs)))
     }
     return result
