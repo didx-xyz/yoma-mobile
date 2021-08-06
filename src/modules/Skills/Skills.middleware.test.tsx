@@ -42,7 +42,7 @@ describe('modules/Skills/Skills.middleware', () => {
       const action = fetchSkills()
       // @ts-ignore
       const { invoke, store } = create(SUT.fetchSkillsFlow)
-      // when ... we respond to the updateSkills action
+      // when ... we respond to the fetchSkills action
       invoke(action)
 
       // then ...validate fetchSkillsFlow
@@ -85,7 +85,7 @@ describe('modules/Skills/Skills.middleware', () => {
       const action = filterSkillsByName('QUERY')
       // @ts-ignore
       const { invoke, store } = create(SUT.filterSkillsByNameFlow)
-      // when ... we respond to the updateSkills action
+      // when ... we respond to the filterSkillsByName action
       invoke(action)
 
       // then ...validate filterSkillsByNameFlow
