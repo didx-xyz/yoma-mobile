@@ -10,7 +10,7 @@ import rootReducer from './reducers'
 
 const persistConfig = {
   key: 'root',
-  version: 1.1,
+  version: 1,
   storage: AsyncStorage,
 }
 
