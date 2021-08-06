@@ -8,6 +8,7 @@ import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../ap
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
+import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
@@ -48,6 +49,9 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
+  OrganisationsMiddleware.fetchOrganisationsFlow,
+  OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
+  OrganisationsMiddleware.fetchOrganisationsFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
   UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
