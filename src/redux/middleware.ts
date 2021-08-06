@@ -83,6 +83,7 @@ const featureModuleMiddleware = [
   JobMiddleware.createJobCredentialsFlow,
   JobMiddleware.createJobCredentialsSuccessFlow({ notification: showSimpleMessage }),
   JobMiddleware.createJobCredentialsFailureFlow({ notification: showSimpleMessage }),
+  JobMiddleware.fetchJobCredentialByIdFlow,
   JobMiddleware.updateJobFlow,
   JobMiddleware.updateJobSuccessFlow,
   JobMiddleware.updateJobFailureFlow({ notification: showSimpleMessage }),

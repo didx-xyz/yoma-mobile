@@ -3,7 +3,7 @@ import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import { JobCredentials, JobRequestPayload } from 'modules/Job/Job.types'
+import { JobCredentials, JobRequestPayload, JobUpdatePayload } from 'modules/Job/Job.types'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
@@ -17,6 +17,7 @@ import { DropDownList } from './ExperienceForm/ExperienceForm.types'
 
 interface Props {
   onJobCreate: (job: JobRequestPayload) => void
+  onJobUpdate: (job: JobUpdatePayload) => void
   filterSkillsByName: (query: string) => void
   jobs: []
   organisations: DropDownList[]
@@ -24,9 +25,18 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
-const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organisations, skills }: Props) => {
+const Experience = ({
+  navigation,
+  onJobCreate,
+  onJobUpdate,
+  filterSkillsByName,
+  jobs,
+  organisations,
+  skills,
+}: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
+  const [isEditMode, setIsEditMode] = useState(false)
   const [jobsList, setJobsList] = useState([])
   const [formState, setFormState] = useState<ExperienceFormState>({ isValid: true, values: INITIAL_VALUES })
 
@@ -34,13 +44,22 @@ const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organis
     setJobsList(Object.values(jobs))
   }, [jobs])
 
+  const addJob = () => {
+    setIsSaved(true)
+    setIsEditMode(false)
+  }
   const editJob = (item: JobCredentials) => {
     const values = extractExperienceFormValues(item)
     setFormState({ ...formState, values })
     setIsSaved(true)
+    setIsEditMode(true)
   }
   const handleExperienceFormSave = () => {
-    onJobCreate(formState.values as JobRequestPayload)
+    if (isEditMode) {
+      onJobUpdate(formState.values as JobUpdatePayload)
+    } else {
+      onJobCreate(formState.values as JobRequestPayload)
+    }
   }
 
   const renderItem = (item: JobCredentials) => {
@@ -63,7 +82,7 @@ const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organis
         navigation={navigation}
         headerText={t('Experience')}
         onSave={handleExperienceFormSave}
-        onAdd={() => setIsSaved(true)}
+        onAdd={addJob}
         showAddButton={!isSaved}
         isSaveButtonEnabled={formState?.isValid}
       />

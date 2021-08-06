@@ -1,9 +1,11 @@
+import { extractPayloadData } from 'api/api.utils'
 import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { selectId } from 'modules/User/User.selector'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
+import { normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiJobConstants } from '../../api/jobs'
@@ -16,6 +18,8 @@ import {
   createJobCredentialsSuccess,
   createJobFailure,
   createJobSuccess,
+  fetchJobCredentialById,
+  setJobEntities,
   setTmpFormValues,
   updateJob,
   updateJobCredentials,
@@ -24,12 +28,14 @@ import {
   updateJobFailure,
   updateJobSuccess,
 } from './Job.reducer'
-import { selectJobTmpFormValues } from './Job.selector'
+import { selectJobCredentialIdFromTmpFormValues, selectJobTmpFormValues } from './Job.selector'
 import { JobCredentialsTmpFormValues } from './Job.types'
 import {
+  extractJobCredentialId,
   extractJobCredentialRequestPayload,
+  extractJobCredentialUpdatePayload,
+  extractJobId,
   extractJobsCredentialTmpFormValues,
-  extractJobsFromPayload,
 } from './Job.utils'
 
 export const createJobFlow: Middleware =
@@ -62,7 +68,7 @@ export const createJobSuccessFlow: Middleware =
     const result = next(action)
     if (createJobSuccess.match(action)) {
       const state = getState()
-      const jobResponsePayload = extractJobsFromPayload(action)
+      const jobResponsePayload = extractPayloadData(action)
       const tmpFormValues = selectJobTmpFormValues(state) as JobCredentialsTmpFormValues
 
       const jobCredentialRequestPayload = extractJobCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
@@ -111,12 +117,14 @@ export const createJobCredentialsFlow: Middleware =
 
 export const createJobCredentialsSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
+  ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
     if (createJobCredentialsSuccess.match(action)) {
+      const jobs = extractPayloadData(action)
+      dispatch(setJobEntities(normalise(jobs)))
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Experience)
       // TODO: this should be handled by the notification module
@@ -147,11 +155,13 @@ export const updateJobFlow: Middleware =
     const result = next(action)
 
     if (updateJob.match(action)) {
+      const jobId = extractJobId(action)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiJobConstants.JOBS_EDIT_CONFIG, {
             onSuccess: updateJobSuccess,
             onFailure: updateJobFailure,
+            endpoint: jobId,
           }),
           action.payload,
         ),
@@ -170,11 +180,8 @@ export const updateJobSuccessFlow: Middleware =
     const result = next(action)
     if (updateJobSuccess.match(action)) {
       const state = getState()
-      const jobResponsePayload = extractJobsFromPayload(action)
       const tmpFormValues = selectJobTmpFormValues(state) as JobCredentialsTmpFormValues
-
-      const jobCredentialRequestPayload = extractJobCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
-      dispatch(updateJobCredentials(jobCredentialRequestPayload))
+      dispatch(updateJobCredentials(tmpFormValues))
     }
     return result
   }
@@ -194,6 +201,33 @@ export const updateJobFailureFlow =
     return result
   }
 
+export const fetchJobCredentialByIdFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchJobCredentialById.match(action)) {
+      const state = getState()
+      const userId = selectId(state)
+
+      const credentialId = action.payload
+      const configWithUserId = ApiUtils.prependIdToEndpointInConfig(
+        ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG,
+      )(userId)
+      const config = ApiUtils.appendIdToEndpointInConfig(configWithUserId)(credentialId)
+
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: updateJobCredentialsSuccess,
+            onFailure: updateJobCredentialsFailure,
+          }),
+        ),
+      )
+    }
+    return result
+  }
+
 export const updateJobCredentialsFlow: Middleware =
   ({ dispatch, getState }) =>
   next =>
@@ -202,7 +236,12 @@ export const updateJobCredentialsFlow: Middleware =
     if (updateJobCredentials.match(action)) {
       const state = getState()
       const userId = selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const jobCredentialId = extractJobCredentialId(action)
+      const jobCredentialUpdatePayload = extractJobCredentialUpdatePayload(action)
+      const configWithUserId = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_EDIT_CONFIG)(
+        userId,
+      )
+      const config = ApiUtils.appendIdToEndpointInConfig(configWithUserId)(jobCredentialId)
 
       dispatch(
         ApiActions.apiRequest(
@@ -210,7 +249,7 @@ export const updateJobCredentialsFlow: Middleware =
             onSuccess: updateJobCredentialsSuccess,
             onFailure: updateJobCredentialsFailure,
           }),
-          action.payload,
+          jobCredentialUpdatePayload,
         ),
       )
     }
@@ -219,12 +258,15 @@ export const updateJobCredentialsFlow: Middleware =
 
 export const updateJobCredentialsSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
+  ({ getState, dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
     if (updateJobCredentialsSuccess.match(action)) {
+      const state = getState()
+      const jobCredentialId = selectJobCredentialIdFromTmpFormValues(state)
+      dispatch(fetchJobCredentialById(jobCredentialId))
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Experience)
       // TODO: this should be handled by the notification module

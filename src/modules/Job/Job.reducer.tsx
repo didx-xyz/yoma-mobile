@@ -1,5 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { UserCredentialPayload } from 'modules/User/User.types'
+import { UserCredentialPayload, UserCredentialRequestPayload } from 'modules/User/User.types'
 import { mergeRight } from 'ramda'
 
 import { JobCredentialsTmpFormValues, JobRequestPayload, JobResponsePayload, JobState } from './Job.types'
@@ -17,7 +17,7 @@ export const createJob = createAction<JobRequestPayload>(`${name} createJob`)
 export const createJobSuccess = createAction<JobResponsePayload>(`${name} createJobSuccess`)
 export const createJobFailure = createAction<string>(`${name} createJobFailure`)
 
-export const createJobCredentials = createAction<UserCredentialPayload>(`${name} createJobCredentials`)
+export const createJobCredentials = createAction<UserCredentialRequestPayload>(`${name} createJobCredentials`)
 export const createJobCredentialsSuccess = createAction<string>(`${name} createJobCredentialsSuccess`)
 export const createJobCredentialsFailure = createAction<string>(`${name} createJobCredentialsFailure`)
 
@@ -25,6 +25,7 @@ export const updateJob = createAction<JobRequestPayload>(`${name} updateJob`)
 export const updateJobSuccess = createAction<JobResponsePayload>(`${name} updateJobSuccess`)
 export const updateJobFailure = createAction<string>(`${name} updateJobFailure`)
 
+export const fetchJobCredentialById = createAction<any>(`${name} fetchJobCredentialById`)
 export const updateJobCredentials = createAction<UserCredentialPayload>(`${name} updateJobCredentials`)
 export const updateJobCredentialsSuccess = createAction<string>(`${name} updateJobCredentialsSuccess`)
 export const updateJobCredentialsFailure = createAction<string>(`${name} updateJobCredentialsFailure`)

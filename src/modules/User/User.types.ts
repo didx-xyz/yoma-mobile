@@ -49,11 +49,13 @@ export interface UserResponse {
 }
 
 export interface UserCredentialPayload {
-  type: string
-  credentialItemId: string
   startTime: string
   endTime: string
   requestVerification?: boolean
+}
+export interface UserCredentialRequestPayload extends UserCredentialPayload {
+  type: string
+  credentialItemId: string
 }
 
 export interface UserCredentialMeta {

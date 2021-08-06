@@ -1,4 +1,6 @@
+import { extractPayloadData } from 'api/api.utils'
 import { UserCredentialTypes } from 'api/users/users.types'
+import { fetchUserCredentialById } from 'modules/User/User.reducer'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
@@ -14,6 +16,7 @@ import {
   createJobCredentialsSuccess,
   createJobFailure,
   createJobSuccess,
+  fetchJobCredentialById,
   updateJob,
   updateJobCredentials,
   updateJobCredentialsFailure,
@@ -21,10 +24,14 @@ import {
   updateJobFailure,
   updateJobSuccess,
 } from './Job.reducer'
-import { selectJobTmpFormValues } from './Job.selector'
+import { selectJobCredentialIdFromTmpFormValues, selectJobTmpFormValues } from './Job.selector'
 import { defaultJobsResponseData } from './Job.test.fixtures'
 import { JobCredentialsTmpFormValues } from './Job.types'
-import { extractJobCredentialRequestPayload, extractJobsFromPayload } from './Job.utils'
+import {
+  extractJobCredentialId,
+  extractJobCredentialRequestPayload,
+  extractJobCredentialUpdatePayload,
+} from './Job.utils'
 
 describe('modules/Jobs/Jobs.middleware', () => {
   describe('createJobFlow', () => {
@@ -129,7 +136,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
       invoke(action)
       // then ...validate createJobSuccessFlow is called
 
-      const jobResponsePayload = extractJobsFromPayload(action)
+      const jobResponsePayload = extractPayloadData(action)
       const tmpFormValues = selectJobTmpFormValues(mockState) as JobCredentialsTmpFormValues
       const jobCredentialRequestPayload = extractJobCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
 
@@ -257,8 +264,8 @@ describe('modules/Jobs/Jobs.middleware', () => {
     })
     it('should correctly handle updating a job', () => {
       // given ...
-      const mockState = rootStateFixture({})
       const mockPayload = {
+        id: 'ID',
         title: 'TITLE',
         description: 'DESCRIPTION',
         organisationId: 'ORGANISATION_ID',
@@ -268,7 +275,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
         language: 'EN',
         published: false,
       }
-      const create = createMiddlewareStub(jest, mockState)
+      const create = createMiddlewareStub(jest)
       const action = updateJob(mockPayload)
       // @ts-ignore
       const { invoke, store } = create(SUT.updateJobFlow)
@@ -281,8 +288,41 @@ describe('modules/Jobs/Jobs.middleware', () => {
           mergeRight(ApiJobsConstants.JOBS_EDIT_CONFIG, {
             onSuccess: updateJobSuccess,
             onFailure: updateJobFailure,
+            endpoint: 'ID',
           }),
           action.payload,
+        ),
+      )
+    })
+  })
+  describe('fetchJobCredentialByIdFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ... a user object with an id in state
+      const userId = 'A USER ID'
+      const create = createMiddlewareStub(jest, { user: { id: userId } })
+
+      // when ... we fetchUserCredentialById
+      const action = fetchJobCredentialById('CREDENTIAL_ID')
+      // @ts-ignore
+      const { store, invoke, next } = create(SUT.fetchJobCredentialByIdFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      expect(next).toHaveBeenCalledWith(action)
+
+      // ... we should ensure the action fetchJobCredentialById
+      const credentialId = action.payload
+      const configWithUserId = ApiUtils.prependIdToEndpointInConfig(
+        ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG,
+      )(userId)
+      const config = ApiUtils.appendIdToEndpointInConfig(configWithUserId)(credentialId)
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: updateJobCredentialsSuccess,
+            onFailure: updateJobCredentialsFailure,
+          }),
         ),
       )
     })
@@ -330,12 +370,8 @@ describe('modules/Jobs/Jobs.middleware', () => {
       // when ... we respond to the updateJobSuccessFlow action
       invoke(action)
       // then ...validate updateJobSuccessFlow is called
-
-      const jobResponsePayload = extractJobsFromPayload(action)
       const tmpFormValues = selectJobTmpFormValues(mockState) as JobCredentialsTmpFormValues
-      const jobCredentialRequestPayload = extractJobCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
-
-      expect(store.dispatch).toHaveBeenCalledWith(updateJobCredentials(jobCredentialRequestPayload))
+      expect(store.dispatch).toHaveBeenCalledWith(updateJobCredentials(tmpFormValues))
     })
   })
   describe('updateJobFailureFlow', () => {
@@ -359,15 +395,13 @@ describe('modules/Jobs/Jobs.middleware', () => {
       // given ... a user object with an id in state
       const userId = 'A USER ID'
       const create = createMiddlewareStub(jest, { user: { id: userId } })
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
       const mockPayload = {
-        type: UserCredentialTypes.Job,
-        credentialItemId: 'CREDENTIAL_ITEM_ID',
-        requestVerification: false,
+        id: 'ID',
+        credentialId: 'CREDENTIAL_ID',
         startTime: 'START_TIME',
         endTime: 'END_TIME',
       }
-      // when ... we create the user's credentials
+      // when ... we updateJobCredentials
       const action = updateJobCredentials(mockPayload)
       // @ts-ignore
       const { store, invoke, next } = create(SUT.updateJobCredentialsFlow)
@@ -376,6 +410,13 @@ describe('modules/Jobs/Jobs.middleware', () => {
       // then ...
       // ... we should ensure the action continues onto next
 
+      const jobCredentialId = extractJobCredentialId(action)
+      const jobCredentialUpdatePayload = extractJobCredentialUpdatePayload(action)
+      const configWithUserId = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_EDIT_CONFIG)(
+        userId,
+      )
+      const config = ApiUtils.appendIdToEndpointInConfig(configWithUserId)(jobCredentialId)
+
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
@@ -383,7 +424,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
             onSuccess: updateJobCredentialsSuccess,
             onFailure: updateJobCredentialsFailure,
           }),
-          action.payload,
+          jobCredentialUpdatePayload,
         ),
       )
     })
@@ -391,7 +432,10 @@ describe('modules/Jobs/Jobs.middleware', () => {
   describe('updateJobCredentialsSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const mockState = rootStateFixture({
+        job: { tmpFormValues: { credentialId: 'CREDENTIAL_ID' } },
+      })
+      const create = createMiddlewareStub(jest, mockState)
       const mockNotification = jest.fn()
 
       const action = updateJobCredentialsSuccess('SUCCESS')
@@ -402,9 +446,33 @@ describe('modules/Jobs/Jobs.middleware', () => {
       // then ...validate updateJobCredentialsSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
     })
+
+    it('should correctly fetch job credentials after being called', () => {
+      // given ...
+      const mockState = rootStateFixture({
+        job: {
+          tmpFormValues: {
+            credentialId: 'CREDENTIAL_ID',
+          },
+        },
+      })
+      const create = createMiddlewareStub(jest, mockState)
+      const mockNotification = jest.fn()
+      const action = updateJobCredentialsSuccess('SUCCESS')
+      // @ts-ignore
+      const { invoke, store } = create(SUT.updateJobCredentialsSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the updateJobCredentialsSuccess action
+      invoke(action)
+      // then ...validate updateJobCredentialsSuccessFlow
+      const jobCredentialId = selectJobCredentialIdFromTmpFormValues(mockState)
+      expect(store.dispatch).toHaveBeenCalledWith(fetchJobCredentialById(jobCredentialId))
+    })
     it('should correctly handle job credential create success', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const mockState = rootStateFixture({
+        job: { tmpFormValues: { credentialId: 'CREDENTIAL_ID' } },
+      })
+      const create = createMiddlewareStub(jest, mockState)
       const mockNotification = jest.fn()
       const action = updateJobCredentialsSuccess('SUCCESS')
       // @ts-ignore

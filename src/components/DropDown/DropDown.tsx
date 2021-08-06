@@ -20,7 +20,9 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
   const { handleChange, handleBlur, values, errors, touched, setFieldValue } = handlers
 
   useEffect(() => {
-    setDropdownValue(values[name])
+    if (values[name]) {
+      setDropdownValue(values[name])
+    }
   }, [name, values])
 
   return (

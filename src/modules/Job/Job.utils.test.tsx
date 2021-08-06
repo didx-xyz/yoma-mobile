@@ -1,32 +1,28 @@
 import * as SUT from './Job.utils'
 
 describe('modules/Jobs/Jobs.utils', () => {
-  describe('extractJobsFromPayload', () => {
-    it('should return the jobs from payload', () => {
+  describe('extractJobId', () => {
+    it('should return the jobs credentials id from payload', () => {
       // given ... an object in the shape of the successful response
       const mockPayload = {
-        skillNames: ['SKILL'],
-        title: 'TITLE',
-        description: 'DESCRIPTION',
-        organisationId: 'ORGANISATION_ID',
-        language: 'EN',
-        startTime: '2021-07-04T10:45:00Z',
-        endTime: '2021-07-18T10:45:00Z',
-        published: false,
-      }
-      const mockedAction = {
-        type: 'ACTION',
         payload: {
-          data: {
-            data: mockPayload,
-          },
+          id: 'ID',
+          title: 'TITLE',
+          description: 'DESCRIPTION',
+          organisationId: 'ORGANISATION_ID',
+          skillNames: ['SKILL'],
+          startTime: 'START_TIME',
+          endTime: 'END_TIME',
+          language: 'EN',
+          published: false,
         },
       }
 
-      // when ... we want to extract the data from the rest of the payload
-      const result = SUT.extractJobsFromPayload(mockedAction)
+      // when ... we want to extract the id from the rest of the payload
+      const result = SUT.extractJobId(mockPayload)
+
       // then ... the data should be extracted correctly
-      expect(result).toEqual(mockPayload)
+      expect(result).toEqual('ID')
     })
   })
   describe('extractJobsCredentialTmpFormValues', () => {
@@ -42,6 +38,51 @@ describe('modules/Jobs/Jobs.utils', () => {
 
       // when ... we want to extract the data from the rest of the payload
       const result = SUT.extractJobsCredentialTmpFormValues(mockPayload)
+
+      // then ... the data should be extracted correctly
+      expect(result).toEqual({
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      })
+    })
+  })
+  describe('extractJobCredentialId', () => {
+    it('should return the jobs credentials id from tmp form values', () => {
+      // given ... an object in the shape of the successful response
+      const mockPayload = {
+        payload: {
+          id: 'ID',
+          credentialId: 'CREDENTIAL_ID',
+          title: 'TITLE',
+          description: 'DESCRIPTION',
+          organisationId: 'ORGANISATION_ID',
+          skillNames: ['SKILL'],
+          startTime: 'START_TIME',
+          endTime: 'END_TIME',
+          language: 'EN',
+          published: false,
+        },
+      }
+
+      // when ... we want to extract the credentialId
+      const result = SUT.extractJobCredentialId(mockPayload)
+      // then ... the data should be extracted correctly
+      expect(result).toEqual('CREDENTIAL_ID')
+    })
+  })
+  describe('extractJobCredentialUpdatePayload', () => {
+    it('should return the jobs credentials form values from state', () => {
+      // given ... an object in the shape of the successful response
+      const mockTmpFormValues = {
+        payload: {
+          otherValue: 'OTHER_VALUE',
+          startTime: 'START_TIME',
+          endTime: 'END_TIME',
+        },
+      }
+
+      // when ... we want to extract the data from the rest of the payload
+      const result = SUT.extractJobCredentialUpdatePayload(mockTmpFormValues)
 
       // then ... the data should be extracted correctly
       expect(result).toEqual({

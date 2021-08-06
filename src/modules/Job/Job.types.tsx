@@ -23,6 +23,8 @@ export interface JobOrganisationPayload extends JobPayload {
 }
 
 export interface JobCredentialsTmpFormValues {
+  credentialId?: string
+  requestVerification?: boolean
   startTime: string
   endTime: string
 }
@@ -33,7 +35,6 @@ export interface JobResponsePayload {
 }
 
 export interface JobRequestPayload {
-  id?: string
   title: string
   description: string
   language: string
@@ -43,6 +44,12 @@ export interface JobRequestPayload {
   startTime: string | null
   endTime: string | null
 }
+
+export interface JobUpdatePayload extends JobRequestPayload {
+  id: string
+  credentialsId: string
+}
+
 export interface JobCredentials extends UserCredentialMeta {
   job: JobOrganisationPayload
 }

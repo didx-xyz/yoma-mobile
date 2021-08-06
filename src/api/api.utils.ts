@@ -1,5 +1,6 @@
 import {
   always,
+  append,
   complement,
   concat,
   equals,
@@ -13,6 +14,7 @@ import {
   mergeDeepRight,
   objOf,
   of,
+  path,
   pathOr,
   pipe,
   unless,
@@ -30,10 +32,15 @@ export const prependIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: st
   evolve({
     endpoint: pipe(of, concat([id])),
   })(config)
+export const appendIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: string) =>
+  evolve({
+    endpoint: append(id),
+  })(config)
 export const addParamsToConfig = addValueWithGivenKeyToConfig('params')
 export const createParam = objOf
 export const createTypeParam = createParam('type')
 
+export const extractPayloadData = path(['payload', 'data', 'data'])
 export const generateSanitisedEndpoint = pipe(flatten, filter(complement(isNil)), join('/'))
 export const addHeaders = (headers: StdObj<string>) => pipe(concat([headers]), mergeAll)
 export const setAuthTokenHeader = unless(isNil, pipe(concat('Bearer '), objOf('Authorization')))
