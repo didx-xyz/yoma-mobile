@@ -9,6 +9,7 @@ import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import ssoAuth from '../modules/SSOAuth'
+import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
 
@@ -61,6 +62,10 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
+  SkillsMiddleware.fetchSkillsFlow,
+  SkillsMiddleware.filterSkillsByNameFlow,
+  SkillsMiddleware.fetchSkillsSuccessFlow,
+  SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
