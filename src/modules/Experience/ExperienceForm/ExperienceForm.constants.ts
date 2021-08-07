@@ -1,12 +1,18 @@
-import { JobRequestPayload } from 'modules/Job/Job.types'
+import { ExperienceFields } from './ExperienceForm.types'
 
-export const INITIAL_VALUES: JobRequestPayload = {
+export const INITIAL_VALUES: ExperienceFields = {
   title: '',
   description: '',
-  language: 'en',
-  organisationId: '',
+  id: '',
+  startDate: null,
+  endDate: null,
+  country: '',
   skillNames: [],
-  startTime: null,
-  endTime: null,
-  published: false,
+  organisationId: '',
+  organisationName: '',
+  organisationWebsite: '',
+  primaryContactName: '',
+  primaryContactEmail: '',
+  noResultInd: false,
+  requestVerificationInd: false,
 }
