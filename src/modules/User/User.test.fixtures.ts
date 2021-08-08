@@ -1,6 +1,6 @@
 import { createFixture } from '../../../tests/tests.utils'
 import { INITIAL_STATE } from './User.reducer'
-import { UserResponse } from './User.types'
+import { UserCredentials, UserResponse } from './User.types'
 
 export const USER_RESPONSE: UserResponse = {
   id: 'xxxxxxxx-xxx-xxx-xxx-xxxxxxxxxxxx',
@@ -25,7 +25,7 @@ export const USER_RESPONSE: UserResponse = {
 export const userStateFixture = createFixture(USER_RESPONSE)
 export const userInitialStateFixture = createFixture(INITIAL_STATE)
 
-export const CREDENTIALS_RESPONSE_MOCK = {
+export const CREDENTIALS_RESPONSE_MOCK: UserCredentials = {
   data: [
     {
       challenge: {

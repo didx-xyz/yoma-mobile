@@ -1,7 +1,7 @@
 import { createMiddlewareStub } from '../../../../tests/tests.utils'
 import * as UserActions from '../User.reducer'
 import * as SUT from './Challenges.middleware'
-import { getChallengesSuccess, normalisedChallenges } from './Challenges.reducer'
+import { getChallengesSuccess, normaliseChallengesSuccess } from './Challenges.reducer'
 import { challengesFixture, normalisedChallengesFixture } from './Challenges.test.fixtures'
 
 describe('modules/User/Challenges/Challenges.middleware', () => {
@@ -57,7 +57,7 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const normalisedCredentialsMock = normalisedChallengesFixture({})
-      const action = normalisedChallenges(normalisedCredentialsMock)
+      const action = normaliseChallengesSuccess(normalisedCredentialsMock)
 
       // when ...
       const { invoke, store, next } = create(SUT.setChallengesFlow)

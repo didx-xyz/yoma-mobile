@@ -11,7 +11,7 @@ import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
-import * as UserCredentialsChallengesMiddleware from '../modules/User/Challenges/Challenges.middleware'
+import * as UserChallengesMiddleware from '../modules/User/Challenges/Challenges.middleware'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -50,6 +50,11 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
+  UserChallengesMiddleware.getChallengesFromFetchCredentialsFlow(
+    UserUtils.extractCredentialsByType(UserCredentialTypes.Challenge),
+  ),
+  UserChallengesMiddleware.normaliseChallengesFlow,
+  UserChallengesMiddleware.setChallengesFlow,
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
   UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
@@ -63,9 +68,6 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
-  UserCredentialsChallengesMiddleware.getChallengesFromFetchCredentialsFlow(
-    UserUtils.extractCredentialsByType(UserCredentialTypes.Challenge),
-  ),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
