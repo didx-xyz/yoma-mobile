@@ -2,7 +2,7 @@ import { createMiddlewareStub } from '../../../../tests/tests.utils'
 import * as UserActions from '../User.reducer'
 import * as SUT from './Challenges.middleware'
 import { getChallengesSuccess, normaliseChallengesSuccess } from './Challenges.reducer'
-import { challengesFixture, normalisedChallengesFixture } from './Challenges.test.fixtures'
+import { challengesFixture } from './Challenges.test.fixtures'
 
 describe('modules/User/Challenges/Challenges.middleware', () => {
   describe('getChallengesFromFetchCredentialsFlow', () => {
@@ -56,7 +56,9 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const normalisedCredentialsMock = normalisedChallengesFixture({})
+
+      const normalisedCredentialsMock = { ids: ['id1', 'id2'], entities: { id1: 'DATA_1', id2: 'DATA_2' } }
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       const action = normaliseChallengesSuccess(normalisedCredentialsMock)
 
       // when ...

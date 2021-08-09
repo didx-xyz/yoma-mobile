@@ -32,13 +32,3 @@ export const CHALLENGES_MOCK: UserChallenge[] = [
   },
 ]
 export const challengesFixture = createFixture(CHALLENGES_MOCK)
-
-export const NORMALISED_CHALLENGES_MOCK = {
-  ids: ['id1', 'id2', 'id3'],
-  entities: {
-    id1: { id: 'id1' },
-    id2: { id: 'id2' },
-    id3: { id: 'id3' },
-  },
-}
-export const normalisedChallengesFixture = createFixture(NORMALISED_CHALLENGES_MOCK)
