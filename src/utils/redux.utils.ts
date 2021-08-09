@@ -1,4 +1,5 @@
-import { applySpec, identity, keys, pipe, prop } from 'ramda'
+import { PayloadAction } from '@reduxjs/toolkit'
+import { applySpec, identity, keys, path, pipe, prop } from 'ramda'
 
 import { objFromListWith } from './ramda.utils'
 
@@ -9,3 +10,5 @@ export const normalise = pipe(
     ids: keys,
   }),
 )
+
+export const extractDataFromPayload = path(['payload', 'data', 'data'])
