@@ -6,13 +6,13 @@ import { Middleware } from 'redux'
 import * as ReduxUtils from 'utils/redux.utils'
 
 import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../api'
-import { UserCredentialTypes } from '../api/users/users.types'
+import { types as ApiUsersTypes } from '../api/users'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
-import * as UserChallengesMiddleware from '../modules/User/Challenges/Challenges.middleware'
+import { middleware as UserChallengesMiddleware } from '../modules/User/Challenges'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -52,7 +52,7 @@ const featureModuleMiddleware = [
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
   UserChallengesMiddleware.getChallengesFromCredentialsFlow(
-    UserUtils.extractCredentialsByType(UserCredentialTypes.Challenge),
+    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),
   ),
   UserChallengesMiddleware.normaliseChallengesFlow(ReduxUtils.normalise),
   UserChallengesMiddleware.setChallengesFlow,

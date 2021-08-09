@@ -25,6 +25,7 @@ export const USER_RESPONSE: UserResponse = {
 export const userStateFixture = createFixture(USER_RESPONSE)
 export const userInitialStateFixture = createFixture(INITIAL_STATE)
 
+// TODO: extend with other credentials as we get them
 export const CREDENTIALS_RESPONSE_MOCK: UserCredentials = {
   data: [
     {

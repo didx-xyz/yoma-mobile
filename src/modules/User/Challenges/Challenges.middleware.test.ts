@@ -29,6 +29,7 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
 
       // when ... we intercept the data and extract challenges
       const extractChallengesMock = jest.fn(() => challengeCredentialsMock)
+      // @ts-ignore - actual shape of data doesn't matter
       const { invoke, store } = create(SUT.getChallengesFromCredentialsFlow(extractChallengesMock))
       invoke(action)
 
@@ -52,6 +53,7 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       const action = getChallengesSuccess(challengeCredentialsMock)
 
       // when ...
+      // @ts-ignore - data shape doesn't matter for test
       const { invoke, store, next } = create(SUT.normaliseChallengesFlow(normaliseMock))
       invoke(action)
 
@@ -72,6 +74,7 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       const action = getChallengesSuccess(challengeCredentialsMock)
 
       // when ...
+      // @ts-ignore - data shape doesn't matter for test
       const { invoke, store } = create(SUT.normaliseChallengesFlow(normaliseMock))
       invoke(action)
 

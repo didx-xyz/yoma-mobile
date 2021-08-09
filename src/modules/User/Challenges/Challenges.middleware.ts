@@ -2,10 +2,12 @@ import { Middleware } from 'redux'
 
 import { StdFn } from '../../../types/general.types'
 import * as UserActions from '../User.reducer'
+import { UserCredentials } from '../User.types'
 import { getChallengesSuccess, normaliseChallengesSuccess, setChallenges } from './Challenges.reducer'
+import { NormalisedChallenges, UserChallenge } from './Challenges.types'
 
 export const getChallengesFromCredentialsFlow =
-  (extractChallenges: StdFn<any, any>): Middleware =>
+  (extractChallenges: StdFn<UserCredentials, UserChallenge[]>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
@@ -18,14 +20,14 @@ export const getChallengesFromCredentialsFlow =
   }
 
 export const normaliseChallengesFlow =
-  (normalise: StdFn<any, any>): Middleware =>
+  (normalise: StdFn<UserChallenge[], NormalisedChallenges>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
     if (getChallengesSuccess.match(action)) {
-      const challenges = normalise(action.payload)
-      dispatch(normaliseChallengesSuccess(challenges))
+      const normalisedChallenges = normalise(action.payload)
+      dispatch(normaliseChallengesSuccess(normalisedChallenges))
     }
     return result
   }

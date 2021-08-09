@@ -18,15 +18,15 @@ export interface Challenge {
 export type UserChallenge = {
   challenge: Challenge
   id: string
-  verifiedAt: string
+  verifiedAt: string | null
   approved: boolean
   approvalMessage: string | null
   startDate: string
-  endDate: string
+  endDate: string | null
   createdAt: string
-  fileId: null
-  fileURL: null
-  requestVerification: true
+  fileId: string | null
+  fileURL: string | null
+  requestVerification: boolean
 }
 
 export type NormalisedChallenges = {
