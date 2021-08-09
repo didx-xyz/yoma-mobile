@@ -1,6 +1,7 @@
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as AuthActions } from '../Auth'
 import { actions as UserActions } from '../User'
+import { actions as UserChallengesActions } from '../User/Challenges'
 import * as SUT from './App.middleware'
 import { hydrateApp, resetAppData } from './App.reducer'
 
@@ -27,6 +28,8 @@ describe('modules/App/App.middleware', () => {
       invoke(action)
       // ... we validate that our actions were triggered
       expect(store.dispatch).toHaveBeenCalledWith(AuthActions.clearAuth())
+      expect(store.dispatch).toHaveBeenCalledWith(UserActions.clearUser())
+      expect(store.dispatch).toHaveBeenCalledWith(UserChallengesActions.clearChallenges())
     })
   })
   describe('hydrateAppFlow', () => {
