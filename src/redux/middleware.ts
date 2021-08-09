@@ -8,7 +8,6 @@ import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../ap
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
-import { middleware as JobMiddleware } from '../modules/Job'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { showSimpleMessage } from '../utils/error'
@@ -68,19 +67,6 @@ const featureModuleMiddleware = [
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.fetchUserCredentialsSuccessFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
-  JobMiddleware.createJobFlow,
-  JobMiddleware.createJobSuccessFlow,
-  JobMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
-  JobMiddleware.createJobCredentialsFlow,
-  JobMiddleware.createJobCredentialsSuccessFlow({ notification: showSimpleMessage }),
-  JobMiddleware.createJobCredentialsFailureFlow({ notification: showSimpleMessage }),
-  JobMiddleware.fetchJobCredentialByIdFlow,
-  JobMiddleware.updateJobFlow,
-  JobMiddleware.updateJobSuccessFlow,
-  JobMiddleware.updateJobFailureFlow({ notification: showSimpleMessage }),
-  JobMiddleware.updateJobCredentialsFlow,
-  JobMiddleware.updateJobCredentialsSuccessFlow({ notification: showSimpleMessage }),
-  JobMiddleware.updateJobCredentialsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

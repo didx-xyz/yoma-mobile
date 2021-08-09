@@ -1,6 +1,5 @@
 import { Middleware } from 'redux'
 
-import * as JobsActions from '../Job/Job.reducer'
 // avoiding circular dependencies:
 import * as AuthActions from './../Auth/Auth.reducer'
 import * as UserActions from './../User/User.reducer'
@@ -15,7 +14,6 @@ export const appResetFlow: Middleware =
     if (resetAppData.match(action)) {
       dispatch(AuthActions.clearAuth())
       dispatch(UserActions.clearUser())
-      dispatch(JobsActions.clearJobs())
     }
 
     return result
