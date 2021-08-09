@@ -11,7 +11,7 @@ export const INITIAL_STATE = {
 export const getChallengesSuccess = createAction<UserChallenge[]>(`${name} getChallengesSuccess`)
 export const normaliseChallengesSuccess = createAction<NormalisedChallenges>(`${name} normaliseChallengesSuccess`)
 export const setChallenges = createAction<NormalisedChallenges>(`${name} setChallenges`)
-export const clearChallenges = createAction(`${name} setChallenges`)
+export const clearChallenges = createAction(`${name} clearChallenges`)
 
 const reducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setChallenges, (_state, action) => action.payload)
