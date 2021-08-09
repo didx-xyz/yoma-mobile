@@ -3,6 +3,7 @@ import FormData from 'form-data'
 import { concat } from 'ramda'
 import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
+import * as ReduxUtils from 'utils/redux.utils'
 
 import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../api'
 import { UserCredentialTypes } from '../api/users/users.types'
@@ -50,10 +51,10 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
-  UserChallengesMiddleware.getChallengesFromFetchCredentialsFlow(
+  UserChallengesMiddleware.getChallengesFromCredentialsFlow(
     UserUtils.extractCredentialsByType(UserCredentialTypes.Challenge),
   ),
-  UserChallengesMiddleware.normaliseChallengesFlow,
+  UserChallengesMiddleware.normaliseChallengesFlow(ReduxUtils.normalise),
   UserChallengesMiddleware.setChallengesFlow,
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
