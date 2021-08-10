@@ -1,3 +1,5 @@
+import { UserCredentialMeta } from '../User/User.types'
+
 export interface Challenge {
   organisationId: string
   organisationName: string
@@ -15,18 +17,8 @@ export interface Challenge {
   published: boolean
 }
 
-export type UserChallenge = {
+export interface UserChallenge extends UserCredentialMeta {
   challenge: Challenge
-  id: string
-  verifiedAt: string | null
-  approved: boolean
-  approvalMessage: string | null
-  startDate: string
-  endDate: string | null
-  createdAt: string
-  fileId: string | null
-  fileURL: string | null
-  requestVerification: boolean
 }
 
 export type NormalisedUserChallenges = {
