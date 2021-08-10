@@ -16,7 +16,7 @@ const Challenge = ({ name, startDate, avatarUrl, isValidated }: Props) => {
       <View style={{ position: 'relative', width: 36, marginRight: 14 }}>
         <Optional condition={isValidated}>
           <Text.Body level={BodyLevels.small} style={{ position: 'absolute', top: 0, right: 0 }}>
-            Tick
+            Tick {avatarUrl}
           </Text.Body>
         </Optional>
         <Text.Header level={HeaderLevels.h3}>👾</Text.Header>
