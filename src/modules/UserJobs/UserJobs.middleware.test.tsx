@@ -284,7 +284,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       // then ...validate updateUserJobsFlow
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(ApiUserJobsConstants.USER_JOBS_EDIT_CONFIG, {
+          mergeRight(ApiUserJobsConstants.JOBS_EDIT_CONFIG, {
             onSuccess: updateUserJobsSuccess,
             onFailure: updateUserJobsFailure,
             endpoint: 'ID',

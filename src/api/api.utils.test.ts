@@ -56,6 +56,25 @@ describe('api/api.utils', () => {
       })
     })
   })
+  describe('appendIdToEndpointInConfig', () => {
+    it('should insert the given id in end of the config endpoint array', () => {
+      // given ... a config with an endpoint key
+      const config = {
+        aKey: 'aValue',
+        anotherKey: 'anotherValue',
+        endpoint: [5, 'SomeValue'],
+      }
+      // when ... we provide the id
+      //@ts-ignore
+      const result = SUT.appendIdToEndpointInConfig(config)(10)
+      // then ... should insert the given id in end of the endpoint array
+      expect(result).toEqual({
+        aKey: 'aValue',
+        anotherKey: 'anotherValue',
+        endpoint: [5, 'SomeValue', 10],
+      })
+    })
+  })
   describe('addParamsToConfig', () => {
     it('should add a params key with object to the config when we provide the object of params, given a config object', () => {
       // given ... a config object
@@ -80,6 +99,27 @@ describe('api/api.utils', () => {
       const result = SUT.createParam('someKey')('someValue')
       // then ... we should get an object of the key : value
       expect(result).toEqual({ someKey: 'someValue' })
+    })
+  })
+
+  describe('extractPayloadData', () => {
+    it('should return data from successful payload', () => {
+      // given ... the auth success response
+      const credentials = {
+        payload: {
+          data: {
+            data: {
+              someKey: 'RESPONSE',
+            },
+          },
+        },
+      }
+      // when extractUserFromLoginPayload
+      const result = SUT.extractPayloadData(credentials)
+      //then expect user response data
+      expect(result).toEqual({
+        someKey: 'RESPONSE',
+      })
     })
   })
   describe('createTypeParam', () => {

@@ -1,8 +1,11 @@
+import { extractPayloadData } from 'api/api.utils'
+import { UserCredentialTypes } from 'api/users/users.types'
 import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 import { setUserJobsEntities } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
+import { normalise } from 'utils/redux.utils'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
@@ -23,7 +26,7 @@ import {
   uploadUserPhotoSuccess,
 } from './User.reducer'
 import { USER_RESPONSE } from './User.test.fixtures'
-import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
+import { extractCredentialsByType, extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
@@ -398,35 +401,6 @@ describe('modules/User/User.middleware', () => {
 
       // then ...validate failure
       expect(mockNotification).toHaveBeenCalled()
-    })
-  })
-  describe('fetchUserCredentialsFlow', () => {
-    it('should correctly handle being called', () => {
-      // given ... a user object with an id in state
-      const userId = 'A USER ID'
-      const create = createMiddlewareStub(jest, { user: { id: userId } })
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
-
-      // when ... we request to get all the user's credentials
-      const action = fetchUserCredentials()
-      // @ts-ignore
-      const { store, invoke, next } = create(SUT.fetchUserCredentialsFlow)
-      invoke(action)
-
-      // then ...
-      // ... we should ensure the action continues onto next
-      expect(next).toHaveBeenCalledWith(action)
-
-      // ... we should fetch the users credentials
-      expect(store.dispatch).toHaveBeenCalledWith(
-        ApiActions.apiRequest(
-          mergeRight(config, {
-            onSuccess: fetchUserCredentialsSuccess,
-            onFailure: fetchUserCredentialsFailure,
-          }),
-          action.payload,
-        ),
-      )
     })
   })
   describe('fetchUserCredentialsSuccessFlow', () => {

@@ -19,6 +19,10 @@ export const USERS_CREDENTIALS_GET_BY_ID_CONFIG: Partial<ApiMeta> = mergeRight(U
 export const USERS_CREDENTIALS_GET_BY_TYPE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   endpoint: UsersEndpoints.Credentials,
 })
+export const USERS_CREDENTIALS_EDIT_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
+  method: ApiMethods.Patch,
+  endpoint: UsersEndpoints.Credentials,
+})
 export const USERS_CREDENTIALS_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   method: ApiMethods.Post,
   endpoint: UsersEndpoints.Credentials,
@@ -27,6 +31,7 @@ export const USERS_PASSWORD_EDIT_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CON
   method: ApiMethods.Patch,
   endpoint: UsersEndpoints.Password,
 })
+
 export const USERS_PHOTO_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   method: ApiMethods.Post,
   endpoint: UsersEndpoints.Photo,

@@ -49,7 +49,6 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
-  UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
   UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserFlow,
