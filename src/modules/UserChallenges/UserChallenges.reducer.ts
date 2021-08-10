@@ -1,6 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-import { NormalisedChallenges, UserChallenge, UserChallengesState } from './UserChallenges.types'
+import { NormalisedUserChallenges, UserChallenge, UserChallengesState } from './UserChallenges.types'
 
 const name = '[User: Challenges]'
 export const INITIAL_STATE = {
@@ -9,10 +9,10 @@ export const INITIAL_STATE = {
 } as UserChallengesState
 
 export const getUserChallengesSuccess = createAction<UserChallenge[]>(`${name} getUserChallengesSuccess`)
-export const normaliseUserChallengesSuccess = createAction<NormalisedChallenges>(
+export const normaliseUserChallengesSuccess = createAction<NormalisedUserChallenges>(
   `${name} normaliseUserChallengesSuccess`,
 )
-export const setUserChallenges = createAction<NormalisedChallenges>(`${name} setUserChallenges`)
+export const setUserChallenges = createAction<NormalisedUserChallenges>(`${name} setUserChallenges`)
 export const clearUserChallenges = createAction(`${name} clearUserChallenges`)
 
 const reducer = createReducer(INITIAL_STATE, builder => {

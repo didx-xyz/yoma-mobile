@@ -4,7 +4,7 @@ import { StdFn } from '../../types/general.types'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
 import { getUserChallengesSuccess, normaliseUserChallengesSuccess, setUserChallenges } from './UserChallenges.reducer'
-import { NormalisedChallenges, UserChallenge } from './UserChallenges.types'
+import { NormalisedUserChallenges, UserChallenge } from './UserChallenges.types'
 
 export const getUserChallengesFromCredentialsFlow =
   (
@@ -24,7 +24,7 @@ export const getUserChallengesFromCredentialsFlow =
   }
 
 export const normaliseUserChallengesFlow =
-  (normalise: StdFn<UserChallenge[], NormalisedChallenges>): Middleware =>
+  (normalise: StdFn<UserChallenge[], NormalisedUserChallenges>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

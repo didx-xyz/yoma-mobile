@@ -29,9 +29,9 @@ export type UserChallenge = {
   requestVerification: boolean
 }
 
-export type NormalisedChallenges = {
+export type NormalisedUserChallenges = {
   ids: string[]
   entities: Record<string, UserChallenge>
 }
 
-export type UserChallengesState = NormalisedChallenges
+export type UserChallengesState = NormalisedUserChallenges
