@@ -1,5 +1,6 @@
 import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
+import { setUserJobsEntities } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
@@ -393,6 +394,110 @@ describe('modules/User/User.middleware', () => {
       const { invoke } = create(SUT.updateUserPhotoFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the updateUserPhotoFailureFlow action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('fetchUserCredentialsFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ... a user object with an id in state
+      const userId = 'A USER ID'
+      const create = createMiddlewareStub(jest, { user: { id: userId } })
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
+
+      // when ... we request to get all the user's credentials
+      const action = fetchUserCredentials()
+      // @ts-ignore
+      const { store, invoke, next } = create(SUT.fetchUserCredentialsFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      expect(next).toHaveBeenCalledWith(action)
+
+      // ... we should fetch the users credentials
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: fetchUserCredentialsSuccess,
+            onFailure: fetchUserCredentialsFailure,
+          }),
+          action.payload,
+        ),
+      )
+    })
+  })
+  describe('fetchUserCredentialsSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockResponseData = {
+        data: {
+          data: [
+            {
+              job: 'JOB DATA 1',
+              id: 'CREDENTIAL_ID',
+            },
+          ],
+        },
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const action = fetchUserCredentialsSuccess(mockResponseData)
+      // @ts-ignore
+      const { invoke, next } = create(SUT.fetchUserCredentialsSuccessFlow)
+      // when ... we respond to the fetchUserCredentialsSuccess action
+      invoke(action)
+      // then ...validate fetchUserCredentialsSuccessFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly set user credentials on successful fetch', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockResponseData = {
+        data: {
+          data: [
+            {
+              job: 'JOB DATA 1',
+              id: 'CREDENTIAL_ID',
+            },
+          ],
+        },
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const action = fetchUserCredentialsSuccess(mockResponseData)
+      // @ts-ignore
+      const { store, invoke } = create(SUT.fetchUserCredentialsSuccessFlow)
+      // when ... we respond to the fetchUserCredentialsSuccess action
+      invoke(action)
+      // then ...validate fetchUserCredentialsSuccessFlow
+      const userCredentialPayload = extractPayloadData(action)
+      const jobs = extractCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
+
+      expect(store.dispatch).toHaveBeenCalledWith(setUserJobsEntities(normalise(jobs)))
+    })
+  })
+  describe('fetchUserCredentialsFailureFlow', () => {
+    it('should correctly handle user credentials fetch failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = fetchUserCredentialsFailure('FAILED')
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.fetchUserCredentialsFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the fetchUserCredentialsFailures action
       invoke(action)
 
       // then ...validate failure

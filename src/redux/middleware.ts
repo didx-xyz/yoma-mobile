@@ -10,6 +10,7 @@ import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
+import { middleware as UserJobsMiddleware } from '../modules/UserJobs'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -61,6 +62,22 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
+  UserMiddleware.fetchUserCredentialsFlow,
+  UserMiddleware.fetchUserCredentialsSuccessFlow,
+  UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.createUserJobsFlow,
+  UserJobsMiddleware.createUserJobsSuccessFlow,
+  UserJobsMiddleware.createUserJobsFailureFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.createUserJobsCredentialsFlow,
+  UserJobsMiddleware.createUserJobsCredentialsSuccessFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.createUserJobsCredentialsFailureFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.fetchUserJobsCredentialByIdFlow,
+  UserJobsMiddleware.updateUserJobsFlow,
+  UserJobsMiddleware.updateUserJobsSuccessFlow,
+  UserJobsMiddleware.updateUserJobsFailureFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.updateUserJobsCredentialsFlow,
+  UserJobsMiddleware.updateUserJobsCredentialsSuccessFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.updateUserJobsCredentialsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

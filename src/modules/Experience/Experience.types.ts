@@ -1,3 +1,6 @@
+import { FormikValues } from 'formik'
+import { JobOrganisationPayload } from 'modules/UserJobs/UserJobs.types'
+
 export type ExperienceType = {
   endDate: string
   id: string
