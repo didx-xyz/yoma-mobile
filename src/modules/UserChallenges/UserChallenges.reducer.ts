@@ -8,14 +8,16 @@ export const INITIAL_STATE = {
   entities: {},
 } as UserChallengesState
 
-export const getChallengesSuccess = createAction<UserChallenge[]>(`${name} getChallengesSuccess`)
-export const normaliseChallengesSuccess = createAction<NormalisedChallenges>(`${name} normaliseChallengesSuccess`)
-export const setChallenges = createAction<NormalisedChallenges>(`${name} setChallenges`)
-export const clearChallenges = createAction(`${name} clearChallenges`)
+export const getUserChallengesSuccess = createAction<UserChallenge[]>(`${name} getUserChallengesSuccess`)
+export const normaliseUserChallengesSuccess = createAction<NormalisedChallenges>(
+  `${name} normaliseUserChallengesSuccess`,
+)
+export const setUserChallenges = createAction<NormalisedChallenges>(`${name} setUserChallenges`)
+export const clearUserChallenges = createAction(`${name} clearUserChallenges`)
 
 const reducer = createReducer(INITIAL_STATE, builder => {
-  builder.addCase(setChallenges, (_state, action) => action.payload)
-  builder.addCase(clearChallenges, (_state, _action) => INITIAL_STATE)
+  builder.addCase(setUserChallenges, (_state, action) => action.payload)
+  builder.addCase(clearUserChallenges, (_state, _action) => INITIAL_STATE)
 })
 
 export default reducer

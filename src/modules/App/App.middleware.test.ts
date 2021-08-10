@@ -29,7 +29,7 @@ describe('modules/App/App.middleware', () => {
       // ... we validate that our actions were triggered
       expect(store.dispatch).toHaveBeenCalledWith(AuthActions.clearAuth())
       expect(store.dispatch).toHaveBeenCalledWith(UserActions.clearUser())
-      expect(store.dispatch).toHaveBeenCalledWith(UserChallengesActions.clearChallenges())
+      expect(store.dispatch).toHaveBeenCalledWith(UserChallengesActions.clearUserChallenges())
     })
   })
   describe('hydrateAppFlow', () => {

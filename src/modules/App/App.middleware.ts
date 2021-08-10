@@ -15,7 +15,7 @@ export const appResetFlow: Middleware =
     if (resetAppData.match(action)) {
       dispatch(AuthActions.clearAuth())
       dispatch(UserActions.clearUser())
-      dispatch(UserChallengesActions.clearChallenges())
+      dispatch(UserChallengesActions.clearUserChallenges())
     }
 
     return result

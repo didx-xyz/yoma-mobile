@@ -51,12 +51,12 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
-  UserChallengesMiddleware.getChallengesFromCredentialsFlow(
+  UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
     ReduxUtils.extractDataFromPayload,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),
   ),
-  UserChallengesMiddleware.normaliseChallengesFlow(ReduxUtils.normalise),
-  UserChallengesMiddleware.setChallengesFlow,
+  UserChallengesMiddleware.normaliseUserChallengesFlow(ReduxUtils.normalise),
+  UserChallengesMiddleware.setUserChallengesFlow,
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
   UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),

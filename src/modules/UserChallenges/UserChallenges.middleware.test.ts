@@ -1,10 +1,10 @@
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserChallenges.middleware'
-import { getChallengesSuccess, normaliseChallengesSuccess, setChallenges } from './UserChallenges.reducer'
+import { getUserChallengesSuccess, normaliseUserChallengesSuccess, setUserChallenges } from './UserChallenges.reducer'
 
-describe('modules/User/Challenges/Challenges.middleware', () => {
-  describe('getChallengesFromCredentialsFlow', () => {
+describe('modules/UserChallenges/UserChallenges.middleware', () => {
+  describe('getUserChallengesFromCredentialsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
@@ -15,7 +15,7 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
 
       // when ...
       const { invoke, next } = create(
-        SUT.getChallengesFromCredentialsFlow(extractDataFromPayloadMock, extractChallengesMock),
+        SUT.getUserChallengesFromCredentialsFlow(extractDataFromPayloadMock, extractChallengesMock),
       )
       invoke(action)
 
@@ -35,17 +35,17 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       const extractChallengesMock = jest.fn(() => challengeCredentialsMock)
       const { invoke, store } = create(
         // @ts-ignore - actual shape of data doesn't matter
-        SUT.getChallengesFromCredentialsFlow(extractDataFromPayloadMock, extractChallengesMock),
+        SUT.getUserChallengesFromCredentialsFlow(extractDataFromPayloadMock, extractChallengesMock),
       )
       invoke(action)
 
       // then ... we should pass on the extracted data
       expect(extractChallengesMock).toHaveBeenCalled()
       // @ts-ignore - actual shape of data doesn't matter
-      expect(store.dispatch).toHaveBeenCalledWith(getChallengesSuccess(challengeCredentialsMock))
+      expect(store.dispatch).toHaveBeenCalledWith(getUserChallengesSuccess(challengeCredentialsMock))
     })
   })
-  describe('normaliseChallengesFlow', () => {
+  describe('normaliseUserChallengesFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
@@ -56,11 +56,11 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       }
       const normaliseMock = jest.fn(() => normalisedChallengesMock)
       // @ts-ignore - data shape doesn't matter for test
-      const action = getChallengesSuccess(challengeCredentialsMock)
+      const action = getUserChallengesSuccess(challengeCredentialsMock)
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseChallengesFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseUserChallengesFlow(normaliseMock))
       invoke(action)
 
       // then ...
@@ -77,29 +77,29 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       }
       const normaliseMock = jest.fn(() => normalisedChallengesMock)
       // @ts-ignore - data shape doesn't matter for test
-      const action = getChallengesSuccess(challengeCredentialsMock)
+      const action = getUserChallengesSuccess(challengeCredentialsMock)
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseChallengesFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseUserChallengesFlow(normaliseMock))
       invoke(action)
 
       // then ...
       // @ts-ignore - data shape doesn't matter for test
-      expect(store.dispatch).toHaveBeenCalledWith(normaliseChallengesSuccess(normalisedChallengesMock))
+      expect(store.dispatch).toHaveBeenCalledWith(normaliseUserChallengesSuccess(normalisedChallengesMock))
     })
   })
-  describe('setChallengesFlow', () => {
+  describe('setUserChallengesFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
 
       const normalisedChallengesMock = 'NORMALISED CHALLENGES DATA'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = normaliseChallengesSuccess(normalisedChallengesMock)
+      const action = normaliseUserChallengesSuccess(normalisedChallengesMock)
 
       // when ...
-      const { invoke, store, next } = create(SUT.setChallengesFlow)
+      const { invoke, store, next } = create(SUT.setUserChallengesFlow)
       invoke(action)
 
       // then ...
@@ -111,15 +111,15 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       const create = createMiddlewareStub(jest)
 
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = normaliseChallengesSuccess('NORMALISED CHALLENGES DATA')
+      const action = normaliseUserChallengesSuccess('NORMALISED CHALLENGES DATA')
 
       // when ... we have challenges data to store in state
-      const { invoke, store } = create(SUT.setChallengesFlow)
+      const { invoke, store } = create(SUT.setUserChallengesFlow)
       invoke(action)
 
       // then ...we want to forward it with our reducer action
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      expect(store.dispatch).toHaveBeenCalledWith(setChallenges('NORMALISED CHALLENGES DATA'))
+      expect(store.dispatch).toHaveBeenCalledWith(setUserChallenges('NORMALISED CHALLENGES DATA'))
     })
   })
 })
