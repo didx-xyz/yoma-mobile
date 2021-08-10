@@ -57,16 +57,3 @@ export interface UserCredentialRequestPayload extends UserCredentialPayload {
   type: string
   credentialItemId: string
 }
-
-export interface UserCredentialMeta {
-  id: string
-  verifiedAt: string
-  approved: boolean
-  approvalMessage: string
-  startDate: string
-  endDate: string
-  createdAt: string
-  fileId: string
-  fileURL: string
-  requestVerification: boolean
-}
