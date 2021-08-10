@@ -21,9 +21,9 @@ export interface UserChallenge extends UserCredentialMeta {
   challenge: Challenge
 }
 
-export type NormalisedUserChallenges = {
+export interface NormalisedUserChallenges {
   ids: string[]
   entities: Record<string, UserChallenge>
 }
 
-export type UserChallengesState = NormalisedUserChallenges
+export interface UserChallengesState extends NormalisedUserChallenges {}
