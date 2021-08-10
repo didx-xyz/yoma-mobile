@@ -1,5 +1,4 @@
-import { FormikValues } from 'formik'
-import { JobOrganisationPayload } from 'modules/Job/Job.types'
+import { JobOrganisationPayload, JobRequestPayload } from 'modules/Job/Job.types'
 
 export type ExperienceType = {
   endDate: string
@@ -9,6 +8,6 @@ export type ExperienceType = {
 }
 
 export type ExperienceFormState = {
-  values: FormikValues
+  values: JobRequestPayload
   isValid: boolean
 }
