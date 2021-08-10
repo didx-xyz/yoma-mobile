@@ -1,8 +1,9 @@
 import { Middleware } from 'redux'
 
 // avoiding circular dependencies:
-import * as AuthActions from './../Auth/Auth.reducer'
-import * as UserActions from './../User/User.reducer'
+import * as AuthActions from '../Auth/Auth.reducer'
+import * as UserActions from '../User/User.reducer'
+import * as UserChallengesActions from '../UserChallenges/UserChallenges.reducer'
 import { hydrateApp, resetAppData } from './App.reducer'
 
 export const appResetFlow: Middleware =
@@ -14,6 +15,7 @@ export const appResetFlow: Middleware =
     if (resetAppData.match(action)) {
       dispatch(AuthActions.clearAuth())
       dispatch(UserActions.clearUser())
+      dispatch(UserChallengesActions.clearUserChallenges())
     }
 
     return result

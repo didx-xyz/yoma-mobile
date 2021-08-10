@@ -39,9 +39,9 @@ export const uploadUserPhotoFailure = createAction<string>(`${name} uploadUserPh
 export const updateUserPhotoSuccess = createAction(`${name} updateUserPhotoSuccess`)
 export const updateUserPhotoFailure = createAction<UpdateUserFailureResponse>(`${name} updateUserPhotoFailure`)
 
-const UserReducer = createReducer(INITIAL_STATE, builder => {
+const userReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUser, (state, action) => mergeDeepRight(state)(action.payload))
   builder.addCase(clearUser, (_state, _action) => INITIAL_STATE)
 })
 
-export default UserReducer
+export default userReducer
