@@ -1,7 +1,7 @@
-import { createMiddlewareStub } from '../../../../tests/tests.utils'
-import * as UserActions from '../User.reducer'
-import * as SUT from './Challenges.middleware'
-import { getChallengesSuccess, normaliseChallengesSuccess, setChallenges } from './Challenges.reducer'
+import { createMiddlewareStub } from '../../../tests/tests.utils'
+import * as UserActions from '../User/User.reducer'
+import * as SUT from './UserChallenges.middleware'
+import { getChallengesSuccess, normaliseChallengesSuccess, setChallenges } from './UserChallenges.reducer'
 
 describe('modules/User/Challenges/Challenges.middleware', () => {
   describe('getChallengesFromCredentialsFlow', () => {
@@ -9,11 +9,14 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const credentialsResponseMock = ['challenge1', 'job1', 'assignment1', 'challenge2']
+      const extractDataFromPayloadMock = jest.fn()
       const extractChallengesMock = jest.fn()
       const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
 
       // when ...
-      const { invoke, next } = create(SUT.getChallengesFromCredentialsFlow(extractChallengesMock))
+      const { invoke, next } = create(
+        SUT.getChallengesFromCredentialsFlow(extractDataFromPayloadMock, extractChallengesMock),
+      )
       invoke(action)
 
       // then ...
@@ -28,9 +31,12 @@ describe('modules/User/Challenges/Challenges.middleware', () => {
       const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
 
       // when ... we intercept the data and extract challenges
+      const extractDataFromPayloadMock = jest.fn()
       const extractChallengesMock = jest.fn(() => challengeCredentialsMock)
-      // @ts-ignore - actual shape of data doesn't matter
-      const { invoke, store } = create(SUT.getChallengesFromCredentialsFlow(extractChallengesMock))
+      const { invoke, store } = create(
+        // @ts-ignore - actual shape of data doesn't matter
+        SUT.getChallengesFromCredentialsFlow(extractDataFromPayloadMock, extractChallengesMock),
+      )
       invoke(action)
 
       // then ... we should pass on the extracted data

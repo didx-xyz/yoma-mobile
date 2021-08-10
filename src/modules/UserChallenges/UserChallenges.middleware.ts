@@ -1,14 +1,16 @@
 import { Middleware } from 'redux'
 
-import { StdFn } from '../../../types/general.types'
-import { extractDataFromPayload } from '../../../utils/redux.utils'
-import * as UserActions from '../User.reducer'
-import { UserCredentials } from '../User.types'
-import { getChallengesSuccess, normaliseChallengesSuccess, setChallenges } from './Challenges.reducer'
-import { NormalisedChallenges, UserChallenge } from './Challenges.types'
+import { StdFn } from '../../types/general.types'
+import * as UserActions from '../User/User.reducer'
+import { UserCredentials } from '../User/User.types'
+import { getChallengesSuccess, normaliseChallengesSuccess, setChallenges } from './UserChallenges.reducer'
+import { NormalisedChallenges, UserChallenge } from './UserChallenges.types'
 
 export const getChallengesFromCredentialsFlow =
-  (extractChallenges: StdFn<UserCredentials, UserChallenge[]>): Middleware =>
+  (
+    extractDataFromPayload: StdFn<any, UserCredentials>,
+    extractChallenges: StdFn<UserCredentials, UserChallenge[]>,
+  ): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

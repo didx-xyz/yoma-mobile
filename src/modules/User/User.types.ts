@@ -1,6 +1,6 @@
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
 
-import { UserChallenge } from './Challenges/Challenges.types'
+import { UserChallenge } from '../UserChallenges/UserChallenges.types'
 
 export interface UpdateUserResponse {
   data: UserResponse
@@ -50,5 +50,5 @@ export interface UserResponse {
   lastLogin: string
 }
 
-// TODO: Add Credentials as we type them as { data: (UserChallenge | UserExperience | ...)[] }
-export type UserCredentials = { data: UserChallenge[] }
+// TODO: Add Credentials as we type them as  (UserChallenge | UserExperience | ...)[]
+export type UserCredentials = UserChallenge[]

@@ -1,7 +1,7 @@
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as AuthActions } from '../Auth'
 import { actions as UserActions } from '../User'
-import { actions as UserChallengesActions } from '../User/Challenges'
+import { actions as UserChallengesActions } from '../UserChallenges'
 import * as SUT from './App.middleware'
 import { hydrateApp, resetAppData } from './App.reducer'
 

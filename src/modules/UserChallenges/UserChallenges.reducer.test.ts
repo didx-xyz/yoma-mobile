@@ -1,4 +1,4 @@
-import SUT, { setChallenges, INITIAL_STATE } from './Challenges.reducer'
+import SUT, { setChallenges, INITIAL_STATE } from './UserChallenges.reducer'
 
 describe('src/modules/User/Challenges/Challenges.redux', () => {
   describe('setChallenges', () => {

@@ -1,6 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-import { NormalisedChallenges, UserChallenge, UserChallengesState } from './Challenges.types'
+import { NormalisedChallenges, UserChallenge, UserChallengesState } from './UserChallenges.types'
 
 const name = '[User: Challenges]'
 export const INITIAL_STATE = {

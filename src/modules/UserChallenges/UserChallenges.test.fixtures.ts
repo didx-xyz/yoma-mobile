@@ -1,5 +1,5 @@
-import { createFixture } from '../../../../tests/tests.utils'
-import { UserChallenge } from './Challenges.types'
+import { createFixture } from '../../../tests/tests.utils'
+import { UserChallenge } from './UserChallenges.types'
 
 export const CHALLENGES_MOCK: UserChallenge[] = [
   {
