@@ -1,11 +1,10 @@
-import { extractPayloadData } from 'api/api.utils'
 import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { selectId } from 'modules/User/User.selector'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
-import { normalise } from 'utils/redux.utils'
+import { extractDataFromPayload, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUserJobsConstants } from '../../api/jobs'
@@ -68,7 +67,7 @@ export const createUserJobsSuccessFlow: Middleware =
     const result = next(action)
     if (createUserJobsSuccess.match(action)) {
       const state = getState()
-      const jobResponsePayload = extractPayloadData(action)
+      const jobResponsePayload = extractDataFromPayload(action)
       const tmpFormValues = selectUserJobsTmpFormValues(state) as UserJobsCredentialsTmpFormValues
 
       const jobCredentialRequestPayload = extractUserJobsCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
@@ -123,7 +122,7 @@ export const createUserJobsCredentialsSuccessFlow =
     const result = next(action)
 
     if (createUserJobsCredentialsSuccess.match(action)) {
-      const jobs = extractPayloadData(action)
+      const jobs = extractDataFromPayload(action)
       dispatch(setUserJobsEntities(normalise(jobs)))
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Experience)

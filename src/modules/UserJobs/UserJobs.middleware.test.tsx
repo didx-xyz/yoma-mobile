@@ -1,7 +1,7 @@
-import { extractPayloadData } from 'api/api.utils'
 import { UserCredentialTypes } from 'api/users/users.types'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
+import { extractDataFromPayload } from 'utils/redux.utils'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
@@ -135,7 +135,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       invoke(action)
       // then ...validate createUserJobsSuccessFlow is called
 
-      const jobResponsePayload = extractPayloadData(action)
+      const jobResponsePayload = extractDataFromPayload(action)
       const tmpFormValues = selectUserJobsTmpFormValues(mockState) as UserJobsCredentialsTmpFormValues
       const jobCredentialRequestPayload = extractUserJobsCredentialRequestPayload(tmpFormValues)(jobResponsePayload)
 

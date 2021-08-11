@@ -1,11 +1,10 @@
-import { extractPayloadData } from 'api/api.utils'
 import { UserCredentialTypes } from 'api/users/users.types'
 import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 import { setUserJobsEntities } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
-import { normalise } from 'utils/redux.utils'
+import { extractDataFromPayload, normalise } from 'utils/redux.utils'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
@@ -456,7 +455,7 @@ describe('modules/User/User.middleware', () => {
       // when ... we respond to the fetchUserCredentialsSuccess action
       invoke(action)
       // then ...validate fetchUserCredentialsSuccessFlow
-      const userCredentialPayload = extractPayloadData(action)
+      const userCredentialPayload = extractDataFromPayload(action)
       const jobs = extractCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
 
       expect(store.dispatch).toHaveBeenCalledWith(setUserJobsEntities(normalise(jobs)))
