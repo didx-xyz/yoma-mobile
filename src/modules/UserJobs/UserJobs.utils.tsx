@@ -1,7 +1,7 @@
 import { UserCredentialTypes } from 'api/users/users.types'
 import { applySpec, path, pick, pipe } from 'ramda'
 
-import { UserJobsCredentialsTmpFormValues, UserJobsPayload } from './UserJobs.types'
+import { UserJobsCredentialsTmpFormValues, UserJob } from './UserJobs.types'
 
 export const extractUserJobsId = path(['payload', 'id'])
 export const extractUserJobsCredentialTmpFormValues = pipe(
@@ -14,7 +14,7 @@ export const extractUserJobsCredentialUpdatePayload = applySpec({
   endTime: path(['payload', 'endTime']),
 })
 export const extractUserJobsCredentialRequestPayload =
-  (tmpFormValues: UserJobsCredentialsTmpFormValues) => (jobPayload: UserJobsPayload) => ({
+  (tmpFormValues: UserJobsCredentialsTmpFormValues) => (jobPayload: UserJob) => ({
     type: UserCredentialTypes.Job,
     credentialItemId: jobPayload.id,
     startTime: tmpFormValues.startTime,

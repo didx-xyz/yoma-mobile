@@ -1,7 +1,7 @@
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
 import { UserCredentialMeta } from 'modules/User/User.types'
 
-export interface UserJobsPayload {
+export interface UserJob {
   id: string
   title: string
   description: string
@@ -12,7 +12,7 @@ export interface UserJobsPayload {
   skills: string[]
 }
 
-export interface UserJobsOrganisationPayload extends UserJobsPayload {
+export interface UserJobsOrganisation extends UserJob {
   organisationId: string
   organisationName: string
   organisationLogoURL: string
@@ -30,7 +30,7 @@ export interface UserJobsCredentialsTmpFormValues {
 }
 
 export interface UserJobsResponsePayload {
-  data: { data: UserJobsPayload }
+  data: { data: UserJob }
   meta: ApiMetaResponse
 }
 
@@ -51,7 +51,7 @@ export interface UserJobsUpdatePayload extends UserJobsRequestPayload {
 }
 
 export interface UserJobsCredentials extends UserCredentialMeta {
-  job: UserJobsOrganisationPayload
+  job: UserJobsOrganisation
 }
 export interface UserJobsState {
   tmpFormValues?: any

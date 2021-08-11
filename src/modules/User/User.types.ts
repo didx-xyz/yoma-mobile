@@ -47,3 +47,16 @@ export interface UserResponse {
   createdAt: string
   lastLogin: string
 }
+
+export interface UserCredentialMeta {
+  id: string
+  verifiedAt: string
+  approved: boolean
+  approvalMessage: string
+  startDate: string
+  endDate: string
+  createdAt: string
+  fileId: string
+  fileURL: string
+  requestVerification: boolean
+}

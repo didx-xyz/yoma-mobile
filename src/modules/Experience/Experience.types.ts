@@ -1,8 +1,8 @@
-import { UserJobsOrganisationPayload } from 'modules/UserJobs/UserJobs.types'
+import { UserJobsOrganisation } from 'modules/UserJobs/UserJobs.types'
 
 export type ExperienceType = {
   endDate: string
   id: string
-  job: UserJobsOrganisationPayload
+  job: UserJobsOrganisation
   startDate: string
 }
