@@ -4,6 +4,6 @@ export type Skills = {
 }
 
 export type SkillsState = {
-  filteredSkills: Skills[]
+  filtered: Skills[]
   skillEntities: Skills[]
 }

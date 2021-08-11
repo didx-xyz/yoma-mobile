@@ -42,8 +42,8 @@ export const filterSkillsByNameFlow: Middleware =
     if (filterSkillsByName.match(action)) {
       const state = getState()
       const skillEntities = selectSkillEntities(state) as []
-      const filteredSkills = searchArrayOfObjByValue(action.payload, skillEntities)
-      dispatch(setFilteredSkills(filteredSkills))
+      const filtered = searchArrayOfObjByValue(action.payload, skillEntities)
+      dispatch(setFilteredSkills(filtered))
     }
     return result
   }

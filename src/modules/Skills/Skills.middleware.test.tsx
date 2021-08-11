@@ -21,9 +21,7 @@ describe('modules/Skills/Skills.middleware', () => {
   describe('fetchSkillsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const mockState = rootStateFixture({})
-
-      const create = createMiddlewareStub(jest, mockState)
+      const create = createMiddlewareStub(jest)
       const action = fetchSkills()
       // @ts-ignore
       const { invoke, next } = create(SUT.fetchSkillsFlow)
@@ -76,7 +74,7 @@ describe('modules/Skills/Skills.middleware', () => {
       // given ...
       const mockState = rootStateFixture({
         skills: {
-          filteredSkills: [],
+          filtered: [],
           skillEntities: [{ key: 'KEY', value: 'VALUE' }],
         },
       })
@@ -91,8 +89,8 @@ describe('modules/Skills/Skills.middleware', () => {
       // then ...validate filterSkillsByNameFlow
       const state = store.getState()
       const skillEntities = selectSkillEntities(state) as []
-      const filteredSkills = searchArrayOfObjByValue(action.payload, skillEntities)
-      expect(store.dispatch).toHaveBeenCalledWith(setFilteredSkills(filteredSkills))
+      const filtered = searchArrayOfObjByValue(action.payload, skillEntities)
+      expect(store.dispatch).toHaveBeenCalledWith(setFilteredSkills(filtered))
     })
   })
   describe('fetchSkillsSuccessFlow', () => {

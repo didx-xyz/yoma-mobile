@@ -34,7 +34,7 @@ describe('modules/Skills/Skills.reducer', () => {
       const action = setFilteredSkills(mockData)
       const result = SUT(mockState, action)
       // then ... should set the FilteredSkills correctly
-      expect(result.filteredSkills).toEqual(mockData)
+      expect(result.filtered).toEqual(mockData)
     })
   })
   describe('clearSkills', () => {

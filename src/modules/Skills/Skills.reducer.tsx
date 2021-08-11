@@ -4,7 +4,7 @@ import { Skills, SkillsState } from './Skills.types'
 
 const name = '[Skills]'
 export const INITIAL_STATE = {
-  filteredSkills: [],
+  filtered: [],
   skillEntities: [],
 } as SkillsState
 
@@ -24,7 +24,7 @@ const SkillsReducer = createReducer(INITIAL_STATE, builder => {
   }))
   builder.addCase(setFilteredSkills, (state, action) => ({
     ...state,
-    filteredSkills: action.payload,
+    filtered: action.payload,
   }))
   builder.addCase(clearSkills, (_state, _action) => INITIAL_STATE)
 })
