@@ -36,6 +36,7 @@ export const updateUserPhotoSuccess = createAction(`${name} updateUserPhotoSucce
 export const updateUserPhotoFailure = createAction<UpdateUserFailureResponse>(`${name} updateUserPhotoFailure`)
 
 export const fetchUserCredentials = createAction(`${name} fetchUserCredentials`)
+//TODO: add type to fetchUserCredentialsSuccess
 export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserCredentialsSuccess`)
 export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
 

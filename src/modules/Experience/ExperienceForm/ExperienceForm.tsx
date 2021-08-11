@@ -64,7 +64,7 @@ const ExperienceForm = ({ formValues, filterSkillsByName, setFormState, skills, 
           <Input name={'title'} label={t('Title')} handlers={formikHandlers} />
           <DropDown
             items={mapToDropDownArray(organisationsList, 'key', 'value')}
-            name={'organisationId'}
+            name="organisationId"
             label={'Company name'}
             handlers={formikHandlers}
             searchable
