@@ -125,6 +125,26 @@ describe('api/api.utils', () => {
       })
     })
   })
+  describe('extractPayloadData', () => {
+    it('should return data from successful payload', () => {
+      // given ... the auth success response
+      const credentials = {
+        payload: {
+          data: {
+            data: {
+              someKey: 'RESPONSE',
+            },
+          },
+        },
+      }
+      // when extractUserFromLoginPayload
+      const result = SUT.extractPayloadData(credentials)
+      //then expect user response data
+      expect(result).toEqual({
+        someKey: 'RESPONSE',
+      })
+    })
+  })
   describe('setAuthTokenHeader', () => {
     it('should give the correct header string with the provided auth token when we provide a token, given a token', () => {
       // given ... a token

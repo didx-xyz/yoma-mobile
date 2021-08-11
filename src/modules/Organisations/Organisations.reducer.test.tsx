@@ -6,7 +6,7 @@ describe('modules/Organisations/Organisations.reducer', () => {
   describe('setOrganisations', () => {
     it('should set organisations correctly', () => {
       // given ....
-      const mockState = rootStateFixture({})
+      const mockState = rootStateFixture()
       const mockData = [
         {
           key: 'SOME_KEY',

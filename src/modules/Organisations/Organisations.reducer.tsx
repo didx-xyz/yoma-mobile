@@ -1,8 +1,10 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
+import { OrganisationsResponsePayload } from './Organisations.types'
+
 const name = '[Organisations]'
-export const INITIAL_STATE = [] as any
-export const setOrganisations = createAction<any>(`${name} setOrganisations`)
+export const INITIAL_STATE = [] as OrganisationsResponsePayload
+export const setOrganisations = createAction<OrganisationsResponsePayload>(`${name} setOrganisations`)
 
 export const fetchOrganisations = createAction(`${name} fetchOrganisations`)
 export const fetchOrganisationsSuccess = createAction<any>(`${name} fetchOrganisationsSuccess`)
