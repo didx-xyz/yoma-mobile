@@ -20,11 +20,13 @@ const CvCardListBody = ({ data, onViewAll, Item, maxDisplay = 2 }: Props) => {
       {dataToDisplay.map((item, index) => (
         <View>
           <Item {...item} />
-          <Divider isVisible={index !== dataToDisplay.length - 1} />
+          <Optional condition={index !== dataToDisplay.length - 1}>
+            <Divider />
+          </Optional>
         </View>
       ))}
       <Optional condition={data.length > dataToDisplay.length}>
-        <Divider isVisible />
+        <Divider />
         <Button label="View All" variant={ButtonVariants.Clear} onPress={onViewAll} />
       </Optional>
     </View>

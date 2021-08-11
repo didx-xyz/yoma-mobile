@@ -1,13 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { Colors, colors } from '../../styles'
-import { Optional } from '../index'
+import styles from './Divider.styles'
 
-const Divider = ({ isVisible }: { isVisible: boolean }) => (
-  <Optional condition={isVisible}>
-    <View style={{ backgroundColor: colors[Colors.lightGrey], height: 1, width: '100%' }} />
-  </Optional>
-)
+const Divider = () => <View style={styles.container} />
 
 export default Divider
