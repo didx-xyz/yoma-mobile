@@ -3,6 +3,7 @@ import React from 'react'
 import { View } from 'react-native'
 
 import { Optional } from '../../components'
+import styles from './Challenge.styles'
 
 interface Props {
   name: string
@@ -12,16 +13,16 @@ interface Props {
 }
 const Challenge = ({ name, startDate, avatarUrl, isValidated }: Props) => {
   return (
-    <View style={{ flexDirection: 'row', paddingHorizontal: 12, paddingVertical: 20 }}>
-      <View style={{ position: 'relative', width: 36, marginRight: 14 }}>
+    <View style={styles.container}>
+      <View style={styles.imageWrap}>
         <Optional condition={isValidated}>
-          <Text.Body level={BodyLevels.small} style={{ position: 'absolute', top: 0, right: 0 }}>
+          <Text.Body level={BodyLevels.small} style={styles.validated}>
             Tick {avatarUrl}
           </Text.Body>
         </Optional>
         <Text.Header level={HeaderLevels.h3}>👾</Text.Header>
       </View>
-      <View style={{ flex: 1 }}>
+      <View style={styles.content}>
         <Text.Header level={HeaderLevels.h6}>{name}</Text.Header>
         <Text.Body level={BodyLevels.small}>{startDate}</Text.Body>
       </View>
