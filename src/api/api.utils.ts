@@ -14,7 +14,6 @@ import {
   mergeDeepRight,
   objOf,
   of,
-  path,
   pathOr,
   pipe,
   unless,
