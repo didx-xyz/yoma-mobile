@@ -1,5 +1,7 @@
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
 
+import { UserChallenge } from '../UserChallenges/UserChallenges.types'
+
 export interface UpdateUserResponse {
   data: UserResponse
   meta: ApiMetaResponse
@@ -60,3 +62,6 @@ export interface UserCredentialMeta {
   fileURL: string
   requestVerification: boolean
 }
+
+// TODO: Add Credentials as we type them as  (UserChallenge | UserExperience | ...)[]
+export type UserCredentials = UserChallenge[]
