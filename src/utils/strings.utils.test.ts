@@ -27,16 +27,16 @@ describe('strings.utils', () => {
       ])
     })
   })
-  describe('sliceArrayByNumber', () => {
+  describe('sliceAt', () => {
     it('should return array of objects with keys label and value', () => {
       const array = ['SKILL1', 'SKILL2', 'SKILL3']
 
-      const result = SUT.sliceArrayByNumber(1, array)
+      const result = SUT.sliceAt(1, array)
 
       expect(result.length).toBe(1)
     })
   })
-  describe('searchArrayOfObjByValue', () => {
+  describe('filterByQuery', () => {
     it('should return array of objects with keys label and value', () => {
       const array = [
         {
@@ -53,22 +53,9 @@ describe('strings.utils', () => {
         },
       ]
 
-      const result = SUT.searchArrayOfObjByValue('ID2', array)
+      const result = SUT.filterByQuery('ID2', array)
 
       expect(result).toMatchObject([{ key: 'SKILL2', value: 'ID2' }])
-    })
-  })
-  describe('dropDownFromArray', () => {
-    it('should convert array to array of objects with keys label and value', () => {
-      const array = ['SKILL1', 'SKILL2', 'SKILL3']
-
-      const result = SUT.dropDownFromArray(array)
-
-      expect(result).toMatchObject([
-        { label: 'SKILL1', value: 'SKILL1' },
-        { label: 'SKILL2', value: 'SKILL2' },
-        { label: 'SKILL3', value: 'SKILL3' },
-      ])
     })
   })
   describe('getUppercasedHead', () => {

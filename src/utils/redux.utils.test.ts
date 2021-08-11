@@ -33,4 +33,15 @@ describe('src/utils/redux.utils', () => {
       })
     })
   })
+  describe('extractDataFromPayload', () => {
+    it('should extract the data from a typical response payload', () => {
+      // given ...
+      const action = { type: 'any', payload: { data: { data: 'DATA' } } }
+      // when ...
+      const result = SUT.extractDataFromPayload(action)
+
+      // then ...
+      expect(result).toBe('DATA')
+    })
+  })
 })

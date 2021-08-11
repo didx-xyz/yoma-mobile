@@ -3,14 +3,17 @@ import FormData from 'form-data'
 import { concat } from 'ramda'
 import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
+import * as ReduxUtils from 'utils/redux.utils'
 
 import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../api'
+import { types as ApiUsersTypes } from '../api/users'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
+import { middleware as UserChallengesMiddleware } from '../modules/UserChallenges'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -49,6 +52,12 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
+  UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
+    ReduxUtils.extractDataFromPayload,
+    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),
+  ),
+  UserChallengesMiddleware.normaliseUserChallengesFlow(ReduxUtils.normalise),
+  UserChallengesMiddleware.setUserChallengesFlow,
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
   UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),

@@ -1,6 +1,6 @@
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
-import { searchArrayOfObjByValue } from 'utils/strings.utils'
+import { filterByQuery } from 'utils/strings.utils'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
@@ -89,7 +89,7 @@ describe('modules/Skills/Skills.middleware', () => {
       // then ...validate filterSkillsByNameFlow
       const state = store.getState()
       const skillEntities = selectSkillEntities(state) as []
-      const filtered = searchArrayOfObjByValue(action.payload, skillEntities)
+      const filtered = filterByQuery(action.payload, skillEntities)
       expect(store.dispatch).toHaveBeenCalledWith(setFilteredSkills(filtered))
     })
   })
