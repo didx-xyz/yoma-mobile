@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native'
 
 import Text, { TextAlign } from '../../components/Typography'
 import { Colors } from '../../styles'
-import UserChallengesWidget from '../UserChallenges/UserChallenges.widget'
+import { UserChallengesWidget } from '../UserChallenges'
 import styles from './DigitalCv.styles'
 
 interface Props {

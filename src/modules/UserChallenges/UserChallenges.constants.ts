@@ -1,5 +1,17 @@
 import { UserChallengeFormFields } from './UserChallenges.types'
 
+export const USER_CHALLENGES_STATE_KEY = 'userChallenges'
+
+export const INITIAL_VALUES: UserChallengeFormFields = {
+  challenge: '',
+  challengeHostProvider: '',
+  description: '',
+  id: '',
+  startDate: null,
+  endDate: null,
+  skillNames: [],
+}
+
 export const MOCKED_CHALLENGES = [
   {
     challenge: 'COVID Challenge',
@@ -18,16 +30,6 @@ export const MOCKED_CHALLENGES = [
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
   },
 ]
-
-export const INITIAL_VALUES: UserChallengeFormFields = {
-  challenge: '',
-  challengeHostProvider: '',
-  description: '',
-  id: '',
-  startDate: null,
-  endDate: null,
-  skillNames: [],
-}
 
 export const MOCK_SKILLS = [
   { label: 'UI', value: 'UI' },

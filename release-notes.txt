@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- merging MyChallenges into UserChallenges
+- adding real data to UserChallenges widget in MyCv
 
 Recent:
+- merging MyChallenges into UserChallenges
 - adding generic list component for CvCard/MyCV
 - adding User Challenges credentials to state
 - adding helper utils for handling MyCV data

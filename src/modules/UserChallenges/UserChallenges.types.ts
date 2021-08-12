@@ -1,3 +1,4 @@
+import { NormalisedData } from '../../redux/redux.types'
 import { UserCredentialMeta } from '../User/User.types'
 
 export interface Challenge {
@@ -21,12 +22,9 @@ export interface UserChallenge extends UserCredentialMeta {
   challenge: Challenge
 }
 
-export interface NormalisedUserChallenges {
-  ids: string[]
-  entities: Record<string, UserChallenge>
-}
+export type NormalisedUserChallenges = NormalisedData<UserChallenge>
 
-export interface UserChallengesState extends NormalisedUserChallenges {}
+export type UserChallengesState = NormalisedUserChallenges
 
 export type ChallengeEntry = {
   challenge: string
