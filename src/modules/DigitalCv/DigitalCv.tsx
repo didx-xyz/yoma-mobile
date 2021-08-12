@@ -64,7 +64,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
           badgeColor={Colors.secondaryPurple}
           title={t('Completed challenges')}
           fallback={t('Have you completed any challenges yet?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.MyChallenges)}
+          onEdit={() => navigation.navigate(HomeNavigationRoutes.UserChallenges)}
         />
         <UserChallengesWidget />
       </ScrollView>

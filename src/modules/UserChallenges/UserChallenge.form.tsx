@@ -5,10 +5,10 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { INITIAL_VALUES, MOCK_SKILLS } from './NewChallengeForm.constants'
-import styles from './NewChallengeForm.styles'
+import { INITIAL_VALUES, MOCK_SKILLS } from './UserChallenge.form.constants'
+import styles from './UserChallenge.form.styles'
 
-const NewChallengeForm = forwardRef((_props, ref) => {
+const UserChallengeForm = forwardRef((_props, ref) => {
   const { t } = useTranslation()
   const [isInProgress, setIsInProgress] = useState(false)
   const [skillsList] = useState(MOCK_SKILLS)
@@ -72,4 +72,4 @@ const NewChallengeForm = forwardRef((_props, ref) => {
   )
 })
 
-export default NewChallengeForm
+export default UserChallengeForm

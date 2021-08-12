@@ -6,13 +6,13 @@ import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import NewChallengeForm from './NewChallengeForm/NewChallengeForm'
+import UserChallengeForm from './UserChallenge.form'
 import { MOCKED_CHALLENGES } from './UserChallenges.constants'
 import styles from './UserChallenges.styles'
 import { ChallengeEntry } from './UserChallenges.types'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyChallenges>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserChallenges>
 }
 
 const renderChallengeEntry = ({ challenge, description, startDate, endDate, organisationLogoUrl }: ChallengeEntry) => {
@@ -65,7 +65,7 @@ const UserChallenges = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <NewChallengeForm ref={formRef} />
+            <UserChallengeForm ref={formRef} />
           </Card>
         </ScrollView>
       </Optional>

@@ -1,4 +1,4 @@
-import { ChallengeFields } from './NewChallengeForm.types'
+import { ChallengeFields } from './UserChallenge.form.types'
 
 export const INITIAL_VALUES: ChallengeFields = {
   challenge: '',
