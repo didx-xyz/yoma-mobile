@@ -1,7 +1,7 @@
-import { mergeRight } from 'ramda'
+import { mergeRight, values } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
-import { filterByQuery, sliceAt } from 'utils/strings.utils'
+import { filterStringArray, sliceAt } from 'utils/strings.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
@@ -13,7 +13,7 @@ import {
   setFilteredSkills,
   setSkillEntities,
 } from './Skills.reducer'
-import { selectSkillEntities } from './Skills.selector'
+import { selectSkillValues } from './Skills.selector'
 import { extractSkillsFromPayload } from './Skills.utils'
 
 export const fetchSkillsFlow: Middleware =
@@ -41,8 +41,8 @@ export const filterSkillsByNameFlow: Middleware =
     const result = next(action)
     if (filterSkillsByName.match(action)) {
       const state = getState()
-      const skillEntities = selectSkillEntities(state) as []
-      const filtered = filterByQuery(action.payload, skillEntities)
+      const skillValues = selectSkillValues(state) as string[]
+      const filtered = filterStringArray(action.payload, skillValues)
       dispatch(setFilteredSkills(filtered))
     }
     return result
@@ -56,9 +56,11 @@ export const fetchSkillsSuccessFlow: Middleware =
 
     if (fetchSkillsSuccess.match(action)) {
       const skillsPayload = extractSkillsFromPayload(action)
-      const truncatedSkills = sliceAt(20, skillsPayload)
+      const skillValues = values(skillsPayload)
+      const slicedSkills = sliceAt(20, skillValues) as []
+
       dispatch(setSkillEntities(skillsPayload))
-      dispatch(setFilteredSkills(truncatedSkills))
+      dispatch(setFilteredSkills(slicedSkills))
     }
     return result
   }

@@ -4,6 +4,9 @@ export type Skills = {
 }
 
 export type SkillsState = {
-  filtered: Skills[]
-  skillEntities: Skills[]
+  filtered: string[]
+  allValues: string[]
+  allKeys: string[]
+  byValue: Record<string, Skills>
+  byKey: Record<string, Skills>
 }

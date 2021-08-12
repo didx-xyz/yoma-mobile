@@ -36,28 +36,6 @@ describe('strings.utils', () => {
       expect(result.length).toBe(1)
     })
   })
-  describe('filterByQuery', () => {
-    it('should return array of objects with keys label and value', () => {
-      const array = [
-        {
-          key: 'SKILL1',
-          value: 'ID1',
-        },
-        {
-          key: 'SKILL2',
-          value: 'ID2',
-        },
-        {
-          key: 'SKILL3',
-          value: 'ID3',
-        },
-      ]
-
-      const result = SUT.filterByQuery('ID2', array)
-
-      expect(result).toMatchObject([{ key: 'SKILL2', value: 'ID2' }])
-    })
-  })
   describe('getUppercasedHead', () => {
     it.each([
       ['john', 'J'],

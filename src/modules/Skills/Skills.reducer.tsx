@@ -1,15 +1,19 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
+import { normaliseByKey, normaliseByValue } from 'utils/redux.utils'
 
-import { Skills, SkillsState } from './Skills.types'
+import { SkillsState } from './Skills.types'
 
 const name = '[Skills]'
 export const INITIAL_STATE = {
   filtered: [],
-  skillEntities: [],
+  allValues: [],
+  allKeys: [],
+  byValue: {},
+  byKey: {},
 } as SkillsState
 
-export const setSkillEntities = createAction<Skills[]>(`${name} setSkillEntities`)
-export const setFilteredSkills = createAction<Skills[]>(`${name} setFilteredSkills`)
+export const setSkillEntities = createAction<{}>(`${name} setSkillEntities`)
+export const setFilteredSkills = createAction<string[]>(`${name} setFilteredSkills`)
 
 export const filterSkillsByName = createAction<string>(`${name} filterSkillsByName`)
 export const fetchSkills = createAction(`${name} fetchSkills`)
@@ -20,7 +24,8 @@ export const clearSkills = createAction(`${name} clearSkills`)
 const SkillsReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setSkillEntities, (state, action) => ({
     ...state,
-    skillEntities: action.payload,
+    ...normaliseByKey(action.payload),
+    ...normaliseByValue(action.payload),
   }))
   builder.addCase(setFilteredSkills, (state, action) => ({
     ...state,

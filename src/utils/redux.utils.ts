@@ -9,5 +9,19 @@ export const normalise = pipe(
     ids: keys,
   }),
 )
+export const normaliseByValue = pipe(
+  objFromListWith(prop('value')),
+  applySpec({
+    allValues: keys,
+    byValue: identity,
+  }),
+)
+export const normaliseByKey = pipe(
+  objFromListWith(prop('key')),
+  applySpec({
+    allKeys: keys,
+    byKey: identity,
+  }),
+)
 
 export const extractDataFromPayload = path(['payload', 'data', 'data'])
