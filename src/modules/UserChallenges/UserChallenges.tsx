@@ -6,10 +6,10 @@ import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import { MOCKED_CHALLENGES } from './MyChallenges.constants'
-import styles from './MyChallenges.styles'
-import { ChallengeEntry } from './MyChallenges.types'
 import NewChallengeForm from './NewChallengeForm/NewChallengeForm'
+import { MOCKED_CHALLENGES } from './UserChallenges.constants'
+import styles from './UserChallenges.styles'
+import { ChallengeEntry } from './UserChallenges.types'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyChallenges>
@@ -27,7 +27,7 @@ const renderChallengeEntry = ({ challenge, description, startDate, endDate, orga
   )
 }
 
-const MyChallenges = ({ navigation }: Props) => {
+const UserChallenges = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<FormikProps<FormikValues>>()
@@ -73,4 +73,4 @@ const MyChallenges = ({ navigation }: Props) => {
   )
 }
 
-export default MyChallenges
+export default UserChallenges

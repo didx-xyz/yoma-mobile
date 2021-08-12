@@ -2,9 +2,9 @@ import { slice } from 'ramda'
 import React from 'react'
 import { View } from 'react-native'
 
-import Button, { ButtonVariants } from '../Button'
-import Divider from '../Divider'
-import { Optional } from '../index'
+import Button, { ButtonVariants } from '../../Button'
+import Divider from '../../Divider'
+import { Optional } from '../../index'
 import styles from './CvCardListBody.styles'
 
 interface Props {

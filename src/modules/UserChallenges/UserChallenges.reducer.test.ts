@@ -10,9 +10,9 @@ describe('src/modules/User/Challenges/Challenges.redux', () => {
       const challengesMock = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Challenge 1',
-          id2: 'Challenge 2',
-          id3: 'Challenge 3',
+          id1: 'UserChallenge 1',
+          id2: 'UserChallenge 2',
+          id3: 'UserChallenge 3',
         },
       }
       // @ts-ignore
@@ -27,8 +27,8 @@ describe('src/modules/User/Challenges/Challenges.redux', () => {
       const state = {
         ids: ['idA', 'idB'],
         entities: {
-          idA: 'Challenge A',
-          idB: 'Challenge B',
+          idA: 'UserChallenge A',
+          idB: 'UserChallenge B',
         },
       }
 
@@ -36,9 +36,9 @@ describe('src/modules/User/Challenges/Challenges.redux', () => {
       const challengesMock = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Challenge 1',
-          id2: 'Challenge 2',
-          id3: 'Challenge 3',
+          id1: 'UserChallenge 1',
+          id2: 'UserChallenge 2',
+          id3: 'UserChallenge 3',
         },
       }
       // @ts-ignore - the shape of the data doesn't matter
@@ -56,9 +56,9 @@ describe('src/modules/User/Challenges/Challenges.redux', () => {
       const state = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Challenge 1',
-          id2: 'Challenge 2',
-          id3: 'Challenge 3',
+          id1: 'UserChallenge 1',
+          id2: 'UserChallenge 2',
+          id3: 'UserChallenge 3',
         },
       }
 

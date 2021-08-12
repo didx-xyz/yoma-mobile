@@ -3,7 +3,7 @@ import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserChallenges.middleware'
 import { getUserChallengesSuccess, normaliseUserChallengesSuccess, setUserChallenges } from './UserChallenges.reducer'
 
-describe('modules/UserChallenges/UserChallenges.middleware', () => {
+describe('modules/Challenges/Challenges.middleware', () => {
   describe('getUserChallengesFromCredentialsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...

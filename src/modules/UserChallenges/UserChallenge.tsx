@@ -3,7 +3,7 @@ import React from 'react'
 import { View } from 'react-native'
 
 import { Optional } from '../../components'
-import styles from './Challenge.styles'
+import styles from './UserChallenge.styles'
 
 interface Props {
   name: string
@@ -11,7 +11,7 @@ interface Props {
   avatarUrl: string
   isValidated: boolean
 }
-const Challenge = ({ name, startDate, avatarUrl, isValidated }: Props) => {
+const UserChallenge = ({ name, startDate, avatarUrl, isValidated }: Props) => {
   return (
     <View style={styles.container}>
       <View style={styles.imageWrap}>
@@ -30,4 +30,4 @@ const Challenge = ({ name, startDate, avatarUrl, isValidated }: Props) => {
   )
 }
 
-export default Challenge
+export default UserChallenge

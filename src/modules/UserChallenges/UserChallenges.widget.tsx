@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import CvCard, { CvCardListBody } from '../../components/CvCard'
 import { Colors } from '../../styles'
-import Challenge from './Challenge'
+import UserChallenge from './UserChallenge'
 
 const mockData: any[] = [
   { id: 'id1', name: 'A NAME', startDate: '10 April 2020', avatarUrl: '', isValidated: false },
@@ -13,7 +13,7 @@ const mockData: any[] = [
 ]
 
 interface Props {}
-const CompletedChallengesWidget = ({}: Props) => {
+const UserChallengesWidget = ({}: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -31,9 +31,9 @@ const CompletedChallengesWidget = ({}: Props) => {
         onViewAll={() => {
           console.log('handle view all')
         }}
-        Item={Challenge}
+        Item={UserChallenge}
       />
     </CvCard>
   )
 }
-export default CompletedChallengesWidget
+export default UserChallengesWidget

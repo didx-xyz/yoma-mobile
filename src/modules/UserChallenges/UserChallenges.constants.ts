@@ -1,6 +1,6 @@
 export const MOCKED_CHALLENGES = [
   {
-    challenge: 'COVID Challenge',
+    challenge: 'COVID UserChallenge',
     organisationLogoUrl: '',
     challengeHostProvider: '',
     startDate: '03/01/2020',

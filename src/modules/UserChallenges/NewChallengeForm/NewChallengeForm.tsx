@@ -36,10 +36,10 @@ const NewChallengeForm = forwardRef((_props, ref) => {
       {formikHandlers => (
         <FormWrapper>
           <Input name={'challenge'} label={t('Challenge')} handlers={formikHandlers} />
-          <Input name={'challengeHostProvider'} label={t('Challenge host provider')} handlers={formikHandlers} />
+          <Input name={'challengeHostProvider'} label={t('UserChallenge host provider')} handlers={formikHandlers} />
           <CheckBox
             isChecked={isInProgress}
-            label={t('Challenge is currently in progress')}
+            label={t('UserChallenge is currently in progress')}
             onPress={() => setIsInProgress(!isInProgress)}
           />
           <View style={styles.row}>
