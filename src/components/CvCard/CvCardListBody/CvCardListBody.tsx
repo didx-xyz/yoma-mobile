@@ -19,7 +19,7 @@ const CvCardListBody = ({ data, onViewAll, Item, maxDisplay = 2 }: Props) => {
     <View style={styles.container}>
       {dataToDisplay.map((item, index) => (
         <View>
-          <Item {...item} />
+          <Item key={item.id || index} {...item} />
           <Optional condition={index !== dataToDisplay.length - 1}>
             <Divider />
           </Optional>
