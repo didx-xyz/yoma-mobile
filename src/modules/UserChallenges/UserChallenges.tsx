@@ -6,8 +6,8 @@ import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import UserChallengeForm from './UserChallenge.form'
 import { MOCKED_CHALLENGES } from './UserChallenges.constants'
+import UserChallengesForm from './UserChallenges.form'
 import styles from './UserChallenges.styles'
 import { ChallengeEntry } from './UserChallenges.types'
 
@@ -65,7 +65,7 @@ const UserChallenges = ({ navigation }: Props) => {
       >
         <ScrollView>
           <Card>
-            <UserChallengeForm ref={formRef} />
+            <UserChallengesForm ref={formRef} />
           </Card>
         </ScrollView>
       </Optional>

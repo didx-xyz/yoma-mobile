@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next'
 
 import CvCard, { CvCardListBody } from '../../components/CvCard'
 import { Colors } from '../../styles'
-import UserChallenge from './UserChallenge'
+import UserChallengeItem from './UserChallengeItem'
 
 const mockData: any[] = [
   { id: 'id1', name: 'A NAME', startDate: '10 April 2020', avatarUrl: '', isValidated: false },
@@ -31,7 +31,7 @@ const UserChallengesWidget = ({}: Props) => {
         onViewAll={() => {
           console.log('handle view all')
         }}
-        Item={UserChallenge}
+        Item={UserChallengeItem}
       />
     </CvCard>
   )

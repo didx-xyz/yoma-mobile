@@ -5,10 +5,10 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { INITIAL_VALUES, MOCK_SKILLS } from './UserChallenge.form.constants'
-import styles from './UserChallenge.form.styles'
+import { INITIAL_VALUES, MOCK_SKILLS } from './UserChallenges.constants'
+import styles from './UserChallenges.form.styles'
 
-const UserChallengeForm = forwardRef((_props, ref) => {
+const UserChallengesForm = forwardRef((_props, ref) => {
   const { t } = useTranslation()
   const [isInProgress, setIsInProgress] = useState(false)
   const [skillsList] = useState(MOCK_SKILLS)
@@ -36,10 +36,14 @@ const UserChallengeForm = forwardRef((_props, ref) => {
       {formikHandlers => (
         <FormWrapper>
           <Input name={'challenge'} label={t('Challenge')} handlers={formikHandlers} />
-          <Input name={'challengeHostProvider'} label={t('UserChallenge host provider')} handlers={formikHandlers} />
+          <Input
+            name={'challengeHostProvider'}
+            label={t('UserChallengeItem host provider')}
+            handlers={formikHandlers}
+          />
           <CheckBox
             isChecked={isInProgress}
-            label={t('UserChallenge is currently in progress')}
+            label={t('UserChallengeItem is currently in progress')}
             onPress={() => setIsInProgress(!isInProgress)}
           />
           <View style={styles.row}>
@@ -72,4 +76,4 @@ const UserChallengeForm = forwardRef((_props, ref) => {
   )
 })
 
-export default UserChallengeForm
+export default UserChallengesForm

@@ -63,5 +63,5 @@ export interface UserCredentialMeta {
   requestVerification: boolean
 }
 
-// TODO: Add Credentials as we type them as  (UserChallenge | UserExperience | ...)[]
+// TODO: Add Credentials as we type them as  (UserChallengeItem | UserExperience | ...)[]
 export type UserCredentials = UserChallenge[]
