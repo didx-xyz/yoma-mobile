@@ -10,3 +10,9 @@ export type SkillsState = {
   byValue: Record<string, Skills>
   byKey: Record<string, Skills>
 }
+export type NormalisedSkillsStatse = {
+  allValues: string[]
+  allKeys: string[]
+  byValue: Record<string, Skills>
+  byKey: Record<string, Skills>
+}

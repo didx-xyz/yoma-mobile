@@ -1,7 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { normaliseByKey, normaliseByValue } from 'utils/redux.utils'
 
-import { SkillsState } from './Skills.types'
+import { NormalisedSkillsState, SkillsState } from './Skills.types'
 
 const name = '[Skills]'
 export const INITIAL_STATE = {
@@ -12,7 +12,7 @@ export const INITIAL_STATE = {
   byKey: {},
 } as SkillsState
 
-export const setSkillEntities = createAction<{}>(`${name} setSkillEntities`)
+export const setSkillEntities = createAction<NormalisedSkillsState>(`${name} setSkillEntities`)
 export const setFilteredSkills = createAction<string[]>(`${name} setFilteredSkills`)
 
 export const filterSkillsByName = createAction<string>(`${name} filterSkillsByName`)
