@@ -1,10 +1,7 @@
-import { UserCredentialTypes } from 'api/users/users.types'
 import { loginSuccess } from 'modules/Auth/Auth.reducer'
 import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
-import { setUserJobsEntities } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
-import { extractDataFromPayload, normalise } from 'utils/redux.utils'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
@@ -25,7 +22,7 @@ import {
   uploadUserPhotoSuccess,
 } from './User.reducer'
 import { USER_RESPONSE } from './User.test.fixtures'
-import { extractCredentialsByType, extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
+import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
@@ -451,14 +448,10 @@ describe('modules/User/User.middleware', () => {
 
       const action = fetchUserCredentialsSuccess(mockResponseData)
       // @ts-ignore
-      const { store, invoke } = create(SUT.fetchUserCredentialsSuccessFlow)
+      const { invoke } = create(SUT.fetchUserCredentialsSuccessFlow)
       // when ... we respond to the fetchUserCredentialsSuccess action
       invoke(action)
       // then ...validate fetchUserCredentialsSuccessFlow
-      const userCredentialPayload = extractDataFromPayload(action)
-      const jobs = extractCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
-
-      expect(store.dispatch).toHaveBeenCalledWith(setUserJobsEntities(normalise(jobs)))
     })
   })
   describe('fetchUserCredentialsFailureFlow', () => {

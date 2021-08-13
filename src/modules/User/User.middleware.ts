@@ -1,11 +1,8 @@
-import { UserCredentialTypes } from 'api/users/users.types'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { CAPTURE_IMAGE_OPTIONS } from 'modules/User/User.constants'
-import { setUserJobsEntities } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromPayload, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
@@ -28,7 +25,6 @@ import {
 import { selectId } from './User.selector'
 import { UploadUserPhotoFlowDependencies } from './User.types'
 import {
-  extractCredentialsByType,
   extractUserFromLoginPayload,
   extractUserFromUpdateUserPayload,
   extractUserFromUserUpdateSuccess,
@@ -206,19 +202,13 @@ export const updateUserPhotoFailureFlow =
     return result
   }
 
-export const fetchUserCredentialsSuccessFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
+export const fetchUserCredentialsSuccessFlow: Middleware = _store => next => action => {
+  const result = next(action)
 
-    if (fetchUserCredentialsSuccess.match(action)) {
-      const userCredentialPayload = extractDataFromPayload(action)
-      const jobs = extractCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
-      dispatch(setUserJobsEntities(normalise(jobs)))
-    }
-    return result
+  if (fetchUserCredentialsSuccess.match(action)) {
   }
+  return result
+}
 
 export const fetchUserCredentialsFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>

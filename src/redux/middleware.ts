@@ -74,19 +74,12 @@ const featureModuleMiddleware = [
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.fetchUserCredentialsSuccessFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.createUserJobsFlow,
-  UserJobsMiddleware.createUserJobsSuccessFlow,
-  UserJobsMiddleware.createUserJobsFailureFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.createUserJobsCredentialsFlow,
-  UserJobsMiddleware.createUserJobsCredentialsSuccessFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.createUserJobsCredentialsFailureFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.fetchUserJobsCredentialByIdFlow,
-  UserJobsMiddleware.updateUserJobsFlow,
-  UserJobsMiddleware.updateUserJobsSuccessFlow,
-  UserJobsMiddleware.updateUserJobsFailureFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.updateUserJobsCredentialsFlow,
-  UserJobsMiddleware.updateUserJobsCredentialsSuccessFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.updateUserJobsCredentialsFailureFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.getUserJobsFromCredentialsFlow(
+    ReduxUtils.extractDataFromPayload,
+    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Job),
+  ),
+  UserJobsMiddleware.normaliseUserJobsFlow(ReduxUtils.normalise),
+  UserJobsMiddleware.setUserJobsFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
