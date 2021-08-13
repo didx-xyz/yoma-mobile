@@ -1,7 +1,7 @@
 import { createFixture } from '../../../tests/tests.utils'
 import { Organisation } from './Organisations.types'
 
-export const SKILLS_MOCK: Organisation[] = [
+export const ORGANISATIONS_MOCK: Organisation[] = [
   {
     key: 'key1',
     value: 'value1',
@@ -11,4 +11,4 @@ export const SKILLS_MOCK: Organisation[] = [
     value: 'value2',
   },
 ]
-export const organisationsFixture = createFixture(SKILLS_MOCK)
+export const organisationsFixture = createFixture(ORGANISATIONS_MOCK)

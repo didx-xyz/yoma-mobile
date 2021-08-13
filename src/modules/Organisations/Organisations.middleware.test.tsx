@@ -14,7 +14,7 @@ import {
   normaliseOrganisationsSuccess,
   setOrganisations,
 } from './Organisations.reducer'
-import { SKILLS_MOCK } from './Organisations.test.fixtures'
+import { ORGANISATIONS_MOCK } from './Organisations.test.fixtures'
 
 describe('modules/Organisations/Organisations.middleware', () => {
   describe('fetchOrganisationsFlow', () => {
@@ -31,7 +31,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       // then ...validate fetchOrganisationsFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly handle updating the organisations state', () => {
+    it('should correctly handle fetching the organisations state', () => {
       // given ...
       const mockState = rootStateFixture()
 
@@ -45,7 +45,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       // then ...validate fetchOrganisationsFlow
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(ApiOrganisationsConstants.SKILLS_GET_KEY_NAMES_CONFIG, {
+          mergeRight(ApiOrganisationsConstants.ORGANISATIONS_GET_KEY_NAMES_CONFIG, {
             onSuccess: fetchOrganisationsSuccess,
             onFailure: fetchOrganisationsFailure,
           }),
@@ -59,7 +59,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       const create = createMiddlewareStub(jest)
       const mockResponseData = {
         data: {
-          data: SKILLS_MOCK,
+          data: ORGANISATIONS_MOCK,
         },
         meta: {
           success: true,
@@ -82,7 +82,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       const create = createMiddlewareStub(jest)
       const mockResponseData = {
         data: {
-          data: SKILLS_MOCK,
+          data: ORGANISATIONS_MOCK,
         },
         meta: {
           success: true,
@@ -151,7 +151,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       // given ...
       const create = createMiddlewareStub(jest)
 
-      const normalisedChallengesMock = 'NORMALISED SKILLS DATA'
+      const normalisedChallengesMock = 'NORMALISED ORGANISATIONS DATA'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       const action = normaliseOrganisationsSuccess(normalisedChallengesMock)
 
@@ -168,7 +168,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       const create = createMiddlewareStub(jest)
 
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = normaliseOrganisationsSuccess('NORMALISED SKILLS DATA')
+      const action = normaliseOrganisationsSuccess('NORMALISED ORGANISATIONS DATA')
 
       // when ... we have organisations data to store in state
       const { invoke, store } = create(SUT.setOrganisationsFlow)
@@ -176,7 +176,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
 
       // then ...we want to forward it with our reducer action
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      expect(store.dispatch).toHaveBeenCalledWith(setOrganisations('NORMALISED SKILLS DATA'))
+      expect(store.dispatch).toHaveBeenCalledWith(setOrganisations('NORMALISED ORGANISATIONS DATA'))
     })
   })
   describe('fetchOrganisationsFailureFlow', () => {
