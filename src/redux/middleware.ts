@@ -10,6 +10,7 @@ import { types as ApiUsersTypes } from '../api/users'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
+import { middleware as JobsMiddleware } from '../modules/Jobs'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { middleware as UserChallengesMiddleware } from '../modules/UserChallenges'
@@ -74,6 +75,9 @@ const featureModuleMiddleware = [
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.fetchUserCredentialsSuccessFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
+  JobsMiddleware.createJobFlow,
+  JobsMiddleware.createJobSuccessFlow,
+  JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.getUserJobsFromCredentialsFlow(
     ReduxUtils.extractDataFromPayload,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Job),

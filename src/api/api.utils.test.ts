@@ -56,25 +56,6 @@ describe('api/api.utils', () => {
       })
     })
   })
-  describe('appendIdToEndpointInConfig', () => {
-    it('should insert the given id in end of the config endpoint array', () => {
-      // given ... a config with an endpoint key
-      const config = {
-        aKey: 'aValue',
-        anotherKey: 'anotherValue',
-        endpoint: [5, 'SomeValue'],
-      }
-      // when ... we provide the id
-      //@ts-ignore
-      const result = SUT.appendIdToEndpointInConfig(config)(10)
-      // then ... should insert the given id in end of the endpoint array
-      expect(result).toEqual({
-        aKey: 'aValue',
-        anotherKey: 'anotherValue',
-        endpoint: [5, 'SomeValue', 10],
-      })
-    })
-  })
   describe('addParamsToConfig', () => {
     it('should add a params key with object to the config when we provide the object of params, given a config object', () => {
       // given ... a config object

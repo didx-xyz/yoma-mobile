@@ -1,6 +1,5 @@
 import {
   always,
-  append,
   complement,
   concat,
   equals,
@@ -30,10 +29,6 @@ export const addIdAsEndpointToConfig = addValueWithGivenKeyToConfig('endpoint')
 export const prependIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: string) =>
   evolve({
     endpoint: pipe(of, concat([id])),
-  })(config)
-export const appendIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: string) =>
-  evolve({
-    endpoint: append(id),
   })(config)
 export const addParamsToConfig = addValueWithGivenKeyToConfig('params')
 export const createParam = objOf
