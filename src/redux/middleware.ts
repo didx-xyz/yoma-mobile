@@ -72,9 +72,10 @@ const featureModuleMiddleware = [
   UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFlow,
-  SkillsMiddleware.filterSkillsByNameFlow,
   SkillsMiddleware.fetchSkillsSuccessFlow,
   SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
+  SkillsMiddleware.normaliseSkillsFlow(ReduxUtils.normalise),
+  SkillsMiddleware.setSkillsFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
