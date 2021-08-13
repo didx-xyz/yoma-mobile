@@ -55,6 +55,8 @@ const featureModuleMiddleware = [
   OrganisationsMiddleware.fetchOrganisationsFlow,
   OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
   OrganisationsMiddleware.fetchOrganisationsFailureFlow({ notification: showSimpleMessage }),
+  OrganisationsMiddleware.normaliseOrganisationsFlow(ReduxUtils.normalise),
+  OrganisationsMiddleware.setOrganisationsFlow,
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
     ReduxUtils.extractDataFromPayload,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),
