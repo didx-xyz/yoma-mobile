@@ -202,14 +202,6 @@ export const updateUserPhotoFailureFlow =
     return result
   }
 
-export const fetchUserCredentialsSuccessFlow: Middleware = _store => next => action => {
-  const result = next(action)
-
-  if (fetchUserCredentialsSuccess.match(action)) {
-  }
-  return result
-}
-
 export const fetchUserCredentialsFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>

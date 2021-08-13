@@ -73,7 +73,6 @@ const featureModuleMiddleware = [
   UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.fetchUserCredentialsFlow,
-  UserMiddleware.fetchUserCredentialsSuccessFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
   JobsMiddleware.createJobFlow,
   JobsMiddleware.createJobSuccessFlow,
