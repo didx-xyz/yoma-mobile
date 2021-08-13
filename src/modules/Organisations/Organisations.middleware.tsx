@@ -1,16 +1,20 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
+import { StdFn } from 'types/general.types'
 import { showSimpleMessage } from 'utils/error'
+import { extractDataFromPayload } from 'utils/redux.utils'
 
 import { actions as ApiActions } from '../../api'
-import { constants as ApiOrganisationConstants } from '../../api/organisations'
+import { constants as ApiOrganisationsConstants } from '../../api/organisations'
 import {
   fetchOrganisations,
   fetchOrganisationsFailure,
   fetchOrganisationsSuccess,
+  getOrganisationsSuccess,
+  normaliseOrganisationsSuccess,
   setOrganisations,
 } from './Organisations.reducer'
-import { extractOrganisationsFromPayload } from './Organisations.utils'
+import { NormalisedOrganisations, Organisation } from './Organisations.types'
 
 export const fetchOrganisationsFlow: Middleware =
   ({ dispatch }) =>
@@ -20,7 +24,7 @@ export const fetchOrganisationsFlow: Middleware =
     if (fetchOrganisations.match(action)) {
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiOrganisationConstants.ORGANISATIONS_GET_KEY_NAMES_CONFIG, {
+          mergeRight(ApiOrganisationsConstants.ORGANISATIONS_GET_KEY_NAMES_CONFIG, {
             onSuccess: fetchOrganisationsSuccess,
             onFailure: fetchOrganisationsFailure,
           }),
@@ -37,8 +41,32 @@ export const fetchOrganisationsSuccessFlow: Middleware =
     const result = next(action)
 
     if (fetchOrganisationsSuccess.match(action)) {
-      const organisationPayload = extractOrganisationsFromPayload(action)
-      dispatch(setOrganisations(organisationPayload))
+      const data = extractDataFromPayload(action)
+      dispatch(getOrganisationsSuccess(data))
+    }
+    return result
+  }
+
+export const normaliseOrganisationsFlow =
+  (normalise: StdFn<Organisation[], NormalisedOrganisations>): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (getOrganisationsSuccess.match(action)) {
+      const normalisedOrganisations = normalise(action.payload)
+      dispatch(normaliseOrganisationsSuccess(normalisedOrganisations))
+    }
+    return result
+  }
+
+export const setOrganisationsFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (normaliseOrganisationsSuccess.match(action)) {
+      dispatch(setOrganisations(action.payload))
     }
     return result
   }

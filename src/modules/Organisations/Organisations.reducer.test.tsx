@@ -1,39 +1,70 @@
-import { rootStateFixture } from 'redux/redux.test.fixtures'
-
 import SUT, { clearOrganisations, INITIAL_STATE, setOrganisations } from './Organisations.reducer'
 
 describe('modules/Organisations/Organisations.reducer', () => {
   describe('setOrganisations', () => {
-    it('should set organisations correctly', () => {
-      // given ....
-      const mockState = rootStateFixture()
-      const mockData = [
-        {
-          key: 'SOME_KEY',
-          value: 'SOME_VALUE',
+    it('should correctly add the organisations credentials', () => {
+      // given ...an initial state
+      const state = INITIAL_STATE
+
+      // when ... we add new organisations
+      const organisationsMock = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Organisation 1',
+          id2: 'Organisation 2',
+          id3: 'Organisation 3',
         },
-      ]
-      // when ... we set the Organisations credentials
-      const action = setOrganisations(mockData)
-      const result = SUT(mockState, action)
-      // then ... should set the organisations correctly
-      expect(result).toEqual(mockData)
+      }
+      // @ts-ignore
+      const action = setOrganisations(organisationsMock)
+      const result = SUT(state, action)
+
+      // then ... state should include the new organisations
+      expect(result).toEqual(organisationsMock)
+    })
+    it('should overwrite all current credentials', () => {
+      // given ...an initial state
+      const state = {
+        ids: ['idA', 'idB'],
+        entities: {
+          idA: 'Organisation A',
+          idB: 'Organisation B',
+        },
+      }
+
+      // when ... we add new organisations
+      const organisationsMock = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Organisation 1',
+          id2: 'Organisation 2',
+          id3: 'Organisation 3',
+        },
+      }
+      // @ts-ignore - the shape of the data doesn't matter
+      const action = setOrganisations(organisationsMock)
+      // @ts-ignore - the shape of the data doesn't matter
+      const result = SUT(state, action)
+
+      // then ... state should include the new organisations
+      expect(result).toEqual(organisationsMock)
     })
   })
   describe('clearOrganisations', () => {
     it('should clear organisations state', () => {
       // give ... organisations in state
-      const mockState = rootStateFixture({
-        organisations: [
-          {
-            key: 'SOME_KEY',
-            value: 'SOME_VALUE',
-          },
-        ],
-      })
+      const state = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Organisation 1',
+          id2: 'Organisation 2',
+          id3: 'Organisation 3',
+        },
+      }
       //when we clearOrganisations
       const action = clearOrganisations()
-      const result = SUT(mockState, action)
+      const result = SUT(state, action)
+
       // then ... should set the default Organisations state
       expect(result).toEqual(INITIAL_STATE)
     })
