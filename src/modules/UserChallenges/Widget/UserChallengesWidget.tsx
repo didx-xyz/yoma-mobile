@@ -1,10 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvCard, { CvCardListBody } from '../../components/CvCard'
-import { Colors } from '../../styles'
-import UserChallengeItem from './UserChallengeItem'
-import { NormalisedUserChallenges } from './UserChallenges.types'
+import CvCard, { CvCardListBody } from '../../../components/CvCard'
+import { Colors } from '../../../styles'
+import UserChallengeItem from '../Item'
+import { NormalisedUserChallenges } from '../UserChallenges.types'
 
 interface Props {
   challenges: NormalisedUserChallenges

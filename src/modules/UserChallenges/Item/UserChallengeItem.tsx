@@ -2,7 +2,7 @@ import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import React from 'react'
 import { View } from 'react-native'
 
-import { Optional } from '../../components'
+import { Optional } from '../../../components'
 import styles from './UserChallengeItem.styles'
 
 interface Props {
