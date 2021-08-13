@@ -13,7 +13,6 @@ import {
   mergeDeepRight,
   objOf,
   of,
-  path,
   pathOr,
   pipe,
   unless,
@@ -26,7 +25,6 @@ import { ApiCall, ApiClientArgs, ApiMeta, PrepareApiRequestData } from './api.ty
 export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<ApiMeta>) =>
   pipe(objOf(key), mergeDeepRight(config))
 
-export const extractPayloadData = path(['payload', 'data', 'data'])
 export const addIdAsEndpointToConfig = addValueWithGivenKeyToConfig('endpoint')
 export const prependIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: string) =>
   evolve({
