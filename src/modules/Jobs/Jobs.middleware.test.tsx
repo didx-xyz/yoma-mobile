@@ -67,7 +67,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
       // then ...validate createJobSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly handle job credential create success', () => {
+    it('should correctly handle job create success', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const mockNotification = jest.fn()
@@ -94,7 +94,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
     })
   })
   describe('createJobFailureFlow', () => {
-    it('should correctly handle job credentials create failure', () => {
+    it('should correctly handle job create failure', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const action = createJobFailure('FAILED')
