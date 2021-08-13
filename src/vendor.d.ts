@@ -14,6 +14,7 @@ declare module 'ramda' {
   export function filter(...rest: any[]): any
   export function find(...rest: any[]): any
   export function flatten(...rest: any[]): any[]
+  export function has(...rest: any[]): any
   export function head(...rest: any[]): any
   export function identity(...rest: any[]): any
   export function ifElse(...rest: any[]): any

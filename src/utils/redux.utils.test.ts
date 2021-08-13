@@ -13,6 +13,10 @@ describe('src/utils/redux.utils', () => {
           id: 'id2',
           other: 'OTHER OTHER DATA',
         },
+        {
+          key: 'id3',
+          other: 'OTHER OTHER DATA',
+        },
       ]
       // when ...
       const result = SUT.normalise(data)
@@ -28,8 +32,12 @@ describe('src/utils/redux.utils', () => {
             id: 'id2',
             other: 'OTHER OTHER DATA',
           },
+          id3: {
+            key: 'id3',
+            other: 'OTHER OTHER DATA',
+          },
         },
-        ids: ['id1', 'id2'],
+        ids: ['id1', 'id2', 'id3'],
       })
     })
   })

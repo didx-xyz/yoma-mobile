@@ -1,67 +1,69 @@
-import { rootStateFixture } from 'redux/redux.test.fixtures'
-
-import SUT, { clearSkills, INITIAL_STATE, setFilteredSkills, setSkillEntities } from './Skills.reducer'
+import SUT, { clearSkills, INITIAL_STATE, setSkills } from './Skills.reducer'
 
 describe('modules/Skills/Skills.reducer', () => {
-  describe('setSkillEntities', () => {
-    it('should set the Skills state correctly', () => {
-      // given ....
-      const mockData = [
-        {
-          key: 'SOME_KEY',
-          value: 'SOME_VALUE',
-        },
-      ]
-      const mockState = {
-        filtered: [],
-        allValues: ['SOME_VALUE'],
-        allKeys: ['SOME_KEY'],
-        byValue: {
-          SOME_VALUE: {
-            key: 'SOME_KEY',
-            value: 'SOME_VALUE',
-          },
-        },
-        byKey: {
-          SOME_KEY: {
-            key: 'SOME_KEY',
-            value: 'SOME_VALUE',
-          },
+  describe('setSkills', () => {
+    it('should correctly add the skills credentials', () => {
+      // given ...an initial state
+      const state = INITIAL_STATE
+
+      // when ... we add new skills
+      const skillsMock = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Skill 1',
+          id2: 'Skill 2',
+          id3: 'Skill 3',
         },
       }
-      // when ... we set the Skills
-      const action = setSkillEntities(mockData)
-      const result = SUT(INITIAL_STATE, action)
-      // then ... should set the state correctly
-      expect(result).toEqual(mockState)
+      // @ts-ignore
+      const action = setSkills(skillsMock)
+      const result = SUT(state, action)
+
+      // then ... state should include the new skills
+      expect(result).toEqual(skillsMock)
     })
-  })
-  describe('setFilteredSkills', () => {
-    it('should set the Skills credentials correctly', () => {
-      // given ....
-      const mockState = INITIAL_STATE
-      const mockData = ['SOME_VALUE']
-      // when ... we set the Skills
-      const action = setFilteredSkills(mockData)
-      const result = SUT(mockState, action)
-      // then ... should set the FilteredSkills correctly
-      expect(result.filtered).toEqual(mockData)
+    it('should overwrite all current credentials', () => {
+      // given ...an initial state
+      const state = {
+        ids: ['idA', 'idB'],
+        entities: {
+          idA: 'Skill A',
+          idB: 'Skill B',
+        },
+      }
+
+      // when ... we add new skills
+      const skillsMock = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Skill 1',
+          id2: 'Skill 2',
+          id3: 'Skill 3',
+        },
+      }
+      // @ts-ignore - the shape of the data doesn't matter
+      const action = setSkills(skillsMock)
+      // @ts-ignore - the shape of the data doesn't matter
+      const result = SUT(state, action)
+
+      // then ... state should include the new skills
+      expect(result).toEqual(skillsMock)
     })
   })
   describe('clearSkills', () => {
     it('should clear skills state', () => {
       // give ... skills in state
-      const mockState = rootStateFixture({
-        skills: [
-          {
-            key: 'SOME_KEY',
-            value: 'SOME_VALUE',
-          },
-        ],
-      })
+      const state = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Skill 1',
+          id2: 'Skill 2',
+          id3: 'Skill 3',
+        },
+      }
       //when we clearSkills
       const action = clearSkills()
-      const result = SUT(mockState, action)
+      const result = SUT(state, action)
       // then ... should set the default Skills state
       expect(result).toEqual(INITIAL_STATE)
     })

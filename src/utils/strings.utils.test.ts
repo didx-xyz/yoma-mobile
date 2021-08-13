@@ -27,15 +27,6 @@ describe('strings.utils', () => {
       ])
     })
   })
-  describe('sliceAt', () => {
-    it('should return array of objects with keys label and value', () => {
-      const array = ['SKILL1', 'SKILL2', 'SKILL3']
-
-      const result = SUT.sliceAt(1, array)
-
-      expect(result.length).toBe(1)
-    })
-  })
   describe('getUppercasedHead', () => {
     it.each([
       ['john', 'J'],

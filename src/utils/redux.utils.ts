@@ -1,26 +1,12 @@
-import { applySpec, identity, keys, path, pipe, prop } from 'ramda'
+import { applySpec, has, identity, ifElse, keys, path, pipe, prop } from 'ramda'
 
 import { objFromListWith } from './ramda.utils'
 
 export const normalise = pipe(
-  objFromListWith(prop('id')),
+  objFromListWith(ifElse(has('key'), prop('key'), prop('id'))),
   applySpec({
     entities: identity,
     ids: keys,
-  }),
-)
-export const normaliseByValue = pipe(
-  objFromListWith(prop('value')),
-  applySpec({
-    allValues: keys,
-    byValue: identity,
-  }),
-)
-export const normaliseByKey = pipe(
-  objFromListWith(prop('key')),
-  applySpec({
-    allKeys: keys,
-    byKey: identity,
   }),
 )
 

@@ -1,29 +1,14 @@
 import { createFixture } from '../../../tests/tests.utils'
-import { SkillsState } from './Skills.types'
+import { Skill } from './Skills.types'
 
-export const SKILLS_STATE_MOCK: SkillsState = {
-  filtered: [],
-  allValues: ['VALUE', 'VALUE1'],
-  allKeys: ['KEY', 'KEY1'],
-  byValue: {
-    VALUE: {
-      key: 'KEY',
-      value: 'VALUE',
-    },
-    VALUE1: {
-      key: 'KEY1',
-      value: 'VALUE1',
-    },
+export const SKILLS_MOCK: Skill[] = [
+  {
+    key: 'key1',
+    value: 'value1',
   },
-  byKey: {
-    KEY: {
-      key: 'KEY',
-      value: 'VALUE',
-    },
-    KEY1: {
-      key: 'KEY1',
-      value: 'VALUE1',
-    },
+  {
+    key: 'key2',
+    value: 'value2',
   },
-}
-export const skillsFixture = createFixture(SKILLS_STATE_MOCK)
+]
+export const skillsFixture = createFixture(SKILLS_MOCK)

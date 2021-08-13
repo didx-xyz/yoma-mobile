@@ -1,7 +1,8 @@
-import { mergeRight, values } from 'ramda'
+import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
+import { StdFn } from 'types/general.types'
 import { showSimpleMessage } from 'utils/error'
-import { filterStringArray, sliceAt } from 'utils/strings.utils'
+import { extractDataFromPayload } from 'utils/redux.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
@@ -9,12 +10,11 @@ import {
   fetchSkills,
   fetchSkillsFailure,
   fetchSkillsSuccess,
-  filterSkillsByName,
-  setFilteredSkills,
-  setSkillEntities,
+  getSkillsSuccess,
+  normaliseSkillsSuccess,
+  setSkills,
 } from './Skills.reducer'
-import { selectSkillValues } from './Skills.selector'
-import { extractSkillsFromPayload } from './Skills.utils'
+import { NormalisedSkills, Skill } from './Skills.types'
 
 export const fetchSkillsFlow: Middleware =
   ({ dispatch }) =>
@@ -34,20 +34,6 @@ export const fetchSkillsFlow: Middleware =
     return result
   }
 
-export const filterSkillsByNameFlow: Middleware =
-  ({ getState, dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (filterSkillsByName.match(action)) {
-      const state = getState()
-      const skillValues = selectSkillValues(state) as string[]
-      const filtered = filterStringArray(action.payload, skillValues)
-      dispatch(setFilteredSkills(filtered))
-    }
-    return result
-  }
-
 export const fetchSkillsSuccessFlow: Middleware =
   ({ dispatch }) =>
   next =>
@@ -55,12 +41,32 @@ export const fetchSkillsSuccessFlow: Middleware =
     const result = next(action)
 
     if (fetchSkillsSuccess.match(action)) {
-      const skillsPayload = extractSkillsFromPayload(action)
-      const skillValues = values(skillsPayload)
-      const slicedSkills = sliceAt(20, skillValues) as []
+      const data = extractDataFromPayload(action)
+      dispatch(getSkillsSuccess(data))
+    }
+    return result
+  }
 
-      dispatch(setSkillEntities(skillsPayload))
-      dispatch(setFilteredSkills(slicedSkills))
+export const normaliseSkillsFlow =
+  (normalise: StdFn<Skill[], NormalisedSkills>): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (getSkillsSuccess.match(action)) {
+      const normalisedSkills = normalise(action.payload)
+      dispatch(normaliseSkillsSuccess(normalisedSkills))
+    }
+    return result
+  }
+
+export const setSkillsFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (normaliseSkillsSuccess.match(action)) {
+      dispatch(setSkills(action.payload))
     }
     return result
   }

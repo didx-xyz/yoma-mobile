@@ -1,6 +1,6 @@
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
-import { filterStringArray } from 'utils/strings.utils'
+import { extractDataFromPayload } from 'utils/redux.utils'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
@@ -10,11 +10,11 @@ import {
   fetchSkills,
   fetchSkillsFailure,
   fetchSkillsSuccess,
-  filterSkillsByName,
-  setFilteredSkills,
-  setSkillEntities,
+  getSkillsSuccess,
+  normaliseSkillsSuccess,
+  setSkills,
 } from './Skills.reducer'
-import { extractSkillsFromPayload } from './Skills.utils'
+import { SKILLS_MOCK } from './Skills.test.fixtures'
 
 describe('modules/Skills/Skills.middleware', () => {
   describe('fetchSkillsFlow', () => {
@@ -33,7 +33,7 @@ describe('modules/Skills/Skills.middleware', () => {
     })
     it('should correctly handle updating the skills state', () => {
       // given ...
-      const mockState = rootStateFixture({})
+      const mockState = rootStateFixture()
 
       const create = createMiddlewareStub(jest, mockState)
       const action = fetchSkills()
@@ -53,58 +53,18 @@ describe('modules/Skills/Skills.middleware', () => {
       )
     })
   })
-  describe('filterSkillsByNameFlow', () => {
-    it('should correctly handle being called', () => {
-      // given ...
-      const mockState = rootStateFixture()
-
-      const create = createMiddlewareStub(jest, mockState)
-      const action = filterSkillsByName('QUERY')
-      // @ts-ignore
-      const { invoke, next } = create(SUT.filterSkillsByNameFlow)
-
-      // when ... we respond to the filterSkillsByName action
-      invoke(action)
-
-      // then ...validate fetchSkillsFlow
-      expect(next).toHaveBeenCalledWith(action)
-    })
-    it('should correctly handle updating the skills filter state', () => {
-      // given ...
-      const mockState = rootStateFixture({
-        skills: {
-          filtered: [],
-          allValues: ['VALUE', 'VALUE2'],
-          allKeys: ['KEY', 'KEY1'],
-          byValue: 'SOME_OBJECT',
-          byKey: 'SOME_OBJECT',
-        },
-      })
-
-      const create = createMiddlewareStub(jest, mockState)
-      const action = filterSkillsByName('VALUE')
-      // @ts-ignore
-      const { invoke, store } = create(SUT.filterSkillsByNameFlow)
-      // when ... we respond to the filterSkillsByName action
-      invoke(action)
-
-      // then ...validate filterSkillsByNameFlow
-      const filtered = filterStringArray(action.payload, ['VALUE'])
-      expect(store.dispatch).toHaveBeenCalledWith(setFilteredSkills(filtered))
-    })
-  })
   describe('fetchSkillsSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const mockResponseData = {
         data: {
-          data: [
-            {
-              key: 'SOME_KEY',
-              value: 'SOME_VALUE',
-            },
-          ],
+          data: SKILLS_MOCK,
+        },
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
         },
       }
 
@@ -116,21 +76,12 @@ describe('modules/Skills/Skills.middleware', () => {
       // then ...validate fetchSkillsSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly set normalised skills to state on successful fetch', () => {
+    it('should correctly s skills to state on successful fetch', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const mockResponseData = {
         data: {
-          data: [
-            {
-              key: 'SOME_KEY',
-              value: 'SOME_VALUE',
-            },
-            {
-              key: 'SOME_KEY1',
-              value: 'SOME_VALUE1',
-            },
-          ],
+          data: SKILLS_MOCK,
         },
         meta: {
           success: true,
@@ -144,10 +95,87 @@ describe('modules/Skills/Skills.middleware', () => {
       const { store, invoke } = create(SUT.fetchSkillsSuccessFlow)
       // when ... we respond to the fetchSkillsSuccess action
       invoke(action)
-      // then ...validate setSkillEntities
+      // then ...validate setSkills
 
-      const skillsPayload = extractSkillsFromPayload(action)
-      expect(store.dispatch).toHaveBeenCalledWith(setSkillEntities(skillsPayload))
+      const data = extractDataFromPayload(action)
+      expect(store.dispatch).toHaveBeenCalledWith(getSkillsSuccess(data))
+    })
+  })
+  describe('normaliseSkillsFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const skillCredentialsMock = [{ id1: 'skill1' }, { id2: 'skill2' }]
+      const normalisedChallengesMock = {
+        ids: ['id1', 'id2'],
+        entries: { id1: 'skill 1', id2: 'skill 2' },
+      }
+      const normaliseMock = jest.fn(() => normalisedChallengesMock)
+      // @ts-ignore - data shape doesn't matter for test
+      const action = getSkillsSuccess(skillCredentialsMock)
+
+      // when ...
+      // @ts-ignore - data shape doesn't matter for test
+      const { invoke, store, next } = create(SUT.normaliseSkillsFlow(normaliseMock))
+      invoke(action)
+
+      // then ...
+      expect(store.dispatch).toHaveBeenCalled()
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should normalise and forward the skill credentials', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const skillCredentialsMock = [{ id1: 'skill1' }, { id2: 'skill2' }]
+      const normalisedChallengesMock = {
+        ids: ['id1', 'id2'],
+        entries: { id1: 'skill 1', id2: 'skill 2' },
+      }
+      const normaliseMock = jest.fn(() => normalisedChallengesMock)
+      // @ts-ignore - data shape doesn't matter for test
+      const action = getSkillsSuccess(skillCredentialsMock)
+
+      // when ...
+      // @ts-ignore - data shape doesn't matter for test
+      const { invoke, store } = create(SUT.normaliseSkillsFlow(normaliseMock))
+      invoke(action)
+
+      // then ...
+      // @ts-ignore - data shape doesn't matter for test
+      expect(store.dispatch).toHaveBeenCalledWith(normaliseSkillsSuccess(normalisedChallengesMock))
+    })
+  })
+  describe('setSkillsFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+
+      const normalisedChallengesMock = 'NORMALISED SKILLS DATA'
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      const action = normaliseSkillsSuccess(normalisedChallengesMock)
+
+      // when ...
+      const { invoke, store, next } = create(SUT.setSkillsFlow)
+      invoke(action)
+
+      // then ...
+      expect(store.dispatch).toHaveBeenCalled()
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should set the normalised skill data', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      const action = normaliseSkillsSuccess('NORMALISED SKILLS DATA')
+
+      // when ... we have skills data to store in state
+      const { invoke, store } = create(SUT.setSkillsFlow)
+      invoke(action)
+
+      // then ...we want to forward it with our reducer action
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      expect(store.dispatch).toHaveBeenCalledWith(setSkills('NORMALISED SKILLS DATA'))
     })
   })
   describe('fetchSkillsFailureFlow', () => {
