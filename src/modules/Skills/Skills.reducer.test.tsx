@@ -64,6 +64,7 @@ describe('modules/Skills/Skills.reducer', () => {
       //when we clearSkills
       const action = clearSkills()
       const result = SUT(state, action)
+
       // then ... should set the default Skills state
       expect(result).toEqual(INITIAL_STATE)
     })

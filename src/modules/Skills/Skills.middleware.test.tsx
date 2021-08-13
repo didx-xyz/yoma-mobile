@@ -73,10 +73,11 @@ describe('modules/Skills/Skills.middleware', () => {
       const { invoke, next } = create(SUT.fetchSkillsSuccessFlow)
       // when ... we respond to the fetchSkillsSuccess action
       invoke(action)
+
       // then ...validate fetchSkillsSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly s skills to state on successful fetch', () => {
+    it('should correctly add skills to state on successful fetch', () => {
       // given ...
       const create = createMiddlewareStub(jest)
       const mockResponseData = {
