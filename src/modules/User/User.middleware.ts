@@ -87,6 +87,20 @@ export const fetchUserCredentialsFlow: Middleware =
     return result
   }
 
+export const fetchUserCredentialsFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserCredentialsFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+    }
+    return result
+  }
+
 export const updateUserSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
@@ -198,20 +212,6 @@ export const updateUserPhotoFailureFlow =
     if (updateUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', action.payload)
-    }
-    return result
-  }
-
-export const fetchUserCredentialsFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (fetchUserCredentialsFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
     }
     return result
   }

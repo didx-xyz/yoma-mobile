@@ -1,6 +1,6 @@
 import SUT, { clearUserJobs, INITIAL_STATE, setUserJobs } from './UserJobs.reducer'
 
-describe('src/modules/User/Jobs/Jobs.redux', () => {
+describe('src/modules/User/Jobs/Jobs.reducer', () => {
   describe('setUserJobs', () => {
     it('should correctly add the jobs credentials', () => {
       // given ...an initial state

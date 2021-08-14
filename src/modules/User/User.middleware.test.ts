@@ -241,164 +241,6 @@ describe('modules/User/User.middleware', () => {
       )
     })
   })
-  describe('uploadUserPhotoFlow', () => {
-    it('should correctly handle being called', async () => {
-      // given ...
-      const create = createMiddlewareStub(jest)
-      const imagePickerStub = {
-        openCamera: () => jest.fn(),
-      }
-      const createPayloadStub = jest.fn()
-      const action = uploadUserPhoto()
-      // @ts-ignore
-      // when ... we get a request for a user photo to be uploaded
-      const { invoke, next, store } = create(
-        SUT.uploadUserPhotoFlow({
-          imagePicker: imagePickerStub,
-          createPayload: createPayloadStub,
-        }),
-      )
-
-      await invoke(action)
-
-      // then ...we should respond correctly
-      expect(store.dispatch).toHaveBeenCalled()
-      expect(next).toHaveBeenCalledWith(action)
-    })
-    it('should correctly upload user profile photo', async () => {
-      const create = createMiddlewareStub(jest)
-      const imagePickerStub = {
-        openCamera: () => jest.fn(),
-      }
-      const createPayloadStub = jest.fn(() => 'PHOTO_PAYLOAD_RESPONSE')
-      const action = uploadUserPhoto()
-
-      // when ... we successfully upload a users photo
-      const { invoke, store } = create(
-        SUT.uploadUserPhotoFlow({
-          imagePicker: imagePickerStub,
-          createPayload: createPayloadStub,
-        }),
-      )
-
-      await invoke(action)
-
-      // then ... we should successfully upload the user image
-      expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoSuccess('PHOTO_PAYLOAD_RESPONSE'))
-    })
-    it('should correctly handle any failure', async () => {
-      const create = createMiddlewareStub(jest)
-      const imagePickerStub = {
-        openCamera: () => jest.fn(),
-      }
-      const createPayloadStub = jest.fn(() => {
-        throw 'SOME ERROR'
-      })
-      const action = uploadUserPhoto()
-
-      // when ... we fail to upload the user
-      const { invoke, store } = create(
-        SUT.uploadUserPhotoFlow({
-          imagePicker: imagePickerStub,
-          createPayload: createPayloadStub,
-        }),
-      )
-
-      await invoke(action)
-
-      // then ... we should successfully upload the user image
-      expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoFailure('SOME ERROR'))
-    })
-  })
-  describe('uploadUserPhotoSuccessFlow', () => {
-    it('should correctly handle being called', () => {
-      const userId = 'USER ID'
-      const create = createMiddlewareStub(jest, { user: { id: userId } })
-
-      // given ... the uploadUserPhotoSuccess action is fired
-      const action = uploadUserPhotoSuccess('PAYLOAD')
-      // @ts-ignore
-      const { invoke, next, store } = create(SUT.uploadUserPhotoSuccessFlow)
-
-      // when ... we respond to the uploadUserPhotoSuccess action
-      invoke(action)
-      // then ...validate uploadUserPhotoSuccessFlow
-      expect(store.dispatch).toHaveBeenCalled()
-      expect(next).toHaveBeenCalledWith(action)
-    })
-    it('should correctly upload user profile photo', () => {
-      const userId = 'USER ID'
-      const create = createMiddlewareStub(jest, { user: { id: userId } })
-
-      // given ... the uploadUserPhotoSuccess action is fired
-      const action = uploadUserPhotoSuccess('PAYLOAD')
-      // @ts-ignore
-      const { invoke, store } = create(SUT.uploadUserPhotoSuccessFlow)
-      // when ... we respond to the uploadUserPhotoSuccess action
-      invoke(action)
-
-      // then ...   call update user photo API
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)('USER ID')
-      expect(store.dispatch).toHaveBeenCalledWith(
-        ApiActions.apiRequest(
-          mergeRight(config, {
-            onSuccess: updateUserPhotoSuccess,
-            onFailure: updateUserPhotoFailure,
-          }),
-          action.payload,
-        ),
-      )
-    })
-  })
-
-  describe('uploadUserPhotoFailureFlow', () => {
-    it('should correctly handle user photo upload failure', () => {
-      // given ...
-      const create = createMiddlewareStub(jest)
-      const action = uploadUserPhotoFailure('FAILED')
-      const mockNotification = jest.fn()
-      // @ts-ignore
-      const { invoke } = create(SUT.uploadUserPhotoFailureFlow({ notification: mockNotification }))
-
-      // when ... we respond to the uploadUserPhotoFailure action
-      invoke(action)
-
-      // then ...validate failure
-      expect(mockNotification).toHaveBeenCalled()
-    })
-  })
-  describe('updateUserPhotoSuccessFlow', () => {
-    it('should correctly handle user photo update failure', () => {
-      // given ...
-      const create = createMiddlewareStub(jest)
-      const action = updateUserPhotoSuccess()
-      const mockNotification = jest.fn()
-      // @ts-ignore
-      const { invoke } = create(SUT.updateUserPhotoSuccessFlow({ notification: mockNotification }))
-
-      // when ... we respond to the updateUserPhotoSuccess action
-      invoke(action)
-
-      // then ...validate updateUserPhotoSuccessFlow
-      expect(mockNotification).toHaveBeenCalled()
-    })
-  })
-  describe('updateUserPhotoFailureFlow', () => {
-    it('should correctly handle user photo update failure', () => {
-      // given ...
-      const create = createMiddlewareStub(jest)
-      const action = updateUserPhotoFailure('FAILED')
-      const mockNotification = jest.fn()
-      // @ts-ignore
-      const { invoke } = create(SUT.updateUserPhotoFailureFlow({ notification: mockNotification }))
-
-      // when ... we respond to the updateUserPhotoFailureFlow action
-      invoke(action)
-
-      // then ...validate failure
-      expect(mockNotification).toHaveBeenCalled()
-    })
-  })
   describe('fetchUserCredentialsFailureFlow', () => {
     it('should correctly handle user credentials fetch failure', () => {
       // given ...
@@ -414,5 +256,162 @@ describe('modules/User/User.middleware', () => {
       // then ...validate failure
       expect(mockNotification).toHaveBeenCalled()
     })
+  })
+})
+describe('uploadUserPhotoFlow', () => {
+  it('should correctly handle being called', async () => {
+    // given ...
+    const create = createMiddlewareStub(jest)
+    const imagePickerStub = {
+      openCamera: () => jest.fn(),
+    }
+    const createPayloadStub = jest.fn()
+    const action = uploadUserPhoto()
+    // @ts-ignore
+    // when ... we get a request for a user photo to be uploaded
+    const { invoke, next, store } = create(
+      SUT.uploadUserPhotoFlow({
+        imagePicker: imagePickerStub,
+        createPayload: createPayloadStub,
+      }),
+    )
+
+    await invoke(action)
+
+    // then ...we should respond correctly
+    expect(store.dispatch).toHaveBeenCalled()
+    expect(next).toHaveBeenCalledWith(action)
+  })
+  it('should correctly upload user profile photo', async () => {
+    const create = createMiddlewareStub(jest)
+    const imagePickerStub = {
+      openCamera: () => jest.fn(),
+    }
+    const createPayloadStub = jest.fn(() => 'PHOTO_PAYLOAD_RESPONSE')
+    const action = uploadUserPhoto()
+
+    // when ... we successfully upload a users photo
+    const { invoke, store } = create(
+      SUT.uploadUserPhotoFlow({
+        imagePicker: imagePickerStub,
+        createPayload: createPayloadStub,
+      }),
+    )
+
+    await invoke(action)
+
+    // then ... we should successfully upload the user image
+    expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoSuccess('PHOTO_PAYLOAD_RESPONSE'))
+  })
+  it('should correctly handle any failure', async () => {
+    const create = createMiddlewareStub(jest)
+    const imagePickerStub = {
+      openCamera: () => jest.fn(),
+    }
+    const createPayloadStub = jest.fn(() => {
+      throw 'SOME ERROR'
+    })
+    const action = uploadUserPhoto()
+
+    // when ... we fail to upload the user
+    const { invoke, store } = create(
+      SUT.uploadUserPhotoFlow({
+        imagePicker: imagePickerStub,
+        createPayload: createPayloadStub,
+      }),
+    )
+
+    await invoke(action)
+
+    // then ... we should successfully upload the user image
+    expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoFailure('SOME ERROR'))
+  })
+})
+describe('uploadUserPhotoSuccessFlow', () => {
+  it('should correctly handle being called', () => {
+    const userId = 'USER ID'
+    const create = createMiddlewareStub(jest, { user: { id: userId } })
+
+    // given ... the uploadUserPhotoSuccess action is fired
+    const action = uploadUserPhotoSuccess('PAYLOAD')
+    // @ts-ignore
+    const { invoke, next, store } = create(SUT.uploadUserPhotoSuccessFlow)
+
+    // when ... we respond to the uploadUserPhotoSuccess action
+    invoke(action)
+    // then ...validate uploadUserPhotoSuccessFlow
+    expect(store.dispatch).toHaveBeenCalled()
+    expect(next).toHaveBeenCalledWith(action)
+  })
+  it('should correctly upload user profile photo', () => {
+    const userId = 'USER ID'
+    const create = createMiddlewareStub(jest, { user: { id: userId } })
+
+    // given ... the uploadUserPhotoSuccess action is fired
+    const action = uploadUserPhotoSuccess('PAYLOAD')
+    // @ts-ignore
+    const { invoke, store } = create(SUT.uploadUserPhotoSuccessFlow)
+    // when ... we respond to the uploadUserPhotoSuccess action
+    invoke(action)
+
+    // then ...   call update user photo API
+    const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)('USER ID')
+    expect(store.dispatch).toHaveBeenCalledWith(
+      ApiActions.apiRequest(
+        mergeRight(config, {
+          onSuccess: updateUserPhotoSuccess,
+          onFailure: updateUserPhotoFailure,
+        }),
+        action.payload,
+      ),
+    )
+  })
+})
+describe('uploadUserPhotoFailureFlow', () => {
+  it('should correctly handle user photo upload failure', () => {
+    // given ...
+    const create = createMiddlewareStub(jest)
+    const action = uploadUserPhotoFailure('FAILED')
+    const mockNotification = jest.fn()
+    // @ts-ignore
+    const { invoke } = create(SUT.uploadUserPhotoFailureFlow({ notification: mockNotification }))
+
+    // when ... we respond to the uploadUserPhotoFailure action
+    invoke(action)
+
+    // then ...validate failure
+    expect(mockNotification).toHaveBeenCalled()
+  })
+})
+describe('updateUserPhotoSuccessFlow', () => {
+  it('should correctly handle user photo update failure', () => {
+    // given ...
+    const create = createMiddlewareStub(jest)
+    const action = updateUserPhotoSuccess()
+    const mockNotification = jest.fn()
+    // @ts-ignore
+    const { invoke } = create(SUT.updateUserPhotoSuccessFlow({ notification: mockNotification }))
+
+    // when ... we respond to the updateUserPhotoSuccess action
+    invoke(action)
+
+    // then ...validate updateUserPhotoSuccessFlow
+    expect(mockNotification).toHaveBeenCalled()
+  })
+})
+describe('updateUserPhotoFailureFlow', () => {
+  it('should correctly handle user photo update failure', () => {
+    // given ...
+    const create = createMiddlewareStub(jest)
+    const action = updateUserPhotoFailure('FAILED')
+    const mockNotification = jest.fn()
+    // @ts-ignore
+    const { invoke } = create(SUT.updateUserPhotoFailureFlow({ notification: mockNotification }))
+
+    // when ... we respond to the updateUserPhotoFailureFlow action
+    invoke(action)
+
+    // then ...validate failure
+    expect(mockNotification).toHaveBeenCalled()
   })
 })

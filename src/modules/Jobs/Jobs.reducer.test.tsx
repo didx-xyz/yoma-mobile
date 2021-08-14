@@ -20,7 +20,7 @@ describe('modules/Jobs/Jobs.reducer', () => {
     it('should clear job state', () => {
       // give ... jobs in state
       const mockState = rootStateFixture({
-        job: JOB_MOCK,
+        jobs: JOB_MOCK,
       })
       //when we clearJobs
       const action = clearJob()

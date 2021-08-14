@@ -9,7 +9,7 @@ import { RootState } from './redux.types'
 export const defaultRootState: RootState = {
   auth: AUTH_INITIAL_STATE,
   user: USER_INITIAL_STATE,
-  job: JOBS_INITIAL_STATE,
+  jobs: JOBS_INITIAL_STATE,
   userJobs: USER_JOBS_INITIAL_STATE,
   userChallenges: USER_CHALLENGES_INITIAL_STATE,
 }

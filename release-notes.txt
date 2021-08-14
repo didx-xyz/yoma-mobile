@@ -1,6 +1,6 @@
 Ver 0.0.1
 Latest:
-- adding helper utils for handling MyCV data
+- added jobs and user jobs to state
 
 Recent:
 - docs upgrade, no new features added.
@@ -10,3 +10,4 @@ Recent:
 - automatically re-auth the user on any unauthorised from the api
 - save edited user profile data
 - my cv display real data in about
+- added jobs and user jobs to state
