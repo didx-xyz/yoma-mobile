@@ -20,7 +20,7 @@ const UserChallengeItem = ({ name, startDate, avatarUrl, isValidated }: Props) =
             Tick {avatarUrl}
           </Text.Body>
         </Optional>
-        <Text.Header level={HeaderLevels.h3}>👾</Text.Header>
+        <Text.Header level={HeaderLevels.h2}>👾</Text.Header>
       </View>
       <View style={styles.content}>
         <Text.Header level={HeaderLevels.h6}>{name}</Text.Header>
