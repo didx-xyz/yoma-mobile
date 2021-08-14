@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { applySpec, evolve, isNil, map, not, path, pathOr, pipe, prop, propOr, tap } from 'ramda'
+import { applySpec, evolve, map, path, pathOr, pipe, propOr } from 'ramda'
 
 import { RootState } from '../../redux/redux.types'
 import { USER_CHALLENGES_STATE_KEY } from './UserChallenges.constants'
