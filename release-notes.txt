@@ -3,11 +3,7 @@ Latest:
 - added jobs and user jobs to state
 
 Recent:
+- adding User Challenges credentials to state
+- adding helper utils for handling MyCV data
 - docs upgrade, no new features added.
 - Adjusted the widgets on MyCv to be able to take different types of content (previously they could only take text)
-- save new profile image
-- add auth with refresh token
-- automatically re-auth the user on any unauthorised from the api
-- save edited user profile data
-- my cv display real data in about
-- added jobs and user jobs to state
