@@ -17,12 +17,12 @@ interface Props {
 
 const CvCardListBody = ({ data, onViewAll, Item, maxDisplay = 2 }: Props) => {
   const { ids, entities } = data
-  const dataIdsToDisplay: typeof ids = slice(0, maxDisplay, ids)
+  const dataIdsToDisplay: string[] = ids ? slice(0, maxDisplay, ids) : []
   return (
     <View style={styles.container}>
       {dataIdsToDisplay.map((item, index) => (
-        <View>
-          <Item key={item || index} {...entities[item]} />
+        <View key={item || index}>
+          <Item {...entities[item]} />
           <Optional condition={index !== dataIdsToDisplay.length - 1}>
             <Divider />
           </Optional>
