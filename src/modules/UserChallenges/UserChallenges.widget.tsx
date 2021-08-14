@@ -2,15 +2,19 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CvCard, { CvCardListBody } from '../../components/CvCard'
+import { NormalisedData } from '../../redux/redux.types'
 import { Colors } from '../../styles'
 import UserChallengeItem from './UserChallengeItem'
 
-const mockData: any[] = [
-  { id: 'id1', name: 'A NAME', startDate: '10 April 2020', avatarUrl: '', isValidated: false },
-  { id: 'id2', name: 'B NAME', startDate: '11 May 2020', avatarUrl: '', isValidated: false },
-  { id: 'id3', name: 'C NAME', startDate: '12 June 2020', avatarUrl: '', isValidated: false },
-  { id: 'id4', name: 'D NAME', startDate: '13 July 2020', avatarUrl: '', isValidated: false },
-]
+const mockData: NormalisedData = {
+  ids: ['id1', 'id2', 'id3', 'id4'],
+  entities: {
+    id1: { id: 'id1', name: 'A NAME', startDate: '10 April 2020', avatarUrl: '', isValidated: false },
+    id2: { id: 'id2', name: 'B NAME', startDate: '11 May 2020', avatarUrl: '', isValidated: false },
+    id3: { id: 'id3', name: 'C NAME', startDate: '12 June 2020', avatarUrl: '', isValidated: false },
+    id4: { id: 'id4', name: 'D NAME', startDate: '13 July 2020', avatarUrl: '', isValidated: false },
+  },
+}
 
 interface Props {}
 const UserChallengesWidget = ({}: Props) => {
@@ -18,7 +22,7 @@ const UserChallengesWidget = ({}: Props) => {
 
   return (
     <CvCard
-      count={mockData.length}
+      count={mockData.ids.length}
       badgeColor={Colors.secondaryPurple}
       title={t('Completed challenges')}
       fallback={t('Have you completed any challenges yet?')}

@@ -65,6 +65,39 @@ export const updateUserFlow: Middleware =
     }
     return result
   }
+
+export const updateUserSuccessFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateUserSuccess.match(action)) {
+      const user = extractUserFromUserUpdateSuccess(action)
+      dispatch(setUser(user))
+      //TODO: add navigation as a dependency
+      Navigation.navigate(HomeNavigationRoutes.Home)
+      // TODO: this should be handled by the notification module
+      notification('success', 'Details Updated')
+    }
+    return result
+  }
+
+export const updateUserFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (updateUserFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+    }
+    return result
+  }
+
 export const fetchUserCredentialsFlow: Middleware =
   ({ dispatch, getState }) =>
   next =>
@@ -95,38 +128,6 @@ export const fetchUserCredentialsFailureFlow =
     const result = next(action)
 
     if (fetchUserCredentialsFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
-    }
-    return result
-  }
-
-export const updateUserSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (updateUserSuccess.match(action)) {
-      const user = extractUserFromUserUpdateSuccess(action)
-      dispatch(setUser(user))
-      //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Home)
-      // TODO: this should be handled by the notification module
-      notification('success', 'Details Updated')
-    }
-    return result
-  }
-
-export const updateUserFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (updateUserFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
     }
@@ -174,6 +175,20 @@ export const uploadUserPhotoSuccessFlow: Middleware =
     return result
   }
 
+export const uploadUserPhotoFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (uploadUserPhotoFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', action.payload)
+    }
+    return result
+  }
+
 export const updateUserPhotoSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
@@ -189,19 +204,7 @@ export const updateUserPhotoSuccessFlow =
     }
     return result
   }
-export const uploadUserPhotoFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
 
-    if (uploadUserPhotoFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', action.payload)
-    }
-    return result
-  }
 export const updateUserPhotoFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
