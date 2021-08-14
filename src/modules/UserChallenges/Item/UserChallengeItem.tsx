@@ -8,7 +8,7 @@ import styles from './UserChallengeItem.styles'
 interface Props {
   name: string
   startDate: string
-  avatarUrl: string
+  avatarUrl?: string
   isValidated: boolean
 }
 const UserChallengeItem = ({ name, startDate, avatarUrl, isValidated }: Props) => {
@@ -17,7 +17,7 @@ const UserChallengeItem = ({ name, startDate, avatarUrl, isValidated }: Props) =
       <View style={styles.imageWrap}>
         <Optional condition={isValidated}>
           <Text.Body level={BodyLevels.small} style={styles.validated}>
-            Tick {avatarUrl}
+            Tick {avatarUrl && avatarUrl}
           </Text.Body>
         </Optional>
         <Text.Header level={HeaderLevels.h2}>👾</Text.Header>
