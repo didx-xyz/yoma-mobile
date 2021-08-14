@@ -4,6 +4,7 @@ Latest:
 
 Recent:
 - adding generic list component for CvCard/MyCV
+- added jobs and user jobs to state
 - adding User Challenges credentials to state
 - adding helper utils for handling MyCV data
 - docs upgrade, no new features added.
