@@ -241,6 +241,22 @@ describe('modules/User/User.middleware', () => {
       )
     })
   })
+  describe('fetchUserCredentialsFailureFlow', () => {
+    it('should correctly handle user credentials fetch failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = fetchUserCredentialsFailure('FAILED')
+      const mockNotification = jest.fn()
+      // @ts-ignore
+      const { invoke } = create(SUT.fetchUserCredentialsFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the fetchUserCredentialsFailures action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
   describe('uploadUserPhotoFlow', () => {
     it('should correctly handle being called', async () => {
       // given ...
@@ -350,7 +366,6 @@ describe('modules/User/User.middleware', () => {
       )
     })
   })
-
   describe('uploadUserPhotoFailureFlow', () => {
     it('should correctly handle user photo upload failure', () => {
       // given ...
