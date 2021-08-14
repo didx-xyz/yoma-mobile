@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { View } from 'react-native'
 
 import { Colors } from '../../styles'
@@ -9,6 +9,7 @@ import ListCardHeader from '../ListCardHeader'
 import Optional from '../Optional'
 import Text, { TextAlign } from '../Typography'
 import styles from './CvCard.styles'
+import { shouldShowContent } from './CvCard.utils'
 
 type Props = WithChildren<{
   title: string
@@ -21,7 +22,7 @@ const CvCard = ({ title, fallback, count, badgeColor = Colors.white, onEdit, chi
   <View style={styles.container}>
     <ListCardHeader
       color={badgeColor}
-      count={count || 0}
+      count={count}
       header={title}
       hasCountBadge={isNotNil(count) as boolean}
       rightComponent={<EditButton onPress={onEdit} />}
@@ -29,7 +30,7 @@ const CvCard = ({ title, fallback, count, badgeColor = Colors.white, onEdit, chi
     />
     <View style={styles.content}>
       <Optional
-        condition={(!!count && count > 0) || (!!children && !count)}
+        condition={shouldShowContent(count, children)}
         fallback={<Text.Body align={TextAlign.center}>{fallback}</Text.Body>}
       >
         {children}
