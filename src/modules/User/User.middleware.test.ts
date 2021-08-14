@@ -29,8 +29,7 @@ describe('modules/User/User.middleware', () => {
     it('should correctly handle being called', () => {
       // given ... the authLogin action is fired
       const create = createMiddlewareStub(jest)
-      const user = defaultUserLoginResponseData
-      const action = loginSuccess(user)
+      const action = loginSuccess(defaultUserLoginResponseData)
 
       // when ... we respond to the loginSuccess action
       // @ts-ignore
@@ -45,8 +44,7 @@ describe('modules/User/User.middleware', () => {
     it('should correctly set the user data', () => {
       // given ... the authLogin action is fired
       const create = createMiddlewareStub(jest)
-      const user = defaultUserLoginResponseData
-      const action = loginSuccess(user)
+      const action = loginSuccess(defaultUserLoginResponseData)
       // @ts-ignore
 
       // when ... we respond to the loginSuccess action
