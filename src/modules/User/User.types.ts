@@ -47,13 +47,3 @@ export interface UserResponse {
   createdAt: string
   lastLogin: string
 }
-
-export interface UserCredentialPayload {
-  startTime: string
-  endTime: string
-  requestVerification?: boolean
-}
-export interface UserCredentialRequestPayload extends UserCredentialPayload {
-  type: string
-  credentialItemId: string
-}

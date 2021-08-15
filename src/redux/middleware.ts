@@ -48,10 +48,7 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
-  UserMiddleware.setUserOnAuthFlow,
-  UserMiddleware.updateUserFlow,
-  UserMiddleware.updateUserSuccessFlow({ notification: showSimpleMessage }),
-  UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
+  UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
   UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserFlow,
@@ -64,9 +61,6 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
-  UserMiddleware.fetchUserCredentialsFlow,
-  UserMiddleware.fetchUserCredentialsSuccessFlow,
-  UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
