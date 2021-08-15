@@ -1,7 +1,5 @@
 import { UserChallengeFormFields } from './UserChallenges.types'
 
-export const USER_CHALLENGES_STATE_KEY = 'userChallenges'
-
 export const INITIAL_FORM_VALUES: UserChallengeFormFields = {
   challenge: '',
   challengeHostProvider: '',
