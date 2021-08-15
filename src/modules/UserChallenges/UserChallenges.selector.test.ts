@@ -100,19 +100,21 @@ describe('modules/UserChallenges/UserChallenges.selector', () => {
       const result = SUT.default(state)
       // then ...
       expect(result).toEqual({
-        ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
-        entities: {
-          '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-            name: 'Test Graph',
-            startDate: '2021-04-15T00:00:00',
-            avatarUrl: null,
-            isValidated: true,
-          },
-          'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-            name: 'Test Graph2',
-            startDate: '2021-04-15T00:00:00',
-            avatarUrl: 'https://google.com',
-            isValidated: false,
+        challenges: {
+          ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
+          entities: {
+            '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
+              name: 'Test Graph',
+              startDate: '2021-04-15T00:00:00',
+              avatarUrl: null,
+              isValidated: true,
+            },
+            'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
+              name: 'Test Graph2',
+              startDate: '2021-04-15T00:00:00',
+              avatarUrl: 'https://google.com',
+              isValidated: false,
+            },
           },
         },
       })

@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { applySpec, evolve, map, path, pathOr, pipe, propOr } from 'ramda'
+import { applySpec, evolve, map, objOf, path, pathOr, pipe, propOr } from 'ramda'
 
 import { RootState } from '../../redux/redux.types'
 import { USER_CHALLENGES_STATE_KEY } from './UserChallenges.constants'
@@ -19,5 +19,6 @@ export default createSelector(
         }),
       ),
     }),
+    objOf('challenges'),
   ),
 )
