@@ -102,26 +102,6 @@ describe('api/api.utils', () => {
     })
   })
 
-  describe('extractPayloadData', () => {
-    it('should return data from successful payload', () => {
-      // given ... the auth success response
-      const credentials = {
-        payload: {
-          data: {
-            data: {
-              someKey: 'RESPONSE',
-            },
-          },
-        },
-      }
-      // when extractUserFromLoginPayload
-      const result = SUT.extractPayloadData(credentials)
-      //then expect user response data
-      expect(result).toEqual({
-        someKey: 'RESPONSE',
-      })
-    })
-  })
   describe('createTypeParam', () => {
     it('should return a new config back with the value added to the type key when we provide the value', () => {
       // when ... we provide a key and value
