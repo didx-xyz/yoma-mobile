@@ -1,3 +1,9 @@
+import { UserCredentialTypes } from 'api/users/users.types'
+import { setCredentialItem, setCredentialItemId } from 'modules/CredentialItems/CredentialItems.reducer'
+import {
+  extractCredentialItemFromJobFormValues,
+  extractCredentialItemIdFromPayload,
+} from 'modules/CredentialItems/CredentialItems.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
@@ -25,6 +31,8 @@ export const createJobFlow: Middleware =
           action.payload,
         ),
       )
+      const credentialValues = extractCredentialItemFromJobFormValues(UserCredentialTypes.Job)(action)
+      dispatch(setCredentialItem(credentialValues))
     }
     return result
   }
@@ -38,7 +46,9 @@ export const createJobSuccessFlow =
 
     if (createJobSuccess.match(action)) {
       const job = extractDataFromPayload(action)
+      const credentialItemId = extractCredentialItemIdFromPayload(action)
       dispatch(setJob(job))
+      dispatch(setCredentialItemId(credentialItemId))
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Experience)
       // TODO: this should be handled by the notification module

@@ -1,29 +1,35 @@
+import { selectId } from 'modules/User/User.selector'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
-import { actions as ApiActions } from '../../api'
-import { constants as ApiCredentialItemsConstants } from '../../api/users'
+import { actions as ApiActions, utils as ApiUtils } from '../../api'
+import { constants as ApiUserConstants } from '../../api/users'
 import {
-  createCredentialItem,
   createCredentialItemFailure,
   createCredentialItemSuccess,
+  setCredentialItemId,
 } from './CredentialItems.reducer'
+import { selectCredentialItems } from './CredentialItems.selector'
 
 export const createCredentialItemFlow: Middleware =
-  ({ dispatch }) =>
+  ({ getState, dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (createCredentialItem.match(action)) {
+    if (setCredentialItemId.match(action)) {
+      const state = getState()
+      const userId = selectId(state)
+      const credentialItem = selectCredentialItems(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUserConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiCredentialItemsConstants.USERS_CREDENTIALS_CREATE_CONFIG, {
+          mergeRight(config, {
             onSuccess: createCredentialItemSuccess,
             onFailure: createCredentialItemFailure,
           }),
-          action.payload,
+          credentialItem,
         ),
       )
     }

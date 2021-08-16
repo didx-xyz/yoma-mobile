@@ -3,6 +3,7 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 import { Job, JobsRequest, JobsResponse, JobsState } from './Jobs.types'
 
 const name = '[Jobs]'
+//TODO: refactor to use normalise data - jobs response (array)
 export const INITIAL_STATE = {
   id: '',
   title: '',

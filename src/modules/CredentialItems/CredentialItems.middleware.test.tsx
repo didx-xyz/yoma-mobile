@@ -3,20 +3,21 @@ import { USER_JOBS_MOCK } from 'modules/UserJobs/UserJobs.test.fixtures'
 import { mergeRight } from 'ramda'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
-import { actions as ApiActions } from '../../api'
-import { constants as ApiCredentialItemsConstants } from '../../api/users'
+import { actions as ApiActions, utils as ApiUtils } from '../../api'
+import { constants as ApiUserConstants } from '../../api/users'
 import * as SUT from './CredentialItems.middleware'
 import {
   createCredentialItem,
   createCredentialItemFailure,
   createCredentialItemSuccess,
+  setCredentialItemId,
 } from './CredentialItems.reducer'
 
 describe('modules/CredentialItems/CredentialItems.middleware', () => {
   describe('createCredentialItemFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const userId = 'A USER ID'
       const mockPayload = {
         type: UserCredentialTypes.Job,
         credentialItemId: 'ID',
@@ -24,22 +25,25 @@ describe('modules/CredentialItems/CredentialItems.middleware', () => {
         endTime: 'END_TIME',
         requestVerification: false,
       }
+      const create = createMiddlewareStub(jest, { user: { id: userId }, credentialItems: mockPayload })
+
       // when ... we create the user's credentials
-      const action = createCredentialItem(mockPayload)
+      const action = setCredentialItemId('ID')
       // @ts-ignore
       const { store, invoke, next } = create(SUT.createCredentialItemFlow)
       invoke(action)
 
       // then ...
       // ... we should ensure the action continues onto next
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUserConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(ApiCredentialItemsConstants.USERS_CREDENTIALS_CREATE_CONFIG, {
+          mergeRight(config, {
             onSuccess: createCredentialItemSuccess,
             onFailure: createCredentialItemFailure,
           }),
-          action.payload,
+          mockPayload,
         ),
       )
     })

@@ -4,10 +4,10 @@ import { UserCredentials } from 'modules/User/User.types'
 
 export interface CredentialItem {
   type: UserCredentialTypes | null
-  credentialItemId: string
+  credentialItemId: string | null
   startTime: string
   endTime: string
-  requestVerification?: boolean
+  requestVerification: boolean
 }
 
 export interface CredentialItemsResponse {
