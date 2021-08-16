@@ -22,9 +22,8 @@ export interface UserChallenge extends UserCredentialMeta {
   challenge: Challenge
 }
 
-export interface UserChallengeItems
-  extends Pick<UserCredentialMeta, 'startDate' | 'approved'>,
-    Pick<Challenge, 'name' | 'organisationLogoURL'> {}
+export type UserChallengeItems = Pick<UserCredentialMeta, 'startDate' | 'approved'> &
+  Pick<Challenge, 'name' | 'organisationLogoURL'>
 
 export type NormalisedUserChallenges = NormalisedData<UserChallenge>
 export type NormalisedUserChallengeItems = NormalisedData<UserChallengeItems>
