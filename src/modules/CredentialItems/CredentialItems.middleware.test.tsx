@@ -7,7 +7,6 @@ import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
 import * as SUT from './CredentialItems.middleware'
 import {
-  createCredentialItem,
   createCredentialItemFailure,
   createCredentialItemSuccess,
   setCredentialItemId,
