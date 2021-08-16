@@ -2,7 +2,7 @@ Ver 0.0.1
 Latest:
 - adding real data to UserChallenges widget in MyCv
 
-Recent:
+10 Most Recent:
 - merging MyChallenges into UserChallenges
 - adding generic list component for CvCard/MyCV
 - added jobs and user jobs to state
@@ -13,5 +13,3 @@ Recent:
 - save new profile image
 - add auth with refresh token
 - automatically re-auth the user on any unauthorised from the api
-- save edited user profile data
-- my cv display real data in about
