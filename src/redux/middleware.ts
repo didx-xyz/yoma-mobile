@@ -9,6 +9,7 @@ import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../ap
 import { types as ApiUsersTypes } from '../api/users'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
+import { middleware as CredentialCertificateMiddleware } from '../modules/CredentialCertificate'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import { middleware as JobsMiddleware } from '../modules/Jobs'
 import ssoAuth from '../modules/SSOAuth'
@@ -83,6 +84,9 @@ const featureModuleMiddleware = [
   ),
   UserJobsMiddleware.normaliseUserJobsFlow(ReduxUtils.normalise),
   UserJobsMiddleware.setUserJobsFlow,
+  CredentialCertificateMiddleware.createCredentialCertificateFlow,
+  CredentialCertificateMiddleware.createCredentialCertificateSuccessFlow,
+  CredentialCertificateMiddleware.createCredentialCertificateFailureFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
