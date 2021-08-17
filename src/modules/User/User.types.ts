@@ -50,7 +50,7 @@ export interface UserResponse {
   createdAt: string
   lastLogin: string
 }
-
+//TODO: refactor - should be in /CredentialCertificate.types as CredentialCertificate
 export interface UserCredentialMeta {
   id: string
   verifiedAt: string
