@@ -6,13 +6,13 @@ import { showSimpleMessage } from 'utils/error'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
 import {
-  createCredentialItemFailure,
-  createCredentialItemSuccess,
+  createCredentialCertificateFailure,
+  createCredentialCertificateSuccess,
   setCredentialItemId,
-} from './CredentialItems.reducer'
-import { selectCredentialItems } from './CredentialItems.selector'
+} from './CredentialCertificate.reducer'
+import { selectCredentialCertificate } from './CredentialCertificate.selector'
 
-export const createCredentialItemFlow: Middleware =
+export const createCredentialCertificateFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
   action => {
@@ -21,39 +21,39 @@ export const createCredentialItemFlow: Middleware =
     if (setCredentialItemId.match(action)) {
       const state = getState()
       const userId = selectId(state)
-      const credentialItem = selectCredentialItems(state)
+      const credentialCertificate = selectCredentialCertificate(state)
       const config = ApiUtils.prependIdToEndpointInConfig(ApiUserConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: createCredentialItemSuccess,
-            onFailure: createCredentialItemFailure,
+            onSuccess: createCredentialCertificateSuccess,
+            onFailure: createCredentialCertificateFailure,
           }),
-          credentialItem,
+          credentialCertificate,
         ),
       )
     }
     return result
   }
 
-export const createCredentialItemSuccessFlow: Middleware = _store => next => action => {
+export const createCredentialCertificateSuccessFlow: Middleware = _store => next => action => {
   const result = next(action)
 
   //returns a single user credential
-  if (createCredentialItemSuccess.match(action)) {
+  if (createCredentialCertificateSuccess.match(action)) {
   }
 
   return result
 }
 
-export const createCredentialItemFailureFlow =
+export const createCredentialCertificateFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
   action => {
     const result = next(action)
 
-    if (createCredentialItemFailure.match(action)) {
+    if (createCredentialCertificateFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
     }

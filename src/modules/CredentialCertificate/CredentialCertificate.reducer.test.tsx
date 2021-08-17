@@ -2,15 +2,15 @@ import { UserCredentialTypes } from 'api/users/users.types'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
 import SUT, {
-  clearCredentialItem,
+  clearCredentialCertificate,
   INITIAL_STATE,
-  setCredentialItem,
+  setCredentialCertificate,
   setCredentialItemId,
-} from './CredentialItems.reducer'
-import { CREDENTIAL_ITEM_MOCK } from './CredentialItems.test.fixtures'
+} from './CredentialCertificate.reducer'
+import { CREDENTIAL_ITEM_MOCK } from './CredentialCertificate.test.fixtures'
 
-describe('modules/CredentialItems/CredentialItems.reducer', () => {
-  describe('setCredentialItem', () => {
+describe('modules/CredentialCertificate/CredentialCertificate.reducer', () => {
+  describe('setCredentialCertificate', () => {
     it('should set credential props from job form values', () => {
       // given ....
       const mockState = rootStateFixture()
@@ -21,16 +21,16 @@ describe('modules/CredentialItems/CredentialItems.reducer', () => {
         endTime: 'END_TIME',
         requestVerification: false,
       }
-      // when ... we set the setCredentialItem
-      const action = setCredentialItem(mockPayload)
+      // when ... we set the setCredentialCertificate
+      const action = setCredentialCertificate(mockPayload)
       const result = SUT(mockState, action)
 
-      // then ... validate setCredentialItem
+      // then ... validate setCredentialCertificate
       expect(result).toEqual(mockPayload)
     })
   })
   describe('setCredentialItemId', () => {
-    it('should set credentialItemId from payload', () => {
+    it('should set credentialCertificateId from payload', () => {
       // given ....
       const mockState = {
         credentialItemId: null,
@@ -51,17 +51,17 @@ describe('modules/CredentialItems/CredentialItems.reducer', () => {
     })
   })
 
-  describe('clearCredentialItem', () => {
-    it('should clear credentialItem state', () => {
-      // give ... credentialItems in state
+  describe('clearCredentialCertificate', () => {
+    it('should clear credentialCertificate state', () => {
+      // give ... credentialCertificate in state
       const mockState = rootStateFixture({
-        credentialItems: CREDENTIAL_ITEM_MOCK,
+        credentialCertificate: CREDENTIAL_ITEM_MOCK,
       })
-      //when we clearCredentialItems
-      const action = clearCredentialItem()
+      //when we clearCredentialCertificate
+      const action = clearCredentialCertificate()
       const result = SUT(mockState, action)
 
-      // then ... should set the default CredentialItems state
+      // then ... should set the default CredentialCertificate state
       expect(result).toEqual(INITIAL_STATE)
     })
   })

@@ -1,8 +1,8 @@
 import { UserCredentialTypes } from 'api/users/users.types'
 
-import * as SUT from './CredentialItems.utils'
+import * as SUT from './CredentialCertificate.utils'
 
-describe('modules/CredentialItems/CredentialItems.utils', () => {
+describe('modules/CredentialCertificate/CredentialCertificate.utils', () => {
   describe('extractCredentialItemFromJobFormValues', () => {
     it('should return the default value for the id if none exists', () => {
       // given ...
@@ -15,10 +15,10 @@ describe('modules/CredentialItems/CredentialItems.utils', () => {
         endTime: 'END_TIME',
         requestVerification: false,
       }
-      // when ... we get the credentialItem
+      // when ... we get the credentialCertificate
       const result = SUT.extractCredentialItemFromJobFormValues(UserCredentialTypes.Job)(mockPayload)
 
-      // then ... should return credentialItem
+      // then ... should return credentialCertificate
       expect(result).toEqual({
         type: UserCredentialTypes.Job,
         credentialItemId: null,
@@ -43,10 +43,10 @@ describe('modules/CredentialItems/CredentialItems.utils', () => {
           requestVerification: false,
         },
       }
-      // when ... we get the credentialItem
+      // when ... we get the credentialCertificate
       const result = SUT.extractCredentialItemIdFromPayload(mockPayload)
 
-      // then ... should return credentialItem
+      // then ... should return credentialCertificate
       expect(result).toEqual({
         credentialItemId: 'ID',
       })

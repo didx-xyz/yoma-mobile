@@ -1,3 +1,6 @@
+import { UserCredentialTypes } from 'api/users/users.types'
+import { setCredentialCertificate } from 'modules/CredentialCertificate/CredentialCertificate.reducer'
+import { extractCredentialItemFromJobFormValues } from 'modules/CredentialCertificate/CredentialCertificate.utils'
 import { mergeRight } from 'ramda'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
@@ -41,6 +44,33 @@ describe('modules/Jobs/Jobs.middleware', () => {
           action.payload,
         ),
       )
+    })
+
+    it('should set credential certificate props on successfull call', () => {
+      // given ... a job / challenge credential payload
+      const create = createMiddlewareStub(jest)
+      const mockPayload = {
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        organisationId: 'ORGANISATION_ID',
+        language: 'EN',
+        published: true,
+        skillNames: ['SKILL 1'],
+        countries: ['COUNTRY 1'],
+        startTime: '2021-08-02T13:24:27.839Z',
+        endTime: '2021-09-02T13:02:27.839Z',
+      }
+      // when ... we create the user's credentials
+      const action = createJob(mockPayload)
+      // @ts-ignore
+      const { store, invoke } = create(SUT.createJobFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      const credentialValues = extractCredentialItemFromJobFormValues(UserCredentialTypes.Job)(action)
+
+      expect(store.dispatch).toHaveBeenCalledWith(setCredentialCertificate(credentialValues))
     })
   })
   describe('createJobSuccessFlow', () => {

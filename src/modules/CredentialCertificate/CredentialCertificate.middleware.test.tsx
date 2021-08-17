@@ -5,15 +5,15 @@ import { mergeRight } from 'ramda'
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUserConstants } from '../../api/users'
-import * as SUT from './CredentialItems.middleware'
+import * as SUT from './CredentialCertificate.middleware'
 import {
-  createCredentialItemFailure,
-  createCredentialItemSuccess,
+  createCredentialCertificateFailure,
+  createCredentialCertificateSuccess,
   setCredentialItemId,
-} from './CredentialItems.reducer'
+} from './CredentialCertificate.reducer'
 
-describe('modules/CredentialItems/CredentialItems.middleware', () => {
-  describe('createCredentialItemFlow', () => {
+describe('modules/CredentialCertificate/CredentialCertificate.middleware', () => {
+  describe('createCredentialCertificateFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const userId = 'A USER ID'
@@ -24,12 +24,12 @@ describe('modules/CredentialItems/CredentialItems.middleware', () => {
         endTime: 'END_TIME',
         requestVerification: false,
       }
-      const create = createMiddlewareStub(jest, { user: { id: userId }, credentialItems: mockPayload })
+      const create = createMiddlewareStub(jest, { user: { id: userId }, credentialCertificate: mockPayload })
 
       // when ... we create the user's credentials
       const action = setCredentialItemId('ID')
       // @ts-ignore
-      const { store, invoke, next } = create(SUT.createCredentialItemFlow)
+      const { store, invoke, next } = create(SUT.createCredentialCertificateFlow)
       invoke(action)
 
       // then ...
@@ -39,15 +39,15 @@ describe('modules/CredentialItems/CredentialItems.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: createCredentialItemSuccess,
-            onFailure: createCredentialItemFailure,
+            onSuccess: createCredentialCertificateSuccess,
+            onFailure: createCredentialCertificateFailure,
           }),
           mockPayload,
         ),
       )
     })
   })
-  describe('createCredentialItemSuccessFlow', () => {
+  describe('createCredentialCertificateSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
@@ -61,16 +61,16 @@ describe('modules/CredentialItems/CredentialItems.middleware', () => {
           message: null,
         },
       }
-      const action = createCredentialItemSuccess(mockedPayload)
+      const action = createCredentialCertificateSuccess(mockedPayload)
       // @ts-ignore
-      const { invoke, next } = create(SUT.createCredentialItemSuccessFlow)
-      // when ... we respond to the createCredentialItemSuccess action
+      const { invoke, next } = create(SUT.createCredentialCertificateSuccessFlow)
+      // when ... we respond to the createCredentialCertificateSuccess action
       invoke(action)
 
-      // then ...validate createCredentialItemSuccessFlow
+      // then ...validate createCredentialCertificateSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly handle credentialItem create success', () => {
+    it('should correctly handle credentialCertificate create success', () => {
       // given ...
       const create = createMiddlewareStub(jest)
 
@@ -85,26 +85,26 @@ describe('modules/CredentialItems/CredentialItems.middleware', () => {
         },
       }
 
-      const action = createCredentialItemSuccess(mockedPayload)
+      const action = createCredentialCertificateSuccess(mockedPayload)
       // @ts-ignore
-      const { invoke } = create(SUT.createCredentialItemSuccessFlow)
-      // when ... we respond to the createCredentialItemSuccess action
+      const { invoke } = create(SUT.createCredentialCertificateSuccessFlow)
+      // when ... we respond to the createCredentialCertificateSuccess action
       invoke(action)
 
-      // then ...validate createCredentialItemSuccessFlow
+      // then ...validate createCredentialCertificateSuccessFlow
       // expect(store.dispatch).toHaveBeenCalledWith()
     })
   })
-  describe('createCredentialItemFailureFlow', () => {
-    it('should correctly handle credentialItem create failure', () => {
+  describe('createCredentialCertificateFailureFlow', () => {
+    it('should correctly handle credentialCertificate create failure', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const action = createCredentialItemFailure('FAILED')
+      const action = createCredentialCertificateFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore
-      const { invoke } = create(SUT.createCredentialItemFailureFlow({ notification: mockNotification }))
+      const { invoke } = create(SUT.createCredentialCertificateFailureFlow({ notification: mockNotification }))
 
-      // when ... we respond to the createCredentialItemFailures action
+      // when ... we respond to the createCredentialCertificateFailures action
       invoke(action)
 
       // then ...validate failure

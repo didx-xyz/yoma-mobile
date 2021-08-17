@@ -1,9 +1,12 @@
 import { UserCredentialTypes } from 'api/users/users.types'
-import { setCredentialItem, setCredentialItemId } from 'modules/CredentialItems/CredentialItems.reducer'
+import {
+  setCredentialCertificate,
+  setCredentialItemId,
+} from 'modules/CredentialCertificate/CredentialCertificate.reducer'
 import {
   extractCredentialItemFromJobFormValues,
   extractCredentialItemIdFromPayload,
-} from 'modules/CredentialItems/CredentialItems.utils'
+} from 'modules/CredentialCertificate/CredentialCertificate.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
@@ -32,7 +35,7 @@ export const createJobFlow: Middleware =
         ),
       )
       const credentialValues = extractCredentialItemFromJobFormValues(UserCredentialTypes.Job)(action)
-      dispatch(setCredentialItem(credentialValues))
+      dispatch(setCredentialCertificate(credentialValues))
     }
     return result
   }
