@@ -2,7 +2,7 @@ import { applySpec, identity, keys, path, pipe, prop } from 'ramda'
 
 import { objFromListWith } from './ramda.utils'
 
-export const normalise = (data: any, identifier = 'id') =>
+export const normalise = (data: Record<string, any>[], identifier = 'id') =>
   pipe(
     objFromListWith(prop(identifier)),
     applySpec({
