@@ -3,7 +3,6 @@ Latest:
 - add skills data to state
 
 Recent:
-- add organisations data to state
 - merging MyChallenges into UserChallenges
 - adding generic list component for CvCard/MyCV
 - added jobs and user jobs to state

@@ -1,4 +1,3 @@
-import ButtonContainer from './ButtonContainer'
 import Card from './Card'
 import CheckBox from './CheckBox'
 import CountBadge from './CountBadge'
@@ -26,7 +25,6 @@ import Upload from './Upload'
 import ViewContainer from './ViewContainer/ViewContainer'
 
 export {
-  ButtonContainer,
   Card,
   CheckBox,
   CountBadge,

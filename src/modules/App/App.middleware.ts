@@ -1,6 +1,7 @@
 import { Middleware } from 'redux'
 
 import * as AuthActions from '../Auth/Auth.reducer'
+import * as JobActions from '../Jobs/Jobs.reducer'
 // avoiding circular dependencies:
 import * as SkillsActions from '../Skills/Skills.reducer'
 import * as UserActions from '../User/User.reducer'
@@ -17,6 +18,7 @@ export const appResetFlow: Middleware =
       dispatch(AuthActions.clearAuth())
       dispatch(UserActions.clearUser())
       dispatch(SkillsActions.clearSkills())
+      dispatch(JobActions.clearJob())
       dispatch(UserChallengesActions.clearUserChallenges())
     }
 

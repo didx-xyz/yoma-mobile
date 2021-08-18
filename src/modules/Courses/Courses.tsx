@@ -1,4 +1,4 @@
-import Text from 'components/Typography'
+import Text, { HeaderLevels } from 'components/Typography'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -9,7 +9,7 @@ const Courses = () => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
-      <Text.Body>{t('Courses')}</Text.Body>
+      <Text.Header level={HeaderLevels.h1}>{t('Courses')}</Text.Header>
     </ViewContainer>
   )
 }

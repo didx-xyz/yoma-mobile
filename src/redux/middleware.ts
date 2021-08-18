@@ -10,10 +10,12 @@ import { types as ApiUsersTypes } from '../api/users'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
+import { middleware as JobsMiddleware } from '../modules/Jobs'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { middleware as UserChallengesMiddleware } from '../modules/UserChallenges'
+import { middleware as UserJobsMiddleware } from '../modules/UserJobs'
 import { showSimpleMessage } from '../utils/error'
 
 const createDebugger = require('redux-flipper').default
@@ -76,6 +78,17 @@ const featureModuleMiddleware = [
   SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.normaliseSkillsFlow(ReduxUtils.normalise),
   SkillsMiddleware.setSkillsFlow,
+  UserMiddleware.fetchUserCredentialsFlow,
+  UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
+  JobsMiddleware.createJobFlow,
+  JobsMiddleware.createJobSuccessFlow({ notification: showSimpleMessage }),
+  JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.getUserJobsFromCredentialsFlow(
+    ReduxUtils.extractDataFromPayload,
+    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Job),
+  ),
+  UserJobsMiddleware.normaliseUserJobsFlow(ReduxUtils.normalise),
+  UserJobsMiddleware.setUserJobsFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
