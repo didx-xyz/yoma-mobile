@@ -14,10 +14,10 @@ import DigitalCv from '../DigitalCv'
 import Education from '../Education'
 import Experience from '../Experience'
 import Marketplace from '../Marketplace'
-import MyChallenges from '../MyChallenges'
 import MyCourses from '../MyCourses'
 import Profile from '../Profile'
 import Skills from '../Skills'
+import UserChallenges from '../UserChallenges'
 import { HomeNavigationRoutes } from './HomeNavigation.types'
 
 const Stack = createStackNavigator()
@@ -86,7 +86,7 @@ const HomeNavigation = () => {
       <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
       <Stack.Screen name={HomeNavigationRoutes.Skills} component={Skills} />
       <Stack.Screen name={HomeNavigationRoutes.MyCourses} component={MyCourses} />
-      <Stack.Screen name={HomeNavigationRoutes.MyChallenges} component={MyChallenges} />
+      <Stack.Screen name={HomeNavigationRoutes.UserChallenges} component={UserChallenges} />
     </Stack.Navigator>
   )
 }

@@ -9,6 +9,7 @@ import { ScrollView } from 'react-native'
 
 import Text, { TextAlign } from '../../components/Typography'
 import { Colors } from '../../styles'
+import UserChallengesWidget from '../UserChallenges/UserChallenges.widget'
 import styles from './DigitalCv.styles'
 
 interface Props {
@@ -63,8 +64,9 @@ const DigitalCv = ({ navigation, biography }: Props) => {
           badgeColor={Colors.secondaryPurple}
           title={t('Completed challenges')}
           fallback={t('Have you completed any challenges yet?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.MyChallenges)}
+          onEdit={() => navigation.navigate(HomeNavigationRoutes.UserChallenges)}
         />
+        <UserChallengesWidget />
       </ScrollView>
     </ViewContainer>
   )
