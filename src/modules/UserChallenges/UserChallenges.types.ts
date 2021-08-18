@@ -27,3 +27,22 @@ export interface NormalisedUserChallenges {
 }
 
 export interface UserChallengesState extends NormalisedUserChallenges {}
+
+export type ChallengeEntry = {
+  challenge: string
+  organisationLogoUrl: string
+  challengeHostProvider: string
+  startDate: string
+  endDate: string
+  description: string
+}
+
+export type UserChallengeFormFields = {
+  challenge: string
+  challengeHostProvider: string
+  description: string
+  id: string
+  startDate: Date | null
+  endDate: Date | null
+  skillNames: string[]
+}

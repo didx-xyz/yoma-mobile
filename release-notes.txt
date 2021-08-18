@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- adding generic list component for CvCard/MyCV
+- merging MyChallenges into UserChallenges
 
 Recent:
+- adding generic list component for CvCard/MyCV
 - added jobs and user jobs to state
 - adding User Challenges credentials to state
 - adding helper utils for handling MyCV data

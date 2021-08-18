@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import CvCard, { CvCardListBody } from '../../components/CvCard'
 import { NormalisedData } from '../../redux/redux.types'
 import { Colors } from '../../styles'
-import Challenge from './Challenge'
+import UserChallengeItem from './UserChallengeItem'
 
 const mockData: NormalisedData = {
   ids: ['id1', 'id2', 'id3', 'id4'],
@@ -17,7 +17,7 @@ const mockData: NormalisedData = {
 }
 
 interface Props {}
-const CompletedChallengesWidget = ({}: Props) => {
+const UserChallengesWidget = ({}: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -35,9 +35,9 @@ const CompletedChallengesWidget = ({}: Props) => {
         onViewAll={() => {
           console.log('handle view all')
         }}
-        Item={Challenge}
+        Item={UserChallengeItem}
       />
     </CvCard>
   )
 }
-export default CompletedChallengesWidget
+export default UserChallengesWidget
