@@ -1,6 +1,6 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { StdFn } from 'types/general.types'
+import { Normalise } from 'types/general.types'
 import { showSimpleMessage } from 'utils/error'
 import { extractDataFromPayload } from 'utils/redux.utils'
 
@@ -48,7 +48,7 @@ export const fetchSkillsSuccessFlow: Middleware =
   }
 
 export const normaliseSkillsFlow =
-  (normalise: StdFn<Skill[], NormalisedSkills>): Middleware =>
+  (normalise: Normalise<Skill, NormalisedSkills>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
