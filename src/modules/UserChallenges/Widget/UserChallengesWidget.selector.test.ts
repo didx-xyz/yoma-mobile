@@ -19,7 +19,6 @@ describe('modules/UserChallenges/UserChallengesWidget/UserChallengesWidget.selec
           ids: [
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5',
             'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5',
-            ,
             'XXXbdc39-cccc-4e1e-948f-5d33a2cfb3b5',
           ],
           entities: {
