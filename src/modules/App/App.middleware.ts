@@ -1,7 +1,6 @@
 import { Middleware } from 'redux'
 
 import * as AuthActions from '../Auth/Auth.reducer'
-import * as JobActions from '../Jobs/Jobs.reducer'
 // avoiding circular dependencies:
 import * as SkillsActions from '../Skills/Skills.reducer'
 import * as UserActions from '../User/User.reducer'
