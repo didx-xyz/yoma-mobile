@@ -1,6 +1,6 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { StdFn } from 'types/general.types'
+import { Normalise } from 'types/redux.types'
 import { showSimpleMessage } from 'utils/error'
 import { extractDataFromPayload } from 'utils/redux.utils'
 
@@ -48,13 +48,13 @@ export const fetchOrganisationsSuccessFlow: Middleware =
   }
 
 export const normaliseOrganisationsFlow =
-  (normalise: StdFn<Organisation[], NormalisedOrganisations>): Middleware =>
+  (normalise: Normalise<Organisation, NormalisedOrganisations>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
     if (getOrganisationsSuccess.match(action)) {
-      const normalisedOrganisations = normalise(action.payload)
+      const normalisedOrganisations = normalise(action.payload, 'key')
       dispatch(normaliseOrganisationsSuccess(normalisedOrganisations))
     }
     return result

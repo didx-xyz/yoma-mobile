@@ -1,4 +1,5 @@
 import { Middleware } from 'redux'
+import { Normalise } from 'types/redux.types'
 
 import { StdFn } from '../../types/general.types'
 import * as UserActions from '../User/User.reducer'
@@ -24,7 +25,7 @@ export const getUserJobsFromCredentialsFlow =
   }
 
 export const normaliseUserJobsFlow =
-  (normalise: StdFn<UserJobCredential[], NormalisedUserJobs>): Middleware =>
+  (normalise: Normalise<UserJobCredential, NormalisedUserJobs>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

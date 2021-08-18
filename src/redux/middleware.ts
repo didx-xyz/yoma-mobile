@@ -13,6 +13,7 @@ import { middleware as ErrorMiddleware } from '../modules/Error'
 import { middleware as JobsMiddleware } from '../modules/Jobs'
 import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
 import ssoAuth from '../modules/SSOAuth'
+import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { middleware as UserChallengesMiddleware } from '../modules/UserChallenges'
 import { middleware as UserJobsMiddleware } from '../modules/UserJobs'
@@ -78,6 +79,11 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoSuccessFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
+  SkillsMiddleware.fetchSkillsFlow,
+  SkillsMiddleware.fetchSkillsSuccessFlow,
+  SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
+  SkillsMiddleware.normaliseSkillsFlow(ReduxUtils.normalise),
+  SkillsMiddleware.setSkillsFlow,
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
   JobsMiddleware.createJobFlow,
