@@ -54,7 +54,7 @@ export const normaliseSkillsFlow =
   action => {
     const result = next(action)
     if (getSkillsSuccess.match(action)) {
-      const normalisedSkills = normalise(action.payload)
+      const normalisedSkills = normalise(action.payload, 'key')
       dispatch(normaliseSkillsSuccess(normalisedSkills))
     }
     return result
