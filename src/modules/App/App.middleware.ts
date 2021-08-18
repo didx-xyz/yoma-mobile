@@ -2,7 +2,6 @@ import { Middleware } from 'redux'
 
 // avoiding circular dependencies:
 import * as AuthActions from '../Auth/Auth.reducer'
-import * as JobActions from '../Jobs/Jobs.reducer'
 import * as OrganisationsActions from '../Organisations/Organisations.reducer'
 import * as UserActions from '../User/User.reducer'
 import * as UserChallengesActions from '../UserChallenges/UserChallenges.reducer'
@@ -17,8 +16,6 @@ export const appResetFlow: Middleware =
     if (resetAppData.match(action)) {
       dispatch(AuthActions.clearAuth())
       dispatch(UserActions.clearUser())
-      dispatch(OrganisationsActions.clearOrganisations())
-      dispatch(JobActions.clearJob())
       dispatch(UserChallengesActions.clearUserChallenges())
     }
 
