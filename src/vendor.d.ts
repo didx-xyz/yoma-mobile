@@ -15,6 +15,7 @@ declare module 'ramda' {
   export function filter(...rest: any[]): any
   export function find(...rest: any[]): any
   export function flatten(...rest: any[]): any[]
+  export function has(...rest: any[]): any
   export function head(...rest: any[]): any
   export function identity(...rest: any[]): any
   export function ifElse(...rest: any[]): any
@@ -47,7 +48,7 @@ declare module 'ramda' {
   export function propOr(...rest: any[]): any
   export function reduce(...rest: any[]): any
   export function reduceRight(...rest: any[]): any[]
-  export function slice(...rest: any[]): any
+  export function slice(...rest: any[]): any[]
   export function tail(...rest: any[]): any[]
   export function tap(...rest: any[]): any[]
   export function toPairs(...rest: any[]): any
