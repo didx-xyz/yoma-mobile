@@ -1,3 +1,3 @@
-import HomeHeader from './HomeHeader'
+import HomeHeaderContainer from './HomeHeader.container'
 
-export default HomeHeader
+export default HomeHeaderContainer

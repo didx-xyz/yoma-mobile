@@ -3,11 +3,13 @@ import React from 'react'
 import { GestureResponderEvent, Image, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
+import { CIRCULAR_RADIUS_DIVISOR } from '../../styles/styles.constants'
 import Optional from '../Optional'
 import ProgressCircle from '../ProgressCircle'
 import styles from './ProfilePhoto.styles'
 
 type Props = {
+  size: number
   outerRadius: number
   percent: number
   onPress: (event: GestureResponderEvent) => void
@@ -19,6 +21,7 @@ type Props = {
 }
 
 const ProfilePhoto = ({
+  size,
   outerRadius,
   percent,
   onPress,
@@ -37,8 +40,19 @@ const ProfilePhoto = ({
         color={colors[Colors.primaryRed]}
       >
         <View style={profileInnerStyle}>
-          <Optional condition={uri !== ''} fallback={<ProfileIcon height={outerRadius} width={outerRadius} />}>
-            <Image source={{ uri: uri as string }} style={{ width: outerRadius, height: outerRadius }} />
+          <Optional condition={!!uri} fallback={<ProfileIcon height={outerRadius} width={outerRadius} />}>
+            <View
+              style={[
+                styles.imageWrap,
+                {
+                  width: size,
+                  height: size,
+                  borderRadius: size / CIRCULAR_RADIUS_DIVISOR,
+                },
+              ]}
+            >
+              <Image source={{ uri: uri as string }} style={{ width: size, height: size }} />
+            </View>
           </Optional>
         </View>
       </ProgressCircle>
