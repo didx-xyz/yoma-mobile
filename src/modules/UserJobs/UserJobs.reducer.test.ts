@@ -2,7 +2,7 @@ import SUT, { clearUserJobs, INITIAL_STATE, setUserJobs } from './UserJobs.reduc
 
 describe('src/modules/User/Jobs/Jobs.reducer', () => {
   describe('setUserJobs', () => {
-    it('should correctly add the jobs credentials', () => {
+    it('should correctly add the usrJobs data', () => {
       // given ...an initial state
       const state = INITIAL_STATE
 
@@ -14,6 +14,7 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
           id2: 'Job 2',
           id3: 'Job 3',
         },
+        formValues: null,
       }
       // @ts-ignore
       const action = setUserJobs(jobsMock)
@@ -60,6 +61,7 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
           id2: 'Job 2',
           id3: 'Job 3',
         },
+        formValues: 'form data',
       }
 
       // when ... we clear jobs

@@ -1,4 +1,4 @@
-import { applySpec, identity, keys, path, pipe, prop } from 'ramda'
+import { applySpec, concat, identity, keys, mergeDeepWith, path, pick, pipe, prop } from 'ramda'
 
 import { objFromListWith } from './ramda.utils'
 
@@ -10,5 +10,12 @@ export const normalise = (data: Record<string, any>[], identifier = 'id') =>
       ids: keys,
     }),
   )(data)
+
+export const extractUpdatedNormalisedState = (
+  normalisedUpdate: Record<string, any>,
+  normalisedState: Record<string, any>,
+) => mergeDeepWith(concat, normalisedState, normalisedUpdate)
+
+export const extractNormalisedEntitiesFromState = pick(['ids', 'entities'])
 
 export const extractDataFromPayload = path(['payload', 'data', 'data'])

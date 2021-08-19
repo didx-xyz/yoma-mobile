@@ -81,7 +81,7 @@ const featureModuleMiddleware = [
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
   JobsMiddleware.createJobFlow,
-  JobsMiddleware.createJobSuccessFlow({ notification: showSimpleMessage }),
+  JobsMiddleware.createJobSuccessFlow,
   JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.getUserJobsFromCredentialsFlow(
     ReduxUtils.extractDataFromPayload,
@@ -89,6 +89,10 @@ const featureModuleMiddleware = [
   ),
   UserJobsMiddleware.normaliseUserJobsFlow(ReduxUtils.normalise),
   UserJobsMiddleware.setUserJobsFlow,
+  UserJobsMiddleware.createUserJobsFlow,
+  UserJobsMiddleware.createUserJobsSuccessFlow,
+  UserJobsMiddleware.updateNormalisedUserJobsStateFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.createUserJobsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

@@ -1,3 +1,4 @@
+import { UserCredentialTypes } from 'api/users/users.types'
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
 
 import { UserChallenge } from '../UserChallenges/UserChallenges.types'
@@ -60,6 +61,14 @@ export interface UserCredentialMeta {
   createdAt: string
   fileId: string | null
   fileURL: string | null
+  requestVerification: boolean
+}
+
+export interface UserCredentialItemPayload {
+  type: UserCredentialTypes
+  credentialItemId: string
+  startTime: string
+  endTime: string
   requestVerification: boolean
 }
 

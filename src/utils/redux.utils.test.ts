@@ -63,6 +63,64 @@ describe('src/utils/redux.utils', () => {
       })
     })
   })
+  describe('extractUpdatedNormalisedState', () => {
+    it('should extract the data from a typical response payload', () => {
+      // given ...
+      const state = {
+        entities: {
+          key1: {
+            key: 'key1',
+            other: 'OTHER DATA',
+          },
+          key2: {
+            key: 'key2',
+            other: 'OTHER OTHER DATA',
+          },
+        },
+        ids: ['key1', 'key2'],
+      }
+
+      const normalisedUpdate = {
+        ids: ['key3'],
+        entities: {
+          key3: {
+            key: 'key3',
+            other: 'ANOTHER DATA',
+          },
+        },
+      }
+
+      // when ...
+      const result = SUT.extractUpdatedNormalisedState(normalisedUpdate, state)
+
+      // then ...
+      expect(result).toEqual({
+        ids: ['key1', 'key2', 'key3'],
+        entities: {
+          key1: { key: 'key1', other: 'OTHER DATA' },
+          key2: { key: 'key2', other: 'OTHER OTHER DATA' },
+          key3: { key: 'key3', other: 'ANOTHER DATA' },
+        },
+      })
+    })
+  })
+
+  describe('extractNormalisedEntitiesFromState', () => {
+    it('should return the jobs credentials form values from state', () => {
+      // given ... an object in the shape of the successful response
+      const mockState = {
+        formValues: null,
+        ids: 'ID',
+        entities: 'ENTITIES',
+      }
+
+      // when ... we want to extract the data from the rest of the payload
+      const result = SUT.extractNormalisedEntitiesFromState(mockState)
+
+      // then ... the data should be extracted correctly
+      expect(result).toEqual({ ids: 'ID', entities: 'ENTITIES' })
+    })
+  })
   describe('extractDataFromPayload', () => {
     it('should extract the data from a typical response payload', () => {
       // given ...

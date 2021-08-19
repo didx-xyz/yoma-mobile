@@ -1,3 +1,6 @@
+import { UserCredentialTypes } from 'api/users/users.types'
+import { ApiMetaResponse } from 'modules/Auth/Auth.types'
+
 import { UserCredentialMeta } from '../User/User.types'
 
 export interface UserJob {
@@ -22,10 +25,23 @@ export interface UserJob {
 export interface UserJobCredential extends UserCredentialMeta {
   job: UserJob
 }
+export interface UserJobsResponse {
+  data: { data: UserJobCredential }
+  meta: ApiMetaResponse
+}
 
 export interface NormalisedUserJobs {
   ids: string[]
   entities: Record<string, UserJobCredential>
 }
 
-export interface UserJobsState extends NormalisedUserJobs {}
+export interface UserJobsState extends NormalisedUserJobs {
+  formValues?: UserJobsFormValues | null
+}
+
+export interface UserJobsFormValues {
+  type: UserCredentialTypes
+  startTime: string
+  endTime: string
+  requestVerification: boolean
+}
