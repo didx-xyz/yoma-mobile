@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { FirstTimeCard, ViewContainer } from 'components'
 import CvCard from 'components/CvCard'
-import HomeHeader from 'components/HomeHeader'
+import HomeHeader from 'modules/HomeHeader'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'

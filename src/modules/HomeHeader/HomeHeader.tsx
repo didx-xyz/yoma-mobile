@@ -5,8 +5,8 @@ import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
-import ProfilePhoto from '../ProfilePhoto'
-import Text, { Bold } from '../Typography'
+import ProfilePhoto from '../../components/ProfilePhoto'
+import Text, { Bold } from '../../components/Typography'
 import { PROFILE_IMAGE_BORDER_WIDTH, PROFILE_IMAGE_RADIUS, PROFILE_IMAGE_SIZE } from './HomeHeader.constants'
 import styles from './HomeHeader.styles'
 
