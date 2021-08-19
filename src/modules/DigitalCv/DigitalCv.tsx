@@ -59,7 +59,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
           fallback={t('Have you completed any courses yet?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MyCourses)}
         />
-        <UserChallengesWidget />
+        <UserChallengesWidget navigation={navigation} />
       </ScrollView>
     </ViewContainer>
   )
