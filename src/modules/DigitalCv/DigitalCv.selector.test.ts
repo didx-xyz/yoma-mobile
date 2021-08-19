@@ -1,10 +1,11 @@
+import { rootStateFixture } from '../../redux/redux.test.fixtures'
 import * as SUT from './DigitalCv.selector'
 
 describe('modules/DigitalCv/DigitalCv.selector', () => {
-  describe('selector ', () => {
+  describe('selector', () => {
     it('should select props as expected when available in state', () => {
       // given ...
-      const state = {
+      const state = rootStateFixture({
         user: {
           id: 'USER_ID',
           firstName: 'FIRST_NAME',
@@ -23,7 +24,7 @@ describe('modules/DigitalCv/DigitalCv.selector', () => {
           createdAt: 'CREATED_AT',
           lastLogin: 'LAST_LOGIN',
         },
-      }
+      })
       // when ... we call the selector
       const result = SUT.default(state)
       // then ... should return result as expected

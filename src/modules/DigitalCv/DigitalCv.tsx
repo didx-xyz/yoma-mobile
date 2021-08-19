@@ -62,8 +62,15 @@ const DigitalCv = ({ navigation, biography }: Props) => {
         <UserChallengesWidget
           navigation={navigation}
           challenges={{
-            ids: [],
-            entities: {},
+            ids: ['id1'],
+            entities: {
+              id1: {
+                startDate: '2021-04-25T19:05:54.5496363',
+                isValidated: false,
+                name: 'ORG UnVerified',
+                avatarUrl: null,
+              },
+            },
           }}
         />
       </ScrollView>

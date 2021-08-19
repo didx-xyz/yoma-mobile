@@ -27,8 +27,12 @@ export interface NormalisedUserChallenges {
   entities: Record<string, UserChallenge>
 }
 
-export type UserChallengeItems = Pick<UserCredentialMeta, 'startDate' | 'approved'> &
-  Pick<Challenge, 'name' | 'organisationLogoURL'>
+export interface UserChallengeItems {
+  startDate: string
+  isValidated: boolean
+  name: string
+  avatarUrl: string | null
+}
 
 export type NormalisedUserChallengeItems = NormalisedData<UserChallengeItems>
 
