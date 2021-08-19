@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- add skills data to state
+- add organisations data to state
 
 Recent:
+- add skills data to state
 - merging MyChallenges into UserChallenges
 - adding generic list component for CvCard/MyCV
 - added jobs and user jobs to state
