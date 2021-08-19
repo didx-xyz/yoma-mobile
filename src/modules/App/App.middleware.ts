@@ -1,6 +1,7 @@
 import { Middleware } from 'redux'
 
 import * as AuthActions from '../Auth/Auth.reducer'
+import * as OrganisationsActions from '../Organisations/Organisations.reducer'
 // avoiding circular dependencies:
 import * as SkillsActions from '../Skills/Skills.reducer'
 import * as UserActions from '../User/User.reducer'
@@ -29,6 +30,7 @@ export const hydrateAppFlow: Middleware =
     const result = next(action)
     if (hydrateApp.match(action)) {
       dispatch(UserActions.fetchUserCredentials())
+      dispatch(OrganisationsActions.fetchOrganisations())
       dispatch(SkillsActions.fetchSkills())
     }
     return result
