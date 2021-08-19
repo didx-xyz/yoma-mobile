@@ -1,3 +1,4 @@
+import { UserJobsFormValues } from 'modules/UserJobs/UserJobs.types'
 import { always, applySpec, equals, filter, find, keys, path, pick, pipe, toLower } from 'ramda'
 
 import { UserCredentialTypes } from '../../api/users/users.types'
@@ -27,7 +28,7 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
 export const extractCredentialsByType = (type: UserCredentialTypes) => filter(pipe(keys, find(equals(toLower(type)))))
 
 export const extractCredentialPayload =
-  (userCredentialId: string, userCredentialType: UserCredentialTypes) => (formValues: UserCredentialFormValues) =>
+  (userCredentialId: string, userCredentialType: UserCredentialTypes) => (formValues: UserJobsFormValues) =>
     applySpec({
       type: always(userCredentialType),
       credentialItemId: always(userCredentialId),
