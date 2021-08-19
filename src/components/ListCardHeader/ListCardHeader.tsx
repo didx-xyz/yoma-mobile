@@ -5,10 +5,11 @@ import { View } from 'react-native'
 import { Colors } from 'styles'
 
 import CountBadge from '../CountBadge'
+import { COUNT_FALLBACK } from './ListCardHeader.constants'
 import styles from './ListCardHeader.styles'
 
 type Props = {
-  count: number
+  count?: number
   color: Colors
   header: string
   hasBorder?: boolean
@@ -16,7 +17,14 @@ type Props = {
   rightComponent?: ReactNode
 }
 
-const ListCardHeader = ({ count, color, header, rightComponent, hasBorder = false, hasCountBadge = true }: Props) => {
+const ListCardHeader = ({
+  count = COUNT_FALLBACK,
+  color,
+  header,
+  rightComponent,
+  hasBorder = false,
+  hasCountBadge = true,
+}: Props) => {
   const borderStyles = hasBorder ? styles.border : {}
   return (
     <View style={[styles.container, borderStyles]}>

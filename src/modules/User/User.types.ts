@@ -52,14 +52,14 @@ export interface UserResponse {
 
 export interface UserCredentialMeta {
   id: string
-  verifiedAt: string
+  verifiedAt: string | null
   approved: boolean
-  approvalMessage: string
+  approvalMessage: string | null
   startDate: string
-  endDate: string
+  endDate: string | null
   createdAt: string
-  fileId: string
-  fileURL: string
+  fileId: string | null
+  fileURL: string | null
   requestVerification: boolean
 }
 
