@@ -17,6 +17,12 @@ const styles = {
     right: -2,
     zIndex: 2,
   } as ViewStyle,
+  imageWrap: {
+    borderRadius: AVATAR_SIZE / CIRCULAR_RADIUS_DIVISOR,
+    overflow: 'hidden',
+    width: AVATAR_SIZE,
+    height: AVATAR_SIZE,
+  } as ViewStyle,
   image: {
     width: AVATAR_SIZE,
     height: AVATAR_SIZE,
