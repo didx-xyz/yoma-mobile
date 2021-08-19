@@ -27,14 +27,14 @@ export interface NormalisedUserChallenges {
   entities: Record<string, UserChallenge>
 }
 
-export interface UserChallengeItems {
+export interface UserChallengeItem {
   startDate: string
   isValidated: boolean
   name: string
   avatarUrl: string | null
 }
 
-export type NormalisedUserChallengeItems = NormalisedData<UserChallengeItems>
+export type NormalisedUserChallengeItem = NormalisedData<UserChallengeItem>
 
 export interface UserChallengesState extends NormalisedUserChallenges {}
 
