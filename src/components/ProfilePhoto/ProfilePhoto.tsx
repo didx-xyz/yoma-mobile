@@ -1,6 +1,6 @@
 import { EditIcon, ProfileIcon } from 'assets/images'
 import React from 'react'
-import { GestureResponderEvent, TouchableOpacity, View, ViewStyle } from 'react-native'
+import { GestureResponderEvent, Image, TouchableOpacity, View, ViewStyle } from 'react-native'
 import { colors, Colors } from 'styles'
 
 import Optional from '../Optional'
@@ -12,9 +12,10 @@ type Props = {
   percent: number
   onPress: (event: GestureResponderEvent) => void
   borderWidth: number
+  uri?: string | null
+  showEditIcon?: boolean
   profileInnerStyle?: ViewStyle
   profileOuterStyle?: ViewStyle
-  showEditIcon?: boolean
 }
 
 const ProfilePhoto = ({
@@ -24,6 +25,7 @@ const ProfilePhoto = ({
   borderWidth,
   profileInnerStyle,
   profileOuterStyle,
+  uri = '',
   showEditIcon = false,
 }: Props) => {
   return (
@@ -35,7 +37,9 @@ const ProfilePhoto = ({
         color={colors[Colors.primaryRed]}
       >
         <View style={profileInnerStyle}>
-          <ProfileIcon height={outerRadius} width={outerRadius} />
+          <Optional condition={uri !== ''} fallback={<ProfileIcon height={outerRadius} width={outerRadius} />}>
+            <Image source={{ uri: uri as string }} style={{ width: outerRadius, height: outerRadius }} />
+          </Optional>
         </View>
       </ProgressCircle>
       <Optional condition={showEditIcon}>

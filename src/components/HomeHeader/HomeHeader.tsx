@@ -12,14 +12,16 @@ import styles from './HomeHeader.styles'
 
 type Props = {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
-  profileProgressPercentage: number
-  rewardPoints: number
+  profileImageUrl: string | null
+  profileProgressPercentage?: number
+  zltoBalance?: number
 }
 
-const HomeHeader = ({ navigation, profileProgressPercentage = 0, rewardPoints = 0 }: Props) => {
+const HomeHeader = ({ navigation, profileImageUrl, profileProgressPercentage = 0, zltoBalance = 0 }: Props) => {
   return (
     <View style={styles.container}>
       <ProfilePhoto
+        uri={profileImageUrl}
         borderWidth={PROFILE_IMAGE_BORDER_WIDTH}
         onPress={() => navigation.navigate(HomeNavigationRoutes.Profile)}
         outerRadius={PROFILE_IMAGE_RADIUS}
@@ -29,7 +31,7 @@ const HomeHeader = ({ navigation, profileProgressPercentage = 0, rewardPoints = 
       <TouchableOpacity style={styles.tokensView}>
         <ZIcon />
         <Text.Body style={styles.tokenAmount}>
-          <Bold color={Colors.primaryYellow}>{rewardPoints}</Bold>
+          <Bold color={Colors.primaryYellow}>{zltoBalance}</Bold>
         </Text.Body>
       </TouchableOpacity>
     </View>
