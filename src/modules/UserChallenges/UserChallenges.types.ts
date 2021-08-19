@@ -22,13 +22,14 @@ export interface UserChallenge extends UserCredentialMeta {
   challenge: Challenge
 }
 
-export type UserChallengeItems = Pick<UserCredentialMeta, 'startDate' | 'approved'> &
-  Pick<Challenge, 'name' | 'organisationLogoURL'>
-export type NormalisedUserChallengeItems = NormalisedData<UserChallengeItems>
-
 export type NormalisedUserChallenges = NormalisedData<UserChallenge>
 
-export type UserChallengesState = NormalisedUserChallenges
+export type UserChallengeItems = Pick<UserCredentialMeta, 'startDate' | 'approved'> &
+  Pick<Challenge, 'name' | 'organisationLogoURL'>
+
+export type NormalisedUserChallengeItems = NormalisedData<UserChallengeItems>
+
+export interface UserChallengesState extends NormalisedUserChallenges {}
 
 export type ChallengeEntry = {
   challenge: string
