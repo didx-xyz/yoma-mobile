@@ -1,7 +1,6 @@
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
 import * as SUT from './User.selector'
-import { selectPhotoUrl, selectZltoBalance } from './User.selector'
 import { USER_RESPONSE } from './User.test.fixtures'
 
 describe('modules/User/User.selector', () => {
