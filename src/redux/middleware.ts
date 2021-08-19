@@ -11,6 +11,7 @@ import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import { middleware as JobsMiddleware } from '../modules/Jobs'
+import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
@@ -54,6 +55,11 @@ const featureModuleMiddleware = [
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ErrorMiddleware.categorizeErrorsFlow,
+  OrganisationsMiddleware.fetchOrganisationsFlow,
+  OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
+  OrganisationsMiddleware.fetchOrganisationsFailureFlow({ notification: showSimpleMessage }),
+  OrganisationsMiddleware.normaliseOrganisationsFlow(ReduxUtils.normalise),
+  OrganisationsMiddleware.setOrganisationsFlow,
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
     ReduxUtils.extractDataFromPayload,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),

@@ -3,6 +3,7 @@ Latest:
 - adding real data to UserChallenges widget in MyCv
 
 10 Most Recent:
+- add organisations data to state
 - add skills data to state
 - merging MyChallenges into UserChallenges
 - adding generic list component for CvCard/MyCV

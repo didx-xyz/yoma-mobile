@@ -1,6 +1,7 @@
 import { Middleware } from 'redux'
+import { Normalise } from 'types/redux.types'
 
-import { Normalise, StdFn } from '../../types/general.types'
+import { StdFn } from '../../types/general.types'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
 import { getUserJobsSuccess, normaliseUserJobsSuccess, setUserJobs } from './UserJobs.reducer'
