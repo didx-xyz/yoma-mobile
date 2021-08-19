@@ -31,7 +31,9 @@ const Avatar = ({ url, name, isValidated }: Props) => (
       </View>
     </Optional>
     <Optional condition={!!url} fallback={<AvatarFallback char={name[0]} />}>
-      <Image source={{ uri: url }} style={styles.image} />
+      <View style={styles.imageWrap}>
+        <Image source={{ uri: url }} style={styles.image} />
+      </View>
     </Optional>
   </View>
 )

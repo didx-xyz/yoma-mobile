@@ -66,9 +66,9 @@ const DigitalCv = ({ navigation, biography }: Props) => {
             entities: {
               id1: {
                 startDate: '2021-04-25T19:05:54.5496363',
-                isValidated: false,
-                name: 'ORG UnVerified',
-                avatarUrl: null,
+                isValidated: true,
+                name: 'ORG Verified with logo',
+                avatarUrl: 'https://picsum.photos/200',
               },
             },
           }}
