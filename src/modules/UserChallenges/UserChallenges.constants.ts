@@ -12,6 +12,7 @@ export const INITIAL_FORM_VALUES: UserChallengeFormFields = {
 
 export const MOCKED_CHALLENGES = [
   {
+    id: 'id1',
     challenge: 'COVID Challenge',
     organisationLogoUrl: '',
     challengeHostProvider: '',
@@ -20,6 +21,7 @@ export const MOCKED_CHALLENGES = [
     description: '',
   },
   {
+    id: 'id2',
     challenge: 'Beyond your future challenge',
     organisationLogoUrl: '',
     challengeHostProvider: '',

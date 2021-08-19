@@ -1,22 +1,6 @@
 import { NormalisedData } from '../../redux/redux.types'
+import { Challenge } from '../Challenges/Challenges.types'
 import { UserCredentialMeta } from '../User/User.types'
-
-export interface Challenge {
-  organisationId: string
-  organisationName: string
-  organisationLogoURL: string | null
-  id: string
-  name: string
-  description: string
-  url: string | null
-  createdAt: string
-  zltoReward: number
-  createdByAdmin: boolean
-  language: string
-  startTime: string
-  endTime: string | null
-  published: boolean
-}
 
 export interface UserChallenge extends UserCredentialMeta {
   challenge: Challenge
@@ -24,10 +8,14 @@ export interface UserChallenge extends UserCredentialMeta {
 
 export type NormalisedUserChallenges = NormalisedData<UserChallenge>
 
-export type UserChallengeItems = Pick<UserCredentialMeta, 'startDate' | 'approved'> &
-  Pick<Challenge, 'name' | 'organisationLogoURL'>
+export interface UserChallengeItem {
+  startDate: string
+  isValidated: boolean
+  name: string
+  avatarUrl: string | null
+}
 
-export type NormalisedUserChallengeItems = NormalisedData<UserChallengeItems>
+export type NormalisedUserChallengeItem = NormalisedData<UserChallengeItem>
 
 export interface UserChallengesState extends NormalisedUserChallenges {}
 

@@ -6,10 +6,10 @@ import CvCard, { CvCardListBody } from '../../../components/CvCard'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import UserChallengeItem from '../Item'
-import { NormalisedUserChallengeItems } from '../UserChallenges.types'
+import { NormalisedUserChallengeItem } from '../UserChallenges.types'
 
 interface Props {
-  challenges: NormalisedUserChallengeItems
+  challenges: NormalisedUserChallengeItem
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.DigitalCv>
 }
 const UserChallengesWidget = ({ challenges, navigation }: Props) => {
