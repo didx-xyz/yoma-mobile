@@ -60,6 +60,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MyCourses)}
         />
         <UserChallengesWidget
+          navigation={navigation}
           challenges={{
             ids: [],
             entities: {},
