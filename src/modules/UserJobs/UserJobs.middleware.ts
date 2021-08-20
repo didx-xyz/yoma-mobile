@@ -3,15 +3,11 @@ import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { createJob } from 'modules/Jobs/Jobs.reducer'
 import { selectId } from 'modules/User/User.selector'
+import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } from 'modules/User/User.utils'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
-import {
-  extractDataFromPayload,
-  extractNormalisedEntitiesFromState,
-  extractUpdatedNormalisedState,
-  normalise,
-} from 'utils/redux.utils'
+import { extractDataFromPayload, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
@@ -27,11 +23,10 @@ import {
   normaliseUserJobsSuccess,
   setUserJobs,
   setUserJobsFormValues,
-  updateNormalisedUserJobsState,
+  updateNormalisedUserJobs,
 } from './UserJobs.reducer'
-import { selectUserJobs, selectUserJobsFormValues } from './UserJobs.selector'
+import { selectFormValues } from './UserJobs.selector'
 import { NormalisedUserJobs, UserJobCredential } from './UserJobs.types'
-import { extractUserCredentialFormValues, extractUserJobsPayload } from './UserJobs.utils'
 
 export const getUserJobsFromCredentialsFlow =
   (
@@ -94,8 +89,8 @@ export const createUserJobsFlow: Middleware =
       const state = getState()
       const userId = selectId(state)
 
-      const formValues = selectUserJobsFormValues(state)
-      const userJobsPayload = extractUserJobsPayload(action)(formValues)
+      const formValues = selectFormValues(state)
+      const userJobsPayload = prepareUserCredentialItemPayload(action)(formValues)
 
       const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
 
@@ -112,7 +107,8 @@ export const createUserJobsFlow: Middleware =
     return result
   }
 
-export const createUserJobsSuccessFlow: Middleware =
+export const createUserJobsSuccessFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
@@ -120,24 +116,7 @@ export const createUserJobsSuccessFlow: Middleware =
     if (createUserJobsSuccess.match(action)) {
       const response = extractDataFromPayload(action)
       const normalisedJobs = normalise([response])
-      dispatch(updateNormalisedUserJobsState(normalisedJobs))
-    }
-    return result
-  }
-
-export const updateNormalisedUserJobsStateFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  ({ getState, dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (updateNormalisedUserJobsState.match(action)) {
-      const state = getState()
-      const userJobs = selectUserJobs(state)
-      const normalisedStateEntities = extractNormalisedEntitiesFromState(userJobs)
-      const updatedState = extractUpdatedNormalisedState(action.payload, normalisedStateEntities)
-
-      dispatch(setUserJobs(updatedState))
+      dispatch(updateNormalisedUserJobs(normalisedJobs))
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Experience)
       // TODO: this should be handled by the notification module

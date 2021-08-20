@@ -14,7 +14,7 @@ import {
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
-  updateNormalisedUserJobsState,
+  updateNormalisedUserJobs,
 } from './UserJobs.reducer'
 import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK } from './UserJobs.test.fixtures'
 
@@ -178,6 +178,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
+      const mockNotification = jest.fn()
       const mockResponse = {
         data: { data: USER_JOBS_MOCK[0] },
         meta: {
@@ -189,31 +190,13 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       const action = createUserJobsSuccess(mockResponse)
       // @ts-ignore
-      const { store, invoke, next } = create(SUT.createUserJobsSuccessFlow)
+      const { store, invoke, next } = create(SUT.createUserJobsSuccessFlow({ notification: mockNotification }))
       // when ... we respond to the createUserJobsSuccess action
       invoke(action)
 
       // then ...validate createUserJobsSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalledWith(updateNormalisedUserJobsState(USER_JOBS_NORMALISED_MOCK))
-    })
-  })
-  describe('updateNormalisedUserJobsStateFlow', () => {
-    it('should correctly handle being called', () => {
-      // given ...
-
-      const create = createMiddlewareStub(jest, { userJobs: { ids: [], entities: {} } })
-      const mockNotification = jest.fn()
-
-      const action = updateNormalisedUserJobsState(USER_JOBS_NORMALISED_MOCK)
-
-      // @ts-ignore
-      const { store, invoke } = create(SUT.updateNormalisedUserJobsStateFlow({ notification: mockNotification }))
-      // when ... we respond to the updateNormalisedUserJobsStateFlow action
-      invoke(action)
-
-      // then ...validate updateNormalisedUserJobsStateFlow
-      expect(store.dispatch).toHaveBeenCalledWith(setUserJobs(USER_JOBS_NORMALISED_MOCK))
+      expect(store.dispatch).toHaveBeenCalledWith(updateNormalisedUserJobs(USER_JOBS_NORMALISED_MOCK))
     })
   })
   describe('createUserJobsFailureFlow', () => {

@@ -90,8 +90,7 @@ const featureModuleMiddleware = [
   UserJobsMiddleware.normaliseUserJobsFlow(ReduxUtils.normalise),
   UserJobsMiddleware.setUserJobsFlow,
   UserJobsMiddleware.createUserJobsFlow,
-  UserJobsMiddleware.createUserJobsSuccessFlow,
-  UserJobsMiddleware.updateNormalisedUserJobsStateFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.createUserJobsSuccessFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.createUserJobsFailureFlow({ notification: showSimpleMessage }),
 ]
 

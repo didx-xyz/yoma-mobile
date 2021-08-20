@@ -29,7 +29,7 @@ describe('modules/UserJobs/UserJobs.selector', () => {
       expect(result).toEqual(state.userJobs)
     })
   })
-  describe('selectUserJobsFormValues ', () => {
+  describe('selectFormValues ', () => {
     it('should return formValues object from the userJobs state', () => {
       const userJobsStateMock = {
         ids: 'IDS',
@@ -41,7 +41,7 @@ describe('modules/UserJobs/UserJobs.selector', () => {
         userJobs: userJobsStateMock,
       })
       // when ... we call the selector
-      const result = SUT.selectUserJobsFormValues(mockState)
+      const result = SUT.selectFormValues(mockState)
 
       // then ... should return result as expected
       expect(result).toEqual('FORM_VALUES')

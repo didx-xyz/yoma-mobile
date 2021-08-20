@@ -1,7 +1,7 @@
-import { UserCredentialTypes } from 'api/users/users.types'
-import { ApiMetaResponse } from 'modules/Auth/Auth.types'
+import { ApiMetaResponse } from 'api/api.types'
 
 import { UserCredentialMeta } from '../User/User.types'
+import { UserCredentialFormValues } from './../User/User.types'
 
 export interface UserJob {
   organisationURL: string
@@ -36,12 +36,5 @@ export interface NormalisedUserJobs {
 }
 
 export interface UserJobsState extends NormalisedUserJobs {
-  formValues?: UserJobsFormValues | null
-}
-
-export interface UserJobsFormValues {
-  type: UserCredentialTypes
-  startTime: string
-  endTime: string
-  requestVerification: boolean
+  formValues?: UserCredentialFormValues | null
 }

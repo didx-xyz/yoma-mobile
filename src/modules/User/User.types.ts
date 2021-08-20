@@ -2,6 +2,7 @@ import { UserCredentialTypes } from 'api/users/users.types'
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
 
 import { UserChallenge } from '../UserChallenges/UserChallenges.types'
+import { UserJobCredential } from './../UserJobs/UserJobs.types'
 
 export interface UpdateUserResponse {
   data: UserResponse
@@ -72,5 +73,11 @@ export interface UserCredentialItemPayload {
   requestVerification: boolean
 }
 
-// TODO: Add Credentials as we type them as  (UserChallenge | UserExperience | ...)[]
-export type UserCredentials = UserChallenge[]
+export interface UserCredentialFormValues {
+  type: UserCredentialTypes
+  startTime: string
+  endTime: string
+  requestVerification: boolean
+}
+
+export type UserCredentials = UserChallenge | UserJobCredential[]

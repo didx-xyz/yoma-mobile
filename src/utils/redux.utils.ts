@@ -11,11 +11,9 @@ export const normalise = (data: Record<string, any>[], identifier = 'id') =>
     }),
   )(data)
 
-export const extractUpdatedNormalisedState = (
-  normalisedUpdate: Record<string, any>,
-  normalisedState: Record<string, any>,
-) => mergeDeepWith(concat, normalisedState, normalisedUpdate)
+export const updateNormalisedState = (normalisedState: Record<string, any>, normalisedUpdate: Record<string, any>) =>
+  mergeDeepWith(concat, normalisedState, normalisedUpdate)
 
-export const extractNormalisedEntitiesFromState = pick(['ids', 'entities'])
-
+export const selectNormalised = pick(['ids', 'entities'])
+export const extractId = path(['payload', 'id'])
 export const extractDataFromPayload = path(['payload', 'data', 'data'])

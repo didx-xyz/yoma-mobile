@@ -2,7 +2,7 @@ import SUT, { clearUserJobs, INITIAL_STATE, setUserJobs } from './UserJobs.reduc
 
 describe('src/modules/User/Jobs/Jobs.reducer', () => {
   describe('setUserJobs', () => {
-    it('should correctly add the usrJobs data', () => {
+    it('should correctly add the userJobs data', () => {
       // given ...an initial state
       const state = INITIAL_STATE
 

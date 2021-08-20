@@ -63,7 +63,7 @@ describe('src/utils/redux.utils', () => {
       })
     })
   })
-  describe('extractUpdatedNormalisedState', () => {
+  describe('updateNormalisedState', () => {
     it('should extract the data from a typical response payload', () => {
       // given ...
       const state = {
@@ -91,7 +91,7 @@ describe('src/utils/redux.utils', () => {
       }
 
       // when ...
-      const result = SUT.extractUpdatedNormalisedState(normalisedUpdate, state)
+      const result = SUT.updateNormalisedState(state, normalisedUpdate)
 
       // then ...
       expect(result).toEqual({
@@ -105,8 +105,8 @@ describe('src/utils/redux.utils', () => {
     })
   })
 
-  describe('extractNormalisedEntitiesFromState', () => {
-    it('should return the jobs credentials form values from state', () => {
+  describe('selectNormalised', () => {
+    it('should return the normalised values from state', () => {
       // given ... an object in the shape of the successful response
       const mockState = {
         formValues: null,
@@ -115,12 +115,30 @@ describe('src/utils/redux.utils', () => {
       }
 
       // when ... we want to extract the data from the rest of the payload
-      const result = SUT.extractNormalisedEntitiesFromState(mockState)
+      const result = SUT.selectNormalised(mockState)
 
       // then ... the data should be extracted correctly
       expect(result).toEqual({ ids: 'ID', entities: 'ENTITIES' })
     })
   })
+  describe('extractId', () => {
+    it('should return id from payload', () => {
+      // given ... an object in the shape of the successful response
+      const mockPayload = {
+        payload: {
+          id: 'ID',
+          other: 'OTHER',
+        },
+      }
+
+      // when ... we want to extract the id from the rest of the payload
+      const result = SUT.extractId(mockPayload)
+
+      // then ... the data should be extracted correctly
+      expect(result).toEqual('ID')
+    })
+  })
+
   describe('extractDataFromPayload', () => {
     it('should extract the data from a typical response payload', () => {
       // given ...
