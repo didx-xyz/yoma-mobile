@@ -1,8 +1,8 @@
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
-import * as SUT from './Experience.selector'
+import * as SUT from './UserJobs.selector'
 
-describe('modules/Experience/Experience.selector', () => {
+describe('modules/UserJobs/UserJobs.selector', () => {
   describe('selector', () => {
     it('should return skills, and organisations from the root state', () => {
       const state = rootStateFixture()

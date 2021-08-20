@@ -1,6 +1,6 @@
 import { applySpec, path, pathOr, prop } from 'ramda'
 
-export const extractExperienceFormValues = applySpec({
+export const extractUserJobsFormValues = applySpec({
   id: path(['job', 'id']),
   credentialId: path(['id']),
   title: path(['job', 'title']),

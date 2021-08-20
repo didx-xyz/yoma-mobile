@@ -8,9 +8,9 @@ import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
-import { ExperienceFormState } from '../Experience.types'
-import styles from './ExperienceForm.styles'
-import { DropDownList } from './ExperienceForm.types'
+import { UserJobsFormState } from '../UserJobs.types'
+import styles from './UserJobsForm.styles'
+import { DropDownList } from './UserJobsForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
@@ -18,10 +18,10 @@ interface Props {
   skills: DropDownList[]
   organisations: DropDownList[]
   formValues: FormikValues
-  setFormState: ({ values: FormikValues, isValid: boolean }: ExperienceFormState) => void
+  setFormState: ({ values: FormikValues, isValid: boolean }: UserJobsFormState) => void
 }
 
-const ExperienceForm = ({ formValues, filterSkillsByName, setFormState, skills, organisations }: Props) => {
+const UserJobsForm = ({ formValues, filterSkillsByName, setFormState, skills, organisations }: Props) => {
   const { t } = useTranslation()
   const [organisationsList, setOrganisationsList] = useState<DropDownList[]>([])
   const [skillsList, setSkillEntitiesList] = useState<DropDownList[]>([])
@@ -101,4 +101,4 @@ const ExperienceForm = ({ formValues, filterSkillsByName, setFormState, skills, 
   )
 }
 
-export default ExperienceForm
+export default UserJobsForm

@@ -1,3 +1,5 @@
+import { FormikValues } from 'formik/dist/types'
+
 import { UserCredentialMeta } from '../User/User.types'
 
 export interface UserJob {
@@ -26,6 +28,18 @@ export interface UserJobCredential extends UserCredentialMeta {
 export interface NormalisedUserJobs {
   ids: string[]
   entities: Record<string, UserJobCredential>
+}
+
+export type UserJobsType = {
+  endDate: string
+  id: string
+  job: any
+  startDate: string
+}
+
+export type UserJobsFormState = {
+  values: FormikValues
+  isValid: boolean
 }
 
 export interface UserJobsState extends NormalisedUserJobs {}

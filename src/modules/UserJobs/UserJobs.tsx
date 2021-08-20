@@ -7,12 +7,12 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import styles from './Experience.styles'
-import { ExperienceFormState, ExperienceType } from './Experience.types'
-import { extractExperienceFormValues } from './Experience.utils'
-import ExperienceForm from './ExperienceForm/ExperienceForm'
-import { INITIAL_VALUES } from './ExperienceForm/ExperienceForm.constants'
-import { DropDownList } from './ExperienceForm/ExperienceForm.types'
+import styles from './UserJobs.styles'
+import { UserJobsFormState, UserJobsType } from './UserJobs.types'
+import { extractUserJobsFormValues } from './UserJobs.utils'
+import UserJobsForm from './UserJobsForm/UserJobsForm'
+import { INITIAL_VALUES } from './UserJobsForm/UserJobsForm.constants'
+import { DropDownList } from './UserJobsForm/UserJobsForm.types'
 
 interface Props {
   onJobCreate: (job: any) => void
@@ -20,15 +20,15 @@ interface Props {
   jobs: []
   organisations: DropDownList[]
   skills: DropDownList[]
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserJobs>
 }
 
-const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organisations, skills }: Props) => {
+const UserJobs = ({ navigation, onJobCreate, filterSkillsByName, jobs, organisations, skills }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
   const [jobsList, setJobsList] = useState([])
-  const [formState, setFormState] = useState<ExperienceFormState>({ isValid: true, values: INITIAL_VALUES })
+  const [formState, setFormState] = useState<UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
   useEffect(() => {
     setJobsList(Object.values(jobs))
@@ -39,19 +39,19 @@ const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organis
     setIsEditMode(false)
   }
   const editJob = (item: any) => {
-    const values = extractExperienceFormValues(item)
+    const values = extractUserJobsFormValues(item)
     setFormState({ ...formState, values })
     setIsSaved(true)
     setIsEditMode(true)
   }
-  const handleExperienceFormSave = () => {
+  const handleUserJobsFormSave = () => {
     if (!isEditMode) {
       onJobCreate(formState.values)
     }
   }
 
   const renderItem = (item: any) => {
-    const { job, startDate, endDate }: ExperienceType = item
+    const { job, startDate, endDate }: UserJobsType = item
     return (
       <InfoCard
         title={job.title}
@@ -68,8 +68,8 @@ const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organis
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={t('Experience')}
-        onSave={handleExperienceFormSave}
+        headerText={t('UserJobs')}
+        onSave={handleUserJobsFormSave}
         onAdd={addJob}
         showAddButton={!isSaved}
         isSaveButtonEnabled={formState?.isValid}
@@ -92,7 +92,7 @@ const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organis
       >
         <ScrollView>
           <Card>
-            <ExperienceForm
+            <UserJobsForm
               formValues={formState?.values}
               filterSkillsByName={filterSkillsByName}
               setFormState={setFormState}
@@ -106,4 +106,4 @@ const Experience = ({ navigation, onJobCreate, filterSkillsByName, jobs, organis
   )
 }
 
-export default Experience
+export default UserJobs

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
-import Experience from './Experience'
-import selector from './Experience.selector'
+import UserJobs from './UserJobs'
+import selector from './UserJobs.selector'
 
 const mapStateToProps = selector
 const mapDispatchToProps = () => {
@@ -11,4 +11,4 @@ const mapDispatchToProps = () => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Experience)
+export default connect(mapStateToProps, mapDispatchToProps)(UserJobs)

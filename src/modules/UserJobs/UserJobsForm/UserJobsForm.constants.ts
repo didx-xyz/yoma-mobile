@@ -1,6 +1,6 @@
-import { ExperienceFields } from './ExperienceForm.types'
+import { UserJobsFields } from './UserJobsForm.types'
 
-export const INITIAL_VALUES: ExperienceFields = {
+export const INITIAL_VALUES: UserJobsFields = {
   title: '',
   description: '',
   id: '',

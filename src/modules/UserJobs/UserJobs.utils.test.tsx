@@ -1,13 +1,13 @@
 import { USER_JOBS_MOCK } from 'modules/UserJobs/UserJobs.test.fixtures'
 
-import * as SUT from './Experience.utils'
+import * as SUT from './UserJobs.utils'
 
-describe('modules/Experience/Experience.utils', () => {
-  describe('extractExperienceFormValues', () => {
-    it('should return experience form values from job credential payload', () => {
+describe('modules/UserJobs/UserJobs.utils', () => {
+  describe('extractUserJobsFormValues', () => {
+    it('should return UserJobs form values from job credential payload', () => {
       //given ...
-      //when .. extractExperienceFormValues
-      const result = SUT.extractExperienceFormValues(USER_JOBS_MOCK[0])
+      //when .. extractUserJobsFormValues
+      const result = SUT.extractUserJobsFormValues(USER_JOBS_MOCK[0])
       //then result should equal job request payload data
       expect(result).toEqual({
         id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
