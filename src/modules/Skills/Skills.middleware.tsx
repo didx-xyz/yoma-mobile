@@ -10,8 +10,10 @@ import {
   fetchSkills,
   fetchSkillsFailure,
   fetchSkillsSuccess,
+  filterSkillsByName,
   getSkillsSuccess,
   normaliseSkillsSuccess,
+  setFilteredSkills,
   setSkills,
 } from './Skills.reducer'
 import { NormalisedSkills, Skill } from './Skills.types'
@@ -67,6 +69,20 @@ export const setSkillsFlow: Middleware =
     const result = next(action)
     if (normaliseSkillsSuccess.match(action)) {
       dispatch(setSkills(action.payload))
+    }
+    return result
+  }
+
+export const filterSkillsByNameFlow: Middleware =
+  ({ getState, dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (filterSkillsByName.match(action)) {
+      const state = getState()
+      const skillEntities = selectSkillEntities(state)
+      const filteredSkills = searchArrayOfObjByValue(action.payload, skillEntities)
+      dispatch(setFilteredSkills(filteredSkills))
     }
     return result
   }
