@@ -1,6 +1,6 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { Normalise } from 'types/general.types'
+import { Normalise } from 'types/redux.types'
 import { showSimpleMessage } from 'utils/error'
 import { extractDataFromPayload } from 'utils/redux.utils'
 
@@ -13,7 +13,6 @@ import {
   filterSkillsByName,
   getSkillsSuccess,
   normaliseSkillsSuccess,
-  setFilteredSkills,
   setSkills,
 } from './Skills.reducer'
 import { NormalisedSkills, Skill } from './Skills.types'
@@ -73,19 +72,16 @@ export const setSkillsFlow: Middleware =
     return result
   }
 
-export const filterSkillsByNameFlow: Middleware =
-  ({ getState, dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (filterSkillsByName.match(action)) {
-      const state = getState()
-      const skillEntities = selectSkillEntities(state)
-      const filteredSkills = searchArrayOfObjByValue(action.payload, skillEntities)
-      dispatch(setFilteredSkills(filteredSkills))
-    }
-    return result
+export const filterSkillsByNameFlow: Middleware = _store => next => action => {
+  const result = next(action)
+  if (filterSkillsByName.match(action)) {
+    // const state = getState()
+    // const skillEntities = selectSkillEntities(state)
+    // const filteredSkills = searchArrayOfObjByValue(action.payload, skillEntities)
+    // dispatch(setFilteredSkills(filteredSkills))
   }
+  return result
+}
 
 export const fetchSkillsFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
