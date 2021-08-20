@@ -10,9 +10,9 @@ interface Props {
   name: string
   startDate: string
   isValidated: boolean
-  avatarUrl?: string
+  organisationLogoURL?: string
 }
-const UserChallengeItem = ({ name, startDate, avatarUrl, isValidated }: Props) => {
+const UserChallengeItem = ({ name, startDate, organisationLogoURL, isValidated }: Props) => {
   const [formattedDate, setFormattedDate] = useState('')
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const UserChallengeItem = ({ name, startDate, avatarUrl, isValidated }: Props) =
   return (
     <View style={styles.container}>
       <View style={styles.imageWrap}>
-        <Avatar name={name} url={avatarUrl} isValidated={isValidated} />
+        <Avatar name={name} url={organisationLogoURL} isValidated={isValidated} />
       </View>
       <View style={styles.content}>
         <Text.Header level={HeaderLevels.h6}>{name}</Text.Header>

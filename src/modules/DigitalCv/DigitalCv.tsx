@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { FirstTimeCard, ViewContainer } from 'components'
 import CvCard from 'components/CvCard'
-import HomeHeader from 'components/HomeHeader'
+import HomeHeader from 'modules/HomeHeader'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -21,7 +21,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
-      <HomeHeader navigation={navigation} profileProgressPercentage={10} rewardPoints={1000} />
+      <HomeHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FirstTimeCard />
         <CvCard
@@ -68,7 +68,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
                 startDate: '2021-04-25T19:05:54.5496363',
                 isValidated: true,
                 name: 'ORG Verified with logo',
-                avatarUrl: 'https://picsum.photos/200',
+                organisationLogoURL: 'https://picsum.photos/200',
               },
             },
           }}
