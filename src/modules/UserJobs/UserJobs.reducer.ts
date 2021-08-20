@@ -15,7 +15,7 @@ export const normaliseUserJobsSuccess = createAction<NormalisedUserJobs>(`${name
 export const updateNormalisedUserJobs = createAction<NormalisedUserJobs>(`${name} updateNormalisedUserJobs`)
 export const setUserJobsFormValues = createAction<UserCredentialFormValues>(`${name} setUserJobsFormValues`)
 
-export const createUserJobs = createAction<any>(`${name} createUserJobs`)
+export const createUserJob = createAction<any>(`${name} createUserJob`)
 export const setUserJobs = createAction<NormalisedUserJobs>(`${name} setUserJobs`)
 export const clearUserJobs = createAction(`${name} clearUserJobs`)
 

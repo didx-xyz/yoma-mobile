@@ -8,7 +8,7 @@ import { constants as ApiUsersConstants } from '../../api/users'
 import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserJobs.middleware'
 import {
-  createUserJobs,
+  createUserJob,
   createUserJobsFailure,
   createUserJobsSuccess,
   getUserJobsSuccess,
@@ -149,7 +149,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       const create = createMiddlewareStub(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
       // when ... we create the user's credentials
-      const action = createUserJobs(JOB_MOCK)
+      const action = createUserJob(JOB_MOCK)
       // @ts-ignore
       const { store, invoke, next } = create(SUT.createUserJobsFlow)
       invoke(action)

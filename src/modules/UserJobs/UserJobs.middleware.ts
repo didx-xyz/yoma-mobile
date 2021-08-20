@@ -16,7 +16,7 @@ import * as Navigation from '../Navigation/Navigation.actions'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
 import {
-  createUserJobs,
+  createUserJob,
   createUserJobsFailure,
   createUserJobsSuccess,
   getUserJobsSuccess,
@@ -85,7 +85,7 @@ export const createUserJobsFlow: Middleware =
   action => {
     const result = next(action)
 
-    if (createUserJobs.match(action)) {
+    if (createUserJob.match(action)) {
       const state = getState()
       const userId = selectId(state)
 

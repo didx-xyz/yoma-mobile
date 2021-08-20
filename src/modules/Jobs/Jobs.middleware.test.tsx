@@ -1,4 +1,4 @@
-import { createUserJobs } from 'modules/UserJobs/UserJobs.reducer'
+import { createUserJob } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
@@ -89,7 +89,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
       invoke(action)
 
       // then ...validate createJobSuccessFlow
-      expect(store.dispatch).toHaveBeenCalledWith(createUserJobs(JOB_MOCK))
+      expect(store.dispatch).toHaveBeenCalledWith(createUserJob(JOB_MOCK))
     })
   })
   describe('createJobFailureFlow', () => {
