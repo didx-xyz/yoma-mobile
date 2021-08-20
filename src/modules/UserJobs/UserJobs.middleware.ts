@@ -69,6 +69,7 @@ export const setUserJobsFlow: Middleware =
     }
     return result
   }
+
 export const setUserJobsFormValuesFlow: Middleware =
   ({ dispatch }) =>
   next =>
@@ -80,6 +81,7 @@ export const setUserJobsFormValuesFlow: Middleware =
     }
     return result
   }
+
 export const createUserJobsFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
