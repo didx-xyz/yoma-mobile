@@ -8,11 +8,10 @@ export interface UserChallenge extends UserCredentialMeta {
 
 export type NormalisedUserChallenges = NormalisedData<UserChallenge>
 
-export interface UserChallengeItem {
-  startDate: string
+export interface UserChallengeItem
+  extends Pick<Challenge, 'organisationLogoURL' | 'name'>,
+    Pick<UserCredentialMeta, 'startDate'> {
   isValidated: boolean
-  name: string
-  avatarUrl: string | null
 }
 
 export type NormalisedUserChallengeItem = NormalisedData<UserChallengeItem>
@@ -21,7 +20,7 @@ export interface UserChallengesState extends NormalisedUserChallenges {}
 
 export type ChallengeEntry = {
   challenge: string
-  organisationLogoUrl: string
+  organisationLogoURL: string
   challengeHostProvider: string
   startDate: string
   endDate: string

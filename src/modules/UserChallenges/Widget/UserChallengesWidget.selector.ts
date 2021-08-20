@@ -11,7 +11,7 @@ export default createSelector(selectUserChallenges, challenges => {
       applySpec({
         name: pathOr('', ['challenge', 'name']),
         startDate: propOr('', 'startDate'),
-        avatarUrl: path(['challenge', 'url']),
+        organisationLogoURL: path(['challenge', 'organisationLogoURL']),
         isValidated: propOr(false, 'approved'),
       }),
     ),
