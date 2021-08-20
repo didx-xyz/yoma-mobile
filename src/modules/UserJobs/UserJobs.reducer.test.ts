@@ -1,4 +1,10 @@
-import SUT, { clearUserJobs, INITIAL_STATE, setUserJobs, updateNormalisedUserJobs } from './UserJobs.reducer'
+import SUT, {
+  clearUserJobs,
+  INITIAL_STATE,
+  setUserJobs,
+  setUserJobsFormValues,
+  updateNormalisedUserJobs,
+} from './UserJobs.reducer'
 
 describe('src/modules/User/Jobs/Jobs.reducer', () => {
   describe('setUserJobs', () => {
@@ -6,7 +12,7 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
       // given ...an initial state
       const state = INITIAL_STATE
 
-      // when ... we add new jobs
+      // when ... we set new jobs
       const jobsMock = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
@@ -14,7 +20,6 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
           id2: 'Job 2',
           id3: 'Job 3',
         },
-        formValues: null,
       }
       // @ts-ignore
       const action = setUserJobs(jobsMock)
@@ -22,6 +27,57 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
 
       // then ... state should include the new jobs
       expect(result).toEqual(jobsMock)
+    })
+    it('should overwrite all current credentials', () => {
+      // given ...an initial state
+      const state = {
+        ids: ['idA', 'idB'],
+        entities: {
+          idA: 'Job A',
+          idB: 'Job B',
+        },
+      }
+
+      // when ... we set new jobs
+      const jobsMock = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Job 1',
+          id2: 'Job 2',
+          id3: 'Job 3',
+        },
+      }
+      // @ts-ignore - the shape of the data doesn't matter
+      const action = setUserJobs(jobsMock)
+      // @ts-ignore - the shape of the data doesn't matter
+      const result = SUT(state, action)
+
+      // then ... state should include the new jobs
+      expect(result).toEqual(jobsMock)
+    })
+  })
+  describe('setUserJobsFormValues', () => {
+    it('should temporarily set form values for userJobs create/update API', () => {
+      // given ...an initial state
+      const state = {
+        ids: 'Normalised Ids array',
+        entities: 'Normalised Entities Object',
+      }
+
+      const formValues = 'Temporary Form Object'
+
+      // when ... we setUserJobsFormValues
+      // @ts-ignore
+      const action = setUserJobsFormValues(formValues)
+      // @ts-ignore
+      const result = SUT(state, action)
+
+      // then ... state should include the new jobs
+      expect(result).toEqual({
+        ids: 'Normalised Ids array',
+        entities: 'Normalised Entities Object',
+        formValues: 'Temporary Form Object',
+      })
     })
     it('should overwrite all current credentials', () => {
       // given ...an initial state
@@ -64,7 +120,6 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
           id2: 'Job 2',
           id3: 'Job 3',
         },
-        formValues: null,
       }
       // @ts-ignore
       const action = updateNormalisedUserJobs(jobsMock)

@@ -1,6 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { UserCredentialFormValues } from 'modules/User/User.types'
-import { updateNormalisedState } from 'utils/redux.utils'
+import { updateNormalisedState, updateStateWithFormValues } from 'utils/redux.utils'
 
 import { NormalisedUserJobs, UserJobCredential, UserJobsResponse, UserJobsState } from './UserJobs.types'
 
@@ -24,6 +24,7 @@ export const createUserJobsFailure = createAction<string>(`${name} createUserJob
 
 const reducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserJobs, (_state, action) => action.payload)
+  builder.addCase(setUserJobsFormValues, (state, action) => updateStateWithFormValues(state, action.payload))
   builder.addCase(updateNormalisedUserJobs, (state, action) => updateNormalisedState(state, action.payload))
   builder.addCase(clearUserJobs, (_state, _action) => INITIAL_STATE)
 })

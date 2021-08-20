@@ -105,6 +105,29 @@ describe('src/utils/redux.utils', () => {
     })
   })
 
+  describe('updateStateWithFormValues', () => {
+    it('should extract the data from a typical response payload', () => {
+      // given ...
+      const state = {
+        ids: 'Normalised Ids array',
+        entities: 'Normalised Entities Object',
+      }
+
+      const formValues = 'Temporary Form Object'
+
+      // when ... we updateStateWithFormValues
+      // @ts-ignore
+      const result = SUT.updateStateWithFormValues(state, formValues)
+
+      // then ...
+      expect(result).toEqual({
+        ids: 'Normalised Ids array',
+        entities: 'Normalised Entities Object',
+        formValues: 'Temporary Form Object',
+      })
+    })
+  })
+
   describe('selectNormalised', () => {
     it('should return the normalised values from state', () => {
       // given ... an object in the shape of the successful response

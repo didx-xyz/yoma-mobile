@@ -150,7 +150,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const create = createMiddlewareStub(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
       // when ... we create the user's credentials
       const action = createUserJob(JOB_MOCK)
-      // @ts-ignore
+
       const { store, invoke, next } = create(SUT.createUserJobsFlow)
       invoke(action)
 
@@ -180,7 +180,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const create = createMiddlewareStub(jest)
       const mockNotification = jest.fn()
       const mockResponse = {
-        data: { data: USER_JOBS_MOCK[0] },
+        data: { data: USER_JOBS_MOCK[0] }, //using actual data for reference
         meta: {
           success: true,
           code: 200,
@@ -189,7 +189,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       }
 
       const action = createUserJobsSuccess(mockResponse)
-      // @ts-ignore
+
       const { store, invoke, next } = create(SUT.createUserJobsSuccessFlow({ notification: mockNotification }))
       // when ... we respond to the createUserJobsSuccess action
       invoke(action)
@@ -205,7 +205,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const create = createMiddlewareStub(jest)
       const action = createUserJobsFailure('FAILED')
       const mockNotification = jest.fn()
-      // @ts-ignore
+
       const { invoke } = create(SUT.createUserJobsFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the createUserJobsFailures action
