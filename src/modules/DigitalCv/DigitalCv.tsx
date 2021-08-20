@@ -68,7 +68,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
                 startDate: '2021-04-25T19:05:54.5496363',
                 isValidated: true,
                 name: 'ORG Verified with logo',
-                avatarUrl: 'https://picsum.photos/200',
+                organisationLogoURL: 'https://picsum.photos/200',
               },
             },
           }}
