@@ -11,6 +11,9 @@ const styles = {
     right: 0,
     bottom: -5,
   } as ViewStyle,
+  imageWrap: {
+    overflow: 'hidden',
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

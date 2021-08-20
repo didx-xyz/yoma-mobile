@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- add organisations data to state
+- adding selector for MyCV title bar
 
 Recent:
+- add organisations data to state
 - add skills data to state
 - merging MyChallenges into UserChallenges
 - adding generic list component for CvCard/MyCV
@@ -15,4 +16,3 @@ Recent:
 - add auth with refresh token
 - automatically re-auth the user on any unauthorised from the api
 - save edited user profile data
-- my cv display real data in about
