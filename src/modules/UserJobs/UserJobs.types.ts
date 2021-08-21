@@ -1,5 +1,3 @@
-import { FormikValues } from 'formik/dist/types'
-
 import { UserCredentialMeta } from '../User/User.types'
 
 export interface UserJob {
@@ -49,7 +47,7 @@ export type UserJobsType = {
 }
 
 export type UserJobsFormState = {
-  values: FormikValues
+  values: UserJobsRequest
   isValid: boolean
 }
 

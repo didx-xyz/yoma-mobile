@@ -16,14 +16,14 @@ import { DropDownList } from './UserJobsForm/UserJobsForm.types'
 
 interface Props {
   onJobCreate: (job: any) => void
-  filterSkillsByName: (query: string) => void
+  filterSkillsByValue: (query: string) => void
   jobs: []
   organisations: DropDownList[]
   skills: DropDownList[]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserJobs>
 }
 
-const UserJobs = ({ navigation, onJobCreate, filterSkillsByName, jobs, organisations, skills }: Props) => {
+const UserJobs = ({ navigation, onJobCreate, filterSkillsByValue, jobs, organisations, skills }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
@@ -94,7 +94,7 @@ const UserJobs = ({ navigation, onJobCreate, filterSkillsByName, jobs, organisat
           <Card>
             <UserJobsForm
               formValues={formState?.values}
-              filterSkillsByName={filterSkillsByName}
+              filterSkillsByValue={filterSkillsByValue}
               setFormState={setFormState}
               skills={skills}
               organisations={organisations}

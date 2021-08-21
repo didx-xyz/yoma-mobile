@@ -10,7 +10,7 @@ import {
   fetchSkills,
   fetchSkillsFailure,
   fetchSkillsSuccess,
-  filterSkillsByName,
+  filterSkillsByValue,
   getSkillsSuccess,
   normaliseSkillsSuccess,
   setFilteredSkills,
@@ -75,12 +75,12 @@ export const setSkillsFlow: Middleware =
     return result
   }
 
-export const filterSkillsByNameFlow: Middleware =
+export const filterSkillsByValueFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (filterSkillsByName.match(action)) {
+    if (filterSkillsByValue.match(action)) {
       const state = getState()
       const skillEntities = selectSkillEntities(state)
       const filteredSkills = extractFilteredSkillsByValue(action.payload, skillEntities)

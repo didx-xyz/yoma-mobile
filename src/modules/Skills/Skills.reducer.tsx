@@ -15,7 +15,7 @@ export const getSkillsSuccess = createAction<Skill[]>(`${name} getSkillsSuccess`
 export const normaliseSkillsSuccess = createAction<NormalisedSkills>(`${name} normaliseSkillsSuccess`)
 export const setFilteredSkills = createAction<any>(`${name} setFilteredSkills`)
 
-export const filterSkillsByName = createAction<string>(`${name} filterSkillsByName`)
+export const filterSkillsByValue = createAction<string>(`${name} filterSkillsByValue`)
 export const fetchSkills = createAction(`${name} fetchSkills`)
 export const fetchSkillsSuccess = createAction<SkillsResponse>(`${name} fetchSkillsSuccess`)
 export const fetchSkillsFailure = createAction<string>(`${name} fetchSkillsFailure`)

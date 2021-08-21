@@ -10,7 +10,7 @@ import {
   fetchSkills,
   fetchSkillsFailure,
   fetchSkillsSuccess,
-  filterSkillsByName,
+  filterSkillsByValue,
   getSkillsSuccess,
   normaliseSkillsSuccess,
   setFilteredSkills,
@@ -181,17 +181,17 @@ describe('modules/Skills/Skills.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(setSkills('NORMALISED SKILLS DATA'))
     })
   })
-  describe('filterSkillsByNameFlow', () => {
+  describe('filterSkillsByValueFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const mockState = rootStateFixture()
 
       const create = createMiddlewareStub(jest, mockState)
-      const action = filterSkillsByName('')
+      const action = filterSkillsByValue('')
       // @ts-ignore
-      const { invoke, next } = create(SUT.filterSkillsByNameFlow)
+      const { invoke, next } = create(SUT.filterSkillsByValueFlow)
 
-      // when ... we respond to the filterSkillsByName action
+      // when ... we respond to the filterSkillsByValue action
       invoke(action)
 
       // then ...validate fetchSkillsFlow
@@ -217,13 +217,13 @@ describe('modules/Skills/Skills.middleware', () => {
       })
 
       const create = createMiddlewareStub(jest, mockState)
-      const action = filterSkillsByName('value1')
+      const action = filterSkillsByValue('value1')
       // @ts-ignore
-      const { invoke, store } = create(SUT.filterSkillsByNameFlow)
+      const { invoke, store } = create(SUT.filterSkillsByValueFlow)
       // when ... we respond to the updateSkills action
       invoke(action)
 
-      // then ...validate filterSkillsByNameFlow
+      // then ...validate filterSkillsByValueFlow
       expect(store.dispatch).toHaveBeenCalledWith(setFilteredSkills(['value1']))
     })
   })

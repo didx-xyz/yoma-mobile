@@ -1,27 +1,27 @@
 import { CheckBox, DatePicker, DropDown, FormWrapper, InfoModal, Input } from 'components'
 import DropDownTags from 'components/DropDownTags'
 import Text, { MetaLevels } from 'components/Typography'
-import { Formik, FormikValues } from 'formik'
+import { Formik } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
-import { UserJobsFormState } from '../UserJobs.types'
+import { UserJobsFormState, UserJobsRequest } from '../UserJobs.types'
 import styles from './UserJobsForm.styles'
 import { DropDownList } from './UserJobsForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  filterSkillsByName: (searchQuery: string) => void
+  filterSkillsByValue: (searchQuery: string) => void
   skills: DropDownList[]
   organisations: DropDownList[]
-  formValues: FormikValues
-  setFormState: ({ values: FormikValues, isValid: boolean }: UserJobsFormState) => void
+  formValues: UserJobsRequest
+  setFormState: ({ values: UserJobsRequest, isValid: boolean }: UserJobsFormState) => void
 }
 
-const UserJobsForm = ({ formValues, filterSkillsByName, setFormState, skills, organisations }: Props) => {
+const UserJobsForm = ({ formValues, filterSkillsByValue, setFormState, skills, organisations }: Props) => {
   const { t } = useTranslation()
   const [organisationsList, setOrganisationsList] = useState<DropDownList[]>([])
   const [skillsList, setSkillEntitiesList] = useState<DropDownList[]>([])
@@ -85,7 +85,7 @@ const UserJobsForm = ({ formValues, filterSkillsByName, setFormState, skills, or
             multiple
             searchable
             searchPlaceholder={t('Search skills')}
-            onChangeSearchText={filterSkillsByName}
+            onChangeSearchText={filterSkillsByValue}
             label={t('Skills developed')}
             name={'skillNames'}
             handlers={formikHandlers}
