@@ -2,7 +2,7 @@ import { UserCredentialTypes } from 'api/users/users.types'
 import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import { createJob } from 'modules/Jobs/Jobs.reducer'
-import { selectId } from 'modules/User/User.selector'
+import * as UserSelectors from 'modules/User/User.selector'
 import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } from 'modules/User/User.utils'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
@@ -18,8 +18,8 @@ import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
 import {
   createUserJob,
-  createUserJobsFailure,
-  createUserJobsSuccess,
+  createUserJobFailure,
+  createUserJobSuccess,
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
@@ -82,7 +82,7 @@ export const setUserJobsFormValuesFlow: Middleware =
     return result
   }
 
-export const createUserJobsFlow: Middleware =
+export const createUserJobFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
   action => {
@@ -90,7 +90,7 @@ export const createUserJobsFlow: Middleware =
 
     if (createUserJob.match(action)) {
       const state = getState()
-      const userId = selectId(state)
+      const userId = UserSelectors.selectId(state)
 
       const formValues = selectFormValues(state)
       const userJobsPayload = prepareUserCredentialItemPayload(action)(formValues)
@@ -100,8 +100,8 @@ export const createUserJobsFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: createUserJobsSuccess,
-            onFailure: createUserJobsFailure,
+            onSuccess: createUserJobSuccess,
+            onFailure: createUserJobFailure,
           }),
           userJobsPayload,
         ),
@@ -110,13 +110,13 @@ export const createUserJobsFlow: Middleware =
     return result
   }
 
-export const createUserJobsSuccessFlow =
+export const createUserJobSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (createUserJobsSuccess.match(action)) {
+    if (createUserJobSuccess.match(action)) {
       const response = extractDataFromPayload(action)
       const normalisedJobs = normalise([response])
       dispatch(updateNormalisedUserJobs(normalisedJobs))
@@ -128,14 +128,14 @@ export const createUserJobsSuccessFlow =
     return result
   }
 
-export const createUserJobsFailureFlow =
+export const createUserJobFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
   action => {
     const result = next(action)
 
-    if (createUserJobsFailure.match(action)) {
+    if (createUserJobFailure.match(action)) {
       const errorMessage = extractErrorMessageFromPayload(action)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', errorMessage)

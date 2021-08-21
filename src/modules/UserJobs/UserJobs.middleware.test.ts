@@ -9,8 +9,8 @@ import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserJobs.middleware'
 import {
   createUserJob,
-  createUserJobsFailure,
-  createUserJobsSuccess,
+  createUserJobFailure,
+  createUserJobSuccess,
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
@@ -135,7 +135,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(setUserJobs('NORMALISED JOBS DATA'))
     })
   })
-  describe('createUserJobsFlow', () => {
+  describe('createUserJobFlow', () => {
     it('should correctly handle being called', () => {
       // given ... a user object with an id in state
       const userId = 'A USER ID'
@@ -151,7 +151,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       // when ... we create the user's credentials
       const action = createUserJob(JOB_MOCK)
 
-      const { store, invoke, next } = create(SUT.createUserJobsFlow)
+      const { store, invoke, next } = create(SUT.createUserJobFlow)
       invoke(action)
 
       // then ...
@@ -166,15 +166,15 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: createUserJobsSuccess,
-            onFailure: createUserJobsFailure,
+            onSuccess: createUserJobSuccess,
+            onFailure: createUserJobFailure,
           }),
           userJobsPayload,
         ),
       )
     })
   })
-  describe('createUserJobsSuccessFlow', () => {
+  describe('createUserJobSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
@@ -188,27 +188,27 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         },
       }
 
-      const action = createUserJobsSuccess(mockResponse)
+      const action = createUserJobSuccess(mockResponse)
 
-      const { store, invoke, next } = create(SUT.createUserJobsSuccessFlow({ notification: mockNotification }))
-      // when ... we respond to the createUserJobsSuccess action
+      const { store, invoke, next } = create(SUT.createUserJobSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the createUserJobSuccess action
       invoke(action)
 
-      // then ...validate createUserJobsSuccessFlow
+      // then ...validate createUserJobSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(updateNormalisedUserJobs(USER_JOBS_NORMALISED_MOCK))
     })
   })
-  describe('createUserJobsFailureFlow', () => {
+  describe('createUserJobFailureFlow', () => {
     it('should correctly handle job credentials create failure', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const action = createUserJobsFailure('FAILED')
+      const action = createUserJobFailure('FAILED')
       const mockNotification = jest.fn()
 
-      const { invoke } = create(SUT.createUserJobsFailureFlow({ notification: mockNotification }))
+      const { invoke } = create(SUT.createUserJobFailureFlow({ notification: mockNotification }))
 
-      // when ... we respond to the createUserJobsFailures action
+      // when ... we respond to the createUserJobFailures action
       invoke(action)
 
       // then ...validate failure

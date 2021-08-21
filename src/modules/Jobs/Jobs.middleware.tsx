@@ -1,4 +1,4 @@
-import { createUserJob } from 'modules/UserJobs/UserJobs.reducer'
+import * as UserJobsActions from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
@@ -36,7 +36,7 @@ export const createJobSuccessFlow: Middleware =
 
     if (createJobSuccess.match(action)) {
       const job = extractDataFromPayload(action)
-      dispatch(createUserJob(job))
+      dispatch(UserJobsActions.createUserJob(job))
     }
 
     return result

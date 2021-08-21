@@ -95,9 +95,9 @@ const featureModuleMiddleware = [
   ),
   UserJobsMiddleware.normaliseUserJobsFlow(ReduxUtils.normalise),
   UserJobsMiddleware.setUserJobsFlow,
-  UserJobsMiddleware.createUserJobsFlow,
-  UserJobsMiddleware.createUserJobsSuccessFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.createUserJobsFailureFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.createUserJobFlow,
+  UserJobsMiddleware.createUserJobSuccessFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.createUserJobFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
