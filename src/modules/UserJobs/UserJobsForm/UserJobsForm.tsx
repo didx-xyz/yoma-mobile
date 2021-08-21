@@ -2,7 +2,7 @@ import { CheckBox, DatePicker, DropDown, FormWrapper, InfoModal, Input } from 'c
 import DropDownTags from 'components/DropDownTags'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -14,27 +14,19 @@ import { DropDownList } from './UserJobsForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
-  filterSkillsByValue: (searchQuery: string) => void
+  filterSkillsByValue: (value: string) => void
   skills: DropDownList[]
   organisations: DropDownList[]
   formValues: UserJobsRequest
   setFormState: ({ values: UserJobsRequest, isValid: boolean }: UserJobsFormState) => void
 }
 
-const UserJobsForm = ({ formValues, filterSkillsByValue, setFormState, skills, organisations }: Props) => {
+const UserJobsForm = ({ formValues, filterSkillsByValue, setFormState }: Props) => {
   const { t } = useTranslation()
-  const [organisationsList, setOrganisationsList] = useState<DropDownList[]>([])
-  const [skillsList, setSkillEntitiesList] = useState<DropDownList[]>([])
+  const [organisationsList] = useState<DropDownList[]>([])
+  const [skillsList] = useState<DropDownList[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
-
-  useEffect(() => {
-    setOrganisationsList(organisations)
-  }, [organisations])
-
-  useEffect(() => {
-    setSkillEntitiesList(skills)
-  }, [skills])
 
   return (
     <Formik

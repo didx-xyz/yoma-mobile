@@ -224,7 +224,14 @@ describe('modules/Skills/Skills.middleware', () => {
       invoke(action)
 
       // then ...validate filterSkillsByValueFlow
-      expect(store.dispatch).toHaveBeenCalledWith(setFilteredSkills(['value1']))
+      expect(store.dispatch).toHaveBeenCalledWith(
+        setFilteredSkills([
+          {
+            key: 'key1',
+            value: 'value1',
+          },
+        ]),
+      )
     })
   })
   describe('fetchSkillsFailureFlow', () => {

@@ -8,37 +8,34 @@ import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import styles from './UserJobs.styles'
-import { UserJobsFormState, UserJobsType } from './UserJobs.types'
+import * as UserJobsTypes from './UserJobs.types'
 import { extractUserJobsFormValues } from './UserJobs.utils'
 import UserJobsForm from './UserJobsForm/UserJobsForm'
-import { INITIAL_VALUES } from './UserJobsForm/UserJobsForm.constants'
-import { DropDownList } from './UserJobsForm/UserJobsForm.types'
+import { INITIAL_VALUES, MOCKED_JOBS, MOCK_ORGANISATIONS, MOCK_SKILLS } from './UserJobsForm/UserJobsForm.constants'
 
 interface Props {
   onJobCreate: (job: any) => void
+  onJobPatch: (job: any) => void
   filterSkillsByValue: (query: string) => void
-  jobs: []
-  organisations: DropDownList[]
-  skills: DropDownList[]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserJobs>
 }
 
-const UserJobs = ({ navigation, onJobCreate, filterSkillsByValue, jobs, organisations, skills }: Props) => {
+const UserJobs = ({ onJobCreate, onJobPatch, filterSkillsByValue, navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [jobsList, setJobsList] = useState([])
-  const [formState, setFormState] = useState<UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
+  const [userJobsList, setUserJobsList] = useState([])
+  const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
   useEffect(() => {
-    setJobsList(Object.values(jobs))
-  }, [jobs])
+    setUserJobsList(MOCKED_JOBS)
+  }, [])
 
-  const addJob = () => {
+  const addUserJob = () => {
     setIsSaved(true)
     setIsEditMode(false)
   }
-  const editJob = (item: any) => {
+  const editUserJob = (item: any) => {
     const values = extractUserJobsFormValues(item)
     setFormState({ ...formState, values })
     setIsSaved(true)
@@ -47,11 +44,13 @@ const UserJobs = ({ navigation, onJobCreate, filterSkillsByValue, jobs, organisa
   const handleUserJobsFormSave = () => {
     if (!isEditMode) {
       onJobCreate(formState.values)
+    } else {
+      onJobPatch(formState.values)
     }
   }
 
   const renderItem = (item: any) => {
-    const { job, startDate, endDate }: UserJobsType = item
+    const { job, startDate, endDate }: UserJobsTypes.UserJobsType = item
     return (
       <InfoCard
         title={job.title}
@@ -59,7 +58,7 @@ const UserJobs = ({ navigation, onJobCreate, filterSkillsByValue, jobs, organisa
         startDate={startDate}
         endDate={endDate}
         logo={job.organisationLogoURL}
-        onEdit={() => editJob(item)}
+        onEdit={() => editUserJob(item)}
       />
     )
   }
@@ -70,7 +69,7 @@ const UserJobs = ({ navigation, onJobCreate, filterSkillsByValue, jobs, organisa
         navigation={navigation}
         headerText={t('UserJobs')}
         onSave={handleUserJobsFormSave}
-        onAdd={addJob}
+        onAdd={addUserJob}
         showAddButton={!isSaved}
         isSaveButtonEnabled={formState?.isValid}
       />
@@ -78,11 +77,11 @@ const UserJobs = ({ navigation, onJobCreate, filterSkillsByValue, jobs, organisa
         condition={isSaved}
         fallback={
           <Optional
-            condition={jobsList.length > 0}
+            condition={userJobsList.length > 0}
             fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
           >
             <FlatList
-              data={jobsList}
+              data={userJobsList}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }: any) => renderItem(item)}
               keyExtractor={(item: any, index: number) => index.toString()}
@@ -96,8 +95,8 @@ const UserJobs = ({ navigation, onJobCreate, filterSkillsByValue, jobs, organisa
               formValues={formState?.values}
               filterSkillsByValue={filterSkillsByValue}
               setFormState={setFormState}
-              skills={skills}
-              organisations={organisations}
+              skills={MOCK_SKILLS}
+              organisations={MOCK_ORGANISATIONS}
             />
           </Card>
         </ScrollView>

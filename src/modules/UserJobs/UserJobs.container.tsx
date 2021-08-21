@@ -7,6 +7,7 @@ const mapStateToProps = selector
 const mapDispatchToProps = () => {
   return {
     onJobCreate: () => {},
+    onJobPatch: () => {},
     filterSkillsByValue: () => {},
   }
 }

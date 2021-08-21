@@ -40,10 +40,10 @@ export interface NormalisedUserJobs {
 }
 
 export type UserJobsType = {
-  endDate: string
   id: string
   job: any
   startDate: string
+  endDate: string
 }
 
 export type UserJobsFormState = {

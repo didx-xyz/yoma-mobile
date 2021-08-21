@@ -18,7 +18,12 @@ describe('modules/Skills/Skills.utils', () => {
       const result = SUT.extractFilteredSkillsByValue('value1', mockEntities)
 
       //then
-      expect(result).toEqual(['value1'])
+      expect(result).toEqual([
+        {
+          key: 'key1',
+          value: 'value1',
+        },
+      ])
     })
   })
   describe('updateSkillsStateWithFiltered', () => {
