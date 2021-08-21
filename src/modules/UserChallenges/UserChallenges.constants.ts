@@ -2,6 +2,7 @@ import { UserChallengeFormFields } from './UserChallenges.types'
 
 export const MOCKED_CHALLENGES = [
   {
+    id: 'id1',
     challenge: 'COVID Challenge',
     organisationLogoUrl: '',
     challengeHostProvider: '',
@@ -10,6 +11,7 @@ export const MOCKED_CHALLENGES = [
     description: '',
   },
   {
+    id: 'id2',
     challenge: 'Beyond your future challenge',
     organisationLogoUrl: '',
     challengeHostProvider: '',

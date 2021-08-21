@@ -9,7 +9,7 @@ import { ScrollView } from 'react-native'
 
 import Text, { TextAlign } from '../../components/Typography'
 import { Colors } from '../../styles'
-import UserChallengesWidget from '../UserChallenges/UserChallenges.widget'
+import { UserChallengesWidget } from '../UserChallenges'
 import styles from './DigitalCv.styles'
 
 interface Props {
@@ -59,14 +59,20 @@ const DigitalCv = ({ navigation, biography }: Props) => {
           fallback={t('Have you completed any courses yet?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MyCourses)}
         />
-        <CvCard
-          count={0}
-          badgeColor={Colors.secondaryPurple}
-          title={t('Completed challenges')}
-          fallback={t('Have you completed any challenges yet?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.UserChallenges)}
+        <UserChallengesWidget
+          navigation={navigation}
+          challenges={{
+            ids: ['id1'],
+            entities: {
+              id1: {
+                startDate: '2021-04-25T19:05:54.5496363',
+                isValidated: true,
+                name: 'ORG Verified with logo',
+                organisationLogoURL: 'https://picsum.photos/200',
+              },
+            },
+          }}
         />
-        <UserChallengesWidget />
       </ScrollView>
     </ViewContainer>
   )

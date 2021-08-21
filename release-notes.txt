@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- adding selector for MyCV title bar
+- updating UserChallenges widget component
 
-Recent:
+10 Most Recent:
+- adding selector for MyCV title bar
 - add organisations data to state
 - add skills data to state
 - merging MyChallenges into UserChallenges
@@ -12,7 +13,3 @@ Recent:
 - adding helper utils for handling MyCV data
 - docs upgrade, no new features added.
 - Adjusted the widgets on MyCv to be able to take different types of content (previously they could only take text)
-- save new profile image
-- add auth with refresh token
-- automatically re-auth the user on any unauthorised from the api
-- save edited user profile data
