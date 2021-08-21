@@ -3,7 +3,7 @@ import SUT, {
   INITIAL_STATE,
   setUserJobs,
   setUserJobsFormValues,
-  updateNormalisedUserJobs,
+  updateUserJobs,
 } from './UserJobs.reducer'
 
 describe('src/modules/User/Jobs/Jobs.reducer', () => {
@@ -107,7 +107,7 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
       expect(result).toEqual(jobsMock)
     })
   })
-  describe('updateNormalisedUserJobs', () => {
+  describe('updateUserJobs', () => {
     it('should correctly update the userJobs state', () => {
       // given ...an initial state
       const state = INITIAL_STATE
@@ -122,7 +122,7 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
         },
       }
       // @ts-ignore
-      const action = updateNormalisedUserJobs(jobsMock)
+      const action = updateUserJobs(jobsMock)
       const result = SUT(state, action)
 
       // then ... state should include the new jobs
@@ -146,7 +146,7 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
         },
       }
       // @ts-ignore - the shape of the data doesn't matter
-      const action = updateNormalisedUserJobs(jobsMock)
+      const action = updateUserJobs(jobsMock)
       // @ts-ignore - the shape of the data doesn't matter
       const result = SUT(state, action)
 

@@ -14,7 +14,7 @@ import {
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
-  updateNormalisedUserJobs,
+  updateUserJobs,
 } from './UserJobs.reducer'
 import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK } from './UserJobs.test.fixtures'
 
@@ -196,7 +196,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // then ...validate createUserJobSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalledWith(updateNormalisedUserJobs(USER_JOBS_NORMALISED_MOCK))
+      expect(store.dispatch).toHaveBeenCalledWith(updateUserJobs(USER_JOBS_NORMALISED_MOCK))
     })
   })
   describe('createUserJobFailureFlow', () => {

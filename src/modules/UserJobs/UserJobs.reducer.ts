@@ -12,7 +12,7 @@ export const INITIAL_STATE = {
 
 export const getUserJobsSuccess = createAction<UserJobCredential[]>(`${name} getUserJobsSuccess`)
 export const normaliseUserJobsSuccess = createAction<NormalisedUserJobs>(`${name} normaliseUserJobsSuccess`)
-export const updateNormalisedUserJobs = createAction<NormalisedUserJobs>(`${name} updateNormalisedUserJobs`)
+export const updateUserJobs = createAction<NormalisedUserJobs>(`${name} updateUserJobs`)
 export const setUserJobsFormValues = createAction<UserCredentialFormValues>(`${name} setUserJobsFormValues`)
 
 export const createUserJob = createAction<any>(`${name} createUserJob`)
@@ -25,7 +25,7 @@ export const createUserJobFailure = createAction<string>(`${name} createUserJobF
 const reducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserJobs, (_state, action) => action.payload)
   builder.addCase(setUserJobsFormValues, (state, action) => updateStateWithFormValues(state, action.payload))
-  builder.addCase(updateNormalisedUserJobs, (state, action) => updateNormalisedState(state, action.payload))
+  builder.addCase(updateUserJobs, (state, action) => updateNormalisedState(state, action.payload))
   builder.addCase(clearUserJobs, (_state, _action) => INITIAL_STATE)
 })
 

@@ -24,7 +24,7 @@ import {
   normaliseUserJobsSuccess,
   setUserJobs,
   setUserJobsFormValues,
-  updateNormalisedUserJobs,
+  updateUserJobs,
 } from './UserJobs.reducer'
 import { selectFormValues } from './UserJobs.selector'
 import { NormalisedUserJobs, UserJobCredential } from './UserJobs.types'
@@ -119,7 +119,7 @@ export const createUserJobSuccessFlow =
     if (createUserJobSuccess.match(action)) {
       const response = extractDataFromPayload(action)
       const normalisedJobs = normalise([response])
-      dispatch(updateNormalisedUserJobs(normalisedJobs))
+      dispatch(updateUserJobs(normalisedJobs))
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Experience)
       // TODO: this should be handled by the notification module
