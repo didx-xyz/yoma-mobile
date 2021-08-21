@@ -1,18 +1,12 @@
-import { UserJobsFields } from './UserJobsForm.types'
+import { UserJobsRequest } from '../UserJobs.types'
 
-export const INITIAL_VALUES: UserJobsFields = {
+export const INITIAL_VALUES: UserJobsRequest = {
   title: '',
   description: '',
-  id: '',
-  startDate: null,
-  endDate: null,
-  country: '',
-  skillNames: [],
+  language: 'en',
   organisationId: '',
-  organisationName: '',
-  organisationWebsite: '',
-  primaryContactName: '',
-  primaryContactEmail: '',
-  noResultInd: false,
-  requestVerificationInd: false,
+  skillNames: [],
+  startTime: null,
+  endTime: null,
+  published: false,
 }

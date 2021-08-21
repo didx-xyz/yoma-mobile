@@ -1,12 +1,13 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 import { NormalisedSkills, Skill, SkillsResponse, SkillsState } from './Skills.types'
+import { updateSkillsStateWithFiltered } from './Skills.utils'
 
 const name = '[Skills]'
 export const INITIAL_STATE = {
-  filtered: [],
   ids: [],
   entities: {},
+  filtered: [],
 } as SkillsState
 
 export const setSkills = createAction<NormalisedSkills>(`${name} setSkills`)
@@ -22,7 +23,7 @@ export const clearSkills = createAction(`${name} clearSkills`)
 
 const SkillsReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setSkills, (_state, action) => action.payload)
-  builder.addCase(setFilteredSkills, (_state, action) => action.payload)
+  builder.addCase(setFilteredSkills, (state, action) => updateSkillsStateWithFiltered(state, action.payload))
   builder.addCase(clearSkills, (_state, _action) => INITIAL_STATE)
 })
 

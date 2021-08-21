@@ -21,6 +21,17 @@ export interface UserJob {
   published: boolean
 }
 
+export interface UserJobsRequest {
+  title: string
+  description: string
+  language: string
+  published: boolean
+  skillNames: string[]
+  organisationId: string
+  startTime: string | null
+  endTime: string | null
+}
+
 export interface UserJobCredential extends UserCredentialMeta {
   job: UserJob
 }

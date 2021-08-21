@@ -13,9 +13,12 @@ import {
   filterSkillsByName,
   getSkillsSuccess,
   normaliseSkillsSuccess,
+  setFilteredSkills,
   setSkills,
 } from './Skills.reducer'
+import { selectSkillEntities } from './Skills.selector'
 import { NormalisedSkills, Skill } from './Skills.types'
+import { extractFilteredSkillsByValue } from './Skills.utils'
 
 export const fetchSkillsFlow: Middleware =
   ({ dispatch }) =>
@@ -72,16 +75,19 @@ export const setSkillsFlow: Middleware =
     return result
   }
 
-export const filterSkillsByNameFlow: Middleware = _store => next => action => {
-  const result = next(action)
-  if (filterSkillsByName.match(action)) {
-    // const state = getState()
-    // const skillEntities = selectSkillEntities(state)
-    // const filteredSkills = searchArrayOfObjByValue(action.payload, skillEntities)
-    // dispatch(setFilteredSkills(filteredSkills))
+export const filterSkillsByNameFlow: Middleware =
+  ({ getState, dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (filterSkillsByName.match(action)) {
+      const state = getState()
+      const skillEntities = selectSkillEntities(state)
+      const filteredSkills = extractFilteredSkillsByValue(action.payload, skillEntities)
+      dispatch(setFilteredSkills(filteredSkills))
+    }
+    return result
   }
-  return result
-}
 
 export const fetchSkillsFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
