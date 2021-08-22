@@ -15,6 +15,4 @@ export type SkillsResponse = {
   meta: ApiMetaResponse
 }
 
-export interface SkillsState extends NormalisedSkills {
-  filtered?: []
-}
+export interface SkillsState extends NormalisedSkills {}
