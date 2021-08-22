@@ -1,4 +1,7 @@
+import { ApiMetaResponse } from 'api/api.types'
+
 import { UserCredentialMeta } from '../User/User.types'
+import { UserCredentialFormValues } from './../User/User.types'
 
 export interface UserJob {
   organisationURL: string
@@ -22,10 +25,16 @@ export interface UserJob {
 export interface UserJobCredential extends UserCredentialMeta {
   job: UserJob
 }
+export interface UserJobsResponse {
+  data: { data: UserJobCredential }
+  meta: ApiMetaResponse
+}
 
 export interface NormalisedUserJobs {
   ids: string[]
   entities: Record<string, UserJobCredential>
 }
 
-export interface UserJobsState extends NormalisedUserJobs {}
+export interface UserJobsState extends NormalisedUserJobs {
+  formValues?: UserCredentialFormValues | null
+}

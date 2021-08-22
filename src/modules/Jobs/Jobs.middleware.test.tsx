@@ -1,10 +1,11 @@
+import { createUserJob } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiJobsConstants } from '../../api/jobs'
 import * as SUT from './Jobs.middleware'
-import { createJob, createJobFailure, createJobSuccess, setJob } from './Jobs.reducer'
+import { createJob, createJobFailure, createJobSuccess } from './Jobs.reducer'
 import { JOB_MOCK } from './Jobs.test.fixtures'
 
 describe('modules/Jobs/Jobs.middleware', () => {
@@ -47,7 +48,6 @@ describe('modules/Jobs/Jobs.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const mockNotification = jest.fn()
       const mockedPayload = {
         data: {
           data: JOB_MOCK,
@@ -60,7 +60,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
       }
       const action = createJobSuccess(mockedPayload)
       // @ts-ignore
-      const { invoke, next } = create(SUT.createJobSuccessFlow({ notification: mockNotification }))
+      const { invoke, next } = create(SUT.createJobSuccessFlow)
       // when ... we respond to the createJobSuccess action
       invoke(action)
 
@@ -70,7 +70,6 @@ describe('modules/Jobs/Jobs.middleware', () => {
     it('should correctly handle job create success', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const mockNotification = jest.fn()
 
       const mockedPayload = {
         data: {
@@ -85,12 +84,12 @@ describe('modules/Jobs/Jobs.middleware', () => {
 
       const action = createJobSuccess(mockedPayload)
       // @ts-ignore
-      const { store, invoke } = create(SUT.createJobSuccessFlow({ notification: mockNotification }))
+      const { store, invoke } = create(SUT.createJobSuccessFlow)
       // when ... we respond to the createJobSuccess action
       invoke(action)
 
       // then ...validate createJobSuccessFlow
-      expect(store.dispatch).toHaveBeenCalledWith(setJob(JOB_MOCK))
+      expect(store.dispatch).toHaveBeenCalledWith(createUserJob(JOB_MOCK))
     })
   })
   describe('createJobFailureFlow', () => {
