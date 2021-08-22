@@ -82,7 +82,7 @@ const HomeNavigation = () => {
       <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
       <Stack.Screen name={HomeNavigationRoutes.DigitalCv} component={DigitalCv} />
       <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
-      <Stack.Screen name={HomeNavigationRoutes.Experience} component={UserJobs} />
+      <Stack.Screen name={HomeNavigationRoutes.UserJobs} component={UserJobs} />
       <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
       <Stack.Screen name={HomeNavigationRoutes.Skills} component={Skills} />
       <Stack.Screen name={HomeNavigationRoutes.MyCourses} component={MyCourses} />
