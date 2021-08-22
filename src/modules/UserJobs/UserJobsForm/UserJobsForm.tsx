@@ -8,7 +8,7 @@ import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 import { mapToDropDownArray } from 'utils/strings.utils'
 
-import { UserJobsFormState, UserJobsRequest } from '../UserJobs.types'
+import { UserJobFormFields, UserJobsFormState } from '../UserJobs.types'
 import styles from './UserJobsForm.styles'
 import { DropDownList } from './UserJobsForm.types'
 import { ValidationSchema } from './ValidationSchema'
@@ -17,8 +17,8 @@ interface Props {
   filterSkillsByValue: (value: string) => void
   skills: DropDownList[]
   organisations: DropDownList[]
-  formValues: UserJobsRequest
-  setFormState: ({ values: UserJobsRequest, isValid: boolean }: UserJobsFormState) => void
+  formValues: UserJobFormFields
+  setFormState: ({ values: UserJobFormFields, isValid: boolean }: UserJobsFormState) => void
 }
 
 const UserJobsForm = ({ formValues, filterSkillsByValue, setFormState }: Props) => {

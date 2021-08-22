@@ -9,6 +9,7 @@ import { FlatList, ScrollView } from 'react-native'
 
 import styles from './UserJobs.styles'
 import * as UserJobsTypes from './UserJobs.types'
+import { UserJobsList } from './UserJobs.types'
 import { extractUserJobsFormValues } from './UserJobs.utils'
 import UserJobsForm from './UserJobsForm/UserJobsForm'
 import { INITIAL_VALUES, MOCKED_JOBS, MOCK_ORGANISATIONS, MOCK_SKILLS } from './UserJobsForm/UserJobsForm.constants'
@@ -24,7 +25,7 @@ const UserJobs = ({ onJobCreate, onJobPatch, filterSkillsByValue, navigation }: 
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [userJobsList, setUserJobsList] = useState(null)
+  const [userJobsList, setUserJobsList] = useState<UserJobsList[]>([])
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
   useEffect(() => {
@@ -50,7 +51,7 @@ const UserJobs = ({ onJobCreate, onJobPatch, filterSkillsByValue, navigation }: 
   }
 
   const renderItem = (item: any) => {
-    const { job, startDate, endDate }: UserJobsTypes.UserJobsType = item
+    const { job, startDate, endDate }: UserJobsTypes.UserJobsList = item
     return (
       <InfoCard
         title={job.title}
@@ -84,7 +85,7 @@ const UserJobs = ({ onJobCreate, onJobPatch, filterSkillsByValue, navigation }: 
               data={userJobsList}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }: any) => renderItem(item)}
-              keyExtractor={(item: any, index: number) => index.toString()}
+              keyExtractor={(item: any) => item.job.id}
             />
           </Optional>
         }

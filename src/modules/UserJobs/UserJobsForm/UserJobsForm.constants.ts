@@ -1,6 +1,6 @@
-import { UserJobsRequest } from '../UserJobs.types'
+import { UserJobFormFields } from '../UserJobs.types'
 
-export const INITIAL_VALUES: UserJobsRequest = {
+export const INITIAL_VALUES: UserJobFormFields = {
   title: '',
   description: '',
   language: 'en',

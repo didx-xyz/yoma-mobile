@@ -19,7 +19,7 @@ export interface UserJob {
   published: boolean
 }
 
-export interface UserJobsRequest {
+export interface UserJobFormFields {
   title: string
   description: string
   language: string
@@ -39,15 +39,14 @@ export interface NormalisedUserJobs {
   entities: Record<string, UserJobCredential>
 }
 
-export type UserJobsType = {
-  id: string
+export type UserJobsList = {
   job: any
   startDate: string
   endDate: string
 }
 
 export type UserJobsFormState = {
-  values: UserJobsRequest
+  values: UserJobFormFields
   isValid: boolean
 }
 
