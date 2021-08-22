@@ -1,3 +1,3 @@
-import UserChallengesWidget from './UserChallengesWidget'
+import UserChallengesWidgetContainer from './UserChallengesWidget.container'
 
-export default UserChallengesWidget
+export default UserChallengesWidgetContainer

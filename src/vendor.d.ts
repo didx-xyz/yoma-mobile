@@ -3,6 +3,7 @@ declare module 'ramda' {
   export function always(...rest: any[]): any[]
   export function and(...rest: any[]): any
   export function append(...rest: any[]): any
+  export function apply(...rest: any[]): any
   export function applySpec(...rest: any[]): any
   export function chain(...rest: any[]): any
   export function complement(...rest: any[]): any
@@ -43,6 +44,7 @@ declare module 'ramda' {
   export function pipe(...rest: any[]): any
   export function prepend(...rest: any[]): any
   export function prop(...rest: any[]): any
+  export function props(...rest: any[]): any
   export function propEq(...rest: any[]): any
   export function propOr(...rest: any[]): any
   export function reduce(...rest: any[]): any
