@@ -18,6 +18,7 @@ declare module 'ramda' {
   export function head(...rest: any[]): any
   export function identity(...rest: any[]): any
   export function ifElse(...rest: any[]): any
+  export function isEmpty(...rest: any[]): any
   export function isNil(...rest: any[]): any
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
@@ -46,6 +47,7 @@ declare module 'ramda' {
   export function propOr(...rest: any[]): any
   export function reduce(...rest: any[]): any
   export function reduceRight(...rest: any[]): any[]
+  export function repeat(...rest: any[]): any
   export function slice(...rest: any[]): any[]
   export function tail(...rest: any[]): any[]
   export function tap(...rest: any[]): any[]
@@ -55,6 +57,7 @@ declare module 'ramda' {
   export function trim(...rest: any[]): any
   export function type(...rest: any[]): any
   export function unless(...rest: any[]): any
+  export function useWith(...rest: any[]): any
   export function values(...rest: any[]): any
   export function view(...rest: any[]): any
   export function when(...rest: any[]): any
