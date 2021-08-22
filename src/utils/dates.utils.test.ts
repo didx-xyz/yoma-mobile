@@ -12,6 +12,17 @@ describe('dates.utils', () => {
     })
   })
 
+  describe('formatISOWithFallback', () => {
+    it.each([
+      ['MMM yyyy', '2021-08-20T21:42:05+00:00', 'Aug 2021'],
+      ['MMM yyyy', '2020-04-20T21:42:05+00:00', 'Apr 2020'],
+      ['MMMM yyyy', '2020-04-25T19:05:54.5496363', 'April 2020'],
+    ])('should be able to convert the date into given format', (formatter, date, expected) => {
+      const result = SUT.formatISOWithFallback(formatter)(date)
+      expect(result).toBe(expected)
+    })
+  })
+
   describe('calculateDifferenceInDate', () => {
     it.each([
       ['10/12/2020', '11/10/2021', '1 year'],

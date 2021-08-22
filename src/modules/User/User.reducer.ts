@@ -24,6 +24,10 @@ export const INITIAL_STATE = {
   lastLogin: null,
 }
 
+export const fetchUserCredentials = createAction(`${name} fetchUserCredentials`)
+export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserCredentialsSuccess`)
+export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
+
 export const setUser = createAction<UserResponse>(`${name} setUser`)
 export const clearUser = createAction(`${name} clearUser`)
 export const updateUser = createAction<UserPayload>(`${name} updateUser`)
@@ -35,13 +39,9 @@ export const uploadUserPhotoFailure = createAction<string>(`${name} uploadUserPh
 export const updateUserPhotoSuccess = createAction(`${name} updateUserPhotoSuccess`)
 export const updateUserPhotoFailure = createAction<UpdateUserFailureResponse>(`${name} updateUserPhotoFailure`)
 
-export const fetchUserCredentials = createAction(`${name} fetchUserCredentials`)
-export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserCredentialsSuccess`)
-export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
-
-const UserReducer = createReducer(INITIAL_STATE, builder => {
+const userReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUser, (state, action) => mergeDeepRight(state)(action.payload))
   builder.addCase(clearUser, (_state, _action) => INITIAL_STATE)
 })
 
-export default UserReducer
+export default userReducer

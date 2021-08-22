@@ -1,12 +1,8 @@
-import { extractPayloadData } from 'api/api.utils'
-import { UserCredentialTypes } from 'api/users/users.types'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
-import { setJobEntities } from 'modules/Job/Job.reducer'
 import { CAPTURE_IMAGE_OPTIONS } from 'modules/User/User.constants'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
-import { normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
@@ -29,7 +25,6 @@ import {
 import { selectId } from './User.selector'
 import { UploadUserPhotoFlowDependencies } from './User.types'
 import {
-  extractCredentialsByType,
   extractUserFromLoginPayload,
   extractUserFromUpdateUserPayload,
   extractUserFromUserUpdateSuccess,
@@ -103,6 +98,42 @@ export const updateUserFailureFlow =
     return result
   }
 
+export const fetchUserCredentialsFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchUserCredentials.match(action)) {
+      const state = getState()
+      const userId = selectId(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: fetchUserCredentialsSuccess,
+            onFailure: fetchUserCredentialsFailure,
+          }),
+          action.payload,
+        ),
+      )
+    }
+    return result
+  }
+
+export const fetchUserCredentialsFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserCredentialsFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+    }
+    return result
+  }
+
 export const uploadUserPhotoFlow =
   ({ imagePicker, createPayload }: UploadUserPhotoFlowDependencies): Middleware =>
   ({ dispatch }) =>
@@ -144,6 +175,20 @@ export const uploadUserPhotoSuccessFlow: Middleware =
     return result
   }
 
+export const uploadUserPhotoFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (uploadUserPhotoFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification('danger', 'An error occurred.', action.payload)
+    }
+    return result
+  }
+
 export const updateUserPhotoSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
@@ -159,19 +204,7 @@ export const updateUserPhotoSuccessFlow =
     }
     return result
   }
-export const uploadUserPhotoFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
 
-    if (uploadUserPhotoFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', action.payload)
-    }
-    return result
-  }
 export const updateUserPhotoFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
@@ -182,55 +215,6 @@ export const updateUserPhotoFailureFlow =
     if (updateUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', 'An error occurred.', action.payload)
-    }
-    return result
-  }
-
-export const fetchUserCredentialsFlow: Middleware =
-  ({ dispatch, getState }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (fetchUserCredentials.match(action)) {
-      const state = getState()
-      const userId = selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(config, {
-            onSuccess: fetchUserCredentialsSuccess,
-            onFailure: fetchUserCredentialsFailure,
-          }),
-          action.payload,
-        ),
-      )
-    }
-    return result
-  }
-export const fetchUserCredentialsSuccessFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (fetchUserCredentialsSuccess.match(action)) {
-      const userCredentialPayload = extractPayloadData(action)
-      const jobs = extractCredentialsByType(UserCredentialTypes.Job)(userCredentialPayload)
-      dispatch(setJobEntities(normalise(jobs)))
-    }
-    return result
-  }
-
-export const fetchUserCredentialsFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (fetchUserCredentialsFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
     }
     return result
   }

@@ -1,5 +1,7 @@
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
 
+import { UserChallenge } from '../UserChallenges/UserChallenges.types'
+
 export interface UpdateUserResponse {
   data: UserResponse
   meta: ApiMetaResponse
@@ -48,25 +50,18 @@ export interface UserResponse {
   lastLogin: string
 }
 
-export interface UserCredentialPayload {
-  startTime: string
-  endTime: string
-  requestVerification?: boolean
-}
-export interface UserCredentialRequestPayload extends UserCredentialPayload {
-  type: string
-  credentialItemId: string
-}
-
 export interface UserCredentialMeta {
   id: string
-  verifiedAt: string
+  verifiedAt: string | null
   approved: boolean
-  approvalMessage: string
+  approvalMessage: string | null
   startDate: string
-  endDate: string
+  endDate: string | null
   createdAt: string
-  fileId: string
-  fileURL: string
+  fileId: string | null
+  fileURL: string | null
   requestVerification: boolean
 }
+
+// TODO: Add Credentials as we type them as  (UserChallenge | UserExperience | ...)[]
+export type UserCredentials = UserChallenge[]

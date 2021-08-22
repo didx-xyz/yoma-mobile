@@ -14,7 +14,6 @@ import {
   mergeDeepRight,
   objOf,
   of,
-  path,
   pathOr,
   pipe,
   unless,
@@ -40,7 +39,6 @@ export const addParamsToConfig = addValueWithGivenKeyToConfig('params')
 export const createParam = objOf
 export const createTypeParam = createParam('type')
 
-export const extractPayloadData = path(['payload', 'data', 'data'])
 export const generateSanitisedEndpoint = pipe(flatten, filter(complement(isNil)), join('/'))
 export const addHeaders = (headers: StdObj<string>) => pipe(concat([headers]), mergeAll)
 export const setAuthTokenHeader = unless(isNil, pipe(concat('Bearer '), objOf('Authorization')))

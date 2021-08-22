@@ -1,12 +1,14 @@
-import { applySpec, identity, ifElse, is, keys, of, pipe, prop } from 'ramda'
+import { applySpec, identity, keys, path, pipe, prop } from 'ramda'
 
 import { objFromListWith } from './ramda.utils'
 
-export const normalise = pipe(
-  ifElse(is(Array), identity, of),
-  objFromListWith(prop('id')),
-  applySpec({
-    entities: identity,
-    ids: keys,
-  }),
-)
+export const normalise = (data: Record<string, any>[], identifier = 'id') =>
+  pipe(
+    objFromListWith(prop(identifier)),
+    applySpec({
+      entities: identity,
+      ids: keys,
+    }),
+  )(data)
+
+export const extractDataFromPayload = path(['payload', 'data', 'data'])

@@ -103,7 +103,7 @@ describe('modules/User/User.utils', () => {
       [UserCredentialTypes.Qualification, [{ qualification: 'QUALIFICATION DATA 1', meta: 'META' }]],
     ])('should correctly extract all of a given credential type from a list of credentials', (type, expected) => {
       // given ... an array of all credential data for a user
-      const credentials = [
+      const credentialsMock = [
         { qualification: 'QUALIFICATION DATA 1', meta: 'META' },
         { assignment: 'ASSIGNMENT DATA 1', meta: 'META' },
         { job: 'JOB DATA 1', meta: 'META' },
@@ -114,10 +114,9 @@ describe('modules/User/User.utils', () => {
       ]
 
       // when we want to get all the credentials of a given type
-      const result = SUT.extractCredentialsByType(type)(credentials)
+      const result = SUT.extractCredentialsByType(type)(credentialsMock)
 
       //then expect that we have a list of challenge credentials
-
       expect(result).toEqual(expected)
     })
   })

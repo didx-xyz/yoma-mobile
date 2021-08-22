@@ -29,7 +29,9 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const removeTag = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
 
   useEffect(() => {
-    setDropdownValue(values[name])
+    if (values[name]) {
+      setDropdownValue(values[name])
+    }
   }, [name, values])
 
   return (
