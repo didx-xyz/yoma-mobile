@@ -30,6 +30,7 @@ declare module 'ramda' {
   export function mergeDeepRight(...rest: any[]): any
   export function mergeLeft(...rest: any[]): any
   export function mergeRight(...rest: any[]): any
+  export function mergeDeepWith(...rest: any[]): any
   export function multiply(...rest: any[]): number
   export function not(...rest: any[]): number
   export function nth(...rest: any[]): any

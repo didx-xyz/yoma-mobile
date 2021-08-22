@@ -1,4 +1,4 @@
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
+import * as UserJobsActions from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
@@ -6,8 +6,7 @@ import { extractDataFromPayload } from 'utils/redux.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiJobsConstants } from '../../api/jobs'
-import * as Navigation from '../Navigation/Navigation.actions'
-import { createJob, createJobFailure, createJobSuccess, setJob } from './Jobs.reducer'
+import { createJob, createJobFailure, createJobSuccess } from './Jobs.reducer'
 
 export const createJobFlow: Middleware =
   ({ dispatch }) =>
@@ -29,8 +28,7 @@ export const createJobFlow: Middleware =
     return result
   }
 
-export const createJobSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+export const createJobSuccessFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
@@ -38,11 +36,7 @@ export const createJobSuccessFlow =
 
     if (createJobSuccess.match(action)) {
       const job = extractDataFromPayload(action)
-      dispatch(setJob(job))
-      //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Experience)
-      // TODO: this should be handled by the notification module
-      notification('success', 'Details saved!')
+      dispatch(UserJobsActions.createUserJob(job))
     }
 
     return result
