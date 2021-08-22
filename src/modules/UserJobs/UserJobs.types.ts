@@ -39,12 +39,6 @@ export interface NormalisedUserJobs {
   entities: Record<string, UserJobCredential>
 }
 
-export type UserJobsList = {
-  job: any
-  startDate: string
-  endDate: string
-}
-
 export type UserJobsFormState = {
   values: UserJobFormFields
   isValid: boolean

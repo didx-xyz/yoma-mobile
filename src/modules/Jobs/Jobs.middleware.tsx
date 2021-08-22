@@ -40,7 +40,7 @@ export const createJobSuccessFlow =
       const job = extractDataFromPayload(action)
       dispatch(setJob(job))
       //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.UserJobs)
+      Navigation.navigate(HomeNavigationRoutes.Experience)
       // TODO: this should be handled by the notification module
       notification('success', 'Details saved!')
     }

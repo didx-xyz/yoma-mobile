@@ -11,29 +11,6 @@ export const INITIAL_VALUES: UserJobFormFields = {
   published: false,
 }
 
-export const MOCKED_JOBS = [
-  {
-    job: {
-      id: 'id',
-      title: 'Job title',
-      description: 'Job description',
-      organisationLogoUrl: '',
-    },
-    startDate: '03/01/2020',
-    endDate: '04/05/2020',
-  },
-  {
-    job: {
-      id: 'id2',
-      title: 'Job title 2',
-      description: 'Job description 2',
-      organisationLogoUrl: '',
-    },
-    startDate: '03/01/2020',
-    endDate: '04/05/2020',
-  },
-]
-
 export const MOCK_SKILLS = [
   { key: 'UI', value: 'UI' },
   { key: 'Design', value: 'Design' },

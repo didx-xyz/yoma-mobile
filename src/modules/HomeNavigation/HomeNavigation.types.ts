@@ -3,7 +3,7 @@ export enum HomeNavigationRoutes {
   Profile = 'Profile',
   DigitalCv = 'DigitalCv',
   About = 'About',
-  UserJobs = 'UserJobs',
+  Experience = 'Experience',
   Education = 'Education',
   Skills = 'Skills',
   MyCourses = 'MyCourses',
@@ -15,7 +15,7 @@ export type HomeNavigatorParamsList = {
   [HomeNavigationRoutes.Profile]: undefined
   [HomeNavigationRoutes.DigitalCv]: undefined
   [HomeNavigationRoutes.About]: undefined
-  [HomeNavigationRoutes.UserJobs]: undefined
+  [HomeNavigationRoutes.Experience]: undefined
   [HomeNavigationRoutes.Education]: undefined
   [HomeNavigationRoutes.Skills]: undefined
   [HomeNavigationRoutes.MyCourses]: undefined

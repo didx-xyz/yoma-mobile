@@ -36,7 +36,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
           badgeColor={Colors.primaryBlue}
           title={t('Experience')}
           fallback={t('Where do you currently work?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.UserJobs)}
+          onEdit={() => navigation.navigate(HomeNavigationRoutes.Experience)}
         />
         <CvCard
           count={0}
