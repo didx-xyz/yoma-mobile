@@ -65,11 +65,3 @@ export interface UserCredentialMeta {
 
 // TODO: Add Credentials as we type them as  (UserChallenge | UserExperience | ...)[]
 export type UserCredentials = UserChallenge[]
-
-export interface CredentialItem {
-  type: string
-  credentialItemId: string
-  startTime: string
-  endTime: string
-  requestVerification?: boolean
-}

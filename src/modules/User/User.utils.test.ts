@@ -117,7 +117,6 @@ describe('modules/User/User.utils', () => {
       const result = SUT.extractCredentialsByType(type)(credentialsMock)
 
       //then expect that we have a list of challenge credentials
-
       expect(result).toEqual(expected)
     })
   })

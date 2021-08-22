@@ -24,7 +24,7 @@ const UserJobs = ({ onJobCreate, onJobPatch, filterSkillsByValue, navigation }: 
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [userJobsList, setUserJobsList] = useState([])
+  const [userJobsList, setUserJobsList] = useState(null)
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
   useEffect(() => {
