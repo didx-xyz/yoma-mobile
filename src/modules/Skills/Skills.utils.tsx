@@ -2,6 +2,7 @@ import { curry, filter, isEmpty, mergeRight, pipe, slice, values } from 'ramda'
 
 import { SkillsState } from './Skills.types'
 
+//filter entity by search term else fallback to 20 records as default
 export const extractFilteredSkillsByValue = curry(({ searchTerm, entities }: SkillsState) => {
   const filtered = pipe(
     values,

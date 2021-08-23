@@ -64,20 +64,22 @@ describe('modules/Skills/Skills.selector', () => {
   describe('selectFiltered', () => {
     it('should extract skill name from entities', () => {
       //given ... actual state shape
-      const mockState = {
-        searchTerm: 'value1',
-        ids: ['key1', 'key2'],
-        entities: {
-          key1: {
-            key: 'key1',
-            value: 'value1',
-          },
-          key2: {
-            key: 'key2',
-            value: 'value2',
+      const mockState = rootStateFixture({
+        skills: {
+          searchTerm: 'value1',
+          ids: ['key1', 'key2'],
+          entities: {
+            key1: {
+              key: 'key1',
+              value: 'value1',
+            },
+            key2: {
+              key: 'key2',
+              value: 'value2',
+            },
           },
         },
-      }
+      })
 
       //when .. selectFiltered
       const result = SUT.selectFiltered(mockState)
@@ -92,11 +94,14 @@ describe('modules/Skills/Skills.selector', () => {
     })
     it('should return 20 skills if value is empty', () => {
       //given ...mocked state with 30 skills
-      const mockState = {
-        searchTerm: '',
-        ids: keys(repeat(0, 30)),
-        entities: zipObj(keys(repeat(0, 30)), repeat({ key: 'key', value: 'skill' }, 30)),
-      }
+      const ids = keys(repeat(0, 30))
+      const mockState = rootStateFixture({
+        skills: {
+          searchTerm: '',
+          ids,
+          entities: zipObj(ids, repeat({ key: 'key', value: 'skill' }, 30)),
+        },
+      })
 
       // when .. selectFiltered with empty value
       const result = SUT.selectFiltered(mockState)
