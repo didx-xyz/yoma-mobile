@@ -16,5 +16,5 @@ export type SkillsResponse = {
 }
 
 export interface SkillsState extends NormalisedSkills {
-  filtered?: []
+  searchTerm?: string
 }

@@ -2,7 +2,7 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { Normalise } from 'types/redux.types'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromPayload, extractEntitiesFromPayload } from 'utils/redux.utils'
+import { extractDataFromPayload } from 'utils/redux.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
@@ -10,15 +10,11 @@ import {
   fetchSkills,
   fetchSkillsFailure,
   fetchSkillsSuccess,
-  filterSkillsByValue,
   getSkillsSuccess,
   normaliseSkillsSuccess,
-  setFilteredSkills,
   setSkills,
 } from './Skills.reducer'
-import { selectEntities } from './Skills.selector'
 import { NormalisedSkills, Skill } from './Skills.types'
-import { extractFilteredSkillsByValue } from './Skills.utils'
 
 export const fetchSkillsFlow: Middleware =
   ({ dispatch }) =>
@@ -70,24 +66,7 @@ export const setSkillsFlow: Middleware =
   action => {
     const result = next(action)
     if (normaliseSkillsSuccess.match(action)) {
-      const normalisedEntities = extractEntitiesFromPayload(action)
-      const filteredSkills = extractFilteredSkillsByValue('', normalisedEntities)
-      dispatch(setFilteredSkills(filteredSkills))
       dispatch(setSkills(action.payload))
-    }
-    return result
-  }
-
-export const filterSkillsByValueFlow: Middleware =
-  ({ getState, dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (filterSkillsByValue.match(action)) {
-      const state = getState()
-      const normalisedEntities = selectEntities(state)
-      const filteredSkills = extractFilteredSkillsByValue(action.payload, normalisedEntities)
-      dispatch(setFilteredSkills(filteredSkills))
     }
     return result
   }

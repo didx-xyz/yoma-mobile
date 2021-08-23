@@ -1,14 +1,14 @@
 import { curry, filter, isEmpty, mergeRight, pipe, slice, values } from 'ramda'
 
-import { Skill, SkillsState } from './Skills.types'
+import { SkillsState } from './Skills.types'
 
-export const extractFilteredSkillsByValue = curry((value: string, normalisedEntities: Record<any, Skill>) => {
+export const extractFilteredSkillsByValue = curry(({ searchTerm, entities }: SkillsState) => {
   const filtered = pipe(
     values,
-    filter((obj: any) => obj.value.indexOf(value) === 0),
-  )(normalisedEntities)
+    filter((obj: any) => obj.value.indexOf(searchTerm) === 0),
+  )(entities)
 
-  return isEmpty(value) ? slice(0, 20, filtered) : filtered
+  return isEmpty(searchTerm) ? slice(0, 20, filtered) : filtered
 })
 
-export const updateSkillsStateWithFiltered = (state: SkillsState, filtered: Skill[]) => mergeRight(state, { filtered })
+export const updateStateWithSearchTerm = (state: SkillsState, searchTerm: string) => mergeRight(state, { searchTerm })

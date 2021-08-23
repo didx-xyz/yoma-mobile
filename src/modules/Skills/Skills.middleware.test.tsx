@@ -10,10 +10,8 @@ import {
   fetchSkills,
   fetchSkillsFailure,
   fetchSkillsSuccess,
-  filterSkillsByValue,
   getSkillsSuccess,
   normaliseSkillsSuccess,
-  setFilteredSkills,
   setSkills,
 } from './Skills.reducer'
 import { SKILLS_MOCK } from './Skills.test.fixtures'
@@ -179,58 +177,6 @@ describe('modules/Skills/Skills.middleware', () => {
       // then ...we want to forward it with our reducer action
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       expect(store.dispatch).toHaveBeenCalledWith(setSkills('NORMALISED SKILLS DATA'))
-    })
-  })
-  describe('filterSkillsByValueFlow', () => {
-    it('should correctly handle being called', () => {
-      // given ...
-      const mockState = rootStateFixture()
-
-      const create = createMiddlewareStub(jest, mockState)
-      const action = filterSkillsByValue('')
-      // @ts-ignore
-      const { invoke, next } = create(SUT.filterSkillsByValueFlow)
-
-      // when ... we respond to the filterSkillsByValue action
-      invoke(action)
-
-      // then ...validate fetchSkillsFlow
-      expect(next).toHaveBeenCalledWith(action)
-    })
-    it('should correctly set filtered skills to state', () => {
-      // given ...
-      const mockState = rootStateFixture({
-        skills: {
-          ids: ['key1', 'key2'],
-          entities: {
-            key1: {
-              key: 'key1',
-              value: 'value1',
-            },
-            key2: {
-              key: 'key2',
-              value: 'value2',
-            },
-          },
-        },
-      })
-
-      const create = createMiddlewareStub(jest, mockState)
-      const action = filterSkillsByValue('value1')
-      // @ts-ignore
-      const { invoke, store } = create(SUT.filterSkillsByValueFlow)
-      // when ... we respond to the updateSkills action
-      invoke(action)
-
-      // then ...validate filterSkillsByValueFlow
-      expect(store.dispatch).toHaveBeenCalledWith(
-        setFilteredSkills([
-          {
-            key: 'key1',
-            value: 'value1',
-          },
-        ]),
-      )
     })
   })
   describe('fetchSkillsFailureFlow', () => {

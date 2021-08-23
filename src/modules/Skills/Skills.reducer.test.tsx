@@ -1,8 +1,8 @@
-import SUT, { clearSkills, INITIAL_STATE, setSkills } from './Skills.reducer'
+import SUT, { clearSkills, INITIAL_STATE, setFilterSearchTerm, setSkills } from './Skills.reducer'
 
 describe('modules/Skills/Skills.reducer', () => {
   describe('setSkills', () => {
-    it('should correctly add the skills credentials', () => {
+    it('should correctly add the skills state', () => {
       // given ...an initial state
       const state = INITIAL_STATE
 
@@ -48,6 +48,35 @@ describe('modules/Skills/Skills.reducer', () => {
 
       // then ... state should include the new skills
       expect(result).toEqual(skillsMock)
+    })
+  })
+  describe('setFilterSearchTerm', () => {
+    it('should correctly set skills filter searchTerm', () => {
+      // given ...an initial state
+      const state = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Skill 1',
+          id2: 'Skill 2',
+          id3: 'Skill 3',
+        },
+      }
+      // when ... we setFilterSearchTerm
+      const action = setFilterSearchTerm('skill')
+
+      // @ts-ignore
+      const result = SUT(state, action)
+
+      // then ... state should include the new skills
+      expect(result).toEqual({
+        searchTerm: 'skill',
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Skill 1',
+          id2: 'Skill 2',
+          id3: 'Skill 3',
+        },
+      })
     })
   })
   describe('clearSkills', () => {
