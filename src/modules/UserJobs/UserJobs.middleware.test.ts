@@ -1,7 +1,22 @@
+import { UserCredentialTypes } from 'api/users/users.types'
+import { JOB_MOCK } from 'modules/Jobs/Jobs.test.fixtures'
+import { mergeRight } from 'ramda'
+
 import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { actions as ApiActions, utils as ApiUtils } from '../../api'
+import { constants as ApiUsersConstants } from '../../api/users'
 import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserJobs.middleware'
-import { getUserJobsSuccess, normaliseUserJobsSuccess, setUserJobs } from './UserJobs.reducer'
+import {
+  createUserJob,
+  createUserJobFailure,
+  createUserJobSuccess,
+  getUserJobsSuccess,
+  normaliseUserJobsSuccess,
+  setUserJobs,
+  updateUserJobs,
+} from './UserJobs.reducer'
+import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK } from './UserJobs.test.fixtures'
 
 describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('getUserJobsFromCredentialsFlow', () => {
@@ -118,6 +133,86 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       // then ...we want to forward it with our reducer action
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       expect(store.dispatch).toHaveBeenCalledWith(setUserJobs('NORMALISED JOBS DATA'))
+    })
+  })
+  describe('createUserJobFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ... a user object with an id in state
+      const userId = 'A USER ID'
+
+      const mockFormValues = {
+        type: UserCredentialTypes.Job,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+        requestVerification: false,
+      }
+
+      const create = createMiddlewareStub(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      // when ... we create the user's credentials
+      const action = createUserJob(JOB_MOCK)
+
+      const { store, invoke, next } = create(SUT.createUserJobFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      const userJobsPayload = {
+        ...mockFormValues,
+        credentialItemId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+      }
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: createUserJobSuccess,
+            onFailure: createUserJobFailure,
+          }),
+          userJobsPayload,
+        ),
+      )
+    })
+  })
+  describe('createUserJobSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockNotification = jest.fn()
+      const mockResponse = {
+        data: { data: USER_JOBS_MOCK[0] }, //using actual data for reference
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const action = createUserJobSuccess(mockResponse)
+
+      const { store, invoke, next } = create(SUT.createUserJobSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the createUserJobSuccess action
+      invoke(action)
+
+      // then ...validate createUserJobSuccessFlow
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalledWith(updateUserJobs(USER_JOBS_NORMALISED_MOCK))
+    })
+  })
+  describe('createUserJobFailureFlow', () => {
+    it('should correctly handle job credentials create failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = createUserJobFailure('FAILED')
+      const mockNotification = jest.fn()
+
+      const { invoke } = create(SUT.createUserJobFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the createUserJobFailures action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
     })
   })
 })

@@ -2,7 +2,7 @@ import { rootStateFixture } from '../../redux/redux.test.fixtures'
 import * as SUT from './Auth.selector'
 
 describe('modules/Auth/Auth.selector', () => {
-  describe('selectAuthState', () => {
+  describe('selectAuth', () => {
     it('should return auth property of the root state', () => {
       const stateMock = rootStateFixture({
         auth: {
@@ -12,14 +12,14 @@ describe('modules/Auth/Auth.selector', () => {
         },
       })
       // when ... we call the selector
-      const result = SUT.selectAuthState(stateMock)
+      const result = SUT.selectAuth(stateMock)
       // then ... should return result as expected
       expect(result).toEqual(stateMock.auth)
     })
     it('should return the default auth state', () => {
       const stateMock = rootStateFixture()
       // when ... we call the selector
-      const result = SUT.selectAuthState(stateMock)
+      const result = SUT.selectAuth(stateMock)
       // then ... should return result as expected
       expect(result).toEqual(stateMock.auth)
     })
