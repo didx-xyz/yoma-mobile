@@ -9,13 +9,12 @@ import { FlatList, ScrollView } from 'react-native'
 
 import styles from './UserJobs.styles'
 import * as UserJobsTypes from './UserJobs.types'
-import { UserJobItem } from './UserJobs.types'
 import { extractUserJobsFormValues } from './UserJobs.utils'
 import UserJobsForm from './UserJobsForm/UserJobsForm'
 import { INITIAL_VALUES, MOCK_ORGANISATIONS, MOCK_SKILLS } from './UserJobsForm/UserJobsForm.constants'
 
 interface Props {
-  userJobs: UserJobItem[]
+  userJobs: UserJobsTypes.UserJobItem[]
   onJobCreate: (job: any) => void
   onJobPatch: (job: any) => void
   filterSkillsByValue: (query: string) => void
@@ -26,11 +25,11 @@ const UserJobs = ({ userJobs, onJobCreate, onJobPatch, filterSkillsByValue, navi
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [userJobsList, setUserJobItem] = useState<UserJobsTypes.UserJobItem[]>([])
+  const [userJobsItems, setUserJobItems] = useState<UserJobsTypes.UserJobItem[]>([])
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
   useEffect(() => {
-    setUserJobItem(userJobs)
+    setUserJobItems(userJobs)
   }, [userJobs])
 
   const addUserJob = () => {
@@ -79,11 +78,11 @@ const UserJobs = ({ userJobs, onJobCreate, onJobPatch, filterSkillsByValue, navi
         condition={isSaved}
         fallback={
           <Optional
-            condition={userJobsList.length > 0}
+            condition={userJobsItems.length > 0}
             fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
           >
             <FlatList
-              data={userJobsList}
+              data={userJobsItems}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }: any) => renderItem(item)}
               keyExtractor={(item: any) => item.job.id}
