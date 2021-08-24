@@ -39,7 +39,7 @@ export interface NormalisedUserJobs {
   entities: Record<string, UserJobCredential>
 }
 
-export type UserJobsList = {
+export type UserJobItem = {
   job: any
   startDate: string
   endDate: string

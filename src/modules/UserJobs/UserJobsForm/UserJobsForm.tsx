@@ -84,7 +84,7 @@ const UserJobsForm = ({ formValues, filterSkillsByValue, setFormState }: Props) 
           />
           <TouchableOpacity onPress={() => setShowInfoModal(true)}>
             <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen}>
-              {t('Find inspiration on how to write a great profile.')}
+              {t('Find inspiration on how to write a great UserJobs.')}
             </Text.Meta>
           </TouchableOpacity>
         </FormWrapper>
