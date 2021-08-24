@@ -87,7 +87,7 @@ const featureModuleMiddleware = [
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
   JobsMiddleware.createJobFlow,
-  JobsMiddleware.createJobSuccessFlow({ notification: showSimpleMessage }),
+  JobsMiddleware.createJobSuccessFlow,
   JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.getUserJobsFromCredentialsFlow(
     ReduxUtils.extractDataFromPayload,
