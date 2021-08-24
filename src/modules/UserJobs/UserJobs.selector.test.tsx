@@ -35,10 +35,10 @@ describe('modules/UserJobs/UserJobs.selector', () => {
       })
       // when ... we call the selector
       // @ts-ignore
-      const result = SUT.selectUserJobItem(stateMock)
+      const result = SUT.default(stateMock)
 
       // then ... should return result as expected
-      expect(result).toEqual([
+      expect(result.userJobs).toEqual([
         {
           job: {
             id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -72,10 +72,10 @@ describe('modules/UserJobs/UserJobs.selector', () => {
       })
       // when ... we call the selector
       // @ts-ignore
-      const result = SUT.selectUserJobItem(stateMock)
+      const result = SUT.default(stateMock)
 
       // then ... should return result as expected
-      expect(result).toEqual([])
+      expect(result.userJobs).toEqual([])
     })
   })
 })

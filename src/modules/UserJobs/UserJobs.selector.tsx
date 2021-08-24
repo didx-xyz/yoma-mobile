@@ -8,6 +8,6 @@ export const selectUserJobItem = createSelector(
   pipe(prop('entities'), values, map(pick(['job', 'startDate', 'endDate']))),
 )
 
-export default createSelector(selectUserJobItem, userJobs => {
-  userJobs
-})
+export default createSelector(selectUserJobItem, userJobs => ({
+  userJobs,
+}))
