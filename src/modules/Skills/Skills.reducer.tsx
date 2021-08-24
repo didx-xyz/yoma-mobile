@@ -13,7 +13,7 @@ export const INITIAL_STATE = {
 export const setSkills = createAction<NormalisedSkills>(`${name} setSkills`)
 export const getSkillsSuccess = createAction<Skill[]>(`${name} getSkillsSuccess`)
 export const normaliseSkillsSuccess = createAction<NormalisedSkills>(`${name} normaliseSkillsSuccess`)
-export const setFilterSearchTerm = createAction<any>(`${name} setFilterSearchTerm`)
+export const setFilterSearchTerm = createAction<string>(`${name} setFilterSearchTerm`)
 
 export const filterSkillsByValue = createAction<string>(`${name} filterSkillsByValue`)
 export const fetchSkills = createAction(`${name} fetchSkills`)
