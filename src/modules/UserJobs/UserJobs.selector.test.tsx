@@ -78,4 +78,22 @@ describe('modules/UserJobs/UserJobs.selector', () => {
       expect(result.userJobs).toEqual([])
     })
   })
+  describe('selectFormValues ', () => {
+    it('should return formValues object from the userJobs state', () => {
+      const userJobsStateMock = {
+        ids: 'IDS',
+        entities: 'ENTITIES_DATA',
+        formValues: 'FORM_VALUES',
+      }
+
+      const mockState = rootStateFixture({
+        userJobs: userJobsStateMock,
+      })
+      // when ... we call the selector
+      const result = SUT.selectFormValues(mockState)
+
+      // then ... should return result as expected
+      expect(result).toEqual('FORM_VALUES')
+    })
+  })
 })

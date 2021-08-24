@@ -5,7 +5,7 @@ import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { INITIAL_VALUES, MOCK_SKILLS } from './UserChallenges.constants'
+import { INITIAL_FORM_VALUES, MOCK_SKILLS } from './UserChallenges.constants'
 import styles from './UserChallenges.form.styles'
 
 const UserChallengesForm = forwardRef((_props, ref) => {
@@ -30,7 +30,7 @@ const UserChallengesForm = forwardRef((_props, ref) => {
       // TODO - we will refactor this when we get everything working
       // @ts-ignore
       innerRef={formRef}
-      initialValues={INITIAL_VALUES}
+      initialValues={INITIAL_FORM_VALUES}
       onSubmit={() => {}}
     >
       {formikHandlers => (
