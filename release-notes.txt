@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- updating UserChallenges widget component
+- add filtered skills to state
 
 10 Most Recent:
+- updating UserChallenges widget component
 - adding selector for MyCV title bar
 - add organisations data to state
 - add skills data to state
@@ -12,4 +13,3 @@ Latest:
 - adding User Challenges credentials to state
 - adding helper utils for handling MyCV data
 - docs upgrade, no new features added.
-- Adjusted the widgets on MyCv to be able to take different types of content (previously they could only take text)
