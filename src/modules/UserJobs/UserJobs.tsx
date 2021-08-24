@@ -3,7 +3,7 @@ import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
@@ -25,12 +25,7 @@ const UserJobs = ({ userJobs, onJobCreate, onJobPatch, filterSkillsByValue, navi
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [userJobsItems, setUserJobItems] = useState<UserJobsTypes.UserJobItem[]>([])
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
-
-  useEffect(() => {
-    setUserJobItems(userJobs)
-  }, [userJobs])
 
   const addUserJob = () => {
     setIsSaved(true)
@@ -78,11 +73,11 @@ const UserJobs = ({ userJobs, onJobCreate, onJobPatch, filterSkillsByValue, navi
         condition={isSaved}
         fallback={
           <Optional
-            condition={userJobsItems.length > 0}
+            condition={userJobs.length > 0}
             fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
           >
             <FlatList
-              data={userJobsItems}
+              data={userJobs}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }: any) => renderItem(item)}
               keyExtractor={(item: any) => item.job.id}
