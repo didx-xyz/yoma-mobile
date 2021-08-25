@@ -39,6 +39,12 @@ export interface ApiClientMetaOverlap {
   config?: Partial<AxiosRequestConfig>
 }
 
+export interface ApiMetaResponse {
+  success: boolean
+  code: number
+  message: string | null
+}
+
 export interface ApiClientArgs extends ApiClientMetaOverlap {
   token?: string
   data?: any

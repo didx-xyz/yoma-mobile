@@ -33,4 +33,10 @@ export const USER_JOBS_MOCK: UserJobCredential[] = [
     },
   },
 ]
+
+export const USER_JOBS_NORMALISED_MOCK = {
+  ids: ['11111-5717-4562-b3fc-2c963f66afa6'],
+  entities: { '11111-5717-4562-b3fc-2c963f66afa6': USER_JOBS_MOCK[0] },
+}
+
 export const jobsFixture = createFixture(USER_JOBS_MOCK)

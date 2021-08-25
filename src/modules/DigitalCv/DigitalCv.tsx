@@ -59,20 +59,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
           fallback={t('Have you completed any courses yet?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MyCourses)}
         />
-        <UserChallengesWidget
-          navigation={navigation}
-          challenges={{
-            ids: ['id1'],
-            entities: {
-              id1: {
-                startDate: '2021-04-25T19:05:54.5496363',
-                isValidated: true,
-                name: 'ORG Verified with logo',
-                organisationLogoURL: 'https://picsum.photos/200',
-              },
-            },
-          }}
-        />
+        <UserChallengesWidget navigation={navigation} />
       </ScrollView>
     </ViewContainer>
   )

@@ -76,7 +76,62 @@ describe('modules/User/User.utils', () => {
       expect(result.formData).toBe('FORM_DATA')
     })
   })
+  describe('extractUserCredentialFormValues', () => {
+    it('should return the jobs credentials form values from state', () => {
+      // given ... an object in the shape of the successful response
+      const mockPayload = {
+        payload: {
+          id: 'ID',
+          title: 'TITLE',
+          description: 'DESCRIPTION',
+          organisationId: 'ORGANISATION_ID',
+          skillNames: ['SKILL'],
+          startTime: 'START_TIME',
+          endTime: 'END_TIME',
+        },
+      }
 
+      // when ... we want to extract the data from the rest of the payload
+      const result = SUT.extractUserCredentialFormValues(UserCredentialTypes.Job)(mockPayload)
+
+      // then ... the data should be extracted correctly
+      expect(result).toEqual({
+        type: UserCredentialTypes.Job,
+        requestVerification: false,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      })
+    })
+  })
+  describe('prepareUserCredentialItemPayload', () => {
+    it('should return merged credential id with form values from state', () => {
+      // given ...
+      const mockPayload = {
+        payload: {
+          id: 'ID',
+          other: 'OTHER',
+        },
+      }
+      const mockFormValues = {
+        type: UserCredentialTypes.Job,
+        requestVerification: false,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      }
+
+      // when ... we want to extract the data from the rest of the payload
+      const result = SUT.prepareUserCredentialItemPayload(mockPayload)(mockFormValues)
+
+      // then ... the data should be extracted correctly
+      expect(result).toEqual({
+        type: UserCredentialTypes.Job,
+        credentialItemId: 'ID',
+        requestVerification: false,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      })
+    })
+  })
   describe('extractCredential', () => {
     it.each([
       [
