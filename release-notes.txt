@@ -1,8 +1,9 @@
 Ver 0.0.1
-Latest:
-- adding real data to UserChallenges widget in MyCv
+Latest: 
+- experience should correctly show all the user's entries
 
 10 Most Recent:
+- adding real data to UserChallenges widget in MyCv
 - updating UserChallenges widget component
 - adding selector for MyCV title bar
 - add organisations data to state
@@ -11,6 +12,5 @@ Latest:
 - adding generic list component for CvCard/MyCV
 - added jobs and user jobs to state
 - adding User Challenges credentials to state
-- adding helper utils for handling MyCV data
-- docs upgrade, no new features added.
+- adding helper utils for handling MyCV data 
 

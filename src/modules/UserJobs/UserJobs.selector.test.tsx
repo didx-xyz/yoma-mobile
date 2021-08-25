@@ -25,7 +25,7 @@ describe('modules/UserJobs/UserJobs.selector', () => {
       expect(result).toEqual(state.userJobs)
     })
   })
-  describe('selectUserJobItem', () => {
+  describe('selectUserJobItems', () => {
     it('should return userJobsItems from userJobs state', () => {
       const stateMock = rootStateFixture({
         userJobs: {
