@@ -1,6 +1,6 @@
 Ver 0.0.1
 Latest:
-- adding real data to UserChallenges widget in MyCv
+- add filtered skills to state
 
 10 Most Recent:
 - updating UserChallenges widget component
@@ -13,4 +13,3 @@ Latest:
 - adding User Challenges credentials to state
 - adding helper utils for handling MyCV data
 - docs upgrade, no new features added.
-

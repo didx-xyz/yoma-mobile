@@ -173,4 +173,15 @@ describe('src/utils/redux.utils', () => {
       expect(result).toBe('DATA')
     })
   })
+  describe('extractEntitiesFromPayload', () => {
+    it('should extract the entities property from payload', () => {
+      // given ...
+      const action = { type: 'any', payload: { ids: 'DATA', entities: 'ENTITY DATA' } }
+      // when ...
+      const result = SUT.extractEntitiesFromPayload(action)
+
+      // then ...
+      expect(result).toBe('ENTITY DATA')
+    })
+  })
 })
