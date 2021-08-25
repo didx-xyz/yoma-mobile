@@ -1,8 +1,9 @@
 import { connect } from 'react-redux'
 
 import UserJobs from './UserJobs'
+import selector from './UserJobs.selector'
 
-const mapStateToProps = null
+const mapStateToProps = selector
 const mapDispatchToProps = () => {
   return {
     onJobCreate: () => {},

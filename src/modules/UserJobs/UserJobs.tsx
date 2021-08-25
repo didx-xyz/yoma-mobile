@@ -14,17 +14,17 @@ import UserJobsForm from './UserJobsForm/UserJobsForm'
 import { INITIAL_VALUES, MOCK_ORGANISATIONS, MOCK_SKILLS } from './UserJobsForm/UserJobsForm.constants'
 
 interface Props {
+  userJobs: UserJobsTypes.UserJobItem[]
   onJobCreate: (job: any) => void
   onJobPatch: (job: any) => void
   filterSkillsByValue: (query: string) => void
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserJobs>
 }
 
-const UserJobs = ({ onJobCreate, onJobPatch, filterSkillsByValue, navigation }: Props) => {
+const UserJobs = ({ userJobs, onJobCreate, onJobPatch, filterSkillsByValue, navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
-  const [userJobsList] = useState<[]>([])
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
   const addUserJob = () => {
@@ -46,7 +46,7 @@ const UserJobs = ({ onJobCreate, onJobPatch, filterSkillsByValue, navigation }: 
   }
 
   const renderItem = (item: any) => {
-    const { job, startDate, endDate } = item
+    const { job, startDate, endDate }: UserJobsTypes.UserJobItem = item
     return (
       <InfoCard
         title={job.title}
@@ -73,11 +73,11 @@ const UserJobs = ({ onJobCreate, onJobPatch, filterSkillsByValue, navigation }: 
         condition={isSaved}
         fallback={
           <Optional
-            condition={userJobsList.length > 0}
+            condition={userJobs.length > 0}
             fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
           >
             <FlatList
-              data={userJobsList}
+              data={userJobs}
               contentContainerStyle={styles.listContainer}
               renderItem={({ item }: any) => renderItem(item)}
               keyExtractor={(item: any) => item.job.id}

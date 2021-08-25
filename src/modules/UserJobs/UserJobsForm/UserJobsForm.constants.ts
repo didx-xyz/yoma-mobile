@@ -10,7 +10,6 @@ export const INITIAL_VALUES: UserJobFormFields = {
   endTime: null,
   published: false,
 }
-
 export const MOCK_SKILLS = [
   { key: 'UI', value: 'UI' },
   { key: 'Design', value: 'Design' },
