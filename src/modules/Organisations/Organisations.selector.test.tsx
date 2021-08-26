@@ -30,11 +30,11 @@ describe('modules/Organisations/Organisations.selector', () => {
     })
   })
   describe('selectOrganisationsList ', () => {
-    it('should return organisations array of label and value object', () => {
+    it('should return organisations list as object of label and value', () => {
       const stateMock = rootStateFixture({
         organisations: {
           ids: ['key1'],
-          entities: { id1: { key: 'key1', value: 'skill 1' } },
+          entities: { key1: { key: 'key1', value: 'skill 1' } },
         },
       })
       // when ... we call the selector
@@ -42,14 +42,6 @@ describe('modules/Organisations/Organisations.selector', () => {
 
       // then ... should return result as expected
       expect(result).toEqual([{ label: 'skill 1', value: 'key1' }])
-    })
-    it('should return the default organisations state', () => {
-      const state = rootStateFixture()
-      // when ... we call the selector
-      const result = SUT.selectOrganisations(state)
-
-      // then ... should return result as expected
-      expect(result).toEqual(state.organisations)
     })
   })
 })

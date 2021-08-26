@@ -6,11 +6,10 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
-import { mapToDropDownArray } from 'utils/strings.utils'
+import { DropDownList } from 'types/general.types'
 
 import { UserJobFormFields, UserJobsFormState } from '../UserJobs.types'
 import styles from './UserJobsForm.styles'
-import { DropDownList } from './UserJobsForm.types'
 import { ValidationSchema } from './ValidationSchema'
 
 interface Props {
@@ -21,10 +20,8 @@ interface Props {
   setFormState: ({ values: UserJobFormFields, isValid: boolean }: UserJobsFormState) => void
 }
 
-const UserJobsForm = ({ formValues, filterSkillsByValue, setFormState }: Props) => {
+const UserJobsForm = ({ skills, organisations, formValues, filterSkillsByValue, setFormState }: Props) => {
   const { t } = useTranslation()
-  const [organisationsList] = useState<DropDownList[]>([])
-  const [skillsList] = useState<DropDownList[]>([])
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
 
@@ -55,7 +52,7 @@ const UserJobsForm = ({ formValues, filterSkillsByValue, setFormState }: Props) 
           {/* <Spinner visible={formikHandlers.isSubmitting} /> */}
           <Input name={'title'} label={t('Title')} handlers={formikHandlers} />
           <DropDown
-            items={mapToDropDownArray(organisationsList, 'key', 'value')}
+            items={organisations}
             name={'organisationId'}
             label={'Company name'}
             handlers={formikHandlers}
@@ -73,7 +70,7 @@ const UserJobsForm = ({ formValues, filterSkillsByValue, setFormState }: Props) 
           </View>
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
-            items={mapToDropDownArray(skillsList, 'value', 'value')}
+            items={skills}
             multiple
             searchable
             searchPlaceholder={t('Search skills')}
