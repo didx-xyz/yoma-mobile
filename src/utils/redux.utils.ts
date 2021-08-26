@@ -12,6 +12,8 @@ export const normalise = (data: Record<string, any>[], identifier = 'id') =>
     }),
   )(data)
 
+export const extractEntitiesFromPayload = path(['payload', 'entities'])
+
 export const updateStateWithFormValues = (normalisedState: Record<string, any>, formValues: UserCredentialFormValues) =>
   mergeRight(normalisedState, { formValues })
 

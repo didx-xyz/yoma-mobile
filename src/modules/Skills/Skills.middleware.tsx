@@ -1,6 +1,6 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { Normalise } from 'types/general.types'
+import { Normalise } from 'types/redux.types'
 import { showSimpleMessage } from 'utils/error'
 import { extractDataFromPayload } from 'utils/redux.utils'
 
