@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { selectOrganisations, selectOrganisationsList } from 'modules/Organisations/Organisations.selector'
+import { selectOrganisationsList } from 'modules/Organisations/Organisations.selector'
 import { selectFiltered } from 'modules/Skills/Skills.selector'
 import { map, pick, pipe, prop, values } from 'ramda'
 import { RootState } from 'redux/redux.types'
