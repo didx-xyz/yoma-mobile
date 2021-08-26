@@ -10,7 +10,7 @@ describe('modules/UserJobs/UserJobsWidget/UserJobsWidget.selector', () => {
       // when ...
       const result = SUT.default(state)
       // then ...
-      expect(result).toEqual({ jobs: INITIAL_STATE })
+      expect(result).toEqual({ userJobs: INITIAL_STATE })
     })
     it('should return the user jobs data in the expected format', () => {
       // given ...
@@ -77,7 +77,7 @@ describe('modules/UserJobs/UserJobsWidget/UserJobsWidget.selector', () => {
 
       // then ...
       expect(result).toEqual({
-        jobs: {
+        userJobs: {
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
