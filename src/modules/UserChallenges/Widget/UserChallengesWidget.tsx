@@ -3,9 +3,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CvCard, { CvCardListBody } from '../../../components/CvCard'
+import * as UserChallengeItem from '../../../components/UserCredentialItem'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
-import UserChallengeItem from '../Item'
 import { NormalisedUserChallengeItem } from '../UserChallenges.types'
 
 interface Props {
