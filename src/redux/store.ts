@@ -32,6 +32,7 @@ const store = configureStore({
           JobsActions.createJob.type,
           UserJobsActions.createUserJobSuccess.type,
           UserJobsActions.setUserJobsFormValues.type,
+          UserJobsActions.fetchUserJobById.type,
         ],
       },
     }).concat(middleware),

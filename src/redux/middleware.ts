@@ -97,8 +97,11 @@ const featureModuleMiddleware = [
   UserJobsMiddleware.setUserJobsFlow,
   UserJobsMiddleware.createUserJobFlow,
   UserJobsMiddleware.setUserJobsFormValuesFlow,
-  UserJobsMiddleware.createUserJobSuccessFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.createUserJobSuccessFlow,
   UserJobsMiddleware.createUserJobFailureFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.fetchUserJobByIdFlow,
+  UserJobsMiddleware.fetchUserJobByIdSuccessFlow({ notification: showSimpleMessage }),
+  UserJobsMiddleware.fetchUserJobByIdFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

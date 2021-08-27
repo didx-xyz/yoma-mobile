@@ -11,6 +11,9 @@ import {
   createUserJob,
   createUserJobFailure,
   createUserJobSuccess,
+  fetchUserJobById,
+  fetchUserJobByIdFailure,
+  fetchUserJobByIdSuccess,
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
@@ -178,7 +181,6 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const mockNotification = jest.fn()
       const mockResponse = {
         data: { data: USER_JOBS_MOCK[0] }, //using actual data for reference
         meta: {
@@ -190,13 +192,13 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       const action = createUserJobSuccess(mockResponse)
 
-      const { store, invoke, next } = create(SUT.createUserJobSuccessFlow({ notification: mockNotification }))
+      const { store, invoke, next } = create(SUT.createUserJobSuccessFlow)
       // when ... we respond to the createUserJobSuccess action
       invoke(action)
 
       // then ...validate createUserJobSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalledWith(updateUserJobs(USER_JOBS_NORMALISED_MOCK))
+      expect(store.dispatch).toHaveBeenCalledWith(fetchUserJobById('11111-5717-4562-b3fc-2c963f66afa6'))
     })
   })
   describe('createUserJobFailureFlow', () => {
@@ -209,6 +211,84 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const { invoke } = create(SUT.createUserJobFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the createUserJobFailures action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+
+  describe('fetchUserJobByIdFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ... a user object with an id in state
+      const userId = 'A USER ID'
+
+      const mockFormValues = {
+        type: UserCredentialTypes.Job,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+        requestVerification: false,
+      }
+
+      const create = createMiddlewareStub(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      // when ... we create the user's credentials
+      const action = fetchUserJobById('ID')
+
+      const { store, invoke, next } = create(SUT.fetchUserJobByIdFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
+        userId,
+      )
+      const configWithCredentialId = ApiUtils.appendIdToEndpointInConfig(config)(action.payload)
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(configWithCredentialId, {
+            onSuccess: fetchUserJobByIdSuccess,
+            onFailure: fetchUserJobByIdFailure,
+          }),
+        ),
+      )
+    })
+  })
+  describe('fetchUserJobByIdSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockNotification = jest.fn()
+      const mockResponse = {
+        data: { data: USER_JOBS_MOCK[0] }, //using actual data for reference
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const action = fetchUserJobByIdSuccess(mockResponse)
+
+      const { store, invoke, next } = create(SUT.fetchUserJobByIdSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the fetchUserJobByIdSuccess action
+      invoke(action)
+
+      // then ...validate fetchUserJobByIdSuccess
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalledWith(updateUserJobs(USER_JOBS_NORMALISED_MOCK))
+    })
+  })
+  describe('fetchUserJobByIdFailureFlow', () => {
+    it('should correctly handle job credentials create failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = fetchUserJobByIdFailure('FAILED')
+      const mockNotification = jest.fn()
+
+      const { invoke } = create(SUT.fetchUserJobByIdFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the fetchUserJobByIdFailure action
       invoke(action)
 
       // then ...validate failure

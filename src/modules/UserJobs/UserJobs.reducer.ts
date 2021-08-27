@@ -15,6 +15,10 @@ export const normaliseUserJobsSuccess = createAction<NormalisedUserJobs>(`${name
 export const updateUserJobs = createAction<NormalisedUserJobs>(`${name} updateUserJobs`)
 export const setUserJobsFormValues = createAction<UserCredentialFormValues>(`${name} setUserJobsFormValues`)
 
+export const fetchUserJobById = createAction<string>(`${name} fetchUserJobById`)
+export const fetchUserJobByIdSuccess = createAction<any>(`${name} fetchUserJobByIdSuccess`)
+export const fetchUserJobByIdFailure = createAction<string>(`${name} fetchUserJobByIdFailure`)
+
 export const createUserJob = createAction<any>(`${name} createUserJob`)
 export const setUserJobs = createAction<NormalisedUserJobs>(`${name} setUserJobs`)
 export const clearUserJobs = createAction(`${name} clearUserJobs`)

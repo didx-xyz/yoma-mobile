@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { selectOrganisationsList } from 'modules/Organisations/Organisations.selector'
-import { selectFiltered } from 'modules/Skills/Skills.selector'
+import * as OrganisationsSelectors from 'modules/Organisations/Organisations.selector'
+import * as SkillsSelectors from 'modules/Skills/Skills.selector'
 import { map, pick, pipe, prop, values } from 'ramda'
 import { RootState } from 'redux/redux.types'
 
@@ -14,8 +14,8 @@ export const selectUserJobItems = createSelector(
 
 export default createSelector(
   selectUserJobItems,
-  selectOrganisationsList,
-  selectFiltered,
+  OrganisationsSelectors.selectOrganisationsList,
+  SkillsSelectors.selectFiltered,
   (userJobs, organisations, skills) => ({
     userJobs,
     organisations,

@@ -7,6 +7,7 @@ import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import * as GeneralTypes from '../../types/general.types'
 import styles from './UserJobs.styles'
 import * as UserJobsTypes from './UserJobs.types'
 import { extractUserJobsFormValues } from './UserJobs.utils'
@@ -15,8 +16,8 @@ import { INITIAL_VALUES } from './UserJobsForm/UserJobsForm.constants'
 
 interface Props {
   userJobs: UserJobsTypes.UserJobItem[]
-  organisations: []
-  skills: []
+  organisations: GeneralTypes.DropDownList[]
+  skills: GeneralTypes.DropDownList[]
   onJobCreate: (job: any) => void
   onJobPatch: (job: any) => void
   filterSkillsByValue: (query: string) => void

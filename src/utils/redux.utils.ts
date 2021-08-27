@@ -23,3 +23,4 @@ export const updateNormalisedState = (normalisedState: Record<string, any>, norm
 export const selectNormalised = pick(['ids', 'entities'])
 export const extractId = path(['payload', 'id'])
 export const extractDataFromPayload = path(['payload', 'data', 'data'])
+export const extractUserCredentialId = path(['payload', 'data', 'data', 'id'])

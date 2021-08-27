@@ -8,7 +8,7 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { Normalise } from 'types/redux.types'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromPayload, normalise } from 'utils/redux.utils'
+import { extractUserCredentialId, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
@@ -20,6 +20,9 @@ import {
   createUserJob,
   createUserJobFailure,
   createUserJobSuccess,
+  fetchUserJobById,
+  fetchUserJobByIdFailure,
+  fetchUserJobByIdSuccess,
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
@@ -28,6 +31,7 @@ import {
 } from './UserJobs.reducer'
 import { selectFormValues } from './UserJobs.selector'
 import { NormalisedUserJobs, UserJobCredential } from './UserJobs.types'
+import { extractUserJobsFromPayload } from './UserJobs.utils'
 
 export const getUserJobsFromCredentialsFlow =
   (
@@ -38,7 +42,10 @@ export const getUserJobsFromCredentialsFlow =
   next =>
   action => {
     const result = next(action)
-    if (UserActions.fetchUserCredentialsSuccess.match(action)) {
+    if (
+      UserActions.fetchUserCredentialsSuccess.match(action) ||
+      UserActions.fetchUserCredentialsFailure.match(action)
+    ) {
       const data = extractDataFromPayload(action)
       const jobs = extractJobs(data)
       dispatch(getUserJobsSuccess(jobs))
@@ -110,20 +117,69 @@ export const createUserJobFlow: Middleware =
     return result
   }
 
-export const createUserJobSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+export const fetchUserJobByIdFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchUserJobById.match(action)) {
+      const state = getState()
+      const userId = UserSelectors.selectId(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
+        userId,
+      )
+      const configWithCredentialId = ApiUtils.appendIdToEndpointInConfig(config)(action.payload)
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(configWithCredentialId, {
+            onSuccess: fetchUserJobByIdSuccess,
+            onFailure: fetchUserJobByIdFailure,
+          }),
+        ),
+      )
+    }
+    return result
+  }
+export const createUserJobSuccessFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
     if (createUserJobSuccess.match(action)) {
-      const response = extractDataFromPayload(action)
-      const normalisedJobs = normalise([response])
+      const UserJobCredentialId = extractUserCredentialId(action)
+      dispatch(fetchUserJobById(UserJobCredentialId))
+    }
+    return result
+  }
+export const fetchUserJobByIdSuccessFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchUserJobByIdSuccess.match(action)) {
+      const response = extractUserJobsFromPayload(action)
+      const normalisedJobs = normalise(response)
       dispatch(updateUserJobs(normalisedJobs))
       // TODO: this should be handled by the notification module
       notification('success', 'Details saved!')
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
+    }
+    return result
+  }
+
+export const fetchUserJobByIdFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserJobByIdFailure.match(action)) {
+      const errorMessage = extractErrorMessageFromPayload(action)
+      // TODO: this should be handled by the notification module
+      notification('danger', 'Error', errorMessage)
     }
     return result
   }
