@@ -42,12 +42,16 @@ const UserJobs = ({
     setIsEditMode(false)
   }, [])
 
-  const editUserJob = (item: any) => {
-    const values = extractUserJobsFormValues(item)
-    setFormState({ ...formState, values })
-    setIsSaved(true)
-    setIsEditMode(true)
-  }
+  const editUserJob = useCallback(
+    (item: any) => {
+      const values = extractUserJobsFormValues(item)
+      setFormState({ ...formState, values })
+      setIsSaved(true)
+      setIsEditMode(true)
+    },
+    [formState],
+  )
+
   const handleUserJobsFormSave = () => {
     if (!isEditMode) {
       onJobCreate(formState.values)
