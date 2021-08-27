@@ -12,9 +12,9 @@ export const clearUserSkills = createAction(`${name} clearUserSkills`)
 export const createUserSkillSuccess = createAction<UserSkillsResponse>(`${name} createUserSkillSuccess`)
 export const createUserSkillFailure = createAction<string>(`${name} createUserSkillFailure`)
 
-const reducer = createReducer(INITIAL_STATE, builder => {
+const UserSkillsReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserSkills, (_state, action) => action.payload)
   builder.addCase(clearUserSkills, (_state, _action) => INITIAL_STATE)
 })
 
-export default reducer
+export default UserSkillsReducer

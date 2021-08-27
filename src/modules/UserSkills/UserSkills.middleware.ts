@@ -1,16 +1,14 @@
 import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import * as UserSelectors from 'modules/User/User.selector'
-import { prepareUserCredentialItemPayload } from 'modules/User/User.utils'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { constants as ApiUsersConstants } from '../../api/users'
+import { constants as ApiSkillsConstants } from '../../api/skills'
 import * as Navigation from '../Navigation/Navigation.actions'
 import { createUserSkill, createUserSkillFailure, createUserSkillSuccess } from './UserSkills.reducer'
-import { selectFormValues } from './UserSkills.selector'
 
 export const createUserSkillFlow: Middleware =
   ({ getState, dispatch }) =>
@@ -21,11 +19,7 @@ export const createUserSkillFlow: Middleware =
     if (createUserSkill.match(action)) {
       const state = getState()
       const userId = UserSelectors.selectId(state)
-
-      const formValues = selectFormValues(state)
-      const userSkillsPayload = prepareUserCredentialItemPayload(action)(formValues)
-
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiSkillsConstants.SKILLS_CREATE_CONFIG)(userId)
 
       dispatch(
         ApiActions.apiRequest(
@@ -33,7 +27,7 @@ export const createUserSkillFlow: Middleware =
             onSuccess: createUserSkillSuccess,
             onFailure: createUserSkillFailure,
           }),
-          userSkillsPayload,
+          action.payload,
         ),
       )
     }
@@ -48,7 +42,7 @@ export const createUserSkillSuccessFlow =
     const result = next(action)
     if (createUserSkillSuccess.match(action)) {
       //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Experience)
+      Navigation.navigate(HomeNavigationRoutes.Skills)
       // TODO: this should be handled by the notification module
       notification('success', 'Details saved!')
     }

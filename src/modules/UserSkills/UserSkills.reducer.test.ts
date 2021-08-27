@@ -34,15 +34,7 @@ describe('src/modules/User/Skills/Skills.reducer', () => {
   describe('clearUserSkills', () => {
     it('should correctly clear the skills credentials', () => {
       // given ...an initial state
-      const state = {
-        ids: ['id1', 'id2', 'id3'],
-        entities: {
-          id1: 'Skill 1',
-          id2: 'Skill 2',
-          id3: 'Skill 3',
-        },
-        formValues: 'form data',
-      }
+      const state = {}
 
       // when ... we clear skills
       const action = clearUserSkills()

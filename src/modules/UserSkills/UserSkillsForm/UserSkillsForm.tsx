@@ -4,10 +4,10 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { SKILLS_INITIAL_VALUES, MOCK_SKILLS_LIST } from './SkillsForm.constants'
-import styles from './SkillsForm.styles'
+import { MOCK_SKILLS_LIST, SKILLS_INITIAL_VALUES } from './UserSkillsForm.constants'
+import styles from './UserSkillsForm.styles'
 
-const SkillsForm = () => {
+const UserSkillsForm = () => {
   const { t } = useTranslation()
 
   return (
@@ -18,7 +18,7 @@ const SkillsForm = () => {
             items={MOCK_SKILLS_LIST}
             multiple
             searchPlaceholder={t('Search skills')}
-            label={t('Skills developed')}
+            label={t('UserSkills developed')}
             placeholder={t('Start typing to view suggestions')}
             name={'skillNames'}
             handlers={formikHandlers}
@@ -29,4 +29,4 @@ const SkillsForm = () => {
   )
 }
 
-export default SkillsForm
+export default UserSkillsForm

@@ -82,14 +82,8 @@ describe('modules/Skills/Skills.reducer', () => {
   describe('clearSkills', () => {
     it('should clear skills state', () => {
       // give ... skills in state
-      const state = {
-        ids: ['id1', 'id2', 'id3'],
-        entities: {
-          id1: 'Skill 1',
-          id2: 'Skill 2',
-          id3: 'Skill 3',
-        },
-      }
+      const state = []
+
       //when we clearSkills
       const action = clearSkills()
       const result = SUT(state, action)
