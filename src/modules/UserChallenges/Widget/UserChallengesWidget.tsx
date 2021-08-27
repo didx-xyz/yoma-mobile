@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CvCard, { CvCardListBody } from '../../../components/CvCard'
-import * as UserChallengeItem from '../../../components/UserCredentialItem'
+import UserCredentialItem from '../../../components/UserCredentialItem'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import { NormalisedUserChallengeItem } from '../UserChallenges.types'
@@ -29,7 +29,7 @@ const UserChallengesWidget = ({ challenges, navigation }: Props) => {
         onViewAll={() => {
           navigation.navigate(HomeNavigationRoutes.UserChallenges)
         }}
-        Item={UserChallengeItem}
+        Item={UserCredentialItem}
       />
     </CvCard>
   )
