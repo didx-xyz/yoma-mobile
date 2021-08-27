@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CvCard, { CvCardListBody } from '../../../components/CvCard'
-import UserJobItem from '../../../components/UserCredentialItem'
+import UserCredentialItem from '../../../components/UserCredentialItem'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import { NormalisedUserJobs } from '../UserJobs.types'
@@ -29,7 +29,7 @@ const UserJobsWidget = ({ userJobs, navigation }: Props) => {
         onViewAll={() => {
           navigation.navigate(HomeNavigationRoutes.UserJobs)
         }}
-        Item={UserJobItem}
+        Item={UserCredentialItem}
       />
     </CvCard>
   )
