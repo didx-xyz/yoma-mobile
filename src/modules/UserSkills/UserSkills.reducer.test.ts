@@ -1,4 +1,5 @@
 import SUT, { clearUserSkills, INITIAL_STATE, setUserSkills } from './UserSkills.reducer'
+import { USER_SKILLS_MOCK } from './UserSkills.test.fixtures'
 
 describe('src/modules/User/Skills/Skills.reducer', () => {
   describe('setUserSkills', () => {
@@ -17,10 +18,10 @@ describe('src/modules/User/Skills/Skills.reducer', () => {
     })
     it('should overwrite all current credentials', () => {
       // given ...an initial state
-      const state = {}
+      const state = []
 
       // when ... we set new skills
-      const skillsMock = {}
+      const skillsMock = USER_SKILLS_MOCK
       // @ts-ignore - the shape of the data doesn't matter
       const action = setUserSkills(skillsMock)
       // @ts-ignore - the shape of the data doesn't matter
@@ -34,7 +35,7 @@ describe('src/modules/User/Skills/Skills.reducer', () => {
   describe('clearUserSkills', () => {
     it('should correctly clear the skills credentials', () => {
       // given ...an initial state
-      const state = {}
+      const state = USER_SKILLS_MOCK
 
       // when ... we clear skills
       const action = clearUserSkills()
