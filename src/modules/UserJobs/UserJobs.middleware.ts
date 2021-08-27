@@ -120,10 +120,10 @@ export const createUserJobSuccessFlow =
       const response = extractDataFromPayload(action)
       const normalisedJobs = normalise([response])
       dispatch(updateUserJobs(normalisedJobs))
-      //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.UserJobs)
       // TODO: this should be handled by the notification module
       notification('success', 'Details saved!')
+      //TODO: add navigation as a dependency
+      Navigation.navigate(HomeNavigationRoutes.Home)
     }
     return result
   }

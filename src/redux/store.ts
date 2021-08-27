@@ -3,7 +3,9 @@ import { configureStore } from '@reduxjs/toolkit'
 import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, REGISTER } from 'redux-persist'
 
 import { actions as ApiActions } from '../api'
+import { actions as JobsActions } from '../modules/Jobs'
 import { actions as UserActions } from '../modules/User'
+import { actions as UserJobsActions } from '../modules/UserJobs'
 import middleware from './middleware'
 import rootReducer from './reducers'
 
@@ -27,6 +29,9 @@ const store = configureStore({
           ApiActions.apiRequest.type,
           ApiActions.apiError.type,
           UserActions.uploadUserPhotoSuccess.type,
+          JobsActions.createJob.type,
+          UserJobsActions.createUserJobSuccess.type,
+          UserJobsActions.setUserJobsFormValues.type,
         ],
       },
     }).concat(middleware),
