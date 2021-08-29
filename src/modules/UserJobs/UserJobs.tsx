@@ -30,7 +30,7 @@ const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onJobPatch, on
   const [isEditMode, setIsEditMode] = useState(false)
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
-  const addUserJob = useCallback(() => {
+  const handleAddUserJob = useCallback(() => {
     setIsSaved(true)
     setIsEditMode(false)
   }, [])
@@ -73,7 +73,7 @@ const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onJobPatch, on
         navigation={navigation}
         headerText={t('UserJobs')}
         onSave={handleUserJobsFormSave}
-        onAdd={addUserJob}
+        onAdd={handleAddUserJob}
         showAddButton={!isSaved}
         isSaveButtonEnabled={formState?.isValid}
       />
