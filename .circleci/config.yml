@@ -122,6 +122,7 @@ workflows:
           filters:
             branches:
               ignore:
+                - YOMA-474_setup_app_for_alpha_deployment_to_playstore
                 - develop
                 - main
   deploy-android-alpha:
@@ -130,6 +131,7 @@ workflows:
           filters:
             branches:
               only:
+                - YOMA-474_setup_app_for_alpha_deployment_to_playstore
                 - develop
                 - main
       - deploy-android-alpha:
