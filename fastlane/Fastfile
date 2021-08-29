@@ -17,7 +17,7 @@ platform :android do
       )
   end
 
-  lane :distribute do
+  lane :firebaseDistribute do
     clean
     build
     firebase_app_distribution(

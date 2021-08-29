@@ -52,16 +52,6 @@ commands:
       - run:
           name: 'Bundle Android JS code'
           command: npm run bundle:android
-  #  setup-node:
-  #    description: 'Setup the node environment'
-  #    steps:
-  #      - node/install-packages:
-  #          cache-version: v1-{{ arch }}
-  #  setup-ruby:
-  #    description: 'Setup ruby and install packages'
-  #    steps:
-  #      - ruby/install-deps:
-  #          key: gems-v1-{{ arch }}
   setup-node:
     description: 'Setup the node environment'
     steps:
@@ -77,21 +67,19 @@ commands:
       - run: gem update bundler
       - ruby/install-deps:
           key: gems-v1-{{ arch }}
-  install-firebase-cli:
-    description: 'Install the FireBase CLI'
-    steps:
-      - run: sudo curl -sL firebase.tools | bash
-  create_keystore:
-    description: 'Create Keystore Properties'
+
+  create_playstore_keystore:
+    description: 'Create Keystore Properties for Google PlayStore'
     steps:
       - run:
-          name: Create keystore properties
+          name: Create keystore properties for Google PlayStore
           command: npm run create:keystore
-  deploy-android-alpha:
-    description: 'Deploy the Android app to Firebase App Distribution'
+
+  deploy-android-playstore-alpha:
+    description: 'Deploy the Android app to Google PlayStore'
     steps:
       - run:
-          name: 'Deploy the Android app to Firebase App Distribution'
+          name: 'Deploy the Android app to Google PlayStore'
           working_directory: ~/project
           resource_class: large
           command: bundle exec fastlane android distribute
@@ -120,10 +108,8 @@ jobs:
       - setup-node
       - setup-ruby
       - env
-      - create_keystore
-      - install-firebase-cli
-      - deploy-android-alpha
-
+      - create_playstore_keystore
+      - deploy-android-playstore-alpha
 # --------------------------------
 # common : workflows
 # --------------------------------

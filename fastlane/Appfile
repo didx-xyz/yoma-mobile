@@ -1,2 +1,2 @@
-json_key_file("/Users/cam/Personal/Yoma/pc-api-7609814866370165280-340-6f67f4285d73.json")
+json_key_file ENV["PLAYSTORE_CREDENTIALS"] || ""
 package_name("com.yomamobile")
