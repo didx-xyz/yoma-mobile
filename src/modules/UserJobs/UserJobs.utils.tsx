@@ -10,8 +10,7 @@ export const extractUserJobsFormValues = applySpec({
   endTime: prop('endDate'),
 })
 
-export const extractUserJobsFromPayload = pipe(
-  path(['payload', 'data', 'data']),
+export const extractUserJobFromData = pipe(
   pick([
     'id',
     'verifiedAt',

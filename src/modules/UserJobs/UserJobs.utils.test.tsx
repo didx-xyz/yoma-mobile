@@ -21,23 +21,13 @@ describe('modules/UserJobs/UserJobs.utils', () => {
       })
     })
 
-    describe('extractUserJobsFromPayload', () => {
+    describe('extractUserJobFromData', () => {
       it('should return UserJobs from payload', () => {
         //given ...
-        const mockResponse = {
-          payload: {
-            data: {
-              data: USER_JOBS_MOCK[0],
-            },
-          },
-          meta: {
-            success: true,
-            code: 200,
-            message: null,
-          },
-        }
-        //when .. extractUserJobsFromPayload
-        const result = SUT.extractUserJobsFromPayload(mockResponse)
+        const mockResponse = USER_JOBS_MOCK[0]
+
+        //when .. extractUserJobFromData
+        const result = SUT.extractUserJobFromData(mockResponse)
 
         //then result should equal job request payload data
         expect(result).toEqual(USER_JOBS_MOCK)

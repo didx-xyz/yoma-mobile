@@ -8,7 +8,7 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { Normalise } from 'types/redux.types'
 import { showSimpleMessage } from 'utils/error'
-import { extractUserCredentialId, normalise } from 'utils/redux.utils'
+import { extractDataFromPayload, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
@@ -31,7 +31,7 @@ import {
 } from './UserJobs.reducer'
 import { selectFormValues } from './UserJobs.selector'
 import { NormalisedUserJobs, UserJobCredential } from './UserJobs.types'
-import { extractUserJobsFromPayload } from './UserJobs.utils'
+import { extractUserJobFromData } from './UserJobs.utils'
 
 export const getUserJobsFromCredentialsFlow =
   (
@@ -42,10 +42,7 @@ export const getUserJobsFromCredentialsFlow =
   next =>
   action => {
     const result = next(action)
-    if (
-      UserActions.fetchUserCredentialsSuccess.match(action) ||
-      UserActions.fetchUserCredentialsFailure.match(action)
-    ) {
+    if (UserActions.fetchUserCredentialsSuccess.match(action)) {
       const data = extractDataFromPayload(action)
       const jobs = extractJobs(data)
       dispatch(getUserJobsSuccess(jobs))
@@ -146,8 +143,9 @@ export const createUserJobSuccessFlow: Middleware =
   action => {
     const result = next(action)
     if (createUserJobSuccess.match(action)) {
-      const UserJobCredentialId = extractUserCredentialId(action)
-      dispatch(fetchUserJobById(UserJobCredentialId))
+      const data = extractDataFromPayload(action)
+
+      dispatch(fetchUserJobById(data.id))
     }
     return result
   }
@@ -158,8 +156,9 @@ export const fetchUserJobByIdSuccessFlow =
   action => {
     const result = next(action)
     if (fetchUserJobByIdSuccess.match(action)) {
-      const response = extractUserJobsFromPayload(action)
-      const normalisedJobs = normalise(response)
+      const data = extractDataFromPayload(action)
+      const userJob = extractUserJobFromData(data)
+      const normalisedJobs = normalise(userJob)
       dispatch(updateUserJobs(normalisedJobs))
       // TODO: this should be handled by the notification module
       notification('success', 'Details saved!')

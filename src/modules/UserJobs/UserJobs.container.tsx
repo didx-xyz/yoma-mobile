@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch(createJob(job))
     },
     onJobPatch: () => {},
-    filterSkillsByValue: () => {},
+    onFilterSkills: () => {},
   }
 }
 

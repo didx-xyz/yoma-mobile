@@ -20,19 +20,11 @@ interface Props {
   skills: GeneralTypes.DropDownList[]
   onJobCreate: (job: any) => void
   onJobPatch: (job: any) => void
-  filterSkillsByValue: (query: string) => void
+  onFilterSkills: (query: string) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserJobs>
 }
 
-const UserJobs = ({
-  userJobs,
-  organisations,
-  skills,
-  onJobCreate,
-  onJobPatch,
-  filterSkillsByValue,
-  navigation,
-}: Props) => {
+const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onJobPatch, onFilterSkills, navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false)
@@ -43,7 +35,7 @@ const UserJobs = ({
     setIsEditMode(false)
   }, [])
 
-  const editUserJob = useCallback(
+  const handleEditUserJob = useCallback(
     (item: any) => {
       const values = extractUserJobsFormValues(item)
       setFormState({ ...formState, values })
@@ -70,7 +62,7 @@ const UserJobs = ({
         startDate={startDate}
         endDate={endDate}
         logo={job.organisationLogoURL}
-        onEdit={() => editUserJob(item)}
+        onEdit={() => handleEditUserJob(item)}
       />
     )
   }
@@ -105,7 +97,7 @@ const UserJobs = ({
           <Card>
             <UserJobsForm
               formValues={formState?.values}
-              filterSkillsByValue={filterSkillsByValue}
+              onFilterSkills={onFilterSkills}
               setFormState={setFormState}
               skills={skills}
               organisations={organisations}
