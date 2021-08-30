@@ -35,10 +35,11 @@ export const prepareUserCredentialItemPayload = (action: any): StdFn<any, UserCr
 
 export const extractUserCredentialFormValues = (
   userCredentialType: UserCredentialTypes,
+  dateToISOString: StdFn,
 ): StdFn<any, UserCredentialFormValues> =>
   applySpec({
     type: always(userCredentialType),
-    startTime: path(['payload', 'startTime']),
-    endTime: path(['payload', 'endTime']),
+    startTime: pipe(path(['payload', 'startTime']), dateToISOString),
+    endTime: pipe(path(['payload', 'endTime']), dateToISOString),
     requestVerification: always(false),
   })

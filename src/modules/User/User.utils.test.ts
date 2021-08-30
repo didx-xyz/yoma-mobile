@@ -86,20 +86,20 @@ describe('modules/User/User.utils', () => {
           description: 'DESCRIPTION',
           organisationId: 'ORGANISATION_ID',
           skillNames: ['SKILL'],
-          startTime: 'START_TIME',
-          endTime: 'END_TIME',
+          startTime: 'MOCK_DATE',
+          endTime: 'MOCK_DATE',
         },
       }
-
+      const mockDateToISOString = jest.fn(() => 'MOCK_DATE')
       // when ... we want to extract the data from the rest of the payload
-      const result = SUT.extractUserCredentialFormValues(UserCredentialTypes.Job)(mockPayload)
+      const result = SUT.extractUserCredentialFormValues(UserCredentialTypes.Job, mockDateToISOString)(mockPayload)
 
       // then ... the data should be extracted correctly
       expect(result).toEqual({
         type: UserCredentialTypes.Job,
         requestVerification: false,
-        startTime: 'START_TIME',
-        endTime: 'END_TIME',
+        startTime: 'MOCK_DATE',
+        endTime: 'MOCK_DATE',
       })
     })
   })
