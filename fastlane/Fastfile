@@ -3,10 +3,6 @@ default_platform(:android)
 platform :android do
   desc "Android deploy"
 
-  before_all do
-    setup_circle_ci
-  end
-
   desc "Android Build"
   private_lane :build do |options|
     versions = google_play_track_version_codes(
