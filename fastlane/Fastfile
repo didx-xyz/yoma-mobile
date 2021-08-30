@@ -18,7 +18,7 @@ platform :android do
     }
 
     gradle(
-      task: "clean assemble",
+      task: "clean bundle",
       build_type: "Release",
       project_dir: './android',
       properties: properties,
@@ -36,7 +36,8 @@ platform :android do
       track: options[:track],
       json_key_data: ENV["PLAYSTORE_CREDENTIALS"],
       release_status: 'draft',
-      )
+      skip_upload_apk: true,
+    )
 
     slack(message: "New #{options[:build_name]} build(#{version}) available on google play")
   end
