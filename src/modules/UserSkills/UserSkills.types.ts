@@ -11,7 +11,7 @@ export interface UserSkill {
 }
 
 export interface UserSkillsResponse {
-  data: { data: UserSkill }
+  data: { data: UserSkill[] }
   meta: ApiMetaResponse
 }
 

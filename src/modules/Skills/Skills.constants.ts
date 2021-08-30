@@ -1,0 +1,2 @@
+export const FALLBACK_SKILLS_LENGTH = 20
+export const SEARCH_TERM_MIN_LENGTH = 3

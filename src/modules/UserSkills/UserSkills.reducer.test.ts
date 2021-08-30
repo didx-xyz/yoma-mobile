@@ -8,27 +8,50 @@ describe('src/modules/User/Skills/Skills.reducer', () => {
       const state = INITIAL_STATE
 
       // when ... we set new skills
-      const skillsMock = {}
+
       // @ts-ignore
-      const action = setUserSkills(skillsMock)
+      const action = setUserSkills(USER_SKILLS_MOCK)
       const result = SUT(state, action)
 
       // then ... state should include the new skills
-      expect(result).toEqual(skillsMock)
+      expect(result).toEqual(USER_SKILLS_MOCK)
     })
-    it('should overwrite all current credentials', () => {
+    it('should update skills state', () => {
       // given ...an initial state
-      const state = []
+      const state = USER_SKILLS_MOCK
 
       // when ... we set new skills
-      const skillsMock = USER_SKILLS_MOCK
+      const skillsMock = [
+        {
+          skillName: 'Skill1',
+          verifiedBy: {
+            name: 'Name1',
+            logoUrl: 'Url1',
+          },
+        },
+      ]
       // @ts-ignore - the shape of the data doesn't matter
       const action = setUserSkills(skillsMock)
       // @ts-ignore - the shape of the data doesn't matter
       const result = SUT(state, action)
 
       // then ... state should include the new skills
-      expect(result).toEqual(skillsMock)
+      expect(result).toEqual([
+        {
+          skillName: 'Skill',
+          verifiedBy: {
+            name: 'Name',
+            logoUrl: 'Url',
+          },
+        },
+        {
+          skillName: 'Skill1',
+          verifiedBy: {
+            name: 'Name1',
+            logoUrl: 'Url1',
+          },
+        },
+      ])
     })
   })
 

@@ -8,7 +8,8 @@ import { showSimpleMessage } from 'utils/error'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
 import * as Navigation from '../Navigation/Navigation.actions'
-import { createUserSkill, createUserSkillFailure, createUserSkillSuccess } from './UserSkills.reducer'
+import { extractDataFromPayload } from './../../utils/redux.utils'
+import { createUserSkill, createUserSkillFailure, createUserSkillSuccess, setUserSkills } from './UserSkills.reducer'
 
 export const createUserSkillFlow: Middleware =
   ({ getState, dispatch }) =>
@@ -36,11 +37,13 @@ export const createUserSkillFlow: Middleware =
 
 export const createUserSkillSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
+  ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
     if (createUserSkillSuccess.match(action)) {
+      const skills = extractDataFromPayload(action)
+      dispatch(setUserSkills(skills))
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Skills)
       // TODO: this should be handled by the notification module
