@@ -20,6 +20,7 @@ platform :android do
     gradle(
       task: "clean assemble",
       build_type: "Release",
+      project_dir: './android',
       properties: properties,
       flags: "--no-daemon --max-workers 2"
     )
