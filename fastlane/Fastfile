@@ -10,7 +10,7 @@ platform :android do
       json_key_data: ENV["PLAYSTORE_CREDENTIALS"]
     )
     current_version_code = versions[0].to_i
-    new_version_code = current_version_code + 1
+    new_version_code = current_version_code + 2
     new_version_name = "#{options[:build_name]}-#{new_version_code}"
     properties = {
       "versionCode" => new_version_code,
@@ -24,6 +24,8 @@ platform :android do
       properties: properties,
       flags: "--no-daemon --max-workers 2"
     )
+
+    say("New Version Code: #{new_version_code}, New Version Name: #{new_version_name}")
 
     new_version_code
   end
