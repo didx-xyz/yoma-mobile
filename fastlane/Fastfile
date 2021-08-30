@@ -25,7 +25,7 @@ platform :android do
       flags: "--no-daemon --max-workers 2"
     )
 
-    say("New Version Code: #{new_version_code}, New Version Name: #{new_version_name}")
+    puts "New Version Code: #{new_version_code}, New Version Name: #{new_version_name}"
 
     new_version_code
   end
