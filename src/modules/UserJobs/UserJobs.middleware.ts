@@ -1,7 +1,7 @@
 import { UserCredentialTypes } from 'api/users/users.types'
 import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
-import { createJob } from 'modules/Jobs/Jobs.reducer'
+import * as JobsActions from 'modules/Jobs/Jobs.reducer'
 import * as UserSelectors from 'modules/User/User.selector'
 import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } from 'modules/User/User.utils'
 import { mergeRight } from 'ramda'
@@ -80,8 +80,8 @@ export const setUserJobsFormValuesFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    if (createJob.match(action)) {
-      const formValues = extractUserCredentialFormValues(UserCredentialTypes.Job, dateToISOString)(action)
+    if (JobsActions.createJob.match(action)) {
+      const formValues = extractUserCredentialFormValues(UserCredentialTypes.Job)(action.payload)
       dispatch(setUserJobsFormValues(formValues))
     }
     return result

@@ -3,11 +3,13 @@ import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
+import { evolve } from 'ramda'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import * as GeneralTypes from '../../types/general.types'
+import { dateToISOString } from '../../utils/dates.utils'
 import styles from './UserJobs.styles'
 import * as UserJobsTypes from './UserJobs.types'
 import { extractUserJobsFormValues } from './UserJobs.utils'
@@ -47,7 +49,11 @@ const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onJobPatch, on
 
   const handleUserJobsFormSave = () => {
     if (!isEditMode) {
-      onJobCreate(formState.values)
+      const values = evolve({
+        startTime: dateToISOString,
+        endTime: dateToISOString,
+      })(formState.values)
+      onJobCreate(values)
     } else {
       onJobPatch(formState.values)
     }

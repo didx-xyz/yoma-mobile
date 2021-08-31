@@ -1,4 +1,4 @@
-import { always, applySpec, equals, filter, find, keys, mergeRight, path, pick, pipe, toLower } from 'ramda'
+import { always, applySpec, equals, filter, find, keys, mergeRight, path, pick, pipe, prop, toLower } from 'ramda'
 import { StdFn } from 'types/general.types'
 import { extractId } from 'utils/redux.utils'
 
@@ -35,11 +35,10 @@ export const prepareUserCredentialItemPayload = (action: any): StdFn<any, UserCr
 
 export const extractUserCredentialFormValues = (
   userCredentialType: UserCredentialTypes,
-  dateToISOString: StdFn,
 ): StdFn<any, UserCredentialFormValues> =>
   applySpec({
     type: always(userCredentialType),
-    startTime: pipe(path(['payload', 'startTime']), dateToISOString),
-    endTime: pipe(path(['payload', 'endTime']), dateToISOString),
+    startTime: prop('startTime'),
+    endTime: prop('endTime'),
     requestVerification: always(false),
   })

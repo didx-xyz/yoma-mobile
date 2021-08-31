@@ -5,6 +5,7 @@ import { mergeRight } from 'ramda'
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
+import { createJob } from '../Jobs/Jobs.reducer'
 import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserJobs.middleware'
 import {
@@ -17,6 +18,7 @@ import {
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
+  setUserJobsFormValues,
   updateUserJobs,
 } from './UserJobs.reducer'
 import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK } from './UserJobs.test.fixtures'
@@ -136,6 +138,58 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       // then ...we want to forward it with our reducer action
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       expect(store.dispatch).toHaveBeenCalledWith(setUserJobs('NORMALISED JOBS DATA'))
+    })
+  })
+  describe('setUserJobsFormValuesFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+
+      const formDataMock = 'Form Data'
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      const action = createJob(formDataMock)
+
+      // when ...
+      const { invoke, store, next } = create(SUT.setUserJobsFormValuesFlow)
+      invoke(action)
+
+      // then ...
+      expect(store.dispatch).toHaveBeenCalled()
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should set the job form data', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+
+      const formDataMock = {
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        language: 'LANGUAGE',
+        published: 'PUBLISHED',
+        skillNames: 'SKILL_NAMES',
+        organisationId: 'ORGANISATION_ID',
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      }
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      const action = createJob(formDataMock)
+
+      // when ...
+      const { invoke, store } = create(SUT.setUserJobsFormValuesFlow)
+      invoke(action)
+
+      // then ...we want to forward it with our reducer action
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      expect(store.dispatch).toHaveBeenCalledWith(
+        setUserJobsFormValues({
+          formValues: {
+            type: UserCredentialTypes.Job,
+            startTime: 'START_TIME',
+            endTime: 'END_TIME',
+            requestVerification: false,
+          },
+        }),
+      )
     })
   })
   describe('createUserJobFlow', () => {
