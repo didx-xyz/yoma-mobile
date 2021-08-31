@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { configureStore } from '@reduxjs/toolkit'
-import { FLUSH, PAUSE, PERSIST, persistReducer, persistStore, REGISTER } from 'redux-persist'
+import { REHYDRATE, FLUSH, PAUSE, PERSIST, persistReducer, persistStore, REGISTER } from 'redux-persist'
 
 import { actions as ApiActions } from '../api'
 import { actions as JobsActions } from '../modules/Jobs'
@@ -25,6 +25,7 @@ const store = configureStore({
           PAUSE,
           PERSIST,
           REGISTER,
+          REHYDRATE,
           ApiActions.apiRequest.type,
           ApiActions.apiError.type,
           UserActions.uploadUserPhotoSuccess.type,
