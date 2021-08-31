@@ -8,7 +8,7 @@ import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import * as GeneralTypes from '../../types/general.types'
+import { types as DropDownTypes } from '../../components/DropDown'
 import { dateToISOString } from '../../utils/dates.utils'
 import styles from './UserJobs.styles'
 import * as UserJobsTypes from './UserJobs.types'
@@ -18,23 +18,20 @@ import { INITIAL_VALUES } from './UserJobsForm/UserJobsForm.constants'
 
 interface Props {
   userJobs: UserJobsTypes.UserJobItem[]
-  organisations: GeneralTypes.DropDownList[]
-  skills: GeneralTypes.DropDownList[]
+  organisations: DropDownTypes.DropDownList[]
+  skills: DropDownTypes.DropDownList[]
   onJobCreate: (job: any) => void
-  onJobPatch: (job: any) => void
   onFilterSkills: (query: string) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserJobs>
 }
 
-const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onJobPatch, onFilterSkills, navigation }: Props) => {
+const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onFilterSkills, navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  const [isEditMode, setIsEditMode] = useState(false)
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
   const handleAddUserJob = useCallback(() => {
     setIsSaved(true)
-    setIsEditMode(false)
   }, [])
 
   const handleEditUserJob = useCallback(
@@ -42,21 +39,16 @@ const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onJobPatch, on
       const values = extractUserJobsFormValues(item)
       setFormState({ ...formState, values })
       setIsSaved(true)
-      setIsEditMode(true)
     },
     [formState],
   )
 
   const handleUserJobsFormSave = () => {
-    if (!isEditMode) {
-      const values = evolve({
-        startTime: dateToISOString,
-        endTime: dateToISOString,
-      })(formState.values)
-      onJobCreate(values)
-    } else {
-      onJobPatch(formState.values)
-    }
+    const values = evolve({
+      startTime: dateToISOString,
+      endTime: dateToISOString,
+    })(formState.values)
+    onJobCreate(values)
   }
 
   const renderItem = (item: UserJobsTypes.UserJobItem) => {
