@@ -1,5 +1,6 @@
 import { createJob } from 'modules/Jobs/Jobs.reducer'
 import { JobsRequest } from 'modules/Jobs/Jobs.types'
+import { setFilterSearchTerm } from 'modules/Skills/Skills.reducer'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
 
@@ -13,7 +14,9 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch(createJob(job))
     },
     onJobPatch: () => {},
-    onFilterSkills: () => {},
+    onFilterSkills: (searchTerm: string) => {
+      dispatch(setFilterSearchTerm(searchTerm))
+    },
   }
 }
 
