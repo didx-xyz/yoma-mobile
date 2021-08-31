@@ -7,6 +7,7 @@ import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } fro
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { Normalise } from 'types/redux.types'
+import { dateToISOString } from 'utils/dates.utils'
 import { showSimpleMessage } from 'utils/error'
 import { extractDataFromPayload, normalise } from 'utils/redux.utils'
 
@@ -80,7 +81,7 @@ export const setUserJobsFormValuesFlow: Middleware =
   action => {
     const result = next(action)
     if (createJob.match(action)) {
-      const formValues = extractUserCredentialFormValues(UserCredentialTypes.Job)(action)
+      const formValues = extractUserCredentialFormValues(UserCredentialTypes.Job, dateToISOString)(action)
       dispatch(setUserJobsFormValues(formValues))
     }
     return result
