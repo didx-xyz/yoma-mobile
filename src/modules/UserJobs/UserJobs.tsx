@@ -71,7 +71,7 @@ const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onJobPatch, on
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={t('UserJobs')}
+        headerText={t('Experience')}
         onSave={handleUserJobsFormSave}
         onAdd={handleAddUserJob}
         showAddButton={!isSaved}
