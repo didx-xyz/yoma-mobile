@@ -16,11 +16,11 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android beta_deploy
+### android deploy_internal
 ```
-fastlane android beta_deploy
+fastlane android deploy_internal
 ```
-Deploy a new Alpha build to Google Play Store
+Deploy a new Internal build to Google Play Store
 ### android production_deploy
 ```
 fastlane android production_deploy
