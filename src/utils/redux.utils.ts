@@ -1,5 +1,5 @@
 import { UserCredentialFormValues } from 'modules/User/User.types'
-import { applySpec, concat, identity, keys, mergeDeepWith, mergeRight, path, pick, pipe, prop } from 'ramda'
+import { applySpec, concat, identity, keys, mergeDeepWith, mergeRight, objOf, path, pick, pipe, prop } from 'ramda'
 
 import { objFromListWith } from './ramda.utils'
 
@@ -12,14 +12,13 @@ export const normalise = (data: Record<string, any>[], identifier = 'id') =>
     }),
   )(data)
 
-export const extractEntitiesFromPayload = path(['payload', 'entities'])
+export const updateStateWithFormValues = (state: Record<string, any>, formValues: UserCredentialFormValues) =>
+  pipe(objOf('formValues'), mergeRight(state))(formValues)
 
-export const updateStateWithFormValues = (normalisedState: Record<string, any>, formValues: UserCredentialFormValues) =>
-  mergeRight(normalisedState, { formValues })
-
-export const updateNormalisedState = (normalisedState: Record<string, any>, normalisedUpdate: Record<string, any>) =>
-  mergeDeepWith(concat, normalisedState, normalisedUpdate)
+export const updateNormalisedState = (state: Record<string, any>, payload: Record<string, any>) =>
+  mergeDeepWith(concat, state, payload)
 
 export const selectNormalised = pick(['ids', 'entities'])
 export const extractId = path(['payload', 'id'])
 export const extractDataFromPayload = path(['payload', 'data', 'data'])
+export const extractEntitiesFromPayload = path(['payload', 'entities'])

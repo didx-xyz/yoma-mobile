@@ -5,15 +5,21 @@ import { mergeRight } from 'ramda'
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
+import { createJob } from '../Jobs/Jobs.reducer'
 import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserJobs.middleware'
 import {
+  clearUserJobsFormValues,
   createUserJob,
   createUserJobFailure,
   createUserJobSuccess,
+  fetchUserJobById,
+  fetchUserJobByIdFailure,
+  fetchUserJobByIdSuccess,
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
+  setUserJobsFormValues,
   updateUserJobs,
 } from './UserJobs.reducer'
 import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK } from './UserJobs.test.fixtures'
@@ -135,6 +141,56 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(setUserJobs('NORMALISED JOBS DATA'))
     })
   })
+  describe('setUserJobsFormValuesFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+
+      const formDataMock = 'Form Data'
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      const action = createJob(formDataMock)
+
+      // when ...
+      const { invoke, store, next } = create(SUT.setUserJobsFormValuesFlow)
+      invoke(action)
+
+      // then ...
+      expect(store.dispatch).toHaveBeenCalled()
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should set the job form data', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+
+      const formDataMock = {
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        language: 'LANGUAGE',
+        published: 'PUBLISHED',
+        skillNames: 'SKILL_NAMES',
+        organisationId: 'ORGANISATION_ID',
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      }
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      const action = createJob(formDataMock)
+
+      // when ...
+      const { invoke, store } = create(SUT.setUserJobsFormValuesFlow)
+      invoke(action)
+
+      // then ...we want to forward it with our reducer action
+      // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
+      expect(store.dispatch).toHaveBeenCalledWith(
+        setUserJobsFormValues({
+          type: UserCredentialTypes.Job,
+          startTime: 'START_TIME',
+          endTime: 'END_TIME',
+          requestVerification: false,
+        }),
+      )
+    })
+  })
   describe('createUserJobFlow', () => {
     it('should correctly handle being called', () => {
       // given ... a user object with an id in state
@@ -178,7 +234,6 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareStub(jest)
-      const mockNotification = jest.fn()
       const mockResponse = {
         data: { data: USER_JOBS_MOCK[0] }, //using actual data for reference
         meta: {
@@ -190,13 +245,14 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       const action = createUserJobSuccess(mockResponse)
 
-      const { store, invoke, next } = create(SUT.createUserJobSuccessFlow({ notification: mockNotification }))
+      const { store, invoke, next } = create(SUT.createUserJobSuccessFlow)
       // when ... we respond to the createUserJobSuccess action
       invoke(action)
 
       // then ...validate createUserJobSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
-      expect(store.dispatch).toHaveBeenCalledWith(updateUserJobs(USER_JOBS_NORMALISED_MOCK))
+      expect(store.dispatch).toHaveBeenCalledWith(fetchUserJobById('11111-5717-4562-b3fc-2c963f66afa6'))
+      expect(store.dispatch).toHaveBeenCalledWith(clearUserJobsFormValues())
     })
   })
   describe('createUserJobFailureFlow', () => {
@@ -209,6 +265,83 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const { invoke } = create(SUT.createUserJobFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the createUserJobFailures action
+      invoke(action)
+
+      // then ...validate failure
+      expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('fetchUserJobByIdFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ... a user object with an id in state
+      const userId = 'A USER ID'
+
+      const mockFormValues = {
+        type: UserCredentialTypes.Job,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+        requestVerification: false,
+      }
+
+      const create = createMiddlewareStub(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      // when ... we create the user's credentials
+      const action = fetchUserJobById('ID')
+
+      const { store, invoke, next } = create(SUT.fetchUserJobByIdFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
+        userId,
+      )
+      const configWithCredentialId = ApiUtils.appendIdToEndpointInConfig(config)(action.payload)
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(configWithCredentialId, {
+            onSuccess: fetchUserJobByIdSuccess,
+            onFailure: fetchUserJobByIdFailure,
+          }),
+        ),
+      )
+    })
+  })
+  describe('fetchUserJobByIdSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const mockNotification = jest.fn()
+      const mockResponse = {
+        data: { data: USER_JOBS_MOCK[0] }, //using actual data for reference
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const action = fetchUserJobByIdSuccess(mockResponse)
+
+      const { store, invoke, next } = create(SUT.fetchUserJobByIdSuccessFlow({ notification: mockNotification }))
+      // when ... we respond to the fetchUserJobByIdSuccess action
+      invoke(action)
+
+      // then ...validate fetchUserJobByIdSuccess
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalledWith(updateUserJobs(USER_JOBS_NORMALISED_MOCK))
+    })
+  })
+  describe('fetchUserJobByIdFailureFlow', () => {
+    it('should correctly handle job credentials create failure', () => {
+      // given ...
+      const create = createMiddlewareStub(jest)
+      const action = fetchUserJobByIdFailure('FAILED')
+      const mockNotification = jest.fn()
+
+      const { invoke } = create(SUT.fetchUserJobByIdFailureFlow({ notification: mockNotification }))
+
+      // when ... we respond to the fetchUserJobByIdFailure action
       invoke(action)
 
       // then ...validate failure

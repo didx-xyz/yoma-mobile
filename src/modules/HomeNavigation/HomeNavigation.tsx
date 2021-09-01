@@ -1,6 +1,6 @@
 import { BottomTabBarOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
-import { DigitalCvIcon, CoursesIcon, ChallengesIcon, MarketplaceIcon } from 'assets/images'
+import { ChallengesIcon, CoursesIcon, DigitalCvIcon, MarketplaceIcon } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { colors, Colors, FontFamily } from 'styles'
@@ -12,12 +12,12 @@ import Challenges from '../Challenges'
 import Courses from '../Courses'
 import DigitalCv from '../DigitalCv'
 import Education from '../Education'
-import Experience from '../Experience'
 import Marketplace from '../Marketplace'
 import MyCourses from '../MyCourses'
 import Profile from '../Profile'
 import Skills from '../Skills'
 import UserChallenges from '../UserChallenges'
+import UserJobs from '../UserJobs'
 import { HomeNavigationRoutes } from './HomeNavigation.types'
 
 const Stack = createStackNavigator()
@@ -82,7 +82,7 @@ const HomeNavigation = () => {
       <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
       <Stack.Screen name={HomeNavigationRoutes.DigitalCv} component={DigitalCv} />
       <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
-      <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
+      <Stack.Screen name={HomeNavigationRoutes.UserJobs} component={UserJobs} />
       <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
       <Stack.Screen name={HomeNavigationRoutes.Skills} component={Skills} />
       <Stack.Screen name={HomeNavigationRoutes.MyCourses} component={MyCourses} />

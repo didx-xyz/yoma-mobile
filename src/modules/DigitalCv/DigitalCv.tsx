@@ -10,6 +10,7 @@ import { ScrollView } from 'react-native'
 import Text, { TextAlign } from '../../components/Typography'
 import { Colors } from '../../styles'
 import { UserChallengesWidget } from '../UserChallenges'
+import { UserJobsWidget } from '../UserJobs'
 import styles from './DigitalCv.styles'
 
 interface Props {
@@ -31,13 +32,7 @@ const DigitalCv = ({ navigation, biography }: Props) => {
         >
           <Text.Body align={TextAlign.center}>{biography}</Text.Body>
         </CvCard>
-        <CvCard
-          count={0}
-          badgeColor={Colors.primaryBlue}
-          title={t('Experience')}
-          fallback={t('Where do you currently work?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.Experience)}
-        />
+        <UserJobsWidget navigation={navigation} />
         <CvCard
           count={0}
           badgeColor={Colors.primaryRed}

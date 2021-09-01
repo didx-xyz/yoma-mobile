@@ -18,7 +18,7 @@ type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' |
 }
 
 const renderTags = (tags: string[], onDelete: (tag: string) => void) =>
-  tags.map((tag, index) => <Tag key={index} tag={tag} onDeleteSkill={onDelete} />)
+  tags.map((tag, index) => <Tag key={index} tag={tag} onDeleteTag={onDelete} />)
 
 const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const [isOpen, setIsOpen] = useState(false)
@@ -26,11 +26,13 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
   const { handleChange, handleBlur, errors, values, touched, setFieldValue } = handlers
   const { t } = useTranslation()
 
-  useEffect(() => {
-    setDropdownValue(values[name])
-  }, [name, values])
+  const removeTag = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
 
-  const deleteSkill = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
+  useEffect(() => {
+    if (values[name]) {
+      setDropdownValue(values[name])
+    }
+  }, [name, values])
 
   return (
     <>
@@ -45,9 +47,11 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         searchContainerStyle={styles.searchContainer}
         listMode={'MODAL'}
         onChangeValue={itemValue => {
-          handleChange(name)
-          handleBlur(name)
-          setFieldValue(name, itemValue)
+          if (values[name] !== itemValue) {
+            handleChange(name)
+            handleBlur(name)
+            setFieldValue(name, itemValue)
+          }
         }}
         value={dropDownValue}
         open={isOpen}
@@ -62,7 +66,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         closeIconContainerStyle={styles.save}
         {...props}
       />
-      <View style={styles.tagsContainer}>{renderTags(dropDownValue, deleteSkill)}</View>
+      <View style={styles.tagsContainer}>{renderTags(dropDownValue, removeTag)}</View>
       <View style={styles.divider} />
       <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
         {errors[name] && touched[name] ? errors[name] : ' '}

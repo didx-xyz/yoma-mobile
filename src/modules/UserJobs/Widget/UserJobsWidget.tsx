@@ -6,32 +6,32 @@ import CvCard, { CvCardListBody } from '../../../components/CvCard'
 import UserCredentialItem from '../../../components/UserCredentialItem'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
-import { NormalisedUserChallengeItem } from '../UserChallenges.types'
+import { NormalisedUserJobs } from '../UserJobs.types'
 
 interface Props {
-  challenges: NormalisedUserChallengeItem
+  userJobs: NormalisedUserJobs
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.DigitalCv>
 }
-const UserChallengesWidget = ({ challenges, navigation }: Props) => {
+const UserJobsWidget = ({ userJobs, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <CvCard
-      count={challenges.ids.length}
+      count={userJobs.ids.length}
       badgeColor={Colors.secondaryPurple}
-      title={t('Completed challenges')}
-      fallback={t('Have you completed any challenges yet?')}
+      title={t('Experience')}
+      fallback={t('Where do you currently work?')}
       onEdit={() => {
-        navigation.navigate(HomeNavigationRoutes.UserChallenges)
+        navigation.navigate(HomeNavigationRoutes.UserJobs)
       }}
     >
       <CvCardListBody
-        data={challenges}
+        data={userJobs}
         onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.UserChallenges)
+          navigation.navigate(HomeNavigationRoutes.UserJobs)
         }}
         Item={UserCredentialItem}
       />
     </CvCard>
   )
 }
-export default UserChallengesWidget
+export default UserJobsWidget

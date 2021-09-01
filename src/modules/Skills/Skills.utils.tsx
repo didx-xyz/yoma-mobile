@@ -6,7 +6,7 @@ import { SkillsState } from './Skills.types'
 export const selectFilterSkillsByTerm = curry(({ searchTerm = '', entities, ids }: SkillsState) => {
   if (searchTerm.length < SEARCH_TERM_MIN_LENGTH) {
     const defaultIds = slice(0, FALLBACK_SKILLS_LENGTH, ids)
-    return map((id: string | number) => entities[id].value, defaultIds)
+    return map((id: string) => entities[id], defaultIds)
   }
 
   return pipe(
