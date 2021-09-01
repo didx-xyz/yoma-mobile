@@ -9,6 +9,7 @@ import { createJob } from '../Jobs/Jobs.reducer'
 import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserJobs.middleware'
 import {
+  clearUserJobsFormValues,
   createUserJob,
   createUserJobFailure,
   createUserJobSuccess,
@@ -251,6 +252,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       // then ...validate createUserJobSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(fetchUserJobById('11111-5717-4562-b3fc-2c963f66afa6'))
+      expect(store.dispatch).toHaveBeenCalledWith(clearUserJobsFormValues())
     })
   })
   describe('createUserJobFailureFlow', () => {

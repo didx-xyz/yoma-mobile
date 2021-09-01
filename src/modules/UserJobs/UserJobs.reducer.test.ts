@@ -1,5 +1,6 @@
 import SUT, {
   clearUserJobs,
+  clearUserJobsFormValues,
   INITIAL_STATE,
   setUserJobs,
   setUserJobsFormValues,
@@ -106,6 +107,36 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
 
       // then ... state should include the new jobs
       expect(result).toEqual(jobsMock)
+    })
+  })
+  describe('clearUserJobsFormValues', () => {
+    it('should correctly clear the form data', () => {
+      // given ...an initial state
+      const state = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Job 1',
+          id2: 'Job 2',
+          id3: 'Job 3',
+        },
+        formValues: 'form data',
+      }
+
+      // when ... we clear jobs
+      const action = clearUserJobsFormValues()
+      // @ts-ignore
+      const result = SUT(state, action)
+
+      // then ... state should include the new jobs
+      expect(result).toEqual({
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Job 1',
+          id2: 'Job 2',
+          id3: 'Job 3',
+        },
+        formValues: {},
+      })
     })
   })
   describe('updateUserJobs', () => {

@@ -17,6 +17,7 @@ import * as Navigation from '../Navigation/Navigation.actions'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
 import {
+  clearUserJobsFormValues,
   createUserJob,
   createUserJobFailure,
   createUserJobSuccess,
@@ -146,6 +147,7 @@ export const createUserJobSuccessFlow: Middleware =
       const data = extractDataFromPayload(action)
 
       dispatch(fetchUserJobById(data.id))
+      dispatch(clearUserJobsFormValues())
     }
     return result
   }
