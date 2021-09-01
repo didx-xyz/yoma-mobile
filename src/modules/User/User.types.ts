@@ -2,7 +2,7 @@ import { UserCredentialTypes } from 'api/users/users.types'
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
 
 import { UserChallenge } from '../UserChallenges/UserChallenges.types'
-import { UserJobCredential } from './../UserJobs/UserJobs.types'
+import { UserJobCredential } from '../UserJobs/UserJobs.types'
 
 export interface UpdateUserResponse {
   data: UserResponse
