@@ -43,7 +43,7 @@ platform :android do
   end
 
   desc "Deploy a new Internal build to Google Play Store"
-  lane :deploy_internal do |options|
+  lane :deploy_internal do
     deploy(build_name: "Yoma Internal Testers", track: "internal")
   end
 
@@ -54,7 +54,7 @@ platform :android do
 
   error do |lane, exception|
     slack(
-      message: "An error has occurred",
+      message: "An error has occurred in #{lane}",
       success: false,
       attachment_properties: {
         fields: [{
