@@ -2,7 +2,7 @@ import { UserCredentialTypes } from 'api/users/users.types'
 import { ApiMetaResponse } from 'modules/Auth/Auth.types'
 
 import { UserChallenge } from '../UserChallenges/UserChallenges.types'
-import { UserJobCredential } from './../UserJobs/UserJobs.types'
+import { UserJobCredential } from '../UserJobs/UserJobs.types'
 
 export interface UpdateUserResponse {
   data: UserResponse
@@ -74,12 +74,10 @@ export interface UserCredentialItemPayload {
 }
 
 export interface UserCredentialFormValues {
-  formValues: {
-    type: UserCredentialTypes
-    startTime: string
-    endTime: string
-    requestVerification: boolean
-  }
+  type: UserCredentialTypes
+  startTime: string
+  endTime: string
+  requestVerification: boolean
 }
 
 export type UserCredentials = UserChallenge | UserJobCredential[]

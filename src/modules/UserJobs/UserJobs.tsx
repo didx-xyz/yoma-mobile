@@ -3,10 +3,13 @@ import { Card, EmptyCard, InfoCard, Optional } from 'components'
 import NormalHeader from 'components/NormalHeader/NormalHeader'
 import ViewContainer from 'components/ViewContainer/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
+import { evolve } from 'ramda'
 import React, { useCallback, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import { types as DropDownTypes } from '../../components/DropDown'
+import { dateToISOString } from '../../utils/dates.utils'
 import styles from './UserJobs.styles'
 import * as UserJobsTypes from './UserJobs.types'
 import { extractUserJobsFormValues } from './UserJobs.utils'
@@ -15,45 +18,37 @@ import { INITIAL_VALUES } from './UserJobsForm/UserJobsForm.constants'
 
 interface Props {
   userJobs: UserJobsTypes.UserJobItem[]
-  organisations: []
-  skills: []
+  organisations: DropDownTypes.DropDownList[]
+  skills: DropDownTypes.DropDownList[]
   onJobCreate: (job: any) => void
-  onJobPatch: (job: any) => void
-  filterSkillsByValue: (query: string) => void
+  onFilterSkills: (query: string) => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserJobs>
 }
 
-const UserJobs = ({
-  userJobs,
-  organisations,
-  skills,
-  onJobCreate,
-  onJobPatch,
-  filterSkillsByValue,
-  navigation,
-}: Props) => {
+const UserJobs = ({ userJobs, organisations, skills, onJobCreate, onFilterSkills, navigation }: Props) => {
   const { t } = useTranslation()
   const [isSaved, setIsSaved] = useState(false)
-  const [isEditMode, setIsEditMode] = useState(false)
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
-  const addUserJob = useCallback(() => {
+  const handleAddUserJob = useCallback(() => {
     setIsSaved(true)
-    setIsEditMode(false)
   }, [])
 
-  const editUserJob = (item: any) => {
-    const values = extractUserJobsFormValues(item)
-    setFormState({ ...formState, values })
-    setIsSaved(true)
-    setIsEditMode(true)
-  }
+  const handleEditUserJob = useCallback(
+    (item: any) => {
+      const values = extractUserJobsFormValues(item)
+      setFormState({ ...formState, values })
+      setIsSaved(true)
+    },
+    [formState],
+  )
+
   const handleUserJobsFormSave = () => {
-    if (!isEditMode) {
-      onJobCreate(formState.values)
-    } else {
-      onJobPatch(formState.values)
-    }
+    const values = evolve({
+      startTime: dateToISOString,
+      endTime: dateToISOString,
+    })(formState.values)
+    onJobCreate(values)
   }
 
   const renderItem = (item: UserJobsTypes.UserJobItem) => {
@@ -65,7 +60,7 @@ const UserJobs = ({
         startDate={startDate}
         endDate={endDate}
         logo={job.organisationLogoURL}
-        onEdit={() => editUserJob(item)}
+        onEdit={() => handleEditUserJob(item)}
       />
     )
   }
@@ -74,9 +69,9 @@ const UserJobs = ({
     <ViewContainer style={styles.container}>
       <NormalHeader
         navigation={navigation}
-        headerText={t('UserJobs')}
+        headerText={t('Experience')}
         onSave={handleUserJobsFormSave}
-        onAdd={addUserJob}
+        onAdd={handleAddUserJob}
         showAddButton={!isSaved}
         isSaveButtonEnabled={formState?.isValid}
       />
@@ -100,7 +95,7 @@ const UserJobs = ({
           <Card>
             <UserJobsForm
               formValues={formState?.values}
-              filterSkillsByValue={filterSkillsByValue}
+              onFilterSkills={onFilterSkills}
               setFormState={setFormState}
               skills={skills}
               organisations={organisations}

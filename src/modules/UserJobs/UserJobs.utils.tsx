@@ -1,4 +1,4 @@
-import { applySpec, path, pathOr, prop } from 'ramda'
+import { applySpec, of, path, pathOr, pick, pipe, prop } from 'ramda'
 
 export const extractUserJobsFormValues = applySpec({
   id: path(['job', 'id']),
@@ -9,3 +9,20 @@ export const extractUserJobsFormValues = applySpec({
   startTime: prop('startDate'),
   endTime: prop('endDate'),
 })
+
+export const extractUserJobFromData = pipe(
+  pick([
+    'id',
+    'verifiedAt',
+    'approved',
+    'approvalMessage',
+    'startDate',
+    'endDate',
+    'createdAt',
+    'fileId',
+    'fileURL',
+    'requestVerification',
+    'job',
+  ]),
+  of,
+)
