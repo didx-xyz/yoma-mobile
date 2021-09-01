@@ -10,11 +10,11 @@ platform :android do
       json_key_data: ENV["PLAYSTORE_CREDENTIALS"]
     )
     current_version_code = versions[0].to_i
-    new_version_code = current_version_code + 1
-    new_version_name = "#{options[:build_name]}-v#{new_version_code}"
+    version_code = current_version_code + 1
+    version_name = "#{options[:build_name]}-v#{version_code}"
     properties = {
-      "versionCode" => new_version_code,
-      "versionName" => new_version_name,
+      "versionCode" => version_code,
+      "versionName" => version_name,
     }
 
     gradle(
@@ -25,7 +25,7 @@ platform :android do
       flags: "--no-daemon --max-workers 2"
     )
 
-    new_version_code
+    version_code
   end
 
   desc "Deploy to Google Play"
