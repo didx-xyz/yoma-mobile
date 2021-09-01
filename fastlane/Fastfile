@@ -11,7 +11,7 @@ platform :android do
     )
     current_version_code = versions[0].to_i
     new_version_code = current_version_code + 1
-    new_version_name = "#{options[:build_name]}-#{new_version_code}"
+    new_version_name = "#{options[:build_name]}-v#{new_version_code}"
     properties = {
       "versionCode" => new_version_code,
       "versionName" => new_version_name,
@@ -32,7 +32,7 @@ platform :android do
   private_lane :deploy do |options|
     version = build(build_name: options[:build_name], track: options[:track])
 
-    upload_to_play_store(
+    supply(
       track: options[:track],
       json_key_data: ENV["PLAYSTORE_CREDENTIALS"],
       release_status: 'draft',
@@ -42,9 +42,9 @@ platform :android do
     slack(message: "New #{options[:build_name]} build(#{version}) available on google play")
   end
 
-  desc "Deploy a new Alpha build to Google Play Store"
-  lane :beta_deploy do |options|
-    deploy(build_name: "Yoma Alpha", track: "internal")
+  desc "Deploy a new Internal build to Google Play Store"
+  lane :deploy_internal do |options|
+    deploy(build_name: "Yoma Internal Testers", track: "internal")
   end
 
   desc "Deploy a new Production build to Google Play Store"
