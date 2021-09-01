@@ -271,7 +271,6 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       expect(mockNotification).toHaveBeenCalled()
     })
   })
-
   describe('fetchUserJobByIdFlow', () => {
     it('should correctly handle being called', () => {
       // given ... a user object with an id in state
