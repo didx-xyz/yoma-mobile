@@ -3,11 +3,6 @@ default_platform(:android)
 platform :android do
   desc "Android deploy"
 
-  desc "Create Changelog"
-  private_lane :changelog do |options|
-    sh("cp", "release-notes.txt","./fastlane/metadata/android/en-GB/changelogs/#{options[:version]}.txt")
-  end
-
   desc "Android Build"
   private_lane :build do |options|
     versions = google_play_track_version_codes(
@@ -37,9 +32,7 @@ platform :android do
   private_lane :deploy do |options|
     version = build(build_name: options[:build_name], track: options[:track])
 
-    changelog(version)
-
-    supply(
+    upload_to_play_store(
       track: options[:track],
       json_key_data: ENV["PLAYSTORE_CREDENTIALS"],
       release_status: 'draft',
