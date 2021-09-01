@@ -74,12 +74,10 @@ export interface UserCredentialItemPayload {
 }
 
 export interface UserCredentialFormValues {
-  formValues: {
-    type: UserCredentialTypes
-    startTime: string
-    endTime: string
-    requestVerification: boolean
-  }
+  type: UserCredentialTypes
+  startTime: string
+  endTime: string
+  requestVerification: boolean
 }
 
 export type UserCredentials = UserChallenge | UserJobCredential[]

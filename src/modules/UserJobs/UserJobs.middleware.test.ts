@@ -182,12 +182,10 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       expect(store.dispatch).toHaveBeenCalledWith(
         setUserJobsFormValues({
-          formValues: {
-            type: UserCredentialTypes.Job,
-            startTime: 'START_TIME',
-            endTime: 'END_TIME',
-            requestVerification: false,
-          },
+          type: UserCredentialTypes.Job,
+          startTime: 'START_TIME',
+          endTime: 'END_TIME',
+          requestVerification: false,
         }),
       )
     })

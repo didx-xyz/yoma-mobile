@@ -76,33 +76,6 @@ describe('modules/User/User.utils', () => {
       expect(result.formData).toBe('FORM_DATA')
     })
   })
-  describe('extractUserCredentialFormValues', () => {
-    it('should return the jobs credentials form values from state', () => {
-      // given ... an object in the shape of the successful response
-      const mockPayload = {
-        payload: {
-          id: 'ID',
-          title: 'TITLE',
-          description: 'DESCRIPTION',
-          organisationId: 'ORGANISATION_ID',
-          skillNames: ['SKILL'],
-          startTime: 'MOCK_DATE',
-          endTime: 'MOCK_DATE',
-        },
-      }
-      const mockDateToISOString = jest.fn(() => 'MOCK_DATE')
-      // when ... we want to extract the data from the rest of the payload
-      const result = SUT.extractUserCredentialFormValues(UserCredentialTypes.Job, mockDateToISOString)(mockPayload)
-
-      // then ... the data should be extracted correctly
-      expect(result).toEqual({
-        type: UserCredentialTypes.Job,
-        requestVerification: false,
-        startTime: 'MOCK_DATE',
-        endTime: 'MOCK_DATE',
-      })
-    })
-  })
   describe('prepareUserCredentialItemPayload', () => {
     it('should return merged credential id with form values from state', () => {
       // given ...
@@ -173,6 +146,30 @@ describe('modules/User/User.utils', () => {
 
       //then expect that we have a list of challenge credentials
       expect(result).toEqual(expected)
+    })
+  })
+  describe('extractUserCredentialFormValues', () => {
+    it('should return the jobs credentials form values from state', () => {
+      // given ... an object in the shape of the successful response
+      const mockPayload = {
+        id: 'ID',
+        title: 'TITLE',
+        description: 'DESCRIPTION',
+        organisationId: 'ORGANISATION_ID',
+        skillNames: ['SKILL'],
+        startTime: 'MOCK_DATE',
+        endTime: 'MOCK_DATE',
+      }
+      // when ... we want to extract the data from the rest of the payload
+      const result = SUT.extractUserCredentialFormValues(UserCredentialTypes.Job)(mockPayload)
+
+      // then ... the data should be extracted correctly
+      expect(result).toEqual({
+        type: UserCredentialTypes.Job,
+        requestVerification: false,
+        startTime: 'MOCK_DATE',
+        endTime: 'MOCK_DATE',
+      })
     })
   })
 })
