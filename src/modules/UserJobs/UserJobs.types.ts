@@ -56,5 +56,5 @@ export type UserJobsFormState = {
 }
 
 export interface UserJobsState extends NormalisedUserJobs {
-  formValues: UserTypes.UserCredentialFormValues | null
+  formValues: UserTypes.UserCredentialFormValues | {}
 }

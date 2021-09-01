@@ -20,6 +20,7 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
           id2: 'Job 2',
           id3: 'Job 3',
         },
+        formValues: {},
       }
       // @ts-ignore
       const action = setUserJobs(jobsMock)
@@ -120,6 +121,7 @@ describe('src/modules/User/Jobs/Jobs.reducer', () => {
           id2: 'Job 2',
           id3: 'Job 3',
         },
+        formValues: {},
       }
       // @ts-ignore
       const action = updateUserJobs(jobsMock)

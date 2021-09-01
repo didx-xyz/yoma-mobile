@@ -9,7 +9,7 @@ const name = '[User Jobs]'
 export const INITIAL_STATE = {
   ids: [],
   entities: {},
-  formValues: null,
+  formValues: {},
 } as UserJobsState
 
 export const getUserJobsSuccess = createAction<UserJobCredential[]>(`${name} getUserJobsSuccess`)

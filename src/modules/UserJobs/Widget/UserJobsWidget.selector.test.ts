@@ -1,5 +1,4 @@
 import { rootStateFixture } from '../../../redux/redux.test.fixtures'
-import { INITIAL_STATE } from '../UserJobs.reducer'
 import * as SUT from './UserJobsWidget.selector'
 
 describe('modules/UserJobs/UserJobsWidget/UserJobsWidget.selector', () => {
@@ -10,7 +9,7 @@ describe('modules/UserJobs/UserJobsWidget/UserJobsWidget.selector', () => {
       // when ...
       const result = SUT.default(state)
       // then ...
-      expect(result).toEqual({ userJobs: INITIAL_STATE })
+      expect(result).toEqual({ userJobs: { ids: [], entities: {} } })
     })
     it('should return the user jobs data in the expected format', () => {
       // given ...
