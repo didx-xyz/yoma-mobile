@@ -34,4 +34,12 @@ describe('dates.utils', () => {
       expect(result).toBe(expected)
     })
   })
+
+  describe('dateToISOString', () => {
+    it('should be able to convert the IOS date into string', () => {
+      const date = new Date('2011-10-05T14:48:00.000Z')
+      const result = SUT.dateToISOString(date)
+      expect(result).toBe('2011-10-05T14:48:00.000Z')
+    })
+  })
 })

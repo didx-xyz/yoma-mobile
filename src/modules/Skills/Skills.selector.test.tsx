@@ -39,30 +39,8 @@ describe('modules/Skills/Skills.selector', () => {
     })
   })
 
-  describe('selectEntities ', () => {
-    it('should return entities property of the skills state', () => {
-      const stateMock = rootStateFixture({
-        skills: {
-          ids: ['idA', 'idB'],
-          entities: {
-            idA: 'Skill A',
-            idB: 'Skill B',
-          },
-        },
-      })
-      // when ... we call the selector
-      const result = SUT.selectEntities(stateMock)
-
-      // then ... should return result as expected
-      expect(result).toEqual({
-        idA: 'Skill A',
-        idB: 'Skill B',
-      })
-    })
-  })
-
   describe('selectFiltered', () => {
-    it('should extract skill name from entities', () => {
+    it('should extract skills list as object of label and value', () => {
       //given ... actual state shape
       const mockState = rootStateFixture({
         skills: {
@@ -87,7 +65,7 @@ describe('modules/Skills/Skills.selector', () => {
       //then
       expect(result).toEqual([
         {
-          key: 'key1',
+          label: 'value1',
           value: 'value1',
         },
       ])
@@ -102,7 +80,6 @@ describe('modules/Skills/Skills.selector', () => {
           entities: zipObj(ids, repeat({ key: 'key', value: 'skill' }, 30)),
         },
       })
-
       // when .. selectFiltered with empty value
       const result = SUT.selectFiltered(mockState)
 

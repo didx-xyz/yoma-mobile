@@ -1,6 +1,7 @@
 declare module 'ramda' {
   export function __(...rest: any[]): any[]
   export function always(...rest: any[]): any[]
+  export function assoc(...rest: any[]): any[]
   export function and(...rest: any[]): any
   export function append(...rest: any[]): any
   export function apply(...rest: any[]): any
@@ -19,7 +20,7 @@ declare module 'ramda' {
   export function head(...rest: any[]): any
   export function identity(...rest: any[]): any
   export function ifElse(...rest: any[]): any
-  export function isEmpty(...rest: any[]): any
+  export function is(...rest: any[]): any
   export function isNil(...rest: any[]): any
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any

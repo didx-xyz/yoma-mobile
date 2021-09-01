@@ -1,7 +1,7 @@
 import { UserCredentialTypes } from 'api/users/users.types'
 import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
-import { createJob } from 'modules/Jobs/Jobs.reducer'
+import * as JobsActions from 'modules/Jobs/Jobs.reducer'
 import * as UserSelectors from 'modules/User/User.selector'
 import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } from 'modules/User/User.utils'
 import { mergeRight } from 'ramda'
@@ -20,6 +20,9 @@ import {
   createUserJob,
   createUserJobFailure,
   createUserJobSuccess,
+  fetchUserJobById,
+  fetchUserJobByIdFailure,
+  fetchUserJobByIdSuccess,
   getUserJobsSuccess,
   normaliseUserJobsSuccess,
   setUserJobs,
@@ -28,6 +31,7 @@ import {
 } from './UserJobs.reducer'
 import { selectFormValues } from './UserJobs.selector'
 import { NormalisedUserJobs, UserJobCredential } from './UserJobs.types'
+import { extractUserJobFromData } from './UserJobs.utils'
 
 export const getUserJobsFromCredentialsFlow =
   (
@@ -75,8 +79,8 @@ export const setUserJobsFormValuesFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    if (createJob.match(action)) {
-      const formValues = extractUserCredentialFormValues(UserCredentialTypes.Job)(action)
+    if (JobsActions.createJob.match(action)) {
+      const formValues = extractUserCredentialFormValues(UserCredentialTypes.Job)(action.payload)
       dispatch(setUserJobsFormValues(formValues))
     }
     return result
@@ -110,20 +114,71 @@ export const createUserJobFlow: Middleware =
     return result
   }
 
-export const createUserJobSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+export const fetchUserJobByIdFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchUserJobById.match(action)) {
+      const state = getState()
+      const userId = UserSelectors.selectId(state)
+      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
+        userId,
+      )
+      const configWithCredentialId = ApiUtils.appendIdToEndpointInConfig(config)(action.payload)
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(configWithCredentialId, {
+            onSuccess: fetchUserJobByIdSuccess,
+            onFailure: fetchUserJobByIdFailure,
+          }),
+        ),
+      )
+    }
+    return result
+  }
+export const createUserJobSuccessFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
     if (createUserJobSuccess.match(action)) {
-      const response = extractDataFromPayload(action)
-      const normalisedJobs = normalise([response])
+      const data = extractDataFromPayload(action)
+
+      dispatch(fetchUserJobById(data.id))
+    }
+    return result
+  }
+export const fetchUserJobByIdSuccessFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchUserJobByIdSuccess.match(action)) {
+      const data = extractDataFromPayload(action)
+      const userJob = extractUserJobFromData(data)
+      const normalisedJobs = normalise(userJob)
       dispatch(updateUserJobs(normalisedJobs))
-      //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Experience)
       // TODO: this should be handled by the notification module
       notification('success', 'Details saved!')
+      //TODO: add navigation as a dependency
+      Navigation.navigate(HomeNavigationRoutes.Home)
+    }
+    return result
+  }
+
+export const fetchUserJobByIdFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserJobByIdFailure.match(action)) {
+      const errorMessage = extractErrorMessageFromPayload(action)
+      // TODO: this should be handled by the notification module
+      notification('danger', 'Error', errorMessage)
     }
     return result
   }

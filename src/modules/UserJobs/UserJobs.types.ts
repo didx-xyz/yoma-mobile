@@ -22,6 +22,17 @@ export interface UserJob {
   published: boolean
 }
 
+export interface UserJobFormFields {
+  title: string
+  description: string
+  language: string
+  published: boolean
+  skillNames: string[]
+  organisationId: string
+  startTime: string | null
+  endTime: string | null
+}
+
 export interface UserJobCredential extends UserCredentialMeta {
   job: UserJob
 }
@@ -33,6 +44,16 @@ export interface UserJobsResponse {
 export interface NormalisedUserJobs {
   ids: string[]
   entities: Record<string, UserJobCredential>
+}
+
+export type UserJobItem = {
+  job: any
+  startDate: string
+  endDate: string
+}
+export type UserJobsFormState = {
+  values: UserJobFormFields
+  isValid: boolean
 }
 
 export interface UserJobsState extends NormalisedUserJobs {

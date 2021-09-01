@@ -9,12 +9,12 @@ import styles from './Tag.styles'
 
 type Props = {
   tag: string
-  onDeleteSkill: (skill: string) => void
+  onDeleteTag: (tag: string) => void
 }
 
-const Tag = ({ tag, onDeleteSkill }: Props) => {
+const Tag = ({ tag, onDeleteTag }: Props) => {
   return (
-    <TouchableOpacity style={styles.container} onPress={() => onDeleteSkill(tag)}>
+    <TouchableOpacity style={styles.container} onPress={() => onDeleteTag(tag)}>
       <View style={styles.crossIcon}>
         <CrossIcon height={ICON_SIZE} width={ICON_SIZE} />
       </View>

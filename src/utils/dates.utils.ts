@@ -10,3 +10,5 @@ export const calculateDifferenceInDate = (startDate: string, endDate: string) =>
   const { years, months } = intervalToDuration({ start: new Date(startDate), end: new Date(endDate) })
   return formatDuration({ years, months })
 }
+
+export const dateToISOString = (e: Date) => e.toISOString()
