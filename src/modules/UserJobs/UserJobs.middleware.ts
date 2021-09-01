@@ -17,6 +17,7 @@ import * as Navigation from '../Navigation/Navigation.actions'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
 import {
+  clearUserJobsFormValues,
   createUserJob,
   createUserJobFailure,
   createUserJobSuccess,
@@ -114,6 +115,35 @@ export const createUserJobFlow: Middleware =
     return result
   }
 
+export const createUserJobSuccessFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (createUserJobSuccess.match(action)) {
+      const data = extractDataFromPayload(action)
+
+      dispatch(fetchUserJobById(data.id))
+      dispatch(clearUserJobsFormValues())
+    }
+    return result
+  }
+
+export const createUserJobFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserJobFailure.match(action)) {
+      const errorMessage = extractErrorMessageFromPayload(action)
+      // TODO: this should be handled by the notification module
+      notification('danger', 'Error', errorMessage)
+    }
+    return result
+  }
+
 export const fetchUserJobByIdFlow: Middleware =
   ({ dispatch, getState }) =>
   next =>
@@ -137,18 +167,7 @@ export const fetchUserJobByIdFlow: Middleware =
     }
     return result
   }
-export const createUserJobSuccessFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (createUserJobSuccess.match(action)) {
-      const data = extractDataFromPayload(action)
 
-      dispatch(fetchUserJobById(data.id))
-    }
-    return result
-  }
 export const fetchUserJobByIdSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch }) =>
@@ -176,21 +195,6 @@ export const fetchUserJobByIdFailureFlow =
     const result = next(action)
 
     if (fetchUserJobByIdFailure.match(action)) {
-      const errorMessage = extractErrorMessageFromPayload(action)
-      // TODO: this should be handled by the notification module
-      notification('danger', 'Error', errorMessage)
-    }
-    return result
-  }
-
-export const createUserJobFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (createUserJobFailure.match(action)) {
       const errorMessage = extractErrorMessageFromPayload(action)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', errorMessage)

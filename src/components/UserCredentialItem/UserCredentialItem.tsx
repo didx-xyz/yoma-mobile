@@ -2,9 +2,9 @@ import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 
-import Avatar from '../../../components/Avatar'
-import { formatISOWithFallback } from '../../../utils/dates.utils'
-import styles from './UserChallengeItem.styles'
+import { formatISOWithFallback } from '../../utils/dates.utils'
+import Avatar from '../Avatar'
+import styles from './UserCredentiaItem.styles'
 
 interface Props {
   name: string
@@ -12,7 +12,7 @@ interface Props {
   isValidated: boolean
   organisationLogoURL?: string
 }
-const UserChallengeItem = ({ name, startDate, organisationLogoURL, isValidated }: Props) => {
+const UserCredentialItem = ({ name, startDate, organisationLogoURL, isValidated }: Props) => {
   const [formattedDate, setFormattedDate] = useState('')
 
   useEffect(() => {
@@ -33,4 +33,4 @@ const UserChallengeItem = ({ name, startDate, organisationLogoURL, isValidated }
   )
 }
 
-export default UserChallengeItem
+export default UserCredentialItem
