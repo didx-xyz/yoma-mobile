@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- moving my cv views out of user credential modules
+- refactor - pascal casing all type enums
 
 10 Most Recent:
+- moving my cv views out of user credential modules
 - PascalCasing Colors enum keys
 - adding user skills 'credentials' to state
 - experience - save new/edited experience to backend
@@ -12,4 +13,3 @@ Latest:
 - adding selector for MyCV title bar
 - add organisations data to state
 - add skills data to state
-- merging MyChallenges into UserChallenges
