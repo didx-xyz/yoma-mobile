@@ -7,7 +7,7 @@ import { Colors, FontFamily } from './styles.types'
 const TextStyles = {
   h4: {
     fontSize: 14,
-    fontFamily: fontStyles[FontFamily.medium],
+    fontFamily: fontStyles[FontFamily.Medium],
   } as TextStyle,
   textTertiary5: {
     color: colors[Colors.PrimaryDarkGrey],
