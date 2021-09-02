@@ -1,10 +1,10 @@
-import { SkillsField } from './SkillsForm.types'
+import { UserSkillsField } from './UserSkillsForm.types'
 
-export const SKILLS_INITIAL_VALUES: SkillsField = {
+export const USER_SKILLS_INITIAL_VALUES: UserSkillsField = {
   skillNames: [],
 }
 
-export const MOCK_SKILLS_LIST = [
+export const MOCK_USER_SKILLS_LIST = [
   { label: 'UI', value: 'UI' },
   { label: 'Design', value: 'Design' },
   { label: 'UX', value: 'UX' },

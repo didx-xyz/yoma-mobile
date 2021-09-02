@@ -4,18 +4,18 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { SKILLS_INITIAL_VALUES, MOCK_SKILLS_LIST } from './SkillsForm.constants'
-import styles from './SkillsForm.styles'
+import { MOCK_USER_SKILLS_LIST, USER_SKILLS_INITIAL_VALUES } from './UserSkillsForm.constants'
+import styles from './UserSkillsForm.styles'
 
-const SkillsForm = () => {
+const UserSkillsForm = () => {
   const { t } = useTranslation()
 
   return (
-    <Formik initialValues={SKILLS_INITIAL_VALUES} onSubmit={() => {}}>
+    <Formik initialValues={USER_SKILLS_INITIAL_VALUES} onSubmit={() => {}}>
       {(formikHandlers: FormikProps<FormikValues>) => (
         <View style={styles.form}>
           <DropDownTags
-            items={MOCK_SKILLS_LIST}
+            items={MOCK_USER_SKILLS_LIST}
             multiple
             searchPlaceholder={t('Search skills')}
             label={t('Skills developed')}
@@ -29,4 +29,4 @@ const SkillsForm = () => {
   )
 }
 
-export default SkillsForm
+export default UserSkillsForm

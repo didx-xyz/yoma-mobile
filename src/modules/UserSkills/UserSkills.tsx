@@ -7,9 +7,9 @@ import { useTranslation } from 'react-i18next'
 import { FlatList } from 'react-native'
 import { Colors } from 'styles'
 
-import { MOCK_SKILLS } from './Skills.constants'
-import styles from './Skills.styles'
-import SkillsForm from './SkillsForm/SkillsForm'
+import { MOCK_SKILLS } from './UserSkills.constants'
+import styles from './UserSkills.styles'
+import SkillsForm from './UserSkillsForm/UserSkillsForm'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Skills>
