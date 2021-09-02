@@ -17,6 +17,7 @@ import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { middleware as UserChallengesMiddleware } from '../modules/UserChallenges'
 import { middleware as UserJobsMiddleware } from '../modules/UserJobs'
+import { middleware as UserQualificationsMiddleware } from '../modules/UserQualifications'
 import { middleware as UserSkillsMiddleware } from '../modules/UserSkills'
 import { showSimpleMessage } from '../utils/error'
 
@@ -98,6 +99,12 @@ const featureModuleMiddleware = [
     createPayload: UserUtils.createPhotoFormPayload(FormData),
   }),
   UserMiddleware.uploadUserPhotoSuccessFlow,
+  UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
+    ReduxUtils.extractDataFromPayload,
+    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Qualification),
+  ),
+  UserQualificationsMiddleware.normaliseUserQualificationsFlow(ReduxUtils.normalise),
+  UserQualificationsMiddleware.setUserQualificationsFlow,
   UserSkillsMiddleware.fetchUserSkillsFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFlow,
   UserSkillsMiddleware.fetchUserSkillsSuccessFlow,
