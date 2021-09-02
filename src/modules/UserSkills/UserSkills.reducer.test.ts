@@ -1,5 +1,4 @@
 import SUT, { clearUserSkills, INITIAL_STATE, setUserSkills } from './UserSkills.reducer'
-import { USER_SKILLS_MOCK } from './UserSkills.test.fixtures'
 
 describe('src/modules/User/Skills/Skills.reducer', () => {
   describe('setUserSkills', () => {
