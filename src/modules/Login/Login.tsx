@@ -29,7 +29,7 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
       <ScrollView>
         <LargeHeader
           navigation={navigation}
-          backgroundColor={Colors.primaryPurple}
+          backgroundColor={Colors.PrimaryPurple}
           circleImage={<YellowCircleLeft />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
@@ -48,7 +48,7 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
           </Text.Body>
           <View style={styles.horizontalLineView}>
             <View style={styles.horizontalLine} />
-            <Text.Body color={Colors.primaryDarkGrey} style={styles.orText}>
+            <Text.Body color={Colors.PrimaryDarkGrey} style={styles.orText}>
               {t('or')}
             </Text.Body>
             <View style={styles.horizontalLine} />
@@ -62,7 +62,7 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
         </Card>
         <Text.Body
           level={BodyLevels.small}
-          color={Colors.primaryDarkGrey}
+          color={Colors.PrimaryDarkGrey}
           align={TextAlign.center}
           style={styles.noAccount}
         >

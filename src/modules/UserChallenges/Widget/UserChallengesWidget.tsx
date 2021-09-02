@@ -17,7 +17,7 @@ const UserChallengesWidget = ({ challenges, navigation }: Props) => {
   return (
     <CvCard
       count={challenges.ids.length}
-      badgeColor={Colors.secondaryPurple}
+      badgeColor={Colors.SecondaryPurple}
       title={t('Completed challenges')}
       fallback={t('Have you completed any challenges yet?')}
       onEdit={() => {

@@ -35,10 +35,10 @@ const Landing = ({ navigation }: Props) => {
           <Text.Header level={HeaderLevels.h1} align={TextAlign.center}>
             {t('unlock')}
           </Text.Header>
-          <Text.Header level={HeaderLevels.h1} align={TextAlign.center} color={Colors.white}>
+          <Text.Header level={HeaderLevels.h1} align={TextAlign.center} color={Colors.White}>
             {t('yourFuture')}
           </Text.Header>
-          <Text.Header level={HeaderLevels.h4} color={Colors.white} align={TextAlign.center} style={styles.bodyText}>
+          <Text.Header level={HeaderLevels.h4} color={Colors.White} align={TextAlign.center} style={styles.bodyText}>
             {t('landingBodyText')}
           </Text.Header>
         </View>
@@ -51,7 +51,7 @@ const Landing = ({ navigation }: Props) => {
           />
           <Button
             variant={ButtonVariants.Clear}
-            color={Colors.white}
+            color={Colors.White}
             label={t('login')}
             onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}
             style={styles.loginButton}

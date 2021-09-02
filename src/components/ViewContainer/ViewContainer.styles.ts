@@ -6,7 +6,7 @@ const styles = {
     flex: 1,
     width: '100%',
     justifyContent: 'flex-start',
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
   } as ViewStyle,
 }
 

@@ -17,11 +17,11 @@ const styles = {
     height: 6,
     width: '100%',
     alignSelf: 'center',
-    backgroundColor: colors[Colors.lightYellow],
+    backgroundColor: colors[Colors.LightYellow],
     borderRadius: 18,
   } as ViewStyle,
   innerProgressbar: {
-    backgroundColor: colors[Colors.primaryRed],
+    backgroundColor: colors[Colors.PrimaryRed],
     borderRadius: 18,
     height: '100%',
     width: '50%',

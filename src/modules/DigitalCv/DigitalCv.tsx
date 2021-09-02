@@ -35,21 +35,21 @@ const DigitalCv = ({ navigation, biography }: Props) => {
         <UserJobsWidget navigation={navigation} />
         <CvCard
           count={0}
-          badgeColor={Colors.primaryRed}
+          badgeColor={Colors.PrimaryRed}
           title={t('Education')}
           fallback={t('Which school, university or college did you attend?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Education)}
         />
         <CvCard
           count={0}
-          badgeColor={Colors.primaryGreen}
+          badgeColor={Colors.PrimaryGreen}
           title={t('My skills')}
           fallback={t('Tell us what you are great at.')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Skills)}
         />
         <CvCard
           count={0}
-          badgeColor={Colors.primaryYellow}
+          badgeColor={Colors.PrimaryYellow}
           title={t('Completed courses')}
           fallback={t('Have you completed any courses yet?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MyCourses)}

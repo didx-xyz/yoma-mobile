@@ -80,7 +80,7 @@ const UserJobsForm = ({ skills, organisations, formValues, onFilterSkills, setFo
             handlers={formikHandlers}
           />
           <TouchableOpacity onPress={() => setShowInfoModal(true)}>
-            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen}>
+            <Text.Meta level={MetaLevels.smallBold} color={Colors.PrimaryGreen}>
               {t('Find inspiration on how to write a great profile.')}
             </Text.Meta>
           </TouchableOpacity>

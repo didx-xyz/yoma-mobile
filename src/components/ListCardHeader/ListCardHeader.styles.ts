@@ -14,7 +14,7 @@ const styles = {
   } as TextStyle,
   border: {
     borderBottomWidth: 2,
-    borderBottomColor: colors[Colors.backgroundGrey],
+    borderBottomColor: colors[Colors.BackgroundGrey],
   } as ViewStyle,
   rightAccessory: {
     marginLeft: 'auto',

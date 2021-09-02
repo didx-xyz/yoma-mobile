@@ -117,7 +117,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
               label={
                 <>
                   {t('I agree')}&nbsp;
-                  <Span color={Colors.menuGrey} style={styles.privacy} onPress={() => {}}>
+                  <Span color={Colors.MenuGrey} style={styles.privacy} onPress={() => {}}>
                     {t('Yoma’s Privacy Policy')}
                   </Span>
                 </>

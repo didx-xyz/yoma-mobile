@@ -4,7 +4,7 @@ import { Colors, colors } from 'styles'
 const styles = {
   container: {
     paddingBottom: 30,
-    backgroundColor: colors[Colors.backgroundGrey],
+    backgroundColor: colors[Colors.BackgroundGrey],
   } as ViewStyle,
   logoContainer: {
     paddingVertical: 20,
@@ -25,7 +25,7 @@ const styles = {
     justifyContent: 'center',
   } as ViewStyle,
   horizontalLine: {
-    backgroundColor: colors[Colors.backgroundGrey],
+    backgroundColor: colors[Colors.BackgroundGrey],
     height: 1,
     flex: 1,
   } as ViewStyle,

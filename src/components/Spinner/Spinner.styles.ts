@@ -16,7 +16,7 @@ const styles = {
     height: SPINNER_CONTAINER_SIZE,
     width: SPINNER_CONTAINER_SIZE,
     borderRadius: 16,
-    backgroundColor: applyAlphaToHex(colors[Colors.white])(0.75),
+    backgroundColor: applyAlphaToHex(colors[Colors.White])(0.75),
   } as ViewStyle,
 }
 

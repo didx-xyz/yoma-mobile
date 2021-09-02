@@ -16,9 +16,9 @@ const SkillCard = ({ skill, skillCount, onPress }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
-      <Text.Header level={HeaderLevels.h6} color={Colors.primaryDarkGrey}>
+      <Text.Header level={HeaderLevels.h6} color={Colors.PrimaryDarkGrey}>
         {skill}
-        <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
+        <Text.Body level={BodyLevels.small} color={Colors.MenuGrey}>
           {' '}
           • {skillCount}
         </Text.Body>

@@ -33,7 +33,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: AVATAR_SIZE / CIRCULAR_RADIUS_DIVISOR,
-    backgroundColor: colors[Colors.lightGrey],
+    backgroundColor: colors[Colors.LightGrey],
   } as ViewStyle,
 }
 

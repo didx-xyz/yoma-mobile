@@ -21,12 +21,12 @@ const CustomInput = ({ label, isTouched, error, showTitle = true, ...props }: In
         <Text.Meta level={MetaLevels.small}>{label}</Text.Meta>
       </Optional>
       <TextInput
-        placeholderTextColor={colors[Colors.menuGrey]}
+        placeholderTextColor={colors[Colors.MenuGrey]}
         placeholder={label}
         style={styles.textInput}
         {...props}
       />
-      <Text.Meta color={Colors.primaryRed} align={TextAlign.center}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.center}>
         {isTouched && error}
       </Text.Meta>
     </View>

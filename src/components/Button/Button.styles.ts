@@ -14,18 +14,18 @@ const baseStyle = {
 const styles = {
   [ButtonVariants.Primary]: {
     ...baseStyle,
-    backgroundColor: colors[Colors.primaryGreen],
-    borderColor: colors[Colors.primaryGreen],
+    backgroundColor: colors[Colors.PrimaryGreen],
+    borderColor: colors[Colors.PrimaryGreen],
   } as ViewStyle,
   [ButtonVariants.Outline]: {
     ...baseStyle,
-    backgroundColor: colors[Colors.transparent],
-    borderColor: colors[Colors.primaryGreen],
+    backgroundColor: colors[Colors.Transparent],
+    borderColor: colors[Colors.PrimaryGreen],
   } as ViewStyle,
   [ButtonVariants.Clear]: {
     ...baseStyle,
-    backgroundColor: colors[Colors.transparent],
-    borderColor: colors[Colors.transparent],
+    backgroundColor: colors[Colors.Transparent],
+    borderColor: colors[Colors.Transparent],
   } as ViewStyle,
   [ButtonSizes.Default]: {
     height: 45,

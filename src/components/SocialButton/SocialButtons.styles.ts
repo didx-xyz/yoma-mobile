@@ -23,11 +23,11 @@ const styles = {
   } as ViewStyle,
   [SocialVariants.Facebook]: {
     ...baseStyle,
-    backgroundColor: colors[Colors.facebookBlue],
+    backgroundColor: colors[Colors.FacebookBlue],
   } as ViewStyle,
   [SocialVariants.Google]: {
     ...baseStyle,
-    borderColor: colors[Colors.googleRed],
+    borderColor: colors[Colors.GoogleRed],
   } as ViewStyle,
 }
 

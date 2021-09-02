@@ -4,7 +4,7 @@ import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.lightGrey],
+    backgroundColor: colors[Colors.LightGrey],
     height: 1,
     width: '100%',
   } as ViewStyle,

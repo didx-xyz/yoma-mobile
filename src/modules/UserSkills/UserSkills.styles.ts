@@ -3,7 +3,7 @@ import { Colors, colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.backgroundGrey],
+    backgroundColor: colors[Colors.BackgroundGrey],
   } as ViewStyle,
   outerCard: {
     paddingHorizontal: 10,

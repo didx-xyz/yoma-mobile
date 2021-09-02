@@ -18,7 +18,7 @@ type Props = WithChildren<{
   badgeColor?: Colors
   onEdit: () => void
 }>
-const CvCard = ({ title, fallback, count, badgeColor = Colors.white, onEdit, children }: Props) => (
+const CvCard = ({ title, fallback, count, badgeColor = Colors.White, onEdit, children }: Props) => (
   <View style={styles.container}>
     <ListCardHeader
       color={badgeColor}

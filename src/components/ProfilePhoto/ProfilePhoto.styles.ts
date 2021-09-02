@@ -5,7 +5,7 @@ import { colors, Colors } from '../../styles'
 const styles = {
   editIcon: {
     elevation: 3,
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     borderRadius: 15,
     position: 'absolute',
     right: 0,

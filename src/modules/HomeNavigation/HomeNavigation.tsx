@@ -25,11 +25,11 @@ const Tab = createBottomTabNavigator()
 
 const tabBarOptions: BottomTabBarOptions = {
   tabStyle: {
-    backgroundColor: colors[Colors.primaryPurple],
+    backgroundColor: colors[Colors.PrimaryPurple],
     paddingBottom: 2,
   },
-  activeTintColor: colors[Colors.white],
-  inactiveTintColor: applyAlphaToHex(colors[Colors.white])(0.38),
+  activeTintColor: colors[Colors.White],
+  inactiveTintColor: applyAlphaToHex(colors[Colors.White])(0.38),
   labelStyle: {
     fontFamily: fontStyles[FontFamily.semibold],
   },

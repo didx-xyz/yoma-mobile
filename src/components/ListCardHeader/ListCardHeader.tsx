@@ -31,7 +31,7 @@ const ListCardHeader = ({
       <Optional condition={hasCountBadge}>
         <CountBadge count={count} color={color} />
       </Optional>
-      <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple} style={styles.header}>
+      <Text.Header level={HeaderLevels.h5} color={Colors.PrimaryPurple} style={styles.header}>
         {header}
       </Text.Header>
       <View style={styles.rightAccessory}>

@@ -10,7 +10,7 @@ type Props = WithChildren<Omit<GetComponentProps<typeof Text>, 'color'>> & {
   onPress: () => void
 }
 
-const Link = ({ onPress, children, color = Colors.primaryGreen, ...props }: Props) => {
+const Link = ({ onPress, children, color = Colors.PrimaryGreen, ...props }: Props) => {
   return (
     <Text
       maxFontSizeMultiplier={undefined}

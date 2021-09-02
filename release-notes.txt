@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- adding user skills 'credentials' to state
+- PascalCasing Colors enum keys
 
 10 Most Recent:
+- adding user skills 'credentials' to state
 - experience - save new/edited experience to backend
 - experience should correctly show all the user's entries
 - adding real data to UserChallenges widget in MyCv
@@ -12,5 +13,3 @@ Latest:
 - add skills data to state
 - merging MyChallenges into UserChallenges
 - adding generic list component for CvCard/MyCV
-- added jobs and user jobs to state
-
