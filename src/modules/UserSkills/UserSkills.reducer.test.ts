@@ -52,7 +52,7 @@ describe('src/modules/User/Skills/Skills.reducer', () => {
       // @ts-ignore - the shape of the data doesn't matter
       const result = SUT(state, action)
 
-      // then ... state should include the new skills
+      // then ... state should only be the new skills
       expect(result).toEqual({
         ids: ['skill3'],
         entities: {
@@ -78,7 +78,7 @@ describe('src/modules/User/Skills/Skills.reducer', () => {
       // @ts-ignore
       const result = SUT(state, action)
 
-      // then ... state should include the new skills
+      // then ... state should be reverted to initial values (empty state)
       expect(result).toEqual(INITIAL_STATE)
     })
   })
