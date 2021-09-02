@@ -12,7 +12,7 @@ export enum UserSkillKeys {
 
 export interface UserSkill {
   [UserSkillKeys.SkillName]: string
-  [UserSkillKeys.VerifiedBy]: SkillVerification
+  [UserSkillKeys.VerifiedBy]: SkillVerification | null
 }
 
 export interface UserSkillsResponse {
