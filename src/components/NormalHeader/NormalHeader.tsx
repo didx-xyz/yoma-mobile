@@ -1,18 +1,18 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { AddIcon, BackIconGrey } from 'assets/images'
 import Button, { ButtonVariants } from 'components/Button'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
+import { types as HomeNavigationTypes } from '../../modules/HomeNavigation'
 import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
 import styles from './NormalHeader.styles'
 
 type Props = {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
+  navigation: StackNavigationProp<HomeNavigationTypes.HomeNavigatorParamsList, HomeNavigationTypes.HomeNavigationRoutes>
   headerText: string | React.ReactNode
   onSave?: () => void
   showAddButton?: boolean

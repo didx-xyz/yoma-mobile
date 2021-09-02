@@ -7,7 +7,7 @@ import HomeHeader from './HomeHeader'
 import selector from './HomeHeader.selector'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.DigitalCv>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
 const HomeHeaderContainer = ({ navigation }: Props) => {
   const { zltoBalance, profileImageUrl } = useSelector(selector)
