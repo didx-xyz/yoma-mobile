@@ -1,7 +1,10 @@
 import { createMiddlewareStub } from '../../../tests/tests.utils'
 import { actions as AuthActions } from '../Auth'
+import * as OrganisationsActions from '../Organisations/Organisations.reducer'
+import * as SkillsActions from '../Skills/Skills.reducer'
 import { actions as UserActions } from '../User'
 import { actions as UserChallengesActions } from '../UserChallenges'
+import { actions as UserSkillsActions } from '../UserSkills/'
 import * as SUT from './App.middleware'
 import { hydrateApp, resetAppData } from './App.reducer'
 
@@ -30,6 +33,7 @@ describe('modules/App/App.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(AuthActions.clearAuth())
       expect(store.dispatch).toHaveBeenCalledWith(UserActions.clearUser())
       expect(store.dispatch).toHaveBeenCalledWith(UserChallengesActions.clearUserChallenges())
+      expect(store.dispatch).toHaveBeenCalledWith(UserSkillsActions.clearUserSkills())
     })
   })
   describe('hydrateAppFlow', () => {
@@ -63,6 +67,9 @@ describe('modules/App/App.middleware', () => {
 
       // then ... we should fetch data from all expected endpoints
       expect(store.dispatch).toHaveBeenCalledWith(UserActions.fetchUserCredentials())
+      expect(store.dispatch).toHaveBeenCalledWith(OrganisationsActions.fetchOrganisations())
+      expect(store.dispatch).toHaveBeenCalledWith(SkillsActions.fetchSkills())
+      expect(store.dispatch).toHaveBeenCalledWith(UserSkillsActions.fetchUserSkills())
     })
   })
 })

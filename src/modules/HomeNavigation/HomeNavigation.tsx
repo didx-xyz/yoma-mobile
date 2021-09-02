@@ -15,9 +15,9 @@ import Education from '../Education'
 import Marketplace from '../Marketplace'
 import MyCourses from '../MyCourses'
 import Profile from '../Profile'
-import Skills from '../Skills'
 import UserChallenges from '../UserChallenges'
 import UserJobs from '../UserJobs'
+import MySkills from '../UserSkills'
 import { HomeNavigationRoutes } from './HomeNavigation.types'
 
 const Stack = createStackNavigator()
@@ -84,7 +84,7 @@ const HomeNavigation = () => {
       <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
       <Stack.Screen name={HomeNavigationRoutes.UserJobs} component={UserJobs} />
       <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
-      <Stack.Screen name={HomeNavigationRoutes.Skills} component={Skills} />
+      <Stack.Screen name={HomeNavigationRoutes.Skills} component={MySkills} />
       <Stack.Screen name={HomeNavigationRoutes.MyCourses} component={MyCourses} />
       <Stack.Screen name={HomeNavigationRoutes.UserChallenges} component={UserChallenges} />
     </Stack.Navigator>

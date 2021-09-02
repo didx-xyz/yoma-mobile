@@ -8,57 +8,71 @@ describe('src/modules/User/Skills/Skills.reducer', () => {
       const state = INITIAL_STATE
 
       // when ... we set new skills
+      const NORMALISED_SKILLS_MOCK = {
+        ids: ['skill1', 'skill2', 'skill3'],
+        entities: {
+          skill1: 'SKILLS1',
+          skill2: 'SKILLS2',
+          skill3: 'SKILLS3',
+        },
+      }
 
       // @ts-ignore
-      const action = setUserSkills(USER_SKILLS_MOCK)
+      const action = setUserSkills(NORMALISED_SKILLS_MOCK)
       const result = SUT(state, action)
 
       // then ... state should include the new skills
-      expect(result).toEqual(USER_SKILLS_MOCK)
+      expect(result).toEqual({
+        ids: ['skill1', 'skill2', 'skill3'],
+        entities: {
+          skill1: 'SKILLS1',
+          skill2: 'SKILLS2',
+          skill3: 'SKILLS3',
+        },
+      })
     })
     it('should update skills state', () => {
       // given ...an initial state
-      const state = USER_SKILLS_MOCK
+      const state = {
+        ids: ['skill1', 'skill2'],
+        entities: {
+          skill1: 'SKILLS1',
+          skill2: 'SKILLS2',
+        },
+      }
 
       // when ... we set new skills
-      const skillsMock = [
-        {
-          skillName: 'Skill1',
-          verifiedBy: {
-            name: 'Name1',
-            logoUrl: 'Url1',
-          },
+      const NORMALISED_SKILLS_MOCK = {
+        ids: ['skill3'],
+        entities: {
+          skill3: 'SKILLS3',
         },
-      ]
+      }
       // @ts-ignore - the shape of the data doesn't matter
-      const action = setUserSkills(skillsMock)
+      const action = setUserSkills(NORMALISED_SKILLS_MOCK)
       // @ts-ignore - the shape of the data doesn't matter
       const result = SUT(state, action)
 
       // then ... state should include the new skills
-      expect(result).toEqual([
-        {
-          skillName: 'Skill',
-          verifiedBy: {
-            name: 'Name',
-            logoUrl: 'Url',
-          },
+      expect(result).toEqual({
+        ids: ['skill3'],
+        entities: {
+          skill3: 'SKILLS3',
         },
-        {
-          skillName: 'Skill1',
-          verifiedBy: {
-            name: 'Name1',
-            logoUrl: 'Url1',
-          },
-        },
-      ])
+      })
     })
   })
-
   describe('clearUserSkills', () => {
     it('should correctly clear the skills credentials', () => {
       // given ...an initial state
-      const state = USER_SKILLS_MOCK
+      const state = {
+        ids: ['skill1', 'skill2', 'skill3'],
+        entities: {
+          skill1: 'SKILLS1',
+          skill2: 'SKILLS2',
+          skill3: 'SKILLS3',
+        },
+      }
 
       // when ... we clear skills
       const action = clearUserSkills()

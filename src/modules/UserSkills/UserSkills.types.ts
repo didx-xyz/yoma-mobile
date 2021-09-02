@@ -5,9 +5,14 @@ export interface SkillVerification {
   logoUrl: string
 }
 
+export enum UserSkillKeys {
+  SkillName = 'skillName',
+  VerifiedBy = 'verifiedBy',
+}
+
 export interface UserSkill {
-  skillName: string
-  verifiedBy: SkillVerification
+  [UserSkillKeys.SkillName]: string
+  [UserSkillKeys.VerifiedBy]: SkillVerification
 }
 
 export interface UserSkillsResponse {
@@ -15,4 +20,9 @@ export interface UserSkillsResponse {
   meta: ApiMetaResponse
 }
 
-export type UserSkillsState = UserSkill[]
+export interface NormalisedUserSkills {
+  ids: string[]
+  entities: Record<string, UserSkill>
+}
+
+export interface UserSkillsState extends NormalisedUserSkills {}
