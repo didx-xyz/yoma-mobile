@@ -1,23 +1,30 @@
 export enum HomeNavigationRoutes {
   Home = 'Home',
   Profile = 'Profile',
-  DigitalCv = 'DigitalCv',
+  MyCv = 'MyCv',
   About = 'About',
-  UserJobs = 'UserJobs',
+  Experience = 'Experience',
   Education = 'Education',
-  Skills = 'Skills',
-  MyCourses = 'MyCourses',
+  MySkills = 'MySkills',
+  CompletedCourses = 'CompletedCourses',
   UserChallenges = 'UserChallenges',
+}
+
+export enum HomeTabRoutes {
+  Courses = 'Courses',
+  Challenges = 'Challenges',
+  MarketPlace = 'MarketPlace',
+  MyCv = 'MyCv',
 }
 
 export type HomeNavigatorParamsList = {
   [HomeNavigationRoutes.Home]: undefined
   [HomeNavigationRoutes.Profile]: undefined
-  [HomeNavigationRoutes.DigitalCv]: undefined
+  [HomeNavigationRoutes.MyCv]: undefined
   [HomeNavigationRoutes.About]: undefined
-  [HomeNavigationRoutes.UserJobs]: undefined
+  [HomeNavigationRoutes.Experience]: undefined
   [HomeNavigationRoutes.Education]: undefined
-  [HomeNavigationRoutes.Skills]: undefined
-  [HomeNavigationRoutes.MyCourses]: undefined
+  [HomeNavigationRoutes.MySkills]: undefined
+  [HomeNavigationRoutes.CompletedCourses]: undefined
   [HomeNavigationRoutes.UserChallenges]: undefined
 }

@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- PascalCasing Colors enum keys
+- moving my cv views out of user credential modules
 
 10 Most Recent:
+- PascalCasing Colors enum keys
 - adding user skills 'credentials' to state
 - experience - save new/edited experience to backend
 - experience should correctly show all the user's entries
@@ -12,4 +13,3 @@ Latest:
 - add organisations data to state
 - add skills data to state
 - merging MyChallenges into UserChallenges
-- adding generic list component for CvCard/MyCV
