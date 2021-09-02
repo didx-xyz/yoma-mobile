@@ -7,7 +7,7 @@ const styles = {
     height: 40,
     padding: 0,
     borderBottomWidth: 1,
-    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
+    borderColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
 }
 

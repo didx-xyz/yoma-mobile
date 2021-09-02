@@ -8,7 +8,7 @@ import styles from './Background.styles'
 type Props = WithChildren<{
   color?: Colors
 }>
-const Background = ({ color = Colors.primaryYellow, children }: Props) => {
+const Background = ({ color = Colors.PrimaryYellow, children }: Props) => {
   const [style, setStyle] = useState<ViewStyle>(styles.container)
 
   useEffect(() => {

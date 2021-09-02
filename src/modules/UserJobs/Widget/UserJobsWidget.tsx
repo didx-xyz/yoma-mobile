@@ -17,7 +17,7 @@ const UserJobsWidget = ({ userJobs, navigation }: Props) => {
   return (
     <CvCard
       count={userJobs.ids.length}
-      badgeColor={Colors.secondaryPurple}
+      badgeColor={Colors.SecondaryPurple}
       title={t('Experience')}
       fallback={t('Where do you currently work?')}
       onEdit={() => {

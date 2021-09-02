@@ -18,7 +18,7 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
     <>
       <Text.Meta level={MetaLevels.small}>{values[name] !== '' ? label : ' '}</Text.Meta>
       <TextInput
-        placeholderTextColor={colors[Colors.menuGrey]}
+        placeholderTextColor={colors[Colors.MenuGrey]}
         placeholder={label}
         onSubmitEditing={Keyboard.dismiss}
         style={styles.textInput}
@@ -27,7 +27,7 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
         onBlur={handleBlur(name)}
         {...props}
       />
-      <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.right}>
         {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
     </>

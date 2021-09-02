@@ -4,7 +4,7 @@ import { Colors, colors } from 'styles'
 const styles = {
   inner: {
     flexDirection: 'row',
-    backgroundColor: colors[Colors.lightGrey],
+    backgroundColor: colors[Colors.LightGrey],
     borderRadius: 20,
     paddingHorizontal: 15,
     paddingVertical: 6,
@@ -12,7 +12,7 @@ const styles = {
     marginVertical: 10,
   } as ViewStyle,
   button: {
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     paddingHorizontal: 15,
     borderRadius: 25,
   } as ViewStyle,

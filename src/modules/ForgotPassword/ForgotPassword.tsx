@@ -27,7 +27,7 @@ const ForgotPassword = ({ navigation }: Props) => {
       <ScrollView>
         <LargeHeader
           navigation={navigation}
-          backgroundColor={Colors.secondaryPurple}
+          backgroundColor={Colors.SecondaryPurple}
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
@@ -38,7 +38,7 @@ const ForgotPassword = ({ navigation }: Props) => {
               <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeaderText}>
                 {t('forgotYourPassword')}?
               </Text.Header>
-              <Text.Body color={Colors.primaryDarkGrey} style={styles.bodyText}>
+              <Text.Body color={Colors.PrimaryDarkGrey} style={styles.bodyText}>
                 {t('forgotPasswordText')}
               </Text.Body>
               <ForgotPasswordForm setSubmitted={() => setEmailSent(true)} />
@@ -52,14 +52,14 @@ const ForgotPassword = ({ navigation }: Props) => {
             <View style={styles.logoContainer}>
               <Message />
             </View>
-            <Text.Body color={Colors.primaryDarkGrey} style={styles.bodyText}>
+            <Text.Body color={Colors.PrimaryDarkGrey} style={styles.bodyText}>
               {t('passwordSentText')}
             </Text.Body>
             <Button label={t('openEmail')} onPress={openInbox} />
             <Text.Header
               onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}
               level={HeaderLevels.h5}
-              color={Colors.primaryGreen}
+              color={Colors.PrimaryGreen}
               align={TextAlign.center}
               style={styles.skipButton}
             >

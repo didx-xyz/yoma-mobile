@@ -7,9 +7,9 @@ const styles = {
   textInput: {
     ...fontWeights.medium_500,
     fontSize: 14,
-    color: colors[Colors.fontBlue],
+    color: colors[Colors.FontBlue],
     borderBottomWidth: 1,
-    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
+    borderColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
     padding: 0,
     marginBottom: 3,
   } as ViewStyle,

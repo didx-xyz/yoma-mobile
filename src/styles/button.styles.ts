@@ -7,7 +7,7 @@ const { height, width } = Dimensions.get('window')
 
 const ButtonStyles = {
   mediumTertiary3Button: {
-    backgroundColor: colors[Colors.primaryGreen],
+    backgroundColor: colors[Colors.PrimaryGreen],
     height: height / 13,
     alignItems: 'center',
     justifyContent: 'center',
@@ -20,7 +20,7 @@ const ButtonStyles = {
     justifyContent: 'center',
   } as ViewStyle,
   largeTertiary3Button: {
-    backgroundColor: colors[Colors.primaryGreen],
+    backgroundColor: colors[Colors.PrimaryGreen],
     height: height / 13,
     alignItems: 'center',
     justifyContent: 'center',
@@ -37,7 +37,7 @@ const ButtonStyles = {
     flexDirection: 'row',
   } as ViewStyle,
   googleButton: {
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     height: height / 13,
     alignItems: 'center',
     justifyContent: 'space-evenly',

@@ -25,7 +25,7 @@ const Register = ({ navigation, onAuthWithSocial }: Props) => {
     <ViewContainer style={styles.container}>
       <LargeHeader
         navigation={navigation}
-        backgroundColor={Colors.primaryYellow}
+        backgroundColor={Colors.PrimaryYellow}
         circleImage={<PurpleQuarter />}
         circleImageStyle={styles.purpleSemiCircleContainer}
       />

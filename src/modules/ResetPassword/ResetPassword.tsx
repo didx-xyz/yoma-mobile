@@ -33,7 +33,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
       <ScrollView contentContainerStyle={styles.container}>
         <LargeHeader
           navigation={navigation}
-          backgroundColor={Colors.primaryYellow}
+          backgroundColor={Colors.PrimaryYellow}
           circleImage={<PurpleQuarter />}
           circleImageStyle={styles.purpleSemiCircleContainer}
         />
@@ -41,7 +41,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
           <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeader}>
             {t('createNewPassword')}
           </Text.Header>
-          <Text.Body color={Colors.primaryDarkGrey} style={styles.bodyText}>
+          <Text.Body color={Colors.PrimaryDarkGrey} style={styles.bodyText}>
             {t('resetPasswordBody1')}
             <Bold>{t('resetPasswordBody2')}</Bold>
             {t('resetPasswordBody3')}

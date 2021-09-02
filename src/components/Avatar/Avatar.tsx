@@ -12,7 +12,7 @@ interface AvatarFallbackProps {
 }
 const AvatarFallback = ({ char }: AvatarFallbackProps) => (
   <View style={styles.avatarFallbackContainer}>
-    <Text.Header level={HeaderLevels.h3} color={Colors.primaryDarkGrey}>
+    <Text.Header level={HeaderLevels.h3} color={Colors.PrimaryDarkGrey}>
       {char[0]}
     </Text.Header>
   </View>

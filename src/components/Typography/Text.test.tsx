@@ -26,14 +26,14 @@ describe('Text', () => {
   it('should correctly fallback to the default presets for color, textAlign and fontWeight if none is set', () => {
     const { getByTestId } = render(<Text>Tester</Text>)
     const foundTextElement = getByTestId('text')
-    expect(foundTextElement.props.style.color).toBe(colors[Colors.primaryPurple])
+    expect(foundTextElement.props.style.color).toBe(colors[Colors.PrimaryPurple])
     expect(foundTextElement.props.style.textAlign).toBe(TextAlign.left)
     expect(foundTextElement.props.style.fontWeight).toBe('500')
   })
   it('should correctly set the text color given with the color prop', () => {
-    const { getByTestId } = render(<Text color={Colors.primaryYellow}>Tester</Text>)
+    const { getByTestId } = render(<Text color={Colors.PrimaryYellow}>Tester</Text>)
     const foundTextElement = getByTestId('text')
-    expect(foundTextElement.props.style.color).toBe(colors[Colors.primaryYellow])
+    expect(foundTextElement.props.style.color).toBe(colors[Colors.PrimaryYellow])
   })
 
   it('should correctly set the text align given with the align prop', () => {

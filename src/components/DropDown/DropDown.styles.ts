@@ -7,7 +7,7 @@ import { fontWeights } from '../Typography/fontWeights.styles'
 const baseTextStyle = {
   ...fontWeights.medium_500,
   fontSize: 14,
-  color: colors[Colors.fontBlue],
+  color: colors[Colors.FontBlue],
 } as TextStyle
 
 const styles = {
@@ -17,7 +17,7 @@ const styles = {
     borderWidth: 0,
     borderBottomWidth: 1,
     borderRadius: 0,
-    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
+    borderColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
   dropDownView: {
     height: 180,
@@ -29,14 +29,14 @@ const styles = {
     ...baseTextStyle,
   } as TextStyle,
   searchContainer: {
-    borderBottomColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
+    borderBottomColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
   search: {
     ...baseTextStyle,
     borderWidth: 0,
   } as TextStyle,
   placeholder: {
-    color: colors[Colors.menuGrey],
+    color: colors[Colors.MenuGrey],
   } as ViewStyle,
 }
 

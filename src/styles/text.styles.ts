@@ -10,10 +10,10 @@ const TextStyles = {
     fontFamily: fontStyles[FontFamily.medium],
   } as TextStyle,
   textTertiary5: {
-    color: colors[Colors.primaryDarkGrey],
+    color: colors[Colors.PrimaryDarkGrey],
   },
   textTertiary3: {
-    color: colors[Colors.primaryGreen],
+    color: colors[Colors.PrimaryGreen],
   },
 }
 

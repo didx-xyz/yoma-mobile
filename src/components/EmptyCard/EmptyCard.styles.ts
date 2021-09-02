@@ -3,7 +3,7 @@ import { colors, Colors } from 'styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     borderRadius: 12,
     elevation: 3,
     margin: 10,

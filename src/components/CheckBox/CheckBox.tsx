@@ -31,7 +31,7 @@ const CheckBox = ({ label, isChecked, onPress }: Props) => {
           <BlueTick />
         </Optional>
       </View>
-      <Text.Body color={Colors.menuGrey}>{label}</Text.Body>
+      <Text.Body color={Colors.MenuGrey}>{label}</Text.Body>
     </Pressable>
   )
 }

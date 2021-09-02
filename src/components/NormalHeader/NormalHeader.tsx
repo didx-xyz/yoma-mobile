@@ -35,7 +35,7 @@ const NormalHeader = ({
       <TouchableOpacity onPress={navigation.goBack}>
         <BackIconGrey />
       </TouchableOpacity>
-      <Text.Header level={HeaderLevels.h5} color={Colors.primaryPurple}>
+      <Text.Header level={HeaderLevels.h5} color={Colors.PrimaryPurple}>
         {headerText}
       </Text.Header>
       <Optional
@@ -45,7 +45,7 @@ const NormalHeader = ({
             isDisabled={!isSaveButtonEnabled}
             variant={ButtonVariants.Clear}
             label={t('Save')}
-            color={Colors.primaryGreen}
+            color={Colors.PrimaryGreen}
             onPress={onSave}
             style={styles.button}
             isFullWidth={false}
@@ -55,7 +55,7 @@ const NormalHeader = ({
         <Button
           variant={ButtonVariants.Clear}
           label={t('Add')}
-          color={Colors.primaryGreen}
+          color={Colors.PrimaryGreen}
           onPress={onAdd!}
           style={styles.addButton}
           isFullWidth={false}

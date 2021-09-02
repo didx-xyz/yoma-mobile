@@ -10,37 +10,37 @@ const styles: Record<HeaderLevels, TextStyle> = {
     fontSize: 35,
     lineHeight: 40,
     letterSpacing: 0.02,
-    color: colors[Colors.primaryPurple],
+    color: colors[Colors.PrimaryPurple],
   } as TextStyle,
   [HeaderLevels.h2]: {
     ...fontWeights.semiBold_600,
     fontSize: 25,
     lineHeight: 29,
-    color: colors[Colors.primaryPurple],
+    color: colors[Colors.PrimaryPurple],
   } as TextStyle,
   [HeaderLevels.h3]: {
     ...fontWeights.semiBold_600,
     fontSize: 21,
     lineHeight: 23,
-    color: colors[Colors.primaryPurple],
+    color: colors[Colors.PrimaryPurple],
   } as TextStyle,
   [HeaderLevels.h4]: {
     ...fontWeights.semiBold_600,
     fontSize: 18,
     lineHeight: 21,
-    color: colors[Colors.primaryPurple],
+    color: colors[Colors.PrimaryPurple],
   } as TextStyle,
   [HeaderLevels.h5]: {
     ...fontWeights.semiBold_600,
     fontSize: 16,
     lineHeight: 17,
-    color: colors[Colors.primaryDarkGrey],
+    color: colors[Colors.PrimaryDarkGrey],
   } as TextStyle,
   [HeaderLevels.h6]: {
     ...fontWeights.semiBold_600,
     fontSize: 14,
     lineHeight: 18,
-    color: colors[Colors.primaryPurple],
+    color: colors[Colors.PrimaryPurple],
   } as TextStyle,
 }
 

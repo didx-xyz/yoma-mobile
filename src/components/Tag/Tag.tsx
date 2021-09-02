@@ -18,7 +18,7 @@ const Tag = ({ tag, onDeleteTag }: Props) => {
       <View style={styles.crossIcon}>
         <CrossIcon height={ICON_SIZE} width={ICON_SIZE} />
       </View>
-      <Text.Body color={Colors.primaryBlue}>{tag}</Text.Body>
+      <Text.Body color={Colors.PrimaryBlue}>{tag}</Text.Body>
     </TouchableOpacity>
   )
 }

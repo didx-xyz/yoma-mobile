@@ -18,7 +18,7 @@ const ViewContainer = ({
   children,
   statusBarStyle = StatusBarStyle.darkContent,
   statusHidden = false,
-  backgroundColor = Colors.white,
+  backgroundColor = Colors.White,
   style,
   ...statusBarProps
 }: Props) => {

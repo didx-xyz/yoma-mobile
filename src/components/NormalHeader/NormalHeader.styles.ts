@@ -4,7 +4,7 @@ import { colors, Colors } from '../../styles'
 
 const dropShadow = {
   elevation: 3,
-  shadowColor: colors[Colors.black],
+  shadowColor: colors[Colors.Black],
   shadowOffset: {
     width: 0,
     height: 1,
@@ -17,7 +17,7 @@ const styles = {
   container: {
     ...dropShadow,
     height: 50,
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
@@ -35,7 +35,7 @@ const styles = {
   } as ViewStyle,
   addIcon: {
     ...dropShadow,
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     marginLeft: 10,
     borderRadius: 10,
     position: 'absolute',

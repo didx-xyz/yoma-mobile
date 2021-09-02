@@ -91,7 +91,7 @@ const EducationForm = forwardRef(({ changeButtonState }: Props, ref) => {
           <View style={styles.bottom}>
             <Text.Meta
               level={MetaLevels.smallBold}
-              color={Colors.primaryGreen}
+              color={Colors.PrimaryGreen}
               style={styles.bottomText}
               onPress={() => setShowInfoModal(true)}
             >
