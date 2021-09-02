@@ -57,10 +57,10 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
       const action = fetchUserSkillsSuccess(mockResponseData)
       // @ts-ignore
       const { invoke, next, store } = create(SUT.fetchUserSkillsSuccessFlow)
-      // when ... we respond to the createUserSkillSuccess action
+      // when ... we respond to the fetchUserSkillsSuccess action
       invoke(action)
 
-      // then ...validate createUserSkillSuccessFlow
+      // then ...normalise the data and set it in state
       expect(store.dispatch).toHaveBeenCalledWith(
         setUserSkills({
           ids: ['Skill'],
@@ -85,12 +85,12 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
       const mockNotification = jest.fn()
       // @ts-ignore
 
-      // when ... we respond to the createUserSkillFailure action
+      // when ... we respond to the fetchUserSkillsFailureFlow action
       const action = fetchUserSkillsFailure('FAILED')
       const { invoke, next } = create(SUT.fetchUserSkillsFailureFlow({ notification: mockNotification }))
       invoke(action)
 
-      // then ...validate failure
+      // then ...notify with a notification of failure
       expect(mockNotification).toHaveBeenCalled()
       expect(next).toHaveBeenCalledWith(action)
     })
