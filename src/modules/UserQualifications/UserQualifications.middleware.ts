@@ -13,7 +13,7 @@ import { NormalisedUserQualifications, UserQualification } from './UserQualifica
 export const getUserQualificationsFromCredentialsFlow =
   (
     extractDataFromPayload: StdFn<any, UserCredentials>,
-    extractChallenges: StdFn<UserCredentials, UserQualification[]>,
+    extractQualifications: StdFn<UserCredentials, UserQualification[]>,
   ): Middleware =>
   ({ dispatch }) =>
   next =>
@@ -21,8 +21,8 @@ export const getUserQualificationsFromCredentialsFlow =
     const result = next(action)
     if (UserActions.fetchUserCredentialsSuccess.match(action)) {
       const data = extractDataFromPayload(action)
-      const challenges = extractChallenges(data)
-      dispatch(getUserQualificationsSuccess(challenges))
+      const qualifications = extractQualifications(data)
+      dispatch(getUserQualificationsSuccess(qualifications))
     }
     return result
   }

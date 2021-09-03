@@ -1,4 +1,4 @@
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserQualifications.middleware'
 import {
@@ -9,58 +9,41 @@ import {
 
 describe('modules/UserQualifications/UserQualifications.middleware', () => {
   describe('getUserQualificationsFromCredentialsFlow', () => {
-    it('should correctly handle being called', () => {
-      // given ...
-      const create = createMiddlewareStub(jest)
-      const credentialsResponseMock = ['challenge1', 'job1', 'assignment1', 'challenge2']
-      const extractDataFromPayloadMock = jest.fn()
-      const extractChallengesMock = jest.fn()
-      const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
-
-      // when ...
-      const { invoke, next } = create(
-        SUT.getUserQualificationsFromCredentialsFlow(extractDataFromPayloadMock, extractChallengesMock),
-      )
-      invoke(action)
-
-      // then ...
-      expect(extractChallengesMock).toHaveBeenCalled()
-      expect(next).toHaveBeenCalledWith(action)
-    })
-    it(' should intercept the credentials data and pass on the correct challenges data', () => {
+    it(' should intercept the credentials data and pass on the correct qualifications data', () => {
       // given ...credential data in an action payload
-      const create = createMiddlewareStub(jest)
-      const credentialsResponseMock = ['challenge1', 'job1', 'assignment1', 'challenge2']
-      const challengeCredentialsMock = ['challenge1', 'challenge2']
+      const create = createMiddlewareMock(jest)
+      const credentialsResponseMock = ['qualification1', 'job1', 'assignment1', 'qualification2']
+      const qualificationCredentialsMock = ['qualification1', 'qualification2']
       const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
 
-      // when ... we intercept the data and extract challenges
+      // when ... we intercept the data and extract qualifications
       const extractDataFromPayloadMock = jest.fn()
-      const extractChallengesMock = jest.fn(() => challengeCredentialsMock)
-      const { invoke, store } = create(
+      const extractQualificationsMock = jest.fn(() => qualificationCredentialsMock)
+      const { invoke, store, next } = create(
         // @ts-ignore - actual shape of data doesn't matter
-        SUT.getUserQualificationsFromCredentialsFlow(extractDataFromPayloadMock, extractChallengesMock),
+        SUT.getUserQualificationsFromCredentialsFlow(extractDataFromPayloadMock, extractQualificationsMock),
       )
       invoke(action)
 
       // then ... we should pass on the extracted data
-      expect(extractChallengesMock).toHaveBeenCalled()
+      expect(extractQualificationsMock).toHaveBeenCalled()
       // @ts-ignore - actual shape of data doesn't matter
-      expect(store.dispatch).toHaveBeenCalledWith(getUserQualificationsSuccess(challengeCredentialsMock))
+      expect(store.dispatch).toHaveBeenCalledWith(getUserQualificationsSuccess(qualificationCredentialsMock))
+      expect(next).toHaveBeenCalledWith(action)
     })
   })
   describe('normaliseUserQualificationsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
-      const challengeCredentialsMock = [{ id1: 'challenge1' }, { id2: 'challenge2' }]
-      const normalisedChallengesMock = {
+      const create = createMiddlewareMock(jest)
+      const qualificationCredentialsMock = [{ id1: 'qualification1' }, { id2: 'qualification2' }]
+      const normalisedQualificationsMock = {
         ids: ['id1', 'id2'],
-        entries: { id1: 'challenge 1', id2: 'challenge 2' },
+        entries: { id1: 'qualification 1', id2: 'qualification 2' },
       }
-      const normaliseMock = jest.fn(() => normalisedChallengesMock)
+      const normaliseMock = jest.fn(() => normalisedQualificationsMock)
       // @ts-ignore - data shape doesn't matter for test
-      const action = getUserQualificationsSuccess(challengeCredentialsMock)
+      const action = getUserQualificationsSuccess(qualificationCredentialsMock)
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
@@ -71,17 +54,17 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       expect(store.dispatch).toHaveBeenCalled()
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should normalise and forward the challenge credentials', () => {
+    it('should normalise and forward the qualification credentials', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
-      const challengeCredentialsMock = [{ id1: 'challenge1' }, { id2: 'challenge2' }]
-      const normalisedChallengesMock = {
+      const create = createMiddlewareMock(jest)
+      const qualificationCredentialsMock = [{ id1: 'qualification1' }, { id2: 'qualification2' }]
+      const normalisedQualificationsMock = {
         ids: ['id1', 'id2'],
-        entries: { id1: 'challenge 1', id2: 'challenge 2' },
+        entries: { id1: 'qualification 1', id2: 'qualification 2' },
       }
-      const normaliseMock = jest.fn(() => normalisedChallengesMock)
+      const normaliseMock = jest.fn(() => normalisedQualificationsMock)
       // @ts-ignore - data shape doesn't matter for test
-      const action = getUserQualificationsSuccess(challengeCredentialsMock)
+      const action = getUserQualificationsSuccess(qualificationCredentialsMock)
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
@@ -90,17 +73,17 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
 
       // then ...
       // @ts-ignore - data shape doesn't matter for test
-      expect(store.dispatch).toHaveBeenCalledWith(normaliseUserQualificationsSuccess(normalisedChallengesMock))
+      expect(store.dispatch).toHaveBeenCalledWith(normaliseUserQualificationsSuccess(normalisedQualificationsMock))
     })
   })
   describe('setUserQualificationsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
-      const normalisedChallengesMock = 'NORMALISED CHALLENGES DATA'
+      const normalisedQualificationsMock = 'NORMALISED CHALLENGES DATA'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = normaliseUserQualificationsSuccess(normalisedChallengesMock)
+      const action = normaliseUserQualificationsSuccess(normalisedQualificationsMock)
 
       // when ...
       const { invoke, store, next } = create(SUT.setUserQualificationsFlow)
@@ -110,14 +93,14 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       expect(store.dispatch).toHaveBeenCalled()
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should set the normalised challenge data', () => {
+    it('should set the normalised qualification data', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       const action = normaliseUserQualificationsSuccess('NORMALISED CHALLENGES DATA')
 
-      // when ... we have challenges data to store in state
+      // when ... we have qualifications data to store in state
       const { invoke, store } = create(SUT.setUserQualificationsFlow)
       invoke(action)
 
