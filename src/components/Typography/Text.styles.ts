@@ -6,9 +6,9 @@ import { fontWeights } from './fontWeights.styles'
 
 const styles = {
   base: {
-    textAlign: TextAlign.left,
+    textAlign: TextAlign.Left,
     color: colors.primaryPurple,
-    ...fontWeights.medium_500,
+    ...fontWeights.Medium500,
   } as TextStyle,
 }
 export default StyleSheet.create(styles)

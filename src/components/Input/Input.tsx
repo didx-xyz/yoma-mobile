@@ -27,7 +27,7 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
         onBlur={handleBlur(name)}
         {...props}
       />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.right}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
         {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
     </>

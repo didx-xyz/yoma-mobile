@@ -31,12 +31,12 @@ const RegisterWithEmail = ({ navigation, onRegisterUser }: Props) => {
           circleImageStyle={styles.yellowCircleContainer}
         />
         <Card style={styles.card}>
-          <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.registerText}>
+          <Text.Header level={HeaderLevels.h3} align={TextAlign.Center} style={styles.registerText}>
             {t('register')}
           </Text.Header>
           <RegisterForm onRegisterUser={onRegisterUser} />
         </Card>
-        <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.notice}>
+        <Text.Body level={BodyLevels.small} align={TextAlign.Center} style={styles.notice}>
           {t('alreadyHaveAccount')}&nbsp;
           <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}>{t('login')}.</Link>
         </Text.Body>

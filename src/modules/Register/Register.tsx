@@ -30,7 +30,7 @@ const Register = ({ navigation, onAuthWithSocial }: Props) => {
         circleImageStyle={styles.purpleSemiCircleContainer}
       />
       <Card style={styles.card}>
-        <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.welcomeText}>
+        <Text.Header level={HeaderLevels.h3} align={TextAlign.Center} style={styles.welcomeText}>
           {t('welcome')}
         </Text.Header>
         <Button
@@ -48,7 +48,7 @@ const Register = ({ navigation, onAuthWithSocial }: Props) => {
         </Text.Body>
         <SSO onAuthWithSocial={onAuthWithSocial} />
       </Card>
-      <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.bottomText}>
+      <Text.Body level={BodyLevels.small} align={TextAlign.Center} style={styles.bottomText}>
         {t('alreadyHaveAccount')}&nbsp;
         <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}>{t('login')}.</Link>
       </Text.Body>

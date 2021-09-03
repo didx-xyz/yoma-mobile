@@ -26,7 +26,7 @@ const CustomInput = ({ label, isTouched, error, showTitle = true, ...props }: In
         style={styles.textInput}
         {...props}
       />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.center}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Center}>
         {isTouched && error}
       </Text.Meta>
     </View>

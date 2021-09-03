@@ -31,7 +31,7 @@ const CvCard = ({ title, fallback, count, badgeColor = Colors.White, onEdit, chi
     <View style={styles.content}>
       <Optional
         condition={shouldShowContent(count, children)}
-        fallback={<Text.Body align={TextAlign.center}>{fallback}</Text.Body>}
+        fallback={<Text.Body align={TextAlign.Center}>{fallback}</Text.Body>}
       >
         {children}
       </Optional>

@@ -4,7 +4,7 @@ import { colors, Colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 const baseTextStyle = {
-  ...fontWeights.medium_500,
+  ...fontWeights.Medium500,
   fontSize: 14,
   color: colors[Colors.FontBlue],
 } as TextStyle

@@ -37,7 +37,7 @@ const FirstTimeCard = () => {
       <View style={styles.progressBar}>
         <View style={styles.innerProgressbar} />
       </View>
-      <Text.Header level={HeaderLevels.h6} weight={FontWeights.bold_700} style={styles.percentText}>
+      <Text.Header level={HeaderLevels.h6} weight={FontWeights.Bold700} style={styles.percentText}>
         {t('1% complete')}
       </Text.Header>
       <Button label={t('Let’s do it')} onPress={() => {}} size={ButtonSizes.Slim} />

@@ -5,7 +5,7 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 import { fontWeights } from '../Typography/fontWeights.styles'
 
 const baseTextStyle = {
-  ...fontWeights.medium_500,
+  ...fontWeights.Medium500,
   fontSize: 14,
   color: colors[Colors.FontBlue],
 } as TextStyle
