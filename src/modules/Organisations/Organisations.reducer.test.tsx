@@ -1,4 +1,4 @@
-import SUT, { clearOrganisations, INITIAL_STATE, setOrganisations } from './Organisations.reducer'
+import SUT, { INITIAL_STATE, clearOrganisations, setOrganisations } from './Organisations.reducer'
 
 describe('modules/Organisations/Organisations.reducer', () => {
   describe('setOrganisations', () => {

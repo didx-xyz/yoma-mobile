@@ -6,6 +6,7 @@ import * as OrganisationsActions from '../Organisations/Organisations.reducer'
 import * as SkillsActions from '../Skills/Skills.reducer'
 import * as UserActions from '../User/User.reducer'
 import * as UserChallengesActions from '../UserChallenges/UserChallenges.reducer'
+import * as UserQualificationsActions from '../UserQualifications/UserQualifications.reducer'
 import * as UserSkillsActions from '../UserSkills/UserSkills.reducer'
 import { hydrateApp, resetAppData } from './App.reducer'
 
@@ -20,6 +21,7 @@ export const appResetFlow: Middleware =
       dispatch(UserActions.clearUser())
       dispatch(UserChallengesActions.clearUserChallenges())
       dispatch(UserSkillsActions.clearUserSkills())
+      dispatch(UserQualificationsActions.clearUserQualifications())
     }
 
     return result

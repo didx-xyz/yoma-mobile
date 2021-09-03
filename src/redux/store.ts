@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 import { configureStore } from '@reduxjs/toolkit'
-import { REHYDRATE, FLUSH, PAUSE, PERSIST, persistReducer, persistStore, REGISTER } from 'redux-persist'
+import { FLUSH, PAUSE, PERSIST, REGISTER, REHYDRATE, persistReducer, persistStore } from 'redux-persist'
 
 import { actions as ApiActions } from '../api'
 import { actions as UserActions } from '../modules/User'

@@ -1,7 +1,7 @@
 import { EditIcon, ProfileIcon } from 'assets/images'
 import React from 'react'
 import { GestureResponderEvent, Image, TouchableOpacity, View, ViewStyle } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 
 import { CIRCULAR_RADIUS_DIVISOR } from '../../styles/styles.constants'
 import Optional from '../Optional'

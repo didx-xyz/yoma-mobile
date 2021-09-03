@@ -1,8 +1,8 @@
-import { StyleSheet, ViewStyle, TextStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
-import { colors, Colors } from '../../styles'
+import { Colors, colors } from '../../styles'
 
 const PROFILE_IMAGE_SIZE = 27
 

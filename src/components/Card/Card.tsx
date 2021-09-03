@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 import { WithChildren } from 'types/react.types'
 
 import styles from './Card.styles'

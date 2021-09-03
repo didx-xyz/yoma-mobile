@@ -1,10 +1,11 @@
 Ver 0.0.1
 Latest:
-- refactor: renaming createMiddlewareStub
+-adding user qualifications to state
 
 10 Most Recent:
-- refactor - pascal casing all type enums
+- refactor: renaming createMiddlewareStub
 - moving my cv views out of user credential modules
+- refactor - pascal casing all type enums
 - PascalCasing Colors enum keys
 - adding user skills 'credentials' to state
 - experience - save new/edited experience to backend
@@ -12,4 +13,3 @@ Latest:
 - adding real data to UserChallenges widget in MyCv
 - updating UserChallenges widget component
 - adding selector for MyCV title bar
-- add organisations data to state

@@ -1,4 +1,4 @@
-import { showMessage, MessageOptions, MessageType } from 'react-native-flash-message'
+import { MessageOptions, MessageType, showMessage } from 'react-native-flash-message'
 
 export const showSimpleMessage = (
   type: MessageType = 'default',

@@ -1,6 +1,6 @@
-import SUT, { setUserChallenges, INITIAL_STATE, clearUserChallenges } from './UserChallenges.reducer'
+import SUT, { INITIAL_STATE, clearUserChallenges, setUserChallenges } from './UserChallenges.reducer'
 
-describe('src/modules/User/Challenges/Challenges.redux', () => {
+describe('modules/UserChallenges/Challenges.redux', () => {
   describe('setUserChallenges', () => {
     it('should correctly add the challenges credentials', () => {
       // given ...an initial state

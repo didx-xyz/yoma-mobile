@@ -1,7 +1,7 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
-import { colors, Colors } from '../../styles'
+import { Colors, colors } from '../../styles'
 
 const styles = {
   container: {
