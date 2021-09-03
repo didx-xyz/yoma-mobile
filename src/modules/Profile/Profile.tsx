@@ -66,7 +66,7 @@ const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }:
         </Card>
         <Button
           variant={ButtonVariants.Clear}
-          color={Colors.menuGrey}
+          color={Colors.MenuGrey}
           label={t('Log Out')}
           onPress={onLogoutUser}
           style={styles.logout}

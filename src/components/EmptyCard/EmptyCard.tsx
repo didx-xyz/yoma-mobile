@@ -18,7 +18,7 @@ const EmptyCard = ({ title, onAdd }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
-      <Background color={Colors.white}>
+      <Background color={Colors.White}>
         <View style={styles.yellowCircle}>
           <YellowBottomLeftCircle />
         </View>
@@ -26,7 +26,7 @@ const EmptyCard = ({ title, onAdd }: Props) => {
           <PurpleTopRightCircle />
         </View>
       </Background>
-      <Text.Body style={styles.text} color={Colors.primaryDarkGrey} align={TextAlign.center}>
+      <Text.Body style={styles.text} color={Colors.PrimaryDarkGrey} align={TextAlign.center}>
         {title}
       </Text.Body>
       <Button size={ButtonSizes.Slim} label={t('Add')} onPress={onAdd} style={styles.button} />

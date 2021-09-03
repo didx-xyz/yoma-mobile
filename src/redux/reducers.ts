@@ -7,6 +7,7 @@ import { reducer as skills } from '../modules/Skills'
 import { reducer as user } from '../modules/User'
 import { reducer as userChallenges } from '../modules/UserChallenges'
 import { reducer as userJobs } from '../modules/UserJobs'
+import { reducer as userSkills } from '../modules/UserSkills'
 
 const rootReducer = combineReducers({
   auth,
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   skills,
   user,
   jobs,
+  userSkills,
   userJobs,
   userChallenges,
 })

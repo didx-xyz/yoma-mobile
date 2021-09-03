@@ -32,7 +32,7 @@ const HomeHeader = ({ navigation, profileImageUrl, profileProgressPercentage = 0
       <TouchableOpacity style={styles.tokensView}>
         <ZIcon />
         <Text.Body style={styles.tokenAmount}>
-          <Bold color={Colors.primaryYellow}>{zltoBalance}</Bold>
+          <Bold color={Colors.PrimaryYellow}>{zltoBalance}</Bold>
         </Text.Body>
       </TouchableOpacity>
     </View>

@@ -8,7 +8,7 @@ const PROFILE_IMAGE_SIZE = 70
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.backgroundGrey],
+    backgroundColor: colors[Colors.BackgroundGrey],
   } as ViewStyle,
   card: {
     paddingVertical: 24,
@@ -30,7 +30,7 @@ const styles = {
   } as ImageStyle,
   editIcon: {
     elevation: 3,
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     borderRadius: 15,
     position: 'absolute',
     right: 0,

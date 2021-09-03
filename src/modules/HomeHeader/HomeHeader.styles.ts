@@ -9,14 +9,14 @@ const PROFILE_IMAGE_SIZE = 27
 const styles = {
   container: {
     height: 50,
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',
     paddingHorizontal: 13,
     elevation: 3,
-    shadowColor: colors[Colors.black],
+    shadowColor: colors[Colors.Black],
     shadowOffset: {
       width: 0,
       height: 1,
@@ -25,7 +25,7 @@ const styles = {
     shadowRadius: 2.22,
   } as ViewStyle,
   profileContainer: {
-    backgroundColor: colors[Colors.backgroundGrey],
+    backgroundColor: colors[Colors.BackgroundGrey],
     borderRadius: PROFILE_IMAGE_SIZE / CIRCULAR_RADIUS_DIVISOR,
     height: PROFILE_IMAGE_SIZE,
     width: PROFILE_IMAGE_SIZE,
@@ -33,7 +33,7 @@ const styles = {
     justifyContent: 'center',
   } as ViewStyle,
   tokensView: {
-    backgroundColor: applyAlphaToHex(colors[Colors.primaryYellow])(0.15),
+    backgroundColor: applyAlphaToHex(colors[Colors.PrimaryYellow])(0.15),
     flexDirection: 'row',
     alignItems: 'center',
     paddingVertical: 2,

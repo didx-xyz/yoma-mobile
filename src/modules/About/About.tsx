@@ -47,7 +47,7 @@ const About = ({ navigation, onBiographySave, biography }: Props) => {
             returnKeyType="done"
           />
           <View style={styles.bottom}>
-            <Text.Meta level={MetaLevels.smallBold} color={Colors.primaryGreen} onPress={() => setInfoModal(true)}>
+            <Text.Meta level={MetaLevels.smallBold} color={Colors.PrimaryGreen} onPress={() => setInfoModal(true)}>
               {t('Find inspiration on how to write a great education description.')}
             </Text.Meta>
           </View>

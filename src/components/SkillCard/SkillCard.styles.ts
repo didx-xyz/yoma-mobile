@@ -6,7 +6,7 @@ const styles = {
     paddingVertical: 15,
     paddingHorizontal: 5,
     borderTopWidth: 1,
-    borderColor: colors[Colors.lightGrey],
+    borderColor: colors[Colors.LightGrey],
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

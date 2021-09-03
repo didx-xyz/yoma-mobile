@@ -3,6 +3,9 @@ Latest:
 - getting app into playstore with changelog
 
 10 Most Recent:
+- moving my cv views out of user credential modules
+- PascalCasing Colors enum keys
+- adding user skills 'credentials' to state
 - experience - save new/edited experience to backend
 - experience should correctly show all the user's entries
 - adding real data to UserChallenges widget in MyCv
@@ -10,6 +13,3 @@ Latest:
 - adding selector for MyCV title bar
 - add organisations data to state
 - add skills data to state
-- merging MyChallenges into UserChallenges
-- adding generic list component for CvCard/MyCV
-- added jobs and user jobs to state

@@ -8,11 +8,11 @@ const styles = {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: applyAlphaToHex(colors[Colors.black])(0.57),
+    backgroundColor: applyAlphaToHex(colors[Colors.Black])(0.57),
   } as ViewStyle,
   innerContainer: {
     margin: 10,
-    backgroundColor: colors[Colors.white],
+    backgroundColor: colors[Colors.White],
     borderRadius: 20,
     padding: 20,
     alignItems: 'center',

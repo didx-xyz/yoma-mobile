@@ -25,6 +25,24 @@ describe('modules/UserJobs/UserJobs.selector', () => {
       expect(result).toEqual(state.userJobs)
     })
   })
+  describe('selectFormValues ', () => {
+    it('should return formValues object from the userJobs state', () => {
+      const userJobsStateMock = {
+        ids: 'IDS',
+        entities: 'ENTITIES_DATA',
+        formValues: 'FORM_VALUES',
+      }
+
+      const mockState = rootStateFixture({
+        userJobs: userJobsStateMock,
+      })
+      // when ... we call the selector
+      const result = SUT.selectFormValues(mockState)
+
+      // then ... should return result as expected
+      expect(result).toEqual('FORM_VALUES')
+    })
+  })
   describe('selectUserJobItems', () => {
     it('should return userJobsItems from userJobs state', () => {
       const stateMock = rootStateFixture({
@@ -35,10 +53,10 @@ describe('modules/UserJobs/UserJobs.selector', () => {
       })
       // when ... we call the selector
       // @ts-ignore
-      const result = SUT.default(stateMock)
+      const result = SUT.selectUserJobItems(stateMock)
 
       // then ... should return result as expected
-      expect(result.userJobs).toEqual([
+      expect(result).toEqual([
         {
           job: {
             id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
@@ -62,65 +80,6 @@ describe('modules/UserJobs/UserJobs.selector', () => {
           endDate: '2021-08-02T10:32:47.330Z',
         },
       ])
-    })
-    it('should return an empty array by default', () => {
-      const stateMock = rootStateFixture({
-        userJobs: {
-          ids: [],
-          entities: {},
-        },
-      })
-      // when ... we call the selector
-      // @ts-ignore
-      const result = SUT.default(stateMock)
-
-      // then ... should return result as expected
-      expect(result.userJobs).toEqual([])
-    })
-  })
-  describe('selectFormValues ', () => {
-    it('should return formValues object from the userJobs state', () => {
-      const userJobsStateMock = {
-        ids: 'IDS',
-        entities: 'ENTITIES_DATA',
-        formValues: 'FORM_VALUES',
-      }
-
-      const mockState = rootStateFixture({
-        userJobs: userJobsStateMock,
-      })
-      // when ... we call the selector
-      const result = SUT.selectFormValues(mockState)
-
-      // then ... should return result as expected
-      expect(result).toEqual('FORM_VALUES')
-    })
-  })
-  describe('selector', () => {
-    it('should return userJobs, skills and organisations lists', () => {
-      const mockState = rootStateFixture({
-        userJobs: {
-          ids: ['id1'],
-          entities: { id1: { job: 'Job Data', startDate: 'Start Data', endDate: 'End Date' } },
-        },
-        skills: {
-          ids: ['key1'],
-          entities: { key1: { key: 'key1', value: 'skill' } },
-        },
-        organisations: {
-          ids: ['key1'],
-          entities: { key1: { key: 'key1', value: 'organisation' } },
-        },
-      })
-      // when ... we call the selector
-      const result = SUT.default(mockState)
-
-      // then ... should return result as expected
-      expect(result).toEqual({
-        userJobs: [{ job: 'Job Data', startDate: 'Start Data', endDate: 'End Date' }],
-        organisations: [{ label: 'organisation', value: 'key1' }],
-        skills: [{ label: 'skill', value: 'skill' }],
-      })
     })
   })
 })

@@ -26,7 +26,7 @@ const RegisterWithEmail = ({ navigation, onRegisterUser }: Props) => {
       <ScrollView>
         <LargeHeader
           navigation={navigation}
-          backgroundColor={Colors.secondaryPurple}
+          backgroundColor={Colors.SecondaryPurple}
           circleImage={<YellowCircleRight />}
           circleImageStyle={styles.yellowCircleContainer}
         />

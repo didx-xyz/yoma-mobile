@@ -32,7 +32,7 @@ const Button = ({
   children,
 }: Props) => {
   const [buttonStyle, setButtonStyle] = useState<ViewStyle>(styles[ButtonVariants.Primary])
-  const [labelColor, setLabelColor] = useState<Colors>(Colors.white)
+  const [labelColor, setLabelColor] = useState<Colors>(Colors.White)
 
   useEffect(() => {
     const variantStyle = styles[variant]
@@ -45,7 +45,7 @@ const Button = ({
   useEffect(() => {
     const defaultVariantColor = MAP_VARIANT_TO_LABEL_COLOR[variant]
     const labelVariantColor = color || defaultVariantColor
-    setLabelColor(isDisabled ? Colors.menuGrey : labelVariantColor)
+    setLabelColor(isDisabled ? Colors.MenuGrey : labelVariantColor)
   }, [variant, color, isDisabled])
 
   return (

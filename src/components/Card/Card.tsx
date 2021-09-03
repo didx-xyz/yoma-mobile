@@ -10,7 +10,7 @@ type Props = WithChildren<{
   style?: ViewStyle
 }>
 
-const Card = ({ children, backgroundColor = Colors.white, style }: Props) => {
+const Card = ({ children, backgroundColor = Colors.White, style }: Props) => {
   const [viewStyles, setViewStyles] = useState<ViewStyle>({})
 
   useEffect(() => {

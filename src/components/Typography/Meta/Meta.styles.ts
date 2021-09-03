@@ -9,13 +9,13 @@ const styles: Record<MetaLevels, TextStyle> = {
     ...fontWeights.medium_500,
     fontSize: 10,
     lineHeight: 13,
-    color: colors[Colors.menuGrey],
+    color: colors[Colors.MenuGrey],
   } as TextStyle,
   [MetaLevels.smallBold]: {
     ...fontWeights.bold_700,
     fontSize: 10,
     lineHeight: 13,
-    color: colors[Colors.menuGrey],
+    color: colors[Colors.MenuGrey],
   } as TextStyle,
 }
 

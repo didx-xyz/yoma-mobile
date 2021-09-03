@@ -41,14 +41,14 @@ const DatePicker = ({ name, label, handlers, ...props }: Props) => {
     <View style={styles.container}>
       <Text.Meta level={MetaLevels.small}>{textOrSpace(values[name], label)}</Text.Meta>
       <TouchableOpacity onPress={() => setShowDatePicker(true)} style={styles.dateContainer}>
-        <Text.Body color={values[name] ? Colors.primaryDarkGrey : Colors.menuGrey}>
+        <Text.Body color={values[name] ? Colors.PrimaryDarkGrey : Colors.MenuGrey}>
           {values[name] ? formatDateString(DATE_TPL_MON_YEAR)(values[name]) : label}
         </Text.Body>
       </TouchableOpacity>
       {showDatePicker && (
         <DateTimePicker value={date} mode={'date'} onChange={onChange} maximumDate={new Date()} {...props} />
       )}
-      <Text.Meta color={Colors.primaryRed} align={TextAlign.right}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.right}>
         {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
     </View>

@@ -6,7 +6,7 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 const baseTextStyle = {
   ...fontWeights.medium_500,
   fontSize: 14,
-  color: colors[Colors.fontBlue],
+  color: colors[Colors.FontBlue],
 } as TextStyle
 
 const styles = {
@@ -15,7 +15,7 @@ const styles = {
     paddingHorizontal: 0,
     borderWidth: 0,
     borderRadius: 0,
-    borderColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
+    borderColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
   dropDownView: {
     height: 180,
@@ -27,14 +27,14 @@ const styles = {
     ...baseTextStyle,
   } as TextStyle,
   searchContainer: {
-    borderBottomColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
+    borderBottomColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
   search: {
     ...baseTextStyle,
     borderWidth: 0,
   } as TextStyle,
   placeholder: {
-    color: colors[Colors.menuGrey],
+    color: colors[Colors.MenuGrey],
   } as ViewStyle,
   tagsContainer: {
     flexDirection: 'row',
@@ -42,7 +42,7 @@ const styles = {
   } as ViewStyle,
   divider: {
     height: 1,
-    backgroundColor: applyAlphaToHex(colors[Colors.menuGrey])(0.7),
+    backgroundColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
     marginTop: 10,
   } as ViewStyle,
   save: {

@@ -37,7 +37,7 @@ const ProfilePhoto = ({
         radius={outerRadius}
         percent={percent}
         borderWidth={borderWidth}
-        color={colors[Colors.primaryRed]}
+        color={colors[Colors.PrimaryRed]}
       >
         <View style={profileInnerStyle}>
           <Optional condition={!!uri} fallback={<ProfileIcon height={outerRadius} width={outerRadius} />}>

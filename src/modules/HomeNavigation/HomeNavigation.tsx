@@ -9,27 +9,27 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 
 import About from '../About'
 import Challenges from '../Challenges'
+import CompletedCourses from '../CompletedCourses'
 import Courses from '../Courses'
-import DigitalCv from '../DigitalCv'
 import Education from '../Education'
 import Marketplace from '../Marketplace'
-import MyCourses from '../MyCourses'
+import MyCv from '../MyCv'
+import MySkills from '../MySkills/MySkills'
 import Profile from '../Profile'
-import Skills from '../Skills'
-import UserChallenges from '../UserChallenges'
+import CompletedChallenges from '../UserChallenges'
 import UserJobs from '../UserJobs'
-import { HomeNavigationRoutes } from './HomeNavigation.types'
+import { HomeNavigationRoutes, HomeTabRoutes } from './HomeNavigation.types'
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const tabBarOptions: BottomTabBarOptions = {
   tabStyle: {
-    backgroundColor: colors[Colors.primaryPurple],
+    backgroundColor: colors[Colors.PrimaryPurple],
     paddingBottom: 2,
   },
-  activeTintColor: colors[Colors.white],
-  inactiveTintColor: applyAlphaToHex(colors[Colors.white])(0.38),
+  activeTintColor: colors[Colors.White],
+  inactiveTintColor: applyAlphaToHex(colors[Colors.White])(0.38),
   labelStyle: {
     fontFamily: fontStyles[FontFamily.semibold],
   },
@@ -40,15 +40,15 @@ const HomeTabs = () => {
   return (
     <Tab.Navigator tabBarOptions={tabBarOptions}>
       <Tab.Screen
-        name="DigitalCv"
-        component={DigitalCv}
+        name={HomeTabRoutes.MyCv}
+        component={MyCv}
         options={{
           title: t('myCv'),
           tabBarIcon: tabInfo => <DigitalCvIcon fill={tabInfo.color} />,
         }}
       />
       <Tab.Screen
-        name="Courses"
+        name={HomeTabRoutes.Courses}
         component={Courses}
         options={{
           title: t('courses'),
@@ -56,7 +56,7 @@ const HomeTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Challenges"
+        name={HomeTabRoutes.Challenges}
         component={Challenges}
         options={{
           title: t('challenges'),
@@ -64,7 +64,7 @@ const HomeTabs = () => {
         }}
       />
       <Tab.Screen
-        name="Marketplace"
+        name={HomeTabRoutes.MarketPlace}
         component={Marketplace}
         options={{
           title: t('marketplace'),
@@ -80,13 +80,13 @@ const HomeNavigation = () => {
     <Stack.Navigator headerMode={'none'}>
       <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
       <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
-      <Stack.Screen name={HomeNavigationRoutes.DigitalCv} component={DigitalCv} />
+      <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />
       <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
-      <Stack.Screen name={HomeNavigationRoutes.UserJobs} component={UserJobs} />
+      <Stack.Screen name={HomeNavigationRoutes.Experience} component={UserJobs} />
       <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
-      <Stack.Screen name={HomeNavigationRoutes.Skills} component={Skills} />
-      <Stack.Screen name={HomeNavigationRoutes.MyCourses} component={MyCourses} />
-      <Stack.Screen name={HomeNavigationRoutes.UserChallenges} component={UserChallenges} />
+      <Stack.Screen name={HomeNavigationRoutes.MySkills} component={MySkills} />
+      <Stack.Screen name={HomeNavigationRoutes.CompletedCourses} component={CompletedCourses} />
+      <Stack.Screen name={HomeNavigationRoutes.UserChallenges} component={CompletedChallenges} />
     </Stack.Navigator>
   )
 }

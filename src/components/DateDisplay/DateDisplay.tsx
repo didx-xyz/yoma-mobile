@@ -12,7 +12,7 @@ type Props = WithChildren<{
 
 const DateDisplay = ({ children, template, date }: Props) => {
   return (
-    <Text.Body level={BodyLevels.small} color={Colors.menuGrey}>
+    <Text.Body level={BodyLevels.small} color={Colors.MenuGrey}>
       {formatDateString(template)(date)}
       {children}
     </Text.Body>

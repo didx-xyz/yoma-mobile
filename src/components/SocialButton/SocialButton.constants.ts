@@ -4,12 +4,12 @@ import { SocialVariants } from './SocialButton.types'
 
 export const MAP_VARIANT_TO_OPTIONS = {
   [SocialVariants.Facebook]: {
-    color: Colors.white,
+    color: Colors.White,
     icon: FacebookIcon,
     translationKey: 'loginFacebook',
   },
   [SocialVariants.Google]: {
-    color: Colors.primaryDarkGrey,
+    color: Colors.PrimaryDarkGrey,
     icon: GoogleIcon,
     translationKey: 'loginGoogle',
   },

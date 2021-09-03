@@ -17,11 +17,11 @@ type Props = WithChildren<{
 }>
 // TODO: refactor this
 const ProgressCircle = ({
-  backgroundColor = applyAlphaToHex(colors[Colors.menuGrey])(0.25),
+  backgroundColor = applyAlphaToHex(colors[Colors.MenuGrey])(0.25),
   borderWidth = 1,
   children,
   color,
-  innerColor = colors[Colors.white],
+  innerColor = colors[Colors.White],
   percent = 0,
   radius,
 }: Props) => {

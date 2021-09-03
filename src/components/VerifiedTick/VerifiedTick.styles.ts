@@ -10,7 +10,7 @@ const styles = {
     width: TICK_BADGE_SIZE,
     height: TICK_BADGE_SIZE,
     borderRadius: TICK_BADGE_SIZE / CIRCULAR_RADIUS_DIVISOR,
-    backgroundColor: colors[Colors.primaryRed],
+    backgroundColor: colors[Colors.PrimaryRed],
     alignItems: 'center',
     justifyContent: 'center',
   } as ViewStyle,

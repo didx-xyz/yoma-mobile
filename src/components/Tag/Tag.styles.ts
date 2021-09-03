@@ -4,7 +4,7 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: applyAlphaToHex(colors[Colors.secondaryBlue])(0.15),
+    backgroundColor: applyAlphaToHex(colors[Colors.SecondaryBlue])(0.15),
     borderRadius: 33,
     paddingHorizontal: 10,
     marginHorizontal: 5,
