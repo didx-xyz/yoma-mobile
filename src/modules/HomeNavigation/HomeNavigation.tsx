@@ -9,7 +9,7 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 
 import About from '../About'
 import Challenges from '../Challenges'
-import CompletedChallenges from '../CompletedChallenges/CompletedChallenges'
+import CompletedChallenges from '../CompletedChallenges'
 import CompletedCourses from '../CompletedCourses'
 import Courses from '../Courses'
 import Education from '../Education'
