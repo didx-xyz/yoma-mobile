@@ -16,7 +16,7 @@ const ListCard = ({ value, color, label }: Props) => {
   return (
     <View style={styles.cardHeader}>
       <CountBadge value={value} color={color} />
-      <Text.Header level={HeaderLevels.h5} color={Colors.PrimaryPurple} style={styles.label}>
+      <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple} style={styles.label}>
         {label}
       </Text.Header>
     </View>

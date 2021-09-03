@@ -26,7 +26,7 @@ const EmptyCard = ({ title, onAdd }: Props) => {
           <PurpleTopRightCircle />
         </View>
       </Background>
-      <Text.Body style={styles.text} color={Colors.PrimaryDarkGrey} align={TextAlign.center}>
+      <Text.Body style={styles.text} color={Colors.PrimaryDarkGrey} align={TextAlign.Center}>
         {title}
       </Text.Body>
       <Button size={ButtonSizes.Slim} label={t('Add')} onPress={onAdd} style={styles.button} />

@@ -31,7 +31,7 @@ const tabBarOptions: BottomTabBarOptions = {
   activeTintColor: colors[Colors.White],
   inactiveTintColor: applyAlphaToHex(colors[Colors.White])(0.38),
   labelStyle: {
-    fontFamily: fontStyles[FontFamily.semibold],
+    fontFamily: fontStyles[FontFamily.Semibold],
   },
 }
 

@@ -16,7 +16,7 @@ type Props = StatusBarProps &
 
 const ViewContainer = ({
   children,
-  statusBarStyle = StatusBarStyle.darkContent,
+  statusBarStyle = StatusBarStyle.DarkContent,
   statusHidden = false,
   backgroundColor = Colors.White,
   style,

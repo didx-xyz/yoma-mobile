@@ -8,7 +8,7 @@ type Props = WithChildren<GetComponentProps<typeof Text>>
 
 const Bold = ({ children, ...props }: Props) => {
   return (
-    <Text maxFontSizeMultiplier={undefined} minimumFontScale={undefined} presetStyle={fontWeights.bold_700} {...props}>
+    <Text maxFontSizeMultiplier={undefined} minimumFontScale={undefined} presetStyle={fontWeights.bold700} {...props}>
       {children}
     </Text>
   )

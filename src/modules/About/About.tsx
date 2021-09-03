@@ -37,7 +37,7 @@ const About = ({ navigation, onBiographySave, biography }: Props) => {
       />
       <Card style={styles.card}>
         <FormWrapper>
-          <Text.Meta level={MetaLevels.small}>{t('Summary')}</Text.Meta>
+          <Text.Meta level={MetaLevels.Small}>{t('Summary')}</Text.Meta>
           <TextInput
             style={styles.textInput}
             value={userBiography}
@@ -47,7 +47,7 @@ const About = ({ navigation, onBiographySave, biography }: Props) => {
             returnKeyType="done"
           />
           <View style={styles.bottom}>
-            <Text.Meta level={MetaLevels.smallBold} color={Colors.PrimaryGreen} onPress={() => setInfoModal(true)}>
+            <Text.Meta level={MetaLevels.SmallBold} color={Colors.PrimaryGreen} onPress={() => setInfoModal(true)}>
               {t('Find inspiration on how to write a great education description.')}
             </Text.Meta>
           </View>

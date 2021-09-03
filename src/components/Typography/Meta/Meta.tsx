@@ -11,7 +11,7 @@ type Props = WithChildren<
     level?: MetaLevels
   }
 >
-const Meta = ({ level = MetaLevels.small, children, ...props }: Props) => {
+const Meta = ({ level = MetaLevels.Small, children, ...props }: Props) => {
   const [presetStyle, setPresetStyle] = useState<TextStyle>({})
   useEffect(() => {
     setPresetStyle(styles[level])

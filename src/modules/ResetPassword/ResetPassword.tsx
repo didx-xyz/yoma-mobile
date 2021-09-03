@@ -38,7 +38,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
           circleImageStyle={styles.purpleSemiCircleContainer}
         />
         <Card style={styles.card}>
-          <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.cardHeader}>
+          <Text.Header level={HeaderLevels.H3} align={TextAlign.Center} style={styles.cardHeader}>
             {t('createNewPassword')}
           </Text.Header>
           <Text.Body color={Colors.PrimaryDarkGrey} style={styles.bodyText}>

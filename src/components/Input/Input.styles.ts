@@ -5,7 +5,7 @@ import { applyAlphaToHex } from 'styles/styles.utils'
 
 const styles = {
   textInput: {
-    ...fontWeights.medium_500,
+    ...fontWeights.medium500,
     fontSize: 14,
     color: colors[Colors.FontBlue],
     borderBottomWidth: 1,
