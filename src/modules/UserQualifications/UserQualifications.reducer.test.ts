@@ -1,4 +1,4 @@
-import SUT, { setUserQualifications, INITIAL_STATE, clearUserQualifications } from './UserQualifications.reducer'
+import SUT, { INITIAL_STATE, clearUserQualifications, setUserQualifications } from './UserQualifications.reducer'
 
 describe('modules/UserQualifications/Qualifications.redux', () => {
   describe('setUserQualifications', () => {
