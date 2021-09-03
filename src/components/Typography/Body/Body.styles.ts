@@ -6,13 +6,13 @@ import { BodyLevels } from './Body.types'
 
 const styles: Record<BodyLevels, TextStyle> = {
   [BodyLevels.Regular]: {
-    ...fontWeights.Medium500,
+    ...fontWeights.medium500,
     fontSize: 14,
     lineHeight: 18,
     color: colors[Colors.PrimaryDarkGrey],
   } as TextStyle,
   [BodyLevels.Small]: {
-    ...fontWeights.Medium500,
+    ...fontWeights.medium500,
     fontSize: 12,
     lineHeight: 15,
     color: colors[Colors.PrimaryDarkGrey],

@@ -8,7 +8,7 @@ const styles = {
   base: {
     textAlign: TextAlign.Left,
     color: colors.primaryPurple,
-    ...fontWeights.Medium500,
+    ...fontWeights.medium500,
   } as TextStyle,
 }
 export default StyleSheet.create(styles)
