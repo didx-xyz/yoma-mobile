@@ -1,7 +1,7 @@
 import { createUserJob } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiJobsConstants } from '../../api/jobs'
 import * as SUT from './Jobs.middleware'
@@ -12,7 +12,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
   describe('createJobFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockPayload = {
         title: 'TITLE',
         description: 'DESCRIPTION',
@@ -47,7 +47,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
   describe('createJobSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockedPayload = {
         data: {
           data: JOB_MOCK,
@@ -69,7 +69,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
     })
     it('should correctly handle job create success', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const mockedPayload = {
         data: {
@@ -95,7 +95,7 @@ describe('modules/Jobs/Jobs.middleware', () => {
   describe('createJobFailureFlow', () => {
     it('should correctly handle job create failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = createJobFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore
