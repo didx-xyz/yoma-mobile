@@ -2,7 +2,7 @@ import { UserCredentialTypes } from 'api/users/users.types'
 import { JOB_MOCK } from 'modules/Jobs/Jobs.test.fixtures'
 import { mergeRight } from 'ramda'
 
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import { createJob } from '../Jobs/Jobs.reducer'
@@ -28,7 +28,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('getUserJobsFromCredentialsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const credentialsResponseMock = ['job1', 'job1', 'assignment1', 'job2']
       const extractDataFromPayloadMock = jest.fn()
       const extractJobsMock = jest.fn()
@@ -44,7 +44,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
     })
     it(' should intercept the credentials data and pass on the correct jobs data', () => {
       // given ...credential data in an action payload
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const credentialsResponseMock = ['job1', 'job1', 'assignment1', 'job2']
       const jobCredentialsMock = ['job1', 'job2']
       const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
@@ -67,7 +67,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('normaliseUserJobsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const jobCredentialsMock = [{ id1: 'job1' }, { id2: 'job2' }]
       const normalisedJobsMock = {
         ids: ['id1', 'id2'],
@@ -88,7 +88,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
     })
     it('should normalise and forward the job credentials', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const jobCredentialsMock = [{ id1: 'job1' }, { id2: 'job2' }]
       const normalisedJobsMock = {
         ids: ['id1', 'id2'],
@@ -111,7 +111,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('setUserJobsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const normalisedJobsMock = 'NORMALISED JOBS DATA'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
@@ -127,7 +127,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
     })
     it('should set the normalised job data', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       const action = normaliseUserJobsSuccess('NORMALISED JOBS DATA')
@@ -144,7 +144,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('setUserJobsFormValuesFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const formDataMock = 'Form Data'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
@@ -160,7 +160,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
     })
     it('should set the job form data', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const formDataMock = {
         title: 'TITLE',
@@ -203,7 +203,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         requestVerification: false,
       }
 
-      const create = createMiddlewareStub(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      const create = createMiddlewareMock(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
       // when ... we create the user's credentials
       const action = createUserJob(JOB_MOCK)
 
@@ -233,7 +233,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('createUserJobSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponse = {
         data: { data: USER_JOBS_MOCK[0] }, //using actual data for reference
         meta: {
@@ -258,7 +258,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('createUserJobFailureFlow', () => {
     it('should correctly handle job credentials create failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = createUserJobFailure('FAILED')
       const mockNotification = jest.fn()
 
@@ -283,7 +283,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         requestVerification: false,
       }
 
-      const create = createMiddlewareStub(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      const create = createMiddlewareMock(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
       // when ... we create the user's credentials
       const action = fetchUserJobById('ID')
 
@@ -310,7 +310,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('fetchUserJobByIdSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockNotification = jest.fn()
       const mockResponse = {
         data: { data: USER_JOBS_MOCK[0] }, //using actual data for reference
@@ -335,7 +335,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('fetchUserJobByIdFailureFlow', () => {
     it('should correctly handle job credentials create failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = fetchUserJobByIdFailure('FAILED')
       const mockNotification = jest.fn()
 

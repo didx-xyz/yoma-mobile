@@ -1,6 +1,6 @@
 import { mergeRight } from 'ramda'
 
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import * as SUT from './UserSkills.middleware'
@@ -10,7 +10,7 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
   describe('fetchUserSkillsFlow', () => {
     it('should correctly handle updating the skills state', () => {
       // given ...
-      const create = createMiddlewareStub(jest, { user: { id: 'USER ID' } })
+      const create = createMiddlewareMock(jest, { user: { id: 'USER ID' } })
       const action = fetchUserSkills()
       const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)('USER ID')
       // @ts-ignore
@@ -34,7 +34,7 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
   describe('fetchUserSkillsSuccessFlow', () => {
     it('should correctly add skills to state on successful fetch', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponseData = {
         data: {
           data: [
@@ -81,7 +81,7 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
   describe('fetchUserSkillsFailureFlow', () => {
     it('should correctly handle user skills fetch failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockNotification = jest.fn()
       // @ts-ignore
 

@@ -1,4 +1,4 @@
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import * as ApiActions from '../../api/api.reducer'
 import * as SUT from './Error.middleware'
 import { unauthorizedError } from './Error.reducer'
@@ -7,7 +7,7 @@ describe('modules/Error/Error.middleware', () => {
   describe('categorizeErrorsFlow', () => {
     it('should correctly handle being called', async () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const action = ApiActions.apiError(
         { onFailure: jest.fn() },
@@ -34,7 +34,7 @@ describe('modules/Error/Error.middleware', () => {
     })
     it('should catch unauthorized errors', async () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const action = ApiActions.apiError(
         { onFailure: jest.fn() },
@@ -60,7 +60,7 @@ describe('modules/Error/Error.middleware', () => {
     })
     it('should call the failure action for any error that is not unauthorized', async () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const onFailure = jest.fn()
       const action = ApiActions.apiError(
