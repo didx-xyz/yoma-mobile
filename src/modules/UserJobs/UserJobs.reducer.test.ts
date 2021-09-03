@@ -7,7 +7,7 @@ import SUT, {
   updateUserJobs,
 } from './UserJobs.reducer'
 
-describe('src/modules/User/Jobs/Jobs.reducer', () => {
+describe('modules/UserJobs/Jobs.reducer', () => {
   describe('setUserJobs', () => {
     it('should correctly add the userJobs data', () => {
       // given ...an initial state

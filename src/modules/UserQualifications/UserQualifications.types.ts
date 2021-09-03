@@ -1,15 +1,16 @@
 import { NormalisedData } from '../../redux/redux.types'
-import { Challenge } from '../Challenges/Challenges.types'
 import { UserCredentialMeta } from '../User/User.types'
 
+export interface Qualification {}
+
 export interface UserQualification extends UserCredentialMeta {
-  challenge: Challenge
+  qualification: Qualification
 }
 
 export type NormalisedUserQualifications = NormalisedData<UserQualification>
 
 export interface UserQualificationItem
-  extends Pick<Challenge, 'organisationLogoURL' | 'name'>,
+  extends Pick<Qualification, 'organisationLogoURL' | 'name'>,
     Pick<UserCredentialMeta, 'startDate'> {
   isValidated: boolean
 }
@@ -18,7 +19,7 @@ export type NormalisedUserQualificationItem = NormalisedData<UserQualificationIt
 
 export interface UserQualificationsState extends NormalisedUserQualifications {}
 
-export type ChallengeEntry = {
+export type QualificationEntry = {
   challenge: string
   organisationLogoURL: string
   challengeHostProvider: string

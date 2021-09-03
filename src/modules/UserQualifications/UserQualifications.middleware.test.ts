@@ -7,7 +7,7 @@ import {
   setUserQualifications,
 } from './UserQualifications.reducer'
 
-describe('modules/CompletedChallenges/CompletedChallenges.middleware', () => {
+describe('modules/UserQualifications/UserQualifications.middleware', () => {
   describe('getUserQualificationsFromCredentialsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
