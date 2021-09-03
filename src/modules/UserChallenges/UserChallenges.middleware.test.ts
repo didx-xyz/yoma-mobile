@@ -1,4 +1,4 @@
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import * as UserActions from '../User/User.reducer'
 import * as SUT from './UserChallenges.middleware'
 import { getUserChallengesSuccess, normaliseUserChallengesSuccess, setUserChallenges } from './UserChallenges.reducer'
@@ -7,7 +7,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
   describe('getUserChallengesFromCredentialsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const credentialsResponseMock = ['challenge1', 'job1', 'assignment1', 'challenge2']
       const extractDataFromPayloadMock = jest.fn()
       const extractChallengesMock = jest.fn()
@@ -25,7 +25,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
     })
     it(' should intercept the credentials data and pass on the correct challenges data', () => {
       // given ...credential data in an action payload
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const credentialsResponseMock = ['challenge1', 'job1', 'assignment1', 'challenge2']
       const challengeCredentialsMock = ['challenge1', 'challenge2']
       const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
@@ -48,7 +48,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
   describe('normaliseUserChallengesFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const challengeCredentialsMock = [{ id1: 'challenge1' }, { id2: 'challenge2' }]
       const normalisedChallengesMock = {
         ids: ['id1', 'id2'],
@@ -69,7 +69,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
     })
     it('should normalise and forward the challenge credentials', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const challengeCredentialsMock = [{ id1: 'challenge1' }, { id2: 'challenge2' }]
       const normalisedChallengesMock = {
         ids: ['id1', 'id2'],
@@ -92,7 +92,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
   describe('setUserChallengesFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const normalisedChallengesMock = 'NORMALISED CHALLENGES DATA'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
@@ -108,7 +108,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
     })
     it('should set the normalised challenge data', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       const action = normaliseUserChallengesSuccess('NORMALISED CHALLENGES DATA')

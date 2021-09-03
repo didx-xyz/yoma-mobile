@@ -1,4 +1,4 @@
-import { createMiddlewareStub } from '../../tests/tests.utils'
+import { createMiddlewareMock } from '../../tests/tests.utils'
 import * as SUT from './api.middleware'
 import { apiError, apiRequest } from './api.reducer'
 
@@ -6,7 +6,7 @@ describe('api/api.middleware.ts', () => {
   describe('apiFlow', () => {
     it('should should correctly handle being called', async () => {
       // given ... a request
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const apiClientStub = jest.fn().mockResolvedValue('SUCCESSFUL RESPONSE')
       const prepArgsStub = jest.fn().mockReturnValue({ apiArgs: 'ARGS', onSuccess: jest.fn, onFailure: jest.fn })
       //@ts-ignore
@@ -28,7 +28,7 @@ describe('api/api.middleware.ts', () => {
     })
     it('should correctly handle a successful api call', async () => {
       // given ... a request
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const apiClientStub = jest
         .fn()
         .mockResolvedValue({ config: 'CONFIG', request: 'REQUEST', data: 'SUCCESSFUL RESPONSE' })
@@ -52,7 +52,7 @@ describe('api/api.middleware.ts', () => {
     })
     it('should correctly handle when the api fails', async () => {
       // given ... a request
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const apiClientStub = jest.fn().mockRejectedValue({ response: { message: 'ERROR' } })
       const onSuccessStub = jest.fn(x => ({ type: 'onSuccess', payload: x }))
       const onFailureStub = jest.fn(x => ({ type: 'onFailure', payload: x }))
