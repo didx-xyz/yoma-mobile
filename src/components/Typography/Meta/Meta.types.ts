@@ -1,4 +1,4 @@
 export enum MetaLevels {
-  small = 'small',
-  smallBold = 'smallBold',
+  Small = 'small',
+  SmallBold = 'smallBold',
 }

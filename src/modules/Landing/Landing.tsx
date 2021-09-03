@@ -32,13 +32,13 @@ const Landing = ({ navigation }: Props) => {
           <WhiteLogo />
         </View>
         <View style={styles.content}>
-          <Text.Header level={HeaderLevels.h1} align={TextAlign.center}>
+          <Text.Header level={HeaderLevels.H1} align={TextAlign.Center}>
             {t('unlock')}
           </Text.Header>
-          <Text.Header level={HeaderLevels.h1} align={TextAlign.center} color={Colors.White}>
+          <Text.Header level={HeaderLevels.H1} align={TextAlign.Center} color={Colors.White}>
             {t('yourFuture')}
           </Text.Header>
-          <Text.Header level={HeaderLevels.h4} color={Colors.White} align={TextAlign.center} style={styles.bodyText}>
+          <Text.Header level={HeaderLevels.H4} color={Colors.White} align={TextAlign.Center} style={styles.bodyText}>
             {t('landingBodyText')}
           </Text.Header>
         </View>

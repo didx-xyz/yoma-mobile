@@ -14,7 +14,7 @@ type Props = {
 const CountBadge = ({ count, color }: Props) => {
   return (
     <View style={[styles.container, { backgroundColor: applyAlphaToHex(colors[color])(0.1) }]}>
-      <Text.Body level={BodyLevels.small} weight={FontWeights.bold_700} color={color}>
+      <Text.Body level={BodyLevels.Small} weight={FontWeights.Bold700} color={color}>
         {count}
       </Text.Body>
     </View>

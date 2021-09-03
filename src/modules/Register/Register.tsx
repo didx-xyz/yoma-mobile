@@ -30,7 +30,7 @@ const Register = ({ navigation, onAuthWithSocial }: Props) => {
         circleImageStyle={styles.purpleSemiCircleContainer}
       />
       <Card style={styles.card}>
-        <Text.Header level={HeaderLevels.h3} align={TextAlign.center} style={styles.welcomeText}>
+        <Text.Header level={HeaderLevels.H3} align={TextAlign.Center} style={styles.welcomeText}>
           {t('welcome')}
         </Text.Header>
         <Button
@@ -43,12 +43,12 @@ const Register = ({ navigation, onAuthWithSocial }: Props) => {
           <Text.Body style={styles.orText}>{t('or')}</Text.Body>
           <View style={styles.horizontalLine} />
         </View>
-        <Text.Body level={BodyLevels.small} style={styles.bodyText}>
+        <Text.Body level={BodyLevels.Small} style={styles.bodyText}>
           {t('registerSocial')}
         </Text.Body>
         <SSO onAuthWithSocial={onAuthWithSocial} />
       </Card>
-      <Text.Body level={BodyLevels.small} align={TextAlign.center} style={styles.bottomText}>
+      <Text.Body level={BodyLevels.Small} align={TextAlign.Center} style={styles.bottomText}>
         {t('alreadyHaveAccount')}&nbsp;
         <Link onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}>{t('login')}.</Link>
       </Text.Body>

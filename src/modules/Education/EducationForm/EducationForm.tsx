@@ -90,7 +90,7 @@ const EducationForm = forwardRef(({ changeButtonState }: Props, ref) => {
           <Upload onPress={() => {}} />
           <View style={styles.bottom}>
             <Text.Meta
-              level={MetaLevels.smallBold}
+              level={MetaLevels.SmallBold}
               color={Colors.PrimaryGreen}
               style={styles.bottomText}
               onPress={() => setShowInfoModal(true)}

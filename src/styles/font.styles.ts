@@ -6,8 +6,8 @@ const SEMIBOLD = 'Montserrat-SemiBold'
 const BOLD = 'Montserrat-Bold'
 
 export default {
-  [FontFamily.small]: SMALL,
-  [FontFamily.medium]: MEDIUM,
-  [FontFamily.semibold]: SEMIBOLD,
-  [FontFamily.bold]: BOLD,
+  [FontFamily.Small]: SMALL,
+  [FontFamily.Medium]: MEDIUM,
+  [FontFamily.Semibold]: SEMIBOLD,
+  [FontFamily.Bold]: BOLD,
 }

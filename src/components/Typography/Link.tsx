@@ -15,7 +15,7 @@ const Link = ({ onPress, children, color = Colors.PrimaryGreen, ...props }: Prop
     <Text
       maxFontSizeMultiplier={undefined}
       minimumFontScale={undefined}
-      weight={FontWeights.bold_700}
+      weight={FontWeights.Bold700}
       color={color}
       onPress={onPress}
       {...props}

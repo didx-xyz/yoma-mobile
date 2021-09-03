@@ -27,7 +27,7 @@ describe('Text', () => {
     const { getByTestId } = render(<Text>Tester</Text>)
     const foundTextElement = getByTestId('text')
     expect(foundTextElement.props.style.color).toBe(colors[Colors.PrimaryPurple])
-    expect(foundTextElement.props.style.textAlign).toBe(TextAlign.left)
+    expect(foundTextElement.props.style.textAlign).toBe(TextAlign.Left)
     expect(foundTextElement.props.style.fontWeight).toBe('500')
   })
   it('should correctly set the text color given with the color prop', () => {
@@ -37,13 +37,13 @@ describe('Text', () => {
   })
 
   it('should correctly set the text align given with the align prop', () => {
-    const { getByTestId } = render(<Text align={TextAlign.right}>Tester</Text>)
+    const { getByTestId } = render(<Text align={TextAlign.Right}>Tester</Text>)
     const foundTextElement = getByTestId('text')
-    expect(foundTextElement.props.style.textAlign).toBe(TextAlign.right)
+    expect(foundTextElement.props.style.textAlign).toBe(TextAlign.Right)
   })
 
   it('should correctly set the font weight with the weight prop', () => {
-    const { getByTestId } = render(<Text weight={FontWeights.semiBold_600}>Tester</Text>)
+    const { getByTestId } = render(<Text weight={FontWeights.SemiBold600}>Tester</Text>)
     const foundTextElement = getByTestId('text')
     expect(foundTextElement.props.style.fontWeight).toBe('600')
   })

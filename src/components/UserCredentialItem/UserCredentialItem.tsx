@@ -26,8 +26,8 @@ const UserCredentialItem = ({ name, startDate, organisationLogoURL, isValidated 
         <Avatar name={name} url={organisationLogoURL} isValidated={isValidated} />
       </View>
       <View style={styles.content}>
-        <Text.Header level={HeaderLevels.h6}>{name}</Text.Header>
-        <Text.Body level={BodyLevels.small}>{formattedDate}</Text.Body>
+        <Text.Header level={HeaderLevels.H6}>{name}</Text.Header>
+        <Text.Body level={BodyLevels.Small}>{formattedDate}</Text.Body>
       </View>
     </View>
   )

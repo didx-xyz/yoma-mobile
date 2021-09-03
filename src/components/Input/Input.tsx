@@ -16,7 +16,7 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
   const { handleChange, handleBlur, values, errors, touched } = handlers
   return (
     <>
-      <Text.Meta level={MetaLevels.small}>{values[name] !== '' ? label : ' '}</Text.Meta>
+      <Text.Meta level={MetaLevels.Small}>{values[name] !== '' ? label : ' '}</Text.Meta>
       <TextInput
         placeholderTextColor={colors[Colors.MenuGrey]}
         placeholder={label}
@@ -27,7 +27,7 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
         onBlur={handleBlur(name)}
         {...props}
       />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.right}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
         {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
     </>
