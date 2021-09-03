@@ -1,11 +1,9 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Card, EmptyCard, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
-import ListCardHeader from 'components/ListCardHeader'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList } from 'react-native'
-import { Colors } from 'styles'
 
 import SkillsForm from './Form/MySkillsForm'
 import { MOCK_SKILLS } from './MySkills.constants'
@@ -42,7 +40,6 @@ const MySkills = ({ navigation }: Props) => {
             <Card style={styles.outerCard}>
               <FlatList
                 data={MOCK_SKILLS}
-                ListHeaderComponent={<ListCardHeader color={Colors.PrimaryBlue} count={60} header={t('Top skills')} />}
                 renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
                 keyExtractor={item => item.skill}
               />

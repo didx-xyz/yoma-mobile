@@ -1,18 +1,18 @@
 export const MOCKED_EDUCATION_DATA = [
   {
-    qualification: 'BA Degree',
-    organisationLogoURL: '',
-    school: 'Rhodes University',
-    startDate: '02/05/2020',
-    endDate: '03/01/2021',
+    id: 1,
+    subtitle: 'BA Degree',
+    iconUrl: '',
+    title: 'Rhodes University',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
+    isValidated: true,
   },
   {
-    qualification: 'Matric',
-    organisationLogoURL: '',
-    school: 'South Africa',
-    startDate: '03/09/2019',
-    endDate: '04/01/2020',
+    id: 2,
+    subtitle: 'Matric',
+    iconUrl: '',
+    title: 'South Africa',
     description: '',
+    isValidated: false,
   },
 ]

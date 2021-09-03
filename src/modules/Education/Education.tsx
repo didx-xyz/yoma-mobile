@@ -1,14 +1,14 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, EmptyCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, EmptyCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import CredentialCard from '../../components/CredentialCard'
 import { MOCKED_EDUCATION_DATA } from './Education.constants'
 import styles from './Education.styles'
-import { EducationEntry } from './Education.types'
 import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
@@ -20,26 +20,6 @@ const Education = ({ navigation }: Props) => {
   const [isSaved, setIsSaved] = useState(false)
   const [isSaveButtonActive, setIsSaveButtonActive] = useState(false)
   const formRef = useRef<FormikProps<FormikValues>>()
-
-  const renderItem = ({
-    description,
-    startDate,
-    endDate,
-    organisationLogoURL,
-    qualification,
-    school,
-  }: EducationEntry) => {
-    return (
-      <InfoCard
-        title={school}
-        subtitle={qualification}
-        description={description}
-        startDate={startDate}
-        endDate={endDate}
-        logo={organisationLogoURL}
-      />
-    )
-  }
 
   const toggleSaveButtonState = (hasFormChanged: boolean) => {
     setIsSaveButtonActive(hasFormChanged)
@@ -72,8 +52,7 @@ const Education = ({ navigation }: Props) => {
             <FlatList
               data={MOCKED_EDUCATION_DATA}
               contentContainerStyle={styles.listContainer}
-              renderItem={({ item }) => renderItem(item)}
-              keyExtractor={item => item.school}
+              renderItem={({ item }) => <CredentialCard {...item} onEdit={() => console.log('edit me')} />}
             />
           </Optional>
         }

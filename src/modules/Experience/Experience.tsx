@@ -5,9 +5,9 @@ import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import Card from '../../components/Card'
+import CredentialCard from '../../components/CredentialCard'
 import { types as DropDownTypes } from '../../components/DropDown'
 import EmptyCard from '../../components/EmptyCard'
-import InfoCard from '../../components/InfoCard'
 import NormalHeader from '../../components/NormalHeader'
 import Optional from '../../components/Optional'
 import ViewContainer from '../../components/ViewContainer'
@@ -54,20 +54,6 @@ const Experience = ({ userJobs, organisations, skills, onJobCreate, onFilterSkil
     onJobCreate(values)
   }
 
-  const renderItem = (item: UserJobsTypes.UserJobItem) => {
-    const { job, startDate, endDate } = item
-    return (
-      <InfoCard
-        title={job.title}
-        description={job.description}
-        startDate={startDate}
-        endDate={endDate}
-        logo={job.organisationLogoURL}
-        onEdit={() => handleEditUserJob(item)}
-      />
-    )
-  }
-
   return (
     <ViewContainer style={styles.container}>
       <NormalHeader
@@ -88,8 +74,7 @@ const Experience = ({ userJobs, organisations, skills, onJobCreate, onFilterSkil
             <FlatList
               data={userJobs}
               contentContainerStyle={styles.listContainer}
-              renderItem={({ item }: any) => renderItem(item)}
-              keyExtractor={(item: any) => item.job.id}
+              renderItem={({ item }: any) => <CredentialCard {...item} />}
             />
           </Optional>
         }

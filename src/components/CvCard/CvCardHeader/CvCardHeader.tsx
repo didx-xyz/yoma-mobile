@@ -1,12 +1,12 @@
-import { Optional } from 'components'
 import Text, { HeaderLevels } from 'components/Typography'
+import { Optional } from 'components/index'
 import React, { ReactNode } from 'react'
 import { View } from 'react-native'
 import { Colors } from 'styles'
 
-import CountBadge from '../CountBadge'
-import { COUNT_FALLBACK } from './ListCardHeader.constants'
-import styles from './ListCardHeader.styles'
+import CountBadge from '../../CountBadge'
+import { COUNT_FALLBACK } from '../CvCard.constants'
+import styles from './CvCardHeader.styles'
 
 type Props = {
   count?: number
@@ -17,7 +17,7 @@ type Props = {
   rightComponent?: ReactNode
 }
 
-const ListCardHeader = ({
+const CvCardHeader = ({
   count = COUNT_FALLBACK,
   color,
   header,
@@ -41,4 +41,4 @@ const ListCardHeader = ({
   )
 }
 
-export default ListCardHeader
+export default CvCardHeader

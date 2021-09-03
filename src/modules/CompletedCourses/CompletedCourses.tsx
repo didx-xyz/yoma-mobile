@@ -1,31 +1,18 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, EmptyCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, EmptyCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import CredentialCard from '../../components/CredentialCard'
 import { MOCK_COURSES } from './CompletedCourses.constants'
 import styles from './CompletedCourses.styles'
-import { CourseEntry } from './CompletedCourses.types'
 import NewCourseForm from './Form/NewCourseForm'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedCourses>
 }
-
-const renderCourseEntry = ({ course, description, startDate, endDate, organisationLogoUrl }: CourseEntry) => {
-  return (
-    <InfoCard
-      title={course}
-      description={description}
-      startDate={startDate}
-      endDate={endDate}
-      logo={organisationLogoUrl}
-    />
-  )
-}
-
 const CompletedCourses = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
@@ -53,8 +40,7 @@ const CompletedCourses = ({ navigation }: Props) => {
             <FlatList
               data={MOCK_COURSES}
               contentContainerStyle={styles.listContainer}
-              renderItem={({ item }) => renderCourseEntry(item)}
-              keyExtractor={item => item.course}
+              renderItem={({ item }) => <CredentialCard {...item} onEdit={() => console.log('edit me')} />}
             />
           </Optional>
         }

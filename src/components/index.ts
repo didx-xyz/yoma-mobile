@@ -9,7 +9,6 @@ import DropDownTags from './DropDownTags'
 import EmptyCard from './EmptyCard'
 import FirstTimeCard from './FirstTimeCard'
 import FormWrapper from './FormWrapper'
-import InfoCard from './InfoCard'
 import InfoModal from './InfoModal'
 import Input from './Input'
 import ListCard from './ListCard'
@@ -37,7 +36,6 @@ export {
   FirstTimeCard,
   FormWrapper,
   OnboardingForms,
-  InfoCard,
   InfoModal,
   Input,
   ListCard,

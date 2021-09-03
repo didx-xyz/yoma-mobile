@@ -1,33 +1,22 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, EmptyCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, EmptyCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
-import { ChallengeEntry } from '../UserChallenges/UserChallenges.types'
+import CredentialCard from '../../components/CredentialCard'
 import { MOCKED_CHALLENGES } from './CompletedChallenges.constants'
 import CompletedChallengesForm from './CompletedChallenges.form'
 import styles from './CompletedChallenges.styles'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserChallenges>
+  challenges: Omit<React.ComponentProps<typeof CredentialCard>, 'onEdit'>[]
 }
 
-const renderChallengeEntry = ({ challenge, description, startDate, endDate, organisationLogoURL }: ChallengeEntry) => {
-  return (
-    <InfoCard
-      title={challenge}
-      description={description}
-      startDate={startDate}
-      endDate={endDate}
-      logo={organisationLogoURL}
-    />
-  )
-}
-
-const CompletedChallenges = ({ navigation }: Props) => {
+const CompletedChallenges = ({ navigation, challenges = MOCKED_CHALLENGES }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<FormikProps<FormikValues>>()
@@ -49,16 +38,23 @@ const CompletedChallenges = ({ navigation }: Props) => {
         condition={isEditing}
         fallback={
           <Optional
-            condition={MOCKED_CHALLENGES.length > 0}
+            condition={challenges.length > 0}
             fallback={
               <EmptyCard title={t('Have you completed any challenges yet?')} onAdd={() => setIsEditing(true)} />
             }
           >
             <FlatList
-              data={MOCKED_CHALLENGES}
+              data={challenges}
               contentContainerStyle={styles.listContainer}
-              renderItem={({ item }) => renderChallengeEntry(item)}
-              keyExtractor={item => item.challenge}
+              renderItem={({ item }) => (
+                <CredentialCard
+                  {...item}
+                  onEdit={() => {
+                    console.log('edit me')
+                  }}
+                />
+              )}
+              keyExtractor={item => item.title}
             />
           </Optional>
         }

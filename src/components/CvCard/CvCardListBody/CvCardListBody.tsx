@@ -5,7 +5,6 @@ import { View } from 'react-native'
 import { NormalisedData } from '../../../redux/redux.types'
 import Button, { ButtonVariants } from '../../Button'
 import Divider from '../../Divider'
-import { Optional } from '../../index'
 import styles from './CvCardListBody.styles'
 
 interface Props {
@@ -26,9 +25,7 @@ const CvCardListBody = ({ data, onViewAll, Item, maxDisplay = 2 }: Props) => {
           <Divider />
         </View>
       ))}
-      <Optional condition={ids.length > dataIdsToDisplay.length}>
-        <Button label="View All" variant={ButtonVariants.Clear} onPress={onViewAll} />
-      </Optional>
+      <Button label="View All" variant={ButtonVariants.Clear} onPress={onViewAll} />
     </View>
   )
 }

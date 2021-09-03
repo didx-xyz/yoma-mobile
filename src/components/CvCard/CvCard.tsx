@@ -5,11 +5,11 @@ import { Colors } from '../../styles'
 import { WithChildren } from '../../types/react.types'
 import { isNotNil } from '../../utils/ramda.utils'
 import EditButton from '../EditButton/EditButton'
-import ListCardHeader from '../ListCardHeader'
 import Optional from '../Optional'
 import Text, { TextAlign } from '../Typography'
 import styles from './CvCard.styles'
 import { shouldShowContent } from './CvCard.utils'
+import CvCardHeader from './CvCardHeader'
 
 type Props = WithChildren<{
   title: string
@@ -20,7 +20,7 @@ type Props = WithChildren<{
 }>
 const CvCard = ({ title, fallback, count, badgeColor = Colors.White, onEdit, children }: Props) => (
   <View style={styles.container}>
-    <ListCardHeader
+    <CvCardHeader
       color={badgeColor}
       count={count}
       header={title}
