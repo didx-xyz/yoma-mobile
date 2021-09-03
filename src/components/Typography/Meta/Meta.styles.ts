@@ -5,13 +5,13 @@ import { fontWeights } from '../fontWeights.styles'
 import { MetaLevels } from './Meta.types'
 
 const styles: Record<MetaLevels, TextStyle> = {
-  [MetaLevels.small]: {
+  [MetaLevels.Small]: {
     ...fontWeights.Medium500,
     fontSize: 10,
     lineHeight: 13,
     color: colors[Colors.MenuGrey],
   } as TextStyle,
-  [MetaLevels.smallBold]: {
+  [MetaLevels.SmallBold]: {
     ...fontWeights.Bold700,
     fontSize: 10,
     lineHeight: 13,

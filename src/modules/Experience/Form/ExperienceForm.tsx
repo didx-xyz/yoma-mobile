@@ -80,7 +80,7 @@ const ExperienceForm = ({ skills, organisations, formValues, onFilterSkills, set
             handlers={formikHandlers}
           />
           <TouchableOpacity onPress={() => setShowInfoModal(true)}>
-            <Text.Meta level={MetaLevels.smallBold} color={Colors.PrimaryGreen}>
+            <Text.Meta level={MetaLevels.SmallBold} color={Colors.PrimaryGreen}>
               {t('Find inspiration on how to write a great profile.')}
             </Text.Meta>
           </TouchableOpacity>

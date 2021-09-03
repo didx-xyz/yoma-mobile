@@ -13,7 +13,7 @@ type Props = WithChildren<
     level?: BodyLevels
   }
 >
-const Body = ({ level = BodyLevels.regular, children, ...props }: Props) => {
+const Body = ({ level = BodyLevels.Regular, children, ...props }: Props) => {
   const [presetStyle, setPresetStyle] = useState<TextStyle>({})
   useEffect(() => {
     setPresetStyle(styles[level])

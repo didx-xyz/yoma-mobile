@@ -18,7 +18,7 @@ const CustomInput = ({ label, isTouched, error, showTitle = true, ...props }: In
   return (
     <View>
       <Optional condition={showTitle}>
-        <Text.Meta level={MetaLevels.small}>{label}</Text.Meta>
+        <Text.Meta level={MetaLevels.Small}>{label}</Text.Meta>
       </Optional>
       <TextInput
         placeholderTextColor={colors[Colors.MenuGrey]}

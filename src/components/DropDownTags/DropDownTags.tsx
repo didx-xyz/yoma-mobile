@@ -36,7 +36,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
 
   return (
     <>
-      <Text.Meta level={MetaLevels.small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
+      <Text.Meta level={MetaLevels.Small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
         dropDownContainerStyle={styles.dropDownView}

@@ -21,11 +21,11 @@ const FirstTimeCard = () => {
           <LightYellowPattern />
         </View>
       </Background>
-      <Text.Header level={HeaderLevels.h3} color={Colors.White}>
+      <Text.Header level={HeaderLevels.H3} color={Colors.White}>
         {t('Complete')}
         <Span color={Colors.SecondaryDarkBlue}>&nbsp;{t('your CV')}</Span>
       </Text.Header>
-      <Text.Header level={HeaderLevels.h6} color={Colors.SecondaryDarkBlue} style={styles.bodyText}>
+      <Text.Header level={HeaderLevels.H6} color={Colors.SecondaryDarkBlue} style={styles.bodyText}>
         {t('Future proof your career and earn')}
         <Bold> 30 ZLTO </Bold>
         {t('by completing our first challenge')}.
@@ -37,7 +37,7 @@ const FirstTimeCard = () => {
       <View style={styles.progressBar}>
         <View style={styles.innerProgressbar} />
       </View>
-      <Text.Header level={HeaderLevels.h6} weight={FontWeights.Bold700} style={styles.percentText}>
+      <Text.Header level={HeaderLevels.H6} weight={FontWeights.Bold700} style={styles.percentText}>
         {t('1% complete')}
       </Text.Header>
       <Button label={t('Let’s do it')} onPress={() => {}} size={ButtonSizes.Slim} />

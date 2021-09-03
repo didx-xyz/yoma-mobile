@@ -16,7 +16,7 @@ const Input = ({ name, label, handlers, ...props }: Props) => {
   const { handleChange, handleBlur, values, errors, touched } = handlers
   return (
     <>
-      <Text.Meta level={MetaLevels.small}>{values[name] !== '' ? label : ' '}</Text.Meta>
+      <Text.Meta level={MetaLevels.Small}>{values[name] !== '' ? label : ' '}</Text.Meta>
       <TextInput
         placeholderTextColor={colors[Colors.MenuGrey]}
         placeholder={label}

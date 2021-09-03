@@ -34,12 +34,12 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
           circleImageStyle={styles.yellowSemiCircleContainer}
         />
         <Card style={styles.card}>
-          <Text.Header level={HeaderLevels.h3} align={TextAlign.Center} style={styles.cardHeader}>
+          <Text.Header level={HeaderLevels.H3} align={TextAlign.Center} style={styles.cardHeader}>
             {t('welcomeBack')}
           </Text.Header>
           <LoginForm onLoginUser={onLoginUser} />
           <Text.Body
-            level={BodyLevels.small}
+            level={BodyLevels.Small}
             align={TextAlign.Center}
             style={styles.forgotPassword}
             onPress={() => navigation.navigate(AuthNavigationRoutes.ForgotPassword)}
@@ -53,7 +53,7 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
             </Text.Body>
             <View style={styles.horizontalLine} />
           </View>
-          <Text.Body level={BodyLevels.small} align={TextAlign.Center} style={styles.loginSocial}>
+          <Text.Body level={BodyLevels.Small} align={TextAlign.Center} style={styles.loginSocial}>
             {t('loginSocial')}
           </Text.Body>
           <View style={styles.social}>
@@ -61,7 +61,7 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
           </View>
         </Card>
         <Text.Body
-          level={BodyLevels.small}
+          level={BodyLevels.Small}
           color={Colors.PrimaryDarkGrey}
           align={TextAlign.Center}
           style={styles.noAccount}

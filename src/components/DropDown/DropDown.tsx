@@ -27,7 +27,7 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
 
   return (
     <>
-      <Text.Meta level={MetaLevels.small}>{textOrSpace(values[name] !== '', label)}</Text.Meta>
+      <Text.Meta level={MetaLevels.Small}>{textOrSpace(values[name] !== '', label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
         dropDownContainerStyle={styles.dropDownView}

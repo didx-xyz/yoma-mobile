@@ -35,7 +35,7 @@ const ForgotPassword = ({ navigation }: Props) => {
           condition={emailSent}
           fallback={
             <Card style={styles.card}>
-              <Text.Header level={HeaderLevels.h3} align={TextAlign.Center} style={styles.cardHeaderText}>
+              <Text.Header level={HeaderLevels.H3} align={TextAlign.Center} style={styles.cardHeaderText}>
                 {t('forgotYourPassword')}?
               </Text.Header>
               <Text.Body color={Colors.PrimaryDarkGrey} style={styles.bodyText}>
@@ -46,7 +46,7 @@ const ForgotPassword = ({ navigation }: Props) => {
           }
         >
           <Card style={styles.card}>
-            <Text.Header level={HeaderLevels.h3} align={TextAlign.Center} style={styles.cardHeaderText}>
+            <Text.Header level={HeaderLevels.H3} align={TextAlign.Center} style={styles.cardHeaderText}>
               {t('checkEmail')}
             </Text.Header>
             <View style={styles.logoContainer}>
@@ -58,7 +58,7 @@ const ForgotPassword = ({ navigation }: Props) => {
             <Button label={t('openEmail')} onPress={openInbox} />
             <Text.Header
               onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}
-              level={HeaderLevels.h5}
+              level={HeaderLevels.H5}
               color={Colors.PrimaryGreen}
               align={TextAlign.Center}
               style={styles.skipButton}
