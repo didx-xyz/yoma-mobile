@@ -1,14 +1,14 @@
 export enum FontWeights {
-  normal_400 = 'normal_400',
-  medium_500 = 'medium_500',
-  semiBold_600 = 'semiBold_600',
-  bold_700 = 'bold_700',
+  Normal400 = 'normal400',
+  Medium500 = 'medium500',
+  SemiBold600 = 'semiBold600',
+  Bold700 = 'bold700',
 }
 
 export enum TextAlign {
-  auto = 'auto',
-  left = 'left',
-  center = 'center',
-  right = 'right',
-  justify = 'justify',
+  Auto = 'auto',
+  Left = 'left',
+  Center = 'center',
+  Right = 'right',
+  Justify = 'justify',
 }

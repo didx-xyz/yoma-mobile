@@ -3,13 +3,13 @@ Latest:
 - getting app into playstore with changelog
 
 10 Most Recent:
+- adding user qualifications to state
+- refactor: renaming createMiddlewareStub
 - moving my cv views out of user credential modules
+- refactor - pascal casing all type enums
 - PascalCasing Colors enum keys
 - adding user skills 'credentials' to state
 - experience - save new/edited experience to backend
 - experience should correctly show all the user's entries
 - adding real data to UserChallenges widget in MyCv
 - updating UserChallenges widget component
-- adding selector for MyCV title bar
-- add organisations data to state
-- add skills data to state

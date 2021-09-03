@@ -1,4 +1,4 @@
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as AuthActions } from '../Auth'
 import * as OrganisationsActions from '../Organisations/Organisations.reducer'
 import * as SkillsActions from '../Skills/Skills.reducer'
@@ -11,7 +11,7 @@ import { hydrateApp, resetAppData } from './App.reducer'
 describe('modules/App/App.middleware', () => {
   describe('appResetFlow', () => {
     it('should correctly handle an app reset action', () => {
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       // given ... the resetAppData action is fired
       const action = resetAppData()
       const { store, next, invoke } = create(SUT.appResetFlow)
@@ -22,7 +22,7 @@ describe('modules/App/App.middleware', () => {
       expect(store.dispatch).toHaveBeenCalled()
     })
     it('should handle app reset action accurately', () => {
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       // given ... the resetAppData action is fired
       const action = resetAppData()
@@ -38,7 +38,7 @@ describe('modules/App/App.middleware', () => {
   })
   describe('hydrateAppFlow', () => {
     it('should correctly handle being called', () => {
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       // given ...
 
       // when ... we want to populate the required app data
@@ -59,7 +59,7 @@ describe('modules/App/App.middleware', () => {
       // given ...
 
       // when ... we want to populate the required app data
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = hydrateApp()
       const { store, invoke } = create(SUT.hydrateAppFlow)
 

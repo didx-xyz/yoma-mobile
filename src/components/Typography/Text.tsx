@@ -1,7 +1,7 @@
 import React from 'react'
-import { StyleSheet, Text as RNText, TextProps, TextStyle } from 'react-native'
+import { Text as RNText, StyleSheet, TextProps, TextStyle } from 'react-native'
 
-import { colors, Colors } from '../../styles'
+import { Colors, colors } from '../../styles'
 import { WithChildren } from '../../types/react.types'
 import styles from './Text.styles'
 import { FontWeights, TextAlign } from './Text.types'

@@ -36,7 +36,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
 
   return (
     <>
-      <Text.Meta level={MetaLevels.small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
+      <Text.Meta level={MetaLevels.Small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
         dropDownContainerStyle={styles.dropDownView}
@@ -59,7 +59,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         setValue={setDropdownValue}
         showArrowIcon={false}
         CloseIconComponent={() => (
-          <Text.Body align={TextAlign.center} weight={FontWeights.bold_700} color={Colors.PrimaryGreen}>
+          <Text.Body align={TextAlign.Center} weight={FontWeights.Bold700} color={Colors.PrimaryGreen}>
             {t('Done')}
           </Text.Body>
         )}
@@ -68,7 +68,7 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
       />
       <View style={styles.tagsContainer}>{renderTags(dropDownValue, removeTag)}</View>
       <View style={styles.divider} />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.right}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
         {errors[name] && touched[name] ? errors[name] : ' '}
       </Text.Meta>
     </>

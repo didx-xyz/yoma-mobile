@@ -3,7 +3,7 @@ import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import * as SUT from './User.middleware'
@@ -28,7 +28,7 @@ describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
     it('should correctly handle being called', () => {
       // given ... the authLogin action is fired
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = loginSuccess(defaultUserLoginResponseData)
 
       // when ... we respond to the loginSuccess action
@@ -43,7 +43,7 @@ describe('modules/User/User.middleware', () => {
     })
     it('should correctly set the user data', () => {
       // given ... the authLogin action is fired
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = loginSuccess(defaultUserLoginResponseData)
       // @ts-ignore
 
@@ -67,7 +67,7 @@ describe('modules/User/User.middleware', () => {
         },
       }
 
-      const create = createMiddlewareStub(jest, mockState)
+      const create = createMiddlewareMock(jest, mockState)
       const action = updateUser(mockAction.payload)
       // @ts-ignore
       const { invoke, next } = create(SUT.updateUserFlow)
@@ -107,7 +107,7 @@ describe('modules/User/User.middleware', () => {
         },
       }
 
-      const create = createMiddlewareStub(jest, mockState)
+      const create = createMiddlewareMock(jest, mockState)
       const action = updateUser(mockAction.payload)
       // @ts-ignore
       const { invoke, store } = create(SUT.updateUserFlow)
@@ -130,7 +130,7 @@ describe('modules/User/User.middleware', () => {
   describe('updateUserSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponseData = {
         data: USER_RESPONSE,
         meta: {
@@ -151,7 +151,7 @@ describe('modules/User/User.middleware', () => {
     })
     it('should correctly set user data on successful update', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponseData = {
         data: USER_RESPONSE,
         meta: {
@@ -174,7 +174,7 @@ describe('modules/User/User.middleware', () => {
     it('should correctly send notification to the user ', () => {
       // given ...
       //TODO: add test case for navigation
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponseData = {
         data: USER_RESPONSE,
         meta: {
@@ -197,7 +197,7 @@ describe('modules/User/User.middleware', () => {
   describe('updateUserFailureFlow', () => {
     it('should correctly handle user update failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = updateUserFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore
@@ -214,7 +214,7 @@ describe('modules/User/User.middleware', () => {
     it('should correctly handle being called', () => {
       // given ... a user object with an id in state
       const userId = 'A USER ID'
-      const create = createMiddlewareStub(jest, { user: { id: userId } })
+      const create = createMiddlewareMock(jest, { user: { id: userId } })
       const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
 
       // when ... we request to get all the user's credentials
@@ -242,7 +242,7 @@ describe('modules/User/User.middleware', () => {
   describe('fetchUserCredentialsFailureFlow', () => {
     it('should correctly handle user credentials fetch failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = fetchUserCredentialsFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore
@@ -258,7 +258,7 @@ describe('modules/User/User.middleware', () => {
   describe('uploadUserPhotoFlow', () => {
     it('should correctly handle being called', async () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const imagePickerStub = {
         openCamera: () => jest.fn(),
       }
@@ -280,7 +280,7 @@ describe('modules/User/User.middleware', () => {
       expect(next).toHaveBeenCalledWith(action)
     })
     it('should correctly upload user profile photo', async () => {
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const imagePickerStub = {
         openCamera: () => jest.fn(),
       }
@@ -301,7 +301,7 @@ describe('modules/User/User.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(uploadUserPhotoSuccess('PHOTO_PAYLOAD_RESPONSE'))
     })
     it('should correctly handle any failure', async () => {
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const imagePickerStub = {
         openCamera: () => jest.fn(),
       }
@@ -327,7 +327,7 @@ describe('modules/User/User.middleware', () => {
   describe('uploadUserPhotoSuccessFlow', () => {
     it('should correctly handle being called', () => {
       const userId = 'USER ID'
-      const create = createMiddlewareStub(jest, { user: { id: userId } })
+      const create = createMiddlewareMock(jest, { user: { id: userId } })
 
       // given ... the uploadUserPhotoSuccess action is fired
       const action = uploadUserPhotoSuccess('PAYLOAD')
@@ -342,7 +342,7 @@ describe('modules/User/User.middleware', () => {
     })
     it('should correctly upload user profile photo', () => {
       const userId = 'USER ID'
-      const create = createMiddlewareStub(jest, { user: { id: userId } })
+      const create = createMiddlewareMock(jest, { user: { id: userId } })
 
       // given ... the uploadUserPhotoSuccess action is fired
       const action = uploadUserPhotoSuccess('PAYLOAD')
@@ -367,7 +367,7 @@ describe('modules/User/User.middleware', () => {
   describe('uploadUserPhotoFailureFlow', () => {
     it('should correctly handle user photo upload failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = uploadUserPhotoFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore
@@ -383,7 +383,7 @@ describe('modules/User/User.middleware', () => {
   describe('updateUserPhotoSuccessFlow', () => {
     it('should correctly handle user photo update failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = updateUserPhotoSuccess()
       const mockNotification = jest.fn()
       // @ts-ignore
@@ -399,7 +399,7 @@ describe('modules/User/User.middleware', () => {
   describe('updateUserPhotoFailureFlow', () => {
     it('should correctly handle user photo update failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = updateUserPhotoFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore

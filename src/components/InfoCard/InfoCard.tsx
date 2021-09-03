@@ -33,7 +33,7 @@ const InfoCard = ({ description, startDate, endDate, logo, subtitle, title, onEd
           <Image source={{ uri: logo }} style={styles.image} />
         </Optional>
         <View>
-          <Text.Header level={HeaderLevels.h6} color={Colors.PrimaryDarkGrey} style={styles.title}>
+          <Text.Header level={HeaderLevels.H6} color={Colors.PrimaryDarkGrey} style={styles.title}>
             <Optional condition={!!subtitle} fallback={<>{title}</>}>
               {subtitle + ' : ' + title}
             </Optional>

@@ -30,7 +30,7 @@ const MyCv = ({ navigation, biography }: Props) => {
           fallback={t('Your biography is one of the first things recruiters look at. Write a great one!')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.About)}
         >
-          <Text.Body align={TextAlign.center}>{biography}</Text.Body>
+          <Text.Body align={TextAlign.Center}>{biography}</Text.Body>
         </CvCard>
         <UserJobsWidget navigation={navigation} />
         <CvCard

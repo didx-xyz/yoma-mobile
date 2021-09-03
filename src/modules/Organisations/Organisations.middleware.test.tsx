@@ -2,7 +2,7 @@ import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 import { extractDataFromPayload } from 'utils/redux.utils'
 
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiOrganisationsConstants } from '../../api/organisations'
 import * as SUT from './Organisations.middleware'
@@ -20,7 +20,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
   describe('fetchOrganisationsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = fetchOrganisations()
       // @ts-ignore
       const { invoke, next } = create(SUT.fetchOrganisationsFlow)
@@ -35,7 +35,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       // given ...
       const mockState = rootStateFixture()
 
-      const create = createMiddlewareStub(jest, mockState)
+      const create = createMiddlewareMock(jest, mockState)
       const action = fetchOrganisations()
       // @ts-ignore
       const { invoke, store } = create(SUT.fetchOrganisationsFlow)
@@ -56,7 +56,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
   describe('fetchOrganisationsSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponseData = {
         data: {
           data: ORGANISATIONS_MOCK,
@@ -79,7 +79,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
     })
     it('should correctly add organisations to state on successful fetch', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponseData = {
         data: {
           data: ORGANISATIONS_MOCK,
@@ -105,7 +105,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
   describe('normaliseOrganisationsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const organisationCredentialsMock = [{ id1: 'organisation1' }, { id2: 'organisation2' }]
       const normalisedChallengesMock = {
         ids: ['id1', 'id2'],
@@ -126,7 +126,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
     })
     it('should normalise and forward the organisation credentials', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const organisationCredentialsMock = [{ id1: 'organisation1' }, { id2: 'organisation2' }]
       const normalisedChallengesMock = {
         ids: ['id1', 'id2'],
@@ -149,7 +149,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
   describe('setOrganisationsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const normalisedChallengesMock = 'NORMALISED ORGANISATIONS DATA'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
@@ -165,7 +165,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
     })
     it('should set the normalised organisation data', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       const action = normaliseOrganisationsSuccess('NORMALISED ORGANISATIONS DATA')
@@ -182,7 +182,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
   describe('fetchOrganisationsFailureFlow', () => {
     it('should correctly handle organisations fetch failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = fetchOrganisationsFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore

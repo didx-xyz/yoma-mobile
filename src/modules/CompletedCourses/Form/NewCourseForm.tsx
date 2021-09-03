@@ -1,5 +1,5 @@
 import { IconInfo } from 'assets/images'
-import { Spinner, DatePicker, DropDownTags, Upload, CheckBox, Input, FormWrapper } from 'components'
+import { CheckBox, DatePicker, DropDownTags, FormWrapper, Input, Spinner, Upload } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'

@@ -3,12 +3,13 @@ import { createStackNavigator } from '@react-navigation/stack'
 import { ChallengesIcon, CoursesIcon, DigitalCvIcon, MarketplaceIcon } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { colors, Colors, FontFamily } from 'styles'
+import { Colors, FontFamily, colors } from 'styles'
 import fontStyles from 'styles/font.styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 import About from '../About'
 import Challenges from '../Challenges'
+import CompletedChallenges from '../CompletedChallenges'
 import CompletedCourses from '../CompletedCourses'
 import Courses from '../Courses'
 import Education from '../Education'
@@ -16,7 +17,6 @@ import Marketplace from '../Marketplace'
 import MyCv from '../MyCv'
 import MySkills from '../MySkills/MySkills'
 import Profile from '../Profile'
-import CompletedChallenges from '../UserChallenges'
 import UserJobs from '../UserJobs'
 import { HomeNavigationRoutes, HomeTabRoutes } from './HomeNavigation.types'
 
@@ -31,7 +31,7 @@ const tabBarOptions: BottomTabBarOptions = {
   activeTintColor: colors[Colors.White],
   inactiveTintColor: applyAlphaToHex(colors[Colors.White])(0.38),
   labelStyle: {
-    fontFamily: fontStyles[FontFamily.semibold],
+    fontFamily: fontStyles[FontFamily.Semibold],
   },
 }
 

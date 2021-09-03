@@ -1,11 +1,11 @@
 import { fontWeights } from 'components/Typography/fontWeights.styles'
 import { StyleSheet, ViewStyle } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 const styles = {
   textInput: {
-    ...fontWeights.medium_500,
+    ...fontWeights.medium500,
     fontSize: 14,
     color: colors[Colors.FontBlue],
     borderBottomWidth: 1,

@@ -1,4 +1,4 @@
 export enum BodyLevels {
-  regular = 'regular',
-  small = 'small',
+  Regular = 'regular',
+  Small = 'small',
 }

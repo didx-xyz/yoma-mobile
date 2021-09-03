@@ -2,7 +2,7 @@ import { mergeRight } from 'ramda'
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 import { extractDataFromPayload } from 'utils/redux.utils'
 
-import { createMiddlewareStub } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
 import * as SUT from './Skills.middleware'
@@ -20,7 +20,7 @@ describe('modules/Skills/Skills.middleware', () => {
   describe('fetchSkillsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = fetchSkills()
       // @ts-ignore
       const { invoke, next } = create(SUT.fetchSkillsFlow)
@@ -35,7 +35,7 @@ describe('modules/Skills/Skills.middleware', () => {
       // given ...
       const mockState = rootStateFixture()
 
-      const create = createMiddlewareStub(jest, mockState)
+      const create = createMiddlewareMock(jest, mockState)
       const action = fetchSkills()
       // @ts-ignore
       const { invoke, store } = create(SUT.fetchSkillsFlow)
@@ -56,7 +56,7 @@ describe('modules/Skills/Skills.middleware', () => {
   describe('fetchSkillsSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponseData = {
         data: {
           data: SKILLS_MOCK,
@@ -79,7 +79,7 @@ describe('modules/Skills/Skills.middleware', () => {
     })
     it('should correctly add skills to state on successful fetch', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const mockResponseData = {
         data: {
           data: SKILLS_MOCK,
@@ -105,7 +105,7 @@ describe('modules/Skills/Skills.middleware', () => {
   describe('normaliseSkillsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const skillCredentialsMock = [{ id1: 'skill1' }, { id2: 'skill2' }]
       const normalisedChallengesMock = {
         ids: ['id1', 'id2'],
@@ -126,7 +126,7 @@ describe('modules/Skills/Skills.middleware', () => {
     })
     it('should normalise and forward the skill credentials', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const skillCredentialsMock = [{ id1: 'skill1' }, { id2: 'skill2' }]
       const normalisedChallengesMock = {
         ids: ['id1', 'id2'],
@@ -149,7 +149,7 @@ describe('modules/Skills/Skills.middleware', () => {
   describe('setSkillsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       const normalisedChallengesMock = 'NORMALISED SKILLS DATA'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
@@ -165,7 +165,7 @@ describe('modules/Skills/Skills.middleware', () => {
     })
     it('should set the normalised skill data', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
 
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       const action = normaliseSkillsSuccess('NORMALISED SKILLS DATA')
@@ -182,7 +182,7 @@ describe('modules/Skills/Skills.middleware', () => {
   describe('fetchSkillsFailureFlow', () => {
     it('should correctly handle skills fetch failure', () => {
       // given ...
-      const create = createMiddlewareStub(jest)
+      const create = createMiddlewareMock(jest)
       const action = fetchSkillsFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore

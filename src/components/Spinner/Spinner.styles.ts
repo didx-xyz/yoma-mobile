@@ -1,5 +1,5 @@
 import { StyleSheet, ViewStyle } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 const SPINNER_CONTAINER_SIZE = 70

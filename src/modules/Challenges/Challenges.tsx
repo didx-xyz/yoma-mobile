@@ -9,7 +9,7 @@ const Challenges = () => {
   const { t } = useTranslation()
   return (
     <ViewContainer style={styles.container}>
-      <Text.Header level={HeaderLevels.h1}>{t('Challenges')}</Text.Header>
+      <Text.Header level={HeaderLevels.H1}>{t('Challenges')}</Text.Header>
     </ViewContainer>
   )
 }

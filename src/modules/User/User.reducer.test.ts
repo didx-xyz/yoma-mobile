@@ -1,7 +1,7 @@
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
-import SUT, { clearUser, INITIAL_STATE, setUser } from './User.reducer'
-import { userInitialStateFixture, USER_RESPONSE } from './User.test.fixtures'
+import SUT, { INITIAL_STATE, clearUser, setUser } from './User.reducer'
+import { USER_RESPONSE, userInitialStateFixture } from './User.test.fixtures'
 
 describe('modules/User/User.reducer', () => {
   describe('setUser', () => {

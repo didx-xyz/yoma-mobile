@@ -1,7 +1,7 @@
 import { FormikErrors, FormikTouched } from 'formik'
 import React from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 
 import Optional from '../Optional'
 import Text, { MetaLevels, TextAlign } from '../Typography'
@@ -18,7 +18,7 @@ const CustomInput = ({ label, isTouched, error, showTitle = true, ...props }: In
   return (
     <View>
       <Optional condition={showTitle}>
-        <Text.Meta level={MetaLevels.small}>{label}</Text.Meta>
+        <Text.Meta level={MetaLevels.Small}>{label}</Text.Meta>
       </Optional>
       <TextInput
         placeholderTextColor={colors[Colors.MenuGrey]}
@@ -26,7 +26,7 @@ const CustomInput = ({ label, isTouched, error, showTitle = true, ...props }: In
         style={styles.textInput}
         {...props}
       />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.center}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Center}>
         {isTouched && error}
       </Text.Meta>
     </View>

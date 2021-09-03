@@ -51,7 +51,7 @@ const Button = ({
   return (
     <TouchableOpacity onPress={onPress} disabled={isDisabled} style={buttonStyle}>
       {children}
-      <Text.Body align={TextAlign.center} weight={FontWeights.bold_700} color={labelColor} style={labelStyle}>
+      <Text.Body align={TextAlign.Center} weight={FontWeights.Bold700} color={labelColor} style={labelStyle}>
         {label}
       </Text.Body>
     </TouchableOpacity>

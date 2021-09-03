@@ -1,11 +1,11 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 import { fontWeights } from '../Typography/fontWeights.styles'
 
 const baseTextStyle = {
-  ...fontWeights.medium_500,
+  ...fontWeights.medium500,
   fontSize: 14,
   color: colors[Colors.FontBlue],
 } as TextStyle

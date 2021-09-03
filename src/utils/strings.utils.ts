@@ -1,4 +1,4 @@
-import { head, join, juxt, pipe, tail, toUpper, trim, filter } from 'ramda'
+import { filter, head, join, juxt, pipe, tail, toUpper, trim } from 'ramda'
 
 export const mapToDropDownArray = (array: Record<string, string>[], valueProp = 'key', labelProp = 'value') => {
   return array.map((opt: Record<string, string>) => ({

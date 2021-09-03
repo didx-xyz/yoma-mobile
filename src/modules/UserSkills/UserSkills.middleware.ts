@@ -6,7 +6,7 @@ import { showSimpleMessage } from 'utils/error'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import * as ReduxUtils from './../../utils/redux.utils'
-import { fetchUserSkills, setUserSkills, fetchUserSkillsSuccess, fetchUserSkillsFailure } from './UserSkills.reducer'
+import { fetchUserSkills, fetchUserSkillsFailure, fetchUserSkillsSuccess, setUserSkills } from './UserSkills.reducer'
 import { UserSkillKeys } from './UserSkills.types'
 
 export const fetchUserSkillsFlow: Middleware =

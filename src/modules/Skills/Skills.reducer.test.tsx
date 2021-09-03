@@ -1,4 +1,4 @@
-import SUT, { clearSkills, INITIAL_STATE, setFilterSearchTerm, setSkills } from './Skills.reducer'
+import SUT, { INITIAL_STATE, clearSkills, setFilterSearchTerm, setSkills } from './Skills.reducer'
 
 describe('modules/Skills/Skills.reducer', () => {
   describe('setSkills', () => {

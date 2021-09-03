@@ -5,7 +5,7 @@ import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
 import * as ReduxUtils from 'utils/redux.utils'
 
-import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../api'
+import { middleware as ApiMiddleware, utils as ApiUtils, apiConfig } from '../api'
 import { types as ApiUsersTypes } from '../api/users'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
@@ -17,6 +17,7 @@ import { middleware as SkillsMiddleware } from '../modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
 import { middleware as UserChallengesMiddleware } from '../modules/UserChallenges'
 import { middleware as UserJobsMiddleware } from '../modules/UserJobs'
+import { middleware as UserQualificationsMiddleware } from '../modules/UserQualifications'
 import { middleware as UserSkillsMiddleware } from '../modules/UserSkills'
 import { showSimpleMessage } from '../utils/error'
 
@@ -98,6 +99,12 @@ const featureModuleMiddleware = [
     createPayload: UserUtils.createPhotoFormPayload(FormData),
   }),
   UserMiddleware.uploadUserPhotoSuccessFlow,
+  UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
+    ReduxUtils.extractDataFromPayload,
+    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Qualification),
+  ),
+  UserQualificationsMiddleware.normaliseUserQualificationsFlow(ReduxUtils.normalise),
+  UserQualificationsMiddleware.setUserQualificationsFlow,
   UserSkillsMiddleware.fetchUserSkillsFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFlow,
   UserSkillsMiddleware.fetchUserSkillsSuccessFlow,

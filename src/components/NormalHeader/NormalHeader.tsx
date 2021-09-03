@@ -35,7 +35,7 @@ const NormalHeader = ({
       <TouchableOpacity onPress={navigation.goBack}>
         <BackIconGrey />
       </TouchableOpacity>
-      <Text.Header level={HeaderLevels.h5} color={Colors.PrimaryPurple}>
+      <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple}>
         {headerText}
       </Text.Header>
       <Optional
