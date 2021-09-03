@@ -1,5 +1,5 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
 
 const IMAGE_SIZE = 35

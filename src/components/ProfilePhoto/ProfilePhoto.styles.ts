@@ -1,6 +1,6 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
-import { colors, Colors } from '../../styles'
+import { Colors, colors } from '../../styles'
 
 const styles = {
   editIcon: {

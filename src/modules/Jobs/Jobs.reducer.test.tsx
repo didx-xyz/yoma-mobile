@@ -1,6 +1,6 @@
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
-import SUT, { clearJob, INITIAL_STATE, setJob } from './Jobs.reducer'
+import SUT, { INITIAL_STATE, clearJob, setJob } from './Jobs.reducer'
 import { JOB_MOCK } from './Jobs.test.fixtures'
 
 describe('modules/Jobs/Jobs.reducer', () => {

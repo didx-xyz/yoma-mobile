@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, EmptyCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useRef, useState } from 'react'

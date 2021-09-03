@@ -1,7 +1,7 @@
 import Text, { BodyLevels, FontWeights } from 'components/Typography'
 import React from 'react'
 import { View } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 import styles from './CountBadge.styles'

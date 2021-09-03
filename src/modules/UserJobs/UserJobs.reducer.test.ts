@@ -1,7 +1,7 @@
 import SUT, {
+  INITIAL_STATE,
   clearUserJobs,
   clearUserJobsFormValues,
-  INITIAL_STATE,
   setUserJobs,
   setUserJobsFormValues,
   updateUserJobs,

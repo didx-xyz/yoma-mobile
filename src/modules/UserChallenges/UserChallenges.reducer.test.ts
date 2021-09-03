@@ -1,4 +1,4 @@
-import SUT, { setUserChallenges, INITIAL_STATE, clearUserChallenges } from './UserChallenges.reducer'
+import SUT, { INITIAL_STATE, clearUserChallenges, setUserChallenges } from './UserChallenges.reducer'
 
 describe('modules/UserChallenges/Challenges.redux', () => {
   describe('setUserChallenges', () => {

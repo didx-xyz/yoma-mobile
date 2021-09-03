@@ -1,6 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { colors, Colors } from '../../styles'
+import { Colors, colors } from '../../styles'
 
 const dropShadow = {
   elevation: 3,

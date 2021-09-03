@@ -1,4 +1,4 @@
-import SUT, { clearAuth, INITIAL_STATE, setAuthCredentials } from './Auth.reducer'
+import SUT, { INITIAL_STATE, clearAuth, setAuthCredentials } from './Auth.reducer'
 
 describe('modules/Auth/Auth.reducer', () => {
   describe('setAuthCredentials', () => {

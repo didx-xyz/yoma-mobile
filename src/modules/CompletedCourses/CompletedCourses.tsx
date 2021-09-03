@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { EmptyCard, Card, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
+import { Card, EmptyCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'

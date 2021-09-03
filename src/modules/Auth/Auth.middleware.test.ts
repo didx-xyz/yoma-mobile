@@ -7,13 +7,14 @@ import { actions as AppActions } from '../App'
 import { actions as ErrorActions } from '../Error'
 import * as SUT from './Auth.middleware'
 import {
-  authorize,
+  INITIAL_STATE,
   authSocialLogin,
   authSocialLoginFailure,
   authSocialLoginSuccess,
   authSocialRegistration,
   authSocialRegistrationFailure,
   authSocialRegistrationSuccess,
+  authorize,
   authorizeWithRefreshTokenFailure,
   authorizeWithRefreshTokenSuccess,
   deleteSecureRefreshToken,
@@ -22,7 +23,6 @@ import {
   getSecureRefreshToken,
   getSecureRefreshTokenFailure,
   getSecureRefreshTokenSuccess,
-  INITIAL_STATE,
   login,
   loginFailure,
   loginSuccess,

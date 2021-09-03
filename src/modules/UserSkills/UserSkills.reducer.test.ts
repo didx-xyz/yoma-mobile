@@ -1,4 +1,4 @@
-import SUT, { clearUserSkills, INITIAL_STATE, setUserSkills } from './UserSkills.reducer'
+import SUT, { INITIAL_STATE, clearUserSkills, setUserSkills } from './UserSkills.reducer'
 
 describe('src/modules/User/Skills/Skills.reducer', () => {
   describe('setUserSkills', () => {

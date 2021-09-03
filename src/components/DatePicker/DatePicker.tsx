@@ -1,7 +1,7 @@
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
 import { FormikProps, FormikValues } from 'formik'
-import React, { useState, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 import { GetComponentProps } from 'types/react.types'

@@ -1,7 +1,7 @@
 import { FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { Keyboard, TextInput, TextInputProps } from 'react-native'
-import { colors, Colors } from 'styles'
+import { Colors, colors } from 'styles'
 
 import Text, { MetaLevels, TextAlign } from '../Typography'
 import styles from './Input.styles'

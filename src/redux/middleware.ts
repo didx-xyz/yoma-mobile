@@ -5,7 +5,7 @@ import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
 import * as ReduxUtils from 'utils/redux.utils'
 
-import { apiConfig, middleware as ApiMiddleware, utils as ApiUtils } from '../api'
+import { middleware as ApiMiddleware, utils as ApiUtils, apiConfig } from '../api'
 import { types as ApiUsersTypes } from '../api/users'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
