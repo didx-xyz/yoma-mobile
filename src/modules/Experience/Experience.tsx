@@ -15,7 +15,6 @@ import { dateToISOString } from '../../utils/dates.utils'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import { types as UserJobsTypes } from '../UserJobs'
 import styles from './Experience.styles'
-import { extractUserJobsFormValues } from './Experience.utils'
 import ExperienceForm from './Form/ExperienceForm'
 import { INITIAL_VALUES } from './Form/ExperienceForm.constants'
 
@@ -36,15 +35,6 @@ const Experience = ({ userJobs, organisations, skills, onJobCreate, onFilterSkil
   const handleAddUserJob = useCallback(() => {
     setIsSaved(true)
   }, [])
-
-  const handleEditUserJob = useCallback(
-    (item: any) => {
-      const values = extractUserJobsFormValues(item)
-      setFormState({ ...formState, values })
-      setIsSaved(true)
-    },
-    [formState],
-  )
 
   const handleUserJobsFormSave = () => {
     const values = evolve({
