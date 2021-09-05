@@ -3,7 +3,7 @@ import React from 'react'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../modules/HomeNavigation/HomeNavigation.types'
 import { WithChildren } from '../../types/react.types'
-import ButtonAdd from '../ButtonAdd'
+import ButtonAdd from '../Button/Add'
 import EmptyCard from '../EmptyCard'
 import Header from '../Header'
 import Optional from '../Optional'

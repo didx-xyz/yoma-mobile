@@ -2,9 +2,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { AddIcon } from '../../assets/images'
-import { Colors } from '../../styles'
-import Button, { ButtonVariants } from '../Button'
+import { AddIcon } from '../../../assets/images'
+import { Colors } from '../../../styles'
+import Button, { ButtonVariants } from '../index'
 import styles from './ButtonAdd.styles'
 
 interface Props {
