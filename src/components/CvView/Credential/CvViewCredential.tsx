@@ -1,0 +1,30 @@
+import React from 'react'
+import { View } from 'react-native'
+
+import Optional from '../../Optional'
+import Text from '../../Typography'
+import styles from './CvViewCredential.styles'
+import CvViewCredentialHeader from './CvViewCredentialHeader'
+
+interface Props extends React.ComponentProps<typeof CvViewCredentialHeader> {
+  description?: string
+}
+
+const CvViewCredential = ({ description, iconUrl, subtitle, title, isValidated, onEdit }: Props) => {
+  return (
+    <View style={styles.container}>
+      <CvViewCredentialHeader
+        title={title}
+        subtitle={subtitle}
+        iconUrl={iconUrl}
+        isValidated={isValidated}
+        onEdit={onEdit}
+      />
+      <Optional condition={description !== ''}>
+        <Text.Body style={styles.description}>{description}</Text.Body>
+      </Optional>
+    </View>
+  )
+}
+
+export default CvViewCredential

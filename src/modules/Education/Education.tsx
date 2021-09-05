@@ -1,90 +1,66 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, EmptyCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
 import { FormikProps, FormikValues } from 'formik'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FlatList, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 
-import { MOCKED_EDUCATION_DATA } from './Education.constants'
+import Card from '../../components/Card'
+import CvView, { CvViewCredentialTypes, CvViewList } from '../../components/CvView'
+import CvViewCredential from '../../components/CvView/Credential'
+import Header from '../../components/Header'
+import Optional from '../../components/Optional'
+import ViewContainer from '../../components/ViewContainer'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
+import { NORMALISED_EDUCATION_MOCK } from './Education.constants'
 import styles from './Education.styles'
-import { EducationEntry } from './Education.types'
 import EducationForm from './EducationForm/EducationForm'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
+  qualifications: CvViewCredentialTypes.CvViewCredentialsData
 }
 
-const Education = ({ navigation }: Props) => {
+const Education = ({ navigation, qualifications = NORMALISED_EDUCATION_MOCK }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [isSaveButtonActive, setIsSaveButtonActive] = useState(false)
   const formRef = useRef<FormikProps<FormikValues>>()
-
-  const renderItem = ({
-    description,
-    startDate,
-    endDate,
-    organisationLogoURL,
-    qualification,
-    school,
-  }: EducationEntry) => {
-    return (
-      <InfoCard
-        title={school}
-        subtitle={qualification}
-        description={description}
-        startDate={startDate}
-        endDate={endDate}
-        logo={organisationLogoURL}
-      />
-    )
-  }
 
   const toggleSaveButtonState = (hasFormChanged: boolean) => {
     setIsSaveButtonActive(hasFormChanged)
   }
 
   return (
-    <ViewContainer style={styles.container}>
-      <NormalHeader
-        navigation={navigation}
-        headerText={t('Education')}
-        isSaveButtonEnabled={isSaveButtonActive}
-        onSave={() => formRef.current?.handleSubmit()}
-        onAdd={() => {
-          setIsSaved(true)
-        }}
-        showAddButton={!isSaved}
-      />
-      <Optional
-        condition={isSaved}
-        fallback={
-          <Optional
-            condition={MOCKED_EDUCATION_DATA.length > 0}
-            fallback={
-              <EmptyCard
-                title={t('Which school, university or college did you attend?')}
-                onAdd={() => setIsSaved(true)}
-              />
-            }
-          >
-            <FlatList
-              data={MOCKED_EDUCATION_DATA}
-              contentContainerStyle={styles.listContainer}
-              renderItem={({ item }) => renderItem(item)}
-              keyExtractor={item => item.school}
-            />
-          </Optional>
-        }
-      >
+    <Optional
+      condition={isEditing}
+      fallback={
+        <CvView
+          title={t('Education')}
+          noDataMessage={t('Which school, university or college did you attend?')}
+          onAdd={() => {
+            setIsEditing(true)
+          }}
+          navigation={navigation}
+        >
+          <CvViewList data={qualifications} RenderItem={CvViewCredential} />
+        </CvView>
+      }
+    >
+      <ViewContainer style={styles.container}>
+        <Header
+          navigation={navigation}
+          headerText={t('Education')}
+          isSaveButtonEnabled={isSaveButtonActive}
+          onSave={() => formRef.current?.handleSubmit()}
+          showAddButton={false}
+        />
         <ScrollView>
           <Card>
             <EducationForm ref={formRef} changeButtonState={toggleSaveButtonState} />
           </Card>
         </ScrollView>
-      </Optional>
-    </ViewContainer>
+      </ViewContainer>
+    </Optional>
   )
 }
 

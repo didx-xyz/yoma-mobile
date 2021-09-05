@@ -1,38 +1,29 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, EmptyCard, InfoCard, NormalHeader, Optional, ViewContainer } from 'components'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import Card from '../../components/Card'
+import CvViewCredential from '../../components/CvView/Credential'
+import EmptyCard from '../../components/EmptyCard'
+import Header from '../../components/Header'
+import Optional from '../../components/Optional'
+import ViewContainer from '../../components/ViewContainer'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import { MOCK_COURSES } from './CompletedCourses.constants'
 import styles from './CompletedCourses.styles'
-import { CourseEntry } from './CompletedCourses.types'
 import NewCourseForm from './Form/NewCourseForm'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedCourses>
 }
-
-const renderCourseEntry = ({ course, description, startDate, endDate, organisationLogoUrl }: CourseEntry) => {
-  return (
-    <InfoCard
-      title={course}
-      description={description}
-      startDate={startDate}
-      endDate={endDate}
-      logo={organisationLogoUrl}
-    />
-  )
-}
-
 const CompletedCourses = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
 
   return (
     <ViewContainer style={styles.container}>
-      <NormalHeader
+      <Header
         navigation={navigation}
         headerText={
           <Optional condition={isEditing} fallback={t('Courses')}>
@@ -53,8 +44,7 @@ const CompletedCourses = ({ navigation }: Props) => {
             <FlatList
               data={MOCK_COURSES}
               contentContainerStyle={styles.listContainer}
-              renderItem={({ item }) => renderCourseEntry(item)}
-              keyExtractor={item => item.course}
+              renderItem={({ item }) => <CvViewCredential {...item} onEdit={() => console.log('edit me')} />}
             />
           </Optional>
         }

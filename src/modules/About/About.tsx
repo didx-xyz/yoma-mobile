@@ -1,5 +1,4 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, FormWrapper, InfoModal, NormalHeader, ViewContainer } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
@@ -7,6 +6,11 @@ import { useTranslation } from 'react-i18next'
 import { TextInput, View } from 'react-native'
 import { Colors } from 'styles'
 
+import Card from '../../components/Card'
+import FormWrapper from '../../components/FormWrapper'
+import Header from '../../components/Header'
+import InfoModal from '../../components/InfoModal'
+import ViewContainer from '../../components/ViewContainer'
 import styles from './About.styles'
 
 interface Props {
@@ -29,7 +33,7 @@ const About = ({ navigation, onBiographySave, biography }: Props) => {
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
         }
       />
-      <NormalHeader
+      <Header
         isSaveButtonEnabled
         navigation={navigation}
         headerText={t('About')}
