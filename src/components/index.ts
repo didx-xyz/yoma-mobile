@@ -11,8 +11,6 @@ import FirstTimeCard from './FirstTimeCard'
 import FormWrapper from './FormWrapper'
 import InfoModal from './InfoModal'
 import Input from './Input'
-import ListCard from './ListCard'
-import NormalHeader from './NormalHeader'
 import OnboardingForms from './OnboardingForms'
 import Optional from './Optional'
 import ProfilePhoto from './ProfilePhoto'
@@ -38,8 +36,6 @@ export {
   OnboardingForms,
   InfoModal,
   Input,
-  ListCard,
-  NormalHeader,
   Optional,
   ProfilePhoto,
   ProgressCircle,

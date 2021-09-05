@@ -1,10 +1,15 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, EmptyCard, NormalHeader, Optional, SkillCard, ViewContainer } from 'components'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList } from 'react-native'
 
+import Card from '../../components/Card'
+import EmptyCard from '../../components/EmptyCard'
+import Header from '../../components/Header'
+import Optional from '../../components/Optional'
+import SkillCard from '../../components/SkillCard'
+import ViewContainer from '../../components/ViewContainer'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import SkillsForm from './Form/MySkillsForm'
 import { MOCK_SKILLS } from './MySkills.constants'
 import styles from './MySkills.styles'
@@ -19,7 +24,7 @@ const MySkills = ({ navigation }: Props) => {
 
   return (
     <ViewContainer style={styles.container}>
-      <NormalHeader
+      <Header
         navigation={navigation}
         headerText={
           <Optional condition={isEditing} fallback={t('Skills')}>

@@ -2,7 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { PurpleQuarter } from 'assets/images'
 import { Card, ViewContainer } from 'components'
 import Button from 'components/Button'
-import LargeHeader from 'components/LargeHeader'
+import HeaderLarge from 'components/HeaderLarge'
 import SSO from 'components/SSO'
 import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
@@ -23,7 +23,7 @@ const Register = ({ navigation, onAuthWithSocial }: Props) => {
 
   return (
     <ViewContainer style={styles.container}>
-      <LargeHeader
+      <HeaderLarge
         navigation={navigation}
         backgroundColor={Colors.PrimaryYellow}
         circleImage={<PurpleQuarter />}

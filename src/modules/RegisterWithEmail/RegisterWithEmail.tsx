@@ -8,7 +8,7 @@ import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 import { Colors } from 'styles'
 
-import LargeHeader from '../../components/LargeHeader'
+import HeaderLarge from '../../components/HeaderLarge'
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import RegisterForm from './RegisterForm/RegisterForm'
 import styles from './RegisterWithEmail.styles'
@@ -24,7 +24,7 @@ const RegisterWithEmail = ({ navigation, onRegisterUser }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <ScrollView>
-        <LargeHeader
+        <HeaderLarge
           navigation={navigation}
           backgroundColor={Colors.SecondaryPurple}
           circleImage={<YellowCircleRight />}

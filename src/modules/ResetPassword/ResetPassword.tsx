@@ -7,7 +7,7 @@ import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 import { Colors } from 'styles'
 
-import LargeHeader from '../../components/LargeHeader'
+import HeaderLarge from '../../components/HeaderLarge'
 import Text, { Bold, HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './ResetPassword.styles'
 import { ResetPasswordRoute } from './ResetPassword.types'
@@ -31,7 +31,7 @@ const ResetPassword = ({ navigation, route }: Props) => {
   return (
     <ViewContainer>
       <ScrollView contentContainerStyle={styles.container}>
-        <LargeHeader
+        <HeaderLarge
           navigation={navigation}
           backgroundColor={Colors.PrimaryYellow}
           circleImage={<PurpleQuarter />}

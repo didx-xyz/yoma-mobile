@@ -2,8 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvCard, { CvCardListBody } from '../../../components/CvCard'
-import UserCredentialItem from '../../../components/UserCredentialItem'
+import CvWidget, { CvWidgetCredential, CvWidgetList } from '../../../components/CvWidget'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import { NormalisedUserChallengeItem } from '../../UserChallenges/UserChallenges.types'
@@ -15,7 +14,7 @@ interface Props {
 const CompletedChallengesWidget = ({ challenges, navigation }: Props) => {
   const { t } = useTranslation()
   return (
-    <CvCard
+    <CvWidget
       count={challenges.ids.length}
       badgeColor={Colors.SecondaryPurple}
       title={t('Completed challenges')}
@@ -24,14 +23,14 @@ const CompletedChallengesWidget = ({ challenges, navigation }: Props) => {
         navigation.navigate(HomeNavigationRoutes.UserChallenges)
       }}
     >
-      <CvCardListBody
+      <CvWidgetList
         data={challenges}
         onViewAll={() => {
           navigation.navigate(HomeNavigationRoutes.UserChallenges)
         }}
-        Item={UserCredentialItem}
+        RenderItem={CvWidgetCredential}
       />
-    </CvCard>
+    </CvWidget>
   )
 }
 export default CompletedChallengesWidget

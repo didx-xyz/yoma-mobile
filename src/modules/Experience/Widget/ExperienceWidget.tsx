@@ -2,8 +2,7 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvCard, { CvCardListBody } from '../../../components/CvCard'
-import UserCredentialItem from '../../../components/UserCredentialItem'
+import CvWidget, { CvWidgetCredential, CvWidgetList } from '../../../components/CvWidget'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import { NormalisedUserJobs } from '../../UserJobs/UserJobs.types'
@@ -15,7 +14,7 @@ interface Props {
 const ExperienceWidget = ({ userJobs, navigation }: Props) => {
   const { t } = useTranslation()
   return (
-    <CvCard
+    <CvWidget
       count={userJobs.ids.length}
       badgeColor={Colors.SecondaryPurple}
       title={t('Experience')}
@@ -24,14 +23,14 @@ const ExperienceWidget = ({ userJobs, navigation }: Props) => {
         navigation.navigate(HomeNavigationRoutes.Experience)
       }}
     >
-      <CvCardListBody
+      <CvWidgetList
         data={userJobs}
         onViewAll={() => {
           navigation.navigate(HomeNavigationRoutes.Experience)
         }}
-        Item={UserCredentialItem}
+        RenderItem={CvWidgetCredential}
       />
-    </CvCard>
+    </CvWidget>
   )
 }
 export default ExperienceWidget
