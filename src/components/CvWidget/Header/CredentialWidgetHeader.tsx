@@ -14,14 +14,14 @@ type Props = {
   header: string
   hasBorder?: boolean
   hasCountBadge?: boolean
-  rightComponent?: ReactNode
+  actionItem?: ReactNode
 }
 
 const CredentialWidgetHeader = ({
   count = CV_WIDGET_COUNT_FALLBACK,
   color,
   header,
-  rightComponent,
+  actionItem,
   hasBorder = false,
   hasCountBadge = true,
 }: Props) => {
@@ -34,8 +34,8 @@ const CredentialWidgetHeader = ({
       <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple} style={styles.header}>
         {header}
       </Text.Header>
-      <View style={styles.rightAccessory}>
-        <Optional condition={!!rightComponent}>{rightComponent}</Optional>
+      <View style={styles.actionItem}>
+        <Optional condition={!!actionItem}>{actionItem}</Optional>
       </View>
     </View>
   )

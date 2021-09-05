@@ -20,7 +20,7 @@ type Props = WithChildren<{
 const CvView = ({ title, noDataMessage, onAdd, navigation, children }: Props) => {
   return (
     <ViewContainer style={styles.container}>
-      <Header navigation={navigation} headerText={title} actionRight={<ButtonAdd onPress={onAdd} />} />
+      <Header navigation={navigation} headerText={title} actionItem={<ButtonAdd onPress={onAdd} />} />
       <Optional condition={!!children} fallback={<EmptyCard title={noDataMessage} onAdd={onAdd} />}>
         {children}
       </Optional>

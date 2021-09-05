@@ -1,13 +1,13 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { BackIconGrey } from 'assets/images'
 import Button, { ButtonVariants } from 'components/Button'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View } from 'react-native'
+import { View } from 'react-native'
 import { Colors } from 'styles'
 
 import { types as HomeNavigationTypes } from '../../modules/HomeNavigation'
 import ButtonAdd from '../ButtonAdd'
+import ButtonBack from '../ButtonBack'
 import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
 import styles from './Header.styles'
@@ -19,7 +19,7 @@ type Props = {
   showAddButton?: boolean
   onAdd?: () => void
   isSaveButtonEnabled?: boolean
-  actionRight?: React.ReactNode
+  actionItem?: React.ReactNode
 }
 
 const Header = ({
@@ -29,21 +29,19 @@ const Header = ({
   showAddButton = false,
   isSaveButtonEnabled = false,
   onAdd,
-  actionRight,
+  actionItem,
 }: Props) => {
   const { t } = useTranslation()
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={navigation.goBack}>
-        <BackIconGrey />
-      </TouchableOpacity>
+      <ButtonBack onPress={navigation.goBack} />
       <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple}>
         {headerText}
       </Text.Header>
       <Optional
-        // TODO: refactoring to only expect the actionRight
-        condition={!!actionRight}
+        // TODO: refactoring to only expect the actionItem
+        condition={!!actionItem}
         fallback={
           <Optional
             condition={showAddButton}
@@ -63,7 +61,7 @@ const Header = ({
           </Optional>
         }
       >
-        {actionRight}
+        {actionItem}
       </Optional>
     </View>
   )

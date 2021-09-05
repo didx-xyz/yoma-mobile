@@ -16,7 +16,7 @@ const styles = {
     borderBottomWidth: 2,
     borderBottomColor: colors[Colors.BackgroundGrey],
   } as ViewStyle,
-  rightAccessory: {
+  actionItem: {
     marginLeft: 'auto',
     zIndex: 10,
   } as ViewStyle,

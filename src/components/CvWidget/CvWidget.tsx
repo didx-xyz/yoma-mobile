@@ -25,7 +25,7 @@ const CvWidget = ({ title, fallback, count, badgeColor = Colors.White, onEdit, c
       count={count}
       header={title}
       hasCountBadge={isNotNil(count) as boolean}
-      rightComponent={<IconButtonEdit onPress={onEdit} />}
+      actionItem={<IconButtonEdit onPress={onEdit} />}
       hasBorder
     />
     <View style={styles.content}>
