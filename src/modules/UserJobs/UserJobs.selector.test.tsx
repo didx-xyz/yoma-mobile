@@ -43,43 +43,4 @@ describe('modules/UserJobs/UserJobs.selector', () => {
       expect(result).toEqual('FORM_VALUES')
     })
   })
-  describe('selectUserJobItems', () => {
-    it('should return userJobsItems from userJobs state', () => {
-      const stateMock = rootStateFixture({
-        userJobs: {
-          ids: ['11111-5717-4562-b3fc-2c963f66afa6'],
-          entities: { '11111-5717-4562-b3fc-2c963f66afa6': USER_JOBS_MOCK[0] },
-        },
-      })
-      // when ... we call the selector
-      // @ts-ignore
-      const result = SUT.selectUserJobItems(stateMock)
-
-      // then ... should return result as expected
-      expect(result).toEqual([
-        {
-          job: {
-            id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-            title: 'TITLE',
-            description: 'DESCRIPTION',
-            createdAt: '2021-08-02T10:32:47.302Z',
-            createdByAdmin: true,
-            language: 'EN',
-            published: true,
-            skills: ['SKILL'],
-            countries: ['COUNTRY'],
-            organisationId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-            organisationName: 'NAME',
-            organisationLogoURL: 'LOGO',
-            organisationURL: 'URL',
-            organisationPrimaryContactName: 'CONTACT_NAME',
-            organisationPrimaryContactEmail: 'EMAIL',
-            organisationPrimaryContactPhone: 'PHONE',
-          },
-          startDate: '2021-06-02T10:32:47.330Z',
-          endDate: '2021-08-02T10:32:47.330Z',
-        },
-      ])
-    })
-  })
 })
