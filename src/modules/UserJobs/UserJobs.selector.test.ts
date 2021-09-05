@@ -1,7 +1,6 @@
 import { rootStateFixture } from 'redux/redux.test.fixtures'
 
 import * as SUT from './UserJobs.selector'
-import { USER_JOBS_MOCK } from './UserJobs.test.fixtures'
 
 describe('modules/UserJobs/UserJobs.selector', () => {
   describe('selectUserJobs ', () => {
