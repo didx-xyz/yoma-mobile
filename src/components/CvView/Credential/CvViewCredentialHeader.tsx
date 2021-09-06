@@ -19,6 +19,7 @@ const CvViewCredentialHeader = ({ iconUrl, metadata = [], title, isValidated, on
   const [subtitleArray, setSubtitleArray] = useState<string[]>([])
 
   useEffect(() => {
+    console.log({ metadata })
     setSubtitleArray(Array.isArray(metadata) ? metadata : [metadata])
   }, [metadata])
 

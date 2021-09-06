@@ -1,5 +1,20 @@
 import { format } from 'date-fns/fp'
-import { always, apply, applySpec, compose, join, path, pathOr, pick, pipe, prop, props, values } from 'ramda'
+import {
+  always,
+  apply,
+  applySpec,
+  compose,
+  isEmpty,
+  join,
+  path,
+  pathOr,
+  pick,
+  pipe,
+  prop,
+  props,
+  reject,
+  values,
+} from 'ramda'
 
 import { DATES_DIVIDER, DATE_DURATION_DIVIDER, DATE_TPL_MON_YEAR } from '../../constants/date.constants'
 import { formatIntervalToDuration, newDate } from '../../utils/dates.utils'
@@ -34,4 +49,5 @@ export const getExperienceMetadata = pipe(
     countries: compose(join(', '), pathOr([], ['job', 'countries'])),
   }),
   values,
+  reject(isEmpty),
 )
