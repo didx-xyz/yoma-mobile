@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { View } from 'react-native'
 
 import { Colors } from '../../../styles'
@@ -9,20 +9,13 @@ import styles from './CvViewCredentialHeader.styles'
 
 interface Props {
   title: string
-  metadata?: string[] | string
+  metadata?: string[]
   iconUrl: string
   isValidated: boolean
   onEdit: () => void
 }
 
 const CvViewCredentialHeader = ({ iconUrl, metadata = [], title, isValidated, onEdit }: Props) => {
-  const [subtitleArray, setSubtitleArray] = useState<string[]>([])
-
-  useEffect(() => {
-    console.log({ metadata })
-    setSubtitleArray(Array.isArray(metadata) ? metadata : [metadata])
-  }, [metadata])
-
   return (
     <View style={styles.container}>
       <Avatar name={title} url={iconUrl} isValidated={isValidated} />
@@ -30,7 +23,7 @@ const CvViewCredentialHeader = ({ iconUrl, metadata = [], title, isValidated, on
         <Text.Header level={HeaderLevels.H6} color={Colors.PrimaryDarkGrey}>
           {title}
         </Text.Header>
-        {subtitleArray.map(text => (
+        {metadata.map(text => (
           <Text.Body level={BodyLevels.Small} color={Colors.MenuGrey}>
             {text}
           </Text.Body>
