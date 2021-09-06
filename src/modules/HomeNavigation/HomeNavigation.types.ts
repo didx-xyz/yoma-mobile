@@ -7,7 +7,7 @@ export enum HomeNavigationRoutes {
   Education = 'Education',
   MySkills = 'MySkills',
   CompletedCourses = 'CompletedCourses',
-  UserChallenges = 'UserChallenges',
+  CompletedChallenges = 'CompletedChallenges',
 }
 
 export enum HomeTabRoutes {
@@ -26,5 +26,5 @@ export type HomeNavigatorParamsList = {
   [HomeNavigationRoutes.Education]: undefined
   [HomeNavigationRoutes.MySkills]: undefined
   [HomeNavigationRoutes.CompletedCourses]: undefined
-  [HomeNavigationRoutes.UserChallenges]: undefined
+  [HomeNavigationRoutes.CompletedChallenges]: undefined
 }
