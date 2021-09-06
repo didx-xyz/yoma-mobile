@@ -39,7 +39,7 @@ const CompletedCourses = ({ navigation }: Props) => {
         fallback={
           <Optional
             condition={MOCK_COURSES.length > 0}
-            fallback={<EmptyCard title={t('Have you completed any courses yet?')} onAdd={() => setIsEditing(true)} />}
+            fallback={<EmptyCard title={t('Have you completed any courses yet?')} onPress={() => setIsEditing(true)} />}
           >
             <FlatList
               data={MOCK_COURSES}

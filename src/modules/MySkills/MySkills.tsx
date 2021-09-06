@@ -40,7 +40,7 @@ const MySkills = ({ navigation }: Props) => {
         fallback={
           <Optional
             condition={MOCK_SKILLS.length > 0}
-            fallback={<EmptyCard title={t('Tell us what you are great at.')} onAdd={() => setIsEditing(true)} />}
+            fallback={<EmptyCard title={t('Tell us what you are great at.')} onPress={() => setIsEditing(true)} />}
           >
             <Card style={styles.outerCard}>
               <FlatList

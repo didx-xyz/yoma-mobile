@@ -1,7 +1,7 @@
 export const MOCK_COURSES = [
   {
     id: 1,
-    subtitle: 'Beyond your future challenge',
+    metadata: ['Beyond your future challenge'],
     iconUrl: '',
     isValidated: true,
     title: '',

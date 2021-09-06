@@ -21,7 +21,7 @@ const CvView = ({ title, noDataMessage, onAdd, navigation, children }: Props) =>
   return (
     <ViewContainer style={styles.container}>
       <Header navigation={navigation} headerText={title} actionItem={<ButtonAdd onPress={onAdd} />} />
-      <Optional condition={!!children} fallback={<EmptyCard title={noDataMessage} onAdd={onAdd} />}>
+      <Optional condition={!!children} fallback={<EmptyCard title={noDataMessage} onPress={onAdd} />}>
         {children}
       </Optional>
     </ViewContainer>

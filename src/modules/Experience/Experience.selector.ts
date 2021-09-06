@@ -5,17 +5,17 @@ import { CvViewCredentialTypes } from '../../components/CvView'
 import * as OrganisationsSelectors from '../Organisations/Organisations.selector'
 import * as SkillsSelectors from '../Skills/Skills.selector'
 import { selectUserJobs } from '../UserJobs/UserJobs.selector'
+import { getExperienceMetadata } from './Experience.utils'
 
 export const selectUserJobItems = createSelector<any, any, CvViewCredentialTypes.CvViewCredentialsData>(
   selectUserJobs,
   jobs => {
-    // TODO: fix this to pass correct data (includes company, countries and period for job)
     const ids = jobs.ids
     const entities = map(
       pipe(
         applySpec({
           title: pathOr('', ['job', 'title']),
-          subtitle: pathOr('', ['job', 'organisationName']),
+          metadata: getExperienceMetadata,
           description: pathOr('', ['job', 'description']),
           iconUrl: path(['job', 'organisationLogoURL']),
           isValidated: propOr(false, 'approved'),
