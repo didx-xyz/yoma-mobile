@@ -3,7 +3,7 @@ export const NORMALISED_EDUCATION_MOCK = {
   entities: {
     id1: {
       id: 1,
-      subtitle: 'BA Degree',
+      metadata: ['BA Degree'],
       iconUrl: '',
       title: 'Rhodes University',
       description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. ',
@@ -11,7 +11,7 @@ export const NORMALISED_EDUCATION_MOCK = {
     },
     id2: {
       id: 2,
-      subtitle: 'Matric',
+      metadata: ['Matric'],
       iconUrl: '',
       title: 'South Africa',
       description: '',

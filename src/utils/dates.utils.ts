@@ -6,9 +6,10 @@ export const formatISOWithFallback =
   (dateString: string, fallback = '') =>
     dateString ? format(parseISO(dateString), formatter) : fallback
 
-export const calculateDifferenceInDate = (startDate: string, endDate: string) => {
+export const formatIntervalToDuration = (startDate: string, endDate: string) => {
   const { years, months } = intervalToDuration({ start: new Date(startDate), end: new Date(endDate) })
   return formatDuration({ years, months })
 }
 
-export const dateToISOString = (e: Date) => e.toISOString()
+export const dateToISOString = (date: Date) => date.toISOString()
+export const newDate = (str: string) => new Date(str)

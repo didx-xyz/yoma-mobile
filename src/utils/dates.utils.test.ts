@@ -23,14 +23,14 @@ describe('dates.utils', () => {
     })
   })
 
-  describe('calculateDifferenceInDate', () => {
+  describe('formatIntervalToDuration', () => {
     it.each([
       ['10/12/2020', '11/10/2021', '1 year'],
       ['10/12/2016', '10/12/2016', ''],
       ['05/04/2016', '06/04/2016', '1 month'],
       ['03/05/2012', '07/06/2018', '6 years 4 months'],
     ])('should be able to find the difference with years and months', (startDate, endDate, expected) => {
-      const result = SUT.calculateDifferenceInDate(startDate, endDate)
+      const result = SUT.formatIntervalToDuration(startDate, endDate)
       expect(result).toBe(expected)
     })
   })

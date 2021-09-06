@@ -9,18 +9,18 @@ import styles from './CvViewCredentialHeader.styles'
 
 interface Props {
   title: string
-  subtitle?: string[] | string
+  metadata?: string[] | string
   iconUrl: string
   isValidated: boolean
   onEdit: () => void
 }
 
-const CvViewCredentialHeader = ({ iconUrl, subtitle = [], title, isValidated, onEdit }: Props) => {
+const CvViewCredentialHeader = ({ iconUrl, metadata = [], title, isValidated, onEdit }: Props) => {
   const [subtitleArray, setSubtitleArray] = useState<string[]>([])
 
   useEffect(() => {
-    setSubtitleArray(Array.isArray(subtitle) ? subtitle : [subtitle])
-  }, [subtitle])
+    setSubtitleArray(Array.isArray(metadata) ? metadata : [metadata])
+  }, [metadata])
 
   return (
     <View style={styles.container}>

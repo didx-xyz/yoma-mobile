@@ -10,12 +10,12 @@ interface Props extends React.ComponentProps<typeof CvViewCredentialHeader> {
   description?: string
 }
 
-const CvViewCredential = ({ description, iconUrl, subtitle, title, isValidated, onEdit }: Props) => {
+const CvViewCredential = ({ description, iconUrl, metadata, title, isValidated, onEdit }: Props) => {
   return (
     <View style={styles.container}>
       <CvViewCredentialHeader
         title={title}
-        subtitle={subtitle}
+        metadata={metadata}
         iconUrl={iconUrl}
         isValidated={isValidated}
         onEdit={onEdit}
