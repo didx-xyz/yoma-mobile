@@ -3,8 +3,6 @@ import { StyleSheet, ViewStyle } from 'react-native'
 const styles = {
   container: {
     flexDirection: 'row',
-    marginTop: 0,
-    marginBottom: 0,
   } as ViewStyle,
   content: {
     marginLeft: 12,
