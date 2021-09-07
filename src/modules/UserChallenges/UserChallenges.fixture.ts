@@ -60,7 +60,7 @@ export const USER_CHALLENGES_RESPONSE_MOCK: UserChallenge[] = [
   },
 ]
 
-export const USER_CHALLENGES_MOCK = {
+export const USER_CHALLENGES_STATE_MOCK = {
   ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
   entities: {
     '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
@@ -122,4 +122,4 @@ export const USER_CHALLENGES_MOCK = {
   },
 }
 export const challengesFixture = createFixture(USER_CHALLENGES_RESPONSE_MOCK)
-export const challengesStateFixture = createFixture(USER_CHALLENGES_MOCK)
+export const challengesStateFixture = createFixture(USER_CHALLENGES_STATE_MOCK)

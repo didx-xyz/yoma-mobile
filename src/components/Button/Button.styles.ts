@@ -9,6 +9,7 @@ const baseStyle = {
   paddingHorizontal: 16,
   borderRadius: 60,
   borderWidth: 1,
+  minHeight: 40,
 } as ViewStyle
 
 const styles = {

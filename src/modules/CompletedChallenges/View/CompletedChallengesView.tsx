@@ -7,11 +7,11 @@ import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigat
 
 interface Props {
   onAdd: () => void
-  challenges: CvViewCredentialTypes.CvViewCredentialsData
+  userChallenges: CvViewCredentialTypes.CvViewCredentialsData
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
 }
 
-const CompletedChallengesView = ({ challenges, onAdd, navigation }: Props) => {
+const CompletedChallengesView = ({ userChallenges, onAdd, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <CvView
@@ -20,7 +20,7 @@ const CompletedChallengesView = ({ challenges, onAdd, navigation }: Props) => {
       onAdd={onAdd}
       navigation={navigation}
     >
-      <CvViewList data={challenges} RenderItem={CvViewCredential} />
+      <CvViewList data={userChallenges} RenderItem={CvViewCredential} />
     </CvView>
   )
 }

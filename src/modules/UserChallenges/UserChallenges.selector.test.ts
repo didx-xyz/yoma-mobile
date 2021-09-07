@@ -1,7 +1,7 @@
 import { rootStateFixture } from '../../redux/redux.test.fixtures'
+import { USER_CHALLENGES_STATE_MOCK } from './UserChallenges.fixture'
 import { INITIAL_STATE } from './UserChallenges.reducer'
 import * as SUT from './UserChallenges.selector'
-import { USER_CHALLENGES_MOCK } from './UserChallenges.test.fixtures'
 
 describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
   describe('selectUserChallenges', function () {
@@ -15,11 +15,11 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
     })
     it('should return all the user challenges data', () => {
       // given ...
-      const state = rootStateFixture({ userChallenges: USER_CHALLENGES_MOCK })
+      const state = rootStateFixture({ userChallenges: USER_CHALLENGES_STATE_MOCK })
       // when ...
       const result = SUT.selectUserChallenges(state)
       // then ...
-      expect(result).toEqual(USER_CHALLENGES_MOCK)
+      expect(result).toEqual(USER_CHALLENGES_STATE_MOCK)
     })
   })
 })
