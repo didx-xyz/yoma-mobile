@@ -28,14 +28,21 @@ describe('modules/CompletedChallenges/CompletedChallengesView/CompletedChallenge
       // then ... should return the data required by the experience view
       expect(result).toEqual({
         userChallenges: {
-          ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
+          ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              title: 'Test Qualification',
-              metadata: ['Apr 2021'],
+              title: 'Test Graph',
+              metadata: ['Test Org', 'Apr 2021 - Apr 2021'],
               iconUrl: null,
               isValidated: true,
               description: 'Test Graph',
+            },
+            'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
+              title: 'Test Graph2',
+              metadata: ['Test Org 2', 'Apr 2021 - Apr 2021'],
+              iconUrl: null,
+              isValidated: true,
+              description: 'Test Graph2',
             },
           },
         },

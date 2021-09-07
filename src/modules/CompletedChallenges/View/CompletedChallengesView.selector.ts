@@ -12,7 +12,7 @@ export default createSelector<any, any, { userChallenges: CvViewCredentialTypes.
     const entities = map(
       pipe(
         applySpec({
-          title: pathOr('', ['challenge', 'title']),
+          title: pathOr('', ['challenge', 'name']),
           metadata: getCompletedChallengesMetadata,
           description: pathOr('', ['challenge', 'description']),
           iconUrl: path(['challenge', 'organisationLogoURL']),
