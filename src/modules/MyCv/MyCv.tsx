@@ -25,7 +25,7 @@ const MyCv = ({ navigation, biography }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <HomeHeader navigation={navigation} />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView contentContainerStyle={styles.scrollInnerContainer}>
         <FirstTimeCard />
         <CvWidget
           title={t('About')}
