@@ -3,7 +3,7 @@ import { applySpec, map, path, pathOr, pipe, propOr } from 'ramda'
 
 import { CvViewCredentialTypes } from '../../../components/CvView'
 import { selectUserJobs } from '../../UserJobs/UserJobs.selector'
-import { getExperienceMetadata } from '../Experience.utils'
+import { getExperienceMetadata } from './ExperienceView.utils'
 
 export default createSelector<any, any, { userJobs: CvViewCredentialTypes.CvViewCredentialsData }>(
   selectUserJobs,

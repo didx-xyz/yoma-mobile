@@ -1,7 +1,7 @@
 import { mergeDeepRight } from 'ramda'
 
-import { USER_QUALIFICATIONS_MOCK } from '../UserQualifications/UserQualifications.fixture'
-import * as SUT from './Education.util'
+import { USER_QUALIFICATIONS_MOCK } from '../../UserQualifications/UserQualifications.fixture'
+import * as SUT from './EducationView.util'
 
 describe('modules/Education/Education.utils', () => {
   describe('getEducationMetadata', () => {
