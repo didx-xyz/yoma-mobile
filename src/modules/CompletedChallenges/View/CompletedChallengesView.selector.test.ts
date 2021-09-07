@@ -25,7 +25,7 @@ describe('modules/CompletedChallenges/CompletedChallengesView/CompletedChallenge
       // when ... we call the selector
       const result = SUT.default(mockState)
 
-      // then ... should return the data required by the experience view
+      // then ... should return the data required by the completed challenges view
       expect(result).toEqual({
         userChallenges: {
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
