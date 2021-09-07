@@ -11,9 +11,9 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 const ExperienceViewContainer = ({ onAdd, navigation }: Props) => {
-  const { userJobs } = useSelector(selector)
+  const { jobs } = useSelector(selector)
 
-  return <ExperienceView onAdd={onAdd} navigation={navigation} userJobs={userJobs} />
+  return <ExperienceView onAdd={onAdd} navigation={navigation} jobs={jobs} />
 }
 
 export default ExperienceViewContainer

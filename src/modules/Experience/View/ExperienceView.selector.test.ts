@@ -12,7 +12,7 @@ describe('modules/Experience/Experience.selector', () => {
 
       // then ... should return result as expected
       expect(result).toEqual({
-        userJobs: {
+        jobs: {
           ids: [],
           entities: {},
         },
@@ -27,7 +27,7 @@ describe('modules/Experience/Experience.selector', () => {
 
       // then ... should return the data required by the experience view
       expect(result).toEqual({
-        userJobs: {
+        jobs: {
           ids: ['11111-5717-4562-b3fc-2c963f66afa6'],
           entities: {
             '11111-5717-4562-b3fc-2c963f66afa6': {
