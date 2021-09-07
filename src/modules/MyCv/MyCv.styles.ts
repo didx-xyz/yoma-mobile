@@ -4,9 +4,9 @@ import { Colors, colors } from 'styles'
 const styles = {
   container: {
     backgroundColor: colors[Colors.BackgroundGrey],
-    alignItems: 'center',
+    alignItems: 'stretch',
   } as ViewStyle,
-  scrollContainer: {
+  scrollInnerContainer: {
     paddingVertical: 15,
   } as ViewStyle,
 }

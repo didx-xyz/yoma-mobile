@@ -1,16 +1,18 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { FirstTimeCard, ViewContainer } from 'components'
-import CvWidget from 'components/CvWidget'
-import HomeHeader from 'modules/HomeHeader'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
 
+import CvWidget from '../../components/CvWidget'
+import FirstTimeCard from '../../components/FirstTimeCard'
 import Text, { TextAlign } from '../../components/Typography'
+import ViewContainer from '../../components/ViewContainer'
 import { Colors } from '../../styles'
 import { CompletedChallengesWidget } from '../CompletedChallenges'
-import { UserJobsWidget } from '../UserJobs'
+import { EducationWidget } from '../Education'
+import { ExperienceWidget } from '../Experience'
+import HomeHeader from '../HomeHeader'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import styles from './MyCv.styles'
 
 interface Props {
@@ -23,7 +25,7 @@ const MyCv = ({ navigation, biography }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <HomeHeader navigation={navigation} />
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+      <ScrollView contentContainerStyle={styles.scrollInnerContainer}>
         <FirstTimeCard />
         <CvWidget
           title={t('About')}
@@ -32,14 +34,8 @@ const MyCv = ({ navigation, biography }: Props) => {
         >
           <Text.Body align={TextAlign.Center}>{biography}</Text.Body>
         </CvWidget>
-        <UserJobsWidget navigation={navigation} />
-        <CvWidget
-          count={0}
-          badgeColor={Colors.PrimaryRed}
-          title={t('Education')}
-          fallback={t('Which school, university or college did you attend?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.Education)}
-        />
+        <ExperienceWidget navigation={navigation} />
+        <EducationWidget navigation={navigation} />
         <CvWidget
           count={0}
           badgeColor={Colors.PrimaryGreen}

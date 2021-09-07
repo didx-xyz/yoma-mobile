@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- adding metadata for countries and duration to job experience
+- display qualifications in widget
 
 10 Most Recent:
+- adding metadata for countries and duration to job experience
 - adding generic MyCv View component (with a bunch of refactoring)
 - adding user qualifications to state
 - refactor: renaming createMiddlewareStub
@@ -12,4 +13,3 @@ Latest:
 - adding user skills 'credentials' to state
 - experience - save new/edited experience to backend
 - experience should correctly show all the user's entries
-- adding real data to UserChallenges widget in MyCv

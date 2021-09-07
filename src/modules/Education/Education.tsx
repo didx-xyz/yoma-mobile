@@ -13,7 +13,7 @@ import ViewContainer from '../../components/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import { NORMALISED_EDUCATION_MOCK } from './Education.constants'
 import styles from './Education.styles'
-import EducationForm from './EducationForm/EducationForm'
+import EducationForm from './Form/EducationForm'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>

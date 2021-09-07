@@ -15,7 +15,7 @@ import CompletedChallengesForm from './CompletedChallenges.form'
 import styles from './CompletedChallenges.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.UserChallenges>
+  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
   challenges: CvViewCredentialTypes.CvViewCredentialsData
 }
 

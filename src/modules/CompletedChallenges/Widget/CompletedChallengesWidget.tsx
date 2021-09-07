@@ -20,13 +20,13 @@ const CompletedChallengesWidget = ({ challenges, navigation }: Props) => {
       title={t('Completed challenges')}
       fallback={t('Have you completed any challenges yet?')}
       onEdit={() => {
-        navigation.navigate(HomeNavigationRoutes.UserChallenges)
+        navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
       }}
     >
       <CvWidgetList
         data={challenges}
         onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.UserChallenges)
+          navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
         }}
         RenderItem={CvWidgetCredential}
       />
