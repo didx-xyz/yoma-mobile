@@ -47,7 +47,7 @@ describe('dates.utils', () => {
   })
   describe('formatStartEndDatesWithDuration', () => {
     it('should return the date period as well as the interval length', () => {
-      const durationTimestamps = pick(['startDate', 'endDate'])(USER_JOBS_MOCK[0])
+      const durationTimestamps = { startDate: '2021-06-02T10:32:47.330Z', endDate: '2021-08-02T10:32:47.330Z' }
 
       const result = SUT.formatStartEndWithDurationString(durationTimestamps)
 
