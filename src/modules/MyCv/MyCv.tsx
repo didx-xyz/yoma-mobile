@@ -1,6 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { FirstTimeCard, ViewContainer } from 'components'
-import CvCard from 'components/CvCard'
+import CvWidget from 'components/CvWidget'
 import HomeHeader from 'modules/HomeHeader'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React from 'react'
@@ -25,34 +25,27 @@ const MyCv = ({ navigation, biography }: Props) => {
       <HomeHeader navigation={navigation} />
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <FirstTimeCard />
-        <CvCard
+        <CvWidget
           title={t('About')}
           fallback={t('Your biography is one of the first things recruiters look at. Write a great one!')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.About)}
         >
           <Text.Body align={TextAlign.Center}>{biography}</Text.Body>
-        </CvCard>
+        </CvWidget>
         <UserJobsWidget navigation={navigation} />
-        <CvCard
+        <CvWidget
           count={0}
           badgeColor={Colors.PrimaryRed}
           title={t('Education')}
           fallback={t('Which school, university or college did you attend?')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.Education)}
         />
-        <CvCard
+        <CvWidget
           count={0}
           badgeColor={Colors.PrimaryGreen}
           title={t('My skills')}
           fallback={t('Tell us what you are great at.')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MySkills)}
-        />
-        <CvCard
-          count={0}
-          badgeColor={Colors.PrimaryYellow}
-          title={t('Completed courses')}
-          fallback={t('Have you completed any courses yet?')}
-          onEdit={() => navigation.navigate(HomeNavigationRoutes.CompletedCourses)}
         />
         <CompletedChallengesWidget navigation={navigation} />
       </ScrollView>

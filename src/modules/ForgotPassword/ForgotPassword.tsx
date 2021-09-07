@@ -9,7 +9,7 @@ import { ScrollView, View } from 'react-native'
 import { openInbox } from 'react-native-email-link'
 import { Colors } from 'styles'
 
-import LargeHeader from '../../components/LargeHeader'
+import HeaderLarge from '../../components/HeaderLarge'
 import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
 import styles from './ForgotPassword.styles'
 import ForgotPasswordForm from './ForgotPasswordForm/ForgotPasswordForm'
@@ -25,7 +25,7 @@ const ForgotPassword = ({ navigation }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <ScrollView>
-        <LargeHeader
+        <HeaderLarge
           navigation={navigation}
           backgroundColor={Colors.SecondaryPurple}
           circleImage={<YellowCircleRight />}

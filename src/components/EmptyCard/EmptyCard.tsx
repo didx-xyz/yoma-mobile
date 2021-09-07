@@ -11,10 +11,10 @@ import styles from './EmptyCard.styles'
 
 type Props = {
   title: string
-  onAdd: () => void
+  onPress: () => void
 }
 
-const EmptyCard = ({ title, onAdd }: Props) => {
+const EmptyCard = ({ title, onPress }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
@@ -29,7 +29,7 @@ const EmptyCard = ({ title, onAdd }: Props) => {
       <Text.Body style={styles.text} color={Colors.PrimaryDarkGrey} align={TextAlign.Center}>
         {title}
       </Text.Body>
-      <Button size={ButtonSizes.Slim} label={t('Add')} onPress={onAdd} style={styles.button} />
+      <Button size={ButtonSizes.Slim} label={t('Add')} onPress={onPress} style={styles.button} />
     </View>
   )
 }

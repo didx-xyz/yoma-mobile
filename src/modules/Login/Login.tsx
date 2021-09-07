@@ -1,7 +1,7 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { YellowCircleLeft } from 'assets/images'
 import { Card, ViewContainer } from 'components'
-import LargeHeader from 'components/LargeHeader'
+import HeaderLarge from 'components/HeaderLarge'
 import SSO from 'components/SSO'
 import { SocialVariants } from 'components/SocialButton/SocialButton.types'
 import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
@@ -27,7 +27,7 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
   return (
     <ViewContainer style={styles.container}>
       <ScrollView>
-        <LargeHeader
+        <HeaderLarge
           navigation={navigation}
           backgroundColor={Colors.PrimaryPurple}
           circleImage={<YellowCircleLeft />}

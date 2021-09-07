@@ -3,6 +3,8 @@ Latest:
 - getting app into playstore with changelog
 
 10 Most Recent:
+- adding metadata for countries and duration to job experience
+- adding generic MyCv View component (with a bunch of refactoring)
 - adding user qualifications to state
 - refactor: renaming createMiddlewareStub
 - moving my cv views out of user credential modules
@@ -12,4 +14,3 @@ Latest:
 - experience - save new/edited experience to backend
 - experience should correctly show all the user's entries
 - adding real data to UserChallenges widget in MyCv
-- updating UserChallenges widget component

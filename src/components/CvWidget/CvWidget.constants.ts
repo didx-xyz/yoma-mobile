@@ -1,0 +1,1 @@
+export const CV_WIDGET_COUNT_FALLBACK = 0

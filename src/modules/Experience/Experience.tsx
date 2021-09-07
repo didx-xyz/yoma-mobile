@@ -1,26 +1,25 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { evolve } from 'ramda'
-import React, { useCallback, useState } from 'react'
+import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { FlatList, ScrollView } from 'react-native'
+import { ScrollView } from 'react-native'
 
 import Card from '../../components/Card'
+import CvView, { CvViewCredentialTypes, CvViewList } from '../../components/CvView'
+import CvViewCredential from '../../components/CvView/Credential'
 import { types as DropDownTypes } from '../../components/DropDown'
-import EmptyCard from '../../components/EmptyCard'
-import InfoCard from '../../components/InfoCard'
-import NormalHeader from '../../components/NormalHeader'
+import Header from '../../components/Header'
 import Optional from '../../components/Optional'
 import ViewContainer from '../../components/ViewContainer'
 import { dateToISOString } from '../../utils/dates.utils'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import { types as UserJobsTypes } from '../UserJobs'
 import styles from './Experience.styles'
-import { extractUserJobsFormValues } from './Experience.utils'
 import ExperienceForm from './Form/ExperienceForm'
 import { INITIAL_VALUES } from './Form/ExperienceForm.constants'
 
 interface Props {
-  userJobs: UserJobsTypes.UserJobItem[]
+  userJobs: CvViewCredentialTypes.CvViewCredentialsData
   organisations: DropDownTypes.DropDownList[]
   skills: DropDownTypes.DropDownList[]
   onJobCreate: (job: any) => void
@@ -30,21 +29,12 @@ interface Props {
 
 const Experience = ({ userJobs, organisations, skills, onJobCreate, onFilterSkills, navigation }: Props) => {
   const { t } = useTranslation()
-  const [isSaved, setIsSaved] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const [formState, setFormState] = useState<UserJobsTypes.UserJobsFormState>({ isValid: true, values: INITIAL_VALUES })
 
-  const handleAddUserJob = useCallback(() => {
-    setIsSaved(true)
-  }, [])
-
-  const handleEditUserJob = useCallback(
-    (item: any) => {
-      const values = extractUserJobsFormValues(item)
-      setFormState({ ...formState, values })
-      setIsSaved(true)
-    },
-    [formState],
-  )
+  const handleAddUserJob = () => {
+    setIsEditing(true)
+  }
 
   const handleUserJobsFormSave = () => {
     const values = evolve({
@@ -54,46 +44,28 @@ const Experience = ({ userJobs, organisations, skills, onJobCreate, onFilterSkil
     onJobCreate(values)
   }
 
-  const renderItem = (item: UserJobsTypes.UserJobItem) => {
-    const { job, startDate, endDate } = item
-    return (
-      <InfoCard
-        title={job.title}
-        description={job.description}
-        startDate={startDate}
-        endDate={endDate}
-        logo={job.organisationLogoURL}
-        onEdit={() => handleEditUserJob(item)}
-      />
-    )
-  }
-
   return (
-    <ViewContainer style={styles.container}>
-      <NormalHeader
-        navigation={navigation}
-        headerText={t('Experience')}
-        onSave={handleUserJobsFormSave}
-        onAdd={handleAddUserJob}
-        showAddButton={!isSaved}
-        isSaveButtonEnabled={formState?.isValid}
-      />
-      <Optional
-        condition={isSaved}
-        fallback={
-          <Optional
-            condition={userJobs.length > 0}
-            fallback={<EmptyCard title={t('Where do you currently work?')} onAdd={() => setIsSaved(true)} />}
-          >
-            <FlatList
-              data={userJobs}
-              contentContainerStyle={styles.listContainer}
-              renderItem={({ item }: any) => renderItem(item)}
-              keyExtractor={(item: any) => item.job.id}
-            />
-          </Optional>
-        }
-      >
+    <Optional
+      condition={isEditing}
+      fallback={
+        <CvView
+          title={t('Experience')}
+          noDataMessage={t('Where do you currently work?')}
+          onAdd={handleAddUserJob}
+          navigation={navigation}
+        >
+          <CvViewList data={userJobs} RenderItem={CvViewCredential} />
+        </CvView>
+      }
+    >
+      <ViewContainer style={styles.container}>
+        <Header
+          navigation={navigation}
+          headerText={t('Experience')}
+          onSave={handleUserJobsFormSave}
+          showAddButton={false}
+          isSaveButtonEnabled={formState?.isValid}
+        />
         <ScrollView>
           <Card>
             <ExperienceForm
@@ -105,8 +77,8 @@ const Experience = ({ userJobs, organisations, skills, onJobCreate, onFilterSkil
             />
           </Card>
         </ScrollView>
-      </Optional>
-    </ViewContainer>
+      </ViewContainer>
+    </Optional>
   )
 }
 
