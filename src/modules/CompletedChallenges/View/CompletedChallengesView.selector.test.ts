@@ -1,8 +1,8 @@
 import { rootStateFixture } from '../../../redux/redux.test.fixtures'
-import { USER_QUALIFICATIONS_STATE_MOCK } from '../../UserQualifications/UserQualifications.fixture'
-import * as SUT from './EducationView.selector'
+import { USER_CHALLENGES_STATE_MOCK } from '../../UserChallenges/UserChallenges.fixture'
+import * as SUT from './CompletedChallengesView.selector'
 
-describe('modules/Education/EducationView/EducationView.selector', () => {
+describe('modules/CompletedChallenges/CompletedChallengesView/CompletedChallengesView.selector', () => {
   describe('default selector', () => {
     it('should handle an empty state', () => {
       const stateMock = rootStateFixture()
@@ -12,22 +12,22 @@ describe('modules/Education/EducationView/EducationView.selector', () => {
 
       // then ... should return result as expected
       expect(result).toEqual({
-        userQualifications: {
+        userChallenges: {
           ids: [],
           entities: {},
         },
       })
     })
-    it('should return userQualifications, skills and organisations lists', () => {
+    it('should return userChallenges, skills and organisations lists', () => {
       const mockState = rootStateFixture({
-        userQualifications: USER_QUALIFICATIONS_STATE_MOCK,
+        userChallenges: USER_CHALLENGES_STATE_MOCK,
       })
       // when ... we call the selector
       const result = SUT.default(mockState)
 
       // then ... should return the data required by the experience view
       expect(result).toEqual({
-        userQualifications: {
+        userChallenges: {
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {

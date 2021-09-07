@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
- - display qualifications in view
- 
+- displaying challenges in Completed Challenges view
+
 10 Most Recent:
+- display qualifications in view
 - display qualifications in widget
 - adding metadata for countries and duration to job experience
 - adding generic MyCv View component (with a bunch of refactoring)
@@ -13,4 +14,3 @@ Latest:
 - PascalCasing Colors enum keys
 - adding user skills 'credentials' to state
 - experience - save new/edited experience to backend
-- experience should correctly show all the user's entries

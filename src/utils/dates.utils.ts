@@ -18,15 +18,24 @@ export const formatIntervalToDuration = (startDate: string, endDate: string) => 
 export const dateToISOString = (date: Date) => date.toISOString()
 export const newDate = (str: string) => new Date(str)
 
-type FormatStartEndWithDurationString = (args: { startDate: string; endDate: string }) => string
-export const formatStartEndWithDurationString: FormatStartEndWithDurationString = pipe(
+type FormatStartEndString = (args: { startDate: string; endDate: string }) => string
+export const formatStartEndString: FormatStartEndString = pipe(
   applySpec({
     start: compose(formatFp(DATE_TPL_MON_YEAR), newDate, prop('startDate')),
     datesDivider: always(DATES_DIVIDER),
     end: compose(formatFp(DATE_TPL_MON_YEAR), newDate, prop('endDate')),
+  }),
+  props(['start', 'datesDivider', 'end']),
+  join(' '),
+)
+
+type FormatStartEndWithDurationString = (args: { startDate: string; endDate: string }) => string
+export const formatStartEndWithDurationString: FormatStartEndWithDurationString = pipe(
+  applySpec({
+    startEndString: formatStartEndString,
     durationDivider: always(DATE_DURATION_DIVIDER),
     period: compose(apply(formatIntervalToDuration), values),
   }),
-  props(['start', 'datesDivider', 'end', 'durationDivider', 'period']),
+  props(['startEndString', 'durationDivider', 'period']),
   join(' '),
 )

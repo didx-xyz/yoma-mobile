@@ -11,20 +11,16 @@ import CompletedChallengesView from './View'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
-  challenges: CvViewCredentialTypes.CvViewCredentialsData
 }
 
-const CompletedChallenges = ({ navigation, challenges = NORMALISED_CHALLENGES_MOCK }: Props) => {
+const CompletedChallenges = ({ navigation }: Props) => {
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<FormikProps<FormikValues>>()
 
+  const handleAdd = () => setIsEditing(true)
+
   return (
-    <Optional
-      condition={isEditing}
-      fallback={
-        <CompletedChallengesView onAdd={() => setIsEditing(true)} challenges={challenges} navigation={navigation} />
-      }
-    >
+    <Optional condition={isEditing} fallback={<CompletedChallengesView onAdd={handleAdd} navigation={navigation} />}>
       <CompletedChallengesForm ref={formRef} navigation={navigation} />
     </Optional>
   )
