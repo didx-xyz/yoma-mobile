@@ -9,13 +9,14 @@ import { NormalisedUserJobs } from '../../UserJobs/UserJobs.types'
 
 interface Props {
   userJobs: NormalisedUserJobs
+  count: number
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
-const ExperienceWidget = ({ userJobs, navigation }: Props) => {
+const ExperienceWidget = ({ userJobs, count, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <CvWidget
-      count={userJobs.ids.length}
+      count={count}
       badgeColor={Colors.SecondaryPurple}
       title={t('Experience')}
       fallback={t('Where do you currently work?')}

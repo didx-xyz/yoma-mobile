@@ -10,7 +10,7 @@ describe('modules/CompletedChallenges/CompletedChallengesWidget/CompletedChallen
       // when ...
       const result = SUT.default(state)
       // then ...
-      expect(result).toEqual({ challenges: INITIAL_STATE })
+      expect(result).toEqual({ challenges: INITIAL_STATE, count: 0 })
     })
     it('should return the user challenges data in the expected format', () => {
       // given ...
@@ -76,6 +76,7 @@ describe('modules/CompletedChallenges/CompletedChallengesWidget/CompletedChallen
       const result = SUT.default(state)
       // then ...
       expect(result).toEqual({
+        count: 3,
         challenges: {
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {

@@ -11,7 +11,7 @@ describe('modules/Education/EducationWidget/EducationWidget.selector', () => {
       // when ...
       const result = SUT.default(state)
       // then ...
-      expect(result).toEqual({ qualifications: INITIAL_STATE })
+      expect(result).toEqual({ count: 0, userQualifications: INITIAL_STATE })
     })
     it('should return the user qualifications data in the expected format', () => {
       // given ...
@@ -22,7 +22,8 @@ describe('modules/Education/EducationWidget/EducationWidget.selector', () => {
       const result = SUT.default(state)
       // then ...
       expect(result).toEqual({
-        qualifications: {
+        count: 1,
+        userQualifications: {
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {

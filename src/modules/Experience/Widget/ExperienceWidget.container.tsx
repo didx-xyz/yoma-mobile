@@ -11,8 +11,8 @@ interface Props {
 }
 
 const ExperienceWidgetContainer = ({ navigation }: Props) => {
-  const { userJobs } = useSelector(selector)
-  return <ExperienceWidget userJobs={userJobs} navigation={navigation} />
+  const { userJobs, count } = useSelector(selector)
+  return <ExperienceWidget userJobs={userJobs} count={count} navigation={navigation} />
 }
 
 export default ExperienceWidgetContainer

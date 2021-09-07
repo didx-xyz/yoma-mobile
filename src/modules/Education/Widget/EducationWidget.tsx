@@ -8,14 +8,15 @@ import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigat
 
 interface Props {
   qualifications: CvWidgetTypes.NormalisedCvWidgetCredentialItems
+  count: number
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
 
-const EducationWidget = ({ qualifications, navigation }: Props) => {
+const EducationWidget = ({ qualifications, count, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <CvWidget
-      count={qualifications.ids.length}
+      count={count}
       badgeColor={Colors.PrimaryRed}
       title={t('Education')}
       fallback={t('Which school, university or college did you attend?')}

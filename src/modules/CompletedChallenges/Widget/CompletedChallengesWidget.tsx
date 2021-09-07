@@ -9,13 +9,14 @@ import { NormalisedUserChallengeItem } from '../../UserChallenges/UserChallenges
 
 interface Props {
   challenges: NormalisedUserChallengeItem
+  count: number
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
-const CompletedChallengesWidget = ({ challenges, navigation }: Props) => {
+const CompletedChallengesWidget = ({ challenges, count, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <CvWidget
-      count={challenges.ids.length}
+      count={count}
       badgeColor={Colors.SecondaryPurple}
       title={t('Completed challenges')}
       fallback={t('Have you completed any challenges yet?')}
