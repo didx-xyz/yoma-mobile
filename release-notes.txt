@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- display qualifications in widget
-
+ - display qualifications in view
+ 
 10 Most Recent:
+- display qualifications in widget
 - adding metadata for countries and duration to job experience
 - adding generic MyCv View component (with a bunch of refactoring)
 - adding user qualifications to state
