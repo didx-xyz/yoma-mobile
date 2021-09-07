@@ -11,8 +11,8 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
 }
 const EducationViewContainer = ({ onAdd, navigation }: Props) => {
-  const { userQualifications } = useSelector(selector)
-  return <EducationView onAdd={onAdd} navigation={navigation} qualifications={userQualifications} />
+  const { qualifications } = useSelector(selector)
+  return <EducationView onAdd={onAdd} navigation={navigation} qualifications={qualifications} />
 }
 
 export default EducationViewContainer

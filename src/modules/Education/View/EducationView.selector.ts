@@ -5,7 +5,7 @@ import { CvViewCredentialTypes } from '../../../components/CvView'
 import { selectUserQualifications } from '../../UserQualifications/UserQualifications.selector'
 import { getEducationMetadata } from '../Education.util'
 
-export const selectUserQualificationItems = createSelector<any, any, CvViewCredentialTypes.CvViewCredentialsData>(
+export default createSelector<any, any, { qualifications: CvViewCredentialTypes.CvViewCredentialsData }>(
   selectUserQualifications,
   qualifications => {
     const ids = qualifications.ids
@@ -20,10 +20,6 @@ export const selectUserQualificationItems = createSelector<any, any, CvViewCrede
         }),
       ),
     )(qualifications.entities)
-    return { ids, entities }
+    return { qualifications: { ids, entities } }
   },
 )
-
-export default createSelector(selectUserQualificationItems, userQualifications => ({
-  userQualifications,
-}))
