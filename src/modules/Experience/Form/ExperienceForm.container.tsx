@@ -5,16 +5,16 @@ import { setFilterSearchTerm } from 'modules/Skills/Skills.reducer'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import Experience from './Experience'
-import selector from './Experience.selector'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import ExperienceForm from './ExperienceForm'
+import selector from './ExperienceForm.selector'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
-const ExperienceContainer = ({ navigation }: Props) => {
+const ExperienceFormContainer = ({ navigation }: Props) => {
   const dispatch = useDispatch()
-  const { userJobs, organisations, skills } = useSelector(selector)
+  const { organisations, skills } = useSelector(selector)
 
   const onJobCreate = (job: JobsRequest) => {
     dispatch(createJob(job))
@@ -25,8 +25,7 @@ const ExperienceContainer = ({ navigation }: Props) => {
   }
 
   return (
-    <Experience
-      userJobs={userJobs}
+    <ExperienceForm
       organisations={organisations}
       skills={skills}
       navigation={navigation}
@@ -36,4 +35,4 @@ const ExperienceContainer = ({ navigation }: Props) => {
   )
 }
 
-export default ExperienceContainer
+export default ExperienceFormContainer

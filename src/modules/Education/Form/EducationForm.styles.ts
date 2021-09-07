@@ -3,6 +3,9 @@ import { Colors, colors } from 'styles'
 import { applyAlphaToHex } from 'styles/styles.utils'
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors[Colors.BackgroundGrey],
+  } as ViewStyle,
   row: {
     flexDirection: 'row',
     justifyContent: 'space-around',

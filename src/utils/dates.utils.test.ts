@@ -42,4 +42,13 @@ describe('dates.utils', () => {
       expect(result).toBe('2011-10-05T14:48:00.000Z')
     })
   })
+  describe('formatStartEndDatesWithDuration', () => {
+    it('should return the date period as well as the interval length', () => {
+      const durationTimestamps = { startDate: '2021-06-02T10:32:47.330Z', endDate: '2021-08-02T10:32:47.330Z' }
+
+      const result = SUT.formatStartEndWithDurationString(durationTimestamps)
+
+      expect(result).toBe('Jun 2021 - Aug 2021 • 2 months')
+    })
+  })
 })

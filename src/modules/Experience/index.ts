@@ -1,4 +1,4 @@
-import Experience from './Experience.container'
+import Experience from './Experience'
 import ExperienceWidget from './Widget'
 
 export default Experience
