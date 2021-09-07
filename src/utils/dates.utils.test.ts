@@ -1,4 +1,3 @@
-import { formatStartEndString } from './dates.utils'
 import * as SUT from './dates.utils'
 
 describe('dates.utils', () => {

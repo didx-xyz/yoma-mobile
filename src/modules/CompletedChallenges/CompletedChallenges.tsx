@@ -2,10 +2,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { FormikProps, FormikValues } from 'formik'
 import React, { useRef, useState } from 'react'
 
-import { CvViewCredentialTypes } from '../../components/CvView'
 import Optional from '../../components/Optional'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import { NORMALISED_CHALLENGES_MOCK } from './CompletedChallenges.constants'
 import CompletedChallengesForm from './Form'
 import CompletedChallengesView from './View'
 
