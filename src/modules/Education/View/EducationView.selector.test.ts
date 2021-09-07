@@ -12,7 +12,7 @@ describe('modules/Education/Education.selector', () => {
 
       // then ... should return result as expected
       expect(result).toEqual({
-        qualifications: {
+        userQualifications: {
           ids: [],
           entities: {},
         },
@@ -27,7 +27,7 @@ describe('modules/Education/Education.selector', () => {
 
       // then ... should return the data required by the experience view
       expect(result).toEqual({
-        qualifications: {
+        userQualifications: {
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {

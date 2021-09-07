@@ -9,9 +9,9 @@ import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigat
 interface Props {
   onAdd: () => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
-  qualifications: CvViewCredentialTypes.CvViewCredentialsData
+  userQualifications: CvViewCredentialTypes.CvViewCredentialsData
 }
-const EducationView = ({ onAdd, navigation, qualifications }: Props) => {
+const EducationView = ({ onAdd, navigation, userQualifications }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -21,7 +21,7 @@ const EducationView = ({ onAdd, navigation, qualifications }: Props) => {
       onAdd={onAdd}
       navigation={navigation}
     >
-      <CvViewList data={qualifications} RenderItem={CvViewCredential} />
+      <CvViewList data={userQualifications} RenderItem={CvViewCredential} />
     </CvView>
   )
 }

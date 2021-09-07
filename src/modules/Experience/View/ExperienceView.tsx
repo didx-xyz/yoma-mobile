@@ -9,10 +9,10 @@ import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigat
 interface Props {
   onAdd: () => void
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
-  jobs: CvViewCredentialTypes.CvViewCredentialsData
+  userJobs: CvViewCredentialTypes.CvViewCredentialsData
 }
 
-const ExperienceView = ({ jobs, navigation, onAdd }: Props) => {
+const ExperienceView = ({ userJobs, navigation, onAdd }: Props) => {
   const { t } = useTranslation()
   return (
     <CvView
@@ -21,7 +21,7 @@ const ExperienceView = ({ jobs, navigation, onAdd }: Props) => {
       onAdd={onAdd}
       navigation={navigation}
     >
-      <CvViewList data={jobs} RenderItem={CvViewCredential} />
+      <CvViewList data={userJobs} RenderItem={CvViewCredential} />
     </CvView>
   )
 }
