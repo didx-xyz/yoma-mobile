@@ -1,6 +1,3 @@
-import { pick } from 'ramda'
-
-import { USER_JOBS_MOCK } from '../modules/UserJobs/UserJobs.test.fixtures'
 import * as SUT from './dates.utils'
 
 describe('dates.utils', () => {
