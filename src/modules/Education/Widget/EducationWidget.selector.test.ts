@@ -1,5 +1,5 @@
 import { rootStateFixture } from '../../../redux/redux.test.fixtures'
-import { USER_QUALIFICATION_STATE_MOCK } from '../../UserQualifications/UserQualifications.fixture'
+import { USER_QUALIFICATIONS_STATE_MOCK } from '../../UserQualifications/UserQualifications.fixture'
 import { INITIAL_STATE } from '../../UserQualifications/UserQualifications.reducer'
 import * as SUT from './EducationWidget.selector'
 
@@ -16,7 +16,7 @@ describe('modules/Education/EducationWidget/EducationWidget.selector', () => {
     it('should return the user qualifications data in the expected format', () => {
       // given ...
       const state = rootStateFixture({
-        userQualifications: USER_QUALIFICATION_STATE_MOCK,
+        userQualifications: USER_QUALIFICATIONS_STATE_MOCK,
       })
       // when ...
       const result = SUT.default(state)

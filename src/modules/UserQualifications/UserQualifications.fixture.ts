@@ -1,4 +1,4 @@
-export const USER_QUALIFICATION_MOCK = [
+export const USER_QUALIFICATIONS_MOCK = [
   {
     qualification: {
       organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
@@ -37,7 +37,7 @@ export const USER_QUALIFICATION_MOCK = [
   },
 ]
 
-export const USER_QUALIFICATION_STATE_MOCK = {
+export const USER_QUALIFICATIONS_STATE_MOCK = {
   ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
   entities: {
     '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {

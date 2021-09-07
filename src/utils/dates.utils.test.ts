@@ -1,3 +1,6 @@
+import { pick } from 'ramda'
+
+import { USER_JOBS_MOCK } from '../modules/UserJobs/UserJobs.test.fixtures'
 import * as SUT from './dates.utils'
 
 describe('dates.utils', () => {
@@ -40,6 +43,15 @@ describe('dates.utils', () => {
       const date = new Date('2011-10-05T14:48:00.000Z')
       const result = SUT.dateToISOString(date)
       expect(result).toBe('2011-10-05T14:48:00.000Z')
+    })
+  })
+  describe('formatStartEndDatesWithDuration', () => {
+    it('should return the date period as well as the interval length', () => {
+      const durationTimestamps = pick(['startDate', 'endDate'])(USER_JOBS_MOCK[0])
+
+      const result = SUT.formatStartEndWithDurationString(durationTimestamps)
+
+      expect(result).toBe('Jun 2021 - Aug 2021 • 2 months')
     })
   })
 })
