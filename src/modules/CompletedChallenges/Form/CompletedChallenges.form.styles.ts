@@ -1,6 +1,11 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
+import { Colors, colors } from '../../../styles'
+
 const styles = {
+  container: {
+    backgroundColor: colors[Colors.BackgroundGrey],
+  } as ViewStyle,
   form: {
     flex: 1,
     padding: 12,

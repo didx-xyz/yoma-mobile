@@ -1,18 +1,13 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { FormikProps, FormikValues } from 'formik'
 import React, { useRef, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ScrollView } from 'react-native'
 
-import Card from '../../components/Card'
-import CvView, { CvViewCredential, CvViewCredentialTypes, CvViewList } from '../../components/CvView'
-import Header from '../../components/Header'
+import { CvViewCredentialTypes } from '../../components/CvView'
 import Optional from '../../components/Optional'
-import ViewContainer from '../../components/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import { NORMALISED_CHALLENGES_MOCK } from './CompletedChallenges.constants'
-import CompletedChallengesForm from './CompletedChallenges.form'
-import styles from './CompletedChallenges.styles'
+import CompletedChallengesForm from './Form'
+import CompletedChallengesView from './View'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
@@ -20,7 +15,6 @@ interface Props {
 }
 
 const CompletedChallenges = ({ navigation, challenges = NORMALISED_CHALLENGES_MOCK }: Props) => {
-  const { t } = useTranslation()
   const [isEditing, setIsEditing] = useState(false)
   const formRef = useRef<FormikProps<FormikValues>>()
 
@@ -28,29 +22,10 @@ const CompletedChallenges = ({ navigation, challenges = NORMALISED_CHALLENGES_MO
     <Optional
       condition={isEditing}
       fallback={
-        <CvView
-          title={t('Challenges')}
-          noDataMessage={t('Have you completed any challenges yet?')}
-          onAdd={() => setIsEditing(true)}
-          navigation={navigation}
-        >
-          <CvViewList data={challenges} RenderItem={CvViewCredential} />
-        </CvView>
+        <CompletedChallengesView onAdd={() => setIsEditing(true)} challenges={challenges} navigation={navigation} />
       }
     >
-      <ViewContainer style={styles.container}>
-        <Header
-          navigation={navigation}
-          onSave={formRef.current?.handleSubmit}
-          headerText={t('Add challenge')}
-          showAddButton={false}
-        />
-        <ScrollView>
-          <Card>
-            <CompletedChallengesForm ref={formRef} />
-          </Card>
-        </ScrollView>
-      </ViewContainer>
+      <CompletedChallengesForm ref={formRef} navigation={navigation} />
     </Optional>
   )
 }
