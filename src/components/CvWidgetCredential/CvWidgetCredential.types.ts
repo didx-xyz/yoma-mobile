@@ -1,7 +1,7 @@
 import React from 'react'
 
 import * as Types from '../../types/general.types'
-import { CvWidgetCredential } from './index'
+import CvWidgetCredential from './CvWidgetCredential'
 
 export interface NormalisedCvWidgetCredentialItems {
   ids: string[]

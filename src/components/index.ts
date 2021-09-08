@@ -2,6 +2,7 @@ import Card from './Card'
 import CheckBox from './CheckBox'
 import CountBadge from './CountBadge'
 import CustomInput from './CustomInput'
+import CvViewSkill from './CvViewSkill'
 import DateDisplay from './DateDisplay'
 import DatePicker from './DatePicker'
 import DropDown from './DropDown'
@@ -15,7 +16,6 @@ import OnboardingForms from './OnboardingForms'
 import Optional from './Optional'
 import ProfilePhoto from './ProfilePhoto'
 import ProgressCircle from './ProgressCircle'
-import SkillCard from './SkillCard'
 import Spinner from './Spinner'
 import Tag from './Tag'
 import Upload from './Upload'
@@ -39,7 +39,7 @@ export {
   Optional,
   ProfilePhoto,
   ProgressCircle,
-  SkillCard,
+  CvViewSkill,
   Spinner,
   Tag,
   Upload,

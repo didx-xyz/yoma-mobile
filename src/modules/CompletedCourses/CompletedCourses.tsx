@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
 import Card from '../../components/Card'
-import CvViewCredential from '../../components/CvView/Credential'
+import CvViewCredential from '../../components/CvViewCredential'
 import EmptyCard from '../../components/EmptyCard'
 import Header from '../../components/Header'
 import Optional from '../../components/Optional'

@@ -1,4 +1,4 @@
-import CvViewCredential, { types as CvViewCredentialTypes } from './Credential'
+import CvViewCredential, { types as CvViewCredentialTypes } from '../CvViewCredential'
 import CvView from './CvView'
 import CvViewList from './List'
 

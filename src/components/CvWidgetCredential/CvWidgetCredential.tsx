@@ -2,8 +2,8 @@ import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
 
-import { formatISOWithFallback } from '../../../utils/dates.utils'
-import Avatar from '../../Avatar'
+import { formatISOWithFallback } from '../../utils/dates.utils'
+import Avatar from '../Avatar'
 import styles from './CvWidgetCredential.styles'
 
 interface Props {

@@ -3,7 +3,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CvView, { CvViewCredentialTypes, CvViewList } from '../../../components/CvView'
-import CvViewCredential from '../../../components/CvView/Credential'
+import CvViewCredential from '../../../components/CvViewCredential'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {

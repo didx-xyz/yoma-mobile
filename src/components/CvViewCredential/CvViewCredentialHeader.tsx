@@ -1,10 +1,10 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { Colors } from '../../../styles'
-import Avatar from '../../Avatar'
-import IconButtonEdit from '../../IconButtonEdit'
-import Text, { BodyLevels, HeaderLevels } from '../../Typography'
+import { Colors } from '../../styles'
+import Avatar from '../Avatar'
+import IconButtonEdit from '../IconButtonEdit'
+import Text, { BodyLevels, HeaderLevels } from '../Typography'
 import styles from './CvViewCredentialHeader.styles'
 
 interface Props {

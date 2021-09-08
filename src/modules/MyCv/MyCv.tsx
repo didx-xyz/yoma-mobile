@@ -13,6 +13,8 @@ import { EducationWidget } from '../Education'
 import { ExperienceWidget } from '../Experience'
 import HomeHeader from '../HomeHeader'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
+import { MySkillsWidget } from '../MySkills'
+import { USER_SKILLS_STATE_MOCK } from '../UserSkills/UserSkills.fixture'
 import styles from './MyCv.styles'
 
 interface Props {
@@ -43,6 +45,7 @@ const MyCv = ({ navigation, biography }: Props) => {
           fallback={t('Tell us what you are great at.')}
           onEdit={() => navigation.navigate(HomeNavigationRoutes.MySkills)}
         />
+        <MySkillsWidget userSkills={USER_SKILLS_STATE_MOCK} count={10} navigation={navigation} />
         <CompletedChallengesWidget navigation={navigation} />
       </ScrollView>
     </ViewContainer>

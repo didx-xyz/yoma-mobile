@@ -4,7 +4,7 @@ import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels } from '../Typography'
-import styles from './SkillCard.styles'
+import styles from './CvViewSkill.styles'
 
 type Props = {
   skill: string
@@ -12,7 +12,7 @@ type Props = {
   onPress: () => void
 }
 
-const SkillCard = ({ skill, skillCount, onPress }: Props) => {
+const CvViewSkill = ({ skill, skillCount, onPress }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
@@ -30,4 +30,4 @@ const SkillCard = ({ skill, skillCount, onPress }: Props) => {
   )
 }
 
-export default SkillCard
+export default CvViewSkill

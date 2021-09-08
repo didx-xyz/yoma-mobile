@@ -12,7 +12,7 @@ interface Props {
 
 const EducationWidgetContainer = ({ navigation }: Props) => {
   const { userQualifications, count } = useSelector(selector)
-  return <EducationWidget qualifications={userQualifications} count={count} navigation={navigation} />
+  return <EducationWidget userQualifications={userQualifications} count={count} navigation={navigation} />
 }
 
 export default EducationWidgetContainer

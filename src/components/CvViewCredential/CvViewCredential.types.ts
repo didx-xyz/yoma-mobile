@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { StdObj } from '../../../types/general.types'
+import { StdObj } from '../../types/general.types'
 import CvViewCredential from './index'
 
 export interface CvViewCredentialsData {

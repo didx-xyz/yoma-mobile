@@ -1,6 +1,8 @@
 import { Colors } from './styles.types'
 
 const BACKGROUND_GREY = '#F1F4F8'
+const BLACK = '#000000'
+const DARK_GREY_02 = '#5A5A6F'
 const FACEBOOK_BLUE = '#507CC0'
 const FONT_BLUE = '#162A42'
 const GOOGLE_RED = '#DF4930'
@@ -21,10 +23,11 @@ const SECONDARY_PURPLE = '#5F65B9'
 const SECONDARY_RED = '#A33232'
 const TRANSPARENT = 'transparent'
 const WHITE = '#FFFFFF'
-const BLACK = '#000000'
 
 export default {
   [Colors.BackgroundGrey]: BACKGROUND_GREY,
+  [Colors.Black]: BLACK,
+  [Colors.DarkGrey02]: DARK_GREY_02,
   [Colors.FacebookBlue]: FACEBOOK_BLUE,
   [Colors.FontBlue]: FONT_BLUE,
   [Colors.GoogleRed]: GOOGLE_RED,
@@ -45,5 +48,4 @@ export default {
   [Colors.SecondaryRed]: SECONDARY_RED,
   [Colors.Transparent]: TRANSPARENT,
   [Colors.White]: WHITE,
-  [Colors.Black]: BLACK,
 }

@@ -2,13 +2,13 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvWidget, { CvWidgetCredential, CvWidgetList } from '../../../components/CvWidget'
+import CvWidget, { CvWidgetList } from '../../../components/CvWidget'
+import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '../../../components/CvWidgetCredential'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
-import { NormalisedUserJobs } from '../../UserJobs/UserJobs.types'
 
 interface Props {
-  userJobs: NormalisedUserJobs
+  userJobs: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
   count: number
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
