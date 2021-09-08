@@ -1,3 +1,3 @@
-import MyCv from './MyCv.container'
+import MyCv from './MyCv'
 
 export default MyCv

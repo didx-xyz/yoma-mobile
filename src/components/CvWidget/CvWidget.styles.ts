@@ -8,7 +8,7 @@ const styles = {
     marginTop: 10,
     marginHorizontal: 10,
     paddingHorizontal: 10,
-    paddingBottom: 10,
+    paddingBottom: 0,
   } as ViewStyle,
   content: {
     flex: 1,

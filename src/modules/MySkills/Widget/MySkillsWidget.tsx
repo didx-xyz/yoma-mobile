@@ -3,35 +3,36 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CvWidget, { CvWidgetList } from '../../../components/CvWidget'
-import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '../../../components/CvWidgetCredential'
+import CvWidgetSkill, { types as CvWidgetSkillTypes } from '../../../components/CvWidgetSkill'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {
-  userChallenges: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
+  userSkills: CvWidgetSkillTypes.NormalisedCvWidgetSkillItems
   count: number
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
-const CompletedChallengesWidget = ({ userChallenges, count, navigation }: Props) => {
+const MySkillsWidget = ({ userSkills, count, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <CvWidget
       count={count}
-      badgeColor={Colors.SecondaryPurple}
-      title={t('Completed challenges')}
-      fallback={t('Have you completed any challenges yet?')}
+      badgeColor={Colors.PrimaryGreen}
+      title={t('My skills')}
+      fallback={t('Tell us what you are great at.')}
       onEdit={() => {
-        navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
+        navigation.navigate(HomeNavigationRoutes.MySkills)
       }}
     >
       <CvWidgetList
-        data={userChallenges}
+        data={userSkills}
         onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
+          navigation.navigate(HomeNavigationRoutes.MySkills)
         }}
-        RenderItem={CvWidgetCredential}
+        maxDisplay={3}
+        RenderItem={CvWidgetSkill}
       />
     </CvWidget>
   )
 }
-export default CompletedChallengesWidget
+export default MySkillsWidget

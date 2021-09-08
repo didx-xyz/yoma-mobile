@@ -2,7 +2,8 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvView, { CvViewCredential, CvViewCredentialTypes, CvViewList } from '../../../components/CvView'
+import CvView, { CvViewList } from '../../../components/CvView'
+import CvViewCredential, { types as CvViewCredentialTypes } from '../../../components/CvViewCredential'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {

@@ -2,20 +2,22 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvWidget, { CvWidgetCredential, CvWidgetList, types as CvWidgetTypes } from '../../../components/CvWidget'
+import CvWidget, { CvWidgetList } from '../../../components/CvWidget'
+import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '../../../components/CvWidgetCredential'
 import { Colors } from '../../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {
-  qualifications: CvWidgetTypes.NormalisedCvWidgetCredentialItems
+  userQualifications: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
+  count: number
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
 
-const EducationWidget = ({ qualifications, navigation }: Props) => {
+const EducationWidget = ({ userQualifications, count, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <CvWidget
-      count={qualifications.ids.length}
+      count={count}
       badgeColor={Colors.PrimaryRed}
       title={t('Education')}
       fallback={t('Which school, university or college did you attend?')}
@@ -24,7 +26,7 @@ const EducationWidget = ({ qualifications, navigation }: Props) => {
       }}
     >
       <CvWidgetList
-        data={qualifications}
+        data={userQualifications}
         onViewAll={() => {
           navigation.navigate(HomeNavigationRoutes.Education)
         }}

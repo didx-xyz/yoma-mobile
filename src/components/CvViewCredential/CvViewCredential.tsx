@@ -1,8 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import Optional from '../../Optional'
-import Text from '../../Typography'
+import Optional from '../Optional'
+import Text from '../Typography'
 import styles from './CvViewCredential.styles'
 import CvViewCredentialHeader from './CvViewCredentialHeader'
 

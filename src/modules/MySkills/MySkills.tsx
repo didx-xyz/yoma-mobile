@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next'
 import { FlatList } from 'react-native'
 
 import Card from '../../components/Card'
+import CvViewSkill from '../../components/CvViewSkill'
 import EmptyCard from '../../components/EmptyCard'
 import Header from '../../components/Header'
 import Optional from '../../components/Optional'
-import SkillCard from '../../components/SkillCard'
 import ViewContainer from '../../components/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import SkillsForm from './Form/MySkillsForm'
@@ -45,7 +45,7 @@ const MySkills = ({ navigation }: Props) => {
             <Card style={styles.outerCard}>
               <FlatList
                 data={MOCK_SKILLS}
-                renderItem={({ item }) => <SkillCard skill={item.skill} skillCount={item.count} onPress={() => {}} />}
+                renderItem={({ item }) => <CvViewSkill skill={item.skill} skillCount={item.count} onPress={() => {}} />}
                 keyExtractor={item => item.skill}
               />
             </Card>

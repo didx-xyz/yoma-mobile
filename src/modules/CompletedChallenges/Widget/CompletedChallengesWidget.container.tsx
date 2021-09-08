@@ -11,8 +11,8 @@ interface Props {
 }
 
 const CompletedChallengesWidgetContainer = ({ navigation }: Props) => {
-  const { challenges } = useSelector(selector)
-  return <CompletedChallengesWidget challenges={challenges} navigation={navigation} />
+  const { userChallenges, count } = useSelector(selector)
+  return <CompletedChallengesWidget userChallenges={userChallenges} count={count} navigation={navigation} />
 }
 
 export default CompletedChallengesWidgetContainer
