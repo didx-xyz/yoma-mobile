@@ -1,33 +1,20 @@
+import Text, { HeaderLevels } from 'components/Typography'
 import React from 'react'
-import { useTranslation } from 'react-i18next'
-import { TouchableOpacity, View } from 'react-native'
-import { Colors } from 'styles'
+import { View } from 'react-native'
 
-import Text, { BodyLevels, HeaderLevels } from '../Typography'
+import { Colors } from '../../styles'
 import styles from './CvViewSkill.styles'
 
-type Props = {
-  skill: string
-  skillCount: number
-  onPress: () => void
+interface Props {
+  name: string
 }
 
-const CvViewSkill = ({ skill, skillCount, onPress }: Props) => {
-  const { t } = useTranslation()
-  return (
-    <View style={styles.container}>
-      <Text.Header level={HeaderLevels.H6} color={Colors.PrimaryDarkGrey}>
-        {skill}
-        <Text.Body level={BodyLevels.Small} color={Colors.MenuGrey}>
-          {' '}
-          • {skillCount}
-        </Text.Body>
-      </Text.Header>
-      <TouchableOpacity onPress={onPress}>
-        <Text.Header level={HeaderLevels.H6}>{t('Skills acquired')}</Text.Header>
-      </TouchableOpacity>
-    </View>
-  )
-}
+const CvViewSkill = ({ name }: Props) => (
+  <View style={styles.container}>
+    <Text.Header level={HeaderLevels.H6} color={Colors.DarkGrey02}>
+      {name}
+    </Text.Header>
+  </View>
+)
 
 export default CvViewSkill
