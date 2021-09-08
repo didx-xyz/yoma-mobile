@@ -1,11 +1,19 @@
-import { rootStateFixture } from '../../redux/redux.test.fixtures'
-import * as SUT from './MyCv.selector'
+import { rootStateFixture } from '../../../redux/redux.test.fixtures'
+import * as SUT from './AboutWidget.selector'
 
-describe('modules/MyCv/MyCv.selector', () => {
-  describe('selector', () => {
+describe('modules/About/AboutWidget/AboutWidget.selector', () => {
+  describe('selector ', () => {
+    it('should handle empty user state', () => {
+      // given ...
+      const stateMock = rootStateFixture({})
+      // when ... we call the selector
+      const result = SUT.default(stateMock)
+      // then ... should return result as expected
+      expect(result).toEqual({ biography: '' })
+    })
     it('should select props as expected when available in state', () => {
       // given ...
-      const state = rootStateFixture({
+      const stateMock = rootStateFixture({
         user: {
           id: 'USER_ID',
           firstName: 'FIRST_NAME',
@@ -26,7 +34,7 @@ describe('modules/MyCv/MyCv.selector', () => {
         },
       })
       // when ... we call the selector
-      const result = SUT.default(state)
+      const result = SUT.default(stateMock)
       // then ... should return result as expected
       expect(result).toEqual({ biography: 'BIOGRAPHY' })
     })

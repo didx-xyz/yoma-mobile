@@ -6,13 +6,13 @@ import { Colors } from '../../styles'
 import styles from './CvWidgetSkill.styles'
 
 interface Props {
-  skillName: string
+  name: string
 }
 
-const CvWidgetSkill = ({ skillName }: Props) => (
+const CvWidgetSkill = ({ name }: Props) => (
   <View style={styles.container}>
     <Text.Header level={HeaderLevels.H6} color={Colors.DarkGrey02}>
-      {skillName}
+      {name}
     </Text.Header>
   </View>
 )
