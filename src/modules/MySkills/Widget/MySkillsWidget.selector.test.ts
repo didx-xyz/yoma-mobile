@@ -1,4 +1,4 @@
-import { rootStateFixture } from '../../../redux/redux.test.fixtures'
+import { rootStateFixture } from '../../../redux/redux.fixture'
 import { USER_SKILLS_STATE_MOCK } from '../../UserSkills/UserSkills.fixture'
 import * as SUT from './MySkillsWidget.selector'
 

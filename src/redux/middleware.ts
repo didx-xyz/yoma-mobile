@@ -9,6 +9,7 @@ import { middleware as ApiMiddleware, utils as ApiUtils, apiConfig } from '../ap
 import { types as ApiUsersTypes } from '../api/users'
 import { middleware as AppMiddleware } from '../modules/App'
 import { middleware as AuthMiddleware } from '../modules/Auth'
+import { middleware as ChallengesMiddleware } from '../modules/Challenges'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import { middleware as JobsMiddleware } from '../modules/Jobs'
 import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
@@ -52,6 +53,9 @@ const featureModuleMiddleware = [
   AuthMiddleware.registrationSuccessFlow({ notification: showSimpleMessage }),
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
+  ChallengesMiddleware.fetchChallengesFlow,
+  ChallengesMiddleware.normaliseChallengesFlow(ReduxUtils.normalise),
+  ChallengesMiddleware.setChallengesFlow,
   ErrorMiddleware.categorizeErrorsFlow,
   JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
   JobsMiddleware.createJobFlow,

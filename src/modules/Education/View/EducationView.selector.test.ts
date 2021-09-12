@@ -1,4 +1,4 @@
-import { rootStateFixture } from '../../../redux/redux.test.fixtures'
+import { rootStateFixture } from '../../../redux/redux.fixture'
 import { USER_QUALIFICATIONS_STATE_MOCK } from '../../UserQualifications/UserQualifications.fixture'
 import * as SUT from './EducationView.selector'
 

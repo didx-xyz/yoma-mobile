@@ -1,4 +1,4 @@
-import { rootStateFixture } from '../../../redux/redux.test.fixtures'
+import { rootStateFixture } from '../../../redux/redux.fixture'
 import { USER_JOBS_NORMALISED_MOCK } from '../../UserJobs/UserJobs.test.fixtures'
 import * as SUT from './ExperienceView.selector'
 

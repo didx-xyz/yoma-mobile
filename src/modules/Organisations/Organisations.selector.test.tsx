@@ -1,5 +1,4 @@
-import { rootStateFixture } from 'redux/redux.test.fixtures'
-
+import { rootStateFixture } from '../../redux/redux.fixture'
 import * as SUT from './Organisations.selector'
 
 describe('modules/Organisations/Organisations.selector', () => {

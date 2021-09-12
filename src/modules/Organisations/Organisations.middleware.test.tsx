@@ -1,10 +1,10 @@
 import { mergeRight } from 'ramda'
-import { rootStateFixture } from 'redux/redux.test.fixtures'
 import { extractDataFromPayload } from 'utils/redux.utils'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiOrganisationsConstants } from '../../api/organisations'
+import { rootStateFixture } from '../../redux/redux.fixture'
 import * as SUT from './Organisations.middleware'
 import {
   fetchOrganisations,
