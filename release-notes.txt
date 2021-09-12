@@ -1,7 +1,9 @@
 Ver 0.0.1
 Latest:
+- Adding Challeges to state
 
 10 Most Recent:
+- display skills in My CV My Skills view
 - adding Skills widget with real data
 - displaying challenges in Completed Challenges view
 - display qualifications in view
@@ -12,6 +14,3 @@ Latest:
 - refactor: renaming createMiddlewareStub
 - moving my cv views out of user credential modules
 - refactor - pascal casing all type enums
-- PascalCasing Colors enum keys
-- adding user skills 'credentials' to state
-- experience - save new/edited experience to backend

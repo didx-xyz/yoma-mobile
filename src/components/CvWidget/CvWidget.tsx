@@ -13,12 +13,12 @@ import CredentialWidgetHeader from './Header'
 
 type Props = WithChildren<{
   title: string
-  fallback: string
+  noDataMessage: string
   count?: number
   badgeColor?: Colors
   onEdit: () => void
 }>
-const CvWidget = ({ title, fallback, count, badgeColor = Colors.White, onEdit, children }: Props) => (
+const CvWidget = ({ title, noDataMessage, count, badgeColor = Colors.White, onEdit, children }: Props) => (
   <View style={styles.container}>
     <CredentialWidgetHeader
       color={badgeColor}
@@ -31,7 +31,7 @@ const CvWidget = ({ title, fallback, count, badgeColor = Colors.White, onEdit, c
     <View style={styles.content}>
       <Optional
         condition={shouldShowContent(count, children)}
-        fallback={<Text.Body align={TextAlign.Center}>{fallback}</Text.Body>}
+        fallback={<Text.Body align={TextAlign.Center}>{noDataMessage}</Text.Body>}
       >
         {children}
       </Optional>

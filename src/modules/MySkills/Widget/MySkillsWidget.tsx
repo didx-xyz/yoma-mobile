@@ -19,7 +19,7 @@ const MySkillsWidget = ({ userSkills, count, navigation }: Props) => {
       count={count}
       badgeColor={Colors.PrimaryGreen}
       title={t('My skills')}
-      fallback={t('Tell us what you are great at.')}
+      noDataMessage={t('Tell us what you are great at.')}
       onEdit={() => {
         navigation.navigate(HomeNavigationRoutes.MySkills)
       }}

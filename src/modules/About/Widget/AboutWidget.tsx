@@ -15,7 +15,7 @@ const AboutWidget = ({ biography, navigation }: Props) => {
   return (
     <CvWidget
       title={t('About')}
-      fallback={t('Your biography is one of the first things recruiters look at. Write a great one!')}
+      noDataMessage={t('Your biography is one of the first things recruiters look at. Write a great one!')}
       onEdit={() => {
         navigation.navigate(HomeNavigationRoutes.About)
       }}

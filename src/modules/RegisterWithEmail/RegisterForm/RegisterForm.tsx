@@ -1,16 +1,20 @@
-import { CheckBox, DropDown, Input, OnboardingForms, Spinner } from 'components'
-import Button from 'components/Button'
 import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
-import { AuthRegistration } from 'modules/Auth/Auth.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Colors } from 'styles'
-import { nameHasDigitsOrSymbols } from 'utils/regex'
-import { mapToDropDownArray } from 'utils/strings.utils'
 import * as yup from 'yup'
 
+import Button from '../../../components/Button'
+import CheckBox from '../../../components/CheckBox'
+import DropDown from '../../../components/DropDown'
+import Input from '../../../components/Input'
+import OnboardingForms from '../../../components/OnboardingForms'
+import Spinner from '../../../components/Spinner'
 import { Span } from '../../../components/Typography'
+import { Colors } from '../../../styles'
+import * as RegexUtils from '../../../utils/regex'
+import * as StringUtils from '../../../utils/strings.utils'
+import { AuthRegistration } from '../../Auth/Auth.types'
 import styles from './RegisterForm.styles'
 
 interface Props {
@@ -39,7 +43,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
           .max(50)
           .required(t('required'))
           .test('First name', 'First name cannot include numbers or symbols', value => {
-            return !nameHasDigitsOrSymbols(value!)
+            return !RegexUtils.nameHasDigitsOrSymbols(value!)
           })
           .label('First name'),
         lastName: yup
@@ -48,7 +52,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
           .max(50)
           .required(t('required'))
           .test('Last name', 'Last name cannot include numbers or symbols', value => {
-            return !nameHasDigitsOrSymbols(value!)
+            return !RegexUtils.nameHasDigitsOrSymbols(value!)
           })
           .label('Last name'),
         email: yup
@@ -92,7 +96,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
               autoCapitalize="none"
             />
             <DropDown
-              items={mapToDropDownArray(countries, 'code', 'name')}
+              items={StringUtils.mapToDropDownArray(countries, 'code', 'name')}
               name={'countryAlpha2'}
               label={'Country'}
               handlers={formikHandlers}

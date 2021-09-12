@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
+import { View } from 'react-native'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../modules/HomeNavigation/HomeNavigation.types'
 import { WithChildren } from '../../types/react.types'
@@ -22,7 +23,7 @@ const CvView = ({ title, noDataMessage, onAdd, navigation, children }: Props) =>
     <ViewContainer style={styles.container}>
       <Header navigation={navigation} headerText={title} actionItem={<ButtonAdd onPress={onAdd} />} />
       <Optional condition={!!children} fallback={<EmptyCard title={noDataMessage} onPress={onAdd} />}>
-        {children}
+        <View style={styles.content}>{children}</View>
       </Optional>
     </ViewContainer>
   )

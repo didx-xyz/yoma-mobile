@@ -1,4 +1,4 @@
-import { rootStateFixture } from '../../../redux/redux.test.fixtures'
+import { rootStateFixture } from '../../../redux/redux.fixture'
 import { INITIAL_STATE } from '../../UserChallenges/UserChallenges.reducer'
 import * as SUT from './CompletedChallengesWidget.selector'
 

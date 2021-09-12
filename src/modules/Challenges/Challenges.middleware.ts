@@ -1,48 +1,59 @@
+import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
+import { actions as ApiActions } from '../../api'
+import { constants as ApiChallengesConstants } from '../../api/challenges'
 import { StdFn } from '../../types/general.types'
-import * as UserActions from '../User/User.reducer'
-import { UserCredentials } from '../User/User.types'
-import { getUserChallengesSuccess, normaliseUserChallengesSuccess, setUserChallenges } from './UserChallenges.reducer'
-import { NormalisedUserChallenges, UserChallenge } from './UserChallenges.types'
+import { extractDataFromPayload } from '../../utils/redux.utils'
+import {
+  fetchChallenges,
+  fetchChallengesFailure,
+  fetchChallengesSuccess,
+  normaliseChallengesSuccess,
+  setChallenges,
+} from './Challenges.reducer'
+import { Challenge, NormalisedChallenges } from './Challenges.types'
 
-export const getUserChallengesFromCredentialsFlow =
-  (
-    extractDataFromPayload: StdFn<any, UserCredentials>,
-    extractChallenges: StdFn<UserCredentials, UserChallenge[]>,
-  ): Middleware =>
+export const fetchChallengesFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (UserActions.fetchUserCredentialsSuccess.match(action)) {
+    if (fetchChallenges.match(action)) {
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiChallengesConstants.CHALLENGES_GET_ALL_CONFIG, {
+            onSuccess: fetchChallengesSuccess,
+            onFailure: fetchChallengesFailure,
+          }),
+          action.payload,
+        ),
+      )
+    }
+    return result
+  }
+
+export const normaliseChallengesFlow =
+  (normalise: StdFn<Challenge[], NormalisedChallenges>): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchChallengesSuccess.match(action)) {
       const data = extractDataFromPayload(action)
-      const challenges = extractChallenges(data)
-      dispatch(getUserChallengesSuccess(challenges))
+      const challenges = normalise(data)
+      dispatch(normaliseChallengesSuccess(challenges))
     }
     return result
   }
 
-export const normaliseUserChallengesFlow =
-  (normalise: StdFn<UserChallenge[], NormalisedUserChallenges>): Middleware =>
+export const setChallengesFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (getUserChallengesSuccess.match(action)) {
-      const normalisedChallenges = normalise(action.payload)
-      dispatch(normaliseUserChallengesSuccess(normalisedChallenges))
-    }
-    return result
-  }
-
-export const setUserChallengesFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-    if (normaliseUserChallengesSuccess.match(action)) {
-      dispatch(setUserChallenges(action.payload))
+    if (normaliseChallengesSuccess.match(action)) {
+      dispatch(setChallenges(action.payload))
     }
     return result
   }

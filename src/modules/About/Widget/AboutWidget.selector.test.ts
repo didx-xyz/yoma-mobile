@@ -1,4 +1,4 @@
-import { rootStateFixture } from '../../../redux/redux.test.fixtures'
+import { rootStateFixture } from '../../../redux/redux.fixture'
 import * as SUT from './AboutWidget.selector'
 
 describe('modules/About/AboutWidget/AboutWidget.selector', () => {

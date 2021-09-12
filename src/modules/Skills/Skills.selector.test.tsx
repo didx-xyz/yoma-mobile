@@ -1,6 +1,6 @@
 import { keys, repeat, zipObj } from 'ramda'
-import { rootStateFixture } from 'redux/redux.test.fixtures'
 
+import { rootStateFixture } from '../../redux/redux.fixture'
 import * as SUT from './Skills.selector'
 
 describe('modules/Skills/Skills.selector', () => {

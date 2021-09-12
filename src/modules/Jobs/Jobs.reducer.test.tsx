@@ -1,5 +1,4 @@
-import { rootStateFixture } from 'redux/redux.test.fixtures'
-
+import { rootStateFixture } from '../../redux/redux.fixture'
 import SUT, { INITIAL_STATE, clearJob, setJob } from './Jobs.reducer'
 import { JOB_MOCK } from './Jobs.test.fixtures'
 

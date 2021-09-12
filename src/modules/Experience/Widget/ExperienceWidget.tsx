@@ -19,7 +19,7 @@ const ExperienceWidget = ({ userJobs, count, navigation }: Props) => {
       count={count}
       badgeColor={Colors.SecondaryPurple}
       title={t('Experience')}
-      fallback={t('Where do you currently work?')}
+      noDataMessage={t('Where do you currently work?')}
       onEdit={() => {
         navigation.navigate(HomeNavigationRoutes.Experience)
       }}

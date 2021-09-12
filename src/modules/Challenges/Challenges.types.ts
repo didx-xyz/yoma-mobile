@@ -1,3 +1,5 @@
+import { NormalisedData } from '../../redux/redux.types'
+
 export interface Challenge {
   organisationId: string
   organisationName: string
@@ -14,3 +16,7 @@ export interface Challenge {
   endTime: string | null
   published: boolean
 }
+
+export type NormalisedChallenges = NormalisedData<Challenge>
+
+export type ChallengesState = NormalisedChallenges

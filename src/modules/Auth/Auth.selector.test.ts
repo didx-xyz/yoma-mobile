@@ -1,4 +1,4 @@
-import { rootStateFixture } from '../../redux/redux.test.fixtures'
+import { rootStateFixture } from '../../redux/redux.fixture'
 import * as SUT from './Auth.selector'
 
 describe('modules/Auth/Auth.selector', () => {
