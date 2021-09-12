@@ -1,10 +1,12 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { View } from 'react-native'
 
 import CvView, { CvViewList } from '../../../components/CvView'
 import CvViewSkill, { types as CvViewSkillTypes } from '../../../components/CvViewSkill'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import styles from './MySkillsView.styles'
 
 interface Props {
   onAdd: () => void
@@ -21,7 +23,11 @@ const MySkillsView = ({ userSkills, onAdd, navigation }: Props) => {
       onAdd={onAdd}
       navigation={navigation}
     >
-      <CvViewList data={userSkills} RenderItem={CvViewSkill} />
+      <View style={styles.container}>
+        <View style={styles.content}>
+          <CvViewList data={userSkills} RenderItem={CvViewSkill} />
+        </View>
+      </View>
     </CvView>
   )
 }

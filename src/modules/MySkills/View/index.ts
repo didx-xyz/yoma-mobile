@@ -1,3 +1,3 @@
-import MySkillsView from './MySkillsView'
+import MySkillsView from './MySkillsView.container'
 
 export default MySkillsView

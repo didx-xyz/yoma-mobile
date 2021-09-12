@@ -1,8 +1,8 @@
 import { rootStateFixture } from '../../../redux/redux.test.fixtures'
 import { USER_SKILLS_STATE_MOCK } from '../../UserSkills/UserSkills.fixture'
-import * as SUT from './MySkillsWidget.selector'
+import * as SUT from './MySkillsView.selector'
 
-describe('modules/MySkills/MySkillsWidget/MySkillsWidget.selector', () => {
+describe('modules/MySkills/MySkillsView/MySkillsView.selector', () => {
   describe('default', function () {
     it('should correctly handle an empty state', () => {
       // given ...
@@ -10,7 +10,7 @@ describe('modules/MySkills/MySkillsWidget/MySkillsWidget.selector', () => {
       // when ...
       const result = SUT.default(state)
       // then ...
-      expect(result).toEqual({ count: 0, userSkills: { ids: [], entities: {} } })
+      expect(result).toEqual({ userSkills: { ids: [], entities: {} } })
     })
     it('should return the user skills data in the expected format', () => {
       // given ...
@@ -22,9 +22,17 @@ describe('modules/MySkills/MySkillsWidget/MySkillsWidget.selector', () => {
 
       // then ...
       expect(result).toEqual({
-        count: 8,
         userSkills: {
-          ids: ['Web Design', 'Data Science', 'Presentations'],
+          ids: [
+            'Web Design',
+            'Data Science',
+            'Presentations',
+            'Machine Learning',
+            'Business Process Modeling',
+            'Digital Marketing',
+            'Computer Literacy',
+            'Mobile Application Development',
+          ],
           entities: {
             'Web Design': {
               name: 'Web Design',
@@ -34,6 +42,21 @@ describe('modules/MySkills/MySkillsWidget/MySkillsWidget.selector', () => {
             },
             Presentations: {
               name: 'Presentations',
+            },
+            'Machine Learning': {
+              name: 'Machine Learning',
+            },
+            'Business Process Modeling': {
+              name: 'Business Process Modeling',
+            },
+            'Digital Marketing': {
+              name: 'Digital Marketing',
+            },
+            'Computer Literacy': {
+              name: 'Computer Literacy',
+            },
+            'Mobile Application Development': {
+              name: 'Mobile Application Development',
             },
           },
         },

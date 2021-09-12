@@ -11,7 +11,7 @@ interface Props {
 
 const CvViewSkill = ({ name }: Props) => (
   <View style={styles.container}>
-    <Text.Header level={HeaderLevels.H6} color={Colors.DarkGrey02}>
+    <Text.Header level={HeaderLevels.H6} color={Colors.PrimaryDarkGrey}>
       {name}
     </Text.Header>
   </View>

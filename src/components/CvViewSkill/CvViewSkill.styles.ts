@@ -1,11 +1,14 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
+import { Colors, colors } from '../../styles'
+
 const styles = {
   container: {
+    margin: 0,
+    borderBottomWidth: 1,
     height: 48,
-    alignItems: 'flex-start',
-    paddingHorizontal: 6,
     justifyContent: 'center',
+    borderBottomColor: colors[Colors.LightGrey],
   } as ViewStyle,
 }
 

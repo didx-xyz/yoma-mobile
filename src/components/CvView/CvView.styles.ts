@@ -6,6 +6,9 @@ const styles = {
   container: {
     backgroundColor: colors[Colors.BackgroundGrey],
   } as ViewStyle,
+  content: {
+    paddingTop: 10,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

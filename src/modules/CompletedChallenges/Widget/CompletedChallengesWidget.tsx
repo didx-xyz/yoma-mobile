@@ -19,7 +19,7 @@ const CompletedChallengesWidget = ({ userChallenges, count, navigation }: Props)
       count={count}
       badgeColor={Colors.SecondaryPurple}
       title={t('Completed challenges')}
-      fallback={t('Have you completed any challenges yet?')}
+      noDataMessage={t('Have you completed any challenges yet?')}
       onEdit={() => {
         navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
       }}
