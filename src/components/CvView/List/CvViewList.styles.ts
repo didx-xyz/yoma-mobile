@@ -2,7 +2,7 @@ import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
   container: {
-    paddingTop: 0,
+    paddingTop: 10,
   } as ViewStyle,
 }
 

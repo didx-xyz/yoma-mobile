@@ -7,7 +7,7 @@ const styles = {
     backgroundColor: colors[Colors.BackgroundGrey],
   } as ViewStyle,
   content: {
-    paddingTop: 10,
+    paddingTop: 0,
   } as ViewStyle,
 }
 

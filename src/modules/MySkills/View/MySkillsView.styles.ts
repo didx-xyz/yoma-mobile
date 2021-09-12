@@ -8,6 +8,7 @@ const styles = {
   container: {
     backgroundColor: colors[Colors.White],
     borderRadius: 12,
+    marginTop: 10,
     marginHorizontal: 10,
     padding: 10,
     ...StyleUtils.dropShadow(5, 5, 23, applyAlphaToHex(Colors.DarkGrey02, 0.15), 5),

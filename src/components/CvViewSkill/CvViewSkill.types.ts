@@ -1,9 +1,9 @@
 import React from 'react'
 
 import * as Types from '../../types/general.types'
-import CvWidgetSkill from './CvViewSkill'
+import CvViewSkill from './CvViewSkill'
 
 export interface NormalisedCvWidgetSkillItems {
   ids: string[]
-  entities: Types.StdObj<React.ComponentProps<typeof CvWidgetSkill>>
+  entities: Types.StdObj<React.ComponentProps<typeof CvViewSkill>>
 }
