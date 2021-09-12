@@ -52,7 +52,6 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, onJ
         navigation={navigation}
         headerText={t('Experience')}
         onSave={handleUserJobsFormSave}
-        showAddButton={false}
         isSaveButtonEnabled={formState?.isValid}
       />
       <ScrollView>

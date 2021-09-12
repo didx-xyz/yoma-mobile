@@ -20,7 +20,7 @@ const EducationWidget = ({ userQualifications, count, navigation }: Props) => {
       count={count}
       badgeColor={Colors.PrimaryRed}
       title={t('Education')}
-      fallback={t('Which school, university or college did you attend?')}
+      noDataMessage={t('Which school, university or college did you attend?')}
       onEdit={() => {
         navigation.navigate(HomeNavigationRoutes.Education)
       }}

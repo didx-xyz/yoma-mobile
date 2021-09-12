@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- adding Skills widget with real data
+- display skills in My CV My Skills view
 
 10 Most Recent:
+- adding Skills widget with real data
 - displaying challenges in Completed Challenges view
 - display qualifications in view
 - display qualifications in widget
@@ -13,5 +14,3 @@ Latest:
 - moving my cv views out of user credential modules
 - refactor - pascal casing all type enums
 - PascalCasing Colors enum keys
-- adding user skills 'credentials' to state
-- experience - save new/edited experience to backend

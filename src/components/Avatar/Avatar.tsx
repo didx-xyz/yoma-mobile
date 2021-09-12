@@ -2,9 +2,9 @@ import React from 'react'
 import { Image, View } from 'react-native'
 
 import { Colors } from '../../styles'
+import Optional from '../Optional'
 import Text, { HeaderLevels } from '../Typography'
 import VerifiedTick from '../VerifiedTick'
-import { Optional } from '../index'
 import styles from './Avatar.styles'
 
 interface AvatarFallbackProps {
