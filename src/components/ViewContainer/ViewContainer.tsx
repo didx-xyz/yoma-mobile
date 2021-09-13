@@ -26,7 +26,7 @@ const ViewContainer = ({
     <View style={[styles.container, style]}>
       <StatusBar
         hidden={statusHidden}
-        barStyle="dark-content"
+        barStyle={statusBarStyle}
         backgroundColor={colors[backgroundColor]}
         translucent
         {...statusBarProps}
