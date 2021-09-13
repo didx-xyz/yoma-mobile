@@ -1,4 +1,4 @@
-import { FormikProps, FormikValues } from 'formik'
+import { FormikProps } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -14,7 +14,7 @@ import styles from './DropDownTags.styles'
 type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
   name: string
   label: string
-  handlers: FormikProps<FormikValues>
+  handlers: FormikProps<any>
 }
 
 const renderTags = (tags: string[], onDelete: (tag: string) => void) =>

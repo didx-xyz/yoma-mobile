@@ -1,6 +1,6 @@
 import DateTimePicker from '@react-native-community/datetimepicker'
 import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
-import { FormikProps, FormikValues } from 'formik'
+import { FormikProps } from 'formik'
 import React, { useCallback, useState } from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Colors } from 'styles'
@@ -14,10 +14,10 @@ import styles from './DatePicker.styles'
 type Props = Omit<GetComponentProps<typeof DateTimePicker>, 'value'> & {
   name: string
   label: string
-  handlers: FormikProps<FormikValues>
+  handlers: FormikProps<any> // figure out proper prop-scoping
 }
 
-const DatePicker = ({ name, label, handlers, ...props }: Props) => {
+const DatePicker = ({ name, label, handlers }: Props) => {
   const [date, setDate] = useState(new Date())
   const [showDatePicker, setShowDatePicker] = useState(false)
 
@@ -46,7 +46,8 @@ const DatePicker = ({ name, label, handlers, ...props }: Props) => {
         </Text.Body>
       </TouchableOpacity>
       {showDatePicker && (
-        <DateTimePicker value={date} mode={'date'} onChange={onChange} maximumDate={new Date()} {...props} />
+        // <DateTimePicker value={date} mode={'date'} onChange={onChange} maximumDate={new Date()} {...props} />
+        <DateTimePicker value={date} onChange={onChange} maximumDate={new Date()} />
       )}
       <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
         {errors[name] && touched[name] ? errors[name] : ' '}

@@ -20,7 +20,7 @@ const Landing = ({ navigation }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <ViewContainer>
+    <ViewContainer backgroundColor={Colors.PrimaryYellow}>
       <Background>
         <RedSemiCircle style={styles.redSemiCircle} />
         <View style={styles.purpleSemiCircleContainer}>

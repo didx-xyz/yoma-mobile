@@ -1,5 +1,5 @@
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
-import { FormikProps, FormikValues } from 'formik'
+import { FormikProps } from 'formik'
 import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
@@ -11,7 +11,7 @@ import styles from './DropDown.styles'
 type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
   name: string
   label: string
-  handlers: FormikProps<FormikValues>
+  handlers: FormikProps<any>
 }
 
 const DropDown = ({ name, label, handlers, ...props }: Props) => {
