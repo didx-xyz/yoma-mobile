@@ -11,6 +11,7 @@ type Props = StatusBarProps &
     statusHidden?: boolean
     statusBarStyle?: StatusBarStyle
     backgroundColor?: Colors
+    translucent?: boolean
     style?: ViewStyle
   }>
 
@@ -19,6 +20,7 @@ const ViewContainer = ({
   statusBarStyle = StatusBarStyle.DarkContent,
   statusHidden = false,
   backgroundColor = Colors.White,
+  translucent = false,
   style,
   ...statusBarProps
 }: Props) => {
@@ -28,7 +30,7 @@ const ViewContainer = ({
         hidden={statusHidden}
         barStyle={statusBarStyle}
         backgroundColor={colors[backgroundColor]}
-        translucent
+        translucent={translucent}
         {...statusBarProps}
       />
       {children}
