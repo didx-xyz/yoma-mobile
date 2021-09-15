@@ -40,10 +40,6 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, h
     }
   }, [handlers, hasSelectedChallenge])
 
-  useEffect(() => {
-    console.log({ values: handlers.values })
-  }, [handlers.values])
-
   return (
     <ViewContainer style={styles.container}>
       <Header
