@@ -6,8 +6,8 @@ import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
 import { IconInfo } from '../../../assets/images'
+import DateRangeSelect from '../../../component s/DateRangeSelect'
 import CheckBoxInput from '../../../components/CheckBoxInput'
-import DateRangeSelect from '../../../components/DateRangeSelect'
 import DropDown from '../../../components/DropDown'
 import { DropDownItem } from '../../../components/DropDown/DropDown.types'
 import FormGroup from '../../../components/FormGroup'
@@ -35,7 +35,7 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, h
   const [hasSelectedChallenge, setHasSelectedChallenge] = useState(false)
 
   useEffect(() => {
-    if (handlers.values.challenge !== '' && !hasSelectedChallenge) {
+    if (handlers.values.challengeId !== '' && !hasSelectedChallenge) {
       setHasSelectedChallenge(true)
     }
   }, [handlers, hasSelectedChallenge])
@@ -64,7 +64,7 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, h
           </Optional>
         </FormGroup>
         <Optional condition={hasSelectedChallenge}>
-          <ChallengeInfo challenge={challenges.entities[handlers.values.challenge]} />
+          <ChallengeInfo challenge={challenges.entities[handlers.values.challengeId]} />
         </Optional>
       </ScrollView>
     </ViewContainer>

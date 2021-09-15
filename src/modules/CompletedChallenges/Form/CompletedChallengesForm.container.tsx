@@ -4,17 +4,17 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
-import { UserChallengeFormFields } from '../../UserChallenges/UserChallenges.types'
 import CompletedChallengesForm from './CompletedChallengesForm'
 import { INITIAL_FORM_VALUES } from './CompletedChallengesForm.constants'
 import selector from './CompletedChallengesForm.selector'
+import { CompletedChallengesFormFields } from './CompletedChallengesForm.types'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
 }
 const CompletedChallengesFormContainer = ({ navigation }: Props) => {
   const { challenges, challengesDropDown } = useSelector(selector)
-  const handleSubmit = (values: UserChallengeFormFields) => {
+  const handleSubmit = (values: CompletedChallengesFormFields) => {
     console.log({ values })
   }
 
