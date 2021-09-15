@@ -1,10 +1,11 @@
 import { IconInfo } from 'assets/images'
-import { CheckBox, DatePicker, DropDownTags, FormWrapper, Input, Spinner, Upload } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
+import { DatePicker, DropDownTags, FormLayout, Input, Spinner, Upload } from '../../../components'
+import CheckBox from '../../../components/CheckBox'
 import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
 
@@ -16,7 +17,7 @@ const NewCourseForm = forwardRef((_props, _ref) => {
   return (
     <Formik initialValues={INITIAL_VALUES} onSubmit={() => {}}>
       {(formikHandlers: FormikProps<FormikValues>) => (
-        <FormWrapper>
+        <FormLayout>
           <Spinner visible={formikHandlers.isSubmitting} />
           <Input name={'course'} label={t('Course name')} handlers={formikHandlers} />
           <Input name={'courseHostProvider'} label={t('Course host provider')} handlers={formikHandlers} />
@@ -49,7 +50,7 @@ const NewCourseForm = forwardRef((_props, _ref) => {
               <IconInfo />
             </View>
           </View>
-        </FormWrapper>
+        </FormLayout>
       )}
     </Formik>
   )

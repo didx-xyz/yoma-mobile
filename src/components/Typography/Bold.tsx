@@ -1,10 +1,10 @@
 import React from 'react'
 
-import { GetComponentProps, WithChildren } from '../../types/react.types'
+import { WithChildren } from '../../types/react.types'
 import Text from './Text'
 import { fontWeights } from './fontWeights.styles'
 
-type Props = WithChildren<GetComponentProps<typeof Text>>
+type Props = WithChildren<React.ComponentProps<typeof Text>>
 
 const Bold = ({ children, ...props }: Props) => {
   return (

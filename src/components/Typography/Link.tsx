@@ -1,11 +1,11 @@
 import React from 'react'
 
 import { Colors } from '../../styles'
-import { GetComponentProps, WithChildren } from '../../types/react.types'
+import { WithChildren } from '../../types/react.types'
 import Text from './Text'
 import { FontWeights } from './Text.types'
 
-type Props = WithChildren<Omit<GetComponentProps<typeof Text>, 'color'>> & {
+type Props = WithChildren<Omit<React.ComponentProps<typeof Text>, 'color'>> & {
   color?: Colors
   onPress: () => void
 }

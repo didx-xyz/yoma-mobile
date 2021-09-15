@@ -3,12 +3,14 @@ import { FormikProps } from 'formik'
 import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
-import { GetComponentProps } from 'types/react.types'
 import { textOrSpace } from 'utils/strings.utils'
 
 import styles from './DropDown.styles'
 
-type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
+type Props = Omit<
+  React.ComponentProps<typeof DropDownPicker>,
+  'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'
+> & {
   name: string
   label: string
   handlers: FormikProps<any>
@@ -30,7 +32,7 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
       <Text.Meta level={MetaLevels.Small}>{textOrSpace(values[name] !== '', label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
-        dropDownContainerStyle={styles.dropDownView}
+        dropDownContainerStyle={styles.dropDownContainer}
         placeholder={label}
         placeholderStyle={styles.placeholder}
         textStyle={styles.label}

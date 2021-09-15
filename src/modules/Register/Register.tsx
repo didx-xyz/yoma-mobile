@@ -22,7 +22,7 @@ const Register = ({ navigation, onAuthWithSocial }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <ViewContainer style={styles.container}>
+    <ViewContainer backgroundColor={Colors.PrimaryYellow} style={styles.container}>
       <HeaderLarge
         navigation={navigation}
         backgroundColor={Colors.PrimaryYellow}

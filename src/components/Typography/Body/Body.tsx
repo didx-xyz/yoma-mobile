@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { TextStyle } from 'react-native'
 
-import { GetComponentProps, WithChildren } from '../../../types/react.types'
+import { WithChildren } from '../../../types/react.types'
 import Text from '../Text'
 import { TextAlign } from '../Text.types'
 import styles from './Body.styles'
 import { BodyLevels } from './Body.types'
 
 type Props = WithChildren<
-  GetComponentProps<typeof Text> & {
+  React.ComponentProps<typeof Text> & {
     align?: TextAlign
     level?: BodyLevels
   }

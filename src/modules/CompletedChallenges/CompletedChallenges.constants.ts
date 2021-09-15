@@ -1,15 +1,3 @@
-import { UserChallengeFormFields } from '../UserChallenges/UserChallenges.types'
-
-export const INITIAL_FORM_VALUES: UserChallengeFormFields = {
-  challenge: '',
-  challengeHostProvider: '',
-  description: '',
-  id: '',
-  startDate: null,
-  endDate: null,
-  skillNames: [],
-}
-
 export const NORMALISED_CHALLENGES_MOCK = {
   ids: ['id1', 'id2'],
   entities: {

@@ -19,7 +19,7 @@ const styles = {
     borderRadius: 0,
     borderColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
-  dropDownView: {
+  dropDownContainer: {
     height: 180,
     borderWidth: 0,
     elevation: 3,

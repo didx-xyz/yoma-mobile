@@ -20,7 +20,7 @@ const Upload = ({ onPress }: Props) => {
           <Text.Body>{t('Choose file')}</Text.Body>
         </TouchableOpacity>
       </View>
-      <Text.Meta>{t('.pdf’s supported')}</Text.Meta>
+      <Text.Meta>{t('.pdfs and .jpg supported')}</Text.Meta>
     </View>
   )
 }

@@ -10,7 +10,7 @@ import CheckBox from '../../../components/CheckBox'
 import DatePicker from '../../../components/DatePicker'
 import DropDown, { types as DropDownTypes } from '../../../components/DropDown'
 import DropDownTags from '../../../components/DropDownTags'
-import FormWrapper from '../../../components/FormWrapper'
+import FormLayout from '../../../components/FormLayout'
 import Header from '../../../components/Header'
 import InfoModal from '../../../components/InfoModal'
 import Input from '../../../components/Input'
@@ -27,8 +27,8 @@ import { ValidationSchema } from './ExperienceForm.validationSchema'
 interface Props {
   onFilterSkills: (value: string) => void
   onJobCreate: (job: any) => void
-  skills: DropDownTypes.DropDownList[]
-  organisations: DropDownTypes.DropDownList[]
+  skills: DropDownTypes.DropDownItem[]
+  organisations: DropDownTypes.DropDownItem[]
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
@@ -71,7 +71,7 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, onJ
             onSubmit={() => {}}
           >
             {(formikHandlers: any) => (
-              <FormWrapper>
+              <FormLayout>
                 <InfoModal
                   visible={showInfoModal}
                   closeModal={() => setShowInfoModal(false)}
@@ -114,7 +114,7 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, onJ
                     {t('Find inspiration on how to write a great profile.')}
                   </Text.Meta>
                 </TouchableOpacity>
-              </FormWrapper>
+              </FormLayout>
             )}
           </Formik>
         </Card>
