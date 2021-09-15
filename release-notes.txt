@@ -1,8 +1,10 @@
 Ver 0.0.1
 Latest:
-- Adding Challeges to state
+- Step 1 of fixing the challenges credentials form
+ (getting real challenges in, allowing user to select a challenge)
 
 10 Most Recent:
+- Adding Challenges to state
 - display skills in My CV My Skills view
 - adding Skills widget with real data
 - displaying challenges in Completed Challenges view
