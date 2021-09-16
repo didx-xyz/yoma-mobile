@@ -46,7 +46,6 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, h
         navigation={navigation}
         onSave={handlers.handleSubmit}
         headerText={t('Add challenge')}
-        showAddButton={false}
         isSaveButtonEnabled
       />
       <ScrollView>

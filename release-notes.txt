@@ -1,9 +1,9 @@
 Ver 0.0.1
 Latest:
-- Step 1 of fixing the challenges credentials form
- (getting real challenges in, allowing user to select a challenge)
+- Step 2 of fixing the challenges credentials form - adding validation
 
 10 Most Recent:
+- Step 1 of fixing the challenges credentials form (getting real challenges in, allowing user to select a challenge)
 - Adding Challenges to state
 - display skills in My CV My Skills view
 - adding Skills widget with real data
@@ -13,6 +13,3 @@ Latest:
 - adding metadata for countries and duration to job experience
 - adding generic MyCv View component (with a bunch of refactoring)
 - adding user qualifications to state
-- refactor: renaming createMiddlewareStub
-- moving my cv views out of user credential modules
-- refactor - pascal casing all type enums

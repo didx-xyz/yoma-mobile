@@ -1,8 +1,8 @@
 import { NormalisedData } from '../../redux/redux.types'
 
 export interface Challenge {
-  approvedCredentials: number
-  countries: string[]
+  approvedCredentials?: number
+  countries?: string[]
   createdAt: string
   createdByAdmin: boolean
   description: string
@@ -14,12 +14,12 @@ export interface Challenge {
   organisationLogoURL: string | null
   organisationName: string
   published: boolean
-  rejectedCredentials: number
-  skills: string[]
-  skillsLearned: number
+  rejectedCredentials?: number
+  skills?: string[]
+  skillsLearned?: number
   startTime: string
-  totalZLTORewarded: number
-  unverifiedCredentials: number
+  totalZLTORewarded?: number
+  unverifiedCredentials?: number
   url: string | null
   zltoReward: number
 }

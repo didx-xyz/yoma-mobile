@@ -251,8 +251,7 @@ export const authSocialLoginFailureFlow =
     return result
   }
 
-export const authorizeSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+export const authorizeSuccessFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
@@ -261,7 +260,6 @@ export const authorizeSuccessFlow =
     if (isAnyOf(loginSuccess, authorizeWithRefreshTokenSuccess)(action)) {
       const credentials = extractCredentialsFromAuthorizedPayload(action)
       const refreshToken = extractRefreshTokenFromAuthorizedPayload(action)
-      notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
       dispatch(setSecureRefreshToken(refreshToken))
       dispatch(AppActions.hydrateApp())

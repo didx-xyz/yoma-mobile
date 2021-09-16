@@ -4,6 +4,7 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { schema } from './CompletedChallengeForm.validation'
 import CompletedChallengesForm from './CompletedChallengesForm'
 import { INITIAL_FORM_VALUES } from './CompletedChallengesForm.constants'
 import selector from './CompletedChallengesForm.selector'
@@ -19,7 +20,7 @@ const CompletedChallengesFormContainer = ({ navigation }: Props) => {
   }
 
   return (
-    <Formik initialValues={INITIAL_FORM_VALUES} onSubmit={handleSubmit}>
+    <Formik initialValues={INITIAL_FORM_VALUES} validationSchema={schema} onSubmit={handleSubmit}>
       {formikHandlers => (
         <CompletedChallengesForm
           navigation={navigation}
