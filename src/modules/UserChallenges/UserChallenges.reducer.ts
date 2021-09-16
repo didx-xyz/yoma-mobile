@@ -1,5 +1,6 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
+import { types as CompletedChallengesFormTypes } from '../CompletedChallenges/Form'
 import { NormalisedUserChallenges, UserChallenge, UserChallengesState } from './UserChallenges.types'
 
 const name = '[User: Challenges]'
@@ -9,9 +10,12 @@ export const INITIAL_STATE = {
 } as UserChallengesState
 
 export const getUserChallengesSuccess = createAction<UserChallenge[]>(`${name} getUserChallengesSuccess`)
-export const normaliseUserChallengesSuccess = createAction<NormalisedUserChallenges>(
-  `${name} normaliseUserChallengesSuccess`,
-)
+export const normaliseUserChallengesSuccess = createAction<NormalisedUserChallenges>(`${name} normaliseUserChallenges
+Success`)
+export const createUserChallenge = createAction<CompletedChallengesFormTypes.FormFields>(`${name} createUserChallenge`)
+export const createUserChallengeSuccess = createAction<UserChallenge>(`${name} createUserChallengeSuccess`)
+export const createUserChallengeFailure = createAction<string>(`${name} createUserChallengeFailure`)
+
 export const setUserChallenges = createAction<NormalisedUserChallenges>(`${name} setUserChallenges`)
 export const clearUserChallenges = createAction(`${name} clearUserChallenges`)
 

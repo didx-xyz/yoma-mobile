@@ -1,36 +1,38 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Formik } from 'formik'
-import { createJob } from 'modules/Jobs/Jobs.reducer'
-import { JobsRequest } from 'modules/Jobs/Jobs.types'
-import { setFilterSearchTerm } from 'modules/Skills/Skills.reducer'
 import { evolve } from 'ramda'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { dateToISOString } from '../../../utils/dates.utils'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import * as DateUtils from '../../../utils/dates.utils'
+import { types as HomeNavigationTypes } from '../../HomeNavigation'
+import { actions as JobActions, types as JobTypes } from '../../Jobs'
+import { actions as SkillsActions } from '../../Skills'
 import ExperienceForm from './ExperienceForm'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import selector from './ExperienceForm.selector'
 import { schema } from './ExperienceForm.validation'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.Experience
+  >
 }
 const ExperienceFormContainer = ({ navigation }: Props) => {
   const dispatch = useDispatch()
   const { organisations, skills } = useSelector(selector)
 
-  const handleSubmit = (values: JobsRequest) => {
+  const handleSubmit = (values: JobTypes.JobsRequest) => {
     const job = evolve({
-      startTime: dateToISOString,
-      endTime: dateToISOString,
+      startTime: DateUtils.dateToISOString,
+      endTime: DateUtils.dateToISOString,
     })(values)
-    dispatch(createJob(job))
+    dispatch(JobActions.createJob(job))
   }
 
   const onFilterSkills = (searchTerm: string) => {
-    dispatch(setFilterSearchTerm(searchTerm))
+    dispatch(SkillsActions.setFilterSearchTerm(searchTerm))
   }
 
   return (

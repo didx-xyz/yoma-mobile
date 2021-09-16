@@ -1,22 +1,24 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Formik } from 'formik'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { actions as UserChallengesActions } from '../../UserChallenges'
 import { schema } from './CompletedChallengeForm.validation'
 import CompletedChallengesForm from './CompletedChallengesForm'
 import { INITIAL_FORM_VALUES } from './CompletedChallengesForm.constants'
 import selector from './CompletedChallengesForm.selector'
-import { CompletedChallengesFormFields } from './CompletedChallengesForm.types'
+import { FormFields } from './CompletedChallengesForm.types'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
 }
 const CompletedChallengesFormContainer = ({ navigation }: Props) => {
   const { challenges, challengesDropDown } = useSelector(selector)
-  const handleSubmit = (values: CompletedChallengesFormFields) => {
-    console.log({ values })
+  const dispatch = useDispatch()
+  const handleSubmit = (values: FormFields) => {
+    dispatch(UserChallengesActions.createUserChallenge(values))
   }
 
   return (
