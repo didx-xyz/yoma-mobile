@@ -422,9 +422,8 @@ describe('modules/Auth/Auth.middleware', () => {
       // given ... the loginSuccess action is fired
       const create = createMiddlewareMock(jest)
       const action = loginSuccess(defaultUserLoginResponseData)
-      const mockNotification = jest.fn()
       // @ts-ignore
-      const { store, invoke, next } = create(SUT.authorizeSuccessFlow({ notification: mockNotification }))
+      const { store, invoke, next } = create(SUT.authorizeSuccessFlow)
 
       // when ... we respond to the loginSuccess action
       invoke(action)
@@ -433,29 +432,13 @@ describe('modules/Auth/Auth.middleware', () => {
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalled()
     })
-    it('should correctly send a notification to the user', () => {
-      // given ... the login action is fired
-      const create = createMiddlewareMock(jest)
-      // @ts-ignore
-      const action = loginSuccess(defaultUserLoginResponseData)
-      const mockNotification = jest.fn()
-      // @ts-ignore
-      const { invoke } = create(SUT.authorizeSuccessFlow({ notification: mockNotification }))
-
-      // when ... we respond to the login action
-      invoke(action)
-
-      // then ... the login API should be called
-      expect(mockNotification).toHaveBeenCalled()
-    })
     it('should extract and transmit auth credentials and refresh token', () => {
       // given ... the login action is fired
       const create = createMiddlewareMock(jest)
       // @ts-ignore
       const action = loginSuccess(defaultUserLoginResponseData)
-      const mockNotification = jest.fn()
       // @ts-ignores
-      const { store, invoke } = create(SUT.authorizeSuccessFlow({ notification: mockNotification }))
+      const { store, invoke } = create(SUT.authorizeSuccessFlow)
 
       // when ... we respond to the login action
       invoke(action)
