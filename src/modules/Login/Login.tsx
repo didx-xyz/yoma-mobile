@@ -11,6 +11,7 @@ import { ScrollView, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
+import { StatusBarStyle } from '../../components/ViewContainer/ViewContainer.types'
 import { AuthCredentials } from '../Auth/Auth.types'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
@@ -25,7 +26,11 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <ViewContainer style={styles.container}>
+    <ViewContainer
+      backgroundColor={Colors.PrimaryPurple}
+      statusBarStyle={StatusBarStyle.LightContent}
+      style={styles.container}
+    >
       <ScrollView>
         <HeaderLarge
           navigation={navigation}

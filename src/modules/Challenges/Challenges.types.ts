@@ -1,20 +1,27 @@
 import { NormalisedData } from '../../redux/redux.types'
 
 export interface Challenge {
-  organisationId: string
-  organisationName: string
-  organisationLogoURL: string | null
-  id: string
-  name: string
-  description: string
-  url: string | null
+  approvedCredentials: number
+  countries: string[]
   createdAt: string
-  zltoReward: number
   createdByAdmin: boolean
-  language: string
-  startTime: string
+  description: string
   endTime: string | null
+  id: string
+  language: string
+  name: string
+  organisationId: string
+  organisationLogoURL: string | null
+  organisationName: string
   published: boolean
+  rejectedCredentials: number
+  skills: string[]
+  skillsLearned: number
+  startTime: string
+  totalZLTORewarded: number
+  unverifiedCredentials: number
+  url: string | null
+  zltoReward: number
 }
 
 export type NormalisedChallenges = NormalisedData<Challenge>

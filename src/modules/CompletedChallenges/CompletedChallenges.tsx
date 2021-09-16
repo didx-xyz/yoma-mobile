@@ -1,6 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { FormikProps, FormikValues } from 'formik'
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 
 import Optional from '../../components/Optional'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
@@ -13,13 +12,12 @@ interface Props {
 
 const CompletedChallenges = ({ navigation }: Props) => {
   const [isEditing, setIsEditing] = useState(false)
-  const formRef = useRef<FormikProps<FormikValues>>()
 
   const handleAdd = () => setIsEditing(true)
 
   return (
     <Optional condition={isEditing} fallback={<CompletedChallengesView onAdd={handleAdd} navigation={navigation} />}>
-      <CompletedChallengesForm ref={formRef} navigation={navigation} />
+      <CompletedChallengesForm navigation={navigation} />
     </Optional>
   )
 }

@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { CheckBox, DatePicker, DropDownTags, FormWrapper, InfoModal, Input, Spinner, Upload } from 'components'
+import { DatePicker, DropDownTags, FormLayout, InfoModal, Input, Spinner, Upload } from 'components'
 import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
@@ -9,6 +9,7 @@ import { Colors } from 'styles'
 import { getHasValuesChanged } from 'utils/form.utils'
 
 import Card from '../../../components/Card'
+import CheckBox from '../../../components/CheckBox'
 import Header from '../../../components/Header'
 import ViewContainer from '../../../components/ViewContainer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
@@ -77,7 +78,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
             onSubmit={() => {}}
           >
             {formikHandlers => (
-              <FormWrapper>
+              <FormLayout>
                 <InfoModal
                   visible={showInfoModal}
                   closeModal={() => setShowInfoModal(false)}
@@ -118,7 +119,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
                     {t('Find inspiration on how to write a great education description.')}
                   </Text.Meta>
                 </View>
-              </FormWrapper>
+              </FormLayout>
             )}
           </Formik>
         </Card>

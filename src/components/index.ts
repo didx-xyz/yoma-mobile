@@ -2,7 +2,7 @@ import Card from './Card'
 import CheckBox from './CheckBox'
 import DatePicker from './DatePicker'
 import DropDownTags from './DropDownTags'
-import FormWrapper from './FormWrapper'
+import FormLayout from './FormLayout'
 import InfoModal from './InfoModal'
 import Input from './Input'
 import OnboardingForms from './OnboardingForms'
@@ -15,7 +15,7 @@ export {
   CheckBox,
   DatePicker,
   DropDownTags,
-  FormWrapper,
+  FormLayout,
   OnboardingForms,
   InfoModal,
   Input,

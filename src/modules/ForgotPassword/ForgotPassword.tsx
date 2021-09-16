@@ -11,6 +11,7 @@ import HeaderLarge from '../../components/HeaderLarge'
 import Optional from '../../components/Optional'
 import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
 import ViewContainer from '../../components/ViewContainer'
+import { StatusBarStyle } from '../../components/ViewContainer/ViewContainer.types'
 import { Colors } from '../../styles'
 import { AuthNavigationRoutes, AuthNavigatorParamsList } from '../AuthNavigation/AuthNavigation.types'
 import styles from './ForgotPassword.styles'
@@ -25,7 +26,11 @@ const ForgotPassword = ({ navigation }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <ViewContainer style={styles.container}>
+    <ViewContainer
+      backgroundColor={Colors.SecondaryPurple}
+      statusBarStyle={StatusBarStyle.LightContent}
+      style={styles.container}
+    >
       <ScrollView>
         <HeaderLarge
           navigation={navigation}

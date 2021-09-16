@@ -1,4 +1,4 @@
-import { FormikProps, FormikValues } from 'formik'
+import { FormikProps } from 'formik'
 import React from 'react'
 import { Keyboard, TextInput, TextInputProps } from 'react-native'
 import { Colors, colors } from 'styles'
@@ -9,7 +9,7 @@ import styles from './Input.styles'
 type Props = TextInputProps & {
   name: string
   label: string
-  handlers: FormikProps<FormikValues>
+  handlers: FormikProps<any>
 }
 
 const Input = ({ name, label, handlers, ...props }: Props) => {

@@ -7,7 +7,7 @@ import { TextInput, View } from 'react-native'
 import { Colors } from 'styles'
 
 import Card from '../../components/Card'
-import FormWrapper from '../../components/FormWrapper'
+import FormLayout from '../../components/FormLayout'
 import Header from '../../components/Header'
 import InfoModal from '../../components/InfoModal'
 import ViewContainer from '../../components/ViewContainer'
@@ -40,7 +40,7 @@ const About = ({ navigation, onBiographySave, biography }: Props) => {
         onSave={() => onBiographySave(userBiography)}
       />
       <Card style={styles.card}>
-        <FormWrapper>
+        <FormLayout>
           <Text.Meta level={MetaLevels.Small}>{t('Summary')}</Text.Meta>
           <TextInput
             style={styles.textInput}
@@ -55,7 +55,7 @@ const About = ({ navigation, onBiographySave, biography }: Props) => {
               {t('Find inspiration on how to write a great education description.')}
             </Text.Meta>
           </View>
-        </FormWrapper>
+        </FormLayout>
       </Card>
     </ViewContainer>
   )

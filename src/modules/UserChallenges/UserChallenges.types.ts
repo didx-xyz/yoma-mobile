@@ -26,13 +26,3 @@ export type ChallengeEntry = {
   endDate: string
   description: string
 }
-
-export type UserChallengeFormFields = {
-  challenge: string
-  challengeHostProvider: string
-  description: string
-  id: string
-  startDate: Date | null
-  endDate: Date | null
-  skillNames: string[]
-}

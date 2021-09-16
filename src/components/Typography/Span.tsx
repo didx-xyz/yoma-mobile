@@ -1,9 +1,9 @@
 import React from 'react'
 
-import { GetComponentProps, WithChildren } from '../../types/react.types'
+import { WithChildren } from '../../types/react.types'
 import Text from './Text'
 
-type Props = WithChildren<GetComponentProps<typeof Text>>
+type Props = WithChildren<React.ComponentProps<typeof Text>>
 
 const Span = ({ children, ...props }: Props) => {
   return (

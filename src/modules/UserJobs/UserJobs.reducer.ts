@@ -14,21 +14,20 @@ export const INITIAL_STATE = {
 
 export const getUserJobsSuccess = createAction<UserJobCredential[]>(`${name} getUserJobsSuccess`)
 export const normaliseUserJobsSuccess = createAction<NormalisedUserJobs>(`${name} normaliseUserJobsSuccess`)
-export const updateUserJobs = createAction<NormalisedUserJobs>(`${name} updateUserJobs`)
-
-export const setUserJobsFormValues = createAction<UserCredentialFormValues>(`${name} setUserJobsFormValues`)
-export const clearUserJobsFormValues = createAction(`${name} clearUserJobsFormValues`)
 
 export const fetchUserJobById = createAction<string>(`${name} fetchUserJobById`)
+export const fetchUserJobByIdFailure = createAction<string>(`${name} fetchUserJobByIdFailure`)
 export const fetchUserJobByIdSuccess = createAction<any>(`${name} fetchUserJobByIdSuccess`)
 
-export const fetchUserJobByIdFailure = createAction<string>(`${name} fetchUserJobByIdFailure`)
 export const createUserJob = createAction<any>(`${name} createUserJob`)
-export const setUserJobs = createAction<NormalisedUserJobs>(`${name} setUserJobs`)
-export const clearUserJobs = createAction(`${name} clearUserJobs`)
-
 export const createUserJobSuccess = createAction<UserJobsResponse>(`${name} createUserJobSuccess`)
 export const createUserJobFailure = createAction<string>(`${name} createUserJobFailure`)
+
+export const setUserJobs = createAction<NormalisedUserJobs>(`${name} setUserJobs`)
+export const updateUserJobs = createAction<NormalisedUserJobs>(`${name} updateUserJobs`)
+export const clearUserJobs = createAction(`${name} clearUserJobs`)
+export const setUserJobsFormValues = createAction<UserCredentialFormValues>(`${name} setUserJobsFormValues`)
+export const clearUserJobsFormValues = createAction(`${name} clearUserJobsFormValues`)
 
 const reducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserJobs, (state, action) => mergeRight({ formValues: state.formValues }, action.payload))

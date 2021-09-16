@@ -1,3 +1,3 @@
-import CompletedChallengesForm from './CompletedChallenges.form'
+import CompletedChallengesForm from './CompletedChallengesForm.container'
 
 export default CompletedChallengesForm

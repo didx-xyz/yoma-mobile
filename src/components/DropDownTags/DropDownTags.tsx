@@ -1,20 +1,22 @@
-import { FormikProps, FormikValues } from 'formik'
+import { FormikProps } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
-import { GetComponentProps } from 'types/react.types'
 import { dropElement, textOrSpace } from 'utils/strings.utils'
 
 import Tag from '../Tag'
 import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDownTags.styles'
 
-type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
+type Props = Omit<
+  React.ComponentProps<typeof DropDownPicker>,
+  'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'
+> & {
   name: string
   label: string
-  handlers: FormikProps<FormikValues>
+  handlers: FormikProps<any>
 }
 
 const renderTags = (tags: string[], onDelete: (tag: string) => void) =>
