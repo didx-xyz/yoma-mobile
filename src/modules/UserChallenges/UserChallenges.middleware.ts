@@ -50,8 +50,8 @@ export const createUserChallengeSuccessFlow: Middleware =
     const result = next(action)
 
     if (createUserChallengeSuccess.match(action)) {
-      const job = extractDataFromPayload(action)
-      dispatch(UserUserChallengesActions.createUserUserChallenge(job))
+      // const job = extractDataFromPayload(action)
+      dispatch(UserChallengesActions.createUserChallenge(job))
     }
 
     return result
