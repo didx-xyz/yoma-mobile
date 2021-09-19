@@ -2,7 +2,7 @@ import * as UserJobsActions from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromPayload } from 'utils/redux.utils'
+import { extractDataFromResponseAction } from 'utils/redux.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiJobsConstants } from '../../api/jobs'
@@ -35,7 +35,7 @@ export const createJobSuccessFlow: Middleware =
     const result = next(action)
 
     if (createJobSuccess.match(action)) {
-      const job = extractDataFromPayload(action)
+      const job = extractDataFromResponseAction(action)
       dispatch(UserJobsActions.createUserJob(job))
     }
 

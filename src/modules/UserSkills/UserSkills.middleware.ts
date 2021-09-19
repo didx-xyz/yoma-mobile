@@ -36,7 +36,7 @@ export const fetchUserSkillsSuccessFlow: Middleware =
   action => {
     const result = next(action)
     if (fetchUserSkillsSuccess.match(action)) {
-      const data = ReduxUtils.extractDataFromPayload(action)
+      const data = ReduxUtils.extractDataFromResponseAction(action)
       const skills = ReduxUtils.normalise(data, UserSkillKeys.SkillName)
       dispatch(setUserSkills(skills))
     }

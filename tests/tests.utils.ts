@@ -1,9 +1,10 @@
 import { mergeDeepRight } from 'ramda'
 import { Action, Middleware } from 'redux'
 
+import { RootState } from '../src/redux/redux.types'
 import { StdObj } from '../src/types/general.types'
 
-export const createMiddlewareMock = (jest: any, state?: {}) => (middleware: Middleware) => {
+export const createMiddlewareMock = (jest: any, state?: Partial<RootState>) => (middleware: Middleware) => {
   const store = {
     getState: jest.fn(() => state),
     dispatch: jest.fn(),
@@ -14,6 +15,9 @@ export const createMiddlewareMock = (jest: any, state?: {}) => (middleware: Midd
 
   return { store, next, invoke }
 }
+
+export const createMiddlewareMockNew = (jest: any) => (middleware: Middleware, state?: Partial<RootState>) =>
+  createMiddlewareMock(jest, state)(middleware)
 
 export const createFixture =
   (stateMock: StdObj) =>

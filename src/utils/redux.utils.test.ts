@@ -63,28 +63,6 @@ describe('src/utils/redux.utils', () => {
       })
     })
   })
-  describe('updateStateWithFormValues', () => {
-    it('should extract the data from a typical response payload', () => {
-      // given ...
-      const state = {
-        ids: 'Normalised Ids array',
-        entities: 'Normalised Entities Object',
-      }
-
-      const formValues = 'Temporary Form Object'
-
-      // when ... we updateStateWithFormValues
-      // @ts-ignore
-      const result = SUT.updateStateWithFormValues(state, formValues)
-
-      // then ...
-      expect(result).toEqual({
-        ids: 'Normalised Ids array',
-        entities: 'Normalised Entities Object',
-        formValues: 'Temporary Form Object',
-      })
-    })
-  })
   describe('updateNormalisedState', () => {
     it('should extract the data from a typical response payload', () => {
       // given ...
@@ -114,6 +92,7 @@ describe('src/utils/redux.utils', () => {
       }
 
       // when ...
+      // @ts-ignore - we don't need to mock exact state endpoints to test this
       const result = SUT.updateNormalisedState(state, normalisedUpdate)
 
       // then ...
@@ -161,23 +140,23 @@ describe('src/utils/redux.utils', () => {
       expect(result).toEqual('ID')
     })
   })
-  describe('extractDataFromPayload', () => {
+  describe('extractDataFromResponseAction', () => {
     it('should extract the data from a typical response payload', () => {
       // given ...
       const action = { type: 'any', payload: { data: { data: 'DATA' } } }
       // when ...
-      const result = SUT.extractDataFromPayload(action)
+      const result = SUT.extractDataFromResponseAction(action)
 
       // then ...
       expect(result).toBe('DATA')
     })
   })
-  describe('extractEntitiesFromPayload', () => {
+  describe('extractEntitiesFromNormalisedAction', () => {
     it('should extract the entities property from payload', () => {
       // given ...
       const action = { type: 'any', payload: { ids: 'DATA', entities: 'ENTITY DATA' } }
       // when ...
-      const result = SUT.extractEntitiesFromPayload(action)
+      const result = SUT.extractEntitiesFromNormalisedAction(action)
 
       // then ...
       expect(result).toBe('ENTITY DATA')

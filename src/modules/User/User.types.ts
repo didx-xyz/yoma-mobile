@@ -55,10 +55,10 @@ export interface UserResponse {
 export interface UserCredentialMeta {
   id: string
   verifiedAt: string | null
-  approved: boolean
+  approved: boolean | null
   approvalMessage: string | null
   startDate: string
-  endDate: string | null
+  endDate: string
   createdAt: string
   fileId: string | null
   fileURL: string | null
@@ -80,4 +80,4 @@ export interface UserCredentialFormValues {
   requestVerification: boolean
 }
 
-export type UserCredentials = UserChallenge | UserJobCredential[]
+export type UserCredentials = UserChallenge[] | UserJobCredential[]

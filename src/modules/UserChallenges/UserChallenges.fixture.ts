@@ -4,6 +4,35 @@ import { UserChallenge } from './UserChallenges.types'
 export const USER_CHALLENGES_RESPONSE_MOCK: UserChallenge[] = [
   {
     challenge: {
+      organisationId: '6baf2197-8f85-4289-477d-08d92e9cc88c',
+      organisationName: 'IDDQD',
+      organisationLogoURL:
+        'https://yoma-test-file-storage.s3.eu-west-1.amazonaws.com/Staging/Certificates/f89346a2-7635-40b0-8afd-a23a829dd8c0?X-Amz-Expires=1800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNSETAVPYWP7TMB/20210919/eu-west-1/s3/aws4_request&X-Amz-Date=20210919T213142Z&X-Amz-SignedHeaders=host&X-Amz-Signature=99051fbc05dc0c91648311647c24f43fab9412eb225c2d9bade2f96716ef0312',
+      id: '61b3783c-2f7b-46b5-2e05-08d92e9e2636',
+      name: 'Make Your Own Bingo!',
+      description: 'What fun',
+      url: null,
+      createdAt: '2021-06-13T19:05:03.0410213',
+      zltoReward: 0,
+      createdByAdmin: true,
+      language: 'EN',
+      startTime: '2021-06-12T22:00:00',
+      endTime: '2021-06-16T22:00:00',
+      published: true,
+    },
+    id: 'bb0e0248-4a76-40df-0cea-08d9794fa862',
+    verifiedAt: null,
+    approved: null,
+    approvalMessage: null,
+    startDate: '2021-06-19T21:28:37.267Z',
+    endDate: '2021-09-17T21:28:37.27Z',
+    createdAt: '2021-09-19T21:31:41.4956283Z',
+    fileId: null,
+    fileURL: null,
+    requestVerification: true,
+  },
+  {
+    challenge: {
       organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
       organisationName: 'Test Org',
       organisationLogoURL: null,

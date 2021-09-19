@@ -1,4 +1,9 @@
-import SUT, { INITIAL_STATE, clearUserChallenges, setUserChallenges } from './UserChallenges.reducer'
+import SUT, {
+  INITIAL_STATE,
+  clearUserChallenges,
+  setUserChallenges,
+  updateUserChallenges,
+} from './UserChallenges.reducer'
 
 describe('modules/UserChallenges/Challenges.redux', () => {
   describe('setUserChallenges', () => {
@@ -48,6 +53,62 @@ describe('modules/UserChallenges/Challenges.redux', () => {
 
       // then ... state should include the new challenges
       expect(result).toEqual(challengesMock)
+    })
+  })
+  describe('updateUserChallenges', () => {
+    it('should correctly add the challenge credentials', () => {
+      // given ...an initial state
+      const state = INITIAL_STATE
+
+      // when ... we add new challenges
+      const challengesMock = {
+        ids: ['id1'],
+        entities: {
+          id1: 'Challenge 1',
+        },
+      }
+      // @ts-ignore
+      const action = updateUserChallenges(challengesMock)
+      const result = SUT(state, action)
+
+      // then ... state should include the new challenges
+      expect(result).toEqual(challengesMock)
+    })
+    it('should update current credentials with new credentials', () => {
+      // given ...an initial state
+      const state = {
+        ids: ['idA', 'idB'],
+        entities: {
+          idA: 'Challenge A',
+          idB: 'Challenge B',
+        },
+      }
+
+      // when ... we add new challenges
+      const challengesMock = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Challenge 1',
+          id2: 'Challenge 2',
+          id3: 'Challenge 3',
+        },
+      }
+      // @ts-ignore - the shape of the data doesn't matter
+      const action = updateUserChallenges(challengesMock)
+      // @ts-ignore - the shape of the data doesn't matter
+      const result = SUT(state, action)
+
+      // then ... state should include the new challenges
+      expect(result).toEqual({
+        ids: ['idA', 'idB', 'id1', 'id2', 'id3'],
+        entities: {
+          idA: 'Challenge A',
+          idB: 'Challenge B',
+          id1: 'Challenge 1',
+          id2: 'Challenge 2',
+          id3: 'Challenge 3',
+        },
+      })
     })
   })
   describe('clearUserChallenges', () => {

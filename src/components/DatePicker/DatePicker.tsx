@@ -1,5 +1,5 @@
 import DateTimePicker from '@react-native-community/datetimepicker'
-import { DATE_TPL_MON_YEAR } from 'constants/date.constants'
+import { DATE_TPL_DAY_MON_YEAR, DATE_TPL_MON_YEAR } from 'constants/date.constants'
 import { FormikProps } from 'formik'
 import React, { useCallback, useState } from 'react'
 import { TouchableOpacity, View } from 'react-native'
@@ -26,14 +26,14 @@ const DatePicker = ({ name, label, handlers }: Props) => {
     (event: Event, selectedDate: Date | undefined) => {
       setShowDatePicker(false)
       if (selectedDate) {
-        setDate(date)
+        setDate(selectedDate)
         setFieldValue(name, selectedDate, false)
       }
       setTimeout(() => {
         setFieldTouched(name, true, true)
-      }, 10)
+      }, 0)
     },
-    [date, name, setFieldTouched, setFieldValue],
+    [name, setFieldTouched, setFieldValue],
   )
 
   const handleShowDatePicker = () => {
@@ -45,7 +45,7 @@ const DatePicker = ({ name, label, handlers }: Props) => {
       <Text.Meta level={MetaLevels.Small}>{textOrSpace(values[name], label)}</Text.Meta>
       <TouchableOpacity onPress={handleShowDatePicker} style={styles.dateContainer}>
         <Text.Body color={values[name] ? Colors.PrimaryDarkGrey : Colors.MenuGrey}>
-          {values[name] ? formatDateString(DATE_TPL_MON_YEAR)(values[name]) : label}
+          {values[name] ? formatDateString(DATE_TPL_DAY_MON_YEAR)(values[name]) : label}
         </Text.Body>
       </TouchableOpacity>
       {showDatePicker && (

@@ -6,6 +6,7 @@ import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import { rootStateFixture } from '../../redux/redux.fixture'
+import { USER_RESPONSE } from './User.fixture'
 import * as SUT from './User.middleware'
 import {
   fetchUserCredentials,
@@ -21,7 +22,6 @@ import {
   uploadUserPhotoFailure,
   uploadUserPhotoSuccess,
 } from './User.reducer'
-import { USER_RESPONSE } from './User.test.fixtures'
 import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
 
 describe('modules/User/User.middleware', () => {

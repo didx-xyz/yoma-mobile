@@ -1,4 +1,5 @@
 import { NormalisedData } from '../../redux/redux.types'
+import { ApiMetaResponse } from '../Auth/Auth.types'
 import { Challenge } from '../Challenges/Challenges.types'
 import { UserCredentialMeta } from '../User/User.types'
 
@@ -6,6 +7,14 @@ export interface UserChallenge extends UserCredentialMeta {
   challenge: Challenge
 }
 
+export interface UserChallengeResponse {
+  data: UserChallenge
+}
+
+export interface CreateUserChallengeSuccessResponse {
+  data: UserChallengeResponse
+  meta: ApiMetaResponse
+}
 export type NormalisedUserChallenges = NormalisedData<UserChallenge>
 
 export interface UserChallengeItem

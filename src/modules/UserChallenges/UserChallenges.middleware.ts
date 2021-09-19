@@ -1,14 +1,15 @@
-import { mergeRight } from 'ramda'
+import { mergeRight, of } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { constants as ApiUsersConstants } from '../../api/users'
-import { StdFn } from '../../types/general.types'
+import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../api/users'
+import * as Types from '../../types/general.types'
 import { showSimpleMessage } from '../../utils/error'
-import { extractDataFromPayload } from '../../utils/redux.utils'
-import * as UserActions from '../User/User.reducer'
-import * as UserSelectors from '../User/User.selector'
-import { UserCredentials } from '../User/User.types'
+import * as ErrorUtils from '../../utils/error'
+import * as ReduxUtils from '../../utils/redux.utils'
+import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
+import * as Navigation from '../Navigation/Navigation.actions'
+import { actions as UserActions, selectors as UserSelectors, types as UserTypes, utils as UserUtils } from '../User'
 import {
   createUserChallenge,
   createUserChallengeFailure,
@@ -16,6 +17,7 @@ import {
   getUserChallengesSuccess,
   normaliseUserChallengesSuccess,
   setUserChallenges,
+  updateUserChallenges,
 } from './UserChallenges.reducer'
 import { NormalisedUserChallenges, UserChallenge } from './UserChallenges.types'
 
@@ -29,6 +31,9 @@ export const createUserChallengeFlow: Middleware =
       const state = getState()
       const userId = UserSelectors.selectId(state)
       const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const payload = UserUtils.prepareCreateUserCredentialPayload(ApiUsersTypes.UserCredentialTypes.Challenge)(
+        action.payload,
+      )
 
       dispatch(
         ApiActions.apiRequest(
@@ -36,29 +41,39 @@ export const createUserChallengeFlow: Middleware =
             onSuccess: createUserChallengeSuccess,
             onFailure: createUserChallengeFailure,
           }),
-          action.payload,
+          payload,
         ),
       )
     }
     return result
   }
 
-export const createUserChallengeSuccessFlow: Middleware =
+export const createUserChallengeSuccessFlow =
+  ({
+    notification,
+    navigate,
+  }: {
+    notification: typeof showSimpleMessage
+    navigate: typeof Navigation.navigate
+  }): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
     if (createUserChallengeSuccess.match(action)) {
-      // const job = extractDataFromPayload(action)
-      dispatch(UserChallengesActions.createUserChallenge(job))
+      const userChallenge = ReduxUtils.extractDataFromResponseAction(action)
+      const normalisedUserChallenge = ReduxUtils.normalise(of(userChallenge))
+      notification('success', 'New Challenge successfully created!')
+      navigate(HomeNavigationRoutes.Home)
+      dispatch(updateUserChallenges(normalisedUserChallenge))
     }
 
     return result
   }
 
 export const createUserChallengeFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  ({ notification }: { notification: typeof ErrorUtils.showSimpleMessage }): Middleware =>
   _store =>
   next =>
   action => {
@@ -66,15 +81,19 @@ export const createUserChallengeFailureFlow =
 
     if (createUserChallengeFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+      notification(
+        'danger',
+        'An error occurred.',
+        'Oops something went wrong saving your' + ' challenge! Please try again.',
+      )
     }
     return result
   }
 
 export const getUserChallengesFromCredentialsFlow =
   (
-    extractDataFromPayload: StdFn<any, UserCredentials>,
-    extractChallenges: StdFn<UserCredentials, UserChallenge[]>,
+    extractDataFromPayload: Types.StdFn<any, UserTypes.UserCredentials>,
+    extractChallenges: Types.StdFn<UserTypes.UserCredentials, UserChallenge[]>,
   ): Middleware =>
   ({ dispatch }) =>
   next =>
@@ -89,7 +108,7 @@ export const getUserChallengesFromCredentialsFlow =
   }
 
 export const normaliseUserChallengesFlow =
-  (normalise: StdFn<UserChallenge[], NormalisedUserChallenges>): Middleware =>
+  (normalise: Types.StdFn<UserChallenge[], NormalisedUserChallenges>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

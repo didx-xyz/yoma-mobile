@@ -8,7 +8,7 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { Normalise } from 'types/redux.types'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromPayload, normalise } from 'utils/redux.utils'
+import { extractDataFromResponseAction, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
@@ -121,7 +121,7 @@ export const createUserJobSuccessFlow: Middleware =
   action => {
     const result = next(action)
     if (createUserJobSuccess.match(action)) {
-      const data = extractDataFromPayload(action)
+      const data = extractDataFromResponseAction(action)
 
       dispatch(fetchUserJobById(data.id))
       dispatch(clearUserJobsFormValues())
@@ -175,7 +175,7 @@ export const fetchUserJobByIdSuccessFlow =
   action => {
     const result = next(action)
     if (fetchUserJobByIdSuccess.match(action)) {
-      const data = extractDataFromPayload(action)
+      const data = extractDataFromResponseAction(action)
       const userJob = extractUserJobFromData(data)
       const normalisedJobs = normalise(userJob)
       dispatch(updateUserJobs(normalisedJobs))

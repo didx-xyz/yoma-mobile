@@ -1,5 +1,6 @@
 import { UserCredentialTypes } from '../../api/users/users.types'
-import { USER_RESPONSE } from './User.test.fixtures'
+import { USER_RESPONSE } from './User.fixture'
+import { updateStateWithFormValues } from './User.utils'
 import * as SUT from './User.utils'
 
 describe('modules/User/User.utils', () => {
@@ -169,6 +170,51 @@ describe('modules/User/User.utils', () => {
         requestVerification: false,
         startTime: 'MOCK_DATE',
         endTime: 'MOCK_DATE',
+      })
+    })
+  })
+  describe('prepareCreateUserCredentialPayload', () => {
+    it('should correctly format the data payload for the create credential api call', () => {
+      // given
+      const actionPayload = {
+        challengeId: 'CHALLENGE ID',
+        startDate: '2020-09-09T22:00:00.000Z',
+        endDate: '2020-10-09T22:00:00.000Z',
+        requestVerification: false,
+      }
+
+      // when we prepare the payload
+      const result = SUT.prepareCreateUserCredentialPayload(UserCredentialTypes.Challenge)(actionPayload)
+
+      // then we should have a correctly formatted payload
+      expect(result).toEqual({
+        type: UserCredentialTypes.Challenge,
+        credentialItemId: 'CHALLENGE ID',
+        startTime: '2020-09-09T22:00:00.000Z',
+        endTime: '2020-10-09T22:00:00.000Z',
+        requestVerification: false,
+      })
+    })
+  })
+  describe('updateStateWithFormValues', () => {
+    it('should extract the data from a typical response payload', () => {
+      // given ...
+      const state = {
+        ids: 'Normalised Ids array',
+        entities: 'Normalised Entities Object',
+      }
+
+      const formValues = 'Temporary Form Object'
+
+      // when ... we updateStateWithFormValues
+      // @ts-ignore
+      const result = updateStateWithFormValues(state, formValues)
+
+      // then ...
+      expect(result).toEqual({
+        ids: 'Normalised Ids array',
+        entities: 'Normalised Entities Object',
+        formValues: 'Temporary Form Object',
       })
     })
   })

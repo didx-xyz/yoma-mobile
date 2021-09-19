@@ -12,6 +12,7 @@ import { middleware as AuthMiddleware } from '../modules/Auth'
 import { middleware as ChallengesMiddleware } from '../modules/Challenges'
 import { middleware as ErrorMiddleware } from '../modules/Error'
 import { middleware as JobsMiddleware } from '../modules/Jobs'
+import * as Navigation from '../modules/Navigation/Navigation.actions'
 import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
 import ssoAuth from '../modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '../modules/Skills'
@@ -70,8 +71,14 @@ const featureModuleMiddleware = [
   SkillsMiddleware.fetchSkillsSuccessFlow,
   SkillsMiddleware.normaliseSkillsFlow(ReduxUtils.normalise),
   SkillsMiddleware.setSkillsFlow,
+  UserChallengesMiddleware.createUserChallengeFlow,
+  UserChallengesMiddleware.createUserChallengeSuccessFlow({
+    notification: showSimpleMessage,
+    navigate: Navigation.navigate,
+  }),
+  UserChallengesMiddleware.createUserChallengeFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
-    ReduxUtils.extractDataFromPayload,
+    ReduxUtils.extractDataFromResponseAction,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),
   ),
   UserChallengesMiddleware.normaliseUserChallengesFlow(ReduxUtils.normalise),
@@ -83,7 +90,7 @@ const featureModuleMiddleware = [
   UserJobsMiddleware.fetchUserJobByIdFlow,
   UserJobsMiddleware.fetchUserJobByIdSuccessFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.getUserJobsFromCredentialsFlow(
-    ReduxUtils.extractDataFromPayload,
+    ReduxUtils.extractDataFromResponseAction,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Job),
   ),
   UserJobsMiddleware.normaliseUserJobsFlow(ReduxUtils.normalise),
@@ -104,7 +111,7 @@ const featureModuleMiddleware = [
   }),
   UserMiddleware.uploadUserPhotoSuccessFlow,
   UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
-    ReduxUtils.extractDataFromPayload,
+    ReduxUtils.extractDataFromResponseAction,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Qualification),
   ),
   UserQualificationsMiddleware.normaliseUserQualificationsFlow(ReduxUtils.normalise),

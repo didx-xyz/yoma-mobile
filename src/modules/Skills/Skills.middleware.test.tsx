@@ -1,5 +1,5 @@
 import { mergeRight } from 'ramda'
-import { extractDataFromPayload } from 'utils/redux.utils'
+import { extractDataFromResponseAction } from 'utils/redux.utils'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
@@ -98,7 +98,7 @@ describe('modules/Skills/Skills.middleware', () => {
       invoke(action)
       // then ...validate setSkills
 
-      const data = extractDataFromPayload(action)
+      const data = extractDataFromResponseAction(action)
       expect(store.dispatch).toHaveBeenCalledWith(getSkillsSuccess(data))
     })
   })
