@@ -39,3 +39,5 @@ export const formatStartEndWithDurationString: FormatStartEndWithDurationString 
   props(['startEndString', 'durationDivider', 'period']),
   join(' '),
 )
+
+export const toJSON = (date: Date) => date.toJSON()

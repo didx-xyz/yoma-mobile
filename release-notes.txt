@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Step 2 of fixing the challenges credentials form - adding validation
+- Step 3 of fixing the challenges credentials form - submitting form to api and handling response
 
 10 Most Recent:
+- Step 2 of fixing the challenges credentials form - adding validation
 - Step 1 of fixing the challenges credentials form (getting real challenges in, allowing user to select a challenge)
 - Adding Challenges to state
 - display skills in My CV My Skills view

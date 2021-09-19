@@ -4,7 +4,7 @@ import { Middleware } from 'redux'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiChallengesConstants } from '../../api/challenges'
 import { StdFn } from '../../types/general.types'
-import { extractDataFromPayload } from '../../utils/redux.utils'
+import { extractDataFromResponseAction } from '../../utils/redux.utils'
 import {
   fetchChallenges,
   fetchChallengesFailure,
@@ -40,7 +40,7 @@ export const normaliseChallengesFlow =
   action => {
     const result = next(action)
     if (fetchChallengesSuccess.match(action)) {
-      const data = extractDataFromPayload(action)
+      const data = extractDataFromResponseAction(action)
       const challenges = normalise(data)
       dispatch(normaliseChallengesSuccess(challenges))
     }

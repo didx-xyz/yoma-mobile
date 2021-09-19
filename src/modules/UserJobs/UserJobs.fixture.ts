@@ -39,4 +39,5 @@ export const USER_JOBS_NORMALISED_MOCK = {
   entities: { '11111-5717-4562-b3fc-2c963f66afa6': USER_JOBS_MOCK[0] },
 }
 
-export const jobsFixture = createFixture(USER_JOBS_MOCK)
+export const userJobsFixture = createFixture(USER_JOBS_MOCK)
+export const userJobsStateFixture = createFixture(USER_JOBS_NORMALISED_MOCK)

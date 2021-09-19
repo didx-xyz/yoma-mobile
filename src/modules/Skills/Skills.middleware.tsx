@@ -2,7 +2,7 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { Normalise } from 'types/redux.types'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromPayload } from 'utils/redux.utils'
+import { extractDataFromResponseAction } from 'utils/redux.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
@@ -41,7 +41,7 @@ export const fetchSkillsSuccessFlow: Middleware =
     const result = next(action)
 
     if (fetchSkillsSuccess.match(action)) {
-      const data = extractDataFromPayload(action)
+      const data = extractDataFromResponseAction(action)
       dispatch(getSkillsSuccess(data))
     }
     return result

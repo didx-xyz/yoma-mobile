@@ -1,6 +1,6 @@
 import { mergeDeepRight } from 'ramda'
 
-import { USER_JOBS_MOCK } from '../../UserJobs/UserJobs.test.fixtures'
+import { USER_JOBS_MOCK } from '../../UserJobs/UserJobs.fixture'
 import * as SUT from './ExperienceView.utils'
 
 describe('modules/Experience/Experience.utils', () => {

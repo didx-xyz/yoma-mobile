@@ -6,7 +6,9 @@ import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import { createJob } from '../Jobs/Jobs.reducer'
+import * as UserFixtures from '../User/User.fixture'
 import * as UserActions from '../User/User.reducer'
+import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK, userJobsStateFixture } from './UserJobs.fixture'
 import * as SUT from './UserJobs.middleware'
 import {
   clearUserJobsFormValues,
@@ -22,7 +24,6 @@ import {
   setUserJobsFormValues,
   updateUserJobs,
 } from './UserJobs.reducer'
-import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK } from './UserJobs.test.fixtures'
 
 describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('getUserJobsFromCredentialsFlow', () => {
@@ -203,7 +204,10 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         requestVerification: false,
       }
 
-      const create = createMiddlewareMock(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      const create = createMiddlewareMock(jest, {
+        user: UserFixtures.userStateFixture({ id: userId }),
+        userJobs: userJobsStateFixture({ formValues: mockFormValues }),
+      })
       // when ... we create the user's credentials
       const action = createUserJob(JOB_MOCK)
 
@@ -283,7 +287,10 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         requestVerification: false,
       }
 
-      const create = createMiddlewareMock(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      const create = createMiddlewareMock(jest, {
+        user: UserFixtures.userStateFixture({ id: userId }),
+        userJobs: userJobsStateFixture({ formValues: mockFormValues }),
+      })
       // when ... we create the user's credentials
       const action = fetchUserJobById('ID')
 

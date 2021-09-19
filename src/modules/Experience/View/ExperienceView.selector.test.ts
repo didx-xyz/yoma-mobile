@@ -1,5 +1,5 @@
 import { rootStateFixture } from '../../../redux/redux.fixture'
-import { USER_JOBS_NORMALISED_MOCK } from '../../UserJobs/UserJobs.test.fixtures'
+import { USER_JOBS_NORMALISED_MOCK } from '../../UserJobs/UserJobs.fixture'
 import * as SUT from './ExperienceView.selector'
 
 describe('modules/Experience/Experience.selector', () => {
