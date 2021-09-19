@@ -1,8 +1,8 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
 import { updateNormalisedState } from '../../utils/redux.utils'
-import { types as CompletedChallengesFormTypes } from '../CompletedChallenges/Form'
 import {
+  CreateUserChallengePayload,
   CreateUserChallengeSuccessResponse,
   NormalisedUserChallenges,
   UserChallenge,
@@ -18,15 +18,11 @@ export const INITIAL_STATE = {
 export const getUserChallengesSuccess = createAction<UserChallenge[]>(`${name} getUserChallengesSuccess`)
 export const normaliseUserChallengesSuccess = createAction<NormalisedUserChallenges>(`${name} normaliseUserChallenges
 Success`)
-export const createUserChallenge = createAction<CompletedChallengesFormTypes.FormFields>(`${name} createUserChallenge`)
+export const createUserChallenge = createAction<CreateUserChallengePayload>(`${name} createUserChallenge`)
 export const createUserChallengeSuccess = createAction<CreateUserChallengeSuccessResponse>(
   `${name} createUserChallengeSuccess`,
 )
 export const createUserChallengeFailure = createAction<string>(`${name} createUserChallengeFailure`)
-
-export const fetchUserChallengeById = createAction<string>(`${name} fetchUserChallengeById`)
-export const fetchUserChallengeByIdFailure = createAction<string>(`${name} fetchUserChallengeByIdFailure`)
-export const fetchUserChallengeByIdSuccess = createAction<any>(`${name} fetchUserChallengeByIdSuccess`)
 
 export const setUserChallenges = createAction<NormalisedUserChallenges>(`${name} setUserChallenges`)
 export const updateUserChallenges = createAction<NormalisedUserChallenges>(`${name} updateUserChallenges`)

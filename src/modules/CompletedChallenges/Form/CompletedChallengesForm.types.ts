@@ -1,6 +1,6 @@
 export type FormFields = {
   challengeId: string
-  startDate: string | null
-  endDate: string | null
+  startDate: Date | null
+  endDate: Date | null
   requestVerification: boolean
 }

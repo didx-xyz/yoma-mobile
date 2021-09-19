@@ -16,9 +16,6 @@ export const createMiddlewareMock = (jest: any, state?: Partial<RootState>) => (
   return { store, next, invoke }
 }
 
-export const createMiddlewareMockNew = (jest: any) => (middleware: Middleware, state?: Partial<RootState>) =>
-  createMiddlewareMock(jest, state)(middleware)
-
 export const createFixture =
   (stateMock: StdObj) =>
   (override = {}) =>

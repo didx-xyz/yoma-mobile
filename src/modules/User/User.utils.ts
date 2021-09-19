@@ -13,7 +13,7 @@ import {
   prop,
   toLower,
 } from 'ramda'
-import { extractId } from 'utils/redux.utils'
+import * as ReduxUtils from 'utils/redux.utils'
 
 import { types as ApiUserTypes } from '../../api/users'
 import * as Types from '../../types/general.types'
@@ -46,7 +46,7 @@ export const extractCredentialsByType = (type: ApiUserTypes.UserCredentialTypes)
   filter(pipe(keys, find(equals(toLower(type)))))
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
   mergeRight({
-    credentialItemId: extractId(action),
+    credentialItemId: ReduxUtils.extractId(action),
   })
 
 export const extractUserCredentialFormValues = (

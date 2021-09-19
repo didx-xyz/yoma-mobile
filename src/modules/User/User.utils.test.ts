@@ -1,6 +1,5 @@
 import { UserCredentialTypes } from '../../api/users/users.types'
 import { USER_RESPONSE } from './User.fixture'
-import { updateStateWithFormValues } from './User.utils'
 import * as SUT from './User.utils'
 
 describe('modules/User/User.utils', () => {
@@ -208,7 +207,7 @@ describe('modules/User/User.utils', () => {
 
       // when ... we updateStateWithFormValues
       // @ts-ignore
-      const result = updateStateWithFormValues(state, formValues)
+      const result = SUT.updateStateWithFormValues(state, formValues)
 
       // then ...
       expect(result).toEqual({
