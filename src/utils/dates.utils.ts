@@ -1,6 +1,6 @@
 import { format, formatDuration, intervalToDuration, parseISO } from 'date-fns'
 import { format as formatFp } from 'date-fns/fp'
-import { always, apply, applySpec, compose, evolve, join, pipe, prop, props, values } from 'ramda'
+import { always, apply, applySpec, compose, join, pipe, prop, props, values } from 'ramda'
 
 import { DATES_DIVIDER, DATE_DURATION_DIVIDER, DATE_TPL_MON_YEAR } from '../constants/date.constants'
 

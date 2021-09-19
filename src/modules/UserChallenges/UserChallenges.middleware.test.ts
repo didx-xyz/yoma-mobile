@@ -1,15 +1,11 @@
 import { mergeRight } from 'ramda'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { actions as ApiActions } from '../../api'
-import { ApiMethods } from '../../api/api.types'
-import { constants as ApiUsersConstants } from '../../api/users'
-import { UserCredentialTypes, UsersEndpoints } from '../../api/users/users.types'
-import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
+import { actions as ApiActions, types as ApiTypes } from '../../api'
+import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../api/users'
+import { types as HomeNavigationTypes } from '../HomeNavigation'
 import * as UserFixtures from '../User/User.fixture'
 import * as UserActions from '../User/User.reducer'
-import { USER_JOBS_MOCK } from '../UserJobs/UserJobs.fixture'
-import { USER_CHALLENGES_RESPONSE_MOCK } from './UserChallenges.fixture'
 import * as SUT from './UserChallenges.middleware'
 import {
   createUserChallenge,
@@ -45,8 +41,8 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
       expect(next).toHaveBeenCalledWith(action)
 
       const config = mergeRight(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG, {
-        method: ApiMethods.Post,
-        endpoint: ['A USER ID', UsersEndpoints.Credentials],
+        method: ApiTypes.ApiMethods.Post,
+        endpoint: ['A USER ID', ApiUsersTypes.UsersEndpoints.Credentials],
       })
       // ... we should call the api middleware with the correct arguments
       expect(store.dispatch).toHaveBeenCalledWith(
@@ -56,7 +52,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
             onFailure: createUserChallengeFailure,
           }),
           {
-            type: UserCredentialTypes.Challenge,
+            type: ApiUsersTypes.UserCredentialTypes.Challenge,
             credentialItemId: 'CHALLENGE ID',
             startTime: '2020-09-09T22:00:00.000Z',
             endTime: '2020-10-09T22:00:00.000Z',
@@ -112,7 +108,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
         }),
       )
       expect(notificationMock).toHaveBeenCalled()
-      expect(navigateMock).toHaveBeenCalledWith(HomeNavigationRoutes.Home)
+      expect(navigateMock).toHaveBeenCalledWith(HomeNavigationTypes.HomeNavigationRoutes.Home)
     })
   })
   describe('createUserChallengeFailureFlow', () => {
