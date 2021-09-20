@@ -1,6 +1,8 @@
 import SUT, {
   INITIAL_STATE,
+  clearFormValues,
   clearUserChallenges,
+  setFormValues,
   setUserChallenges,
   updateUserChallenges,
 } from './UserChallenges.reducer'
@@ -104,6 +106,65 @@ describe('modules/UserChallenges/Challenges.redux', () => {
         entities: {
           idA: 'Challenge A',
           idB: 'Challenge B',
+          id1: 'Challenge 1',
+          id2: 'Challenge 2',
+          id3: 'Challenge 3',
+        },
+      })
+    })
+  })
+  describe('setFormValues', () => {
+    it('should correctly clear the form values', () => {
+      // given ...an initial state
+      const state = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Challenge 1',
+          id2: 'Challenge 2',
+          id3: 'Challenge 3',
+        },
+      }
+
+      // when ... we clear challenges
+      // @ts-ignore - file shape doesn't matter for the test
+      const action = setFormValues({ file: 'SOME FILE DATA' })
+      // @ts-ignore
+      const result = SUT(state, action)
+
+      // then ... state should include the new challenges
+      expect(result).toEqual({
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Challenge 1',
+          id2: 'Challenge 2',
+          id3: 'Challenge 3',
+        },
+        formValues: { file: 'SOME FILE DATA' },
+      })
+    })
+  })
+  describe('clearFormValues', () => {
+    it('should correctly clear the form values', () => {
+      // given ...an initial state
+      const state = {
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
+          id1: 'Challenge 1',
+          id2: 'Challenge 2',
+          id3: 'Challenge 3',
+        },
+        formValues: { file: 'SOME FILE DATA' },
+      }
+
+      // when ... we clear challenges
+      const action = clearFormValues()
+      // @ts-ignore
+      const result = SUT(state, action)
+
+      // then ... state should include the new challenges
+      expect(result).toEqual({
+        ids: ['id1', 'id2', 'id3'],
+        entities: {
           id1: 'Challenge 1',
           id2: 'Challenge 2',
           id3: 'Challenge 3',

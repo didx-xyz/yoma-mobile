@@ -100,7 +100,7 @@ export const createUserJobFlow: Middleware =
       const formValues = selectFormValues(state)
       const userJobsPayload = prepareUserCredentialItemPayload(action)(formValues)
 
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
 
       dispatch(
         ApiActions.apiRequest(
@@ -152,10 +152,10 @@ export const fetchUserJobByIdFlow: Middleware =
     if (fetchUserJobById.match(action)) {
       const state = getState()
       const userId = UserSelectors.selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
         userId,
       )
-      const configWithCredentialId = ApiUtils.appendIdToEndpointInConfig(config)(action.payload)
+      const configWithCredentialId = ApiUtils.appendValueToEndpointArrayInConfig(config)(action.payload)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(configWithCredentialId, {

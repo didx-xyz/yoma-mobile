@@ -17,7 +17,7 @@ export const fetchUserSkillsFlow: Middleware =
     if (fetchUserSkills.match(action)) {
       const state = getState()
       const userId = selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)(userId)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {

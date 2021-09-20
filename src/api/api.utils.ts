@@ -17,6 +17,7 @@ import {
   pathOr,
   pipe,
   unless,
+  zip,
 } from 'ramda'
 
 import { RootState } from '../redux/redux.types'
@@ -27,14 +28,20 @@ export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<Ap
   pipe(objOf(key), mergeDeepRight(config))
 
 export const addIdAsEndpointToConfig = addValueWithGivenKeyToConfig('endpoint')
-export const prependIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: string) =>
+export const prependValueToEndpointInConfig = (config: Partial<ApiMeta>) => (id: string) =>
   evolve({
     endpoint: pipe(of, concat([id])),
   })(config)
-export const appendIdToEndpointInConfig = (config: Partial<ApiMeta>) => (id: string) =>
+
+export const appendValueToEndpointArrayInConfig = (config: Partial<ApiMeta>) => (id: string) =>
   evolve({
     endpoint: append(id),
   })(config)
+
+export const zipIdsIntoConfigEndpoint = (ids: string[]) =>
+  evolve({
+    endpoint: pipe(zip(ids), flatten),
+  })
 export const addParamsToConfig = addValueWithGivenKeyToConfig('params')
 export const createParam = objOf
 export const createTypeParam = createParam('type')

@@ -23,7 +23,7 @@ const Upload = ({ label, name }: Props) => {
         type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
       })
       setFileName(res[0].name)
-      setValue(res[0].uri)
+      setValue(res[0])
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         // User cancelled the picker, exit any dialogs or menus and move on

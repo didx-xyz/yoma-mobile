@@ -66,5 +66,6 @@ declare module 'ramda' {
   export function values(...rest: any[]): any
   export function view(...rest: any[]): any
   export function when(...rest: any[]): any
+  export function zip(...rest: any[]): any
   export function zipObj(...rest: any[]): any
 }

@@ -6,6 +6,7 @@ import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../ap
 import { types as HomeNavigationTypes } from '../HomeNavigation'
 import * as UserFixtures from '../User/User.fixture'
 import * as UserActions from '../User/User.reducer'
+import { setUserChallengeFormValuesFlow } from './UserChallenges.middleware'
 import * as SUT from './UserChallenges.middleware'
 import {
   createUserChallenge,
@@ -13,11 +14,40 @@ import {
   createUserChallengeSuccess,
   getUserChallengesSuccess,
   normaliseUserChallengesSuccess,
+  setFormValues,
   setUserChallenges,
   updateUserChallenges,
 } from './UserChallenges.reducer'
 
 describe('modules/UserChallenges/UserChallenges.middleware', () => {
+  describe('setUserChallengeFormValuesFlow', () => {
+    it('should correctly set the form values in state', () => {
+      // given ... state with a user id
+      const create = createMiddlewareMock(jest, {
+        user: UserFixtures.userStateFixture({ id: 'A USER ID' }),
+      })
+
+      // when ... we create the user's credentials
+      const action = createUserChallenge({
+        credentialItemId: 'CHALLENGE ID',
+        startTime: '2020-09-09T22:00:00.000Z',
+        endTime: '2020-10-09T22:00:00.000Z',
+        requestVerification: false,
+        // @ts-ignore file shape isn't required for the test
+        file: 'SOME FILE DATA',
+      })
+
+      const { store, invoke, next } = create(SUT.setUserChallengeFormValuesFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      expect(next).toHaveBeenCalledWith(action)
+      // ... we should submit the uri to be saved to state
+      // @ts-ignore file shape isn't required for the test
+      expect(store.dispatch).toHaveBeenCalledWith(setFormValues({ file: 'SOME FILE DATA' }))
+    })
+  })
   describe('createUserChallengeFlow', () => {
     it('should correctly call the api middleware with the payload and correct meta', () => {
       // given ... state with a user id
@@ -27,10 +57,11 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
 
       // when ... we create the user's credentials
       const action = createUserChallenge({
-        challengeId: 'CHALLENGE ID',
-        startDate: '2020-09-09T22:00:00.000Z',
-        endDate: '2020-10-09T22:00:00.000Z',
+        credentialItemId: 'CHALLENGE ID',
+        startTime: '2020-09-09T22:00:00.000Z',
+        endTime: '2020-10-09T22:00:00.000Z',
         requestVerification: false,
+        uri: 'SOME URI',
       })
 
       const { store, invoke, next } = create(SUT.createUserChallengeFlow)

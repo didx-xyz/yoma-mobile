@@ -37,7 +37,7 @@ describe('api/api.utils', () => {
       })
     })
   })
-  describe('addIdBeforeEndpointInConfig', () => {
+  describe('prependValueToEndpointInConfig', () => {
     it('should insert the given id in front of the endpoint value when we provide the id, given a config with an endpoint key', () => {
       // given ... a config with an endpoint key
       const config = {
@@ -47,7 +47,7 @@ describe('api/api.utils', () => {
       }
       // when ... we provide the id
       //@ts-ignore
-      const result = SUT.prependIdToEndpointInConfig(config)(10)
+      const result = SUT.prependValueToEndpointInConfig(config)(10)
       // then ... should insert the given id in front of the endpoint value
       expect(result).toEqual({
         aKey: 'aValue',
@@ -56,7 +56,7 @@ describe('api/api.utils', () => {
       })
     })
   })
-  describe('appendIdToEndpointInConfig', () => {
+  describe('appendValueToEndpointArrayInConfig', () => {
     it('should insert the given id in end of the config endpoint array', () => {
       // given ... a config with an endpoint key
       const config = {
@@ -66,12 +66,31 @@ describe('api/api.utils', () => {
       }
       // when ... we provide the id
       //@ts-ignore
-      const result = SUT.appendIdToEndpointInConfig(config)(10)
+      const result = SUT.appendValueToEndpointArrayInConfig(config)(10)
       // then ... should insert the given id in end of the endpoint array
       expect(result).toEqual({
         aKey: 'aValue',
         anotherKey: 'anotherValue',
         endpoint: [5, 'SomeValue', 10],
+      })
+    })
+  })
+  describe('zipIdsIntoConfigEndpoint', () => {
+    it('should zip the given ids into an array of endpoints', () => {
+      // given ... a config with an endpoint key
+      const config = {
+        aKey: 'aValue',
+        anotherKey: 'anotherValue',
+        endpoint: ['endpoint1', 'endpoint2'],
+      }
+      // when ... we provide the id
+      //@ts-ignore
+      const result = SUT.zipIdsIntoConfigEndpoint([1, 2])(config)
+      // then ... should insert the given id in end of the endpoint array
+      expect(result).toEqual({
+        aKey: 'aValue',
+        anotherKey: 'anotherValue',
+        endpoint: [1, 'endpoint1', 2, 'endpoint2'],
       })
     })
   })

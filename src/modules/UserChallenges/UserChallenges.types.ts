@@ -1,3 +1,5 @@
+import { DocumentPickerResponse } from 'react-native-document-picker'
+
 import * as ReduxTypes from '../../redux/redux.types'
 import * as Types from '../../types/general.types'
 import { types as AuthTypes } from '../Auth'
@@ -35,7 +37,10 @@ export interface UserChallengeItem
 
 export type NormalisedUserChallengeItem = ReduxTypes.NormalisedData<UserChallengeItem>
 
-export interface UserChallengesState extends NormalisedUserChallenges {}
+export type UserChallengeFormValues = { file: DocumentPickerResponse }
+export interface UserChallengesState extends NormalisedUserChallenges {
+  formValues?: UserChallengeFormValues
+}
 
 export type ChallengeEntry = {
   challenge: string

@@ -12,7 +12,7 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
       // given ...
       const create = createMiddlewareMock(jest, { user: { id: 'USER ID' } })
       const action = fetchUserSkills()
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)('USER ID')
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)('USER ID')
       // @ts-ignore
       const { invoke, next, store } = create(SUT.fetchUserSkillsFlow)
 

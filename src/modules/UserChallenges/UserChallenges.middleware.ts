@@ -1,8 +1,12 @@
-import { mergeRight, of } from 'ramda'
+import { append, evolve, mergeDeepRight, mergeRight, of, pick, pipe, prepend, zip } from 'ramda'
+import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
+import { appendValueToEndpointArrayInConfig } from '../../api/api.utils'
 import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../api/users'
+import { USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG } from '../../api/users/users.constants'
+import middleware from '../../redux/middleware'
 import * as Types from '../../types/general.types'
 import { showSimpleMessage } from '../../utils/error'
 import * as ErrorUtils from '../../utils/error'
@@ -12,14 +16,31 @@ import * as Navigation from '../Navigation/Navigation.actions'
 import { actions as UserActions, selectors as UserSelectors, types as UserTypes, utils as UserUtils } from '../User'
 import {
   createUserChallenge,
+  createUserChallengeCertificate,
+  createUserChallengeCertificateFailure,
+  createUserChallengeCertificateSuccess,
   createUserChallengeFailure,
   createUserChallengeSuccess,
   getUserChallengesSuccess,
   normaliseUserChallengesSuccess,
+  setFormValues,
   setUserChallenges,
   updateUserChallenges,
 } from './UserChallenges.reducer'
+import { selectFormFile } from './UserChallenges.selector'
 import { NormalisedUserChallenges, UserChallenge } from './UserChallenges.types'
+
+export const setUserChallengeFormValuesFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (createUserChallenge.match(action)) {
+      const payload = pick(['file'])(action.payload)
+      dispatch(setFormValues(payload))
+    }
+    return result
+  }
 
 export const createUserChallengeFlow: Middleware =
   ({ dispatch, getState }) =>
@@ -30,7 +51,7 @@ export const createUserChallengeFlow: Middleware =
     if (createUserChallenge.match(action)) {
       const state = getState()
       const userId = UserSelectors.selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
       const payload = UserUtils.prepareCreateUserCredentialPayload(ApiUsersTypes.UserCredentialTypes.Challenge)(
         action.payload,
       )
@@ -67,8 +88,41 @@ export const createUserChallengeSuccessFlow =
       notification('success', 'New Challenge successfully created!')
       navigate(HomeNavigationRoutes.Home)
       dispatch(updateUserChallenges(normalisedUserChallenge))
+      dispatch(createUserChallengeCertificate(userChallenge.id))
     }
 
+    return result
+  }
+
+export const createUserChallengeCertificateFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserChallengeCertificate.match(action)) {
+      const state = getState()
+      const file = selectFormFile(state) as DocumentPickerResponse | undefined
+      if (file) {
+        const userId = UserSelectors.selectId(state)
+        const config = ApiUtils.zipIdsIntoConfigEndpoint([userId, action.payload])(
+          ApiUsersConstants.USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG,
+        )
+
+        const formData = new FormData()
+        const payload = append('image/pdf', { uri: file.uri, type: file.type, name: file.name })(formData)
+
+        dispatch(
+          ApiActions.apiRequest(
+            mergeRight(config, {
+              onSuccess: createUserChallengeCertificateSuccess,
+              onFailure: createUserChallengeCertificateFailure,
+            }),
+            payload,
+          ),
+        )
+      }
+    }
     return result
   }
 

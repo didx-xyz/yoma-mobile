@@ -1,6 +1,7 @@
 import { rootStateFixture } from '../../redux/redux.fixture'
 import { USER_CHALLENGES_STATE_MOCK } from './UserChallenges.fixture'
 import { INITIAL_STATE } from './UserChallenges.reducer'
+import { selectFormUri } from './UserChallenges.selector'
 import * as SUT from './UserChallenges.selector'
 
 describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
@@ -20,6 +21,26 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       const result = SUT.selectUserChallenges(state)
       // then ...
       expect(result).toEqual(USER_CHALLENGES_STATE_MOCK)
+    })
+  })
+  describe('selectFormUri', function () {
+    it('should correctly handle an empty state', () => {
+      // given ...
+      const state = rootStateFixture()
+      // when ...
+      const result = SUT.selectFormUri(state)
+      // then ...
+      expect(result).toEqual(null)
+    })
+    it('should return the uri in formValues should it exist', () => {
+      // given ...
+      const state = rootStateFixture({
+        userChallenges: { ...USER_CHALLENGES_STATE_MOCK, formValues: { uri: 'SOME URI' } },
+      })
+      // when ...
+      const result = SUT.selectFormUri(state)
+      // then ...
+      expect(result).toEqual('SOME URI')
     })
   })
 })

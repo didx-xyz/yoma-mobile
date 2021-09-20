@@ -106,7 +106,9 @@ export const fetchUserCredentialsFlow: Middleware =
     if (fetchUserCredentials.match(action)) {
       const state = getState()
       const userId = selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(
+        userId,
+      )
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
@@ -161,7 +163,7 @@ export const uploadUserPhotoSuccessFlow: Middleware =
     if (uploadUserPhotoSuccess.match(action)) {
       const state = getState()
       const userId = selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)(userId)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {

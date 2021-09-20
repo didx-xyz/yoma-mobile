@@ -7,6 +7,7 @@ import {
   keys,
   mergeRight,
   objOf,
+  omit,
   path,
   pick,
   pipe,
@@ -17,7 +18,6 @@ import * as ReduxUtils from 'utils/redux.utils'
 
 import { types as ApiUserTypes } from '../../api/users'
 import * as Types from '../../types/general.types'
-import * as RamdaUtils from '../../utils/ramda.utils'
 import { PHOTO_UPLOAD_FORM_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
 
@@ -59,7 +59,8 @@ export const extractUserCredentialFormValues = (
     requestVerification: always(false),
   })
 
-export const prepareCreateUserCredentialPayload = (type: ApiUserTypes.UserCredentialTypes) => mergeRight({ type })
+export const prepareCreateUserCredentialPayload = (type: ApiUserTypes.UserCredentialTypes) =>
+  pipe(omit(['uri']), mergeRight({ type }))
 
 export const updateStateWithFormValues = (state: Types.StdObj, formValues: UserCredentialFormValues) =>
   pipe(objOf('formValues'), mergeRight(state))(formValues)
