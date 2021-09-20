@@ -59,15 +59,7 @@ export const extractUserCredentialFormValues = (
     requestVerification: always(false),
   })
 
-export const prepareCreateUserCredentialPayload = (type: ApiUserTypes.UserCredentialTypes) =>
-  pipe(
-    RamdaUtils.renameKeys({
-      challengeId: 'credentialItemId',
-      endDate: 'endTime',
-      startDate: 'startTime',
-    }),
-    mergeRight({ type }),
-  )
+export const prepareCreateUserCredentialPayload = (type: ApiUserTypes.UserCredentialTypes) => mergeRight({ type })
 
 export const updateStateWithFormValues = (state: Types.StdObj, formValues: UserCredentialFormValues) =>
   pipe(objOf('formValues'), mergeRight(state))(formValues)

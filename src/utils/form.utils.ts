@@ -7,6 +7,6 @@ export const getHasValuesChanged = (initialValues: StdObj, values: StdObj, isVal
   and(not(equals(initialValues, values)), isValid)
 
 export const sanitiseDateRange = evolve({
-  startDate: DatUtils.toJSON,
-  endDate: DatUtils.toJSON,
+  startTime: DatUtils.toJSON,
+  endTime: DatUtils.toJSON,
 })

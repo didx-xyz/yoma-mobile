@@ -2,11 +2,11 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import { FormikProps } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, TouchableOpacity, View } from 'react-native'
+import { ScrollView, TouchableOpacity } from 'react-native'
 
 import Card from '../../../components/Card'
 import CheckBox from '../../../components/CheckBox'
-import DatePicker from '../../../components/DatePicker'
+import DateRangeSelect from '../../../components/DateRangeSelect'
 import DropDown, { types as DropDownTypes } from '../../../components/DropDown'
 import DropDownTags from '../../../components/DropDownTags'
 import FormLayout from '../../../components/FormLayout'
@@ -23,18 +23,18 @@ interface Props {
   onFilterSkills: (value: string) => void
   skills: DropDownTypes.DropDownItem[]
   organisations: DropDownTypes.DropDownItem[]
-  handlers: FormikProps<any>
+  form: FormikProps<any>
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
-const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, handlers }: Props) => {
+const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, form }: Props) => {
   const { t } = useTranslation()
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
 
   return (
     <ViewContainer style={styles.container}>
-      <Header navigation={navigation} headerText={t('Experience')} onSave={handlers.handleSubmit} isSaveButtonEnabled />
+      <Header navigation={navigation} headerText={t('Experience')} onSave={form.handleSubmit} isSaveButtonEnabled />
       <ScrollView>
         <Card>
           <FormLayout>
@@ -45,12 +45,11 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, han
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
               }
             />
-            <Input name={'title'} label={t('Title')} handlers={handlers} />
+            <Input name={'title'} label={t('Title')} handlers={form} />
             <DropDown
               items={organisations}
               name={'organisationId'}
               label={'Company name'}
-              handlers={handlers}
               searchable
               searchPlaceholder={t('Search organisation')}
             />
@@ -59,11 +58,8 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, han
               label={t('I currently work here')}
               onPress={() => setIsWorkingHere(!isWorkingHere)}
             />
-            <View style={styles.row}>
-              <DatePicker name="startTime" label={t('Start date')} handlers={handlers} />
-              <DatePicker name="endTime" label={t('End date')} handlers={handlers} />
-            </View>
-            <Input name={'description'} label={t('Description')} handlers={handlers} multiline />
+            <DateRangeSelect label={t('When did you work here?')} />
+            <Input name={'description'} label={t('Description')} handlers={form} multiline />
             <DropDownTags
               items={skills}
               multiple
@@ -72,7 +68,7 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, han
               onChangeSearchText={onFilterSkills}
               label={t('Skills developed')}
               name={'skillNames'}
-              handlers={handlers}
+              handlers={form}
             />
             <TouchableOpacity onPress={() => setShowInfoModal(true)}>
               <Text.Meta level={MetaLevels.SmallBold} color={Colors.PrimaryGreen}>

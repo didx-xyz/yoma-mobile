@@ -23,39 +23,34 @@ import styles from './CompletedChallengesForm.styles'
 interface Props {
   challenges: ChallengeTypes.NormalisedChallenges
   challengesDropDown: DropDownItem[]
-  handlers: FormikProps<any>
+  form: FormikProps<any>
   navigation: StackNavigationProp<
     HomeNavigationTypes.HomeNavigatorParamsList,
     HomeNavigationTypes.HomeNavigationRoutes.CompletedChallenges
   >
 }
 
-const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, handlers }: Props) => {
+const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, form }: Props) => {
   const { t } = useTranslation()
   const [hasSelectedChallenge, setHasSelectedChallenge] = useState(false)
 
   useEffect(() => {
-    if (handlers.values.challengeId !== '' && !hasSelectedChallenge) {
+    if (form.values.challengeId !== '' && !hasSelectedChallenge) {
       setHasSelectedChallenge(true)
     }
-  }, [handlers, hasSelectedChallenge])
+  }, [form, hasSelectedChallenge])
 
   return (
     <ViewContainer style={styles.container}>
-      <Header
-        navigation={navigation}
-        onSave={handlers.handleSubmit}
-        headerText={t('Add challenge')}
-        isSaveButtonEnabled
-      />
+      <Header navigation={navigation} onSave={form.handleSubmit} headerText={t('Add challenge')} isSaveButtonEnabled />
       <ScrollView>
         <FormGroup>
-          <DropDown name="challengeId" label={t('Select a challenge')} items={challengesDropDown} handlers={handlers} />
+          <DropDown name="credentialItemId" label={t('Select a challenge')} items={challengesDropDown} />
           <Optional condition={hasSelectedChallenge}>
-            <DateRangeSelect label={t('When did you do the challenge?')} handlers={handlers} />
-            <Upload onPress={() => {}} />
+            <DateRangeSelect label={t('When did you do the challenge?')} />
+            <Upload name="upload" label={t('Upload certification (if completed)')} />
             <View style={styles.checkBoxRow}>
-              <CheckBoxInput label={t('Request verification')} name="requestVerification" handlers={handlers} />
+              <CheckBoxInput label={t('Request verification')} name="requestVerification" />
               <View style={styles.iconInfo}>
                 <IconInfo />
               </View>
@@ -63,7 +58,7 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, h
           </Optional>
         </FormGroup>
         <Optional condition={hasSelectedChallenge}>
-          <ChallengeInfo challenge={challenges.entities[handlers.values.challengeId]} />
+          <ChallengeInfo challenge={challenges.entities[form.values.challengeId]} />
         </Optional>
       </ScrollView>
     </ViewContainer>

@@ -16,8 +16,8 @@ export interface UserChallengeResponse {
 export type CreateUserChallengePayload = Types.Modify<
   CompletedChallengesFormTypes.FormFields,
   {
-    startDate: string
-    endDate: string
+    startTime: string
+    endTime: string
   }
 >
 

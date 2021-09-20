@@ -1,6 +1,6 @@
 export type FormFields = {
-  challengeId: string
-  startDate: Date | null
-  endDate: Date | null
+  credentialItemId: string
+  startTime: Date | null
+  endTime: Date | null
   requestVerification: boolean
 }

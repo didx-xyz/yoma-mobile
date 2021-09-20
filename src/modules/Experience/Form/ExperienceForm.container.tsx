@@ -5,6 +5,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import * as DateUtils from '../../../utils/dates.utils'
+import * as FormUtils from '../../../utils/form.utils'
 import { types as HomeNavigationTypes } from '../../HomeNavigation'
 import { actions as JobActions, types as JobTypes } from '../../Jobs'
 import { actions as SkillsActions } from '../../Skills'
@@ -24,10 +25,7 @@ const ExperienceFormContainer = ({ navigation }: Props) => {
   const { organisations, skills } = useSelector(selector)
 
   const handleSubmit = (values: JobTypes.JobsRequest) => {
-    const job = evolve({
-      startTime: DateUtils.dateToISOString,
-      endTime: DateUtils.dateToISOString,
-    })(values)
+    const job = FormUtils.sanitiseDateRange(values)
     dispatch(JobActions.createJob(job))
   }
 
@@ -49,7 +47,7 @@ const ExperienceFormContainer = ({ navigation }: Props) => {
           skills={skills}
           navigation={navigation}
           onFilterSkills={onFilterSkills}
-          handlers={formikHandlers}
+          form={formikHandlers}
         />
       )}
     </Formik>

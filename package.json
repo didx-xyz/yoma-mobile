@@ -55,6 +55,7 @@
     "react": "17.0.1",
     "react-i18next": "^11.8.12",
     "react-native": "0.64.2",
+    "react-native-document-picker": "^6.0.4",
     "react-native-dropdown-picker": "^5.1.4",
     "react-native-elements": "^3.3.2",
     "react-native-email-link": "^1.11.0",

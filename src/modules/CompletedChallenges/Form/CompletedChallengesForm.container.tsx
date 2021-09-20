@@ -18,8 +18,10 @@ interface Props {
 const CompletedChallengesFormContainer = ({ navigation }: Props) => {
   const { challenges, challengesDropDown } = useSelector(selector)
   const dispatch = useDispatch()
+
   const handleSubmit = (values: FormFields) => {
-    dispatch(UserChallengesActions.createUserChallenge(FormUtils.sanitiseDateRange(values)))
+    const challenge = FormUtils.sanitiseDateRange(values)
+    dispatch(UserChallengesActions.createUserChallenge(challenge))
   }
 
   return (
@@ -29,7 +31,7 @@ const CompletedChallengesFormContainer = ({ navigation }: Props) => {
           navigation={navigation}
           challenges={challenges}
           challengesDropDown={challengesDropDown}
-          handlers={formikHandlers}
+          form={formikHandlers}
         />
       )}
     </Formik>

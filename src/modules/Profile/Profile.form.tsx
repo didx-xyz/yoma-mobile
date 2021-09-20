@@ -47,7 +47,6 @@ const ProfileForm = ({ user, setFormState }: Props) => {
               items={mapToDropDownArray(countries, 'code', 'name')}
               name={'countryAlpha2'}
               label={'Country'}
-              handlers={formikHandlers}
               searchPlaceholder={t('Search country')}
             />
             <Input

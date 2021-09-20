@@ -1,17 +1,19 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { DatePicker, DropDownTags, FormLayout, InfoModal, Input, Spinner, Upload } from 'components'
-import Text, { MetaLevels } from 'components/Typography'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useImperativeHandle, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
-import { Colors } from 'styles'
-import { getHasValuesChanged } from 'utils/form.utils'
 
+import { DropDownTags, FormLayout, InfoModal, Input, Spinner } from '../../../components'
 import Card from '../../../components/Card'
 import CheckBox from '../../../components/CheckBox'
+import DateRangeSelect from '../../../components/DateRangeSelect'
 import Header from '../../../components/Header'
+import Text, { MetaLevels } from '../../../components/Typography'
+import Upload from '../../../components/Upload'
 import ViewContainer from '../../../components/ViewContainer'
+import { Colors } from '../../../styles'
+import { getHasValuesChanged } from '../../../utils/form.utils'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import ValidationSchema from './Education.validationSchema'
 import { INITIAL_VALUES, MOCKED_SKILLS_DATA } from './EducationForm.constants'
@@ -95,10 +97,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
                   label={t('I currently study here')}
                   onPress={() => setIsStudying(!isStudying)}
                 />
-                <View style={styles.row}>
-                  <DatePicker name={'startDate'} label={t('Start date')} handlers={formikHandlers} />
-                  <DatePicker name={'endDate'} label={t('End date')} handlers={formikHandlers} />
-                </View>
+                <DateRangeSelect label={t('When did you do the course?')} />
                 <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
                 <DropDownTags
                   items={skillsList}
@@ -108,7 +107,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
                   name={'skillNames'}
                   handlers={formikHandlers}
                 />
-                <Upload onPress={() => {}} />
+                <Upload name="upload" label={t('Upload certification (if completed)')} />
                 <View style={styles.bottom}>
                   <Text.Meta
                     level={MetaLevels.SmallBold}
