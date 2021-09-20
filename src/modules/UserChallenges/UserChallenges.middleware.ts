@@ -1,12 +1,9 @@
-import { append, evolve, mergeDeepRight, mergeRight, of, pick, pipe, prepend, zip } from 'ramda'
+import { append, mergeRight, of, pick } from 'ramda'
 import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { appendValueToEndpointArrayInConfig } from '../../api/api.utils'
 import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../api/users'
-import { USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG } from '../../api/users/users.constants'
-import middleware from '../../redux/middleware'
 import * as Types from '../../types/general.types'
 import { showSimpleMessage } from '../../utils/error'
 import * as ErrorUtils from '../../utils/error'

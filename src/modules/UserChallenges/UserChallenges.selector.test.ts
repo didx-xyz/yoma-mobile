@@ -1,7 +1,6 @@
 import { rootStateFixture } from '../../redux/redux.fixture'
 import { USER_CHALLENGES_STATE_MOCK } from './UserChallenges.fixture'
 import { INITIAL_STATE } from './UserChallenges.reducer'
-import { selectFormUri } from './UserChallenges.selector'
 import * as SUT from './UserChallenges.selector'
 
 describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {

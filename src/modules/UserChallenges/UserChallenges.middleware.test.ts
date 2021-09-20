@@ -6,7 +6,6 @@ import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../ap
 import { types as HomeNavigationTypes } from '../HomeNavigation'
 import * as UserFixtures from '../User/User.fixture'
 import * as UserActions from '../User/User.reducer'
-import { setUserChallengeFormValuesFlow } from './UserChallenges.middleware'
 import * as SUT from './UserChallenges.middleware'
 import {
   createUserChallenge,
