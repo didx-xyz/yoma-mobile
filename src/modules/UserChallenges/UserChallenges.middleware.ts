@@ -11,7 +11,7 @@ import * as ReduxUtils from '../../utils/redux.utils'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import * as Navigation from '../Navigation/Navigation.actions'
 import { actions as UserActions, selectors as UserSelectors, types as UserTypes, utils as UserUtils } from '../User'
-import { USER_CREDENTIAL_FORM_DATA_NAME } from '../User/User.constants'
+import { USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME } from '../User/User.constants'
 import {
   createUserChallenge,
   createUserChallengeCertificate,
@@ -128,7 +128,7 @@ export const createUserChallengeCertificateFlow: Middleware =
 
         const formData = new FormData()
         const fileData = pick(['uri', 'type', 'name'], certificate)
-        formData.append(USER_CREDENTIAL_FORM_DATA_NAME, fileData)
+        formData.append(USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
 
         dispatch(
           ApiActions.apiRequest(

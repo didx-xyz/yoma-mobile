@@ -11,5 +11,5 @@ export const CAPTURE_IMAGE_OPTIONS: Options = {
   compressImageQuality: 0.2,
 }
 
-export const PHOTO_UPLOAD_FORM_NAME = 'Photo'
-export const USER_CREDENTIAL_FORM_DATA_NAME = 'File'
+export const USER_PHOTO_FORM_DATA_NAME = 'Photo'
+export const USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME = 'File'
