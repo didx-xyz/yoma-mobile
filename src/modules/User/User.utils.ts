@@ -60,7 +60,7 @@ export const extractUserCredentialFormValues = (
   })
 
 export const prepareCreateUserCredentialPayload = (type: ApiUserTypes.UserCredentialTypes) =>
-  pipe(omit(['uri']), mergeRight({ type }))
+  pipe(omit(['certificate']), mergeRight({ type }))
 
 export const updateStateWithFormValues = (state: Types.StdObj, formValues: UserCredentialFormValues) =>
   pipe(objOf('formValues'), mergeRight(state))(formValues)

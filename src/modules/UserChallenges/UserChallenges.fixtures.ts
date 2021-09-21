@@ -150,5 +150,5 @@ export const USER_CHALLENGES_STATE_MOCK = {
     },
   },
 }
-export const userChallengesFixture = createFixture(USER_CHALLENGES_RESPONSE_MOCK)
+export const userChallengesFixtures = createFixture(USER_CHALLENGES_RESPONSE_MOCK)
 export const userChallengesStateFixture = createFixture(USER_CHALLENGES_STATE_MOCK)

@@ -37,7 +37,7 @@ export interface UserChallengeItem
 
 export type NormalisedUserChallengeItem = ReduxTypes.NormalisedData<UserChallengeItem>
 
-export type UserChallengeFormValues = { file: DocumentPickerResponse }
+export type UserChallengeFormValues = { certificate: DocumentPickerResponse }
 export interface UserChallengesState extends NormalisedUserChallenges {
   formValues?: UserChallengeFormValues
 }

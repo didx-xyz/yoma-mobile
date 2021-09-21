@@ -1,4 +1,4 @@
-import { append, mergeRight, of, pick } from 'ramda'
+import { mergeRight, of, pick } from 'ramda'
 import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
@@ -11,6 +11,7 @@ import * as ReduxUtils from '../../utils/redux.utils'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import * as Navigation from '../Navigation/Navigation.actions'
 import { actions as UserActions, selectors as UserSelectors, types as UserTypes, utils as UserUtils } from '../User'
+import { USER_CREDENTIAL_FORM_DATA_NAME } from '../User/User.constants'
 import {
   createUserChallenge,
   createUserChallengeCertificate,
@@ -24,7 +25,7 @@ import {
   setUserChallenges,
   updateUserChallenges,
 } from './UserChallenges.reducer'
-import { selectFormFile } from './UserChallenges.selector'
+import { selectFormCertificate } from './UserChallenges.selector'
 import { NormalisedUserChallenges, UserChallenge } from './UserChallenges.types'
 
 export const setUserChallengeFormValuesFlow: Middleware =
@@ -33,7 +34,8 @@ export const setUserChallengeFormValuesFlow: Middleware =
   action => {
     const result = next(action)
     if (createUserChallenge.match(action)) {
-      const payload = pick(['file'])(action.payload)
+      const payload = pick(['certificate'])(action.payload)
+      console.log({ payload })
       dispatch(setFormValues(payload))
     }
     return result
@@ -91,38 +93,6 @@ export const createUserChallengeSuccessFlow =
     return result
   }
 
-export const createUserChallengeCertificateFlow: Middleware =
-  ({ dispatch, getState }) =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (createUserChallengeCertificate.match(action)) {
-      const state = getState()
-      const file = selectFormFile(state) as DocumentPickerResponse | undefined
-      if (file) {
-        const userId = UserSelectors.selectId(state)
-        const config = ApiUtils.zipIdsIntoConfigEndpoint([userId, action.payload])(
-          ApiUsersConstants.USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG,
-        )
-
-        const formData = new FormData()
-        const payload = append('image/pdf', { uri: file.uri, type: file.type, name: file.name })(formData)
-
-        dispatch(
-          ApiActions.apiRequest(
-            mergeRight(config, {
-              onSuccess: createUserChallengeCertificateSuccess,
-              onFailure: createUserChallengeCertificateFailure,
-            }),
-            payload,
-          ),
-        )
-      }
-    }
-    return result
-  }
-
 export const createUserChallengeFailureFlow =
   ({ notification }: { notification: typeof ErrorUtils.showSimpleMessage }): Middleware =>
   _store =>
@@ -136,6 +106,74 @@ export const createUserChallengeFailureFlow =
         'danger',
         'An error occurred.',
         'Oops something went wrong saving your' + ' challenge! Please try again.',
+      )
+    }
+    return result
+  }
+
+export const createUserChallengeCertificateFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserChallengeCertificate.match(action)) {
+      const state = getState()
+      const certificate = selectFormCertificate(state) as DocumentPickerResponse | undefined
+      if (certificate) {
+        const userId = UserSelectors.selectId(state)
+        const config = ApiUtils.zipIdsIntoConfigEndpoint([userId, action.payload])(
+          ApiUsersConstants.USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG,
+        )
+
+        const formData = new FormData()
+        const fileData = pick(['uri', 'type', 'name'], certificate)
+        formData.append(USER_CREDENTIAL_FORM_DATA_NAME, fileData)
+
+        dispatch(
+          ApiActions.apiRequest(
+            mergeRight(config, {
+              onSuccess: createUserChallengeCertificateSuccess,
+              onFailure: createUserChallengeCertificateFailure,
+            }),
+            formData,
+          ),
+        )
+      }
+    }
+    return result
+  }
+
+export const createUserChallengeCertificateSuccessFlow: Middleware = _state => next => action => {
+  const result = next(action)
+
+  if (createUserChallengeCertificateSuccess.match(action)) {
+    console.log(action)
+    // need to add ability to update a specific credential by ID.
+    // so we can merge the updated certificate file, etc to the credential.
+    // this would mean finding the credential in state, then merging the payload data onto it
+    // and updating state with the new values.
+    // I'd think that we'd handle the merging in middleware and simply update state with the
+    // adjusted credential. We should then just insure that our current update credentials
+    // action overwrites just the data that's changed.
+  }
+
+  return result
+}
+
+export const createUserChallengeCertificateFailureFlow =
+  ({ notification }: { notification: typeof ErrorUtils.showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserChallengeCertificateFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification(
+        'danger',
+        'An error occurred.',
+        'Oops something went wrong uploading your' + ' challenge certificate. Please try again.',
       )
     }
     return result

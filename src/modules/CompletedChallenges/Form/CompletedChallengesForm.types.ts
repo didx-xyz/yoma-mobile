@@ -5,5 +5,5 @@ export type FormFields = {
   startTime: Date | null
   endTime: Date | null
   requestVerification: boolean
-  file: DocumentPickerResponse
+  certificate: DocumentPickerResponse | null
 }

@@ -35,7 +35,7 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, f
   const [hasSelectedChallenge, setHasSelectedChallenge] = useState(false)
 
   useEffect(() => {
-    if (form.values.challengeId !== '' && !hasSelectedChallenge) {
+    if (form.values.credentialItemId !== '' && !hasSelectedChallenge) {
       setHasSelectedChallenge(true)
     }
   }, [form, hasSelectedChallenge])
@@ -48,7 +48,7 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, f
           <DropDown name="credentialItemId" label={t('Select a challenge')} items={challengesDropDown} />
           <Optional condition={hasSelectedChallenge}>
             <DateRangeSelect label={t('When did you do the challenge?')} />
-            <Upload name="upload" label={t('Upload certification (if completed)')} />
+            <Upload name="certificate" label={t('Upload certification (if completed)')} />
             <View style={styles.checkBoxRow}>
               <CheckBoxInput label={t('Request verification')} name="requestVerification" />
               <View style={styles.iconInfo}>
@@ -58,7 +58,7 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, f
           </Optional>
         </FormGroup>
         <Optional condition={hasSelectedChallenge}>
-          <ChallengeInfo challenge={challenges.entities[form.values.challengeId]} />
+          <ChallengeInfo challenge={challenges.entities[form.values.credentialItemId]} />
         </Optional>
       </ScrollView>
     </ViewContainer>

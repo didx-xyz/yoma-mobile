@@ -1,5 +1,5 @@
 import { rootStateFixture } from '../../redux/redux.fixture'
-import { USER_CHALLENGES_STATE_MOCK } from './UserChallenges.fixture'
+import { USER_CHALLENGES_STATE_MOCK } from './UserChallenges.fixtures'
 import { INITIAL_STATE } from './UserChallenges.reducer'
 import * as SUT from './UserChallenges.selector'
 
@@ -22,24 +22,29 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       expect(result).toEqual(USER_CHALLENGES_STATE_MOCK)
     })
   })
-  describe('selectFormUri', function () {
+  describe('selectFormCertificate', function () {
     it('should correctly handle an empty state', () => {
       // given ...
       const state = rootStateFixture()
       // when ...
-      const result = SUT.selectFormUri(state)
+      const result = SUT.selectFormCertificate(state)
       // then ...
       expect(result).toEqual(null)
     })
     it('should return the uri in formValues should it exist', () => {
       // given ...
       const state = rootStateFixture({
-        userChallenges: { ...USER_CHALLENGES_STATE_MOCK, formValues: { uri: 'SOME URI' } },
+        userChallenges: {
+          ...USER_CHALLENGES_STATE_MOCK,
+          formValues: {
+            certificate: 'FILE DATA OBJECT',
+          },
+        },
       })
       // when ...
-      const result = SUT.selectFormUri(state)
+      const result = SUT.selectFormCertificate(state)
       // then ...
-      expect(result).toEqual('SOME URI')
+      expect(result).toEqual('FILE DATA OBJECT')
     })
   })
 })

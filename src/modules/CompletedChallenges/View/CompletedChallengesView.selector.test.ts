@@ -1,5 +1,5 @@
 import { rootStateFixture } from '../../../redux/redux.fixture'
-import { USER_CHALLENGES_STATE_MOCK } from '../../UserChallenges/UserChallenges.fixture'
+import { USER_CHALLENGES_STATE_MOCK } from '../../UserChallenges/UserChallenges.fixtures'
 import * as SUT from './CompletedChallengesView.selector'
 
 describe('modules/CompletedChallenges/CompletedChallengesView/CompletedChallengesView.selector', () => {

@@ -71,12 +71,16 @@ const featureModuleMiddleware = [
   SkillsMiddleware.fetchSkillsSuccessFlow,
   SkillsMiddleware.normaliseSkillsFlow(ReduxUtils.normalise),
   SkillsMiddleware.setSkillsFlow,
+  UserChallengesMiddleware.setUserChallengeFormValuesFlow,
   UserChallengesMiddleware.createUserChallengeFlow,
   UserChallengesMiddleware.createUserChallengeSuccessFlow({
     notification: showSimpleMessage,
     navigate: Navigation.navigate,
   }),
   UserChallengesMiddleware.createUserChallengeFailureFlow({ notification: showSimpleMessage }),
+  UserChallengesMiddleware.createUserChallengeCertificateFlow,
+  UserChallengesMiddleware.createUserChallengeCertificateSuccessFlow,
+  UserChallengesMiddleware.createUserChallengeCertificateFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),

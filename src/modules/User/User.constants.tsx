@@ -12,3 +12,4 @@ export const CAPTURE_IMAGE_OPTIONS: Options = {
 }
 
 export const PHOTO_UPLOAD_FORM_NAME = 'Photo'
+export const USER_CREDENTIAL_FORM_DATA_NAME = 'File'

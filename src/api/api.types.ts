@@ -34,8 +34,9 @@ export enum ApiMethods {
 export interface ApiClientMetaOverlap {
   client: ApiClients
   method: ApiMethods
-  endpoint: ApiEndpoints
+  endpoint: ApiEndpoints | string[]
   headers: StdObj<string>
+  additionalHeaders?: StdObj<string>
   params?: Record<string, string | number>
   config?: Partial<AxiosRequestConfig>
 }

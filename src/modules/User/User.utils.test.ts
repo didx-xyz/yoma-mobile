@@ -180,7 +180,7 @@ describe('modules/User/User.utils', () => {
         startTime: '2020-09-09T22:00:00.000Z',
         endTime: '2020-10-09T22:00:00.000Z',
         requestVerification: false,
-        uri: 'SOME URI',
+        certificate: { name: 'SOME NAME', type: 'SOME TYPE' },
       }
 
       // when we prepare the payload
