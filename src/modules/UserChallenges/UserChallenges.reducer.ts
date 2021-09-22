@@ -1,7 +1,8 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeRight, omit } from 'ramda'
 
-import { updateNormalisedState } from '../../utils/redux.utils'
+import { updateNormalisedReducer } from '../../redux/redux.utils'
+import { types as UserTypes } from '../User'
 import {
   CreateUserChallengePayload,
   CreateUserChallengeSuccessResponse,
@@ -28,7 +29,7 @@ export const createUserChallengeSuccess = createAction<CreateUserChallengeSucces
 export const createUserChallengeFailure = createAction<string>(`${name} createUserChallengeFailure`)
 
 export const createUserChallengeCertificate = createAction<string>(`${name} createUserChallengeCertificate`)
-export const createUserChallengeCertificateSuccess = createAction<CreateUserChallengeSuccessResponse>(
+export const createUserChallengeCertificateSuccess = createAction<UserTypes.UserCredentialMeta>(
   `${name} createUserChallengeCertificateSuccess`,
 )
 export const createUserChallengeCertificateFailure = createAction<string>(
@@ -45,9 +46,7 @@ export const clearFormValues = createAction(`${name} clearFormValues`)
 
 const reducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserChallenges, (_state, action) => action.payload)
-  builder.addCase(updateUserChallenges, (state: UserChallengesState, action) =>
-    updateNormalisedState(state, action.payload),
-  )
+  builder.addCase(updateUserChallenges, updateNormalisedReducer)
   builder.addCase(setFormValues, (state, action) => mergeRight(state, { formValues: action.payload }))
   builder.addCase(clearFormValues, (state, _action) => omit(['formValues'], state))
   builder.addCase(clearUserChallenges, (_state, _action) => INITIAL_STATE)

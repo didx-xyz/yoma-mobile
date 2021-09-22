@@ -1,8 +1,8 @@
 import * as UserJobsActions from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
+import { extractDataFromResponseAction } from 'redux/redux.utils'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromResponseAction } from 'utils/redux.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiJobsConstants } from '../../api/jobs'

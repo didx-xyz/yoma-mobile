@@ -1,13 +1,15 @@
-import { mergeRight, of, pick } from 'ramda'
+import { mergeDeepRight, mergeRight, of, pick } from 'ramda'
 import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../api/users'
+import { Normalise, NormaliseDep, NormalisedDataEntities } from '../../redux/redux.types'
+import { extractDataFromResponseAction } from '../../redux/redux.utils'
+import * as ReduxUtils from '../../redux/redux.utils'
 import * as Types from '../../types/general.types'
 import { showSimpleMessage } from '../../utils/error'
 import * as ErrorUtils from '../../utils/error'
-import * as ReduxUtils from '../../utils/redux.utils'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import * as Navigation from '../Navigation/Navigation.actions'
 import { actions as UserActions, selectors as UserSelectors, types as UserTypes, utils as UserUtils } from '../User'
@@ -25,8 +27,13 @@ import {
   setUserChallenges,
   updateUserChallenges,
 } from './UserChallenges.reducer'
-import { selectFormCertificate } from './UserChallenges.selector'
-import { NormalisedUserChallenges, UserChallenge } from './UserChallenges.types'
+import { selectFormCertificate, selectUserChallengeEntities, selectUserChallenges } from './UserChallenges.selector'
+import {
+  NormalisedUserChallengeEntities,
+  NormalisedUserChallenges,
+  UserChallenge,
+  UserChallengeItem,
+} from './UserChallenges.types'
 
 export const setUserChallengeFormValuesFlow: Middleware =
   ({ dispatch }) =>
@@ -144,22 +151,21 @@ export const createUserChallengeCertificateFlow: Middleware =
     return result
   }
 
-export const createUserChallengeCertificateSuccessFlow: Middleware = _state => next => action => {
-  const result = next(action)
+export const createUserChallengeCertificateSuccessFlow =
+  ({ normalise }: NormaliseDep<UserChallenge>): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
 
-  if (createUserChallengeCertificateSuccess.match(action)) {
-    console.log(action)
-    // need to add ability to update a specific credential by ID.
-    // so we can merge the updated certificate file, etc to the credential.
-    // this would mean finding the credential in state, then merging the payload data onto it
-    // and updating state with the new values.
-    // I'd think that we'd handle the merging in middleware and simply update state with the
-    // adjusted credential. We should then just insure that our current update credentials
-    // action overwrites just the data that's changed.
+    if (createUserChallengeCertificateSuccess.match(action)) {
+      const credential = extractDataFromResponseAction(action)
+      const normalisedCredential = normalise([credential])
+      dispatch(updateUserChallenges(normalisedCredential))
+    }
+
+    return result
   }
-
-  return result
-}
 
 export const createUserChallengeCertificateFailureFlow =
   ({ notification }: { notification: typeof ErrorUtils.showSimpleMessage }): Middleware =>
@@ -197,7 +203,7 @@ export const getUserChallengesFromCredentialsFlow =
   }
 
 export const normaliseUserChallengesFlow =
-  (normalise: Types.StdFn<UserChallenge[], NormalisedUserChallenges>): Middleware =>
+  ({ normalise }: NormaliseDep<UserChallenge>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

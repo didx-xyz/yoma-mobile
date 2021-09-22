@@ -8,7 +8,7 @@ import { types as CompletedChallengesFormTypes } from '../CompletedChallenges/Fo
 import { types as UserTypes } from '../User'
 
 export interface UserChallenge extends UserTypes.UserCredentialMeta {
-  challenge: ChallengesTypes.Challenge
+  challenge?: ChallengesTypes.Challenge
 }
 
 export interface UserChallengeResponse {
@@ -35,6 +35,7 @@ export interface UserChallengeItem
   isValidated: boolean
 }
 
+export type NormalisedUserChallengeEntities = ReduxTypes.NormalisedDataEntities<UserChallengeItem>
 export type NormalisedUserChallengeItem = ReduxTypes.NormalisedData<UserChallengeItem>
 
 export type UserChallengeFormValues = { certificate: DocumentPickerResponse }

@@ -22,6 +22,37 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       expect(result).toEqual(USER_CHALLENGES_STATE_MOCK)
     })
   })
+  describe('selectUserChallengeEntities', function () {
+    it('should correctly handle an empty state', () => {
+      // given ...
+      const state = rootStateFixture()
+      // when ...
+      const result = SUT.selectUserChallengeEntities(state)
+      // then ...
+      expect(result).toEqual({})
+    })
+    it('should return the entities object', () => {
+      // given ...
+      const state = rootStateFixture({
+        userChallenges: {
+          ids: ['challenge1', 'challenge2', 'challenge3'],
+          entities: {
+            challenge1: 'USER CREDENTIAL DATA',
+            challenge2: 'USER CREDENTIAL DATA',
+            challenge3: 'USER CREDENTIAL DATA',
+          },
+        },
+      })
+      // when ...
+      const result = SUT.selectUserChallengeEntities(state)
+      // then ...
+      expect(result).toEqual({
+        challenge1: 'USER CREDENTIAL DATA',
+        challenge2: 'USER CREDENTIAL DATA',
+        challenge3: 'USER CREDENTIAL DATA',
+      })
+    })
+  })
   describe('selectFormCertificate', function () {
     it('should correctly handle an empty state', () => {
       // given ...
@@ -29,9 +60,9 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       // when ...
       const result = SUT.selectFormCertificate(state)
       // then ...
-      expect(result).toEqual(null)
+      expect(result).toBe(null)
     })
-    it('should return the uri in formValues should it exist', () => {
+    it('should return the certificate in formValues should it exist', () => {
       // given ...
       const state = rootStateFixture({
         userChallenges: {
@@ -44,7 +75,7 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       // when ...
       const result = SUT.selectFormCertificate(state)
       // then ...
-      expect(result).toEqual('FILE DATA OBJECT')
+      expect(result).toBe('FILE DATA OBJECT')
     })
   })
 })

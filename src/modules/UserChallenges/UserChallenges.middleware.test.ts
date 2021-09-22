@@ -209,7 +209,6 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
       const responseMock = {
         data: {
           data: {
-            challenge: 'CHALLENGE DATA',
             id: 'CREDENTIAL ID',
             otherData: 'OTHER DATA',
           },
@@ -221,15 +220,22 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
         },
       }
 
+      const normaliseMock = jest.fn(() => 'NORMALISED CREDENTIAL')
+
       // @ts-ignore - mocking a quasi-response so typing fails
       const action = createUserChallengeCertificateSuccess(responseMock)
 
-      const { invoke, next } = create(SUT.createUserChallengeCertificateSuccessFlow)
+      const { store, invoke, next } = create(
+        // @ts-ignore - normalise mock isn't typesafe
+        SUT.createUserChallengeCertificateSuccessFlow({ normalise: normaliseMock }),
+      )
       // when ... we respond to the createUserJobSuccess action
       invoke(action)
 
       // then ...validate createUserJobSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
+      // @ts-ignore - testing we're returning correctly. correctly typed value not necessary
+      expect(store.dispatch).toHaveBeenCalledWith(updateUserChallenges('NORMALISED CREDENTIAL'))
     })
   })
   describe('createUserChallengeCertificateFailureFlow', () => {
@@ -305,7 +311,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseUserChallengesFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseUserChallengesFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -326,7 +332,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseUserChallengesFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseUserChallengesFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...

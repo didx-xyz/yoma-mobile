@@ -6,16 +6,17 @@ import * as UserSelectors from 'modules/User/User.selector'
 import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } from 'modules/User/User.utils'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { Normalise } from 'types/redux.types'
+import { extractDataFromResponseAction, normalise } from 'redux/redux.utils'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromResponseAction, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
+import { Normalise, NormaliseDep } from '../../redux/redux.types'
 import { StdFn } from '../../types/general.types'
 import * as Navigation from '../Navigation/Navigation.actions'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
+import { UserChallenge } from '../UserChallenges/UserChallenges.types'
 import {
   clearUserJobsFormValues,
   createUserJob,
@@ -52,7 +53,7 @@ export const getUserJobsFromCredentialsFlow =
   }
 
 export const normaliseUserJobsFlow =
-  (normalise: Normalise<UserJobCredential, NormalisedUserJobs>): Middleware =>
+  ({ normalise }: NormaliseDep<UserJobCredential>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

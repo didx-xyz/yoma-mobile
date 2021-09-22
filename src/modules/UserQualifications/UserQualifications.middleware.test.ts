@@ -47,7 +47,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseUserQualificationsFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseUserQualificationsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -68,7 +68,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseUserQualificationsFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseUserQualificationsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...

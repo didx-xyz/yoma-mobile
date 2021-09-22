@@ -3,8 +3,10 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiChallengesConstants } from '../../api/challenges'
+import { NormaliseDep } from '../../redux/redux.types'
+import { extractDataFromResponseAction } from '../../redux/redux.utils'
 import { StdFn } from '../../types/general.types'
-import { extractDataFromResponseAction } from '../../utils/redux.utils'
+import { Organisation } from '../Organisations/Organisations.types'
 import {
   fetchChallenges,
   fetchChallengesFailure,
@@ -34,7 +36,7 @@ export const fetchChallengesFlow: Middleware =
   }
 
 export const normaliseChallengesFlow =
-  (normalise: StdFn<Challenge[], NormalisedChallenges>): Middleware =>
+  ({ normalise }: NormaliseDep<Challenge>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

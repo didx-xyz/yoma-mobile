@@ -80,7 +80,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseUserJobsFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseUserJobsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -101,7 +101,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseUserJobsFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseUserJobsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...

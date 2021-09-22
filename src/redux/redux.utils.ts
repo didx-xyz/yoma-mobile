@@ -1,7 +1,9 @@
-import { applySpec, concat, identity, keys, mergeDeepWith, path, pick, pipe, prop } from 'ramda'
+import { PayloadAction } from '@reduxjs/toolkit'
+import { applySpec, concat, evolve, identity, keys, mergeDeepRight, path, pick, pipe, prop, uniq } from 'ramda'
 
 import * as Types from '../types/general.types'
-import { objFromListWith } from './ramda.utils'
+import { objFromListWith } from '../utils/ramda.utils'
+import { NormalisedData } from './redux.types'
 
 export const normalise = (data: Types.StdObj[], identifier = 'id') =>
   pipe(
@@ -12,8 +14,13 @@ export const normalise = (data: Types.StdObj[], identifier = 'id') =>
     }),
   )(data)
 
-export const updateNormalisedState = (state: Types.StdObj, payload: Types.StdObj) =>
-  mergeDeepWith(concat, state, payload)
+export const updateNormalisedReducer = (state: Types.StdObj, action: PayloadAction<NormalisedData<any>>) =>
+  pipe(
+    evolve({
+      ids: pipe(concat(state.ids), uniq),
+    }),
+    mergeDeepRight(state),
+  )(action.payload)
 
 export const selectNormalised = pick(['ids', 'entities'])
 export const extractId = path(['payload', 'id'])

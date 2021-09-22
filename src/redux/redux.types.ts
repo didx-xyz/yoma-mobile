@@ -3,7 +3,14 @@ import rootReducer from './reducers'
 
 export type RootState = ReturnType<typeof rootReducer>
 
+export type NormalisedDataIds = string[]
+export type NormalisedDataEntities<T = any> = StdObj<T>
+
 export interface NormalisedData<T = any> {
-  ids: string[]
-  entities: StdObj<T>
+  ids: NormalisedDataIds
+  entities: NormalisedDataEntities<T>
 }
+
+export type Normalise<T> = (data: T[], identifier?: string) => NormalisedData<T>
+
+export type NormaliseDep<T> = { normalise: Normalise<T> }

@@ -1,7 +1,7 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { UserCredentialFormValues } from 'modules/User/User.types'
 import { mergeRight } from 'ramda'
-import { updateNormalisedState } from 'utils/redux.utils'
+import { updateNormalisedReducer } from 'redux/redux.utils'
 
 import { updateStateWithFormValues } from '../User/User.utils'
 import { NormalisedUserJobs, UserJobCredential, UserJobsResponse, UserJobsState } from './UserJobs.types'
@@ -32,7 +32,7 @@ export const clearUserJobsFormValues = createAction(`${name} clearUserJobsFormVa
 
 const reducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserJobs, (state, action) => mergeRight({ formValues: state.formValues }, action.payload))
-  builder.addCase(updateUserJobs, (state, action) => updateNormalisedState(state, action.payload))
+  builder.addCase(updateUserJobs, updateNormalisedReducer)
   builder.addCase(clearUserJobs, (_state, _action) => INITIAL_STATE)
   builder.addCase(setUserJobsFormValues, (state, action) => updateStateWithFormValues(state, action.payload))
   builder.addCase(clearUserJobsFormValues, (state, _action) => mergeRight(state, { formValues: {} }))

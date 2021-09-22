@@ -65,7 +65,7 @@ describe('modules/Challenges/Challenges.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseChallengesFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseChallengesFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -86,7 +86,7 @@ describe('modules/Challenges/Challenges.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseChallengesFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseChallengesFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
