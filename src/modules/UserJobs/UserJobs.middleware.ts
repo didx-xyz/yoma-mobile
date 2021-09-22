@@ -1,5 +1,5 @@
 import { UserCredentialTypes } from 'api/users/users.types'
-import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
+import { extractErrorResponseMessage } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import * as JobsActions from 'modules/Jobs/Jobs.reducer'
 import * as UserSelectors from 'modules/User/User.selector'
@@ -137,7 +137,7 @@ export const createUserJobFailureFlow =
     const result = next(action)
 
     if (createUserJobFailure.match(action)) {
-      const errorMessage = extractErrorMessageFromPayload(action)
+      const errorMessage = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', errorMessage)
     }
@@ -195,7 +195,7 @@ export const fetchUserJobByIdFailureFlow =
     const result = next(action)
 
     if (fetchUserJobByIdFailure.match(action)) {
-      const errorMessage = extractErrorMessageFromPayload(action)
+      const errorMessage = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', errorMessage)
     }

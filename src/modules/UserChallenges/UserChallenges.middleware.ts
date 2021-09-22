@@ -8,6 +8,7 @@ import * as ReduxTypes from '../../redux/redux.types'
 import * as ReduxUtils from '../../redux/redux.utils'
 import * as Types from '../../types/general.types'
 import * as ErrorUtils from '../../utils/error'
+import { extractErrorResponseMessage } from '../Error/error.utils'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import * as Navigation from '../Navigation/Navigation.actions'
 import {
@@ -106,12 +107,9 @@ export const createUserChallengeFailureFlow =
     const result = next(action)
 
     if (createUserChallengeFailure.match(action)) {
+      const message = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
-      notification(
-        'danger',
-        'An error occurred.',
-        'Oops something went wrong saving your' + ' challenge! Please try again.',
-      )
+      notification('danger', 'Oops something went wrong!', message)
     }
     return result
   }
