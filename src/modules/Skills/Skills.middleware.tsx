@@ -5,8 +5,7 @@ import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
-import { Normalise, NormaliseDep } from '../../redux/redux.types'
-import { UserChallenge } from '../UserChallenges/UserChallenges.types'
+import * as ReduxTypes from '../../redux/redux.types'
 import {
   fetchSkills,
   fetchSkillsFailure,
@@ -15,7 +14,7 @@ import {
   normaliseSkillsSuccess,
   setSkills,
 } from './Skills.reducer'
-import { NormalisedSkills, Skill } from './Skills.types'
+import { Skill } from './Skills.types'
 
 export const fetchSkillsFlow: Middleware =
   ({ dispatch }) =>
@@ -49,7 +48,7 @@ export const fetchSkillsSuccessFlow: Middleware =
   }
 
 export const normaliseSkillsFlow =
-  ({ normalise }: NormaliseDep<Skill>): Middleware =>
+  ({ normalise }: ReduxTypes.NormaliseDependency<Skill>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

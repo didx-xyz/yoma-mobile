@@ -1,19 +1,22 @@
-import { mergeDeepRight, mergeRight, of, pick } from 'ramda'
+import { mergeRight, of, pick } from 'ramda'
 import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../api/users'
-import { Normalise, NormaliseDep, NormalisedDataEntities } from '../../redux/redux.types'
-import { extractDataFromResponseAction } from '../../redux/redux.utils'
+import * as ReduxTypes from '../../redux/redux.types'
 import * as ReduxUtils from '../../redux/redux.utils'
 import * as Types from '../../types/general.types'
-import { showSimpleMessage } from '../../utils/error'
 import * as ErrorUtils from '../../utils/error'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import * as Navigation from '../Navigation/Navigation.actions'
-import { actions as UserActions, selectors as UserSelectors, types as UserTypes, utils as UserUtils } from '../User'
-import { USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME } from '../User/User.constants'
+import {
+  actions as UserActions,
+  constants as UserConstants,
+  selectors as UserSelectors,
+  types as UserTypes,
+  utils as UserUtils,
+} from '../User'
 import {
   createUserChallenge,
   createUserChallengeCertificate,
@@ -27,13 +30,8 @@ import {
   setUserChallenges,
   updateUserChallenges,
 } from './UserChallenges.reducer'
-import { selectFormCertificate, selectUserChallengeEntities, selectUserChallenges } from './UserChallenges.selector'
-import {
-  NormalisedUserChallengeEntities,
-  NormalisedUserChallenges,
-  UserChallenge,
-  UserChallengeItem,
-} from './UserChallenges.types'
+import { selectFormCertificate } from './UserChallenges.selector'
+import { UserChallenge } from './UserChallenges.types'
 
 export const setUserChallengeFormValuesFlow: Middleware =
   ({ dispatch }) =>
@@ -80,7 +78,7 @@ export const createUserChallengeSuccessFlow =
     notification,
     navigate,
   }: {
-    notification: typeof showSimpleMessage
+    notification: typeof ErrorUtils.showSimpleMessage
     navigate: typeof Navigation.navigate
   }): Middleware =>
   ({ dispatch }) =>
@@ -135,7 +133,7 @@ export const createUserChallengeCertificateFlow: Middleware =
 
         const formData = new FormData()
         const fileData = pick(['uri', 'type', 'name'], certificate)
-        formData.append(USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
+        formData.append(UserConstants.USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
 
         dispatch(
           ApiActions.apiRequest(
@@ -152,14 +150,14 @@ export const createUserChallengeCertificateFlow: Middleware =
   }
 
 export const createUserChallengeCertificateSuccessFlow =
-  ({ normalise }: NormaliseDep<UserChallenge>): Middleware =>
+  ({ normalise }: ReduxTypes.NormaliseDependency<UserChallenge>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
     if (createUserChallengeCertificateSuccess.match(action)) {
-      const credential = extractDataFromResponseAction(action)
+      const credential = ReduxUtils.extractDataFromResponseAction(action)
       const normalisedCredential = normalise([credential])
       dispatch(updateUserChallenges(normalisedCredential))
     }
@@ -203,7 +201,7 @@ export const getUserChallengesFromCredentialsFlow =
   }
 
 export const normaliseUserChallengesFlow =
-  ({ normalise }: NormaliseDep<UserChallenge>): Middleware =>
+  ({ normalise }: ReduxTypes.NormaliseDependency<UserChallenge>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

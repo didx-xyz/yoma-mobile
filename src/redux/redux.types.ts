@@ -13,4 +13,4 @@ export interface NormalisedData<T = any> {
 
 export type Normalise<T> = (data: T[], identifier?: string) => NormalisedData<T>
 
-export type NormaliseDep<T> = { normalise: Normalise<T> }
+export type NormaliseDependency<T> = { normalise: Normalise<T> }

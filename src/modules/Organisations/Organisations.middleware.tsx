@@ -5,8 +5,7 @@ import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiOrganisationsConstants } from '../../api/organisations'
-import { Normalise, NormaliseDep } from '../../redux/redux.types'
-import { Skill } from '../Skills/Skills.types'
+import * as ReduxTypes from '../../redux/redux.types'
 import {
   fetchOrganisations,
   fetchOrganisationsFailure,
@@ -15,7 +14,7 @@ import {
   normaliseOrganisationsSuccess,
   setOrganisations,
 } from './Organisations.reducer'
-import { NormalisedOrganisations, Organisation } from './Organisations.types'
+import { Organisation } from './Organisations.types'
 
 export const fetchOrganisationsFlow: Middleware =
   ({ dispatch }) =>
@@ -49,7 +48,7 @@ export const fetchOrganisationsSuccessFlow: Middleware =
   }
 
 export const normaliseOrganisationsFlow =
-  ({ normalise }: NormaliseDep<Organisation>): Middleware =>
+  ({ normalise }: ReduxTypes.NormaliseDependency<Organisation>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

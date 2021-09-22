@@ -11,12 +11,11 @@ import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
-import { Normalise, NormaliseDep } from '../../redux/redux.types'
+import { NormaliseDependency } from '../../redux/redux.types'
 import { StdFn } from '../../types/general.types'
 import * as Navigation from '../Navigation/Navigation.actions'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
-import { UserChallenge } from '../UserChallenges/UserChallenges.types'
 import {
   clearUserJobsFormValues,
   createUserJob,
@@ -32,7 +31,7 @@ import {
   updateUserJobs,
 } from './UserJobs.reducer'
 import { selectFormValues } from './UserJobs.selector'
-import { NormalisedUserJobs, UserJobCredential } from './UserJobs.types'
+import { UserJobCredential } from './UserJobs.types'
 import { extractUserJobFromData } from './UserJobs.utils'
 
 export const getUserJobsFromCredentialsFlow =
@@ -53,7 +52,7 @@ export const getUserJobsFromCredentialsFlow =
   }
 
 export const normaliseUserJobsFlow =
-  ({ normalise }: NormaliseDep<UserJobCredential>): Middleware =>
+  ({ normalise }: NormaliseDependency<UserJobCredential>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
