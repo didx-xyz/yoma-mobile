@@ -99,7 +99,6 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
               items={StringUtils.mapToDropDownArray(countries, 'code', 'name')}
               name={'countryAlpha2'}
               label={'Country'}
-              handlers={formikHandlers}
               searchPlaceholder={t('Search country')}
             />
             <Input

@@ -1,11 +1,11 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { Normalise } from 'types/redux.types'
+import { extractDataFromResponseAction } from 'redux/redux.utils'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromResponseAction } from 'utils/redux.utils'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiSkillsConstants } from '../../api/skills'
+import * as ReduxTypes from '../../redux/redux.types'
 import {
   fetchSkills,
   fetchSkillsFailure,
@@ -14,7 +14,7 @@ import {
   normaliseSkillsSuccess,
   setSkills,
 } from './Skills.reducer'
-import { NormalisedSkills, Skill } from './Skills.types'
+import { Skill } from './Skills.types'
 
 export const fetchSkillsFlow: Middleware =
   ({ dispatch }) =>
@@ -48,7 +48,7 @@ export const fetchSkillsSuccessFlow: Middleware =
   }
 
 export const normaliseSkillsFlow =
-  (normalise: Normalise<Skill, NormalisedSkills>): Middleware =>
+  ({ normalise }: ReduxTypes.NormaliseDependency<Skill>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

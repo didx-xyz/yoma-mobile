@@ -1,3 +1,5 @@
+import { DocumentPickerResponse } from 'react-native-document-picker'
+
 import * as ReduxTypes from '../../redux/redux.types'
 import * as Types from '../../types/general.types'
 import { types as AuthTypes } from '../Auth'
@@ -6,7 +8,7 @@ import { types as CompletedChallengesFormTypes } from '../CompletedChallenges/Fo
 import { types as UserTypes } from '../User'
 
 export interface UserChallenge extends UserTypes.UserCredentialMeta {
-  challenge: ChallengesTypes.Challenge
+  challenge?: ChallengesTypes.Challenge
 }
 
 export interface UserChallengeResponse {
@@ -16,8 +18,8 @@ export interface UserChallengeResponse {
 export type CreateUserChallengePayload = Types.Modify<
   CompletedChallengesFormTypes.FormFields,
   {
-    startDate: string
-    endDate: string
+    startTime: string
+    endTime: string
   }
 >
 
@@ -33,9 +35,13 @@ export interface UserChallengeItem
   isValidated: boolean
 }
 
+export type NormalisedUserChallengeEntities = ReduxTypes.NormalisedDataEntities<UserChallengeItem>
 export type NormalisedUserChallengeItem = ReduxTypes.NormalisedData<UserChallengeItem>
 
-export interface UserChallengesState extends NormalisedUserChallenges {}
+export type UserChallengeFormValues = { certificate: DocumentPickerResponse }
+export interface UserChallengesState extends NormalisedUserChallenges {
+  formValues?: UserChallengeFormValues
+}
 
 export type ChallengeEntry = {
   challenge: string

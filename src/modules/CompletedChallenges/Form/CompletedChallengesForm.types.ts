@@ -1,6 +1,9 @@
+import { DocumentPickerResponse } from 'react-native-document-picker'
+
 export type FormFields = {
-  challengeId: string
-  startDate: Date | null
-  endDate: Date | null
+  credentialItemId: string
+  startTime: Date | null
+  endTime: Date | null
   requestVerification: boolean
+  certificate: DocumentPickerResponse | null
 }

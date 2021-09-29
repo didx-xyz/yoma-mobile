@@ -23,6 +23,12 @@ export const USERS_CREDENTIALS_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USER
   method: ApiMethods.Post,
   endpoint: UsersEndpoints.Credentials,
 })
+export const USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
+  method: ApiMethods.Post,
+  endpoint: [UsersEndpoints.Credentials, UsersEndpoints.Certificate],
+  additionalHeaders: { 'Content-Type': 'multipart/form-data' },
+})
+
 export const USERS_SKILLS_GET_BY_ID_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   endpoint: UsersEndpoints.Skills,
 })

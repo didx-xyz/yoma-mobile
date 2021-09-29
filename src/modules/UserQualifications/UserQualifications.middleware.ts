@@ -1,5 +1,6 @@
 import { Middleware } from 'redux'
 
+import { NormaliseDependency } from '../../redux/redux.types'
 import { StdFn } from '../../types/general.types'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
@@ -8,7 +9,7 @@ import {
   normaliseUserQualificationsSuccess,
   setUserQualifications,
 } from './UserQualifications.reducer'
-import { NormalisedUserQualifications, UserQualification } from './UserQualifications.types'
+import { UserQualification } from './UserQualifications.types'
 
 export const getUserQualificationsFromCredentialsFlow =
   (
@@ -28,7 +29,7 @@ export const getUserQualificationsFromCredentialsFlow =
   }
 
 export const normaliseUserQualificationsFlow =
-  (normalise: StdFn<UserQualification[], NormalisedUserQualifications>): Middleware =>
+  ({ normalise }: NormaliseDependency<UserQualification>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

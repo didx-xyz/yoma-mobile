@@ -7,18 +7,18 @@ import {
   keys,
   mergeRight,
   objOf,
+  omit,
   path,
   pick,
   pipe,
   prop,
   toLower,
 } from 'ramda'
-import * as ReduxUtils from 'utils/redux.utils'
+import * as ReduxUtils from 'redux/redux.utils'
 
 import { types as ApiUserTypes } from '../../api/users'
 import * as Types from '../../types/general.types'
-import * as RamdaUtils from '../../utils/ramda.utils'
-import { PHOTO_UPLOAD_FORM_NAME } from './User.constants'
+import { USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
 
 export const extractUserFromLoginPayload = path(['payload', 'data', 'data', 'user'])
@@ -34,7 +34,7 @@ export const extractUserFromUpdateUserPayload = pick([
 export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any) => {
   const photoPayload = new formInstance()
 
-  photoPayload.append(PHOTO_UPLOAD_FORM_NAME, {
+  photoPayload.append(USER_PHOTO_FORM_DATA_NAME, {
     uri: imageResponse.path,
     name: imageResponse.filename || 'default.jpg',
     type: imageResponse.mime,
@@ -60,14 +60,7 @@ export const extractUserCredentialFormValues = (
   })
 
 export const prepareCreateUserCredentialPayload = (type: ApiUserTypes.UserCredentialTypes) =>
-  pipe(
-    RamdaUtils.renameKeys({
-      challengeId: 'credentialItemId',
-      endDate: 'endTime',
-      startDate: 'startTime',
-    }),
-    mergeRight({ type }),
-  )
+  pipe(omit(['certificate']), mergeRight({ type }))
 
 export const updateStateWithFormValues = (state: Types.StdObj, formValues: UserCredentialFormValues) =>
   pipe(objOf('formValues'), mergeRight(state))(formValues)

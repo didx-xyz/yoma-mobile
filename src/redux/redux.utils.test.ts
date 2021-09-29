@@ -63,8 +63,8 @@ describe('src/utils/redux.utils', () => {
       })
     })
   })
-  describe('updateNormalisedState', () => {
-    it('should extract the data from a typical response payload', () => {
+  describe('updateNormalisedReducer', () => {
+    it('should add a normalised item to an already normalised state', () => {
       // given ...
       const state = {
         entities: {
@@ -81,19 +81,22 @@ describe('src/utils/redux.utils', () => {
         formValues: {},
       }
 
-      const normalisedUpdate = {
-        ids: ['key3'],
-        entities: {
-          key3: {
-            key: 'key3',
-            other: 'ANOTHER DATA',
+      const action = {
+        type: 'ANY ACTION',
+        payload: {
+          ids: ['key3'],
+          entities: {
+            key3: {
+              key: 'key3',
+              other: 'ANOTHER DATA',
+            },
           },
         },
       }
 
       // when ...
       // @ts-ignore - we don't need to mock exact state endpoints to test this
-      const result = SUT.updateNormalisedState(state, normalisedUpdate)
+      const result = SUT.updateNormalisedReducer(state, action)
 
       // then ...
       expect(result).toEqual({
@@ -104,6 +107,49 @@ describe('src/utils/redux.utils', () => {
           key3: { key: 'key3', other: 'ANOTHER DATA' },
         },
         formValues: {},
+      })
+    })
+    it('should update an existing item in a normalised state', () => {
+      // given ...
+      const state = {
+        entities: {
+          key1: {
+            key: 'key1',
+            other: 'OTHER DATA',
+          },
+          key2: {
+            key: 'key2',
+            other: 'OTHER OTHER DATA',
+            extra: 'EXTRA DATA',
+          },
+        },
+        ids: ['key1', 'key2'],
+      }
+
+      const action = {
+        type: 'ANY ACTION',
+        payload: {
+          ids: ['key2'],
+          entities: {
+            key2: {
+              key: 'key2',
+              other: 'ANOTHER DATA',
+            },
+          },
+        },
+      }
+
+      // when ...
+      // @ts-ignore - we don't need to mock exact state endpoints to test this
+      const result = SUT.updateNormalisedReducer(state, action)
+
+      // then ...
+      expect(result).toEqual({
+        ids: ['key1', 'key2'],
+        entities: {
+          key1: { key: 'key1', other: 'OTHER DATA' },
+          key2: { key: 'key2', other: 'ANOTHER DATA', extra: 'EXTRA DATA' },
+        },
       })
     })
   })

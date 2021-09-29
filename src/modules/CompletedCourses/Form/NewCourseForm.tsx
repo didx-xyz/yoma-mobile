@@ -4,8 +4,10 @@ import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { DatePicker, DropDownTags, FormLayout, Input, Spinner, Upload } from '../../../components'
+import { DropDownTags, FormLayout, Input, Spinner } from '../../../components'
 import CheckBox from '../../../components/CheckBox'
+import DateRangeSelect from '../../../components/DateRangeSelect'
+import Upload from '../../../components/Upload'
 import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
 
@@ -26,10 +28,7 @@ const NewCourseForm = forwardRef((_props, _ref) => {
             label={t('Course is currently in progress')}
             onPress={() => setIsCourseActive(!isCourseActive)}
           />
-          <View style={styles.row}>
-            <DatePicker name={'startDate'} label={t('Start date')} handlers={formikHandlers} />
-            <DatePicker name={'endDate'} label={t('End date')} handlers={formikHandlers} />
-          </View>
+          <DateRangeSelect label={t('When did you do the course?')} />
           <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
           <DropDownTags
             items={MOCK_SKILLS_LIST}
@@ -39,7 +38,7 @@ const NewCourseForm = forwardRef((_props, _ref) => {
             name={'skillNames'}
             handlers={formikHandlers}
           />
-          <Upload onPress={() => {}} />
+          <Upload name="upload" label={t('Upload certification (if completed)')} />
           <View style={styles.checkBoxRow}>
             <CheckBox
               isChecked={shouldRequestVerification}

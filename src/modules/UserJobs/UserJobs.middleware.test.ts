@@ -80,7 +80,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseUserJobsFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseUserJobsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -101,7 +101,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseUserJobsFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseUserJobsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -220,7 +220,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         ...mockFormValues,
         credentialItemId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       }
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
 
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
@@ -299,10 +299,10 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // then ...
       // ... we should ensure the action continues onto next
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
         userId,
       )
-      const configWithCredentialId = ApiUtils.appendIdToEndpointInConfig(config)(action.payload)
+      const configWithCredentialId = ApiUtils.appendValueToEndpointArrayInConfig(config)(action.payload)
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(

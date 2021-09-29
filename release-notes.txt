@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Step 3 of fixing the challenges credentials form - submitting form to api and handling response
+- Step 4 of fixing the challenges credentials form - handling uploading credential certificates
 
 10 Most Recent:
+- Step 3 of fixing the challenges credentials form - submitting form to api and handling response
 - Step 2 of fixing the challenges credentials form - adding validation
 - Step 1 of fixing the challenges credentials form (getting real challenges in, allowing user to select a challenge)
 - Adding Challenges to state
@@ -12,5 +13,3 @@ Latest:
 - display qualifications in view
 - display qualifications in widget
 - adding metadata for countries and duration to job experience
-- adding generic MyCv View component (with a bunch of refactoring)
-- adding user qualifications to state

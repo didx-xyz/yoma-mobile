@@ -6,18 +6,50 @@ import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../ap
 import { types as HomeNavigationTypes } from '../HomeNavigation'
 import * as UserFixtures from '../User/User.fixture'
 import * as UserActions from '../User/User.reducer'
+import { userChallengesStateFixture } from './UserChallenges.fixtures'
 import * as SUT from './UserChallenges.middleware'
 import {
   createUserChallenge,
+  createUserChallengeCertificate,
+  createUserChallengeCertificateSuccess,
   createUserChallengeFailure,
   createUserChallengeSuccess,
   getUserChallengesSuccess,
   normaliseUserChallengesSuccess,
+  setFormValues,
   setUserChallenges,
   updateUserChallenges,
 } from './UserChallenges.reducer'
 
 describe('modules/UserChallenges/UserChallenges.middleware', () => {
+  describe('setUserChallengeFormValuesFlow', () => {
+    it('should correctly set the form values in state', () => {
+      // given ... state with a user id
+      const create = createMiddlewareMock(jest, {
+        user: UserFixtures.userStateFixture({ id: 'A USER ID' }),
+      })
+
+      // when ... we create the user's credentials
+      const action = createUserChallenge({
+        credentialItemId: 'CHALLENGE ID',
+        startTime: '2020-09-09T22:00:00.000Z',
+        endTime: '2020-10-09T22:00:00.000Z',
+        requestVerification: false,
+        // @ts-ignore file shape isn't required for the test
+        certificate: 'SOME FILE DATA',
+      })
+
+      const { store, invoke, next } = create(SUT.setUserChallengeFormValuesFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      expect(next).toHaveBeenCalledWith(action)
+      // ... we should submit the uri to be saved to state
+      // @ts-ignore file shape isn't required for the test
+      expect(store.dispatch).toHaveBeenCalledWith(setFormValues({ certificate: 'SOME FILE DATA' }))
+    })
+  })
   describe('createUserChallengeFlow', () => {
     it('should correctly call the api middleware with the payload and correct meta', () => {
       // given ... state with a user id
@@ -27,10 +59,12 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
 
       // when ... we create the user's credentials
       const action = createUserChallenge({
-        challengeId: 'CHALLENGE ID',
-        startDate: '2020-09-09T22:00:00.000Z',
-        endDate: '2020-10-09T22:00:00.000Z',
+        credentialItemId: 'CHALLENGE ID',
+        startTime: '2020-09-09T22:00:00.000Z',
+        endTime: '2020-10-09T22:00:00.000Z',
         requestVerification: false,
+        // @ts-ignore = file shape isn't required for test
+        certificate: 'SOME FILE',
       })
 
       const { store, invoke, next } = create(SUT.createUserChallengeFlow)
@@ -128,6 +162,99 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
       expect(notificationMock).toHaveBeenCalled()
     })
   })
+  describe('createUserChallengeCertificateFlow', () => {
+    it('should ignore if the file data does not exist', () => {
+      // given ... state with a user id
+      const create = createMiddlewareMock(jest, {
+        user: UserFixtures.userStateFixture({ id: 'A USER ID' }),
+        userChallenges: userChallengesStateFixture(),
+      })
+
+      // when ... we create the user's credentials
+      const action = createUserChallengeCertificate('A CREDENTIAL ID')
+
+      const { store, invoke, next } = create(SUT.createUserChallengeCertificateFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).not.toHaveBeenCalled()
+    })
+    it('should correctly call the api middleware with the payload and correct meta', () => {
+      // given ... state with a user id
+      const create = createMiddlewareMock(jest, {
+        user: UserFixtures.userStateFixture({ id: 'A USER ID' }),
+        userChallenges: userChallengesStateFixture({
+          formValues: { certificate: { uri: 'FILE URI', type: 'FILE TYPE', name: 'FILE NAME' } },
+        }),
+      })
+
+      // when ... we create the user's credentials
+      const action = createUserChallengeCertificate('A CREDENTIAL ID')
+
+      const { store, invoke, next } = create(SUT.createUserChallengeCertificateFlow)
+      invoke(action)
+
+      // then ...
+      // ... we should ensure the action continues onto next
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalled()
+    })
+  })
+  describe('createUserChallengeCertificateSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareMock(jest)
+      const responseMock = {
+        data: {
+          data: {
+            id: 'CREDENTIAL ID',
+            otherData: 'OTHER DATA',
+          },
+        },
+        meta: {
+          success: true,
+          code: 200,
+          message: null,
+        },
+      }
+
+      const normaliseMock = jest.fn(() => 'NORMALISED CREDENTIAL')
+
+      // @ts-ignore - mocking a quasi-response so typing fails
+      const action = createUserChallengeCertificateSuccess(responseMock)
+
+      const { store, invoke, next } = create(
+        // @ts-ignore - normalise mock isn't typesafe
+        SUT.createUserChallengeCertificateSuccessFlow({ normalise: normaliseMock }),
+      )
+      // when ... we respond to the createUserJobSuccess action
+      invoke(action)
+
+      // then ...validate createUserJobSuccessFlow
+      expect(next).toHaveBeenCalledWith(action)
+      // @ts-ignore - testing we're returning correctly. correctly typed value not necessary
+      expect(store.dispatch).toHaveBeenCalledWith(updateUserChallenges('NORMALISED CREDENTIAL'))
+    })
+  })
+  describe('createUserChallengeCertificateFailureFlow', () => {
+    it('should correctly handle job credentials create failure', () => {
+      // given ...
+      const create = createMiddlewareMock(jest)
+      const action = createUserChallengeFailure('FAILED')
+      const notificationMock = jest.fn()
+
+      const { invoke, next } = create(SUT.createUserChallengeFailureFlow({ notification: notificationMock }))
+
+      // when ... we respond to the createUserJobFailures action
+      invoke(action)
+
+      // then ...validate failure
+      expect(next).toHaveBeenCalledWith(action)
+      expect(notificationMock).toHaveBeenCalled()
+    })
+  })
   describe('getUserChallengesFromCredentialsFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
@@ -184,7 +311,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseUserChallengesFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseUserChallengesFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -205,7 +332,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseUserChallengesFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseUserChallengesFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...

@@ -1,25 +1,50 @@
-import { mergeRight, of } from 'ramda'
+import { mergeRight, of, pick } from 'ramda'
+import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../api/users'
+import * as ReduxTypes from '../../redux/redux.types'
+import * as ReduxUtils from '../../redux/redux.utils'
 import * as Types from '../../types/general.types'
-import { showSimpleMessage } from '../../utils/error'
 import * as ErrorUtils from '../../utils/error'
-import * as ReduxUtils from '../../utils/redux.utils'
+import { extractErrorResponseMessage } from '../Error/error.utils'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import * as Navigation from '../Navigation/Navigation.actions'
-import { actions as UserActions, selectors as UserSelectors, types as UserTypes, utils as UserUtils } from '../User'
+import {
+  actions as UserActions,
+  constants as UserConstants,
+  selectors as UserSelectors,
+  types as UserTypes,
+  utils as UserUtils,
+} from '../User'
 import {
   createUserChallenge,
+  createUserChallengeCertificate,
+  createUserChallengeCertificateFailure,
+  createUserChallengeCertificateSuccess,
   createUserChallengeFailure,
   createUserChallengeSuccess,
   getUserChallengesSuccess,
   normaliseUserChallengesSuccess,
+  setFormValues,
   setUserChallenges,
   updateUserChallenges,
 } from './UserChallenges.reducer'
-import { NormalisedUserChallenges, UserChallenge } from './UserChallenges.types'
+import { selectFormCertificate } from './UserChallenges.selector'
+import { UserChallenge } from './UserChallenges.types'
+
+export const setUserChallengeFormValuesFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (createUserChallenge.match(action)) {
+      const payload = pick(['certificate'])(action.payload)
+      dispatch(setFormValues(payload))
+    }
+    return result
+  }
 
 export const createUserChallengeFlow: Middleware =
   ({ dispatch, getState }) =>
@@ -30,7 +55,7 @@ export const createUserChallengeFlow: Middleware =
     if (createUserChallenge.match(action)) {
       const state = getState()
       const userId = UserSelectors.selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
       const payload = UserUtils.prepareCreateUserCredentialPayload(ApiUsersTypes.UserCredentialTypes.Challenge)(
         action.payload,
       )
@@ -53,7 +78,7 @@ export const createUserChallengeSuccessFlow =
     notification,
     navigate,
   }: {
-    notification: typeof showSimpleMessage
+    notification: typeof ErrorUtils.showSimpleMessage
     navigate: typeof Navigation.navigate
   }): Middleware =>
   ({ dispatch }) =>
@@ -67,6 +92,7 @@ export const createUserChallengeSuccessFlow =
       notification('success', 'New Challenge successfully created!')
       navigate(HomeNavigationRoutes.Home)
       dispatch(updateUserChallenges(normalisedUserChallenge))
+      dispatch(createUserChallengeCertificate(userChallenge.id))
     }
 
     return result
@@ -80,11 +106,75 @@ export const createUserChallengeFailureFlow =
     const result = next(action)
 
     if (createUserChallengeFailure.match(action)) {
+      const message = extractErrorResponseMessage(action)
+      // TODO: this should be handled by the notification module
+      notification('danger', 'Oops something went wrong!', message)
+    }
+    return result
+  }
+
+export const createUserChallengeCertificateFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserChallengeCertificate.match(action)) {
+      const state = getState()
+      const certificate = selectFormCertificate(state) as DocumentPickerResponse | undefined
+      if (certificate) {
+        const userId = UserSelectors.selectId(state)
+        const config = ApiUtils.zipIdsIntoConfigEndpoint([userId, action.payload])(
+          ApiUsersConstants.USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG,
+        )
+
+        const formData = new FormData()
+        const fileData = pick(['uri', 'type', 'name'], certificate)
+        formData.append(UserConstants.USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
+
+        dispatch(
+          ApiActions.apiRequest(
+            mergeRight(config, {
+              onSuccess: createUserChallengeCertificateSuccess,
+              onFailure: createUserChallengeCertificateFailure,
+            }),
+            formData,
+          ),
+        )
+      }
+    }
+    return result
+  }
+
+export const createUserChallengeCertificateSuccessFlow =
+  ({ normalise }: ReduxTypes.NormaliseDependency<UserChallenge>): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserChallengeCertificateSuccess.match(action)) {
+      const credential = ReduxUtils.extractDataFromResponseAction(action)
+      const normalisedCredential = normalise([credential])
+      dispatch(updateUserChallenges(normalisedCredential))
+    }
+
+    return result
+  }
+
+export const createUserChallengeCertificateFailureFlow =
+  ({ notification }: { notification: typeof ErrorUtils.showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserChallengeCertificateFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification(
         'danger',
         'An error occurred.',
-        'Oops something went wrong saving your' + ' challenge! Please try again.',
+        'Oops something went wrong uploading your challenge certificate. Please try again.',
       )
     }
     return result
@@ -108,7 +198,7 @@ export const getUserChallengesFromCredentialsFlow =
   }
 
 export const normaliseUserChallengesFlow =
-  (normalise: Types.StdFn<UserChallenge[], NormalisedUserChallenges>): Middleware =>
+  ({ normalise }: ReduxTypes.NormaliseDependency<UserChallenge>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

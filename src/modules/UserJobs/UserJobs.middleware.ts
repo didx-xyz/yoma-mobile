@@ -1,17 +1,17 @@
 import { UserCredentialTypes } from 'api/users/users.types'
-import { extractErrorMessageFromPayload } from 'modules/Error/error.utils'
+import { extractErrorResponseMessage } from 'modules/Error/error.utils'
 import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
 import * as JobsActions from 'modules/Jobs/Jobs.reducer'
 import * as UserSelectors from 'modules/User/User.selector'
 import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } from 'modules/User/User.utils'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { Normalise } from 'types/redux.types'
+import { extractDataFromResponseAction, normalise } from 'redux/redux.utils'
 import { showSimpleMessage } from 'utils/error'
-import { extractDataFromResponseAction, normalise } from 'utils/redux.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
+import { NormaliseDependency } from '../../redux/redux.types'
 import { StdFn } from '../../types/general.types'
 import * as Navigation from '../Navigation/Navigation.actions'
 import * as UserActions from '../User/User.reducer'
@@ -31,7 +31,7 @@ import {
   updateUserJobs,
 } from './UserJobs.reducer'
 import { selectFormValues } from './UserJobs.selector'
-import { NormalisedUserJobs, UserJobCredential } from './UserJobs.types'
+import { UserJobCredential } from './UserJobs.types'
 import { extractUserJobFromData } from './UserJobs.utils'
 
 export const getUserJobsFromCredentialsFlow =
@@ -52,7 +52,7 @@ export const getUserJobsFromCredentialsFlow =
   }
 
 export const normaliseUserJobsFlow =
-  (normalise: Normalise<UserJobCredential, NormalisedUserJobs>): Middleware =>
+  ({ normalise }: NormaliseDependency<UserJobCredential>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
@@ -100,7 +100,7 @@ export const createUserJobFlow: Middleware =
       const formValues = selectFormValues(state)
       const userJobsPayload = prepareUserCredentialItemPayload(action)(formValues)
 
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
 
       dispatch(
         ApiActions.apiRequest(
@@ -137,7 +137,7 @@ export const createUserJobFailureFlow =
     const result = next(action)
 
     if (createUserJobFailure.match(action)) {
-      const errorMessage = extractErrorMessageFromPayload(action)
+      const errorMessage = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', errorMessage)
     }
@@ -152,10 +152,10 @@ export const fetchUserJobByIdFlow: Middleware =
     if (fetchUserJobById.match(action)) {
       const state = getState()
       const userId = UserSelectors.selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
         userId,
       )
-      const configWithCredentialId = ApiUtils.appendIdToEndpointInConfig(config)(action.payload)
+      const configWithCredentialId = ApiUtils.appendValueToEndpointArrayInConfig(config)(action.payload)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(configWithCredentialId, {
@@ -195,7 +195,7 @@ export const fetchUserJobByIdFailureFlow =
     const result = next(action)
 
     if (fetchUserJobByIdFailure.match(action)) {
-      const errorMessage = extractErrorMessageFromPayload(action)
+      const errorMessage = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', errorMessage)
     }

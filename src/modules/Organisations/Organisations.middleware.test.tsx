@@ -1,5 +1,5 @@
 import { mergeRight } from 'ramda'
-import { extractDataFromResponseAction } from 'utils/redux.utils'
+import { extractDataFromResponseAction } from 'redux/redux.utils'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
@@ -117,7 +117,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseOrganisationsFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseOrganisationsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -138,7 +138,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseOrganisationsFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseOrganisationsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...

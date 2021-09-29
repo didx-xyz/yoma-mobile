@@ -176,10 +176,11 @@ describe('modules/User/User.utils', () => {
     it('should correctly format the data payload for the create credential api call', () => {
       // given
       const actionPayload = {
-        challengeId: 'CHALLENGE ID',
-        startDate: '2020-09-09T22:00:00.000Z',
-        endDate: '2020-10-09T22:00:00.000Z',
+        credentialItemId: 'CHALLENGE ID',
+        startTime: '2020-09-09T22:00:00.000Z',
+        endTime: '2020-10-09T22:00:00.000Z',
         requestVerification: false,
+        certificate: { name: 'SOME NAME', type: 'SOME TYPE' },
       }
 
       // when we prepare the payload

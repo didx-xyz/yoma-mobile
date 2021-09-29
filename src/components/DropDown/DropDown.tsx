@@ -1,10 +1,11 @@
 import Text, { MetaLevels, TextAlign } from 'components/Typography'
-import { FormikProps } from 'formik'
+import { useField } from 'formik'
 import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 import { textOrSpace } from 'utils/strings.utils'
 
+import Optional from '../Optional'
 import styles from './DropDown.styles'
 
 type Props = Omit<
@@ -13,23 +14,22 @@ type Props = Omit<
 > & {
   name: string
   label: string
-  handlers: FormikProps<any>
 }
 
-const DropDown = ({ name, label, handlers, ...props }: Props) => {
+const DropDown = ({ name, label, ...props }: Props) => {
+  const [, { value, error, touched }, { setValue }] = useField(name)
   const [isOpen, setIsOpen] = useState(false)
   const [dropDownValue, setDropdownValue] = useState(null)
-  const { handleChange, handleBlur, values, errors, touched, setFieldValue } = handlers
 
   useEffect(() => {
-    if (values[name]) {
-      setDropdownValue(values[name])
+    if (value) {
+      setDropdownValue(value)
     }
-  }, [name, values])
+  }, [value])
 
   return (
     <>
-      <Text.Meta level={MetaLevels.Small}>{textOrSpace(values[name] !== '', label)}</Text.Meta>
+      <Text.Meta level={MetaLevels.Small}>{textOrSpace(value !== '', label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
         dropDownContainerStyle={styles.dropDownContainer}
@@ -40,10 +40,8 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
         searchContainerStyle={styles.searchContainer}
         listMode={'MODAL'}
         onChangeValue={(itemValue: any) => {
-          if (values[name] !== itemValue) {
-            handleChange(name)
-            handleBlur(name)
-            setFieldValue(name, itemValue)
+          if (value !== itemValue) {
+            setValue(itemValue)
           }
         }}
         value={dropDownValue}
@@ -52,9 +50,11 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
         setValue={setDropdownValue}
         {...props}
       />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
-        {errors[name] && touched[name] ? errors[name] : ' '}
-      </Text.Meta>
+      <Optional condition={!!error && touched}>
+        <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
+          {error}
+        </Text.Meta>
+      </Optional>
     </>
   )
 }

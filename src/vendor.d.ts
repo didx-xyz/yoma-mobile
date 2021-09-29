@@ -62,9 +62,11 @@ declare module 'ramda' {
   export function toUpper(...rest: any[]): any
   export function trim(...rest: any[]): any
   export function type(...rest: any[]): any
+  export function uniq(...rest: any[]): any
   export function unless(...rest: any[]): any
   export function values(...rest: any[]): any
   export function view(...rest: any[]): any
   export function when(...rest: any[]): any
+  export function zip(...rest: any[]): any
   export function zipObj(...rest: any[]): any
 }

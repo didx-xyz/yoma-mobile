@@ -5,7 +5,7 @@ import { showSimpleMessage } from 'utils/error'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
-import * as ReduxUtils from './../../utils/redux.utils'
+import * as ReduxUtils from '../../redux/redux.utils'
 import { fetchUserSkills, fetchUserSkillsFailure, fetchUserSkillsSuccess, setUserSkills } from './UserSkills.reducer'
 import { UserSkillKeys } from './UserSkills.types'
 
@@ -17,7 +17,7 @@ export const fetchUserSkillsFlow: Middleware =
     if (fetchUserSkills.match(action)) {
       const state = getState()
       const userId = selectId(state)
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)(userId)
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
