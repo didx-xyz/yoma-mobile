@@ -41,7 +41,6 @@ export const setUserChallengeFormValuesFlow: Middleware =
     const result = next(action)
     if (createUserChallenge.match(action)) {
       const payload = pick(['certificate'])(action.payload)
-      console.log({ payload })
       dispatch(setFormValues(payload))
     }
     return result
