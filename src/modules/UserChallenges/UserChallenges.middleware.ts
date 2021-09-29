@@ -174,7 +174,7 @@ export const createUserChallengeCertificateFailureFlow =
       notification(
         'danger',
         'An error occurred.',
-        'Oops something went wrong uploading your' + ' challenge certificate. Please try again.',
+        'Oops something went wrong uploading your challenge certificate. Please try again.',
       )
     }
     return result
