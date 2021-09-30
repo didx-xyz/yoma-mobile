@@ -8,9 +8,9 @@ import styles from './ButtonSave.styles'
 
 interface Props {
   onPress: () => void
-  isDisabled: boolean
+  isDisabled?: boolean
 }
-const ButtonSave = ({ onPress, isDisabled }: Props) => {
+const ButtonSave = ({ onPress, isDisabled = false }: Props) => {
   const { t } = useTranslation()
 
   return (

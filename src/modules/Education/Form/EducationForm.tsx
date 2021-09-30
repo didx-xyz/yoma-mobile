@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 
 import { DropDownTags, FormLayout, InfoModal, Input, Spinner } from '../../../components'
+import { ButtonSave } from '../../../components/Button'
 import Card from '../../../components/Card'
 import CheckBox from '../../../components/CheckBox'
 import DateRangeSelect from '../../../components/DateRangeSelect'
@@ -62,9 +63,7 @@ const EducationForm = forwardRef(({ navigation }: Props, ref) => {
       <Header
         navigation={navigation}
         headerText={t('Education')}
-        isSaveButtonEnabled={isSaveButtonActive}
-        onSave={() => formRef.current?.handleSubmit()}
-        showAddButton={false}
+        actionItem={<ButtonSave onPress={() => formRef.current?.handleSubmit()} isDisabled={!isSaveButtonActive} />}
       />
       <ScrollView>
         <Card>
