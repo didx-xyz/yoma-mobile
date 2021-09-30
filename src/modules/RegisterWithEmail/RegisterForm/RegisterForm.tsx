@@ -1,8 +1,9 @@
-import countries from 'constants/countries'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import * as yup from 'yup'
+
+import countries from '~/constants/countries'
 
 import Button from '../../../components/Button'
 import CheckBox from '../../../components/CheckBox'
