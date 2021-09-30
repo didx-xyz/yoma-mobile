@@ -1,10 +1,11 @@
-import { Input, OnboardingForms } from 'components'
-import Button from 'components/Button'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import * as yup from 'yup'
+
+import { Input, OnboardingForms } from '~/components'
+import Button from '~/components/Button'
 
 import { AuthCredentials } from '../../Auth/Auth.types'
 import { INITIAL_VALUES } from './LoginForm.constants'

@@ -1,8 +1,9 @@
-import { HomeNavigationRoutes } from 'modules/HomeNavigation/HomeNavigation.types'
-import { CAPTURE_IMAGE_OPTIONS } from 'modules/User/User.constants'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
+
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { CAPTURE_IMAGE_OPTIONS } from '~/modules/User/User.constants'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'

@@ -1,10 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import Text, { MetaLevels } from 'components/Typography'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextInput, View } from 'react-native'
-import { Colors } from 'styles'
+
+import Text, { MetaLevels } from '~/components/Typography'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { Colors } from '~/styles'
 
 import { ButtonSave } from '../../components/Button'
 import Card from '../../components/Card'

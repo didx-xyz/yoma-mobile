@@ -1,7 +1,8 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { UserCredentialFormValues } from 'modules/User/User.types'
 import { mergeRight } from 'ramda'
 import { updateNormalisedReducer } from 'redux/redux.utils'
+
+import { UserCredentialFormValues } from '~/modules/User/User.types'
 
 import { updateStateWithFormValues } from '../User/User.utils'
 import { NormalisedUserJobs, UserJobCredential, UserJobsResponse, UserJobsState } from './UserJobs.types'

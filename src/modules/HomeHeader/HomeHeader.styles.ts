@@ -1,6 +1,7 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
-import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { CIRCULAR_RADIUS_DIVISOR } from '~/styles/styles.constants'
+import { applyAlphaToHex } from '~/styles/styles.utils'
 
 import { Colors, colors } from '../../styles'
 

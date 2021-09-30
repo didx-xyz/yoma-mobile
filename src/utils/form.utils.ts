@@ -1,5 +1,6 @@
 import { and, equals, evolve, not } from 'ramda'
-import { StdObj } from 'types/general.types'
+
+import { StdObj } from '~/types/general.types'
 
 import * as DateUtils from './dates.utils'
 

@@ -1,7 +1,8 @@
-import { BackIcon, WhiteLogo } from 'assets/images'
 import React, { ReactElement, useEffect, useState } from 'react'
 import { StyleSheet, TouchableOpacity, View, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
+
+import { BackIcon, WhiteLogo } from '~/assets/images'
+import { Colors, colors } from '~/styles'
 
 import styles from './HeaderLarge.styles'
 

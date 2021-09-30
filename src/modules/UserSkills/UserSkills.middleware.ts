@@ -1,7 +1,8 @@
-import { selectId } from 'modules/User/User.selector'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 import { showSimpleMessage } from 'utils/error'
+
+import { selectId } from '~/modules/User/User.selector'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'

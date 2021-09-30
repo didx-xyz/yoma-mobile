@@ -1,6 +1,7 @@
-import { loginSuccess } from 'modules/Auth/Auth.reducer'
-import { defaultUserLoginResponseData } from 'modules/Auth/Auth.test.fixtures'
 import { mergeRight } from 'ramda'
+
+import { loginSuccess } from '~/modules/Auth/Auth.reducer'
+import { defaultUserLoginResponseData } from '~/modules/Auth/Auth.test.fixtures'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'

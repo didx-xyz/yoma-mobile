@@ -1,6 +1,7 @@
 import React from 'react'
 import { ActivityIndicator, Modal, View } from 'react-native'
-import { Colors, colors } from 'styles'
+
+import { Colors, colors } from '~/styles'
 
 import styles from './Spinner.styles'
 

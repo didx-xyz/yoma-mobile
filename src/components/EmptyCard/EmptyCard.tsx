@@ -1,10 +1,11 @@
-import { PurpleTopRightCircle, YellowBottomLeftCircle } from 'assets/images'
-import Button, { ButtonSizes } from 'components/Button'
-import Text, { TextAlign } from 'components/Typography'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors } from 'styles'
+
+import { PurpleTopRightCircle, YellowBottomLeftCircle } from '~/assets/images'
+import Button, { ButtonSizes } from '~/components/Button'
+import Text, { TextAlign } from '~/components/Typography'
+import { Colors } from '~/styles'
 
 import Background from '../Background/Background'
 import styles from './EmptyCard.styles'
