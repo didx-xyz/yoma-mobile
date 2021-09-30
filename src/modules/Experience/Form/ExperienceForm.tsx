@@ -4,6 +4,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, TouchableOpacity } from 'react-native'
 
+import { ButtonSave } from '../../../components/Button'
 import Card from '../../../components/Card'
 import CheckBox from '../../../components/CheckBox'
 import DateRangeSelect from '../../../components/DateRangeSelect'
@@ -34,7 +35,11 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, for
 
   return (
     <ViewContainer style={styles.container}>
-      <Header navigation={navigation} headerText={t('Experience')} onSave={form.handleSubmit} isSaveButtonEnabled />
+      <Header
+        navigation={navigation}
+        headerText={t('Experience')}
+        actionItem={<ButtonSave onPress={form.handleSubmit} />}
+      />
       <ScrollView>
         <Card>
           <FormLayout>

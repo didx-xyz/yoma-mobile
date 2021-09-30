@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { FlatList, ScrollView } from 'react-native'
 
+import { ButtonAdd, ButtonSave } from '../../components/Button'
 import Card from '../../components/Card'
 import CvViewCredential from '../../components/CvViewCredential'
 import EmptyCard from '../../components/EmptyCard'
@@ -30,9 +31,17 @@ const CompletedCourses = ({ navigation }: Props) => {
             {t('Add course')}
           </Optional>
         }
-        onSave={() => {}}
-        onAdd={() => setIsEditing(true)}
-        showAddButton={!isEditing}
+        actionItem={
+          isEditing ? (
+            <ButtonSave onPress={() => {}} />
+          ) : (
+            <ButtonAdd
+              onPress={() => {
+                setIsEditing(true)
+              }}
+            />
+          )
+        }
       />
       <Optional
         condition={isEditing}

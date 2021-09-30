@@ -6,6 +6,7 @@ import { View } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 
 import { IconInfo } from '../../../assets/images'
+import { ButtonSave } from '../../../components/Button'
 import CheckBoxInput from '../../../components/CheckBoxInput'
 import DateRangeSelect from '../../../components/DateRangeSelect'
 import DropDown from '../../../components/DropDown'
@@ -42,7 +43,11 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, f
 
   return (
     <ViewContainer style={styles.container}>
-      <Header navigation={navigation} onSave={form.handleSubmit} headerText={t('Add challenge')} isSaveButtonEnabled />
+      <Header
+        navigation={navigation}
+        headerText={t('Add challenge')}
+        actionItem={<ButtonSave onPress={form.handleSubmit} />}
+      />
       <ScrollView>
         <FormGroup>
           <DropDown name="credentialItemId" label={t('Select a challenge')} items={challengesDropDown} />

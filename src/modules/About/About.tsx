@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { TextInput, View } from 'react-native'
 import { Colors } from 'styles'
 
+import { ButtonSave } from '../../components/Button'
 import Card from '../../components/Card'
 import FormLayout from '../../components/FormLayout'
 import Header from '../../components/Header'
@@ -34,10 +35,9 @@ const About = ({ navigation, onBiographySave, biography }: Props) => {
         }
       />
       <Header
-        isSaveButtonEnabled
         navigation={navigation}
         headerText={t('About')}
-        onSave={() => onBiographySave(userBiography)}
+        actionItem={<ButtonSave onPress={() => onBiographySave(userBiography)} />}
       />
       <Card style={styles.card}>
         <FormLayout>
