@@ -1,6 +1,6 @@
-import { UserCredentialTypes } from 'api/users/users.types'
 import { mergeRight } from 'ramda'
 
+import { UserCredentialTypes } from '~/api/users/users.types'
 import { JOB_MOCK } from '~/modules/Jobs/Jobs.test.fixtures'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'

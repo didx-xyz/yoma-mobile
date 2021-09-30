@@ -1,10 +1,11 @@
 import { mergeRight } from 'ramda'
-import { extractDataFromResponseAction } from 'redux/redux.utils'
+
+import { actions as ApiActions } from '~/api'
+import { constants as ApiSkillsConstants } from '~/api/skills'
+import { rootStateFixture } from '~/redux/redux.fixture'
+import { extractDataFromResponseAction } from '~/redux/redux.utils'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { actions as ApiActions } from '../../api'
-import { constants as ApiSkillsConstants } from '../../api/skills'
-import { rootStateFixture } from '../../redux/redux.fixture'
 import * as SUT from './Skills.middleware'
 import {
   fetchSkills,

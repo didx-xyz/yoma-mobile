@@ -1,14 +1,14 @@
-import { UserCredentialTypes } from 'api/users/users.types'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { extractDataFromResponseAction, normalise } from 'redux/redux.utils'
-import { showSimpleMessage } from 'utils/error'
 
+import { UserCredentialTypes } from '~/api/users/users.types'
 import { extractErrorResponseMessage } from '~/modules/Error/error.utils'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
 import * as JobsActions from '~/modules/Jobs/Jobs.reducer'
 import * as UserSelectors from '~/modules/User/User.selector'
 import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } from '~/modules/User/User.utils'
+import { extractDataFromResponseAction, normalise } from '~/redux/redux.utils'
+import { showSimpleMessage } from '~/utils/error'
 
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'

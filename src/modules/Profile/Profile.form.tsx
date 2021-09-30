@@ -2,7 +2,8 @@ import countries from 'constants/countries'
 import { Formik } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { mapToDropDownArray } from 'utils/strings.utils'
+
+import { mapToDropDownArray } from '~/utils/strings.utils'
 
 import DropDown from '../../components/DropDown'
 import Input from '../../components/Input'
