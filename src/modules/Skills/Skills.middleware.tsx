@@ -1,11 +1,12 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { extractDataFromResponseAction } from 'redux/redux.utils'
-import { showSimpleMessage } from 'utils/error'
 
-import { actions as ApiActions } from '../../api'
-import { constants as ApiSkillsConstants } from '../../api/skills'
-import * as ReduxTypes from '../../redux/redux.types'
+import { actions as ApiActions } from '~/api'
+import { constants as ApiSkillsConstants } from '~/api/skills'
+import * as ReduxTypes from '~/redux/redux.types'
+import { extractDataFromResponseAction } from '~/redux/redux.utils'
+import { showSimpleMessage } from '~/utils/error'
+
 import {
   fetchSkills,
   fetchSkillsFailure,

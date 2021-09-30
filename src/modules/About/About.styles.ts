@@ -1,6 +1,7 @@
-import textinputStyles from 'components/Input/Input.styles'
 import { StyleSheet, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
+
+import textinputStyles from '~/components/Input/Input.styles'
+import { Colors, colors } from '~/styles'
 
 const styles = {
   container: {

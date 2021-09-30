@@ -1,11 +1,12 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { PurpleQuarter } from 'assets/images'
-import { Card, ViewContainer } from 'components'
-import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import { Colors } from 'styles'
+
+import { PurpleQuarter } from '~/assets/images'
+import { Card, ViewContainer } from '~/components'
+import { AuthNavigationRoutes, AuthNavigatorParamsList } from '~/modules/AuthNavigation/AuthNavigation.types'
+import { Colors } from '~/styles'
 
 import HeaderLarge from '../../components/HeaderLarge'
 import Text, { Bold, HeaderLevels, TextAlign } from '../../components/Typography'

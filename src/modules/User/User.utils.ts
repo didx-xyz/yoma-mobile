@@ -14,7 +14,8 @@ import {
   prop,
   toLower,
 } from 'ramda'
-import * as ReduxUtils from 'redux/redux.utils'
+
+import * as ReduxUtils from '~/redux/redux.utils'
 
 import { types as ApiUserTypes } from '../../api/users'
 import * as Types from '../../types/general.types'

@@ -1,8 +1,9 @@
 import React from 'react'
 import { View } from 'react-native'
-import { Colors, colors } from 'styles'
-import { applyAlphaToHex } from 'styles/styles.utils'
-import { WithChildren } from 'types/react.types'
+
+import { Colors, colors } from '~/styles'
+import { applyAlphaToHex } from '~/styles/styles.utils'
+import { WithChildren } from '~/types/react.types'
 
 import styles from './ProgressCircle.styles'
 

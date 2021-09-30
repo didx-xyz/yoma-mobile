@@ -1,11 +1,12 @@
-import api from 'api'
-import { Input, OnboardingForms } from 'components'
-import Button from 'components/Button'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
+
+import api from '~/api'
+import { Input, OnboardingForms } from '~/components'
+import Button from '~/components/Button'
+import { showSimpleMessage } from '~/utils/error'
 
 import styles from './ForgotPasswordForm.styles'
 

@@ -1,4 +1,4 @@
-import { ApiMetaResponse } from 'api/api.types'
+import { ApiMetaResponse } from '~/api/api.types'
 
 import * as UserTypes from '../User/User.types'
 

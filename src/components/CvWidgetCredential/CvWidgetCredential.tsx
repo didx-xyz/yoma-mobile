@@ -1,6 +1,7 @@
-import Text, { BodyLevels, HeaderLevels } from 'components/Typography'
 import React, { useEffect, useState } from 'react'
 import { View } from 'react-native'
+
+import Text, { BodyLevels, HeaderLevels } from '~/components/Typography'
 
 import { formatISOWithFallback } from '../../utils/dates.utils'
 import Avatar from '../Avatar'

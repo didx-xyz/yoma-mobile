@@ -1,8 +1,10 @@
 Ver 0.0.1
 Latest:
-- Step 4 of fixing the challenges credentials form - handling uploading credential certificates
+- refactoring import logic
 
-10 Most Recent:
+Last 10 deployment release notes:
+- updated header to only use the itemAction prop
+- Step 4 of fixing the challenges credentials form - handling uploading credential certificates
 - Step 3 of fixing the challenges credentials form - submitting form to api and handling response
 - Step 2 of fixing the challenges credentials form - adding validation
 - Step 1 of fixing the challenges credentials form (getting real challenges in, allowing user to select a challenge)
@@ -12,4 +14,3 @@ Latest:
 - displaying challenges in Completed Challenges view
 - display qualifications in view
 - display qualifications in widget
-- adding metadata for countries and duration to job experience

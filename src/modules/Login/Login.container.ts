@@ -1,6 +1,7 @@
-import { SocialVariants } from 'components/SocialButton/SocialButton.types'
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+
+import { SocialVariants } from '~/components/SocialButton/SocialButton.types'
 
 import * as AuthActions from '../Auth/Auth.reducer'
 import { AuthCredentials } from '../Auth/Auth.types'

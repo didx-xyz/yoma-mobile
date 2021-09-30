@@ -1,8 +1,9 @@
-import { CrossIcon } from 'assets/images'
-import Text from 'components/Typography'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { Colors } from 'styles'
+
+import { CrossIcon } from '~/assets/images'
+import Text from '~/components/Typography'
+import { Colors } from '~/styles'
 
 import { ICON_SIZE } from './Tag.constants'
 import styles from './Tag.styles'

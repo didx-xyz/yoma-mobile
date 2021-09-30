@@ -1,5 +1,6 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { CIRCULAR_RADIUS_DIVISOR } from 'styles/styles.constants'
+
+import { CIRCULAR_RADIUS_DIVISOR } from '~/styles/styles.constants'
 
 import { Colors, colors } from '../../styles'
 

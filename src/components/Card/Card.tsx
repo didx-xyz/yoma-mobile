@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
-import { WithChildren } from 'types/react.types'
+
+import { Colors, colors } from '~/styles'
+import * as ReactTypes from '~/types/react.types'
 
 import styles from './Card.styles'
 
-type Props = WithChildren<{
+type Props = ReactTypes.WithChildren<{
   backgroundColor?: Colors
   style?: ViewStyle
 }>

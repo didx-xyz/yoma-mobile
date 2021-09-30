@@ -1,11 +1,12 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from 'assets/images'
-import { ViewContainer } from 'components'
-import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors } from 'styles'
+
+import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from '~/assets/images'
+import { ViewContainer } from '~/components'
+import { AuthNavigationRoutes, AuthNavigatorParamsList } from '~/modules/AuthNavigation/AuthNavigation.types'
+import { Colors } from '~/styles'
 
 import Background from '../../components/Background/Background'
 import Button, { ButtonSizes, ButtonVariants } from '../../components/Button'

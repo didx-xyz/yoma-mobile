@@ -3,8 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { Colors } from 'styles'
-import { dropElement, textOrSpace } from 'utils/strings.utils'
+
+import { Colors } from '~/styles'
+import { dropElement, textOrSpace } from '~/utils/strings.utils'
 
 import Tag from '../Tag'
 import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'

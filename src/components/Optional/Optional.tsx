@@ -1,6 +1,7 @@
 import { equals } from 'ramda'
 import React, { ReactNode } from 'react'
-import { WithChildren } from 'types/react.types'
+
+import { WithChildren } from '~/types/react.types'
 
 type Props = WithChildren<{
   condition: boolean

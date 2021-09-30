@@ -1,5 +1,6 @@
 import { StyleSheet, ViewStyle } from 'react-native'
-import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { applyAlphaToHex } from '~/styles/styles.utils'
 
 import { Colors, colors } from '../../styles'
 

@@ -1,4 +1,4 @@
-import { ApiMetaResponse } from 'modules/Auth/Auth.types'
+import { ApiMetaResponse } from '~/modules/Auth/Auth.types'
 
 export type Organisation = {
   key: string

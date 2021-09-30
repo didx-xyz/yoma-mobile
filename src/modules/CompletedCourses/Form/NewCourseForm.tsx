@@ -1,8 +1,9 @@
-import { IconInfo } from 'assets/images'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
+
+import { IconInfo } from '~/assets/images'
 
 import { DropDownTags, FormLayout, Input, Spinner } from '../../../components'
 import CheckBox from '../../../components/CheckBox'
