@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 
 import { EditIcon } from '../../assets/images'
-import Button, { ButtonVariants } from '../../components/Button'
+import Button, { ButtonSave, ButtonVariants } from '../../components/Button'
 import Card from '../../components/Card'
 import Header from '../../components/Header'
 import Optional from '../../components/Optional'
@@ -43,7 +43,11 @@ const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }:
 
   return (
     <ViewContainer style={styles.container}>
-      <Header isSaveButtonEnabled navigation={navigation} headerText={'Profile'} onSave={handleProfileForm} />
+      <Header
+        navigation={navigation}
+        headerText={t('Profile')}
+        actionItem={<ButtonSave onPress={handleProfileForm} isDisabled={!formState?.isValid} />}
+      />
       <ScrollView>
         <Card style={styles.card}>
           <Optional
