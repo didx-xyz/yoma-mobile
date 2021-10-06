@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
 
@@ -12,46 +12,32 @@ import ProfilePhoto from '../../components/ProfilePhoto'
 import ViewContainer from '../../components/ViewContainer'
 import { Colors } from '../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import { UserResponse } from '../User/User.types'
-import ProfileForm from './Profile.form.container'
+import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
-import { ProfileFormState } from './Profile.types'
+import { ProfileFormUser } from './Profile.types'
 
 interface Props {
   onLogoutUser: () => void
   onPhotoSave: () => void
-  onProfileSave: (user: any) => void
-  user: UserResponse
+  user: ProfileFormUser
+  form: any
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
-const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }: Props) => {
-  const [userResponse, setUserResponse] = useState<UserResponse>(user)
-  const [formState, setFormState] = useState<ProfileFormState | null>(null)
-
+const Profile = ({ navigation, onLogoutUser, onPhotoSave, user, form }: Props) => {
   const { t } = useTranslation()
-
-  const handleProfileForm = () => {
-    if (formState?.isValid) {
-      onProfileSave(formState.values)
-    }
-  }
-
-  useEffect(() => {
-    setUserResponse(user)
-  }, [user])
 
   return (
     <ViewContainer style={styles.container}>
       <Header
         navigation={navigation}
         headerText={t('Profile')}
-        actionItem={<ButtonSave onPress={handleProfileForm} isDisabled={!formState?.isValid} />}
+        actionItem={<ButtonSave onPress={form.handleSubmit} isDisabled={form.isValid} />}
       />
       <ScrollView>
         <Card style={styles.card}>
           <Optional
-            condition={!!userResponse.photoURL}
+            condition={!!user.photoURL}
             fallback={
               <ProfilePhoto
                 size={78}
@@ -65,13 +51,13 @@ const Profile = ({ navigation, onLogoutUser, onPhotoSave, onProfileSave, user }:
             }
           >
             <TouchableOpacity onPress={onPhotoSave} style={styles.imageContainer}>
-              <Image source={{ uri: userResponse.photoURL as string }} style={styles.profileImage} />
+              <Image source={{ uri: user.photoURL as string }} style={styles.profileImage} />
               <View style={styles.editIcon}>
                 <EditIcon />
               </View>
             </TouchableOpacity>
           </Optional>
-          <ProfileForm setFormState={setFormState} user={userResponse} />
+          <ProfileForm />
         </Card>
         <Button
           variant={ButtonVariants.Clear}
