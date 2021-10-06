@@ -8,7 +8,7 @@ interface Props {
   error?: string
   touched: boolean
 }
-const InputErrorDisplay = ({ error, touched }: Props) => (
+const InputError = ({ error, touched }: Props) => (
   <Optional condition={!!error && touched}>
     <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
       {error}
@@ -16,4 +16,4 @@ const InputErrorDisplay = ({ error, touched }: Props) => (
   </Optional>
 )
 
-export default InputErrorDisplay
+export default InputError

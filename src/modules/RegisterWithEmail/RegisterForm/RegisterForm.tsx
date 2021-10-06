@@ -86,35 +86,17 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
         <>
           <OnboardingForms>
             <Spinner visible={formikHandlers.isSubmitting} />
-            <Input name={'firstName'} label={t('firstName')} handlers={formikHandlers} />
-            <Input name={'lastName'} label={t('lastName')} handlers={formikHandlers} />
-            <Input
-              name={'email'}
-              label={t('email')}
-              handlers={formikHandlers}
-              keyboardType="email-address"
-              autoCapitalize="none"
-            />
+            <Input name={'firstName'} label={t('firstName')} />
+            <Input name={'lastName'} label={t('lastName')} />
+            <Input name={'email'} label={t('email')} keyboardType="email-address" autoCapitalize="none" />
             <DropDown
               items={StringUtils.mapToDropDownArray(countries, 'code', 'name')}
               name={'countryAlpha2'}
               label={'Country'}
               searchPlaceholder={t('Search country')}
             />
-            <Input
-              name={'password'}
-              label={t('createPassword')}
-              handlers={formikHandlers}
-              autoCapitalize="none"
-              secureTextEntry
-            />
-            <Input
-              name={'confirmPassword'}
-              label={t('confirmPassword')}
-              handlers={formikHandlers}
-              autoCapitalize="none"
-              secureTextEntry
-            />
+            <Input name={'password'} label={t('createPassword')} autoCapitalize="none" secureTextEntry />
+            <Input name={'confirmPassword'} label={t('confirmPassword')} autoCapitalize="none" secureTextEntry />
             <CheckBox
               isChecked={hasChecked}
               label={

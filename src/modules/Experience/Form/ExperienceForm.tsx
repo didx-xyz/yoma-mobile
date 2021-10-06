@@ -50,7 +50,7 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, for
                 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
               }
             />
-            <Input name={'title'} label={t('Title')} handlers={form} />
+            <Input name={'title'} label={t('Title')} />
             <DropDown
               items={organisations}
               name={'organisationId'}
@@ -64,7 +64,7 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, for
               onPress={() => setIsWorkingHere(!isWorkingHere)}
             />
             <DateRangeSelect label={t('When did you work here?')} />
-            <Input name={'description'} label={t('Description')} handlers={form} multiline />
+            <Input name={'description'} label={t('Description')} multiline />
             <DropDownTags
               items={skills}
               multiple
@@ -73,7 +73,6 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, for
               onChangeSearchText={onFilterSkills}
               label={t('Skills developed')}
               name={'skillNames'}
-              handlers={form}
             />
             <TouchableOpacity onPress={() => setShowInfoModal(true)}>
               <Text.Meta level={MetaLevels.SmallBold} color={Colors.PrimaryGreen}>

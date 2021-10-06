@@ -1,12 +1,13 @@
-import api from 'api'
-import { Input, OnboardingForms } from 'components'
-import Button from 'components/Button'
+import { apiConfig } from 'api'
+import { OnboardingForms } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
+import Button from '../../../components/Button'
+import Input from '../../../components/Input'
 import styles from './ForgotPasswordForm.styles'
 
 interface Props {
@@ -24,13 +25,13 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
         email: yup.string().min(2).max(255).email().required(t('required')).label('Email'),
       })}
       onSubmit={async values => {
-        await api.auth
+        await apiConfig.auth
           .resetPassword({ ...values })
           .then((response: any) => {
             showSimpleMessage('success', response.meta.message)
             setSubmitted(true)
           })
-          .catch(error => {
+          .catch((error: string) => {
             showSimpleMessage('danger', 'Error', error)
           })
       }}
@@ -38,13 +39,7 @@ const ForgotPasswordForm = ({ setSubmitted }: Props) => {
       {(formikHandlers: FormikProps<FormikValues>) => (
         <>
           <OnboardingForms>
-            <Input
-              name={'email'}
-              label={t('email')}
-              keyboardType="email-address"
-              autoCapitalize="none"
-              handlers={formikHandlers}
-            />
+            <Input name={'email'} label={t('email')} keyboardType="email-address" autoCapitalize="none" />
           </OnboardingForms>
           <Button label={t('sendInstruction')} onPress={formikHandlers.handleSubmit} style={styles.button} />
         </>

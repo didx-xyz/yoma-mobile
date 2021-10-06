@@ -6,7 +6,7 @@ import DropDownPicker from 'react-native-dropdown-picker'
 import { Colors } from 'styles'
 import { dropElement, textOrSpace } from 'utils/strings.utils'
 
-import InputErrorDisplay from '../InputErrorDisplay'
+import InputError from '../InputError'
 import Optional from '../Optional'
 import Tag from '../Tag'
 import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
@@ -70,7 +70,7 @@ const DropDownTags = ({ name, label, ...props }: Props) => {
       />
       <View style={styles.tagsContainer}>{renderTags(dropDownValue, removeTag)}</View>
       <View style={styles.divider} />
-      <InputErrorDisplay error={error} touched={touched} />
+      <InputError error={error} touched={touched} />
     </>
   )
 }

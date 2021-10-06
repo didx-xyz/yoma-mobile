@@ -1,5 +1,6 @@
-import { Input, OnboardingForms } from 'components'
 import Button from 'components/Button'
+import Input from 'components/Input'
+import OnboardingForms from 'components/OnboardingForms'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -37,20 +38,8 @@ const ResetPasswordForm = () => {
       {(formikHandlers: FormikProps<FormikValues>) => (
         <>
           <OnboardingForms>
-            <Input
-              name={'password'}
-              label={t('password')}
-              handlers={formikHandlers}
-              autoCapitalize="none"
-              secureTextEntry
-            />
-            <Input
-              name={'confirmPassword'}
-              label={t('confirmPassword')}
-              handlers={formikHandlers}
-              autoCapitalize="none"
-              secureTextEntry
-            />
+            <Input name={'password'} label={t('password')} autoCapitalize="none" secureTextEntry />
+            <Input name={'confirmPassword'} label={t('confirmPassword')} autoCapitalize="none" secureTextEntry />
           </OnboardingForms>
           <Button
             isDisabled={formikHandlers.isSubmitting}

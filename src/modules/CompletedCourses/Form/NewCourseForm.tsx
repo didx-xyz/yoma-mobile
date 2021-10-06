@@ -4,9 +4,10 @@ import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { DropDownTags, FormLayout, Input, Spinner } from '../../../components'
+import { DropDownTags, FormLayout, Spinner } from '../../../components'
 import CheckBox from '../../../components/CheckBox'
 import DateRangeSelect from '../../../components/DateRangeSelect'
+import Input from '../../../components/Input'
 import Upload from '../../../components/Upload'
 import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
@@ -21,22 +22,21 @@ const NewCourseForm = forwardRef((_props, _ref) => {
       {(formikHandlers: FormikProps<FormikValues>) => (
         <FormLayout>
           <Spinner visible={formikHandlers.isSubmitting} />
-          <Input name={'course'} label={t('Course name')} handlers={formikHandlers} />
-          <Input name={'courseHostProvider'} label={t('Course host provider')} handlers={formikHandlers} />
+          <Input name={'course'} label={t('Course name')} />
+          <Input name={'courseHostProvider'} label={t('Course host provider')} />
           <CheckBox
             isChecked={isCourseActive}
             label={t('Course is currently in progress')}
             onPress={() => setIsCourseActive(!isCourseActive)}
           />
           <DateRangeSelect label={t('When did you do the course?')} />
-          <Input name={'description'} label={t('Description')} handlers={formikHandlers} multiline />
+          <Input name={'description'} label={t('Description')} multiline />
           <DropDownTags
             items={MOCK_SKILLS_LIST}
             multiple
             searchPlaceholder={t('Search skills')}
             label={t('Skills developed')}
             name={'skillNames'}
-            handlers={formikHandlers}
           />
           <Upload name="upload" label={t('Upload certification (if completed)')} />
           <View style={styles.checkBoxRow}>

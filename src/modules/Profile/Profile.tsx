@@ -13,7 +13,7 @@ import ViewContainer from '../../components/ViewContainer'
 import { Colors } from '../../styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import { UserResponse } from '../User/User.types'
-import ProfileForm from './Profile.form'
+import ProfileForm from './Profile.form.container'
 import styles from './Profile.styles'
 import { ProfileFormState } from './Profile.types'
 

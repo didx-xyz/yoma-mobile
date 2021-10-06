@@ -1,26 +1,32 @@
 import { StackNavigationProp } from '@react-navigation/stack'
+import { FormikProps } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 
-import { DropDownTags, FormLayout, InfoModal, Input, Spinner } from '../../../components'
+import { DropDownTags, FormLayout, InfoModal, Spinner } from '../../../components'
 import { ButtonSave } from '../../../components/Button'
-import Card from '../../../components/Card'
 import DateRangeSelect from '../../../components/DateRangeSelect'
 import DropDown from '../../../components/DropDown'
+import { DropDownItem } from '../../../components/DropDown/DropDown.types'
+import FormGroup from '../../../components/FormGroup'
 import Header from '../../../components/Header'
+import Input from '../../../components/Input'
 import Text, { MetaLevels } from '../../../components/Typography'
 import Upload from '../../../components/Upload'
 import ViewContainer from '../../../components/ViewContainer'
 import { Colors } from '../../../styles'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { types as HomeNavigationTypes } from '../../HomeNavigation'
 import styles from './EducationForm.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
-  skillsDropDown: any
-  organisationsDropDown: any
-  form: any
+  navigation: StackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.Education
+  >
+  skillsDropDown: DropDownItem[]
+  organisationsDropDown: DropDownItem[]
+  form: FormikProps<any>
 }
 
 const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form }: Props) => {
@@ -29,40 +35,32 @@ const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form
 
   return (
     <ViewContainer style={styles.container}>
+      <Spinner visible={form.isSubmitting} />
       <Header
         navigation={navigation}
         headerText={t('Education')}
         actionItem={<ButtonSave onPress={form.handleSubmit} />}
       />
       <ScrollView>
-        <Card>
+        <FormGroup>
           <FormLayout>
-            <InfoModal
-              visible={showInfoModal}
-              closeModal={() => setShowInfoModal(false)}
-              infoText={
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
-              }
+            <Input name={'title'} label={t('Qualification')} />
+            <Input name={'description'} label={t('Description')} multiline />
+            <DropDown
+              items={organisationsDropDown}
+              multiple
+              searchPlaceholder={t('Search organisations')}
+              label={t('School or Educational institution')}
+              name={'organisationId'}
             />
-            <Spinner visible={form.isSubmitting} />
-            <Input name={'school'} label={t('School')} handlers={form} />
-            <Input name={'qualificationType'} label={t('Qualification type')} handlers={form} />
-            <Input name={'country'} label={t('Country or region')} handlers={form} />
+            <Input name={'country'} label={t('Country or region')} />
             <DateRangeSelect label={t('When did you do the course?')} />
-            <Input name={'description'} label={t('Description')} handlers={form} multiline />
             <DropDownTags
               items={skillsDropDown}
               multiple
               searchPlaceholder={t('Search skills')}
               label={t('Skills developed')}
               name={'skillNames'}
-            />
-            <DropDown
-              items={organisationsDropDown}
-              multiple
-              searchPlaceholder={t('Search organisations')}
-              label={t('Educational institution')}
-              name={'organisationId'}
             />
             <Upload name="upload" label={t('Upload certification (if completed)')} />
             <View style={styles.bottom}>
@@ -74,9 +72,16 @@ const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form
               >
                 {t('Find inspiration on how to write a great education description.')}
               </Text.Meta>
+              <InfoModal
+                visible={showInfoModal}
+                closeModal={() => setShowInfoModal(false)}
+                infoText={
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
+                }
+              />
             </View>
           </FormLayout>
-        </Card>
+        </FormGroup>
       </ScrollView>
     </ViewContainer>
   )

@@ -21,8 +21,14 @@ const EducationFormContainer = ({ navigation }: Props) => {
       {formikHandlers => (
         <EducationForm
           navigation={navigation}
-          skillsDropDown={['skill 1', 'skill 2']}
-          organisationsDropDown={['org 1', 'org 2']}
+          skillsDropDown={[
+            { label: 'skill 1', value: 'skill1' },
+            { label: 'skill 2', value: 'skill2' },
+          ]}
+          organisationsDropDown={[
+            { label: 'org 1', value: 'org1' },
+            { label: 'org 2', value: 'org2' },
+          ]}
           form={formikHandlers}
         />
       )}

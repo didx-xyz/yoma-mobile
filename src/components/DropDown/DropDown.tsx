@@ -1,10 +1,10 @@
-import Text, { MetaLevels, TextAlign } from 'components/Typography'
+import Text, { MetaLevels } from 'components/Typography'
 import { useField } from 'formik'
 import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
 import { textOrSpace } from 'utils/strings.utils'
 
-import InputErrorDisplay from '../InputErrorDisplay'
+import InputError from '../InputError'
 import styles from './DropDown.styles'
 
 type Props = Omit<
@@ -49,7 +49,7 @@ const DropDown = ({ name, label, ...props }: Props) => {
         setValue={setDropdownValue}
         {...props}
       />
-      <InputErrorDisplay error={error} touched={touched} />
+      <InputError error={error} touched={touched} />
     </>
   )
 }

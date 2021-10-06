@@ -1,4 +1,4 @@
-import { FormikProps } from 'formik'
+import { useField } from 'formik'
 import React from 'react'
 import { Keyboard, TextInput, TextInputProps } from 'react-native'
 import { Colors, colors } from 'styles'
@@ -9,26 +9,25 @@ import styles from './Input.styles'
 type Props = TextInputProps & {
   name: string
   label: string
-  handlers: FormikProps<any>
 }
 
-const Input = ({ name, label, handlers, ...props }: Props) => {
-  const { handleChange, handleBlur, values, errors, touched } = handlers
+const Input = ({ name, label, ...props }: Props) => {
+  const [, { value, error, touched }, { setValue }] = useField(name)
   return (
     <>
-      <Text.Meta level={MetaLevels.Small}>{values[name] !== '' ? label : ' '}</Text.Meta>
+      <Text.Meta level={MetaLevels.Small}>{value !== '' ? label : ' '}</Text.Meta>
       <TextInput
         placeholderTextColor={colors[Colors.MenuGrey]}
         placeholder={label}
         onSubmitEditing={Keyboard.dismiss}
         style={styles.textInput}
-        value={values[name]}
-        onChangeText={handleChange(name)}
-        onBlur={handleBlur(name)}
+        value={value}
+        onChangeText={setValue}
+        onBlur={setValue}
         {...props}
       />
       <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
-        {errors[name] && touched[name] ? errors[name] : ' '}
+        {error && touched ? error : ' '}
       </Text.Meta>
     </>
   )
