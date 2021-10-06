@@ -2,10 +2,9 @@ import Text, { MetaLevels, TextAlign } from 'components/Typography'
 import { useField } from 'formik'
 import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { Colors } from 'styles'
 import { textOrSpace } from 'utils/strings.utils'
 
-import Optional from '../Optional'
+import InputErrorDisplay from '../InputErrorDisplay'
 import styles from './DropDown.styles'
 
 type Props = Omit<
@@ -46,15 +45,11 @@ const DropDown = ({ name, label, ...props }: Props) => {
         }}
         value={dropDownValue}
         open={isOpen}
-        setOpen={() => setIsOpen(!isOpen)}
+        setOpen={() => setIsOpen(isCurrentlyOpen => !isCurrentlyOpen)}
         setValue={setDropdownValue}
         {...props}
       />
-      <Optional condition={!!error && touched}>
-        <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
-          {error}
-        </Text.Meta>
-      </Optional>
+      <InputErrorDisplay error={error} touched={touched} />
     </>
   )
 }

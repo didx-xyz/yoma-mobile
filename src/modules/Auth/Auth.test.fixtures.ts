@@ -23,6 +23,8 @@ export const defaultUserLoginResponseData: AuthLoginSuccessResponse = {
         photoURL: null,
         role: null,
         organisation: null,
+        organisationId: null,
+        organisationVerified: false,
         createdAt: '2021-04-25T19:05:54.5496363',
         lastLogin: '2021-04-25T19:27:39.5278619Z',
       },
