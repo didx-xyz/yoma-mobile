@@ -31,10 +31,6 @@ export type AuthLoginFailureResponse = string
 
 export type AuthState = AuthCredentialsResponse
 
-export type AuthLoginMiddleware = {
-  client: AuthEndpoints
-}
-
 export interface AuthCredentials {
   email: string
   password: string
