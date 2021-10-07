@@ -8,6 +8,7 @@ import { OnboardingForms } from '~/components'
 import Button from '~/components/Button'
 import { showSimpleMessage } from '~/utils/error'
 
+import Input from '../../../components/Input'
 import styles from './ForgotPasswordForm.styles'
 
 interface Props {
