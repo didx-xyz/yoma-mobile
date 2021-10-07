@@ -7,7 +7,6 @@ import { Colors } from 'styles'
 import { dropElement, textOrSpace } from 'utils/strings.utils'
 
 import InputError from '../InputError'
-import Optional from '../Optional'
 import Tag from '../Tag'
 import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDownTags.styles'

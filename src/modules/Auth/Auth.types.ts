@@ -1,5 +1,3 @@
-import { AxiosResponse } from 'axios'
-
 import { AuthEndpoints } from '../../api/auth/auth.types'
 import { UserResponse } from '../User/User.types'
 
