@@ -1,3 +1,3 @@
-import EducationForm from './EducationForm'
+import EducationForm from './EducationForm.container'
 
 export default EducationForm

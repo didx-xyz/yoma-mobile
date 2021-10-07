@@ -1,4 +1,4 @@
-export type EducationFields = {
+export type FormFields = {
   school: string
   description: string
   qualificationType: string

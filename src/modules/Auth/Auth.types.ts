@@ -1,4 +1,3 @@
-import { AuthEndpoints } from '../../api/auth/auth.types'
 import { UserResponse } from '../User/User.types'
 
 export interface ApiMetaResponse {
@@ -30,10 +29,6 @@ export interface AuthLoginSuccessResponse {
 export type AuthLoginFailureResponse = string
 
 export type AuthState = AuthCredentialsResponse
-
-export type AuthLoginMiddleware = {
-  client: AuthEndpoints
-}
 
 export interface AuthCredentials {
   email: string
@@ -68,6 +63,27 @@ export type AuthRegistrationSuccessResponse = {
   meta: ApiMetaResponse
 }
 
-export type AuthRegistrationFailureResponse = string
+export interface ErrorResponseMeta {
+  message: string
+  code: string
+  success: boolean
+}
+
+export interface ErrorResponseHeaders {
+  'content-type': string
+  date: string
+  server: string
+}
+
+export interface ErrorResponse {
+  data: {
+    meta: ErrorResponseMeta
+  }
+  status: string
+  statusText?: string
+  headers: ErrorResponseHeaders
+}
+
+export type AuthRegistrationFailureResponse = ErrorResponse
 
 export type SecureStorageRefreshToken = string | null

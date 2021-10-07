@@ -1,6 +1,6 @@
 import { EducationFields } from './EducationForm.types'
 
-export const INITIAL_VALUES: EducationFields = {
+export const INITIAL_FORM_VALUES: EducationFields = {
   school: '',
   description: '',
   qualificationType: '',

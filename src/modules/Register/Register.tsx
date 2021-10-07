@@ -8,14 +8,15 @@ import { Card, ViewContainer } from '~/components'
 import Button from '~/components/Button'
 import HeaderLarge from '~/components/HeaderLarge'
 import SSO from '~/components/SSO'
-import { AuthNavigationRoutes, AuthNavigatorParamsList } from '~/modules/AuthNavigation/AuthNavigation.types'
+import { types as SocialButtonTypes } from '~/components/SocialButton'
+import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '~/components/Typography'
 import { Colors } from '~/styles'
 
-import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
+import { AuthNavigationRoutes, AuthNavigatorParamsList } from '../AuthNavigation/AuthNavigation.types'
 import styles from './Register.styles'
 
 interface Props {
-  onAuthWithSocial: (type: string) => void
+  onAuthWithSocial: (type: SocialButtonTypes.SocialVariants) => void
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Register>
 }
 

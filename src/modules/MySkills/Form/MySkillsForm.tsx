@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Formik, FormikProps, FormikValues } from 'formik'
+import { Formik } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -23,7 +23,7 @@ const MySkillsForm = ({ navigation }: Props) => {
       <Header navigation={navigation} headerText={t('Add skill')} actionItem={<ButtonSave onPress={() => {}} />} />
       <Card>
         <Formik initialValues={USER_SKILLS_INITIAL_VALUES} onSubmit={() => {}}>
-          {(formikHandlers: FormikProps<FormikValues>) => (
+          {() => (
             <View style={styles.form}>
               <DropDownTags
                 items={MOCK_USER_SKILLS_LIST}
@@ -32,7 +32,6 @@ const MySkillsForm = ({ navigation }: Props) => {
                 label={t('Skills developed')}
                 placeholder={t('Start typing to view suggestions')}
                 name={'skillNames'}
-                handlers={formikHandlers}
               />
             </View>
           )}

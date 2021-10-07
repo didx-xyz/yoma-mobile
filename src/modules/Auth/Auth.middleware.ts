@@ -7,9 +7,7 @@ import { constants as ApiAuthConstants } from '../../api/auth'
 import { showSimpleMessage } from '../../utils/error'
 // avoiding circular dependencies:
 import * as AppActions from '../App/App.reducer'
-import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
 import { actions as ErrorActions } from '../Error'
-import * as Navigation from '../Navigation/Navigation.actions'
 import { Providers } from '../SSOAuth/SSOAuth.types'
 import { selectRegistrationCredentials, selectSocialLoginCredentials } from '../SSOAuth/SSOAuth.utils'
 import { selectors as UserSelectors } from '../User'
@@ -48,6 +46,7 @@ import { selectLoginCredentials } from './Auth.selector'
 import { SecureStorageRefreshToken } from './Auth.types'
 import {
   extractCredentialsFromAuthorizedPayload,
+  extractMessageFromErrorPayload,
   extractRefreshTokenFromAuthorizedPayload,
   selectLoginCredentialsFromRegistration,
 } from './Auth.utils'
@@ -381,9 +380,8 @@ export const registrationFailureFlow =
   action => {
     const result = next(action)
     if (registerFailure.match(action)) {
-      Navigation.navigate(AuthNavigationRoutes.Register)
-      // TODO: this should be handled by the notification module
-      notification('danger', 'Error', action.payload)
+      const message = extractMessageFromErrorPayload(action)
+      notification('danger', 'Error', message)
     }
 
     return result

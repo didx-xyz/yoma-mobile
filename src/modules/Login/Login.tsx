@@ -1,4 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
+import { FormikProps } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
@@ -13,17 +14,16 @@ import { Colors } from '~/styles'
 
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
 import { StatusBarStyle } from '../../components/ViewContainer/ViewContainer.types'
-import { AuthCredentials } from '../Auth/Auth.types'
 import styles from './Login.styles'
 import LoginForm from './LoginForm/LoginForm'
 
 interface Props {
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Login>
   onAuthWithSocial: (provider: SocialVariants) => void
-  onLoginUser: (details: AuthCredentials) => void
+  form: FormikProps<any>
 }
 
-const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
+const Login = ({ navigation, onAuthWithSocial, form }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -43,7 +43,7 @@ const Login = ({ navigation, onAuthWithSocial, onLoginUser }: Props) => {
           <Text.Header level={HeaderLevels.H3} align={TextAlign.Center} style={styles.cardHeader}>
             {t('welcomeBack')}
           </Text.Header>
-          <LoginForm onLoginUser={onLoginUser} />
+          <LoginForm form={form} />
           <Text.Body
             level={BodyLevels.Small}
             align={TextAlign.Center}

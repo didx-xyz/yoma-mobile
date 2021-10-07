@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- refactoring import logic
+- Qualifications - ensure form is setup correctly
 
 Last 10 deployment release notes:
+- refactoring import logic
 - updated header to only use the itemAction prop
 - Step 4 of fixing the challenges credentials form - handling uploading credential certificates
 - Step 3 of fixing the challenges credentials form - submitting form to api and handling response
