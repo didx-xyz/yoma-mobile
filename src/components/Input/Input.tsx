@@ -4,7 +4,8 @@ import { Keyboard, TextInput, TextInputProps } from 'react-native'
 
 import { Colors, colors } from '~/styles'
 
-import Text, { MetaLevels, TextAlign } from '../Typography'
+import InputError from '../InputError'
+import Text, { MetaLevels } from '../Typography'
 import styles from './Input.styles'
 
 type Props = TextInputProps & {
@@ -27,9 +28,7 @@ const Input = ({ name, label, ...props }: Props) => {
         onChangeText={setValue}
         {...props}
       />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
-        {error && touched ? error : ' '}
-      </Text.Meta>
+      <InputError touched={touched} error={error} />
     </>
   )
 }
