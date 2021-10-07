@@ -1,4 +1,3 @@
-import { AuthEndpoints } from '../../api/auth/auth.types'
 import { UserResponse } from '../User/User.types'
 
 export interface ApiMetaResponse {
