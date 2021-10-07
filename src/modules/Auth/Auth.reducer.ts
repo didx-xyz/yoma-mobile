@@ -1,5 +1,4 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
-import { AxiosResponse } from 'axios'
 import { mergeDeepRight } from 'ramda'
 
 import {
