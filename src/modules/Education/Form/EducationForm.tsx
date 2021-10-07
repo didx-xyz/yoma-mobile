@@ -4,18 +4,19 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 
-import { DropDownTags, FormLayout, InfoModal, Spinner } from '../../../components'
-import { ButtonSave } from '../../../components/Button'
-import DateRangeSelect from '../../../components/DateRangeSelect'
-import DropDown from '../../../components/DropDown'
-import { DropDownItem } from '../../../components/DropDown/DropDown.types'
-import FormGroup from '../../../components/FormGroup'
-import Header from '../../../components/Header'
-import Input from '../../../components/Input'
-import Text, { MetaLevels } from '../../../components/Typography'
-import Upload from '../../../components/Upload'
-import ViewContainer from '../../../components/ViewContainer'
-import { Colors } from '../../../styles'
+import { DropDownTags, FormLayout, InfoModal, Spinner } from '~/components'
+import { ButtonSave } from '~/components/Button'
+import DateRangeSelect from '~/components/DateRangeSelect'
+import DropDown from '~/components/DropDown'
+import { types as DropDownTypes } from '~/components/DropDown'
+import FormGroup from '~/components/FormGroup'
+import Header from '~/components/Header'
+import Input from '~/components/Input'
+import Text, { MetaLevels } from '~/components/Typography'
+import Upload from '~/components/Upload'
+import ViewContainer from '~/components/ViewContainer'
+import { Colors } from '~/styles'
+
 import { types as HomeNavigationTypes } from '../../HomeNavigation'
 import styles from './EducationForm.styles'
 
@@ -24,8 +25,8 @@ interface Props {
     HomeNavigationTypes.HomeNavigatorParamsList,
     HomeNavigationTypes.HomeNavigationRoutes.Education
   >
-  skillsDropDown: DropDownItem[]
-  organisationsDropDown: DropDownItem[]
+  skillsDropDown: DropDownTypes.DropDownItem[]
+  organisationsDropDown: DropDownTypes.DropDownItem[]
   form: FormikProps<any>
 }
 
