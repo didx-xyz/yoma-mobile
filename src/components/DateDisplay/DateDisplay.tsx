@@ -1,7 +1,8 @@
 import React from 'react'
-import { Colors } from 'styles'
-import { WithChildren } from 'types/react.types'
-import { formatDateString } from 'utils/dates.utils'
+
+import { Colors } from '~/styles'
+import { WithChildren } from '~/types/react.types'
+import { formatDateString } from '~/utils/dates.utils'
 
 import Text, { BodyLevels } from '../Typography'
 

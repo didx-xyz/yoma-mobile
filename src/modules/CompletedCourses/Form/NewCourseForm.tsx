@@ -1,14 +1,15 @@
-import { IconInfo } from 'assets/images'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React, { forwardRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { DropDownTags, FormLayout, Spinner } from '../../../components'
-import CheckBox from '../../../components/CheckBox'
-import DateRangeSelect from '../../../components/DateRangeSelect'
-import Input from '../../../components/Input'
-import Upload from '../../../components/Upload'
+import { IconInfo } from '~/assets/images'
+import { DropDownTags, FormLayout, Spinner } from '~/components'
+import CheckBox from '~/components/CheckBox'
+import DateRangeSelect from '~/components/DateRangeSelect'
+import Input from '~/components/Input'
+import Upload from '~/components/Upload'
+
 import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'
 import styles from './NewCourseForm.styles'
 

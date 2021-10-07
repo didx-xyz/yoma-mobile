@@ -1,11 +1,12 @@
 import DateTimePicker from '@react-native-community/datetimepicker'
-import * as DateConstants from 'constants/date.constants'
 import { useField } from 'formik'
 import React, { useCallback, useState } from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { Colors } from 'styles'
-import { formatDateString } from 'utils/dates.utils'
-import { textOrSpace } from 'utils/strings.utils'
+
+import * as DateConstants from '~/constants/date.constants'
+import { Colors } from '~/styles'
+import { formatDateString } from '~/utils/dates.utils'
+import { textOrSpace } from '~/utils/strings.utils'
 
 import Optional from '../Optional'
 import Text, { MetaLevels, TextAlign } from '../Typography'

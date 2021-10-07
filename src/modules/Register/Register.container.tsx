@@ -1,7 +1,8 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { types as SocialButtonTypes } from 'components/SocialButton'
 import React from 'react'
 import { useDispatch } from 'react-redux'
+
+import { types as SocialButtonTypes } from '~/components/SocialButton'
 
 import * as AuthActions from '../Auth/Auth.reducer'
 import { AuthNavigationRoutes, AuthNavigatorParamsList } from '../AuthNavigation/AuthNavigation.types'

@@ -1,7 +1,8 @@
-import { BlueHollowCircle, BlueTick } from 'assets/images'
 import React from 'react'
 import { Pressable, View } from 'react-native'
-import { Colors } from 'styles'
+
+import { BlueHollowCircle, BlueTick } from '~/assets/images'
+import { Colors } from '~/styles'
 
 import Optional from '../Optional'
 import Text from '../Typography'

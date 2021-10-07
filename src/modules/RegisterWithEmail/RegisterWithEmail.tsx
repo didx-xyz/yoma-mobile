@@ -1,12 +1,13 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { YellowCircleRight } from 'assets/images'
-import { Card, ViewContainer } from 'components'
-import { AuthRegistration } from 'modules/Auth/Auth.types'
-import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView } from 'react-native'
-import { Colors } from 'styles'
+
+import { YellowCircleRight } from '~/assets/images'
+import { Card, ViewContainer } from '~/components'
+import { AuthRegistration } from '~/modules/Auth/Auth.types'
+import { AuthNavigationRoutes, AuthNavigatorParamsList } from '~/modules/AuthNavigation/AuthNavigation.types'
+import { Colors } from '~/styles'
 
 import HeaderLarge from '../../components/HeaderLarge'
 import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'

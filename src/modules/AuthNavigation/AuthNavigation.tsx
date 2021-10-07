@@ -1,11 +1,12 @@
 import { createStackNavigator } from '@react-navigation/stack'
-import ForgotPassword from 'modules/ForgotPassword/ForgotPassword'
-import Landing from 'modules/Landing/Landing'
-import Login from 'modules/Login'
-import Register from 'modules/Register'
-import RegisterWithEmail from 'modules/RegisterWithEmail'
-import ResetPassword from 'modules/ResetPassword/ResetPassword'
 import React from 'react'
+
+import ForgotPassword from '~/modules/ForgotPassword/ForgotPassword'
+import Landing from '~/modules/Landing/Landing'
+import Login from '~/modules/Login'
+import Register from '~/modules/Register'
+import RegisterWithEmail from '~/modules/RegisterWithEmail'
+import ResetPassword from '~/modules/ResetPassword/ResetPassword'
 
 import { AuthNavigationRoutes } from './AuthNavigation.types'
 

@@ -1,11 +1,12 @@
 import { BottomTabBarOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createStackNavigator } from '@react-navigation/stack'
-import { ChallengesIcon, CoursesIcon, DigitalCvIcon, MarketplaceIcon } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Colors, FontFamily, colors } from 'styles'
-import fontStyles from 'styles/font.styles'
-import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { ChallengesIcon, CoursesIcon, DigitalCvIcon, MarketplaceIcon } from '~/assets/images'
+import { Colors, FontFamily, colors } from '~/styles'
+import fontStyles from '~/styles/font.styles'
+import { applyAlphaToHex } from '~/styles/styles.utils'
 
 import About from '../About'
 import Challenges from '../Challenges'

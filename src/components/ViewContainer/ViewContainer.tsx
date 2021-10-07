@@ -1,8 +1,9 @@
 import React from 'react'
 import { StatusBar, StatusBarProps, View, ViewStyle } from 'react-native'
-import { WithChildren } from 'types/react.types'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from '~/styles'
+import { WithChildren } from '~/types/react.types'
+
 import styles from './ViewContainer.styles'
 import { StatusBarStyle } from './ViewContainer.types'
 

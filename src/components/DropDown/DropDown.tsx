@@ -1,8 +1,10 @@
-import Text, { MetaLevels } from 'components/Typography'
 import { useField } from 'formik'
 import React, { useEffect, useState } from 'react'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { textOrSpace } from 'utils/strings.utils'
+
+import Text, { MetaLevels, TextAlign } from '~/components/Typography'
+import { Colors } from '~/styles'
+import { textOrSpace } from '~/utils/strings.utils'
 
 import InputError from '../InputError'
 import styles from './DropDown.styles'

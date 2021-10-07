@@ -1,9 +1,10 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Card, DropDownTags, ViewContainer } from 'components'
-import { Formik } from 'formik'
+import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
+
+import { Card, DropDownTags, ViewContainer } from '~/components'
 
 import { ButtonSave } from '../../../components/Button'
 import Header from '../../../components/Header'

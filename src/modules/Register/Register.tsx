@@ -1,17 +1,18 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { PurpleQuarter } from 'assets/images'
-import { Card, ViewContainer } from 'components'
-import Button from 'components/Button'
-import HeaderLarge from 'components/HeaderLarge'
-import SSO from 'components/SSO'
-import { types as SocialButtonTypes } from 'components/SocialButton'
-import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors } from 'styles'
 
-import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../components/Typography'
+import { PurpleQuarter } from '~/assets/images'
+import { Card, ViewContainer } from '~/components'
+import Button from '~/components/Button'
+import HeaderLarge from '~/components/HeaderLarge'
+import SSO from '~/components/SSO'
+import { types as SocialButtonTypes } from '~/components/SocialButton'
+import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '~/components/Typography'
+import { Colors } from '~/styles'
+
+import { AuthNavigationRoutes, AuthNavigatorParamsList } from '../AuthNavigation/AuthNavigation.types'
 import styles from './Register.styles'
 
 interface Props {

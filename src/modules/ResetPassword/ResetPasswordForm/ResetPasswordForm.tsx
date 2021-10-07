@@ -1,10 +1,11 @@
-import Button from 'components/Button'
-import Input from 'components/Input'
-import OnboardingForms from 'components/OnboardingForms'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import * as yup from 'yup'
+
+import Button from '~/components/Button'
+import Input from '~/components/Input'
+import OnboardingForms from '~/components/OnboardingForms'
 
 import styles from './ResetPasswordForm.styles'
 

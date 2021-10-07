@@ -1,10 +1,11 @@
-import Button from 'components/Button'
-import Input from 'components/Input'
-import OnboardingForms from 'components/OnboardingForms'
 import { FormikProps } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
+
+import Button from '~/components/Button'
+import Input from '~/components/Input'
+import OnboardingForms from '~/components/OnboardingForms'
 
 import styles from './LoginForm.styles'
 

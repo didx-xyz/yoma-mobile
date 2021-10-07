@@ -1,5 +1,6 @@
 import { mergeRight } from 'ramda'
-import { extractDataFromResponseAction } from 'redux/redux.utils'
+
+import { extractDataFromResponseAction } from '~/redux/redux.utils'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'

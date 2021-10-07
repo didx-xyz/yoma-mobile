@@ -1,6 +1,7 @@
-import { RNLocalize, setI18nConfig } from 'locales/i18n'
 import React, { useEffect } from 'react'
 import FlashMessage from 'react-native-flash-message'
+
+import { RNLocalize, setI18nConfig } from '~/locales/i18n'
 
 import Navigation from '../Navigation'
 

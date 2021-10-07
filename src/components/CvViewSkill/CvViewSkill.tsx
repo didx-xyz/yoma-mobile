@@ -1,6 +1,7 @@
-import Text, { HeaderLevels } from 'components/Typography'
 import React from 'react'
 import { View } from 'react-native'
+
+import Text, { HeaderLevels } from '~/components/Typography'
 
 import { Colors } from '../../styles'
 import styles from './CvViewSkill.styles'

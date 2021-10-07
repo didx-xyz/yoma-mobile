@@ -1,6 +1,6 @@
 import { assoc, chain, complement, curry, isNil, keys, map, reduce, zipObj } from 'ramda'
 
-import { StdObj } from '../types/general.types'
+import { StdObj } from '~/types/general.types'
 
 export const isNotNil = complement(isNil)
 

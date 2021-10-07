@@ -1,7 +1,8 @@
-import { fontWeights } from 'components/Typography/fontWeights.styles'
 import { StyleSheet, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
-import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { fontWeights } from '~/components/Typography/fontWeights.styles'
+import { Colors, colors } from '~/styles'
+import { applyAlphaToHex } from '~/styles/styles.utils'
 
 const styles = {
   textInput: {

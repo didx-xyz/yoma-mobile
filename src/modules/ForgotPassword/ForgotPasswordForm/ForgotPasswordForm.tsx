@@ -1,13 +1,13 @@
-import { apiConfig } from 'api'
-import { OnboardingForms } from 'components'
 import { Formik, FormikProps, FormikValues } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { showSimpleMessage } from 'utils/error'
 import * as yup from 'yup'
 
-import Button from '../../../components/Button'
-import Input from '../../../components/Input'
+import { apiConfig } from '~/api'
+import { OnboardingForms } from '~/components'
+import Button from '~/components/Button'
+import { showSimpleMessage } from '~/utils/error'
+
 import styles from './ForgotPasswordForm.styles'
 
 interface Props {
