@@ -5,4 +5,5 @@ export const extractCredentialsFromAuthorizedPayload = pipe(
   pick(['token', 'expiresAt']),
 )
 export const extractRefreshTokenFromAuthorizedPayload = pathOr('', ['payload', 'data', 'data', 'refreshToken'])
+export const extractMessageFromErrorPayload = pathOr('', ['payload', 'data', 'meta', 'message'])
 export const selectLoginCredentialsFromRegistration = pick(['email', 'password'])

@@ -1,4 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
+import { FormikProps } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Image, ScrollView, TouchableOpacity, View } from 'react-native'
@@ -20,7 +21,7 @@ interface Props {
   onLogoutUser: () => void
   onPhotoSave: () => void
   user: ProfileFormUser
-  form: any
+  form: FormikProps<any>
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
@@ -32,7 +33,7 @@ const Profile = ({ navigation, onLogoutUser, onPhotoSave, user, form }: Props) =
       <Header
         navigation={navigation}
         headerText={t('Profile')}
-        actionItem={<ButtonSave onPress={form.handleSubmit} isDisabled={form.isValid} />}
+        actionItem={<ButtonSave onPress={form.handleSubmit} isDisabled={!form.isValid} />}
       />
       <ScrollView>
         <Card style={styles.card}>

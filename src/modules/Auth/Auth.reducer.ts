@@ -1,4 +1,5 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
+import { AxiosResponse } from 'axios'
 import { mergeDeepRight } from 'ramda'
 
 import {
@@ -32,7 +33,9 @@ export const setSecureRefreshTokenFailure = createAction<any>(`${name} setSecure
 export const authSocialLogin = createAction<string>(`${name} Social Login`)
 export const authSocialRegistration = createAction<string>(`${name} Social Registration`)
 export const authSocialLoginSuccess = createAction<AuthSocialLoginCredentials>(`${name} Social Login Success`)
-export const authSocialLoginFailure = createAction<string>(`${name} Social Login Failure`)
+export const authSocialLoginFailure = createAction<AxiosResponse<{ meta: { message: string } }>>(
+  `${name} Social Login Failure`,
+)
 export const authSocialRegistrationSuccess = createAction<AuthSocialRegistrationCredentials>(
   `${name} Social Registration Success`,
 )

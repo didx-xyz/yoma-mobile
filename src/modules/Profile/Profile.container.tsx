@@ -8,7 +8,7 @@ import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation
 import { actions as UserActions } from '../User'
 import Profile from './Profile'
 import selector from './Profile.selector'
-import { profileValidationSchema } from './Profile.validationSchema'
+import { schema } from './Profile.validation'
 
 interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
@@ -30,7 +30,7 @@ const ProfileContainer = ({ navigation }: Props) => {
   }
 
   return (
-    <Formik initialValues={user} enableReinitialize validationSchema={profileValidationSchema} onSubmit={onProfileSave}>
+    <Formik initialValues={user} enableReinitialize validationSchema={schema} onSubmit={onProfileSave}>
       {formikHandlers => (
         <Profile
           user={user}

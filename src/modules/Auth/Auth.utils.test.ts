@@ -60,6 +60,36 @@ describe('modules/Auth/Auth.utils', () => {
       expect(result).toEqual('')
     })
   })
+  describe('extractMessageFromErrorPayload', () => {
+    it('should get the message out of the error payload', () => {
+      // given ... an object in the shape of the successful login response
+      const mockedAction = {
+        type: 'FAILURE ACTION',
+        payload: {
+          data: {
+            meta: {
+              message: 'ERROR MESSAGE',
+            },
+          },
+        },
+      }
+      // when ... we want to extract the refresh token from the rest of the payload
+      const result = SUT.extractMessageFromErrorPayload(mockedAction)
+      // then ... the refresh token should be extracted correctly
+      expect(result).toEqual('ERROR MESSAGE')
+    })
+    it('should handle the refresh token not being available', () => {
+      // given ... a data without a refresh token
+      const mockedAction = {
+        type: 'FAILURE ACTION',
+        payload: {},
+      }
+      // when ... we want to extract the refresh token but it doesn't exists
+      const result = SUT.extractRefreshTokenFromAuthorizedPayload(mockedAction)
+      // then ... we should return the fallback value of an empty string
+      expect(result).toEqual('')
+    })
+  })
   describe('selectLoginCredentialsFromRegistration', () => {
     it('should return the user email address and password from registration data', () => {
       // given ... an object in the shape of the successful reegistration

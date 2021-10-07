@@ -4,6 +4,7 @@ import { Card, ViewContainer } from 'components'
 import Button from 'components/Button'
 import HeaderLarge from 'components/HeaderLarge'
 import SSO from 'components/SSO'
+import { types as SocialButtonTypes } from 'components/SocialButton'
 import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -14,7 +15,7 @@ import Text, { BodyLevels, HeaderLevels, Link, TextAlign } from '../../component
 import styles from './Register.styles'
 
 interface Props {
-  onAuthWithSocial: (type: string) => void
+  onAuthWithSocial: (type: SocialButtonTypes.SocialVariants) => void
   navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Register>
 }
 

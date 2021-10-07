@@ -12,7 +12,8 @@ type Props = TextInputProps & {
 }
 
 const Input = ({ name, label, ...props }: Props) => {
-  const [, { value, error, touched }, { setValue }] = useField(name)
+  const [{ value }, { touched, error }, { setValue }] = useField(name)
+
   return (
     <>
       <Text.Meta level={MetaLevels.Small}>{value !== '' ? label : ' '}</Text.Meta>
@@ -23,7 +24,6 @@ const Input = ({ name, label, ...props }: Props) => {
         style={styles.textInput}
         value={value}
         onChangeText={setValue}
-        onBlur={setValue}
         {...props}
       />
       <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
