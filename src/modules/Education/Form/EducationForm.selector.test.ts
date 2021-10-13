@@ -1,90 +1,51 @@
-import { keys, repeat, zipObj } from 'ramda'
+import { rootStateFixture } from '~/redux/redux.fixture'
 
-import { rootStateFixture } from '../../redux/redux.fixture'
-import * as SUT from './Skills.selector'
+import SUT from './EducationForm.selector'
 
-describe('modules/Skills/Skills.selector', () => {
-  describe('selectSkills ', () => {
-    it('should return skills property of the root state', () => {
-      const stateMock = rootStateFixture({
-        searchTerm: '',
-        skills: {
-          ids: ['idA', 'idB'],
-          entities: {
-            idA: 'Skill A',
-            idB: 'Skill B',
-          },
-        },
-      })
+describe('modules/Education/EducationForm/EducationForm.selector', () => {
+  describe('default ', () => {
+    it('should return state props required by EducationForm with an empty state', () => {
+      const state = rootStateFixture()
       // when ... we call the selector
-      const result = SUT.selectSkills(stateMock)
+      const result = SUT(state)
 
       // then ... should return result as expected
       expect(result).toEqual({
-        searchTerm: '',
-        ids: ['idA', 'idB'],
-        entities: {
-          idA: 'Skill A',
-          idB: 'Skill B',
-        },
+        organisations: [],
+        skills: [],
       })
     })
-    it('should return the default skills state', () => {
-      const state = rootStateFixture()
-      // when ... we call the selector
-      const result = SUT.selectSkills(state)
-
-      // then ... should return result as expected
-      expect(result).toEqual(state.skills)
-    })
-  })
-
-  describe('selectFiltered', () => {
-    it('should extract skills list as object of label and value', () => {
-      //given ... actual state shape
-      const mockState = rootStateFixture({
+    it('should return state props required by EducationForm with an populated state', () => {
+      const stateMock = rootStateFixture({
         skills: {
-          searchTerm: 'value1',
-          ids: ['key1', 'key2'],
+          ids: ['idA', 'idB'],
           entities: {
-            key1: {
-              key: 'key1',
-              value: 'value1',
-            },
-            key2: {
-              key: 'key2',
-              value: 'value2',
-            },
+            idA: { value: 'Skill A' },
+            idB: { value: 'Skill B' },
+          },
+        },
+        organisations: {
+          ids: ['id1', 'id2'],
+          entities: {
+            id1: { value: 'Org 1', key: 'id1' },
+            id2: { value: 'Org 2', key: 'id2' },
           },
         },
       })
+      // when ... we call the selector
+      const result = SUT(stateMock)
 
-      //when .. selectFiltered
-      const result = SUT.selectFiltered(mockState)
-
-      //then
-      expect(result).toEqual([
-        {
-          label: 'value1',
-          value: 'value1',
-        },
-      ])
-    })
-    it('should return 20 skills if value is empty', () => {
-      //given ...mocked state with 30 skills
-      const ids = keys(repeat(0, 30))
-      const mockState = rootStateFixture({
-        skills: {
-          searchTerm: '',
-          ids,
-          entities: zipObj(ids, repeat({ key: 'key', value: 'skill' }, 30)),
-        },
+      // then ... should return result as expected
+      expect(result).toEqual({
+        organisations: [
+          { label: 'Org 1', value: 'id1' },
+          { label: 'Org 2', value: 'id2' },
+        ],
+        skills: [
+          { label: 'Skill A', value: 'Skill A' },
+          { label: 'Skill B', value: 'Skill B' },
+        ],
       })
-      // when .. selectFiltered with empty value
-      const result = SUT.selectFiltered(mockState)
-
-      //then .. return 20 skills
-      expect(result).toHaveLength(20)
     })
   })
 })

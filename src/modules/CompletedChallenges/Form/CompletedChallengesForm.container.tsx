@@ -3,7 +3,8 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import * as FormUtils from '../../../utils/form.utils'
+import * as FormUtils from '~/utils/form.utils'
+
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import { actions as UserChallengesActions } from '../../UserChallenges'
 import { schema } from './CompletedChallengeForm.validation'

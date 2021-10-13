@@ -2,8 +2,9 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvView, { CvViewList } from '../../../components/CvView'
-import CvViewCredential, { types as CvViewCredentialTypes } from '../../../components/CvViewCredential'
+import CvView, { CvViewList } from '~/components/CvView'
+import CvViewCredential, { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
+
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {
@@ -12,8 +13,9 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
 }
 
-const CompletedChallengesView = ({ userChallenges, onAdd, navigation }: Props) => {
+const CompletedChallengesView = ({ onAdd, userChallenges, navigation }: Props) => {
   const { t } = useTranslation()
+
   return (
     <CvView
       title={t('Challenges')}
