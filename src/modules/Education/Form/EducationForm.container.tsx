@@ -1,10 +1,12 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Formik } from 'formik'
 import React from 'react'
+import { useSelector } from 'react-redux'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import EducationForm from './EducationForm'
 import { INITIAL_FORM_VALUES } from './EducationForm.constants'
+import selector from './EducationForm.selector'
 import { FormFields } from './EducationForm.types'
 import { schema } from './EducationForm.validation'
 
@@ -12,6 +14,7 @@ interface Props {
   navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
 }
 const EducationFormContainer = ({ navigation }: Props) => {
+  const { organisations, skills } = useSelector(selector)
   const handleSubmit = (values: FormFields) => {
     console.log({ values })
   }
@@ -21,14 +24,8 @@ const EducationFormContainer = ({ navigation }: Props) => {
       {formikHandlers => (
         <EducationForm
           navigation={navigation}
-          skillsDropDown={[
-            { label: 'skill 1', value: 'skill1' },
-            { label: 'skill 2', value: 'skill2' },
-          ]}
-          organisationsDropDown={[
-            { label: 'org 1', value: 'org1' },
-            { label: 'org 2', value: 'org2' },
-          ]}
+          skillsDropDown={skills}
+          organisationsDropDown={organisations}
           form={formikHandlers}
         />
       )}

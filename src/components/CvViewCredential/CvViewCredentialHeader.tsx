@@ -24,7 +24,7 @@ const CvViewCredentialHeader = ({ iconUrl, metadata = [], title, isValidated, on
           {title}
         </Text.Header>
         {metadata.map(text => (
-          <Text.Body level={BodyLevels.Small} color={Colors.MenuGrey}>
+          <Text.Body key={text} level={BodyLevels.Small} color={Colors.MenuGrey}>
             {text}
           </Text.Body>
         ))}
