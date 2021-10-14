@@ -42,44 +42,44 @@ const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form
         actionItem={<ButtonSave onPress={form.handleSubmit} />}
       />
       <ScrollView>
+        <Spinner visible={form.isSubmitting} />
         <FormGroup>
           <FormLayout>
             <Input name={'title'} label={t('Qualification')} />
-            {/*<Input name={'description'} label={t('Description')} multiline />*/}
-            {/*<DropDown*/}
-            {/*  items={organisationsDropDown}*/}
-            {/*  multiple*/}
-            {/*  searchPlaceholder={t('Search organisations')}*/}
-            {/*  label={t('School or Educational institution')}*/}
-            {/*  name={'organisationId'}*/}
-            {/*/>*/}
-            {/*<Input name={'country'} label={t('Country or region')} />*/}
-            {/*<DateRangeSelect label={t('When did you do the course?')} />*/}
-            {/*<DropDownTags*/}
-            {/*  items={skillsDropDown}*/}
-            {/*  multiple*/}
-            {/*  searchPlaceholder={t('Search skills')}*/}
-            {/*  label={t('Skills developed')}*/}
-            {/*  name={'skillNames'}*/}
-            {/*/>*/}
-            {/*<Upload name="upload" label={t('Upload certification (if completed)')} />*/}
-            {/*<View style={styles.bottom}>*/}
-            {/*  <Text.Meta*/}
-            {/*    level={MetaLevels.SmallBold}*/}
-            {/*    color={Colors.PrimaryGreen}*/}
-            {/*    style={styles.bottomText}*/}
-            {/*    onPress={() => setShowInfoModal(true)}*/}
-            {/*  >*/}
-            {/*    {t('Find inspiration on how to write a great education description.')}*/}
-            {/*  </Text.Meta>*/}
-            {/*  <InfoModal*/}
-            {/*    visible={showInfoModal}*/}
-            {/*    closeModal={() => setShowInfoModal(false)}*/}
-            {/*    infoText={*/}
-            {/*      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '*/}
-            {/*    }*/}
-            {/*  />*/}
-            {/*</View>*/}
+            <Input name={'description'} label={t('Description')} multiline />
+            <DropDown
+              items={organisationsDropDown}
+              searchPlaceholder={t('Search organisations')}
+              label={t('School or Educational institution')}
+              name={'organisationId'}
+            />
+            <Input name={'country'} label={t('Country or region')} />
+            <DateRangeSelect label={t('When did you do the course?')} />
+            <DropDownTags
+              items={skillsDropDown}
+              multiple
+              searchPlaceholder={t('Search skills')}
+              label={t('Skills developed')}
+              name={'skillNames'}
+            />
+            <Upload name="upload" label={t('Upload certification (if completed)')} />
+            <View style={styles.bottom}>
+              <Text.Meta
+                level={MetaLevels.SmallBold}
+                color={Colors.PrimaryGreen}
+                style={styles.bottomText}
+                onPress={() => setShowInfoModal(true)}
+              >
+                {t('Find inspiration on how to write a great education description.')}
+              </Text.Meta>
+              <InfoModal
+                visible={showInfoModal}
+                closeModal={() => setShowInfoModal(false)}
+                infoText={
+                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
+                }
+              />
+            </View>
           </FormLayout>
         </FormGroup>
       </ScrollView>
