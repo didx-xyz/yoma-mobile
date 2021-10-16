@@ -42,7 +42,6 @@ const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form
         actionItem={<ButtonSave onPress={form.handleSubmit} />}
       />
       <ScrollView>
-        <Spinner visible={form.isSubmitting} />
         <FormGroup>
           <FormLayout>
             <Input name={'title'} label={t('Qualification')} />

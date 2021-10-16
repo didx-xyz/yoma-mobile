@@ -1,9 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Formik } from 'formik'
 import React from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
+import * as FormUtils from '../../../utils/form.utils'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { actions as QualificationActions } from '../../Qualifications'
 import EducationForm from './EducationForm'
 import { INITIAL_FORM_VALUES } from './EducationForm.constants'
 import selector from './EducationForm.selector'
@@ -15,8 +17,11 @@ interface Props {
 }
 const EducationFormContainer = ({ navigation }: Props) => {
   const { organisations, skills } = useSelector(selector)
+  const dispatch = useDispatch()
+
   const handleSubmit = (values: FormFields) => {
-    console.log({ values })
+    const qualification = FormUtils.sanitiseDateRange(values)
+    dispatch(QualificationActions.createQualification(qualification))
   }
 
   return (

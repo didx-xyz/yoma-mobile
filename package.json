@@ -46,6 +46,7 @@
     "@react-navigation/stack": "^5.14.3",
     "@reduxjs/toolkit": "^1.5.0",
     "@types/common-tags": "^1.8.1",
+    "@types/form-data": "^2.5.0",
     "axios": "^0.21.4",
     "common-tags": "^1.8.0",
     "date-fns": "^2.21.0",
@@ -66,7 +67,6 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-image-crop-picker": "^0.36.0",
     "react-native-localize": "^2.0.2",
-    "react-native-reanimated": "^2.3.0-alpha.2",
     "react-native-safe-area-context": "^3.2.0",
     "react-native-screens": "^2.18.1",
     "react-native-svg": "^12.1.0",
@@ -86,6 +86,7 @@
     "@testing-library/jest-native": "^4.0.1",
     "@testing-library/react-native": "^7.2.0",
     "@trivago/prettier-plugin-sort-imports": "^1.4.4",
+    "@types/form-data": "2.5.0",
     "@types/jest": "^26.0.23",
     "@types/react-native": "^0.64.2",
     "@types/react-native-fbsdk": "^3.0.0",
@@ -115,7 +116,7 @@
     "pretty-quick": "^3.1.1",
     "react-test-renderer": "17.0.1",
     "redux-devtools-extension": "^2.13.8",
-    "redux-flipper": "^1.4.2",
+    "redux-flipper": "^2.0.1",
     "typescript": "^3.8.3"
   },
   "react-native-unimodules": {
