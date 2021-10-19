@@ -1,4 +1,3 @@
-import * as Yup from 'yup'
 import * as yup from 'yup'
 
 export const schema = yup.object().shape({
@@ -6,8 +5,9 @@ export const schema = yup.object().shape({
   description: yup.string().min(2).max(1000).required('Required'),
   organisationId: yup.string().min(2).max(200).required('Required'),
   country: yup.string().required('Required'),
-  startTime: Yup.date().max(new Date(), 'Start date cannot be in the future').nullable().required('Required'),
-  endTime: Yup.date()
+  startTime: yup.date().max(new Date(), 'Start date cannot be in the future').nullable().required('Required'),
+  endTime: yup
+    .date()
     .when('startDate', (eventStartDate: any, schema: any) =>
       eventStartDate ? schema.min(eventStartDate, 'End date cannot be before start date') : schema,
     )
