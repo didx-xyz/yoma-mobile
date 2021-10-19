@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 
-import { DropDownTags, FormLayout, InfoModal, Spinner } from '~/components'
+import { DropDownTags, FormLayout, InfoModal } from '~/components'
 import { ButtonSave } from '~/components/Button'
 import DateRangeSelect from '~/components/DateRangeSelect'
 import DropDown from '~/components/DropDown'
