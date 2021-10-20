@@ -10,7 +10,7 @@ import * as Types from '../../types/general.types'
 import * as ErrorUtils from '../../utils/error'
 import { extractErrorResponseMessage } from '../Error/error.utils'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
-import * as Navigation from '../Navigation/Navigation.actions'
+import * as Navigation from '../Navigation/Navigation.utils'
 import {
   actions as UserActions,
   constants as UserConstants,

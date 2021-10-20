@@ -8,7 +8,7 @@ import { showSimpleMessage } from '~/utils/error'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import { loginSuccess } from '../Auth/Auth.reducer'
-import * as Navigation from '../Navigation/Navigation.actions'
+import * as Navigation from '../Navigation/Navigation.utils'
 import {
   fetchUserCredentials,
   fetchUserCredentialsFailure,

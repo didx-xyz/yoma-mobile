@@ -11,7 +11,6 @@ import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { middleware as JobsMiddleware } from '~/modules/Jobs'
-import * as Navigation from '~/modules/Navigation/Navigation.actions'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
 import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import ssoAuth from '~/modules/SSOAuth'
@@ -23,6 +22,7 @@ import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualif
 import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
 import { showSimpleMessage } from '~/utils/error'
 
+import * as Navigation from '../modules/Navigation/Navigation.utils'
 import * as ReduxUtils from './redux.utils'
 
 const createDebugger = require('redux-flipper').default
