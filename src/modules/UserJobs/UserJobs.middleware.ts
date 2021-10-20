@@ -14,7 +14,7 @@ import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import { NormaliseDependency } from '../../redux/redux.types'
 import { StdFn } from '../../types/general.types'
-import * as Navigation from '../Navigation/Navigation.actions'
+import * as Navigation from '../Navigation/Navigation.utils'
 import * as UserActions from '../User/User.reducer'
 import { UserCredentials } from '../User/User.types'
 import {

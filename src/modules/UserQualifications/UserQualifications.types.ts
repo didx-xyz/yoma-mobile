@@ -1,35 +1,31 @@
 import { NormalisedData } from '../../redux/redux.types'
-import { UserCredentialMeta } from '../User/User.types'
-
-export interface QualificationOrganisationResponse {
-  id: string
-  title: string | null
-  description: string | null
-  instructions: string | null
-  url: string | null
-  createdAt: string
-  zltoReward: number | null
-  createdByAdmin: boolean
-  language: string | null
-  difficulty: string | null
-  timeValue: number | null
-  timePeriod: string | null
-  startTime: string | null
-  endTime: string | null
-  published: boolean
-  organisationId: string | null
-  organisationName: string | null
-  organisationLogoURL: string | null
-  organisationURL: string | null
-  organisationPrimaryContactName: string | null
-  organisationPrimaryContactEmail: string | null
-  organisationPrimaryContactPhone: string | null
-}
-
-export interface UserQualification extends UserCredentialMeta {
-  qualification: QualificationOrganisationResponse
-}
+import * as Types from '../../types/general.types'
+import { types as AuthTypes } from '../Auth'
+import { types as EducationFormTypes } from '../Education/Form'
+import { types as QualificationTypes } from '../Qualifications'
+import { types as UserTypes } from '../User'
 
 export type NormalisedUserQualifications = NormalisedData<UserQualification>
 
 export type UserQualificationsState = NormalisedUserQualifications
+
+export interface UserQualification extends UserTypes.UserCredentialMeta {
+  qualification?: QualificationTypes.Qualification
+}
+
+export type CreateUserQualificationPayload = Types.Modify<
+  EducationFormTypes.FormFields,
+  {
+    startTime: string
+    endTime: string
+  }
+>
+
+export interface UserQualificationResponse {
+  data: UserQualification
+}
+
+export interface CreateUserQualificationSuccessResponse {
+  data: UserQualificationResponse
+  meta: AuthTypes.ApiMetaResponse
+}

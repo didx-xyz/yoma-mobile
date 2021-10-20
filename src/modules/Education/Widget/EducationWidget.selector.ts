@@ -1,9 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, path, pathOr, pick, pipe, propOr, slice } from 'ramda'
 
-import { selectUserQualifications } from '../../UserQualifications/UserQualifications.selector'
+import { selectUserQualificationCredentials } from '../../UserQualifications/UserQualifications.selector'
 
-export default createSelector(selectUserQualifications, userQualifications => {
+export default createSelector(selectUserQualificationCredentials, userQualifications => {
   const count = userQualifications.ids.length
   const ids = slice(0, 2, userQualifications.ids)
   const entities = pipe(

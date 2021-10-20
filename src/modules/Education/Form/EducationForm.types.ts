@@ -1,12 +1,9 @@
 export type FormFields = {
-  school: string
+  title: string
   description: string
-  qualificationType: string
-  id: string
-  startDate: Date | null
-  endDate: Date | null
-  country: string
-  skillNames: string[]
   organisationId: string
-  organisationName: string
+  countries: string[]
+  startTime: string | Date | null
+  endTime: string | Date | null
+  skillNames: string[]
 }

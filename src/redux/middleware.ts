@@ -11,8 +11,8 @@ import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { middleware as JobsMiddleware } from '~/modules/Jobs'
-import * as Navigation from '~/modules/Navigation/Navigation.actions'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
+import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import ssoAuth from '~/modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '~/modules/User'
@@ -22,6 +22,7 @@ import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualif
 import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
 import { showSimpleMessage } from '~/utils/error'
 
+import * as Navigation from '../modules/Navigation/Navigation.utils'
 import * as ReduxUtils from './redux.utils'
 
 const createDebugger = require('redux-flipper').default
@@ -67,6 +68,9 @@ const featureModuleMiddleware = [
   OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
   OrganisationsMiddleware.normaliseOrganisationsFlow({ normalise: ReduxUtils.normalise }),
   OrganisationsMiddleware.setOrganisationsFlow,
+  QualificationsMiddleware.createQualificationFlow,
+  QualificationsMiddleware.createQualificationSuccessFlow,
+  QualificationsMiddleware.createQualificationFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFlow,
   SkillsMiddleware.fetchSkillsSuccessFlow,
@@ -121,6 +125,10 @@ const featureModuleMiddleware = [
   ),
   UserQualificationsMiddleware.normaliseUserQualificationsFlow({ normalise: ReduxUtils.normalise }),
   UserQualificationsMiddleware.setUserQualificationsFlow,
+  UserQualificationsMiddleware.setUserQualificationsFormValuesFlow,
+  UserQualificationsMiddleware.createUserQualificationFlow,
+  UserQualificationsMiddleware.createUserQualificationSuccessFlow({ normalise: ReduxUtils.normalise }),
+  UserQualificationsMiddleware.createUserQualificationFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFlow,
   UserSkillsMiddleware.fetchUserSkillsSuccessFlow,

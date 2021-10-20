@@ -5,7 +5,7 @@ import React from 'react'
 import AuthNavigation from '../AuthNavigation'
 import HomeNavigation from '../HomeNavigation'
 import linking from './Linking'
-import { navigationRef } from './Navigation.actions'
+import { navigationRef } from './Navigation.utils'
 
 const Stack = createStackNavigator()
 
