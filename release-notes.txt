@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Qualifications - ensure form is setup correctly
+- Qualifications - submitting real data
 
 Last 10 deployment release notes:
+- Qualifications - ensure form is setup correctly
 - refactoring import logic
 - updated header to only use the itemAction prop
 - Step 4 of fixing the challenges credentials form - handling uploading credential certificates
@@ -12,6 +13,3 @@ Last 10 deployment release notes:
 - Adding Challenges to state
 - display skills in My CV My Skills view
 - adding Skills widget with real data
-- displaying challenges in Completed Challenges view
-- display qualifications in view
-- display qualifications in widget
