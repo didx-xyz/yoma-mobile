@@ -1,7 +1,8 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeRight } from 'ramda'
 
-import { updateNormalisedReducer } from '../../redux/redux.utils'
+import * as ReduxUtils from '~/redux/redux.utils'
+
 import { UserCredentialFormValues } from '../User/User.types'
 import { updateStateWithFormValues } from '../User/User.utils'
 import {
@@ -41,7 +42,7 @@ export const clearUserQualificationFormValues = createAction(`${name} clearUserQ
 
 const reducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserQualifications, (_state, action) => action.payload)
-  builder.addCase(updateUserQualifications, updateNormalisedReducer)
+  builder.addCase(updateUserQualifications, ReduxUtils.updateNormalisedReducer)
   builder.addCase(clearUserQualifications, (_state, _action) => INITIAL_STATE)
   builder.addCase(setUserQualificationFormValues, (state, action) => updateStateWithFormValues(state, action.payload))
   builder.addCase(clearUserQualificationFormValues, (state, _action) => mergeRight(state, { formValues: {} }))

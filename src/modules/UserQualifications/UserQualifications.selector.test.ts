@@ -22,4 +22,22 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       expect(result).toEqual(USER_QUALIFICATIONS_MOCK)
     })
   })
+  describe('selectFormValues ', () => {
+    it('should return formValues object from the userQualifications state', () => {
+      const userQualificationsStateMock = {
+        ids: 'IDS',
+        entities: 'ENTITIES_DATA',
+        formValues: 'FORM_VALUES',
+      }
+
+      const mockState = rootStateFixture({
+        userQualifications: userQualificationsStateMock,
+      })
+      // when ... we call the selector
+      const result = SUT.selectFormValues(mockState)
+
+      // then ... should return result as expected
+      expect(result).toEqual('FORM_VALUES')
+    })
+  })
 })
