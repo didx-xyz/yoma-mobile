@@ -1,10 +1,10 @@
 import { mergeRight } from 'ramda'
 
-import { createUserQualification } from '~/modules/UserQualifications/UserQualifications.reducer'
+import { actions as ApiActions } from '~/api'
+import { constants as ApiQualificationsConstants } from '~/api/Qualifications'
+import { actions as UserQualificationActions } from '~/modules/UserQualifications'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { actions as ApiActions } from '../../api'
-import { constants as ApiQualificationsConstants } from '../../api/Qualifications'
 import * as SUT from './Qualifications.middleware'
 import { createQualification, createQualificationFailure, createQualificationSuccess } from './Qualifications.reducer'
 
@@ -89,8 +89,10 @@ describe('modules/Qualifications/Qualifications.middleware', () => {
       invoke(action)
 
       // then ...validate createQualificationSuccessFlow
-      // @ts-ignore
-      expect(store.dispatch).toHaveBeenCalledWith(createUserQualification('QUALIFICATION DATA'))
+      expect(store.dispatch).toHaveBeenCalledWith(
+        // @ts-ignore
+        UserQualificationActions.createUserQualification('QUALIFICATION DATA'),
+      )
     })
   })
   describe('createQualificationFailureFlow', () => {
