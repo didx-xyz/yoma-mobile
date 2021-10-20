@@ -1,7 +1,7 @@
 import { mergeRight } from 'ramda'
 
 import { actions as ApiActions } from '~/api'
-import { constants as ApiQualificationsConstants } from '~/api/Qualifications'
+import { constants as ApiQualificationsConstants } from '~/api/qualifications'
 import { actions as UserQualificationActions } from '~/modules/UserQualifications'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
