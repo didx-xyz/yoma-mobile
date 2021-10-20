@@ -1,3 +1,5 @@
+import { INITIAL_FORM_VALUES } from '../Education/Form/EducationForm.constants'
+
 export const USER_QUALIFICATIONS_MOCK = [
   {
     qualification: {
@@ -77,4 +79,5 @@ export const USER_QUALIFICATIONS_STATE_MOCK = {
       requestVerification: true,
     },
   },
+  formFields: INITIAL_FORM_VALUES,
 }

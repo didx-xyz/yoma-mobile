@@ -1,6 +1,5 @@
 import { rootStateFixture } from '../../../redux/redux.fixture'
 import { USER_QUALIFICATIONS_STATE_MOCK } from '../../UserQualifications/UserQualifications.fixture'
-import { INITIAL_STATE } from '../../UserQualifications/UserQualifications.reducer'
 import * as SUT from './EducationWidget.selector'
 
 describe('modules/Education/EducationWidget/EducationWidget.selector', () => {
@@ -11,7 +10,13 @@ describe('modules/Education/EducationWidget/EducationWidget.selector', () => {
       // when ...
       const result = SUT.default(state)
       // then ...
-      expect(result).toEqual({ count: 0, userQualifications: INITIAL_STATE })
+      expect(result).toEqual({
+        count: 0,
+        userQualifications: {
+          ids: [],
+          entities: {},
+        },
+      })
     })
     it('should return the user qualifications data in the expected format', () => {
       // given ...

@@ -1,4 +1,5 @@
 import { rootStateFixture } from '../../redux/redux.fixture'
+import { INITIAL_FORM_VALUES } from '../Education/Form/EducationForm.constants'
 import { USER_QUALIFICATIONS_MOCK } from './UserQualifications.fixture'
 import { INITIAL_STATE } from './UserQualifications.reducer'
 import * as SUT from './UserQualifications.selector'
@@ -13,13 +14,46 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       // then ...
       expect(result).toEqual(INITIAL_STATE)
     })
-    it('should return all the user qualifications data', () => {
+    it('should return the entire user qualifications state', () => {
       // given ...
       const state = rootStateFixture({ userQualifications: USER_QUALIFICATIONS_MOCK })
       // when ...
       const result = SUT.selectUserQualifications(state)
       // then ...
       expect(result).toEqual(USER_QUALIFICATIONS_MOCK)
+    })
+  })
+  describe('selectUserQualificationCredentials', () => {
+    it('should correctly handle an empty state', () => {
+      // given ...
+      const state = rootStateFixture()
+      // when ...
+      const result = SUT.selectUserQualificationCredentials(state)
+      // then ...
+      expect(result).toEqual({ ids: [], entities: {} })
+    })
+    it('should return all the user qualifications credentials', () => {
+      // given ...
+      const state = rootStateFixture({
+        userQualifications: {
+          ids: ['id1', 'id2'],
+          entities: {
+            id1: 'ENTITY 1',
+            id2: 'ENTITY 2',
+          },
+          formValues: INITIAL_FORM_VALUES,
+        },
+      })
+      // when ...
+      const result = SUT.selectUserQualificationCredentials(state)
+      // then ...
+      expect(result).toEqual({
+        ids: ['id1', 'id2'],
+        entities: {
+          id1: 'ENTITY 1',
+          id2: 'ENTITY 2',
+        },
+      })
     })
   })
   describe('selectFormValues ', () => {
