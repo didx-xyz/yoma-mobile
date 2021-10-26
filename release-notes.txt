@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Qualifications - submitting real data
+- Qualifications - submitting certificate
 
 Last 10 deployment release notes:
+- Qualifications - submitting real data
 - Qualifications - ensure form is setup correctly
 - refactoring import logic
 - updated header to only use the itemAction prop
@@ -12,4 +13,3 @@ Last 10 deployment release notes:
 - Step 1 of fixing the challenges credentials form (getting real challenges in, allowing user to select a challenge)
 - Adding Challenges to state
 - display skills in My CV My Skills view
-- adding Skills widget with real data

@@ -11,3 +11,4 @@ export const selectUserQualificationCredentials = createSelector<
   NormalisedUserQualifications
 >(selectUserQualifications, pick(['ids', 'entities']))
 export const selectFormValues = createSelector(selectUserQualifications, prop(['formValues']))
+export const selectFormCertificate = createSelector(selectFormValues, prop('certificate'))

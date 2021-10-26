@@ -1,20 +1,6 @@
-import {
-  always,
-  applySpec,
-  equals,
-  filter,
-  find,
-  keys,
-  mergeRight,
-  objOf,
-  omit,
-  path,
-  pick,
-  pipe,
-  prop,
-  toLower,
-} from 'ramda'
+import { always, applySpec, equals, filter, find, keys, mergeRight, omit, path, pick, pipe, prop, toLower } from 'ramda'
 
+import * as ReduxTypes from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
 
 import { types as ApiUserTypes } from '../../api/users'
@@ -58,10 +44,11 @@ export const extractUserCredentialFormValues = (
     startTime: prop('startTime'),
     endTime: prop('endTime'),
     requestVerification: always(false),
+    certificate: prop('certificate'),
   })
 
 export const prepareCreateUserCredentialPayload = (type: ApiUserTypes.UserCredentialTypes) =>
   pipe(omit(['certificate']), mergeRight({ type }))
 
-export const updateStateWithFormValues = (state: Types.StdObj, formValues: UserCredentialFormValues) =>
-  pipe(objOf('formValues'), mergeRight(state))(formValues)
+export const setFormValues = (state: ReduxTypes.NormalisedData, formValues: Types.StdObj) =>
+  Object.assign(state, { formValues })

@@ -74,4 +74,33 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       expect(result).toEqual('FORM_VALUES')
     })
   })
+  describe('selectFormCertificate', function () {
+    it('should correctly handle an empty state', () => {
+      // given ...
+      const state = rootStateFixture()
+      // when ...
+      const result = SUT.selectFormCertificate(state)
+      // then ...
+      expect(result).toBe(undefined)
+    })
+    it('should return the certificate in formValues should it exist', () => {
+      // given ...
+      const state = rootStateFixture({
+        userQualifications: {
+          ids: ['id1', 'id2'],
+          entities: {
+            id1: 'ENTITY1',
+            id2: 'ENTITY2',
+          },
+          formValues: {
+            certificate: 'FILE DATA OBJECT',
+          },
+        },
+      })
+      // when ...
+      const result = SUT.selectFormCertificate(state)
+      // then ...
+      expect(result).toBe('FILE DATA OBJECT')
+    })
+  })
 })

@@ -1,4 +1,4 @@
-import { FormFields } from './EducationForm.types'
+import type { FormFields } from './EducationForm.types'
 
 export const INITIAL_FORM_VALUES: FormFields = {
   title: '',
@@ -8,4 +8,5 @@ export const INITIAL_FORM_VALUES: FormFields = {
   endTime: null,
   countries: [''],
   skillNames: [],
+  certificate: null,
 }

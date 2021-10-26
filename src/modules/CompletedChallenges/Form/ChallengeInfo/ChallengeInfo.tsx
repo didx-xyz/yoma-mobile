@@ -26,7 +26,7 @@ const ChallengeInfo = ({ challenge }: Props) => {
       <Optional condition={!!challenge?.skills && challenge?.skills.length > 0}>
         <Spacer height={8} />
         <Text.Body>
-          <Bold>Skills:</Bold> {challenge?.skills.join(' | ')}
+          <Bold>Skills:</Bold> {challenge?.skills?.join(' | ')}
         </Text.Body>
       </Optional>
     </View>

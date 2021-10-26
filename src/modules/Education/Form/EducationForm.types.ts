@@ -1,3 +1,5 @@
+import { DocumentPickerResponse } from 'react-native-document-picker'
+
 export type FormFields = {
   title: string
   description: string
@@ -6,4 +8,5 @@ export type FormFields = {
   startTime: string | Date | null
   endTime: string | Date | null
   skillNames: string[]
+  certificate: DocumentPickerResponse | null
 }

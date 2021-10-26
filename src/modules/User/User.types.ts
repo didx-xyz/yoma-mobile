@@ -1,3 +1,5 @@
+import { DocumentPickerResponse } from 'react-native-document-picker'
+
 import { UserCredentialTypes } from '~/api/users/users.types'
 import { ApiMetaResponse } from '~/modules/Auth/Auth.types'
 
@@ -78,6 +80,7 @@ export interface UserCredentialFormValues {
   startTime: string
   endTime: string
   requestVerification: boolean
+  certificate?: DocumentPickerResponse
 }
 
 export type UserCredentials = UserChallenge[] | UserJobCredential[]

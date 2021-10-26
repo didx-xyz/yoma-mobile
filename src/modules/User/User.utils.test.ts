@@ -196,25 +196,26 @@ describe('modules/User/User.utils', () => {
       })
     })
   })
-  describe('updateStateWithFormValues', () => {
+  describe('setFormValues', () => {
     it('should extract the data from a typical response payload', () => {
       // given ...
       const state = {
         ids: 'Normalised Ids array',
         entities: 'Normalised Entities Object',
+        formValues: {},
       }
 
-      const formValues = 'Temporary Form Object'
+      const formValues = { value: 'NEW FORM OBJECT' }
 
-      // when ... we updateStateWithFormValues
+      // when ... we setFormValues
       // @ts-ignore
-      const result = SUT.updateStateWithFormValues(state, formValues)
+      const result = SUT.setFormValues(state, formValues)
 
       // then ...
       expect(result).toEqual({
         ids: 'Normalised Ids array',
         entities: 'Normalised Entities Object',
-        formValues: 'Temporary Form Object',
+        formValues: { value: 'NEW FORM OBJECT' },
       })
     })
   })

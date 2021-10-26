@@ -1,3 +1,4 @@
+import { createFixture } from '../../../tests/tests.utils'
 import { INITIAL_FORM_VALUES } from '../Education/Form/EducationForm.constants'
 
 export const USER_QUALIFICATIONS_MOCK = [
@@ -81,3 +82,5 @@ export const USER_QUALIFICATIONS_STATE_MOCK = {
   },
   formFields: INITIAL_FORM_VALUES,
 }
+
+export const userQualificationsStateFixture = createFixture(USER_QUALIFICATIONS_STATE_MOCK)

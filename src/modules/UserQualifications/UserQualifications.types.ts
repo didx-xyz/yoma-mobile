@@ -1,13 +1,18 @@
+import { DocumentPickerResponse } from 'react-native-document-picker'
+
 import { NormalisedData } from '../../redux/redux.types'
 import * as Types from '../../types/general.types'
 import { types as AuthTypes } from '../Auth'
 import { types as EducationFormTypes } from '../Education/Form'
 import { types as QualificationTypes } from '../Qualifications'
 import { types as UserTypes } from '../User'
+import { UserCredentialFormValues } from '../User/User.types'
 
 export type NormalisedUserQualifications = NormalisedData<UserQualification>
 
-export type UserQualificationsState = NormalisedUserQualifications
+export type UserQualificationsState = NormalisedUserQualifications & {
+  formValues: UserCredentialFormValues | {}
+}
 
 export interface UserQualification extends UserTypes.UserCredentialMeta {
   qualification?: QualificationTypes.Qualification
@@ -20,6 +25,11 @@ export type CreateUserQualificationPayload = Types.Modify<
     endTime: string
   }
 >
+
+export interface CreateUserQualificationCertificatePayload {
+  id: string
+  certificate: DocumentPickerResponse
+}
 
 export interface UserQualificationResponse {
   data: UserQualification
