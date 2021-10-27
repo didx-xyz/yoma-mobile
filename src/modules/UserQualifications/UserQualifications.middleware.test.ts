@@ -242,6 +242,8 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
           message: null,
         },
       }
+      const notificationMock = jest.fn()
+
       const normaliseMock = jest.fn(() => ({
         ids: ['CREDENTIAL ID'],
         entities: {
@@ -257,8 +259,10 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       // @ts-ignore - mocking a quasi-response so typing fails
       const action = createUserQualificationSuccess(responseMock)
 
-      // @ts-ignore - mocking a quasi-response so typing fails
-      const { store, invoke, next } = create(SUT.createUserQualificationSuccessFlow({ normalise: normaliseMock }))
+      const { store, invoke, next } = create(
+        // @ts-ignore - mocking a quasi-response so typing for normalise function fails
+        SUT.createUserQualificationSuccessFlow({ normalise: normaliseMock, notification: notificationMock }),
+      )
       // when ... we respond to the createUserJobSuccess action
       invoke(action)
 
@@ -309,6 +313,8 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
           message: null,
         },
       }
+      const notificationMock = jest.fn()
+
       const normaliseMock = jest.fn(() => ({
         ids: ['CREDENTIAL ID'],
         entities: {
@@ -324,8 +330,10 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       // @ts-ignore - mocking a quasi-response so typing fails
       const action = createUserQualificationSuccess(responseMock)
 
-      // @ts-ignore - mocking a quasi-response so typing fails
-      const { store, invoke } = create(SUT.createUserQualificationSuccessFlow({ normalise: normaliseMock }))
+      const { store, invoke } = create(
+        // @ts-ignore - mocking a quasi-response so typing for normalise function fails
+        SUT.createUserQualificationSuccessFlow({ normalise: normaliseMock, notification: notificationMock }),
+      )
       // when ... we respond to the createUserJobSuccess action
       invoke(action)
 
