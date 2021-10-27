@@ -1,5 +1,6 @@
 import { useField } from 'formik'
 import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 
 import Text, { MetaLevels } from '~/components/Typography'
@@ -28,7 +29,7 @@ const DropDown = ({ name, label, ...props }: Props) => {
   }, [value])
 
   return (
-    <>
+    <View style={styles.container}>
       <Text.Meta level={MetaLevels.Small}>{textOrSpace(value !== '', label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
@@ -51,7 +52,7 @@ const DropDown = ({ name, label, ...props }: Props) => {
         {...props}
       />
       <InputError error={error} touched={touched} />
-    </>
+    </View>
   )
 }
 

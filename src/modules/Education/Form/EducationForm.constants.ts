@@ -6,7 +6,7 @@ export const INITIAL_FORM_VALUES: FormFields = {
   organisationId: '',
   startTime: null,
   endTime: null,
-  countries: [''],
+  // countries: null,
   skillNames: [],
   certificate: null,
 }

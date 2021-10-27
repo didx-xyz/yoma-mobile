@@ -12,6 +12,9 @@ const baseTextStyle = {
 } as TextStyle
 
 const styles = {
+  container: {
+    marginBottom: 16,
+  } as ViewStyle,
   dropDown: {
     height: 30,
     paddingHorizontal: 0,

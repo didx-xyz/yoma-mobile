@@ -122,7 +122,10 @@ export const createUserQualificationFlow: Middleware =
   }
 
 export const createUserQualificationSuccessFlow =
-  ({ normalise }: NormaliseDependency<UserQualification>): Middleware =>
+  ({
+    normalise,
+    notification,
+  }: NormaliseDependency<UserQualification> & { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch, getState }) =>
   next =>
   action => {
@@ -138,6 +141,7 @@ export const createUserQualificationSuccessFlow =
       }
       dispatch(clearUserQualificationFormValues())
       NavigationUtils.navigate(HomeNavigationRoutes.Home)
+      notification('success', 'Your Qualification has been added.')
     }
     return result
   }

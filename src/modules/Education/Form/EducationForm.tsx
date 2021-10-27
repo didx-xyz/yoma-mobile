@@ -15,8 +15,9 @@ import Input from '~/components/Input'
 import Text, { MetaLevels } from '~/components/Typography'
 import Upload from '~/components/Upload'
 import ViewContainer from '~/components/ViewContainer'
-import { Colors } from '~/styles'
+import { Colors, colors } from '~/styles'
 
+import CountryPickerField from '../../../components/CountryPickerField'
 import { types as HomeNavigationTypes } from '../../HomeNavigation'
 import styles from './EducationForm.styles'
 
@@ -44,24 +45,26 @@ const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form
       <ScrollView>
         <FormGroup>
           <FormLayout>
-            <Input name={'title'} label={t('Qualification')} />
-            <Input name={'description'} label={t('Description')} multiline />
+            <Input name="title" label={t('Qualification')} />
+            <Input name="description" label={t('Description')} multiline />
             <DropDown
               items={organisationsDropDown}
               searchPlaceholder={t('Search organisations')}
               label={t('School or Educational institution')}
-              name={'organisationId'}
+              name="organisationId"
             />
-            <Input name={'country'} label={t('Country or region')} />
-            <DateRangeSelect label={t('When did you do the course?')} />
+            <CountryPickerField name="countries" label={t('Country')} />
+            {/*<Input name="countries" label={t('Country or region')} />*/}
+            <DateRangeSelect />
             <DropDownTags
               items={skillsDropDown}
               multiple
+              labelStyle={{ color: colors[Colors.MenuGrey], fontSize: 13 }}
               searchPlaceholder={t('Search skills')}
               label={t('Skills developed')}
-              name={'skillNames'}
+              name="skillNames"
             />
-            <Upload name="upload" label={t('Upload certification (if completed)')} />
+            <Upload name="certificate" label={t('Upload certification (if completed)')} />
             <View style={styles.bottom}>
               <Text.Meta
                 level={MetaLevels.SmallBold}

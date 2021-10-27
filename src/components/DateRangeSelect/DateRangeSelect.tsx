@@ -2,6 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
+import { Colors } from '../../styles'
 import DatePicker from '../DatePicker'
 import Text, { MetaLevels } from '../Typography'
 import styles from './DateRangeSelect.styles'
@@ -15,7 +16,7 @@ const DateRangeSelect = ({ label }: Props) => {
 
   return (
     <>
-      {label && <Text.Meta level={MetaLevels.Small}>{label}</Text.Meta>}
+      {label && <Text.Body color={Colors.MenuGrey}>{label}</Text.Body>}
       <View style={styles.row}>
         <DatePicker name="startTime" label={t('Start date')} />
         <DatePicker name="endTime" label={t('End date')} />

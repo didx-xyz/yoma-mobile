@@ -127,7 +127,10 @@ const featureModuleMiddleware = [
   UserQualificationsMiddleware.setUserQualificationsFlow,
   UserQualificationsMiddleware.setUserQualificationFormValuesFlow,
   UserQualificationsMiddleware.createUserQualificationFlow,
-  UserQualificationsMiddleware.createUserQualificationSuccessFlow({ normalise: ReduxUtils.normalise }),
+  UserQualificationsMiddleware.createUserQualificationSuccessFlow({
+    normalise: ReduxUtils.normalise,
+    notification: showSimpleMessage,
+  }),
   UserQualificationsMiddleware.createUserQualificationFailureFlow({ notification: showSimpleMessage }),
   UserQualificationsMiddleware.createUserQualificationCertificateFlow,
   UserQualificationsMiddleware.createUserQualificationCertificateSuccessFlow({ normalise: ReduxUtils.normalise }),

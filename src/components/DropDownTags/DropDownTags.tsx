@@ -39,7 +39,7 @@ const DropDownTags = ({ name, label, ...props }: Props) => {
   }, [value])
 
   return (
-    <>
+    <View style={styles.container}>
       <Text.Meta level={MetaLevels.Small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
@@ -71,7 +71,7 @@ const DropDownTags = ({ name, label, ...props }: Props) => {
       <View style={styles.tagsContainer}>{renderTags(dropDownValue, removeTag)}</View>
       <View style={styles.divider} />
       <InputError error={error} touched={touched} />
-    </>
+    </View>
   )
 }
 
