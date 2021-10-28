@@ -1,5 +1,5 @@
 import { useField } from 'formik'
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback } from 'react'
 import { View } from 'react-native'
 import CountryPicker from 'react-native-country-picker-modal'
 
@@ -16,10 +16,6 @@ interface Props extends Omit<React.ComponentProps<typeof CountryPicker>, 'onSele
 
 const CountryPickerField = ({ name, label, ...props }: Props) => {
   const [, { value, error, touched }, { setValue }] = useField(name)
-
-  useEffect(() => {
-    console.log({ value })
-  }, [value])
 
   const handleOnSelect = useCallback(
     country => {
