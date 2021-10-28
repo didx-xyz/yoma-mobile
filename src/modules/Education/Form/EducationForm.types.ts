@@ -4,7 +4,7 @@ export type FormFields = {
   title: string
   description: string
   organisationId: string
-  // countries: string[] | null
+  countries: string[] | null
   startTime: string | Date | null
   endTime: string | Date | null
   skillNames: string[]

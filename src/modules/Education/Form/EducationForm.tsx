@@ -54,7 +54,6 @@ const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form
               name="organisationId"
             />
             <CountryPickerField name="countries" label={t('Country')} />
-            {/*<Input name="countries" label={t('Country or region')} />*/}
             <DateRangeSelect />
             <DropDownTags
               items={skillsDropDown}

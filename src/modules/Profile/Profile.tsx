@@ -29,10 +29,6 @@ interface Props {
 const Profile = ({ navigation, onLogoutUser, onPhotoSave, user, form }: Props) => {
   const { t } = useTranslation()
 
-  useEffect(() => {
-    console.log({ form })
-  }, [form])
-
   return (
     <ViewContainer style={styles.container}>
       <Header
