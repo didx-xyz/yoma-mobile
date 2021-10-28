@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 
-import { Colors, colors } from '~/styles'
+import { Colors } from '~/styles'
 import { dropElement, textOrSpace } from '~/utils/strings.utils'
 
 import InputError from '../InputError'

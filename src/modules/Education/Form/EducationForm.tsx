@@ -15,7 +15,7 @@ import Input from '~/components/Input'
 import Text, { MetaLevels } from '~/components/Typography'
 import Upload from '~/components/Upload'
 import ViewContainer from '~/components/ViewContainer'
-import { Colors, colors } from '~/styles'
+import { Colors } from '~/styles'
 
 import CountryPickerField from '../../../components/CountryPickerField'
 import { types as HomeNavigationTypes } from '../../HomeNavigation'
