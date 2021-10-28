@@ -57,6 +57,7 @@
     "react": "17.0.2",
     "react-i18next": "^11.8.12",
     "react-native": "0.66.0",
+    "react-native-country-picker-modal": "^2.0.0",
     "react-native-document-picker": "^6.0.4",
     "react-native-dropdown-picker": "^5.1.4",
     "react-native-elements": "^3.3.2",

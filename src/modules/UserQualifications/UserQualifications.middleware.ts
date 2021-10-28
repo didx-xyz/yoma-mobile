@@ -1,4 +1,5 @@
-import { mergeRight } from 'ramda'
+import { mergeRight, omit, pick, pipe } from 'ramda'
+import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '~/api'
@@ -8,14 +9,24 @@ import * as ReduxUtils from '~/redux/redux.utils'
 import * as GeneralTypes from '~/types/general.types'
 import { showSimpleMessage } from '~/utils/error'
 
+import * as ReduxTypes from '../../redux/redux.types'
 import { utils as ErrorUtils } from '../Error'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import { utils as NavigationUtils } from '../Navigation'
 import { actions as QualificationsActions } from '../Qualifications'
-import { actions as UserActions, selectors as UserSelectors, types as UserTypes, utils as UserUtils } from '../User'
+import {
+  actions as UserActions,
+  constants as UserConstants,
+  selectors as UserSelectors,
+  types as UserTypes,
+  utils as UserUtils,
+} from '../User'
 import {
   clearUserQualificationFormValues,
   createUserQualification,
+  createUserQualificationCertificate,
+  createUserQualificationCertificateFailure,
+  createUserQualificationCertificateSuccess,
   createUserQualificationFailure,
   createUserQualificationSuccess,
   getUserQualificationsSuccess,
@@ -24,7 +35,7 @@ import {
   setUserQualifications,
   updateUserQualifications,
 } from './UserQualifications.reducer'
-import { selectFormValues } from './UserQualifications.selector'
+import { selectFormCertificate, selectFormValues } from './UserQualifications.selector'
 import { UserQualification } from './UserQualifications.types'
 
 export const getUserQualificationsFromCredentialsFlow =
@@ -51,8 +62,8 @@ export const normaliseUserQualificationsFlow =
   action => {
     const result = next(action)
     if (getUserQualificationsSuccess.match(action)) {
-      const normalisedChallenges = normalise(action.payload)
-      dispatch(normaliseUserQualificationsSuccess(normalisedChallenges))
+      const normalisedQualifications = normalise(action.payload)
+      dispatch(normaliseUserQualificationsSuccess(normalisedQualifications))
     }
     return result
   }
@@ -68,7 +79,7 @@ export const setUserQualificationsFlow: Middleware =
     return result
   }
 
-export const setUserQualificationsFormValuesFlow: Middleware =
+export const setUserQualificationFormValuesFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
@@ -92,7 +103,7 @@ export const createUserQualificationFlow: Middleware =
       const state = getState()
       const userId = UserSelectors.selectId(state)
 
-      const formValues = selectFormValues(state)
+      const formValues = pipe(selectFormValues, omit(['certificate']))(state)
       const userQualificationsPayload = UserUtils.prepareUserCredentialItemPayload(action)(formValues)
 
       const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
@@ -111,17 +122,26 @@ export const createUserQualificationFlow: Middleware =
   }
 
 export const createUserQualificationSuccessFlow =
-  ({ normalise }: NormaliseDependency<UserQualification>): Middleware =>
-  ({ dispatch }) =>
+  ({
+    normalise,
+    notification,
+  }: NormaliseDependency<UserQualification> & { notification: typeof showSimpleMessage }): Middleware =>
+  ({ dispatch, getState }) =>
   next =>
   action => {
     const result = next(action)
     if (createUserQualificationSuccess.match(action)) {
+      const state = getState()
+      const certificate = selectFormCertificate(state) as DocumentPickerResponse | undefined
       const data = ReduxUtils.extractDataFromResponseAction(action)
       const normalised = normalise([data])
       dispatch(updateUserQualifications(normalised))
+      if (certificate) {
+        dispatch(createUserQualificationCertificate({ id: data.id, certificate }))
+      }
       dispatch(clearUserQualificationFormValues())
       NavigationUtils.navigate(HomeNavigationRoutes.Home)
+      notification('success', 'Your Qualification has been added.')
     }
     return result
   }
@@ -137,6 +157,71 @@ export const createUserQualificationFailureFlow =
       const errorMessage = ErrorUtils.extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
       notification('danger', 'Error', errorMessage)
+    }
+    return result
+  }
+
+export const createUserQualificationCertificateFlow: Middleware =
+  ({ dispatch, getState }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserQualificationCertificate.match(action)) {
+      const state = getState()
+      const userId = UserSelectors.selectId(state)
+      const config = ApiUtils.zipIdsIntoConfigEndpoint([userId, action.payload.id])(
+        ApiUsersConstants.USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG,
+      )
+
+      const formData = new FormData()
+      const fileData = pick(['uri', 'type', 'name'], action.payload.certificate)
+      formData.append(UserConstants.USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
+
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(config, {
+            onSuccess: createUserQualificationCertificateSuccess,
+            onFailure: createUserQualificationCertificateFailure,
+          }),
+          formData,
+        ),
+      )
+    }
+    return result
+  }
+
+export const createUserQualificationCertificateSuccessFlow =
+  ({ normalise }: ReduxTypes.NormaliseDependency<UserQualification>): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserQualificationCertificateSuccess.match(action)) {
+      console.log({ action })
+      const credential = ReduxUtils.extractDataFromResponseAction(action)
+      const normalisedCredential = normalise([credential])
+      dispatch(updateUserQualifications(normalisedCredential))
+    }
+
+    return result
+  }
+
+export const createUserQualificationCertificateFailureFlow =
+  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+  _store =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (createUserQualificationCertificateFailure.match(action)) {
+      // TODO: this should be handled by the notification module
+      notification(
+        'danger',
+        'An error occurred.',
+        'Oops something went wrong uploading your challenge certificate. Please try again.',
+      )
     }
     return result
   }

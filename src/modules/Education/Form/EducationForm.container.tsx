@@ -1,5 +1,6 @@
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Formik } from 'formik'
+import { pipe } from 'ramda'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -20,7 +21,7 @@ const EducationFormContainer = ({ navigation }: Props) => {
   const dispatch = useDispatch()
 
   const handleSubmit = (values: FormFields) => {
-    const qualification = FormUtils.sanitiseDateRange(values)
+    const qualification = pipe(FormUtils.sanitiseDateRange, FormUtils.countriesAsArray)(values)
     dispatch(QualificationActions.createQualification(qualification))
   }
 

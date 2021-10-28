@@ -11,6 +11,9 @@ const baseTextStyle = {
 } as TextStyle
 
 const styles = {
+  container: {
+    marginVertical: 20,
+  } as ViewStyle,
   dropDown: {
     height: 30,
     paddingHorizontal: 0,
@@ -46,6 +49,10 @@ const styles = {
     backgroundColor: StyleUtils.applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
     marginTop: 10,
   } as ViewStyle,
+  pickerLabel: {
+    ...baseTextStyle,
+    color: colors[Colors.MenuGrey],
+  } as TextStyle,
   save: {
     paddingRight: 10,
   } as ViewStyle,

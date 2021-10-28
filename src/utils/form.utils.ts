@@ -1,4 +1,4 @@
-import { and, equals, evolve, not } from 'ramda'
+import { and, equals, evolve, not, of } from 'ramda'
 
 import { StdObj } from '~/types/general.types'
 
@@ -11,3 +11,5 @@ export const sanitiseDateRange = evolve({
   startTime: DateUtils.toJSON,
   endTime: DateUtils.toJSON,
 })
+
+export const countriesAsArray = evolve({ countries: of })
