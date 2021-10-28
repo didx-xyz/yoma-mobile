@@ -59,7 +59,6 @@ const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form
             <DropDownTags
               items={skillsDropDown}
               multiple
-              labelStyle={{ color: colors[Colors.MenuGrey], fontSize: 13 }}
               searchPlaceholder={t('Search skills')}
               label={t('Skills developed')}
               name="skillNames"

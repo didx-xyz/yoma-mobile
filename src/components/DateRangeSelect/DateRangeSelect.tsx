@@ -4,7 +4,7 @@ import { View } from 'react-native'
 
 import { Colors } from '../../styles'
 import DatePicker from '../DatePicker'
-import Text, { MetaLevels } from '../Typography'
+import Text from '../Typography'
 import styles from './DateRangeSelect.styles'
 
 interface Props {

@@ -1,5 +1,5 @@
 import { StackNavigationProp } from '@react-navigation/stack'
-import { Form, Formik } from 'formik'
+import { Formik } from 'formik'
 import { pipe } from 'ramda'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'

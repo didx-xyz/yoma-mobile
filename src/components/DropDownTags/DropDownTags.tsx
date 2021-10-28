@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 
-import { Colors } from '~/styles'
+import { Colors, colors } from '~/styles'
 import { dropElement, textOrSpace } from '~/utils/strings.utils'
 
 import InputError from '../InputError'
@@ -66,6 +66,7 @@ const DropDownTags = ({ name, label, ...props }: Props) => {
           </Text.Body>
         )}
         closeIconContainerStyle={styles.save}
+        labelStyle={styles.pickerLabel}
         {...props}
       />
       <View style={styles.tagsContainer}>{renderTags(dropDownValue, removeTag)}</View>
