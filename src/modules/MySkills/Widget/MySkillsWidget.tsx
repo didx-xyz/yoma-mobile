@@ -2,9 +2,10 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvWidget, { CvWidgetList } from '../../../components/CvWidget'
-import CvWidgetSkill, { types as CvWidgetSkillTypes } from '../../../components/CvWidgetSkill'
-import { Colors } from '../../../styles'
+import CvWidget, { CvWidgetList } from '~/components/CvWidget'
+import CvWidgetSkill, { types as CvWidgetSkillTypes } from '~/components/CvWidgetSkill'
+import { Colors } from '~/styles'
+
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {

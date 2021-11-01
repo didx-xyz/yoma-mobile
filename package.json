@@ -85,6 +85,7 @@
     "@babel/runtime": "^7.14.8",
     "@react-native-community/eslint-config": "^2.0.0",
     "@testing-library/jest-native": "^4.0.1",
+    "@testing-library/react-hooks": "^7.0.2",
     "@testing-library/react-native": "^7.2.0",
     "@trivago/prettier-plugin-sort-imports": "^1.4.4",
     "@types/form-data": "2.5.0",
