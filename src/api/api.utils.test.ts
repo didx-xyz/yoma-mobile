@@ -180,7 +180,7 @@ describe('api/api.utils', () => {
       expect(result).toEqual(undefined)
     })
   })
-  describe('getTokenFromState', () => {
+  describe('selectAuthToken', () => {
     it('should get the auth token when we request the token, given state with a token in it', () => {
       // given ... state with a token in it
       const mockedState = {
@@ -190,7 +190,7 @@ describe('api/api.utils', () => {
         },
       }
       // when ... we request the token
-      const result = SUT.getTokenFromState(mockedState)
+      const result = SUT.selectAuthToken(mockedState)
 
       // then ... should get the auth token
       expect(result).toBe('AUTH TOKEN')
@@ -201,7 +201,7 @@ describe('api/api.utils', () => {
         anotherKey: 'ANOTHER VALUE',
       }
       // when ... we request the token
-      const result = SUT.getTokenFromState(mockedState)
+      const result = SUT.selectAuthToken(mockedState)
 
       // then ... should get the auth token
       expect(result).toBe(null)

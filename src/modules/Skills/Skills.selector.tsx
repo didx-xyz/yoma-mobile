@@ -2,9 +2,9 @@ import { createSelector } from '@reduxjs/toolkit'
 import { pipe } from 'ramda'
 
 import { RootState } from '~/redux/redux.types'
-import { mapToDropDownArray } from '~/utils/strings.utils'
 
 import { types as DropDownTypes } from '../../components/DropDown'
+import { mapToDropDownArray } from '../../utils/arrays.utils'
 import { selectFilterSkillsByTerm } from './Skills.utils'
 
 export const selectSkills = (state: RootState) => state.skills

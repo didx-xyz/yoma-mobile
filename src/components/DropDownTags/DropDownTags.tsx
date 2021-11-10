@@ -5,10 +5,11 @@ import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 
 import { Colors } from '~/styles'
-import { dropElement, textOrSpace } from '~/utils/strings.utils'
+import { textOrSpace } from '~/utils/strings.utils'
 
+import { dropElement } from '../../utils/arrays.utils'
 import InputError from '../InputError'
-import Tag from '../Tag'
+import Pill from '../Pill'
 import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDownTags.styles'
 
@@ -21,7 +22,7 @@ type Props = Omit<
 }
 
 const renderTags = (tags: string[], onDelete: (tag: string) => void) =>
-  tags.map((tag, index) => <Tag key={index} tag={tag} onDeleteTag={onDelete} />)
+  tags.map((tag, index) => <Pill key={index} name={tag} onDelete={onDelete} />)
 
 const DropDownTags = ({ name, label, ...props }: Props) => {
   const [, { value, error, touched }, { setValue }] = useField(name)
@@ -30,7 +31,7 @@ const DropDownTags = ({ name, label, ...props }: Props) => {
   const [dropDownValue, setDropdownValue] = useState([])
   const { t } = useTranslation()
 
-  const removeTag = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
+  const removeTag = (tag: string) => setDropdownValue(dropElement(tag)(dropDownValue))
 
   useEffect(() => {
     if (value) {

@@ -13,8 +13,8 @@ import OnboardingForms from '../../../components/OnboardingForms'
 import Spinner from '../../../components/Spinner'
 import { Span } from '../../../components/Typography'
 import { Colors } from '../../../styles'
+import { mapToDropDownArray } from '../../../utils/arrays.utils'
 import * as RegexUtils from '../../../utils/regex'
-import * as StringUtils from '../../../utils/strings.utils'
 import { AuthRegistration } from '../../Auth/Auth.types'
 import styles from './RegisterForm.styles'
 
@@ -91,7 +91,7 @@ const RegisterForm = ({ onRegisterUser }: Props) => {
             <Input name={'lastName'} label={t('lastName')} />
             <Input name={'email'} label={t('email')} keyboardType="email-address" autoCapitalize="none" />
             <DropDown
-              items={StringUtils.mapToDropDownArray(countries, 'code', 'name')}
+              items={mapToDropDownArray(countries, 'code', 'name')}
               name={'countryAlpha2'}
               label={'Country'}
               searchPlaceholder={t('Search country')}
