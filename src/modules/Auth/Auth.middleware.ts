@@ -1,6 +1,9 @@
 import { isAnyOf } from '@reduxjs/toolkit'
 import { mergeRight } from 'ramda'
+import { authorize as oAuthAuthorize } from 'react-native-app-auth'
 import { Middleware } from 'redux'
+
+import oAuthConfig from '~/oauth'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiAuthConstants } from '../../api/auth'
@@ -117,19 +120,13 @@ export const authorizeWithRefreshTokenFailureFlow: Middleware =
 export const loginFlow: Middleware =
   ({ dispatch }) =>
   next =>
-  action => {
+  async action => {
     const result = next(action)
 
     if (login.match(action)) {
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            onSuccess: loginSuccess,
-            onFailure: loginFailure,
-          }),
-          action.payload,
-        ),
-      )
+      const result = await oAuthAuthorize(oAuthConfig)
+      console.log(result)
+      // dispatch(loginSuccess(result))
     }
 
     return result

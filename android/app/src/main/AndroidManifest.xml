@@ -1,5 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.yomamobile">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.yomamobile">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA"/>
@@ -15,13 +14,8 @@
       android:theme="@style/AppTheme">
 
       <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
-<meta-data android:name="com.facebook.sdk.ApplicationId" 
-        android:value="@string/facebook_app_id"/>
-    
-    <activity android:name="com.facebook.FacebookActivity"
-        android:configChanges=
-                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-        android:label="@string/app_name" />
+
+    <activity android:name="com.facebook.FacebookActivity" android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation" android:label="@string/app_name" />
     <activity
         android:name="com.facebook.CustomTabActivity"
         android:exported="true">
@@ -44,10 +38,10 @@
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter>
         <intent-filter>
+            <data android:scheme="https" android:host="staging.app.yoma.africa" android:pathPrefix="/auth/sign-in/" />
             <action android:name="android.intent.action.VIEW"/>
             <category android:name="android.intent.category.DEFAULT"/>
             <category android:name="android.intent.category.BROWSABLE"/>
-            <data android:host="staging.app.yoma.africa" android:scheme="https"/>
         </intent-filter>
       </activity>
     </application>
