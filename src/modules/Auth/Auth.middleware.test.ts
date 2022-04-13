@@ -126,6 +126,7 @@ describe('modules/Auth/Auth.middleware', () => {
   describe('authorizeWithRefreshTokenFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
+      // @ts-ignore - partial mocking for test only
       const create = createMiddlewareMock(jest, { user: { id: 'USER ID' } })
       const action = getSecureRefreshTokenSuccess('REFRESH TOKEN')
       // @ts-ignore
@@ -142,6 +143,7 @@ describe('modules/Auth/Auth.middleware', () => {
     })
     it('should correctly call the refresh token api', () => {
       // given ...
+      // @ts-ignore - partial mocking for test only
       const create = createMiddlewareMock(jest, { user: { id: 'USER ID' } })
       const action = getSecureRefreshTokenSuccess('REFRESH TOKEN')
       // @ts-ignore
@@ -160,6 +162,9 @@ describe('modules/Auth/Auth.middleware', () => {
           { userId: 'USER ID', refreshToken: 'REFRESH TOKEN' },
         ),
       )
+    })
+    it('should handle an error getting the token', () => {
+      //TODO: add error state test
     })
   })
   describe('authorizeWithRefreshTokenFailureFlow', () => {
@@ -654,6 +659,7 @@ describe('modules/Auth/Auth.middleware', () => {
       const create = createMiddlewareMock(jest)
       // @ts-ignore
       const response = 'ERROR: FAILED FOR A REASON'
+      // @ts-ignore
       const action = registerFailure(response)
       const mockNotification = jest.fn()
       // @ts-ignore

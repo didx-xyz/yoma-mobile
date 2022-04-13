@@ -2,7 +2,6 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeDeepRight } from 'ramda'
 
 import {
-  AuthCredentials,
   AuthLoginFailureResponse,
   AuthLoginSuccessResponse,
   AuthRegistration,
@@ -11,14 +10,15 @@ import {
   AuthSocialLoginCredentials,
   AuthSocialRegistrationCredentials,
   AuthState,
+  OAuthLoginSuccessResponse,
 } from './Auth.types'
 
 const name = '[Auth]'
 export const INITIAL_STATE = {} as AuthState
 
 export const authorize = createAction(`${name} authorize`)
-export const login = createAction<AuthCredentials>(`${name} login`)
-export const loginSuccess = createAction<AuthLoginSuccessResponse>(`${name} loginSuccess`)
+export const login = createAction(`${name} login`)
+export const loginSuccess = createAction<OAuthLoginSuccessResponse>(`${name} loginSuccess`)
 export const loginFailure = createAction<AuthLoginFailureResponse>(`${name} loginFailure`)
 export const logout = createAction(`${name} Logout`)
 

@@ -1,1 +1,3 @@
-export { default } from './oauth.config'
+import * as constants from './oauth.constants'
+
+export { constants }

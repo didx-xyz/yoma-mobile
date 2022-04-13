@@ -3,11 +3,11 @@ import { mergeRight } from 'ramda'
 import { authorize as oAuthAuthorize } from 'react-native-app-auth'
 import { Middleware } from 'redux'
 
-import oAuthConfig from '~/oauth'
+import { actions as ApiActions } from '~/api'
+import { constants as ApiAuthConstants } from '~/api/auth'
+import { constants as oAuthConstants } from '~/oauth'
+import { showSimpleMessage } from '~/utils/error'
 
-import { actions as ApiActions } from '../../api'
-import { constants as ApiAuthConstants } from '../../api/auth'
-import { showSimpleMessage } from '../../utils/error'
 // avoiding circular dependencies:
 import * as AppActions from '../App/App.reducer'
 import { actions as ErrorActions } from '../Error'
@@ -45,8 +45,7 @@ import {
   setSecureRefreshTokenSuccess,
   setUserLoginCredentials,
 } from './Auth.reducer'
-import { selectLoginCredentials } from './Auth.selector'
-import { SecureStorageRefreshToken } from './Auth.types'
+import { OAuthLoginSuccessResponse, SecureStorageRefreshToken } from './Auth.types'
 import {
   extractCredentialsFromAuthorizedPayload,
   extractMessageFromErrorPayload,
@@ -72,11 +71,16 @@ export const getSecureRefreshTokenFlow =
   async action => {
     const result = next(action)
     if (getSecureRefreshToken.match(action)) {
-      await getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
-        .then((data: SecureStorageRefreshToken) => {
-          data === null ? dispatch(noRefreshTokenInSecureStore()) : dispatch(getSecureRefreshTokenSuccess(data))
-        })
-        .catch((error: any) => dispatch(getSecureRefreshTokenFailure(error.message)))
+      try {
+        const token: SecureStorageRefreshToken = await getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
+        if (token === null) {
+          dispatch(noRefreshTokenInSecureStore())
+          return result
+        }
+        dispatch(getSecureRefreshTokenSuccess(token))
+      } catch (error) {
+        dispatch(getSecureRefreshTokenFailure(error.message))
+      }
     }
     return result
   }
@@ -124,9 +128,14 @@ export const loginFlow: Middleware =
     const result = next(action)
 
     if (login.match(action)) {
-      const result = await oAuthAuthorize(oAuthConfig)
-      console.log(result)
-      // dispatch(loginSuccess(result))
+      try {
+        const result: OAuthLoginSuccessResponse = await oAuthAuthorize(oAuthConstants.config)
+        dispatch(loginSuccess(result))
+        console.log({ loginResult: result })
+      } catch (error) {
+        dispatch(loginFailure(error))
+        console.error({ error })
+      }
     }
 
     return result
@@ -356,7 +365,7 @@ export const registrationFlow: Middleware =
 
 export const registrationSuccessFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  ({ getState, dispatch }) =>
+  ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
@@ -364,8 +373,7 @@ export const registrationSuccessFlow =
     if (registerSuccess.match(action)) {
       // TODO: this should be handled by the notification module
       notification('success', 'Registration Successful')
-      const credentials = selectLoginCredentials(getState())
-      dispatch(login(credentials))
+      dispatch(login())
     }
     return result
   }

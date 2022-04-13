@@ -17,14 +17,19 @@ export interface AuthCredentialsResponse {
   password?: string
 }
 
-export interface AuthLoginSuccessData extends AuthCredentialsResponse, AuthRefreshTokenResponse {
-  user: UserResponse
+export type OAuthAdditionalParams = { [name: string]: string } | undefined
+export type OAuthScopes = string[]
+
+export interface OAuthCredentialsResponse {
+  accessToken: string
+  accessTokenExpirationDate: string
+  idToken: string
+  tokenType: string
+  scopes: OAuthScopes
+  tokenAdditionalParameters?: OAuthAdditionalParams
 }
 
-export interface AuthLoginSuccessResponse {
-  data: { data: AuthLoginSuccessData }
-  meta: ApiMetaResponse
-}
+export interface OAuthLoginSuccessResponse extends AuthRefreshTokenResponse, OAuthCredentialsResponse {}
 
 export type AuthLoginFailureResponse = string
 
