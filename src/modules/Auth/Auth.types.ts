@@ -1,5 +1,3 @@
-import { UserResponse } from '../User/User.types'
-
 export interface ApiMetaResponse {
   success: boolean
   code: number

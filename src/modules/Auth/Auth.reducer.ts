@@ -3,7 +3,6 @@ import { mergeDeepRight } from 'ramda'
 
 import {
   AuthLoginFailureResponse,
-  AuthLoginSuccessResponse,
   AuthRegistration,
   AuthRegistrationFailureResponse,
   AuthRegistrationSuccessResponse,

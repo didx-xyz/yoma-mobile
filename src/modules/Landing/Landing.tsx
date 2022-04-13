@@ -2,7 +2,6 @@ import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { authorize as oAuthAuthorize } from 'react-native-app-auth'
 
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from '~/assets/images'
 import { ViewContainer } from '~/components'
