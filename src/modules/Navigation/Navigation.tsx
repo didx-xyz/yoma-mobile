@@ -2,8 +2,8 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import React from 'react'
 
-import AuthNavigation from '../AuthNavigation'
 import HomeNavigation from '../HomeNavigation'
+import Landing from '../Landing'
 import linking from './Linking'
 import { navigationRef } from './Navigation.utils'
 
@@ -19,7 +19,7 @@ const Navigation = ({ isAuthorised }: Props) => (
       {isAuthorised ? (
         <Stack.Screen name="Home" component={HomeNavigation} />
       ) : (
-        <Stack.Screen name="Authentication" component={AuthNavigation} />
+        <Stack.Screen name="Landing" component={Landing} />
       )}
     </Stack.Navigator>
   </NavigationContainer>

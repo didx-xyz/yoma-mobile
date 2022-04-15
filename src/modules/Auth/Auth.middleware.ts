@@ -1,6 +1,6 @@
 import { isAnyOf } from '@reduxjs/toolkit'
 import { mergeRight } from 'ramda'
-import RNAppAuth from 'react-native-app-auth'
+import { authorize as OAuthAutherize } from 'react-native-app-auth'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
@@ -115,9 +115,8 @@ export const loginFlow: Middleware =
     const result = next(action)
 
     if (login.match(action)) {
-      console.log({ action })
       try {
-        const result: OAuthLoginSuccessResponse = await RNAppAuth.authorize(oAuthConstants.config)
+        const result: OAuthLoginSuccessResponse = await OAuthAutherize(oAuthConstants.config)
         dispatch(loginSuccess(result))
       } catch (error) {
         dispatch(loginFailure(error))
