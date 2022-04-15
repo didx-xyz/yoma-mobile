@@ -7,21 +7,31 @@ describe('modules/Auth/Auth.utils', () => {
       const mockedAction = {
         type: 'LOGIN ACTION',
         payload: {
-          data: {
-            data: {
-              refreshToken: 'REFRESH_TOKEN',
-              token: 'USER_TOKEN',
-              expiresAt: 'EXPIRES_AT',
-            },
-          },
-          meta: {},
+          refreshToken: 'REFRESH_TOKEN',
+          token: 'USER_TOKEN',
+          expiresAt: 'EXPIRES_AT',
+          accessToken: 'TOKEN',
+          accessTokenExpirationDate: 'EXPIRES_AT',
+          idToken: 'ID_TOKEN',
+          tokenType: 'TOKEN_TYPE',
+          scopes: ['SCOPES'],
+          tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+          authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
         },
       }
 
       // when ... we want to extract the credentials from the rest of the payload
       const result = SUT.extractCredentialsFromAuthorizedPayload(mockedAction)
       // then ... the credentials should be extracted correctly
-      expect(result).toEqual({ token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
+      expect(result).toEqual({
+        accessToken: 'TOKEN',
+        accessTokenExpirationDate: 'EXPIRES_AT',
+        idToken: 'ID_TOKEN',
+        tokenType: 'TOKEN_TYPE',
+        scopes: ['SCOPES'],
+        tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+        authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
+      })
     })
   })
   describe('prepareCredentials', () => {
@@ -44,21 +54,22 @@ describe('modules/Auth/Auth.utils', () => {
       const mockedAction = {
         type: 'LOGIN ACTION',
         payload: {
-          data: {
-            data: {
-              refreshToken: 'REFRESH_TOKEN',
-              token: 'USER_TOKEN',
-              expiresAt: 'EXPIRES_AT',
-              otherProperty: 'SOME OTHER PROPERTY',
-            },
-          },
-          meta: {},
+          refreshToken: 'REFRESH_TOKEN',
+          token: 'USER_TOKEN',
+          expiresAt: 'EXPIRES_AT',
+          accessToken: 'TOKEN',
+          accessTokenExpirationDate: 'EXPIRES_AT',
+          idToken: 'ID_TOKEN',
+          tokenType: 'TOKEN_TYPE',
+          scopes: ['SCOPES'],
+          tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+          authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
         },
       }
       // when ... we want to extract the refresh token from the rest of the payload
       const result = SUT.extractRefreshTokenFromAuthorizedPayload(mockedAction)
       // then ... the refresh token should be extracted correctly
-      expect(result).toEqual('REFRESH_TOKEN')
+      expect(result).toBe('REFRESH_TOKEN')
     })
     it('should handle the refresh token not being available', () => {
       // given ... a data without a refresh token
