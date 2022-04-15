@@ -20,8 +20,9 @@ import {
   zip,
 } from 'ramda'
 
-import { RootState } from '../redux/redux.types'
-import { StdObj } from '../types/general.types'
+import { RootState } from '~/redux/redux.types'
+import { StdObj } from '~/types/general.types'
+
 import { ApiCall, ApiClientArgs, ApiMeta, PrepareApiRequestData } from './api.types'
 
 export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<ApiMeta>) =>
