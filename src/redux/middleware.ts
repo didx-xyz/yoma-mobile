@@ -13,7 +13,6 @@ import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { middleware as JobsMiddleware } from '~/modules/Jobs'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
 import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
-import ssoAuth from '~/modules/SSOAuth'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '~/modules/User'
 import { middleware as UserChallengesMiddleware } from '~/modules/UserChallenges'
@@ -40,20 +39,11 @@ const featureModuleMiddleware = [
   AuthMiddleware.authorizeSuccessFlow,
   AuthMiddleware.authorizeWithRefreshTokenFailureFlow,
   AuthMiddleware.authorizeWithRefreshTokenFlow,
-  AuthMiddleware.authSocialLoginFailureFlow({ notification: showSimpleMessage }),
-  AuthMiddleware.authSocialLoginFlow({ ssoAuth, notification: showSimpleMessage }),
-  AuthMiddleware.authSocialLoginSuccessFlow,
-  AuthMiddleware.authSocialRegistrationFailureFlow({ notification: showSimpleMessage }),
-  AuthMiddleware.authSocialRegistrationFlow({ ssoAuth }),
-  AuthMiddleware.authSocialRegistrationSuccessFlow,
   AuthMiddleware.deleteSecureRefreshTokenFlow(SecureStore.deleteItemAsync),
   AuthMiddleware.getSecureRefreshTokenFlow(SecureStore.getItemAsync),
   AuthMiddleware.loginFailureFlow({ notification: showSimpleMessage }),
   AuthMiddleware.loginFlow,
   AuthMiddleware.logoutFlow,
-  AuthMiddleware.registrationFailureFlow({ notification: showSimpleMessage }),
-  AuthMiddleware.registrationFlow,
-  AuthMiddleware.registrationSuccessFlow({ notification: showSimpleMessage }),
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
   ChallengesMiddleware.fetchChallengesFlow,

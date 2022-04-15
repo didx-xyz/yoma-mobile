@@ -1,4 +1,3 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -6,19 +5,17 @@ import { View } from 'react-native'
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from '~/assets/images'
 import { ViewContainer } from '~/components'
 import Background from '~/components/Background/Background'
-import Button, { ButtonSizes, ButtonVariants } from '~/components/Button'
+import Button, { ButtonSizes } from '~/components/Button'
 import Text, { HeaderLevels, TextAlign } from '~/components/Typography'
-import { AuthNavigationRoutes, AuthNavigatorParamsList } from '~/modules/AuthNavigation/AuthNavigation.types'
 import { Colors } from '~/styles'
 
 import styles from './Landing.styles'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Landing>
   onLogin: () => void
 }
 
-const Landing = ({ navigation, onLogin }: Props) => {
+const Landing = ({ onLogin }: Props) => {
   const { t } = useTranslation()
   return (
     <ViewContainer backgroundColor={Colors.PrimaryYellow}>
@@ -44,19 +41,7 @@ const Landing = ({ navigation, onLogin }: Props) => {
           </Text.Header>
         </View>
         <View style={styles.actionsContainer}>
-          <Button
-            size={ButtonSizes.Default}
-            label={t('register')}
-            onPress={() => navigation.navigate(AuthNavigationRoutes.Register)}
-            style={styles.registerButton}
-          />
-          <Button
-            variant={ButtonVariants.Clear}
-            color={Colors.White}
-            label={t('login')}
-            onPress={onLogin}
-            style={styles.loginButton}
-          />
+          <Button size={ButtonSizes.Default} label={t('Login')} onPress={onLogin} style={styles.registerButton} />
         </View>
       </View>
     </ViewContainer>

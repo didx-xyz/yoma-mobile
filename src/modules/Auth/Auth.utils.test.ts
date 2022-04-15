@@ -24,6 +24,20 @@ describe('modules/Auth/Auth.utils', () => {
       expect(result).toEqual({ token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
     })
   })
+  describe('prepareCredentials', () => {
+    it('should rename the object keys', () => {
+      // given ... an object in the shape of the successful login response
+      const mockedAction = {
+        accessToken: 'USER_TOKEN',
+        accessTokenExpirationDate: 'EXPIRES_AT',
+      }
+
+      // when ... we want to extract the credentials from the rest of the payload
+      const result = SUT.prepareCredentials(mockedAction)
+      // then ... the credentials should be extracted correctly
+      expect(result).toEqual({ token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
+    })
+  })
   describe('extractRefreshTokenFromAuthorizedPayload', () => {
     it('should return the refresh token from the login payload', () => {
       // given ... an object in the shape of the successful login response

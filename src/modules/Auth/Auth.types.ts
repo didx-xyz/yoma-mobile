@@ -8,13 +8,6 @@ export interface AuthRefreshTokenResponse {
   refreshToken: string
 }
 
-export interface AuthCredentialsResponse {
-  token: string
-  expiresAt: string
-  email?: string
-  password?: string
-}
-
 export type OAuthAdditionalParams = { [name: string]: string } | undefined
 export type OAuthScopes = string[]
 
@@ -25,17 +18,21 @@ export interface OAuthCredentialsResponse {
   tokenType: string
   scopes: OAuthScopes
   tokenAdditionalParameters?: OAuthAdditionalParams
+  authorizeAdditionalParameters?: OAuthAdditionalParams
 }
 
 export interface OAuthLoginSuccessResponse extends AuthRefreshTokenResponse, OAuthCredentialsResponse {}
 
 export type AuthLoginFailureResponse = string
 
-export type AuthState = AuthCredentialsResponse
-
-export interface AuthCredentials {
-  email: string
-  password: string
+export type AuthState = {
+  token: string
+  expiresAt: string
+  idToken: string
+  tokenType: string
+  scopes: OAuthScopes
+  tokenAdditionalParameters?: OAuthAdditionalParams
+  authorizeAdditionalParameters?: OAuthAdditionalParams
 }
 
 export interface AuthRegistration {
@@ -47,46 +44,5 @@ export interface AuthRegistration {
   confirmPassword: string
   privacyInd: boolean
 }
-
-export interface AuthSocialRegistrationCredentials {
-  firstName: string
-  lastName: string
-  email: string
-  provider: string
-  providerKey: string
-  token: string
-}
-export interface AuthSocialLoginCredentials {
-  provider: string
-  providerKey: string
-  token: string
-}
-
-export type AuthRegistrationSuccessResponse = {
-  meta: ApiMetaResponse
-}
-
-export interface ErrorResponseMeta {
-  message: string
-  code: string
-  success: boolean
-}
-
-export interface ErrorResponseHeaders {
-  'content-type': string
-  date: string
-  server: string
-}
-
-export interface ErrorResponse {
-  data: {
-    meta: ErrorResponseMeta
-  }
-  status: string
-  statusText?: string
-  headers: ErrorResponseHeaders
-}
-
-export type AuthRegistrationFailureResponse = ErrorResponse
 
 export type SecureStorageRefreshToken = string | null
