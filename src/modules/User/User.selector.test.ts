@@ -1,4 +1,5 @@
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import { USER_RESPONSE } from './User.fixture'
 import * as SUT from './User.selector'
 

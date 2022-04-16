@@ -1,4 +1,5 @@
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import { USER_RESPONSE, userInitialStateFixture } from './User.fixture'
 import SUT, { INITIAL_STATE, clearUser, setUser } from './User.reducer'
 

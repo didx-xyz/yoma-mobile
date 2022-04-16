@@ -1,4 +1,5 @@
-import { UserCredentialTypes } from '../../api/users/users.types'
+import { UserCredentialTypes } from '~/api/users/users.types'
+
 import { USER_RESPONSE } from './User.fixture'
 import * as SUT from './User.utils'
 

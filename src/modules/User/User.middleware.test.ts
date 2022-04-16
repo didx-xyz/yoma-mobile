@@ -1,12 +1,12 @@
 import { mergeRight } from 'ramda'
 
-import { loginSuccess } from '~/modules/Auth/Auth.reducer'
-import { defaultUserLoginResponseData } from '~/modules/Auth/Auth.test.fixtures'
+import { createMiddlewareMock } from '~/../tests/tests.utils'
+import { actions as ApiActions, utils as ApiUtils } from '~/api'
+import { constants as ApiUsersConstants } from '~/api/users'
+import { rootStateFixture } from '~/redux/redux.fixture'
 
-import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { constants as ApiUsersConstants } from '../../api/users'
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { loginSuccess } from '../Auth/Auth.reducer'
+import { defaultUserLoginResponseData } from '../Auth/Auth.test.fixtures'
 import { USER_RESPONSE } from './User.fixture'
 import * as SUT from './User.middleware'
 import {

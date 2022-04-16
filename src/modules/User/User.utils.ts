@@ -1,11 +1,11 @@
 import { always, applySpec, equals, filter, find, keys, mergeRight, omit, path, pick, pipe, prop, toLower } from 'ramda'
 
+import { types as ApiUserTypes } from '~/api/users'
 import * as ReduxTypes from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
+import * as Types from '~/types/general.types'
 import { renameKeys } from '~/utils/ramda.utils'
 
-import { types as ApiUserTypes } from '../../api/users'
-import * as Types from '../../types/general.types'
 import { USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
 

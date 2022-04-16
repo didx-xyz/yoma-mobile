@@ -8,7 +8,6 @@ import { middleware as ApiMiddleware, utils as ApiUtils, apiConfig } from '~/api
 import { types as ApiUsersTypes } from '~/api/users'
 import { middleware as AppMiddleware } from '~/modules/App'
 import { middleware as AuthMiddleware } from '~/modules/Auth'
-import { getUserFromOAuthFlow } from '~/modules/Auth/Auth.middleware'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { middleware as JobsMiddleware } from '~/modules/Jobs'
@@ -16,7 +15,6 @@ import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
 import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '~/modules/User'
-import { fetchUserDetailsFlow, fetchUserDetailsSuccessFlow, hydrateUserFlow } from '~/modules/User/User.middleware'
 import { middleware as UserChallengesMiddleware } from '~/modules/UserChallenges'
 import { middleware as UserJobsMiddleware } from '~/modules/UserJobs'
 import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualifications'
@@ -41,7 +39,7 @@ const featureModuleMiddleware = [
   AuthMiddleware.authorizeSuccessFlow,
   AuthMiddleware.authorizeWithRefreshTokenFailureFlow,
   AuthMiddleware.authorizeWithRefreshTokenFlow,
-  AuthMiddleware.getUserFromOAuthFlow,
+  AuthMiddleware.fetchUserFromOAuthFlow,
   AuthMiddleware.deleteSecureRefreshTokenFlow(SecureStore.deleteItemAsync),
   AuthMiddleware.getSecureRefreshTokenFlow(SecureStore.getItemAsync),
   AuthMiddleware.loginFailureFlow({ notification: showSimpleMessage }),

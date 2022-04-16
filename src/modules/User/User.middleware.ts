@@ -6,7 +6,7 @@ import { constants as ApiUsersConstants } from '~/api/users'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { showSimpleMessage } from '~/utils/error'
 
-import { getUserFromOAuthSuccess } from '../Auth/Auth.reducer'
+import { fetchUserFromOAuthSuccess } from '../Auth/Auth.reducer'
 import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import * as Navigation from '../Navigation/Navigation.utils'
 import { CAPTURE_IMAGE_OPTIONS } from './User.constants'
@@ -41,7 +41,7 @@ export const setUserOnAuthFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    if (getUserFromOAuthSuccess.match(action)) {
+    if (fetchUserFromOAuthSuccess.match(action)) {
       const user = extractUserFromPayload(action)
       dispatch(setUser(user))
       dispatch(hydrateUser())

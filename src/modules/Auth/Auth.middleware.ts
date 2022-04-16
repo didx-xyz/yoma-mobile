@@ -19,12 +19,12 @@ import {
   deleteSecureRefreshToken,
   deleteSecureRefreshTokenFailure,
   deleteSecureRefreshTokenSuccess,
+  fetchUserFromOAuth,
+  fetchUserFromOAuthFailure,
+  fetchUserFromOAuthSuccess,
   getSecureRefreshToken,
   getSecureRefreshTokenFailure,
   getSecureRefreshTokenSuccess,
-  getUserFromOAuth,
-  getUserFromOAuthFailure,
-  getUserFromOAuthSuccess,
   login,
   loginFailure,
   loginSuccess,
@@ -140,7 +140,7 @@ export const authorizeSuccessFlow: Middleware =
       const refreshToken = extractRefreshTokenFromAuthorizedPayload(action)
       dispatch(setAuthCredentials(credentials))
       dispatch(setSecureRefreshToken(refreshToken))
-      dispatch(getUserFromOAuth())
+      dispatch(fetchUserFromOAuth())
       dispatch(AppActions.hydrateApp())
     }
     return result
@@ -180,18 +180,18 @@ export const loginFailureFlow =
     return result
   }
 
-export const getUserFromOAuthFlow: Middleware =
+export const fetchUserFromOAuthFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (getUserFromOAuth.match(action)) {
+    if (fetchUserFromOAuth.match(action)) {
       dispatch(
         ApiActions.apiRequest(
           mergeRight(ApiAuthConstants.USER_INFO_CONFIG, {
-            onSuccess: getUserFromOAuthSuccess,
-            onFailure: getUserFromOAuthFailure,
+            onSuccess: fetchUserFromOAuthSuccess,
+            onFailure: fetchUserFromOAuthFailure,
           }),
           action.payload,
         ),
