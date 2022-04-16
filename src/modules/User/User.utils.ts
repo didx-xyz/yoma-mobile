@@ -2,13 +2,18 @@ import { always, applySpec, equals, filter, find, keys, mergeRight, omit, path, 
 
 import * as ReduxTypes from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
+import { renameKeys } from '~/utils/ramda.utils'
 
 import { types as ApiUserTypes } from '../../api/users'
 import * as Types from '../../types/general.types'
 import { USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
 
-export const extractUserFromLoginPayload = path(['payload', 'data', 'data', 'user'])
+export const extractUserFromPayload = pipe(
+  path(['payload', 'data']),
+  renameKeys({ sub: 'id', family_name: 'firstName', given_name: 'lastName' }),
+)
+
 export const extractUserFromUserUpdateSuccess = path(['payload', 'data', 'data'])
 export const extractUserFromUpdateUserPayload = pick([
   'firstName',

@@ -23,7 +23,7 @@ import {
   uploadUserPhotoFailure,
   uploadUserPhotoSuccess,
 } from './User.reducer'
-import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
+import { extractUserFromPayload, extractUserFromUserUpdateSuccess } from './User.utils'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
@@ -50,7 +50,7 @@ describe('modules/User/User.middleware', () => {
 
       // when ... we respond to the loginSuccess action
       const { invoke, store } = create(SUT.setUserOnAuthFlow)
-      const userData = extractUserFromLoginPayload(action)
+      const userData = extractUserFromPayload(action)
       invoke(action)
 
       // then ... setUser should be called

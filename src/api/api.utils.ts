@@ -71,10 +71,10 @@ export const prepareApiRequest = (state: RootState, action: any): PrepareApiRequ
 
 export const apiCall: ApiCall =
   instance =>
-  ({ client, endpoint, method, token, data, params, headers, config = {} }: ApiClientArgs) =>
+  ({ urlSuffix, client, endpoint, method, token, data, params, headers, config = {} }: ApiClientArgs) =>
     instance.request({
       method,
-      url: generateSanitisedEndpoint([client, endpoint]),
+      url: generateSanitisedEndpoint([urlSuffix, client, endpoint]),
       data,
       headers: addHeaders({})([headers, setAuthTokenHeader(token)]),
       params,

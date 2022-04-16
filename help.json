@@ -1,6 +1,6 @@
 {
-  "env:dev": "generate environment file (env.json) with dev variables",
-  "env:test": "generate environment file (env.json) with test variables (for use by circleci primarily)",
+  "make_env:dev": "generate environment file (env.json) with dev variables",
+  "make_env:test": "generate environment file (env.json) with test variables (for use by circleci primarily)",
   "init": "initialize package",
   "init:ios": "init app for ios",
   "ios": "serve app on ios simulator",

@@ -21,9 +21,9 @@ export interface OAuthCredentialsResponse {
   authorizeAdditionalParameters?: OAuthAdditionalParams
 }
 
-export interface OAuthLoginSuccessResponse extends AuthRefreshTokenResponse, OAuthCredentialsResponse {}
+export type OAuthLoginSuccessResponse = AuthRefreshTokenResponse & OAuthCredentialsResponse
 
-export type AuthLoginFailureResponse = string
+export type OAuthLoginFailureResponse = string
 
 export type AuthState = {
   token: string

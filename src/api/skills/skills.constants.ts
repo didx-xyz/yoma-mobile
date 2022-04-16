@@ -1,11 +1,14 @@
 import { mergeRight } from 'ramda'
 
+import { API_VERSION_PART } from '~/api/api.constants'
+
 import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
 import { SkillsEndpoints } from './skills.types'
 
 export const SKILLS_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Skills,
   method: ApiMethods.Get,
+  urlSuffix: API_VERSION_PART,
   isTokenRequired: true,
 }
 

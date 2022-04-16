@@ -28,6 +28,12 @@ export const fetchUserCredentials = createAction(`${name} fetchUserCredentials`)
 export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserCredentialsSuccess`)
 export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
 
+export const fetchUserDetails = createAction(`${name} getUserDetails`)
+export const fetchUserDetailsSuccess = createAction(`${name} getUserDetailsSuccess`)
+export const fetchUserDetailsFailure = createAction(`${name} getUserDetailsFailure`)
+
+export const hydrateUser = createAction(`${name} hydrateUser`)
+
 export const setUser = createAction<UserResponse>(`${name} setUser`)
 export const clearUser = createAction(`${name} clearUser`)
 export const updateUser = createAction<UserPayload>(`${name} updateUser`)

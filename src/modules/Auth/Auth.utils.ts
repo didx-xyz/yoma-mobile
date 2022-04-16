@@ -19,5 +19,3 @@ export const prepareCredentials = renameKeys({
   accessTokenExpirationDate: 'expiresAt',
 })
 export const extractRefreshTokenFromAuthorizedPayload = pathOr('', ['payload', 'refreshToken'])
-export const extractMessageFromErrorPayload = pathOr('', ['payload', 'data', 'meta', 'message'])
-export const selectLoginCredentialsFromRegistration = pick(['email', 'password'])

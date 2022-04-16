@@ -1,11 +1,10 @@
 import { isAnyOf } from '@reduxjs/toolkit'
 import { mergeRight } from 'ramda'
-import { authorize as OAuthAutherize } from 'react-native-app-auth'
+import { authorize as OAuthAuthorize } from 'react-native-app-auth'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiAuthConstants } from '~/api/auth'
-import { constants as oAuthConstants } from '~/oauth'
 import { showSimpleMessage } from '~/utils/error'
 
 // avoiding circular dependencies:
@@ -23,6 +22,9 @@ import {
   getSecureRefreshToken,
   getSecureRefreshTokenFailure,
   getSecureRefreshTokenSuccess,
+  getUserFromOAuth,
+  getUserFromOAuthFailure,
+  getUserFromOAuthSuccess,
   login,
   loginFailure,
   loginSuccess,
@@ -116,7 +118,7 @@ export const loginFlow: Middleware =
 
     if (login.match(action)) {
       try {
-        const result: OAuthLoginSuccessResponse = await OAuthAutherize(oAuthConstants.config)
+        const result: OAuthLoginSuccessResponse = await OAuthAuthorize(ApiAuthConstants.OAUTH_SETUP_CONFIG)
         dispatch(loginSuccess(result))
       } catch (error) {
         dispatch(loginFailure(error))
@@ -138,6 +140,7 @@ export const authorizeSuccessFlow: Middleware =
       const refreshToken = extractRefreshTokenFromAuthorizedPayload(action)
       dispatch(setAuthCredentials(credentials))
       dispatch(setSecureRefreshToken(refreshToken))
+      dispatch(getUserFromOAuth())
       dispatch(AppActions.hydrateApp())
     }
     return result
@@ -172,6 +175,27 @@ export const loginFailureFlow =
       // TODO: this should be handled by the notification module
       // @ts-ignore
       notification('danger', 'An error occurred.', action.payload.message)
+    }
+
+    return result
+  }
+
+export const getUserFromOAuthFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (getUserFromOAuth.match(action)) {
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.USER_INFO_CONFIG, {
+            onSuccess: getUserFromOAuthSuccess,
+            onFailure: getUserFromOAuthFailure,
+          }),
+          action.payload,
+        ),
+      )
     }
 
     return result

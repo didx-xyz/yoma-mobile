@@ -1,5 +1,5 @@
 {
-  "YOMA_API_BASE_PATH": "https://staging.api.yoma.africa/api/v1/",
+  "YOMA_API_BASE_PATH": "https://staging.api.yoma.africa/",
   "YOMA_WEB_BASE_PATH": "https://staging.app.yoma.africa/",
   "OAUTH_BASE_PATH": "https://staging.api.yoma.africa"
 }

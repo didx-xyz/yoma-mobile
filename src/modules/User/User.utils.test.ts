@@ -16,7 +16,7 @@ describe('modules/User/User.utils', () => {
         },
       }
       // when extractUserFromLoginPayload
-      const result = SUT.extractUserFromLoginPayload(credentials)
+      const result = SUT.extractUserFromPayload(credentials)
       //then expect user response data
       expect(result).toEqual(USER_RESPONSE)
     })
