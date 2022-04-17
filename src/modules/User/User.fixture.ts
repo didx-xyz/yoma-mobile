@@ -4,6 +4,7 @@ import { UserCredentials, UserResponse } from './User.types'
 
 export const USER_RESPONSE: UserResponse = {
   id: 'xxxxxxxx-xxx-xxx-xxx-xxxxxxxxxxxx',
+  name: 'Joe Soap',
   firstName: 'Joe',
   lastName: 'Soap',
   phoneNumber: '12324567890',
