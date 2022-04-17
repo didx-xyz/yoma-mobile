@@ -8,7 +8,6 @@ import { constants as ApiAuthConstants } from '~/api/auth'
 import { actions as AppActions } from '../App'
 import { actions as ErrorActions } from '../Error'
 import * as SUT from './Auth.middleware'
-import { fetchUserFromOAuthFlow } from './Auth.middleware'
 import {
   authorize,
   authorizeWithRefreshTokenFailure,
