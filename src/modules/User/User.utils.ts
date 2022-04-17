@@ -11,7 +11,7 @@ import { UserCredentialFormValues, UserCredentialItemPayload } from './User.type
 
 export const extractUserFromPayload = pipe(
   path(['payload', 'data']),
-  renameKeys({ sub: 'id', family_name: 'firstName', given_name: 'lastName' }),
+  renameKeys({ sub: 'id', family_name: 'lastName', given_name: 'firstName' }),
 )
 
 export const extractUserFromUserUpdateSuccess = path(['payload', 'data', 'data'])

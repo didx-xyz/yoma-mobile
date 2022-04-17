@@ -10,16 +10,20 @@ describe('modules/User/User.utils', () => {
       const credentials = {
         payload: {
           data: {
-            data: {
-              user: USER_RESPONSE,
-            },
+            sub: 'MOCK_ID',
+            family_name: 'MOCK_LAST_NAME',
+            given_name: 'MOCK_FIRST_NAME',
           },
         },
       }
       // when extractUserFromLoginPayload
       const result = SUT.extractUserFromPayload(credentials)
       //then expect user response data
-      expect(result).toEqual(USER_RESPONSE)
+      expect(result).toEqual({
+        id: 'MOCK_ID',
+        lastName: 'MOCK_LAST_NAME',
+        firstName: 'MOCK_FIRST_NAME',
+      })
     })
   })
   describe('extractUserFromUserUpdateSuccess', () => {
