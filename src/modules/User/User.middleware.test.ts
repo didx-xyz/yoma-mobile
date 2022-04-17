@@ -1,8 +1,28 @@
+import { mergeRight } from 'ramda'
+
 import { createMiddlewareMock } from '~/../tests/tests.utils'
+import { actions as ApiActions, utils as ApiUtils } from '~/api'
+import { constants as ApiUsersConstants } from '~/api/users'
 import { fetchUserFromOAuthSuccess } from '~/modules/Auth/Auth.reducer'
 import { OAuthUserResponse } from '~/modules/Auth/Auth.types'
-import { hydrateUser, setUser } from '~/modules/User/User.reducer'
-import { extractUserFromPayload } from '~/modules/User/User.utils'
+import { USER_RESPONSE } from '~/modules/User/User.fixture'
+import {
+  fetchUserCredentials,
+  fetchUserCredentialsFailure,
+  fetchUserCredentialsSuccess,
+  hydrateUser,
+  setUser,
+  updateUser,
+  updateUserFailure,
+  updateUserPhotoFailure,
+  updateUserPhotoSuccess,
+  updateUserSuccess,
+  uploadUserPhoto,
+  uploadUserPhotoFailure,
+  uploadUserPhotoSuccess,
+} from '~/modules/User/User.reducer'
+import { extractUserFromPayload, extractUserFromUserUpdateSuccess } from '~/modules/User/User.utils'
+import { rootStateFixture } from '~/redux/redux.fixture'
 
 import * as SUT from './User.middleware'
 
