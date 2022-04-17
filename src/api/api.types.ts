@@ -45,7 +45,15 @@ export interface ApiClientMetaOverlap {
   config?: Partial<AxiosRequestConfig>
 }
 
-export interface ApiMetaResponse {
+export type ApiResponseStatus = number
+
+export interface ApiResponseHeaders {
+  'content-type': string
+  date: string
+  server: string
+}
+
+export interface ApiResponseMeta {
   success: boolean
   code: number
   message: string | null

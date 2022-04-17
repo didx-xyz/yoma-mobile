@@ -1,8 +1,9 @@
 import { DocumentPickerResponse } from 'react-native-document-picker'
 
-import * as ReduxTypes from '../../redux/redux.types'
-import * as Types from '../../types/general.types'
-import { types as AuthTypes } from '../Auth'
+import { types as ApiTypes } from '~/api'
+import * as ReduxTypes from '~/redux/redux.types'
+import * as Types from '~/types/general.types'
+
 import { types as ChallengesTypes } from '../Challenges'
 import { types as CompletedChallengesFormTypes } from '../CompletedChallenges/Form'
 import { types as UserTypes } from '../User'
@@ -25,7 +26,7 @@ export type CreateUserChallengePayload = Types.Modify<
 
 export interface CreateUserChallengeSuccessResponse {
   data: UserChallengeResponse
-  meta: AuthTypes.ApiMetaResponse
+  meta: ApiTypes.ApiResponseMeta
 }
 export type NormalisedUserChallenges = ReduxTypes.NormalisedData<UserChallenge>
 

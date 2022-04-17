@@ -36,6 +36,7 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
 
 export const extractCredentialsByType = (type: ApiUserTypes.UserCredentialTypes) =>
   filter(pipe(keys, find(equals(toLower(type)))))
+
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
   mergeRight({
     credentialItemId: ReduxUtils.extractId(action),

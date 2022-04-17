@@ -11,9 +11,9 @@ export const login = createAction(`${name} login`)
 export const loginSuccess = createAction<OAuthLoginSuccessResponse>(`${name} loginSuccess`)
 export const loginFailure = createAction<OAuthLoginFailureResponse>(`${name} loginFailure`)
 
-export const fetchUserFromOAuth = createAction(`${name} getUserFromOAuth`)
-export const fetchUserFromOAuthSuccess = createAction<OAuthUserResponse>(`${name} getUserFromOAuthSuccess`)
-export const fetchUserFromOAuthFailure = createAction<string>(`${name} getUserFromOAuthFailure`)
+export const fetchUserFromOAuth = createAction(`${name} fetchUserFromOAuth`)
+export const fetchUserFromOAuthSuccess = createAction<OAuthUserResponse>(`${name} fetchUserFromOAuthSuccess`)
+export const fetchUserFromOAuthFailure = createAction<string>(`${name} fetchUserFromOAuthFailure`)
 
 export const getSecureRefreshToken = createAction(`${name} getSecureRefreshToken`)
 export const getSecureRefreshTokenSuccess = createAction<string>(`${name} getSecureRefreshTokenSuccess`)
@@ -35,14 +35,12 @@ export const authorizeWithRefreshTokenFailure = createAction<string>(`${name} au
 export const clearAuth = createAction(`${name} clearAuth`)
 
 export const setAuthCredentials = createAction<AuthState>(`${name} setAuthCredentials`)
-export const setUserLoginCredentials = createAction<AuthState>(`${name} setUserLoginCredentials`)
 
 export const logout = createAction(`${name} logout`)
 
 const authReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(clearAuth, () => INITIAL_STATE)
   builder.addCase(setAuthCredentials, (state, action) => mergeDeepRight(state)(action.payload))
-  builder.addCase(setUserLoginCredentials, (state, action) => mergeDeepRight(state)(action.payload))
 })
 
 export default authReducer

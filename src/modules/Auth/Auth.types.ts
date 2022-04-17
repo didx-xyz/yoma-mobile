@@ -1,8 +1,4 @@
-export interface ApiMetaResponse {
-  success: boolean
-  code: number
-  message: string | null
-}
+import { ApiResponseHeaders } from '~/api/api.types'
 
 export interface AuthRefreshTokenResponse {
   refreshToken: string
@@ -32,11 +28,8 @@ export interface OAuthUserResponseData {
   sub: string
 }
 
-export interface OAuthUserResponseHeaders {
-  'content-type': string
-  date: string
+export interface OAuthUserResponseHeaders extends ApiResponseHeaders {
   'cache-control': string
-  server: string
   pragma: string
 }
 
@@ -54,16 +47,6 @@ export type AuthState = {
   scopes: OAuthScopes
   tokenAdditionalParameters?: OAuthAdditionalParams
   authorizeAdditionalParameters?: OAuthAdditionalParams
-}
-
-export interface AuthRegistration {
-  firstName: string
-  lastName: string
-  email: string
-  countryAlpha2: string
-  password: string
-  confirmPassword: string
-  privacyInd: boolean
 }
 
 export type SecureStorageRefreshToken = string | null

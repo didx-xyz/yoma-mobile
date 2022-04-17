@@ -1,4 +1,4 @@
-import { ApiMetaResponse } from '~/modules/Auth/Auth.types'
+import { types as ApiTypes } from '~/api'
 
 export type Skill = {
   key: string
@@ -12,7 +12,7 @@ export type NormalisedSkills = {
 
 export type SkillsResponse = {
   data: { data: Skill[] }
-  meta: ApiMetaResponse
+  meta: ApiTypes.ApiResponseMeta
 }
 
 export interface SkillsState extends NormalisedSkills {

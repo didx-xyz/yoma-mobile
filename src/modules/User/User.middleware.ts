@@ -84,6 +84,19 @@ export const fetchUserDetailsFlow: Middleware =
     return result
   }
 
+export const fetchUserDetailsSuccessFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserDetailsSuccess.match(action)) {
+      const user = extractUserFromUserUpdateSuccess(action)
+      dispatch(setUser(user))
+    }
+    return result
+  }
+
 export const updateUserFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
@@ -104,19 +117,6 @@ export const updateUserFlow: Middleware =
           patchPayload,
         ),
       )
-    }
-    return result
-  }
-
-export const fetchUserDetailsSuccessFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (fetchUserDetailsSuccess.match(action)) {
-      const user = extractUserFromUserUpdateSuccess(action)
-      dispatch(setUser(user))
     }
     return result
   }

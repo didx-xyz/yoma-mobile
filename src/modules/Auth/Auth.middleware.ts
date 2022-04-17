@@ -193,7 +193,6 @@ export const fetchUserFromOAuthFlow: Middleware =
             onSuccess: fetchUserFromOAuthSuccess,
             onFailure: fetchUserFromOAuthFailure,
           }),
-          action.payload,
         ),
       )
     }

@@ -8,6 +8,7 @@ import { constants as ApiAuthConstants } from '~/api/auth'
 import { actions as AppActions } from '../App'
 import { actions as ErrorActions } from '../Error'
 import * as SUT from './Auth.middleware'
+import { fetchUserFromOAuthFlow } from './Auth.middleware'
 import {
   authorize,
   authorizeWithRefreshTokenFailure,
@@ -15,6 +16,9 @@ import {
   deleteSecureRefreshToken,
   deleteSecureRefreshTokenFailure,
   deleteSecureRefreshTokenSuccess,
+  fetchUserFromOAuth,
+  fetchUserFromOAuthFailure,
+  fetchUserFromOAuthSuccess,
   getSecureRefreshToken,
   getSecureRefreshTokenFailure,
   getSecureRefreshTokenSuccess,
@@ -332,6 +336,47 @@ describe('modules/Auth/Auth.middleware', () => {
 
       // then ... the login API should be called
       expect(mockNotification).toHaveBeenCalled()
+    })
+  })
+  describe('fetchUserFromOAuthFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      // @ts-ignore - partial mocking for test only
+      const create = createMiddlewareMock(jest)
+      const action = fetchUserFromOAuth()
+
+      // @ts-ignore
+      const { invoke, next, store } = create(SUT.fetchUserFromOAuthFlow)
+
+      // when ... we handle successfully retrieving the refresh token
+      invoke(action)
+
+      // then ...
+      // ... we should make sure that we pass the action on
+      expect(next).toHaveBeenCalledWith(action)
+      // ... we should try to retrieve the token
+      expect(store.dispatch).toHaveBeenCalled()
+    })
+    it('should correctly call the user info api', () => {
+      // given ...
+      // @ts-ignore - partial mocking for test only
+      const create = createMiddlewareMock(jest)
+      const action = fetchUserFromOAuth()
+      // @ts-ignore
+      const { invoke, store } = create(SUT.fetchUserFromOAuthFlow)
+
+      // when ... we need to fetch the user info from the oath server
+      invoke(action)
+
+      // then ... we should correctly call the oath server
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.USER_INFO_CONFIG, {
+            onSuccess: fetchUserFromOAuthSuccess,
+            onFailure: fetchUserFromOAuthFailure,
+          }),
+        ),
+      )
     })
   })
   describe('logoutFlow', () => {

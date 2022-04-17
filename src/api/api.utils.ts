@@ -50,17 +50,17 @@ export const createTypeParam = createParam('type')
 export const generateSanitisedEndpoint = pipe(flatten, filter(complement(isNil)), join('/'))
 export const addHeaders = (headers: StdObj<string>) => pipe(concat([headers]), mergeAll)
 export const setAuthTokenHeader = unless(isNil, pipe(concat('Bearer '), objOf('Authorization')))
-export const getTokenFromState = pathOr(null, ['auth', 'token'])
+export const selectToken = pathOr(null, ['auth', 'token'])
 
-export const getTokenIfRequired = (state: RootState) =>
-  ifElse(equals(true), always(getTokenFromState(state)), always(undefined))
+export const selectTokenIfRequired = (state: RootState) =>
+  ifElse(equals(true), always(selectToken(state)), always(undefined))
 
 export const prepareApiRequest = (state: RootState, action: any): PrepareApiRequestData => {
   //@ts-ignore - will properly type once we get the action with meta data
   const { payload: data, meta } = action
   const { onSuccess, onFailure, isTokenRequired, ...args } = meta
 
-  const token = getTokenIfRequired(state)(isTokenRequired)
+  const token = selectTokenIfRequired(state)(isTokenRequired)
   const apiArgs = {
     token,
     data,
