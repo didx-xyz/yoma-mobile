@@ -25,6 +25,27 @@ export type OAuthLoginSuccessResponse = AuthRefreshTokenResponse & OAuthCredenti
 
 export type OAuthLoginFailureResponse = string
 
+export interface OAuthUserResponseData {
+  name: string
+  family_name: string
+  given_name: string
+  sub: string
+}
+
+export interface OAuthUserResponseHeaders {
+  'content-type': string
+  date: string
+  'cache-control': string
+  server: string
+  pragma: string
+}
+
+export interface OAuthUserResponse {
+  data: OAuthUserResponseData
+  status: number
+  headers: OAuthUserResponseHeaders
+}
+
 export type AuthState = {
   token: string
   expiresAt: string

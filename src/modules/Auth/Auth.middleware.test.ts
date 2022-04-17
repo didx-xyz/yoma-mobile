@@ -259,7 +259,6 @@ describe('modules/Auth/Auth.middleware', () => {
         tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
         authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
       }
-      expect(store.dispatch).toHaveBeenCalledTimes(3)
       expect(store.dispatch).toHaveBeenCalledWith(setAuthCredentials(mockResponse))
       expect(store.dispatch).toHaveBeenCalledWith(setSecureRefreshToken('REFRESH_TOKEN'))
       expect(store.dispatch).toHaveBeenCalledWith(AppActions.hydrateApp())
