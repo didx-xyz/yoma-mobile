@@ -227,6 +227,7 @@ describe('modules/User/User.middleware', () => {
     it('should correctly handle being called', () => {
       // given ... a user object with an id in state
       const userId = 'A USER ID'
+      // @ts-ignore - only partially mocked state shape for testing purposes
       const create = createMiddlewareMock(jest, { user: { id: userId } })
       const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(
         userId,
@@ -342,6 +343,7 @@ describe('modules/User/User.middleware', () => {
   describe('uploadUserPhotoSuccessFlow', () => {
     it('should correctly handle being called', () => {
       const userId = 'USER ID'
+      // @ts-ignore - only partially mocked state shape for testing purposes
       const create = createMiddlewareMock(jest, { user: { id: userId } })
 
       // given ... the uploadUserPhotoSuccess action is fired
@@ -357,6 +359,7 @@ describe('modules/User/User.middleware', () => {
     })
     it('should correctly upload user profile photo', () => {
       const userId = 'USER ID'
+      // @ts-ignore - only partially mocked state shape for testing purposes
       const create = createMiddlewareMock(jest, { user: { id: userId } })
 
       // given ... the uploadUserPhotoSuccess action is fired
