@@ -1,18 +1,23 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
-import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import { CAPTURE_IMAGE_OPTIONS } from '~/modules/User/User.constants'
+import { actions as ApiActions, utils as ApiUtils } from '~/api'
+import { constants as ApiUsersConstants } from '~/api/users'
+import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { showSimpleMessage } from '~/utils/error'
 
-import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { constants as ApiUsersConstants } from '../../api/users'
-import { loginSuccess } from '../Auth/Auth.reducer'
+import { fetchUserFromOAuthSuccess } from '../Auth/Auth.reducer'
+import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
 import * as Navigation from '../Navigation/Navigation.utils'
+import { CAPTURE_IMAGE_OPTIONS } from './User.constants'
 import {
   fetchUserCredentials,
   fetchUserCredentialsFailure,
   fetchUserCredentialsSuccess,
+  fetchUserDetails,
+  fetchUserDetailsFailure,
+  fetchUserDetailsSuccess,
+  hydrateUser,
   setUser,
   updateUser,
   updateUserFailure,
@@ -26,7 +31,7 @@ import {
 import { selectId } from './User.selector'
 import { UploadUserPhotoFlowDependencies } from './User.types'
 import {
-  extractUserFromLoginPayload,
+  extractUserFromPayload,
   extractUserFromUpdateUserPayload,
   extractUserFromUserUpdateSuccess,
 } from './User.utils'
@@ -36,8 +41,57 @@ export const setUserOnAuthFlow: Middleware =
   next =>
   action => {
     const result = next(action)
-    if (loginSuccess.match(action)) {
-      const user = extractUserFromLoginPayload(action)
+    if (fetchUserFromOAuthSuccess.match(action)) {
+      const user = extractUserFromPayload(action)
+      dispatch(setUser(user))
+      dispatch(hydrateUser())
+    }
+    return result
+  }
+
+export const hydrateUserFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (hydrateUser.match(action)) {
+      dispatch(fetchUserDetails())
+      dispatch(fetchUserCredentials())
+      dispatch(UserSkillsActions.fetchUserSkills())
+    }
+    return result
+  }
+
+export const fetchUserDetailsFlow: Middleware =
+  ({ getState, dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchUserDetails.match(action)) {
+      const state = getState()
+      const userId = selectId(state)
+
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiUsersConstants.USERS_GET_BY_ID_CONFIG, {
+            onSuccess: fetchUserDetailsSuccess,
+            onFailure: fetchUserDetailsFailure,
+            endpoint: userId,
+          }),
+        ),
+      )
+    }
+    return result
+  }
+
+export const fetchUserDetailsSuccessFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserDetailsSuccess.match(action)) {
+      const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
     }
     return result

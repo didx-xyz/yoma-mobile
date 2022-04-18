@@ -1,4 +1,4 @@
-import { NormalisedData } from '../../redux/redux.types'
+import { NormalisedData } from '~/redux/redux.types'
 
 export interface Challenge {
   approvedCredentials?: number

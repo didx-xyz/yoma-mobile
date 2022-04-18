@@ -1,3 +1,4 @@
+declare module 'form-data'
 declare module 'ramda' {
   export function __(...rest: any[]): any[]
   export function always(...rest: any[]): any[]

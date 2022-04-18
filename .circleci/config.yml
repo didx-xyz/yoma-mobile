@@ -45,7 +45,7 @@ commands:
     steps:
       - run:
           name: 'Create Test Env'
-          command: npm run env:test
+          command: npm run make_env:test
   bundle:
     description: 'Bundle Android JS code'
     steps:

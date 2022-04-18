@@ -148,6 +148,9 @@ android {
         versionCode 51
         versionName "0.0.1"
         multiDexEnabled true
+        manifestPlaceholders = [
+                appAuthRedirectScheme: 'com.yomamobile.auth'
+        ]
     }
     splits {
         abi {

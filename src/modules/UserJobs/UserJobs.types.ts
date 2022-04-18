@@ -1,4 +1,4 @@
-import { ApiMetaResponse } from '~/api/api.types'
+import { ApiResponseMeta } from '~/api/api.types'
 
 import * as UserTypes from '../User/User.types'
 
@@ -37,7 +37,7 @@ export interface UserJobCredential extends UserTypes.UserCredentialMeta {
 }
 export interface UserJobsResponse {
   data: { data: UserJobCredential }
-  meta: ApiMetaResponse
+  meta: ApiResponseMeta
 }
 
 export interface NormalisedUserJobs {

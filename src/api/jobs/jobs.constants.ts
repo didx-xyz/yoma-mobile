@@ -1,10 +1,13 @@
 import { mergeRight } from 'ramda'
 
+import { API_VERSION_PART } from '~/api/api.constants'
+
 import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
 
 export const JOBS_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Jobs,
   method: ApiMethods.Get,
+  urlSuffix: API_VERSION_PART,
   isTokenRequired: true,
 }
 

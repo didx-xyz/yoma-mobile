@@ -1,4 +1,4 @@
-import { ApiMetaResponse } from '~/api/api.types'
+import { ApiResponseMeta } from '~/api/api.types'
 
 export interface SkillVerification {
   name: string
@@ -17,7 +17,7 @@ export interface UserSkill {
 
 export interface UserSkillsResponse {
   data: { data: UserSkill[] }
-  meta: ApiMetaResponse
+  meta: ApiResponseMeta
 }
 
 export interface NormalisedUserSkills {

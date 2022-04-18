@@ -1,13 +1,20 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeDeepRight } from 'ramda'
 
-import { UpdateUserFailureResponse, UpdateUserResponse, UserPayload, UserResponse } from './User.types'
+import {
+  UpdateUserFailureResponse,
+  UpdateUserResponse,
+  UserDetailsResponse,
+  UserPayload,
+  UserResponse,
+} from './User.types'
 
 const name = '[User]'
 export const INITIAL_STATE = {
   id: '',
   firstName: '',
   lastName: '',
+  name: '',
   email: '',
   countryAlpha2: '',
   phoneNumber: null,
@@ -27,6 +34,12 @@ export const INITIAL_STATE = {
 export const fetchUserCredentials = createAction(`${name} fetchUserCredentials`)
 export const fetchUserCredentialsSuccess = createAction<any>(`${name} fetchUserCredentialsSuccess`)
 export const fetchUserCredentialsFailure = createAction<string>(`${name} fetchUserCredentialsFailure`)
+
+export const fetchUserDetails = createAction(`${name} fetchUserDetails`)
+export const fetchUserDetailsSuccess = createAction<UserDetailsResponse>(`${name} fetchUserDetailsSuccess`)
+export const fetchUserDetailsFailure = createAction(`${name} fetchUserDetailsFailure`)
+
+export const hydrateUser = createAction(`${name} hydrateUser`)
 
 export const setUser = createAction<UserResponse>(`${name} setUser`)
 export const clearUser = createAction(`${name} clearUser`)
