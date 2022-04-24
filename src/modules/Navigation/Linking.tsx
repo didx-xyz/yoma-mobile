@@ -2,7 +2,7 @@ import { LinkingOptions, PathConfigMap } from '@react-navigation/native'
 
 import Env from '../../env.json'
 
-const screens: PathConfigMap = {
+const screens: PathConfigMap<any> = {
   Authentication: {
     path: '',
     screens: {
@@ -22,7 +22,7 @@ const config = {
   screens: screens,
 }
 
-const linking: LinkingOptions = {
+const linking: LinkingOptions<any> = {
   prefixes: [Env.YOMA_WEB_BASE_PATH],
   config,
 }

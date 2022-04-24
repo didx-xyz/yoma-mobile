@@ -24,6 +24,9 @@ export const setI18nConfig = () => {
     interpolation: {
       escapeValue: false,
     },
+    react: {
+      useSuspense: false,
+    },
   })
 }
 
