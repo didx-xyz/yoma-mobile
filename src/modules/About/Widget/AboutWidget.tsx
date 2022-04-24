@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -8,7 +8,7 @@ import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigat
 
 interface Props {
   biography: string
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
 const AboutWidget = ({ biography, navigation }: Props) => {
   const { t } = useTranslation()

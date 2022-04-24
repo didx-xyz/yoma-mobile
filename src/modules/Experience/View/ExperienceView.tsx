@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -8,7 +8,7 @@ import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigat
 
 interface Props {
   onAdd: () => void
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
   userJobs: CvViewCredentialTypes.CvViewCredentialsData
 }
 

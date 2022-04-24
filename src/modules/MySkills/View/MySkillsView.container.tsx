@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -8,7 +8,7 @@ import selector from './MySkillsView.selector'
 
 interface Props {
   onAdd: () => void
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MySkills>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MySkills>
 }
 
 const MySkillsViewContainer = ({ navigation, onAdd }: Props) => {

@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { FormikProps } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -22,7 +22,7 @@ import { types as HomeNavigationTypes } from '../../HomeNavigation'
 import styles from './EducationForm.styles'
 
 interface Props {
-  navigation: StackNavigationProp<
+  navigation: NativeStackNavigationProp<
     HomeNavigationTypes.HomeNavigatorParamsList,
     HomeNavigationTypes.HomeNavigationRoutes.Education
   >

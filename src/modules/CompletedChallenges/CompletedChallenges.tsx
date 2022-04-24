@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
 
 import Optional from '../../components/Optional'
@@ -7,7 +7,7 @@ import CompletedChallengesForm from './Form'
 import CompletedChallengesView from './View'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
 }
 
 const CompletedChallenges = ({ navigation }: Props) => {

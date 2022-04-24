@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 
@@ -12,7 +12,7 @@ import { PROFILE_IMAGE_BORDER_WIDTH, PROFILE_IMAGE_RADIUS, PROFILE_IMAGE_SIZE } 
 import styles from './HomeHeader.styles'
 
 type Props = {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
   profileImageUrl: string | null
   profileProgressPercentage?: number
   zltoBalance?: number

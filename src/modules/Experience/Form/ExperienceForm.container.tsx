@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,7 +13,7 @@ import selector from './ExperienceForm.selector'
 import { schema } from './ExperienceForm.validation'
 
 interface Props {
-  navigation: StackNavigationProp<
+  navigation: NativeStackNavigationProp<
     HomeNavigationTypes.HomeNavigatorParamsList,
     HomeNavigationTypes.HomeNavigationRoutes.Experience
   >
