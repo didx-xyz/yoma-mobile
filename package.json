@@ -88,7 +88,6 @@
     "@types/form-data": "2.5.0",
     "@types/jest": "^27.4.1",
     "@types/react-native": "^0.66.0",
-    "@types/react-redux": "^7.1.24",
     "@types/react-test-renderer": "^17.0.2",
     "@types/yup": "^0.29.11",
     "@typescript-eslint/eslint-plugin": "^5.20.0",
