@@ -25,7 +25,8 @@ const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
 const screenOptions = {
-  tabBarTabStyle: {
+  headerShown: false,
+  tabBarItemStyle: {
     backgroundColor: colors[Colors.PrimaryPurple],
     paddingBottom: 2,
   },
