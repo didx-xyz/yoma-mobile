@@ -140,7 +140,7 @@ export const createUserQualificationSuccessFlow =
         dispatch(createUserQualificationCertificate({ id: data.id, certificate }))
       }
       dispatch(clearUserQualificationFormValues())
-      NavigationUtils.navigate(HomeNavigationRoutes.Home)
+      NavigationUtils.navigate(HomeNavigationRoutes.HomeBase)
       notification('success', 'Your Qualification has been added.')
     }
     return result

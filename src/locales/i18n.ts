@@ -1,4 +1,5 @@
 import i18n from 'i18next'
+import 'intl-pluralrules'
 import { initReactI18next } from 'react-i18next'
 import * as RNLocalize from 'react-native-localize'
 

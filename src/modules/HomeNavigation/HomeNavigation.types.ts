@@ -1,5 +1,5 @@
 export enum HomeNavigationRoutes {
-  Home = 'Home',
+  HomeBase = 'HomeBase',
   Profile = 'Profile',
   MyCv = 'MyCv',
   About = 'About',
@@ -18,7 +18,7 @@ export enum HomeTabRoutes {
 }
 
 export type HomeNavigatorParamsList = {
-  [HomeNavigationRoutes.Home]: undefined
+  [HomeNavigationRoutes.HomeBase]: undefined
   [HomeNavigationRoutes.Profile]: undefined
   [HomeNavigationRoutes.MyCv]: undefined
   [HomeNavigationRoutes.About]: undefined

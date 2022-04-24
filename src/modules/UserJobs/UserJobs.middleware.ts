@@ -183,7 +183,7 @@ export const fetchUserJobByIdSuccessFlow =
       // TODO: this should be handled by the notification module
       notification('success', 'Details saved!')
       //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Home)
+      Navigation.navigate(HomeNavigationRoutes.HomeBase)
     }
     return result
   }

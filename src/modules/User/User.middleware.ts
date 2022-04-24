@@ -132,7 +132,7 @@ export const updateUserSuccessFlow =
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
       //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Home)
+      Navigation.navigate(HomeNavigationRoutes.HomeBase)
       // TODO: this should be handled by the notification module
       notification('success', 'Details Updated')
     }
