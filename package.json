@@ -85,7 +85,7 @@
     "@testing-library/jest-native": "^4.0.4",
     "@testing-library/react-native": "^9.1.0",
     "@trivago/prettier-plugin-sort-imports": "^3.2.0",
-    "@types/common-tags": "^1.8.2",
+    "@types/common-tags": "^1.8.1",
     "@types/form-data": "2.5.0",
     "@types/jest": "^27.4.1",
     "@types/react-native": "^0.66.0",
