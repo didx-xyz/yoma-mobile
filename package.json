@@ -61,7 +61,7 @@
     "react-native-elements": "^3.3.2",
     "react-native-flash-message": "^0.1.24",
     "react-native-flipper": "^0.143.0",
-    "react-native-gesture-handler": "^2.4.1",
+    "react-native-gesture-handler": "^1.10.3",
     "react-native-image-crop-picker": "^0.37.3",
     "react-native-localize": "^2.2.1",
     "react-native-safe-area-context": "^3.4.1",
