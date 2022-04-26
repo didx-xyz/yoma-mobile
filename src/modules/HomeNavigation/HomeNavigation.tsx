@@ -80,7 +80,7 @@ const HomeTabs = () => {
 const HomeNavigation = () => {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={HomeNavigationRoutes.HomeBase} component={HomeTabs} />
+      <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
       <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
       <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />
       <Stack.Screen name={HomeNavigationRoutes.About} component={About} />

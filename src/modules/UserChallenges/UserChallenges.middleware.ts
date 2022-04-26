@@ -90,7 +90,7 @@ export const createUserChallengeSuccessFlow =
       const userChallenge = ReduxUtils.extractDataFromResponseAction(action)
       const normalisedUserChallenge = ReduxUtils.normalise(of(userChallenge))
       notification('success', 'New Challenge successfully created!')
-      navigate(HomeNavigationRoutes.HomeBase)
+      navigate(HomeNavigationRoutes.Home)
       dispatch(updateUserChallenges(normalisedUserChallenge))
       dispatch(createUserChallengeCertificate(userChallenge.id))
     }

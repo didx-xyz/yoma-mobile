@@ -142,7 +142,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
         }),
       )
       expect(notificationMock).toHaveBeenCalled()
-      expect(navigateMock).toHaveBeenCalledWith(HomeNavigationTypes.HomeNavigationRoutes.HomeBase)
+      expect(navigateMock).toHaveBeenCalledWith(HomeNavigationTypes.HomeNavigationRoutes.Home)
     })
   })
   describe('createUserChallengeFailureFlow', () => {

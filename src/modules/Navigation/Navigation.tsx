@@ -17,7 +17,7 @@ const Navigation = ({ isAuthorised }: Props) => (
   <NavigationContainer linking={linking} ref={navigationRef}>
     <Stack.Navigator screenOptions={{ headerShown: false }}>
       {isAuthorised ? (
-        <Stack.Screen name="Home" component={HomeNavigation} />
+        <Stack.Screen name="Authed" component={HomeNavigation} />
       ) : (
         <Stack.Screen name="Landing" component={Landing} />
       )}

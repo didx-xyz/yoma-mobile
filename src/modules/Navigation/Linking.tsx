@@ -1,20 +1,12 @@
 import { LinkingOptions, PathConfigMap } from '@react-navigation/native'
 
-import Env from '../../env.json'
+import Env from '~/env.json'
+import { LandingParamsList } from '~/modules/Landing/Landing.types'
 
-const screens: PathConfigMap<any> = {
+const screens: PathConfigMap<LandingParamsList> = {
   Authentication: {
     path: '',
-    screens: {
-      ResetPassword: {
-        path: 'auth/reset-password',
-        parse: {
-          // TODO: Need to check this + sign becomes empty
-          Token: (Token: string) => `${Token.replace(/ /g, '+')}`,
-          Id: (Id: string) => `${Id}`,
-        },
-      },
-    },
+    screens: {},
   },
 }
 
@@ -22,7 +14,7 @@ const config = {
   screens: screens,
 }
 
-const linking: LinkingOptions<any> = {
+const linking: LinkingOptions<LandingParamsList> = {
   prefixes: [Env.YOMA_WEB_BASE_PATH],
   config,
 }
