@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { FormikProps } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -25,7 +25,7 @@ interface Props {
   skills: DropDownTypes.DropDownItem[]
   organisations: DropDownTypes.DropDownItem[]
   form: FormikProps<any>
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
 const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, form }: Props) => {

@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import { pipe } from 'ramda'
 import React from 'react'
@@ -14,7 +14,7 @@ import { FormFields } from './EducationForm.types'
 import { schema } from './EducationForm.validation'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
 }
 const EducationFormContainer = ({ navigation }: Props) => {
   const { organisations, skills } = useSelector(selector)

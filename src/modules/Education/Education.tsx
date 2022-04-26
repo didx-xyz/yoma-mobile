@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
 
 import Optional from '../../components/Optional'
@@ -7,7 +7,7 @@ import EducationForm from './Form'
 import EducationView from './View'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
 }
 
 const Education = ({ navigation }: Props) => {

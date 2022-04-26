@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { View } from 'react-native'
 
@@ -15,7 +15,7 @@ type Props = WithChildren<{
   title: string
   noDataMessage: string
   onAdd: () => void
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
 }>
 
 const CvView = ({ title, noDataMessage, onAdd, navigation, children }: Props) => {

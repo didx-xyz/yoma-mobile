@@ -1,5 +1,5 @@
-import { BottomTabBarOptions, createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
@@ -21,17 +21,18 @@ import MySkills from '../MySkills/MySkills'
 import Profile from '../Profile'
 import { HomeNavigationRoutes, HomeTabRoutes } from './HomeNavigation.types'
 
-const Stack = createStackNavigator()
+const Stack = createNativeStackNavigator()
 const Tab = createBottomTabNavigator()
 
-const tabBarOptions: BottomTabBarOptions = {
-  tabStyle: {
+const screenOptions = {
+  headerShown: false,
+  tabBarItemStyle: {
     backgroundColor: colors[Colors.PrimaryPurple],
     paddingBottom: 2,
   },
-  activeTintColor: colors[Colors.White],
-  inactiveTintColor: applyAlphaToHex(colors[Colors.White])(0.38),
-  labelStyle: {
+  tabBarActiveTintColor: colors[Colors.White],
+  tabBarInactiveTintColor: applyAlphaToHex(colors[Colors.White])(0.38),
+  tabBarLabelStyle: {
     fontFamily: fontStyles[FontFamily.Semibold],
   },
 }
@@ -39,7 +40,7 @@ const tabBarOptions: BottomTabBarOptions = {
 const HomeTabs = () => {
   const { t } = useTranslation()
   return (
-    <Tab.Navigator tabBarOptions={tabBarOptions}>
+    <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
         name={HomeTabRoutes.MyCv}
         component={MyCv}
@@ -78,7 +79,7 @@ const HomeTabs = () => {
 
 const HomeNavigation = () => {
   return (
-    <Stack.Navigator headerMode={'none'}>
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
       <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
       <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
       <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />

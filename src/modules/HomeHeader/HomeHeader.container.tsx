@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
@@ -7,7 +7,7 @@ import HomeHeader from './HomeHeader'
 import selector from './HomeHeader.selector'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
 const HomeHeaderContainer = ({ navigation }: Props) => {
   const { zltoBalance, profileImageUrl } = useSelector(selector)

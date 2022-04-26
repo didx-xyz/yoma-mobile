@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { FormikProps } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -26,7 +26,7 @@ interface Props {
   challenges: ChallengeTypes.NormalisedChallenges
   challengesDropDown: DropDownItem[]
   form: FormikProps<any>
-  navigation: StackNavigationProp<
+  navigation: NativeStackNavigationProp<
     HomeNavigationTypes.HomeNavigatorParamsList,
     HomeNavigationTypes.HomeNavigationRoutes.CompletedChallenges
   >
