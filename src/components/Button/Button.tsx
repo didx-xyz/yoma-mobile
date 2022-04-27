@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { ActivityIndicator, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native'
 
+import Optional from '~/components/Optional'
 import { HStack } from '~/components/Stack'
 import { Colors, colors } from '~/styles'
 import { WithChildren } from '~/types/react.types'
@@ -73,10 +74,14 @@ const Button = ({
   return (
     <TouchableOpacity onPress={handlePress} disabled={isDisabled} style={buttonStyle}>
       <HStack>
-        {isButtonLoading && <ActivityIndicator color={colors[Colors.White]} style={styles.loading} />}
+        <Optional condition={isButtonLoading}>
+          <ActivityIndicator color={colors[Colors.White]} style={styles.loading} />
+        </Optional>
         {children}
         <Text.Body align={TextAlign.Center} weight={FontWeights.Bold700} color={labelColor} style={labelStyle}>
-          {isButtonLoading ? loadingLabel : label}
+          <Optional condition={isButtonLoading} fallback={label}>
+            {loadingLabel}
+          </Optional>
         </Text.Body>
       </HStack>
     </TouchableOpacity>
