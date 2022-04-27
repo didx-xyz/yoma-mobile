@@ -17,6 +17,7 @@ interface Props {
 
 const Landing = ({ onLogin }: Props) => {
   const { t } = useTranslation()
+
   return (
     <ViewContainer backgroundColor={Colors.PrimaryYellow}>
       <Background>
@@ -41,7 +42,14 @@ const Landing = ({ onLogin }: Props) => {
           </Text.Header>
         </View>
         <View style={styles.actionsContainer}>
-          <Button size={ButtonSizes.Default} label={t('Login')} onPress={onLogin} style={styles.registerButton} />
+          <Button
+            size={ButtonSizes.Default}
+            label={t('Login')}
+            onPress={onLogin}
+            style={styles.registerButton}
+            loadingLabel="Logging you in..."
+            isLoadingEnabled
+          />
         </View>
       </View>
     </ViewContainer>

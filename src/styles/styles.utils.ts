@@ -1,6 +1,7 @@
 import { curry, join, mergeRight, multiply, of, pipe, prepend } from 'ramda'
 
-import { toFixed, toStringWithRadix } from '../utils/numbers.utils'
+import { toFixed, toStringWithRadix } from '~/utils/numbers.utils'
+
 import colors from './colors.styles'
 import { Colors } from './styles.types'
 

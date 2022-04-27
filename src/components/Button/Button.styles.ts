@@ -39,6 +39,9 @@ const styles = {
     position: 'relative',
     marginHorizontal: 12,
   } as ViewStyle,
+  loading: {
+    paddingRight: 10,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
