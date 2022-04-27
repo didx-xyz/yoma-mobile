@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -15,7 +15,7 @@ import { MOCK_USER_SKILLS_LIST, USER_SKILLS_INITIAL_VALUES } from './MySkillsFor
 import styles from './MySkillsForm.styles'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MySkills>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MySkills>
 }
 const MySkillsForm = ({ navigation }: Props) => {
   const { t } = useTranslation()

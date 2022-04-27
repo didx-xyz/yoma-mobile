@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { FormikProps } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
@@ -23,7 +23,7 @@ interface Props {
   onPhotoSave: () => void
   user: ProfileFormUser
   form: FormikProps<any>
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 
 const Profile = ({ navigation, onLogoutUser, onPhotoSave, user, form }: Props) => {

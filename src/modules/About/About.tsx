@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextInput, View } from 'react-native'
@@ -18,7 +18,7 @@ import styles from './About.styles'
 interface Props {
   biography: string
   onBiographySave: (biography: string) => void
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.About>
 }
 
 const About = ({ navigation, onBiographySave, biography }: Props) => {

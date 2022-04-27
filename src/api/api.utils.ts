@@ -20,8 +20,9 @@ import {
   zip,
 } from 'ramda'
 
-import { RootState } from '../redux/redux.types'
-import { StdObj } from '../types/general.types'
+import { RootState } from '~/redux/redux.types'
+import { StdObj } from '~/types/general.types'
+
 import { ApiCall, ApiClientArgs, ApiMeta, PrepareApiRequestData } from './api.types'
 
 export const addValueWithGivenKeyToConfig = (key: string) => (config: Partial<ApiMeta>) =>
@@ -51,7 +52,7 @@ export const addHeaders = (headers: StdObj<string>) => pipe(concat([headers]), m
 export const setAuthTokenHeader = unless(isNil, pipe(concat('Bearer '), objOf('Authorization')))
 export const selectAuthToken = pathOr(null, ['auth', 'token'])
 
-export const getTokenIfRequired = (state: RootState) =>
+export const selectTokenIfRequired = (state: RootState) =>
   ifElse(equals(true), always(selectAuthToken(state)), always(undefined))
 
 export const prepareApiRequest = (state: RootState, action: any): PrepareApiRequestData => {
@@ -59,7 +60,7 @@ export const prepareApiRequest = (state: RootState, action: any): PrepareApiRequ
   const { payload: data, meta } = action
   const { onSuccess, onFailure, isTokenRequired, ...args } = meta
 
-  const token = getTokenIfRequired(state)(isTokenRequired)
+  const token = selectTokenIfRequired(state)(isTokenRequired)
   const apiArgs = {
     token,
     data,
@@ -70,10 +71,10 @@ export const prepareApiRequest = (state: RootState, action: any): PrepareApiRequ
 
 export const apiCall: ApiCall =
   instance =>
-  ({ client, endpoint, method, token, data, params, headers, config = {} }: ApiClientArgs) =>
+  ({ urlSuffix, client, endpoint, method, token, data, params, headers, config = {} }: ApiClientArgs) =>
     instance.request({
       method,
-      url: generateSanitisedEndpoint([client, endpoint]),
+      url: generateSanitisedEndpoint([urlSuffix, client, endpoint]),
       data,
       headers: addHeaders({})([headers, setAuthTokenHeader(token)]),
       params,

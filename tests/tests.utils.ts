@@ -1,8 +1,8 @@
 import { mergeDeepRight } from 'ramda'
 import { Action, Middleware } from 'redux'
 
-import { RootState } from '../src/redux/redux.types'
-import { StdObj } from '../src/types/general.types'
+import { RootState } from '~/redux/redux.types'
+import { StdObj } from '~/types/general.types'
 
 export const createMiddlewareMock = (jest: any, state?: Partial<RootState>) => (middleware: Middleware) => {
   const store = {

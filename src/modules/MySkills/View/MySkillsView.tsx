@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
@@ -11,7 +11,7 @@ import styles from './MySkillsView.styles'
 interface Props {
   onAdd: () => void
   userSkills: CvViewSkillTypes.NormalisedCvWidgetSkillItems
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MySkills>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MySkills>
 }
 
 const MySkillsView = ({ userSkills, onAdd, navigation }: Props) => {

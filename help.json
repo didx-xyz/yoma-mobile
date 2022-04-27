@@ -1,13 +1,16 @@
 {
-  "env:dev": "generate environment file (env.json) with dev variables",
-  "env:test": "generate environment file (env.json) with test variables (for use by circleci primarily)",
+  "make_env:dev": "generate environment file (env.json) with dev variables",
+  "make_env:test": "generate environment file (env.json) with test variables (for use by circleci primarily)",
   "init": "initialize package",
   "init:ios": "init app for ios",
   "ios": "serve app on ios simulator",
   "android": "serve app on android emulator",
   "clean:android": "runs gradle clean on the project",
+  "reset": "deletes node modules and re-installs modules and pods",
+  "reset:all": "clears cache for watchman, rn packager, metro, node modules, runs cache clean and installs",
   "start": "start app bundler",
   "start:reset": "reset and start app bundler",
+  "start:reset:all": "runs reset:all then start:reset",
   "test": "run all unit tests",
   "test:watch": "run all unit tests (in watch mode)",
   "test:ui": "run all UI component tests",
@@ -16,5 +19,4 @@
   "format": "formats the codebase with prettier",
   "code:lint": "runs prettier and eslint linters",
   "npm:audit": "audit NPM dependencies for critical vulnerabilities",
-  "reset": "deletes node modules and re-installs modules and pods"
 }

@@ -1,8 +1,9 @@
 import { DocumentPickerResponse } from 'react-native-document-picker'
 
-import { NormalisedData } from '../../redux/redux.types'
-import * as Types from '../../types/general.types'
-import { types as AuthTypes } from '../Auth'
+import { types as ApiTypes } from '~/api'
+import { NormalisedData } from '~/redux/redux.types'
+import * as Types from '~/types/general.types'
+
 import { types as EducationFormTypes } from '../Education/Form'
 import { types as QualificationTypes } from '../Qualifications'
 import { types as UserTypes } from '../User'
@@ -37,5 +38,5 @@ export interface UserQualificationResponse {
 
 export interface CreateUserQualificationSuccessResponse {
   data: UserQualificationResponse
-  meta: AuthTypes.ApiMetaResponse
+  meta: ApiTypes.ApiResponseMeta
 }

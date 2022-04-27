@@ -120,7 +120,6 @@ describe('api/api.utils', () => {
       expect(result).toEqual({ someKey: 'someValue' })
     })
   })
-
   describe('createTypeParam', () => {
     it('should return a new config back with the value added to the type key when we provide the value', () => {
       // when ... we provide a key and value
@@ -207,7 +206,7 @@ describe('api/api.utils', () => {
       expect(result).toBe(null)
     })
   })
-  describe('getTokenIfRequired', () => {
+  describe('selectTokenIfRequired', () => {
     it('should return the token when the condition is met, given there is a token in state', () => {
       // given ... there is a token in state
       const mockedState = {
@@ -218,7 +217,7 @@ describe('api/api.utils', () => {
       }
       // when ... the condition is met
       //@ts-ignore - state is mocked for test
-      const result = SUT.getTokenIfRequired(mockedState)(true)
+      const result = SUT.selectTokenIfRequired(mockedState)(true)
 
       // then ... should return the token
       expect(result).toBe('AUTH TOKEN')
@@ -230,7 +229,7 @@ describe('api/api.utils', () => {
       }
       // when ... the token is required
       //@ts-ignore - state is mocked for test
-      const result = SUT.getTokenIfRequired(mockedState)(true)
+      const result = SUT.selectTokenIfRequired(mockedState)(true)
 
       // then ... should return null
       expect(result).toBe(null)
@@ -245,7 +244,7 @@ describe('api/api.utils', () => {
       }
       // when ... the token is not required
       //@ts-ignore - state is mocked for test
-      const result = SUT.getTokenIfRequired(mockedState)(false)
+      const result = SUT.selectTokenIfRequired(mockedState)(false)
 
       // then ... should return undefined
       expect(result).toBe(undefined)

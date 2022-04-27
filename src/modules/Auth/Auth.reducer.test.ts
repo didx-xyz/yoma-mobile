@@ -8,7 +8,12 @@ describe('modules/Auth/Auth.reducer', () => {
       const credentials = {
         refreshToken: 'REFRESH_TOKEN',
         token: 'TOKEN',
-        expiresAt: 'DATE OF EXPIRY',
+        expiresAt: 'EXPIRES_AT',
+        idToken: 'ID_TOKEN',
+        tokenType: 'TOKEN_TYPE',
+        scopes: ['SCOPES'],
+        tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+        authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
       }
       // when ... we set the Auth credentials
       const action = setAuthCredentials(credentials)
@@ -20,13 +25,23 @@ describe('modules/Auth/Auth.reducer', () => {
       // give ... there are are credentials in state
       const state = {
         refreshToken: 'REFRESH_TOKEN',
-        token: 'USER_TOKEN',
-        expiresAt: 'EXPIRY_DATE',
+        token: 'TOKEN',
+        expiresAt: 'EXPIRES_AT',
+        idToken: 'ID_TOKEN',
+        tokenType: 'TOKEN_TYPE',
+        scopes: ['SCOPES'],
+        tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+        authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
       }
       const credentials = {
         refreshToken: 'NEW REFRESH_TOKEN',
-        token: 'NEW TOKEN',
-        expiresAt: 'NEW DATE',
+        token: 'TOKEN',
+        expiresAt: 'EXPIRES_AT',
+        idToken: 'ID_TOKEN',
+        tokenType: 'TOKEN_TYPE',
+        scopes: ['SCOPES'],
+        tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+        authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
       }
       // when ... we update the Auth credentials
       const action = setAuthCredentials(credentials)
@@ -40,8 +55,13 @@ describe('modules/Auth/Auth.reducer', () => {
       // give ... there are no credentials in state
       const state = {
         refreshToken: 'REFRESH_TOKEN',
-        token: 'USER_TOKEN',
-        expiresAt: 'EXPIRY_DATE',
+        token: 'TOKEN',
+        expiresAt: 'EXPIRES_AT',
+        idToken: 'ID_TOKEN',
+        tokenType: 'TOKEN_TYPE',
+        scopes: ['SCOPES'],
+        tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+        authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
       }
       const action = clearAuth()
       const result = SUT(state, action)

@@ -1,14 +1,19 @@
 import { always, applySpec, equals, filter, find, keys, mergeRight, omit, path, pick, pipe, prop, toLower } from 'ramda'
 
+import { types as ApiUserTypes } from '~/api/users'
 import * as ReduxTypes from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
+import * as Types from '~/types/general.types'
+import { renameKeys } from '~/utils/ramda.utils'
 
-import { types as ApiUserTypes } from '../../api/users'
-import * as Types from '../../types/general.types'
 import { USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
 
-export const extractUserFromLoginPayload = path(['payload', 'data', 'data', 'user'])
+export const extractUserFromPayload = pipe(
+  path(['payload', 'data']),
+  renameKeys({ sub: 'id', family_name: 'lastName', given_name: 'firstName' }),
+)
+
 export const extractUserFromUserUpdateSuccess = path(['payload', 'data', 'data'])
 export const extractUserFromUpdateUserPayload = pick([
   'firstName',
@@ -31,6 +36,7 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
 
 export const extractCredentialsByType = (type: ApiUserTypes.UserCredentialTypes) =>
   filter(pipe(keys, find(equals(toLower(type)))))
+
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
   mergeRight({
     credentialItemId: ReduxUtils.extractId(action),

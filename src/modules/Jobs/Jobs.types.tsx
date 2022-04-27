@@ -1,4 +1,4 @@
-import { ApiMetaResponse } from '~/modules/Auth/Auth.types'
+import { types as ApiTypes } from '~/api'
 
 export interface Job {
   id: string
@@ -13,7 +13,7 @@ export interface Job {
 
 export interface JobsResponse {
   data: { data: Job }
-  meta: ApiMetaResponse
+  meta: ApiTypes.ApiResponseMeta
 }
 
 export interface JobsRequest {

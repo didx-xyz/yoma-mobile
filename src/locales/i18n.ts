@@ -1,4 +1,5 @@
 import i18n from 'i18next'
+import 'intl-pluralrules'
 import { initReactI18next } from 'react-i18next'
 import * as RNLocalize from 'react-native-localize'
 
@@ -23,6 +24,9 @@ export const setI18nConfig = () => {
     debug: false,
     interpolation: {
       escapeValue: false,
+    },
+    react: {
+      useSuspense: false,
     },
   })
 }

@@ -1,10 +1,11 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
-import { actions as ApiActions } from '../../api'
-import { constants as ApiChallengesConstants } from '../../api/challenges'
-import * as ReduxTypes from '../../redux/redux.types'
-import { extractDataFromResponseAction } from '../../redux/redux.utils'
+import { actions as ApiActions } from '~/api'
+import { constants as ApiChallengesConstants } from '~/api/challenges'
+import * as ReduxTypes from '~/redux/redux.types'
+import { extractDataFromResponseAction } from '~/redux/redux.utils'
+
 import {
   fetchChallenges,
   fetchChallengesFailure,

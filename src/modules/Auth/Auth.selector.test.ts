@@ -1,4 +1,5 @@
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './Auth.selector'
 
 describe('modules/Auth/Auth.selector', () => {
@@ -66,17 +67,6 @@ describe('modules/Auth/Auth.selector', () => {
       const result = SUT.selectIsAuthenticated(stateMock)
       // then ... should return result as expected
       expect(result).toEqual(true)
-    })
-  })
-  describe('selectLoginCredentials', () => {
-    it('should return user login credentials.', () => {
-      const state = rootStateFixture({
-        auth: { email: 'EMAIL', password: 'PASSWORD' },
-      })
-      // when ... we call the selector
-      const result = SUT.selectLoginCredentials(state)
-      // then ... should return result as expected
-      expect(result).toEqual({ email: 'EMAIL', password: 'PASSWORD' })
     })
   })
 })

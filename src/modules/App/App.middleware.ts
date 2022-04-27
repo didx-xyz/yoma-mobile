@@ -39,8 +39,6 @@ export const hydrateAppFlow: Middleware =
       dispatch(ChallengesActions.fetchChallenges())
       dispatch(OrganisationsActions.fetchOrganisations())
       dispatch(SkillsActions.fetchSkills())
-      dispatch(UserActions.fetchUserCredentials())
-      dispatch(UserSkillsActions.fetchUserSkills())
     }
     return result
   }

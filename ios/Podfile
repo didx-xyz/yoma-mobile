@@ -14,8 +14,6 @@ target 'YomaMobile' do
     :hermes_enabled => false
   )
 
-  pod 'react-native-fbsdk-next', :path => '../node_modules/react-native-fbsdk-next'
-
   target 'YomaMobileTests' do
     inherit! :complete
     # Pods for testing

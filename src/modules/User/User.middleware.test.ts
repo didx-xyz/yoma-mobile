@@ -1,18 +1,19 @@
 import { mergeRight } from 'ramda'
 
-import { loginSuccess } from '~/modules/Auth/Auth.reducer'
-import { defaultUserLoginResponseData } from '~/modules/Auth/Auth.test.fixtures'
-
-import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { constants as ApiUsersConstants } from '../../api/users'
-import { rootStateFixture } from '../../redux/redux.fixture'
-import { USER_RESPONSE } from './User.fixture'
-import * as SUT from './User.middleware'
+import { createMiddlewareMock } from '~/../tests/tests.utils'
+import { actions as ApiActions, utils as ApiUtils } from '~/api'
+import { constants as ApiUsersConstants } from '~/api/users'
+import { fetchUserFromOAuthSuccess } from '~/modules/Auth/Auth.reducer'
+import { OAuthUserResponse } from '~/modules/Auth/Auth.types'
+import { USER_RESPONSE } from '~/modules/User/User.fixture'
 import {
   fetchUserCredentials,
   fetchUserCredentialsFailure,
   fetchUserCredentialsSuccess,
+  fetchUserDetails,
+  fetchUserDetailsFailure,
+  fetchUserDetailsSuccess,
+  hydrateUser,
   setUser,
   updateUser,
   updateUserFailure,
@@ -22,15 +23,24 @@ import {
   uploadUserPhoto,
   uploadUserPhotoFailure,
   uploadUserPhotoSuccess,
-} from './User.reducer'
-import { extractUserFromLoginPayload, extractUserFromUserUpdateSuccess } from './User.utils'
+} from '~/modules/User/User.reducer'
+import { extractUserFromPayload, extractUserFromUserUpdateSuccess } from '~/modules/User/User.utils'
+import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
+import * as SUT from './User.middleware'
 
 describe('modules/User/User.middleware', () => {
   describe('setUserOnAuthFlow', () => {
     it('should correctly handle being called', () => {
       // given ... the authLogin action is fired
       const create = createMiddlewareMock(jest)
-      const action = loginSuccess(defaultUserLoginResponseData)
+      const payloadMock = {
+        data: {},
+        status: 200,
+        headers: {},
+      }
+      const action = fetchUserFromOAuthSuccess(payloadMock as OAuthUserResponse)
 
       // when ... we respond to the loginSuccess action
       // @ts-ignore
@@ -43,18 +53,142 @@ describe('modules/User/User.middleware', () => {
       expect(store.dispatch).toHaveBeenCalled()
     })
     it('should correctly set the user data', () => {
-      // given ... the authLogin action is fired
+      // given ... the fetchUserFromOAuthSuccess action is fired
       const create = createMiddlewareMock(jest)
-      const action = loginSuccess(defaultUserLoginResponseData)
+      const payloadMock = {
+        data: {},
+        status: 200,
+        headers: {},
+      }
+      const action = fetchUserFromOAuthSuccess(payloadMock as OAuthUserResponse)
       // @ts-ignore
 
       // when ... we respond to the loginSuccess action
       const { invoke, store } = create(SUT.setUserOnAuthFlow)
-      const userData = extractUserFromLoginPayload(action)
+      const userData = extractUserFromPayload(action)
       invoke(action)
 
       // then ... setUser should be called
       expect(store.dispatch).toHaveBeenCalledWith(setUser(userData))
+      expect(store.dispatch).toHaveBeenCalledWith(hydrateUser())
+    })
+  })
+  describe('hydrateUserFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const create = createMiddlewareMock(jest)
+      const action = hydrateUser()
+      // @ts-ignore
+      const { invoke, store, next } = create(SUT.hydrateUserFlow)
+
+      // when ... we respond to the updateUser action
+      invoke(action)
+
+      // then ...validate updateUserFlow
+      expect(next).toHaveBeenCalledWith(action)
+      expect(store.dispatch).toHaveBeenCalled()
+    })
+    it('should hydrate the user data', () => {
+      // given ...
+      const create = createMiddlewareMock(jest)
+      const action = hydrateUser()
+      // @ts-ignore
+      const { invoke, store } = create(SUT.hydrateUserFlow)
+      // when ... we respond to the updateUser action
+      invoke(action)
+
+      // then ...validate updateUserFlow
+      expect(store.dispatch).toHaveBeenCalledWith(fetchUserDetails())
+      expect(store.dispatch).toHaveBeenCalledWith(fetchUserCredentials())
+      expect(store.dispatch).toHaveBeenCalledWith(UserSkillsActions.fetchUserSkills())
+    })
+  })
+  describe('fetchUserDetailsFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const stateMock = rootStateFixture({
+        user: {
+          id: 'USER ID',
+        },
+      })
+      const create = createMiddlewareMock(jest, stateMock)
+      const action = fetchUserDetails()
+      // @ts-ignore
+      const { invoke, next } = create(SUT.fetchUserDetailsFlow)
+
+      // when ... we respond to the updateUser action
+      invoke(action)
+
+      // then ...validate updateUserFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly handle fetch the user details', () => {
+      // given ...
+      const stateMock = rootStateFixture({
+        user: {
+          id: 'USER ID',
+        },
+      })
+      const create = createMiddlewareMock(jest, stateMock)
+      const action = fetchUserDetails()
+
+      // @ts-ignore
+      const { invoke, store } = create(SUT.fetchUserDetailsFlow)
+      // when ... we respond to the updateUser action
+      invoke(action)
+
+      // then ...validate updateUserFlow
+      expect(store.dispatch).toHaveBeenCalledWith(
+        ApiActions.apiRequest(
+          mergeRight(ApiUsersConstants.USERS_GET_BY_ID_CONFIG, {
+            onSuccess: fetchUserDetailsSuccess,
+            onFailure: fetchUserDetailsFailure,
+            endpoint: 'USER ID',
+          }),
+        ),
+      )
+    })
+  })
+  describe('fetchUserDetailsSuccessFlow', () => {
+    it('should correctly handle being called', () => {
+      // given ...
+      const payloadMock = {
+        data: {
+          data: 'DATA',
+        },
+      }
+
+      const create = createMiddlewareMock(jest)
+      // @ts-ignore - partially mocked response for testing
+      const action = fetchUserDetailsSuccess(payloadMock)
+      // @ts-ignore
+      const { invoke, next } = create(SUT.fetchUserDetailsSuccessFlow)
+
+      // when ... we respond to the updateUser action
+      invoke(action)
+
+      // then ...validate updateUserFlow
+      expect(next).toHaveBeenCalledWith(action)
+    })
+    it('should correctly handle updating the user data', () => {
+      // given ...
+      const payloadMock = {
+        data: {
+          data: 'USER DATA',
+        },
+      }
+
+      const create = createMiddlewareMock(jest)
+      // @ts-ignore - mocked response for testing
+      const action = fetchUserDetailsSuccess(payloadMock)
+      // @ts-ignore
+      const { invoke, store } = create(SUT.fetchUserDetailsSuccessFlow)
+      // when ... we respond to the updateUser action
+      invoke(action)
+
+      // then ...validate updateUserFlow
+      // @ts-ignore - mocked response for testing
+      expect(store.dispatch).toHaveBeenCalledWith(setUser('USER DATA'))
     })
   })
   describe('updateUserFlow', () => {
@@ -215,6 +349,7 @@ describe('modules/User/User.middleware', () => {
     it('should correctly handle being called', () => {
       // given ... a user object with an id in state
       const userId = 'A USER ID'
+      // @ts-ignore - only partially mocked state shape for testing purposes
       const create = createMiddlewareMock(jest, { user: { id: userId } })
       const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(
         userId,
@@ -330,6 +465,7 @@ describe('modules/User/User.middleware', () => {
   describe('uploadUserPhotoSuccessFlow', () => {
     it('should correctly handle being called', () => {
       const userId = 'USER ID'
+      // @ts-ignore - only partially mocked state shape for testing purposes
       const create = createMiddlewareMock(jest, { user: { id: userId } })
 
       // given ... the uploadUserPhotoSuccess action is fired
@@ -345,6 +481,7 @@ describe('modules/User/User.middleware', () => {
     })
     it('should correctly upload user profile photo', () => {
       const userId = 'USER ID'
+      // @ts-ignore - only partially mocked state shape for testing purposes
       const create = createMiddlewareMock(jest, { user: { id: userId } })
 
       // given ... the uploadUserPhotoSuccess action is fired

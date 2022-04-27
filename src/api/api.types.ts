@@ -1,7 +1,8 @@
 import { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios'
 import { ActionCreator } from 'redux'
 
-import { StdObj } from '../types/general.types'
+import { StdObj } from '~/types/general.types'
+
 import { prepareApiRequest } from './api.utils'
 import { types as AuthTypes } from './auth/'
 import { types as OrgTypes } from './organisations'
@@ -18,6 +19,7 @@ export enum ApiClients {
   Auth = 'auth',
   Challenges = 'challenges',
   Jobs = 'jobs',
+  OAuth = 'connect',
   Organisations = 'organisations',
   Qualifications = 'qualifications',
   Skills = 'skills',
@@ -38,11 +40,20 @@ export interface ApiClientMetaOverlap {
   endpoint: ApiEndpoints | string[]
   headers: StdObj<string>
   additionalHeaders?: StdObj<string>
+  urlSuffix?: string
   params?: Record<string, string | number>
   config?: Partial<AxiosRequestConfig>
 }
 
-export interface ApiMetaResponse {
+export type ApiResponseStatus = number
+
+export interface ApiResponseHeaders {
+  'content-type': string
+  date: string
+  server: string
+}
+
+export interface ApiResponseMeta {
   success: boolean
   code: number
   message: string | null

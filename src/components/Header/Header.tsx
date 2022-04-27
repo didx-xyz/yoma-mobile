@@ -1,4 +1,4 @@
-import { StackNavigationProp } from '@react-navigation/stack'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { View } from 'react-native'
 
@@ -10,7 +10,10 @@ import Text, { HeaderLevels } from '../Typography'
 import styles from './Header.styles'
 
 type Props = {
-  navigation: StackNavigationProp<HomeNavigationTypes.HomeNavigatorParamsList, HomeNavigationTypes.HomeNavigationRoutes>
+  navigation: NativeStackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes
+  >
   headerText: string | React.ReactNode
   actionItem?: React.ReactNode
 }
