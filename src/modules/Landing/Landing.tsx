@@ -17,6 +17,7 @@ interface Props {
 
 const Landing = ({ onLogin }: Props) => {
   const { t } = useTranslation()
+
   return (
     <ViewContainer backgroundColor={Colors.PrimaryYellow}>
       <Background>

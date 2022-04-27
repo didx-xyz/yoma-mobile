@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
-import { StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native'
+import React, { useCallback, useEffect, useState } from 'react'
+import { ActivityIndicator, StyleSheet, TextStyle, TouchableOpacity, ViewStyle } from 'react-native'
 
-import { Colors } from '../../styles'
-import { WithChildren } from '../../types/react.types'
+import { Colors, colors } from '~/styles'
+import { applyAlphaToHex } from '~/styles/styles.utils'
+import { WithChildren } from '~/types/react.types'
+
 import Text, { FontWeights, TextAlign } from '../Typography'
 import { MAP_VARIANT_TO_LABEL_COLOR } from './Button.constants'
 import styles from './Button.styles'
@@ -15,6 +17,7 @@ type Props = WithChildren<{
   size?: ButtonSizes
   color?: Colors
   isDisabled?: boolean
+  isLoading?: boolean
   isFullWidth?: boolean
   labelStyle?: TextStyle
   style?: ViewStyle
@@ -25,6 +28,7 @@ const Button = ({
   variant = ButtonVariants.Primary,
   size = ButtonSizes.Default,
   isDisabled = false,
+  isLoading = false,
   isFullWidth = true,
   color,
   labelStyle,
@@ -33,6 +37,16 @@ const Button = ({
 }: Props) => {
   const [buttonStyle, setButtonStyle] = useState<ViewStyle>(styles[ButtonVariants.Primary])
   const [labelColor, setLabelColor] = useState<Colors>(Colors.White)
+  const [isButtonLoading, setButtonLoading] = useState<boolean>(false)
+
+  const handlePress = useCallback(() => {
+    setButtonLoading(true)
+    onPress?.()
+  }, [onPress])
+
+  useEffect(() => {
+    setButtonLoading(isLoading)
+  }, [isLoading])
 
   useEffect(() => {
     const variantStyle = styles[variant]
@@ -49,10 +63,10 @@ const Button = ({
   }, [variant, color, isDisabled])
 
   return (
-    <TouchableOpacity onPress={onPress} disabled={isDisabled} style={buttonStyle}>
+    <TouchableOpacity onPress={handlePress} disabled={isDisabled} style={buttonStyle}>
       {children}
       <Text.Body align={TextAlign.Center} weight={FontWeights.Bold700} color={labelColor} style={labelStyle}>
-        {label}
+        {isButtonLoading ? <ActivityIndicator color={colors[Colors.White]} /> : label}
       </Text.Body>
     </TouchableOpacity>
   )
