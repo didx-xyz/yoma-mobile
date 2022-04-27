@@ -9,7 +9,7 @@ type Props = WithChildren<{
   isRow?: boolean
   isColumn?: boolean
 }>
-const Flex = ({ children, isRow = false, isColumn = true }: Props) => {
+const Stack = ({ children, isRow = false, isColumn = true }: Props) => {
   const [style, setStyle] = useState<ViewStyle>()
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const Flex = ({ children, isRow = false, isColumn = true }: Props) => {
   return <View style={style}>{children}</View>
 }
 
-export const FlexRow = (props: Props) => <Flex isRow={true} {...props} />
-export const FlexCol = (props: Props) => <Flex isColumn={true} {...props} />
+export const HStack = (props: Props) => <Stack isRow={true} {...props} />
+export const VStack = (props: Props) => <Stack isColumn={true} {...props} />
 
-export default Flex
+export default Stack
