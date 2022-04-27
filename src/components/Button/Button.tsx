@@ -73,7 +73,7 @@ const Button = ({
   return (
     <TouchableOpacity onPress={handlePress} disabled={isDisabled} style={buttonStyle}>
       <HStack>
-        {isButtonLoading && <ActivityIndicator color={colors[Colors.White]} style={{ paddingRight: 10 }} />}
+        {isButtonLoading && <ActivityIndicator color={colors[Colors.White]} style={styles.loading} />}
         {children}
         <Text.Body align={TextAlign.Center} weight={FontWeights.Bold700} color={labelColor} style={labelStyle}>
           {isButtonLoading ? loadingLabel : label}
