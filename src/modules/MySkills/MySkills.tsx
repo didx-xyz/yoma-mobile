@@ -1,13 +1,17 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
 
-import Optional from '../../components/Optional'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
+import Optional from '~/components/Optional'
+
+import { types as HomeNavigationTypes } from '../HomeNavigation'
 import SkillsForm from './Form/MySkillsForm'
 import MySkillsView from './View'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MySkills>
+  navigation: NativeStackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.MySkills
+  >
 }
 
 const MySkills = ({ navigation }: Props) => {

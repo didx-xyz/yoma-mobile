@@ -12,6 +12,10 @@ export const fetchUserSkills = createAction(`${name} fetchUserSkills`)
 export const fetchUserSkillsSuccess = createAction<UserSkillsResponse>(`${name} fetchUserSkillsSuccess`)
 export const fetchUserSkillsFailure = createAction<string>(`${name} fetchUserSkillsFailure`)
 
+export const addUserSkills = createAction(`${name} addUserSkills`)
+export const addUserSkillsSuccess = createAction(`${name} addUserSkillsSuccess`)
+export const addUserSkillsFailure = createAction(`${name} addUserSkillsFailure`)
+
 export const setUserSkills = createAction<NormalisedUserSkills>(`${name} setUserSkills`)
 export const clearUserSkills = createAction(`${name} clearUserSkills`)
 

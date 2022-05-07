@@ -1,1 +1,1 @@
-export { default } from './MySkillsForm'
+export { default } from './MySkillsForm.container'

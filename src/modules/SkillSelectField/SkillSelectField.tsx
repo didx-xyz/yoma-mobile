@@ -1,75 +1,22 @@
 import { useField } from 'formik'
 import { concat, of, pipe, uniq } from 'ramda'
 import React, { useCallback, useState } from 'react'
-import { useTranslation } from 'react-i18next'
-import { ActivityIndicator, FlatList, Modal, Pressable, StyleSheet, TextInput, View, ViewStyle } from 'react-native'
 
-import Divider from '~/components/Divider'
-import Optional from '~/components/Optional'
-import Text, { FontWeights, HeaderLevels, TextAlign } from '~/components/Typography'
-import { Colors, colors } from '~/styles'
 import { dropElement } from '~/utils/arrays.utils'
 
-import { useSkillsFilter } from './SkillSelectField.hooks'
-import styles from './SkillSelectField.styles'
-import SkillsInput from './SkillsInput'
-
-const buttonDoneStyles = StyleSheet.create({
-  container: {
-    alignSelf: 'flex-end',
-    marginRight: 10,
-    padding: 10,
-  } as ViewStyle,
-})
-interface ButtonDoneProps {
-  onPress: () => void
-}
-const ButtonDone = ({ onPress }: ButtonDoneProps) => {
-  const { t } = useTranslation()
-  return (
-    <Pressable onPress={onPress} style={buttonDoneStyles.container}>
-      <Text.Body align={TextAlign.Center} weight={FontWeights.Bold700} color={Colors.PrimaryGreen}>
-        {t('Done')}
-      </Text.Body>
-    </Pressable>
-  )
-}
-
-const itemStyles = StyleSheet.create({
-  container: {
-    backgroundColor: colors[Colors.LightGrey],
-    paddingVertical: 20,
-    paddingHorizontal: 10,
-  } as ViewStyle,
-})
-interface ItemProps {
-  item: string
-  onPress: () => void
-}
-const Item = ({ item, onPress }: ItemProps) => {
-  const [isSelected, setIsSelected] = useState(false)
-
-  const handleOnPress = useCallback(() => {
-    setIsSelected(true)
-    onPress()
-  }, [onPress])
-  return (
-    <Pressable key={item} onPress={handleOnPress} style={itemStyles.container}>
-      <Text.Body>{item}</Text.Body>
-      {isSelected && <Text.Body>Selected</Text.Body>}
-    </Pressable>
-  )
-}
+import SkillSelectModal from './SkillSelectModal'
+import SkillsInput from './SkillsInput/SkillsInput'
 
 interface Props {
   name: string
+  placeholder: string
   skills: string[]
 }
-const SkillsSelectField = ({ name, skills }: Props) => {
+const SkillsSelectField = ({ name, placeholder, skills }: Props) => {
+  console.log({ component: 'SkillsSelectField' })
+
   const [{ value }, { touched, error }, { setValue }] = useField(name)
-  const { filteredSkills, searchTerm, isBusy, setSearchTerm } = useSkillsFilter(skills)
-  const [isModalOpen, setToggleModal] = useState(false)
-  const { t } = useTranslation()
+  const [isModalOpen, setModalOpen] = useState<boolean>(false)
 
   const handleItemSelect = useCallback(
     (skill: string) => {
@@ -87,46 +34,33 @@ const SkillsSelectField = ({ name, skills }: Props) => {
     [setValue, value],
   )
 
-  const openModal = () => setToggleModal(true)
+  const handleOpenModal = useCallback(() => {
+    setModalOpen(true)
+  }, [])
 
+  /* TODO:
+   * [x] 1. Add loading states for 'searching' for skills
+   * [?] 2. Add pagination? (or slow load for longer lists - although RN should just handle this itself tbh - make sure we're using the correct list.
+   * [x] 3. Initial view should just be the +Add Skills pill, I think.
+   * [] 4. TEST ASAP ON AN ACTUAL DEVICE (TO MAKE SURE IT'S PERFORMANT)
+   * [x] 5. Fix styling for 'No Results...'
+   */
   return (
     <>
-      <SkillsInput skills={value} touched={touched} error={error} onDelete={handleDelete} onAdd={openModal} />
-      <Modal visible={isModalOpen} transparent animationType={'fade'} hardwareAccelerated statusBarTranslucent>
-        <View style={styles.modalOverlay} />
-        <View style={styles.modal}>
-          <ButtonDone
-            onPress={() => {
-              setToggleModal(false)
-              setSearchTerm('')
-            }}
-          />
-          <FlatList
-            ListHeaderComponent={
-              <TextInput
-                onChangeText={setSearchTerm}
-                placeholder={t('Start typing to view suggestions')}
-                style={styles.filterInput}
-              />
-            }
-            ItemSeparatorComponent={() => <Divider />}
-            data={filteredSkills}
-            ListEmptyComponent={
-              <Optional
-                condition={isBusy}
-                fallback={
-                  <Optional condition={searchTerm !== ''}>
-                    <Text.Header level={HeaderLevels.H2}>{t('No Results for Search Term')}</Text.Header>
-                  </Optional>
-                }
-              >
-                <ActivityIndicator size={'large'} />
-              </Optional>
-            }
-            renderItem={({ item }) => <Item item={item} onPress={() => handleItemSelect(item)} />}
-          />
-        </View>
-      </Modal>
+      <SkillsInput
+        skills={value}
+        touched={touched}
+        error={error}
+        placeholder={placeholder}
+        onDelete={handleDelete}
+        onAdd={handleOpenModal}
+      />
+      <SkillSelectModal
+        skills={skills}
+        setModalOpen={setModalOpen}
+        isModalOpen={isModalOpen}
+        handleItemSelect={handleItemSelect}
+      />
     </>
   )
 }

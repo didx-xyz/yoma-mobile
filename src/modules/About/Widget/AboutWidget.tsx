@@ -2,8 +2,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvWidget from '../../../components/CvWidget'
-import Text, { TextAlign } from '../../../components/Typography'
+import CvWidget from '~/components/CvWidget'
+import Text, { TextAlign } from '~/components/Typography'
+
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {

@@ -6,12 +6,13 @@ import selector from './SkillSelectField.selector'
 
 interface Props {
   name: string
+  placeholder: string
 }
 
-const SkillSelectFieldContainer = ({ name }: Props) => {
+const SkillSelectFieldContainer = ({ name, placeholder }: Props) => {
   const skills = useSelector(selector)
 
-  return <SkillSelectField name={name} skills={skills} />
+  return <SkillSelectField name={name} placeholder={placeholder} skills={skills} />
 }
 
 export default SkillSelectFieldContainer
