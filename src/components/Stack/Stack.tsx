@@ -18,10 +18,7 @@ const Stack = ({ styles = {}, children, isRow = false, isColumn = true }: Props)
     setStyle(prevStyle => StyleSheet.flatten([prevStyle, { flexDirection: direction }]))
   }, [isRow, isColumn])
 
-  const containerStyles = useMemo(
-    () => StyleSheet.flatten([styles, style, { alignContent: 'stretch' }]),
-    [style, styles],
-  )
+  const containerStyles = useMemo(() => StyleSheet.flatten([styles, style]), [style, styles])
 
   return <View style={containerStyles}>{children}</View>
 }
