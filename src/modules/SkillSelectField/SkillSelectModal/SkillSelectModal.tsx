@@ -37,44 +37,44 @@ const SkillSelectModal = ({ isModalOpen, handleItemSelect, setModalOpen, skills 
 
   return (
     <Modal onClose={handleClose} isVisible={isModalOpen}>
-      <FlatList
-        ListHeaderComponent={
-          <Stack styles={styles.header}>
-            <TextInput
-              onTextInput={() => {
-                if (!isLoading) {
-                  setIsLoading(true)
-                }
-              }}
-              onChangeText={debounce(setSearchTerm, 500, { maxWait: 1000 })}
-              placeholder={t('Enter skill names')}
-              style={styles.filterInput}
-            />
-            <Optional condition={isLoading}>
-              <ActivityIndicator style={styles.loader} />
-            </Optional>
-          </Stack>
-        }
-        ItemSeparatorComponent={() => <Divider />}
-        data={filteredSkills}
-        ListEmptyComponent={
-          <Optional
-            condition={searchTerm !== ''}
-            fallback={
-              <Text.Body align={TextAlign.Center} color={Colors.MenuGrey}>
-                {t('Type to begin searching')}
-              </Text.Body>
-            }
-          >
-            <Stack>
-              <Text.Header level={HeaderLevels.H4} align={TextAlign.Center}>
-                {t('No matching skills found')}
-              </Text.Header>
-            </Stack>
+      <Stack styles={{ overflow: 'hidden' }}>
+        <Stack styles={styles.header}>
+          <TextInput
+            onTextInput={() => {
+              if (!isLoading) {
+                setIsLoading(true)
+              }
+            }}
+            onChangeText={debounce(setSearchTerm, 500, { maxWait: 1000 })}
+            placeholder={t('Enter skill names')}
+            style={styles.filterInput}
+          />
+          <Optional condition={isLoading}>
+            <ActivityIndicator style={styles.loader} />
           </Optional>
-        }
-        renderItem={renderItem}
-      />
+        </Stack>
+        <FlatList
+          ItemSeparatorComponent={() => <Divider />}
+          data={filteredSkills}
+          ListEmptyComponent={
+            <Optional
+              condition={searchTerm !== ''}
+              fallback={
+                <Text.Body align={TextAlign.Center} color={Colors.MenuGrey}>
+                  {t('Type to begin searching')}
+                </Text.Body>
+              }
+            >
+              <Stack>
+                <Text.Header level={HeaderLevels.H4} align={TextAlign.Center}>
+                  {t('No matching skills found')}
+                </Text.Header>
+              </Stack>
+            </Optional>
+          }
+          renderItem={renderItem}
+        />
+      </Stack>
     </Modal>
   )
 }

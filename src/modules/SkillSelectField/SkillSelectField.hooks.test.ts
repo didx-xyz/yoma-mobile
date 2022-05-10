@@ -5,48 +5,42 @@ import * as SUT from './SkillSelectField.hooks'
 
 describe('Skills/SkillsFilter/SkillsFilter.hooks', () => {
   describe('useSkillsFilter', () => {
-    describe('useFilterCustomers', () => {
-      it('should pass through customers if no search term is provided', () => {
-        const skillsMock = [
-          'Web Design',
-          'Data Science',
-          'Presentations',
-          'Machine Learning',
-          'Business Process Modeling',
-          'Digital Marketing',
-        ]
-        const { result } = renderHook(() => SUT.useSkillsFilter(skillsMock))
+    it('should pass through customers if no search term is provided', () => {
+      const skillsMock = [
+        'Web Design',
+        'Data Science',
+        'Presentations',
+        'Machine Learning',
+        'Business Process Modeling',
+        'Digital Marketing',
+      ]
+      const { result } = renderHook(() => SUT.useSkillsFilter(skillsMock))
 
-        act(() => {
-          result.current.setSearchTerm('')
-        })
-
-        expect(result.current.filteredSkills).toEqual([
-          'Web Design',
-          'Data Science',
-          'Presentations',
-          'Machine Learning',
-          'Business Process Modeling',
-          'Digital Marketing',
-        ])
+      act(() => {
+        result.current.setSearchTerm('')
       })
-      it('should correctly filter the data with a search term', () => {
-        const skillsMock = [
-          'Web Design',
-          'Data Science',
-          'Presentations',
-          'Machine Learning',
-          'Business Process Modeling',
-          'Digital Marketing',
-        ]
-        const { result } = renderHook(() => SUT.useSkillsFilter(skillsMock))
 
-        act(() => {
-          result.current.setSearchTerm('de')
-        })
+      expect(result.current.results).toEqual([])
+    })
+    it('should correctly filter the data with a search term', async () => {
+      const skillsMock = [
+        'Web Design',
+        'Data Science',
+        'Presentations',
+        'Machine Learning',
+        'Business Process Modeling',
+        'Digital Marketing',
+      ]
+      const { result } = await renderHook(() => SUT.useSkillsFilter(skillsMock))
 
-        expect(result.current.filteredSkills).toEqual(['Web Design', 'Business Process Modeling'])
+      act(() => {
+        result.current.setSearchTerm('web')
+        result.current.setIsLoading(true)
       })
+
+      expect(result.current.searchTerm).toBe('web')
+      expect(result.current.isLoading).toBe(true)
+      expect(result.current.results).toEqual(['Web Design', 'Business Process Modeling'])
     })
   })
 })
