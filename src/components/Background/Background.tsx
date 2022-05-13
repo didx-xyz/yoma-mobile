@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
-import { WithChildren } from '../../types/react.types'
+import { Colors, colors } from '~/styles'
+import { WithChildren } from '~/types/react.types'
+
 import styles from './Background.styles'
 
 type Props = WithChildren<{
