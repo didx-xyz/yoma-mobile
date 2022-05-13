@@ -1,6 +1,7 @@
 import { StyleSheet, TextStyle } from 'react-native'
 
-import { Colors, colors } from '../../../styles'
+import { Colors, colors } from '~/styles'
+
 import { fontWeights } from '../fontWeights.styles'
 import { MetaLevels } from './Meta.types'
 
