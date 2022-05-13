@@ -5,9 +5,9 @@ import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
 
 import { Colors } from '~/styles'
+import { dropElement } from '~/utils/arrays.utils'
 import { textOrSpace } from '~/utils/strings.utils'
 
-import { dropElement } from '../../utils/arrays.utils'
 import InputError from '../InputError'
 import Pill from '../Pill'
 import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
