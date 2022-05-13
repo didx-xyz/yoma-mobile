@@ -16,35 +16,35 @@ import styles from './SkillSelectModal.styles'
 
 interface Props {
   isModalOpen: boolean
-  setModalOpen: (isOpen: boolean) => void
   handleItemSelect: (skill: string) => void
   skills: string[]
 }
 
-const SkillSelectModal = ({ isModalOpen, handleItemSelect, setModalOpen, skills }: Props) => {
+const SkillSelectModal = ({ isModalOpen, handleItemSelect, skills }: Props) => {
   const { t } = useTranslation()
   const { isLoading, setIsLoading, results: filteredSkills, searchTerm, setSearchTerm } = useSkillsFilter(skills)
 
   const handleClose = useCallback(() => {
     setSearchTerm('')
-    setModalOpen(false)
-  }, [setModalOpen, setSearchTerm])
+  }, [setSearchTerm])
 
   const renderItem = useCallback(
     ({ item }) => <SkillItem item={item} onPress={() => handleItemSelect(item)} />,
     [handleItemSelect],
   )
 
+  const onTextInput = useCallback(() => {
+    if (!isLoading) {
+      setIsLoading(true)
+    }
+  }, [isLoading, setIsLoading])
+
   return (
     <Modal onClose={handleClose} isVisible={isModalOpen}>
       <Stack styles={{ overflow: 'hidden' }}>
         <Stack styles={styles.header}>
           <TextInput
-            onTextInput={() => {
-              if (!isLoading) {
-                setIsLoading(true)
-              }
-            }}
+            onTextInput={onTextInput}
             onChangeText={debounce(setSearchTerm, 500, { maxWait: 1000 })}
             placeholder={t('Enter skill names')}
             style={styles.filterInput}
