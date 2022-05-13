@@ -19,7 +19,6 @@ import { middleware as UserChallengesMiddleware } from '~/modules/UserChallenges
 import { middleware as UserJobsMiddleware } from '~/modules/UserJobs'
 import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualifications'
 import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
-import { addUserSkillsFailureFlow, addUserSkillsFlow } from '~/modules/UserSkills/UserSkills.middleware'
 import { showSimpleMessage } from '~/utils/error'
 
 import * as Navigation from '../modules/Navigation/Navigation.utils'

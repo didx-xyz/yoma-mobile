@@ -3,7 +3,6 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '~/api'
 import { constants as ApiUsersConstants } from '~/api/users'
-import { USERS_SKILLS_ADD_CONFIG } from '~/api/users/users.constants'
 import { selectId } from '~/modules/User/User.selector'
 import * as ReduxUtils from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
