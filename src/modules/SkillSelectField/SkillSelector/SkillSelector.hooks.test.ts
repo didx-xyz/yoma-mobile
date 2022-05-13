@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { act } from 'react-test-renderer'
 
-import * as SUT from './SkillSelectField.hooks'
+import * as SUT from './SkillSelector.hooks'
 
 describe('Skills/SkillsFilter/SkillsFilter.hooks', () => {
   describe('useSkillsFilter', () => {

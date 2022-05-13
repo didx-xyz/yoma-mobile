@@ -4,7 +4,7 @@ import bodyStyles from '~/components/Typography/Body/Body.styles'
 import { Colors, colors } from '~/styles'
 
 const styles = StyleSheet.create({
-  header: {
+  container: {
     position: 'relative',
     borderStyle: 'solid',
     borderColor: '#ddd',
@@ -14,12 +14,7 @@ const styles = StyleSheet.create({
   filterInput: {
     borderBottomColor: colors[Colors.MenuGrey],
     padding: 10,
-    ...bodyStyles,
-  } as ViewStyle,
-  loader: {
-    position: 'absolute',
-    right: 4,
-    top: 16,
+    ...bodyStyles.regular,
   } as ViewStyle,
 })
 

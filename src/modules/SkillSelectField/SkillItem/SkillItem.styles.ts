@@ -5,8 +5,9 @@ import { Colors, colors } from '~/styles'
 const styles = StyleSheet.create({
   container: {
     backgroundColor: colors[Colors.LightGrey],
-    paddingVertical: 20,
+    paddingVertical: 10,
     paddingHorizontal: 10,
+    alignContent: 'center',
   } as ViewStyle,
 })
 
