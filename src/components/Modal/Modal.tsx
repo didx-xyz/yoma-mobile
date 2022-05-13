@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Modal as RNModal, View } from 'react-native'
 
 import Button, { ButtonSizes, ButtonVariants } from '~/components/Button'
@@ -18,6 +18,11 @@ const Modal = ({ onClose, isVisible, children }: Props) => {
     setModalVisible(isVisible)
   }, [isVisible])
 
+  const handleCloseModal = useCallback(() => {
+    setModalVisible(false)
+    onClose()
+  }, [onClose])
+
   return (
     <RNModal visible={isModalVisible} transparent animationType={'fade'} hardwareAccelerated statusBarTranslucent>
       <View style={styles.modalOverlay} />
@@ -26,10 +31,7 @@ const Modal = ({ onClose, isVisible, children }: Props) => {
           style={styles.button}
           size={ButtonSizes.Default}
           label="Done"
-          onPress={() => {
-            setModalVisible(false)
-            onClose()
-          }}
+          onPress={handleCloseModal}
           variant={ButtonVariants.Clear}
         />
         {children}

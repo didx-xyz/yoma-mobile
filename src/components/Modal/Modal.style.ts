@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop: 40,
     borderRadius: 12,
+    overflow: 'hidden',
+    borderWidth: 4,
+    borderColor: colors[Colors.White],
     ...StyleSheet.absoluteFillObject,
   } as ViewStyle,
   button: {
