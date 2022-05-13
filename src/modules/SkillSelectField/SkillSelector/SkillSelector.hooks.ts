@@ -31,10 +31,6 @@ export const useSkillsFilter = (skills: string[]) => {
 
   const hasNoResults = useMemo(() => searchTerm !== '' && results.length === 0, [results.length, searchTerm])
 
-  useEffect(() => {
-    console.log({ isLoading, results, searchTerm })
-  }, [isLoading, results, searchTerm])
-
   return {
     hasNoResults,
     isLoading,

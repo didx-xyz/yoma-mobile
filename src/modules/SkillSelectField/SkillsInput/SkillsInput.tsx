@@ -17,16 +17,14 @@ interface Props {
   touched: boolean
   error?: string
 }
-const SkillsInput = ({ skills, placeholder, onDelete, onAdd, touched, error }: Props) => {
-  return (
-    <View style={styles.container}>
-      <Text.Header level={HeaderLevels.H6}>{placeholder}</Text.Header>
-      <PillContainer pills={skills} onDelete={onDelete} onAdd={onAdd} />
-      <Spacer height={10} />
-      <Divider />
-      <InputError error={error} touched={touched} />
-    </View>
-  )
-}
+const SkillsInput = ({ skills, placeholder, onDelete, onAdd, touched, error }: Props) => (
+  <View style={styles.container}>
+    <Text.Header level={HeaderLevels.H6}>{placeholder}</Text.Header>
+    <PillContainer pills={skills} onDelete={onDelete} onAdd={onAdd} />
+    <Spacer height={10} />
+    <Divider />
+    <InputError error={error} touched={touched} />
+  </View>
+)
 
 export default SkillsInput

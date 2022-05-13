@@ -1,3 +1,1 @@
-import PillContainer from './PillContainer'
-
-export default PillContainer
+export { default } from './PillContainer'
