@@ -15,7 +15,7 @@ import styles from './DropDownTags.styles'
 
 type Props = Omit<
   React.ComponentProps<typeof DropDownPicker>,
-  'open' | 'setOpen' | 'setValue' | 'setItems' | 'value' | 'items'
+  'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'
 > & {
   name: string
   label: string
@@ -25,7 +25,7 @@ type Props = Omit<
 const renderTags = (tags: string[], onDelete: (tag: string) => void) =>
   tags.map((tag, index) => <Pill key={index} name={tag} onDelete={onDelete} />)
 
-const DropDownTags = ({ items, name, label, ...props }: Props) => {
+const DropDownTags = ({ name, label, ...props }: Props) => {
   const [, { value, error, touched }, { setValue }] = useField(name)
 
   const [isOpen, setIsOpen] = useState(false)
@@ -44,7 +44,6 @@ const DropDownTags = ({ items, name, label, ...props }: Props) => {
     <View style={styles.container}>
       <Text.Meta level={MetaLevels.Small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
       <DropDownPicker
-        items={items}
         style={styles.dropDown}
         dropDownContainerStyle={styles.dropDownView}
         placeholder={label}
