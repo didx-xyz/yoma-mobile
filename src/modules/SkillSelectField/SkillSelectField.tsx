@@ -1,9 +1,9 @@
 import { useField } from 'formik'
-import { append, ifElse, includes, without } from 'ramda'
+import { without } from 'ramda'
 import React, { useCallback, useState } from 'react'
 
 import Modal from '~/components/Modal/Modal'
-import { dropElement } from '~/utils/arrays.utils'
+import { withoutElseAppend } from '~/utils/arrays.utils'
 
 import SkillSelector from './SkillSelector'
 import SkillsInput from './SkillsInput'
@@ -19,9 +19,7 @@ const SkillsSelectField = ({ name, placeholder, skills }: Props) => {
 
   const handleItemSelect = useCallback(
     (skill: string) => {
-      const selectedSkills = ifElse(includes(skill), without(skill), append(skill))(value)
-
-      // const selectedSkills = pipe(of, concat(value), uniq)(skill)
+      const selectedSkills = withoutElseAppend(skill)(value)
       setValue(selectedSkills)
     },
     [setValue, value],
@@ -29,7 +27,7 @@ const SkillsSelectField = ({ name, placeholder, skills }: Props) => {
 
   const handleDelete = useCallback(
     skill => {
-      const selectedSkills = dropElement(skill)(value)
+      const selectedSkills = without(skill)(value)
       setValue(selectedSkills)
     },
     [setValue, value],

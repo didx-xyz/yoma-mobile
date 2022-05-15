@@ -1,4 +1,4 @@
-import { filter, map } from 'ramda'
+import { append, ifElse, includes, map, without } from 'ramda'
 
 export const mapToDropDownArray = (array: Record<string, string>[], valueProp = 'key', labelProp = 'value') =>
   map((opt: Record<string, string>) => ({
@@ -6,4 +6,4 @@ export const mapToDropDownArray = (array: Record<string, string>[], valueProp = 
     value: opt[valueProp],
   }))(array)
 
-export const dropElement = (value: string) => filter((element: string) => element !== value)
+export const withoutElseAppend = (element: string) => ifElse(includes(element), without(element), append(element))

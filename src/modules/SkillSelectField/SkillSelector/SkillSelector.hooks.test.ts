@@ -5,7 +5,7 @@ import * as SUT from './SkillSelector.hooks'
 
 describe('Skills/SkillsFilter/SkillsFilter.hooks', () => {
   describe('useSkillsFilter', () => {
-    it('should pass through customers if no search term is provided', () => {
+    it('should pass through customers if no search term is provided', async () => {
       const skillsMock = [
         'Web Design',
         'Data Science',
@@ -16,7 +16,7 @@ describe('Skills/SkillsFilter/SkillsFilter.hooks', () => {
       ]
       const { result } = renderHook(() => SUT.useSkillsFilter(skillsMock))
 
-      act(() => {
+      await act(async () => {
         result.current.setSearchTerm('')
       })
 
@@ -33,14 +33,14 @@ describe('Skills/SkillsFilter/SkillsFilter.hooks', () => {
       ]
       const { result } = await renderHook(() => SUT.useSkillsFilter(skillsMock))
 
-      act(() => {
+      await act(async () => {
         result.current.setSearchTerm('web')
         result.current.setIsLoading(true)
       })
 
       expect(result.current.searchTerm).toBe('web')
-      expect(result.current.isLoading).toBe(true)
-      expect(result.current.results).toEqual(['Web Design', 'Business Process Modeling'])
+      expect(result.current.isLoading).toBe(false)
+      expect(result.current.results).toEqual(['Web Design'])
     })
   })
 })

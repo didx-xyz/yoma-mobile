@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 
-import { filterSkills } from '../SkillsSelectField.utils'
+import { filterSkills } from './SkillSelector.utils'
 
 export const useSkillsFilter = (skills: string[]) => {
   const [results, setResults] = useState<string[]>([])

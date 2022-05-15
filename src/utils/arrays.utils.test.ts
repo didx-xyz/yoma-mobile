@@ -27,14 +27,18 @@ describe('arrays.utils', () => {
       ])
     })
   })
-  describe('dropElement', () => {
-    it.each([
-      ['skill1', ['skill1', 'skill2', 'skill3'], ['skill2', 'skill3']],
-      ['test', ['skill1', 'skill2', 'skill3'], ['skill1', 'skill2', 'skill3']],
-      ['', ['skill1', 'skill2', 'skill3'], ['skill1', 'skill2', 'skill3']],
-    ])('should drop an element from array', (value, array, expected) => {
-      const result = SUT.dropElement(value)(array)
-      expect(result).toEqual(expected)
+  describe('withoutElseAppend', () => {
+    it('should add a skill to the list if it is not already in the list', () => {
+      const skillsMock = ['skill 1', 'skill 2', 'skill 3']
+      const result = SUT.withoutElseAppend('skill 4')(skillsMock)
+
+      expect(result).toEqual(['skill 1', 'skill 2', 'skill 3', 'skill 4'])
+    })
+    it('should remove a skill from the list if it is already in the list', () => {
+      const skillsMock = ['skill 1', 'skill 2', 'skill 3', 'skill 4']
+      const result = SUT.withoutElseAppend('skill 4')(skillsMock)
+
+      expect(result).toEqual(['skill 1', 'skill 2', 'skill 3'])
     })
   })
 })

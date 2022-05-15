@@ -1,11 +1,11 @@
 import { useField } from 'formik'
+import { without } from 'ramda'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker, { ItemType } from 'react-native-dropdown-picker'
 
 import { Colors } from '~/styles'
-import { dropElement } from '~/utils/arrays.utils'
 import { textOrSpace } from '~/utils/strings.utils'
 
 import InputError from '../InputError'
@@ -32,7 +32,7 @@ const DropDownTags = ({ items, name, label, ...props }: Props) => {
   const [dropDownValue, setDropdownValue] = useState([])
   const { t } = useTranslation()
 
-  const removeTag = (tag: string) => setDropdownValue(dropElement(tag)(dropDownValue))
+  const removeTag = (tag: string) => setDropdownValue(without(tag)(dropDownValue))
 
   useEffect(() => {
     if (value) {

@@ -1,12 +1,12 @@
-import * as SUT from './SkillsSelectField.utils'
+import * as SUT from './SkillSelector.utils'
 
-describe('Skills/SkillsFilter/SkillsFilter.utils', () => {
+describe('modules/SkillSelectField/SkillSelector/SkillSelector.utils', () => {
   describe('filterSkills', () => {
     it.each([
       ['we', ['Web Design']],
       ['Da', ['Data Science']],
       ['de', ['Web Design', 'Business Process Modeling', 'Mobile Application Development', 'Design Thinking']],
-    ])('should correctly filter a given list of skills', (term, expected) => {
+    ])('should correctly filter a given list of skills', async (term, expected) => {
       const skillsMock = [
         'Web Design',
         'Data Science',
@@ -19,7 +19,7 @@ describe('Skills/SkillsFilter/SkillsFilter.utils', () => {
         '.NET Assemblies',
         'Design Thinking',
       ]
-      const result = SUT.filterSkills(skillsMock, term)
+      const result = await SUT.filterSkills(skillsMock, term)
       expect(result).toEqual(expected)
     })
   })
