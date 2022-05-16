@@ -2,8 +2,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { AddIcon } from '../../../assets/images'
-import { Colors } from '../../../styles'
+import { AddIcon } from '~/assets/images'
+import { Colors } from '~/styles'
+
 import Button from '../Button'
 import { ButtonVariants } from '../Button.types'
 import styles from './ButtonAdd.styles'

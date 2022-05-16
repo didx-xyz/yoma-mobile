@@ -4,10 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import { IconInfo } from '~/assets/images'
-import { DropDownTags, FormLayout, Spinner } from '~/components'
 import CheckBox from '~/components/CheckBox'
 import DateRangeSelect from '~/components/DateRangeSelect'
+import DropDownTags from '~/components/DropDownTags'
+import FormLayout from '~/components/FormLayout'
 import Input from '~/components/Input'
+import Spinner from '~/components/Spinner'
 import Upload from '~/components/Upload'
 
 import { INITIAL_VALUES, MOCK_SKILLS_LIST } from './NewCourseForm.constants'

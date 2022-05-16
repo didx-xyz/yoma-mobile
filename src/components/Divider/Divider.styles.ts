@@ -1,10 +1,10 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
+import { Colors, utils as StyleUtils, colors } from '../../styles'
 
 const styles = {
   container: {
-    backgroundColor: colors[Colors.LightGrey],
+    backgroundColor: StyleUtils.applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
     height: 1,
     width: '100%',
   } as ViewStyle,

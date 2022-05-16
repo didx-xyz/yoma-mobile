@@ -3,10 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from '~/assets/images'
-import { ViewContainer } from '~/components'
 import Background from '~/components/Background/Background'
 import Button, { ButtonSizes } from '~/components/Button'
 import Text, { HeaderLevels, TextAlign } from '~/components/Typography'
+import ViewContainer from '~/components/ViewContainer'
 import { Colors } from '~/styles'
 
 import styles from './Landing.styles'

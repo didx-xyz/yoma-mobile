@@ -1,3 +1,3 @@
 export type UserSkillsField = {
-  skillNames: string[]
+  skills: string[]
 }

@@ -132,6 +132,9 @@ const featureModuleMiddleware = [
   UserSkillsMiddleware.fetchUserSkillsFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFlow,
   UserSkillsMiddleware.fetchUserSkillsSuccessFlow,
+  UserSkillsMiddleware.addUserSkillsFlow,
+  UserSkillsMiddleware.addUserSkillsSuccessFlow,
+  UserSkillsMiddleware.addUserSkillsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

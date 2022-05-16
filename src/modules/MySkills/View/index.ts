@@ -1,3 +1,1 @@
-import MySkillsView from './MySkillsView.container'
-
-export default MySkillsView
+export { default } from './MySkillsView.container'

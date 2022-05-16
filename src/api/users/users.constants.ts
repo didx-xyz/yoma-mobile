@@ -35,9 +35,8 @@ export const USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG: Partial<ApiMeta> = mer
 export const USERS_SKILLS_GET_BY_ID_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   endpoint: UsersEndpoints.Skills,
 })
-export const USERS_PASSWORD_EDIT_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
-  method: ApiMethods.Patch,
-  endpoint: UsersEndpoints.Password,
+export const USERS_SKILLS_ADD_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
+  endpoint: UsersEndpoints.Skills,
 })
 export const USERS_PHOTO_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   method: ApiMethods.Post,
