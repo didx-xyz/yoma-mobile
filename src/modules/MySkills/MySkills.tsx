@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Optional from '~/components/Optional'
 
 import { types as HomeNavigationTypes } from '../HomeNavigation'
-import SkillsForm from './Form/MySkillsForm'
+import SkillsForm from './Form'
 import MySkillsView from './View'
 
 interface Props {

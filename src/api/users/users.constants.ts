@@ -37,6 +37,7 @@ export const USERS_SKILLS_GET_BY_ID_CONFIG: Partial<ApiMeta> = mergeRight(USERS_
 })
 export const USERS_SKILLS_ADD_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   endpoint: UsersEndpoints.Skills,
+  method: ApiMethods.Post,
 })
 export const USERS_PHOTO_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
   method: ApiMethods.Post,

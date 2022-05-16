@@ -3,7 +3,8 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import * as FormUtils from '../../../utils/form.utils'
+import * as FormUtils from '~/utils/form.utils'
+
 import { types as HomeNavigationTypes } from '../../HomeNavigation'
 import { actions as JobActions, types as JobTypes } from '../../Jobs'
 import { actions as SkillsActions } from '../../Skills'

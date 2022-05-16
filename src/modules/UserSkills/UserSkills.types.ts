@@ -26,3 +26,5 @@ export interface NormalisedUserSkills {
 }
 
 export interface UserSkillsState extends NormalisedUserSkills {}
+
+export type SkillAdded = string
