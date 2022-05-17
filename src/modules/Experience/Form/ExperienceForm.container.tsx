@@ -3,11 +3,10 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
+import { actions as JobActions, types as JobTypes } from '~/modules/Jobs'
 import * as FormUtils from '~/utils/form.utils'
 
-import { types as HomeNavigationTypes } from '../../HomeNavigation'
-import { actions as JobActions, types as JobTypes } from '../../Jobs'
-import { actions as SkillsActions } from '../../Skills'
 import ExperienceForm from './ExperienceForm'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import selector from './ExperienceForm.selector'
@@ -21,15 +20,11 @@ interface Props {
 }
 const ExperienceFormContainer = ({ navigation }: Props) => {
   const dispatch = useDispatch()
-  const { organisations, skills } = useSelector(selector)
+  const { organisations } = useSelector(selector)
 
   const handleSubmit = (values: JobTypes.JobsRequest) => {
     const job = FormUtils.sanitiseDateRange(values)
     dispatch(JobActions.createJob(job))
-  }
-
-  const onFilterSkills = (searchTerm: string) => {
-    dispatch(SkillsActions.setFilterSearchTerm(searchTerm))
   }
 
   return (
@@ -41,13 +36,7 @@ const ExperienceFormContainer = ({ navigation }: Props) => {
       onSubmit={handleSubmit}
     >
       {(formikHandlers: any) => (
-        <ExperienceForm
-          organisations={organisations}
-          skills={skills}
-          navigation={navigation}
-          onFilterSkills={onFilterSkills}
-          form={formikHandlers}
-        />
+        <ExperienceForm organisations={organisations} navigation={navigation} form={formikHandlers} />
       )}
     </Formik>
   )

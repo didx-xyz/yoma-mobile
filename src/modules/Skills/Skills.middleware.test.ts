@@ -1,11 +1,12 @@
 import { mergeRight } from 'ramda'
 
+import { createMiddlewareMock } from '~/../tests/tests.utils'
 import { actions as ApiActions } from '~/api'
 import { constants as ApiSkillsConstants } from '~/api/skills'
 import { rootStateFixture } from '~/redux/redux.fixture'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
 
-import { createMiddlewareMock } from '../../../tests/tests.utils'
+import { SKILLS_MOCK } from './Skills.fixtures'
 import * as SUT from './Skills.middleware'
 import {
   fetchSkills,
@@ -15,7 +16,6 @@ import {
   normaliseSkillsSuccess,
   setSkills,
 } from './Skills.reducer'
-import { SKILLS_MOCK } from './Skills.test.fixtures'
 
 describe('modules/Skills/Skills.middleware', () => {
   describe('fetchSkillsFlow', () => {

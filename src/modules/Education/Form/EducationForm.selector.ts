@@ -1,11 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 
-import { selectors as OrganisationSelectors } from '../../Organisations'
-import { selectors as SkillsSelectors } from '../../Skills'
+import { selectors as OrganisationSelectors } from '~/modules/Organisations'
 
-export default createSelector(
-  [OrganisationSelectors.selectOrganisationsList, SkillsSelectors.selectFiltered],
-  (organisations, skills) => {
-    return { organisations, skills }
-  },
-)
+export default createSelector([OrganisationSelectors.selectOrganisationsList], organisations => {
+  return { organisations }
+})

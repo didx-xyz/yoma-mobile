@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 
-import { selectSkills } from '../Skills/Skills.selector'
+import { selectors as SkillsSelectors } from '../Skills'
 
-const selector = createSelector(selectSkills, skills => skills.ids.map(id => skills.entities[id].value))
+const selector = createSelector(SkillsSelectors.selectSkills, skills => skills.ids.map(id => skills.entities[id].value))
 
 export default selector

@@ -3,27 +3,19 @@ import { rootStateFixture } from '~/redux/redux.fixture'
 import SUT from './EducationForm.selector'
 
 describe('modules/Education/EducationForm/EducationForm.selector', () => {
-  describe('default ', () => {
+  describe('default', () => {
     it('should return state props required by EducationForm with an empty state', () => {
       const state = rootStateFixture()
       // when ... we call the selector
-      const result = SUT(state)
+      const result = SUT(state as never) // temp fix - need to look into why this is doing this...
 
       // then ... should return result as expected
       expect(result).toEqual({
         organisations: [],
-        skills: [],
       })
     })
     it('should return state props required by EducationForm with an populated state', () => {
       const stateMock = rootStateFixture({
-        skills: {
-          ids: ['idA', 'idB'],
-          entities: {
-            idA: { value: 'Skill A' },
-            idB: { value: 'Skill B' },
-          },
-        },
         organisations: {
           ids: ['id1', 'id2'],
           entities: {
@@ -31,7 +23,7 @@ describe('modules/Education/EducationForm/EducationForm.selector', () => {
             id2: { value: 'Org 2', key: 'id2' },
           },
         },
-      })
+      }) as never // temp fix - need to look into why this is doing this...
       // when ... we call the selector
       const result = SUT(stateMock)
 
@@ -40,10 +32,6 @@ describe('modules/Education/EducationForm/EducationForm.selector', () => {
         organisations: [
           { label: 'Org 1', value: 'id1' },
           { label: 'Org 2', value: 'id2' },
-        ],
-        skills: [
-          { label: 'Skill A', value: 'Skill A' },
-          { label: 'Skill B', value: 'Skill B' },
         ],
       })
     })

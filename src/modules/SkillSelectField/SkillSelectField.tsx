@@ -10,10 +10,11 @@ import SkillsInput from './SkillsInput'
 
 interface Props {
   name: string
-  placeholder: string
+  label?: string
+  searchPlaceholder?: string
   skills: string[]
 }
-const SkillsSelectField = ({ name, placeholder, skills }: Props) => {
+const SkillsSelectField = ({ name, label, searchPlaceholder, skills }: Props) => {
   const [{ value }, { touched, error }, { setValue }] = useField(name)
   const [isModalOpen, setModalOpen] = useState<boolean>(false)
 
@@ -43,12 +44,12 @@ const SkillsSelectField = ({ name, placeholder, skills }: Props) => {
         skills={value}
         touched={touched}
         error={error}
-        placeholder={placeholder}
+        label={label}
         onDelete={handleDelete}
         onAdd={handleOpenModal}
       />
       <Modal setVisible={setModalOpen} isVisible={isModalOpen}>
-        <SkillSelector onItemSelect={handleItemSelect} skills={skills} />
+        <SkillSelector searchPlaceholder={searchPlaceholder} onItemSelect={handleItemSelect} skills={skills} />
       </Modal>
     </>
   )

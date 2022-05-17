@@ -8,11 +8,12 @@ import { Stack } from '~/components/Stack'
 import styles from './SkillsFilter.styles'
 
 interface Props {
+  searchPlaceholder?: string
   setSearchTerm: (term: string) => void
   setIsLoading: (state: boolean) => void
 }
 
-const SkillsFilter = ({ setSearchTerm, setIsLoading }: Props) => {
+const SkillsFilter = ({ searchPlaceholder, setSearchTerm, setIsLoading }: Props) => {
   const { t } = useTranslation()
   const onTextInput = useCallback(() => {
     setIsLoading(true)
@@ -23,7 +24,7 @@ const SkillsFilter = ({ setSearchTerm, setIsLoading }: Props) => {
       <TextInput
         onTextInput={onTextInput}
         onChangeText={debounce(setSearchTerm, 750)}
-        placeholder={t('Enter skill names')}
+        placeholder={searchPlaceholder || t('Enter skill names')}
         style={styles.filterInput}
       />
     </Stack>

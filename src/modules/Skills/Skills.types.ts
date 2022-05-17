@@ -1,20 +1,18 @@
 import { types as ApiTypes } from '~/api'
 
-export type Skill = {
+export interface Skill {
   key: string
   value: string
 }
 
-export type NormalisedSkills = {
+export interface NormalisedSkills {
   ids: string[]
   entities: Record<string, Skill>
 }
 
-export type SkillsResponse = {
+export interface SkillsResponse {
   data: { data: Skill[] }
   meta: ApiTypes.ApiResponseMeta
 }
 
-export interface SkillsState extends NormalisedSkills {
-  searchTerm?: string
-}
+export type SkillsState = NormalisedSkills

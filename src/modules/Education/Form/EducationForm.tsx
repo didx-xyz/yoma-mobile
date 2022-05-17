@@ -9,7 +9,6 @@ import CountryPickerField from '~/components/CountryPickerField'
 import DateRangeSelect from '~/components/DateRangeSelect'
 import DropDown from '~/components/DropDown'
 import { types as DropDownTypes } from '~/components/DropDown'
-import DropDownTags from '~/components/DropDownTags'
 import FormGroup from '~/components/FormGroup'
 import FormLayout from '~/components/FormLayout'
 import Header from '~/components/Header'
@@ -18,9 +17,10 @@ import Input from '~/components/Input'
 import Text, { MetaLevels } from '~/components/Typography'
 import Upload from '~/components/Upload'
 import ViewContainer from '~/components/ViewContainer'
+import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
+import SkillsSelectField from '~/modules/SkillSelectField'
 import { Colors } from '~/styles'
 
-import { types as HomeNavigationTypes } from '../../HomeNavigation'
 import styles from './EducationForm.styles'
 
 interface Props {
@@ -28,12 +28,11 @@ interface Props {
     HomeNavigationTypes.HomeNavigatorParamsList,
     HomeNavigationTypes.HomeNavigationRoutes.Education
   >
-  skillsDropDown: DropDownTypes.DropDownItem[]
   organisationsDropDown: DropDownTypes.DropDownItem[]
   form: FormikProps<any>
 }
 
-const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form }: Props) => {
+const EducationForm = ({ navigation, organisationsDropDown, form }: Props) => {
   const { t } = useTranslation()
   const [showInfoModal, setShowInfoModal] = useState(false)
 
@@ -57,13 +56,7 @@ const EducationForm = ({ navigation, skillsDropDown, organisationsDropDown, form
             />
             <CountryPickerField name="countries" label={t('Country')} />
             <DateRangeSelect />
-            <DropDownTags
-              items={skillsDropDown}
-              multiple
-              searchPlaceholder={t('Search skills')}
-              label={t('Skills developed')}
-              name="skillNames"
-            />
+            <SkillsSelectField name="skillNames" searchPlaceholder={t('Search skills')} label={t('Skills developed')} />
             <Upload name="certificate" label={t('Upload certification (if completed)')} />
             <View style={styles.bottom}>
               <Text.Meta
