@@ -23,12 +23,11 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
     it('should correctly handle updating the skills state', () => {
       // given ...
       const create = createMiddlewareMock(jest, { user: userInitialStateFixture({ id: 'USER ID' }) })
-      const action = fetchUserSkills()
       const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)('USER ID')
-      // @ts-ignore
-      const { invoke, next, store } = create(SUT.fetchUserSkillsFlow)
 
       // when ...
+      const action = fetchUserSkills()
+      const { invoke, next, store } = create(SUT.fetchUserSkillsFlow)
       invoke(action)
 
       // then ...
@@ -66,10 +65,9 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
         },
       }
 
-      const action = fetchUserSkillsSuccess(mockResponseData)
-      // @ts-ignore
-      const { invoke, next, store } = create(SUT.fetchUserSkillsSuccessFlow)
       // when ... we respond to the fetchUserSkillsSuccess action
+      const action = fetchUserSkillsSuccess(mockResponseData)
+      const { invoke, next, store } = create(SUT.fetchUserSkillsSuccessFlow)
       invoke(action)
 
       // then ...normalise the data and set it in state
@@ -95,7 +93,6 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
       // given ...
       const create = createMiddlewareMock(jest)
       const mockNotification = jest.fn()
-      // @ts-ignore
 
       // when ... we respond to the fetchUserSkillsFailureFlow action
       const action = fetchUserSkillsFailure('FAILED')
@@ -113,7 +110,6 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
       const create = createMiddlewareMock(jest, { user: userInitialStateFixture({ id: 'USER ID' }) })
       const action = addUserSkills(['SKILL 1', 'SKILL 2'])
       const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_ADD_CONFIG)('USER ID')
-      // @ts-ignore
       const { invoke, next, store } = create(SUT.addUserSkillsFlow)
 
       // when ...
@@ -155,12 +151,11 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
         status: 201,
         statusText: undefined,
       }
-
-      const action = addUserSkillsSuccess(mockResponseData)
       const notificationMock = jest.fn()
-      // @ts-ignore
+
+      // when ... we respond to the addUserSkillsSuccess action
+      const action = addUserSkillsSuccess(mockResponseData)
       const { invoke, next, store } = create(SUT.addUserSkillsSuccessFlow({ notification: notificationMock }))
-      // when ... we respond to the fetchUserSkillsSuccess action
       invoke(action)
 
       // then ...normalise the data and set it in state
@@ -185,9 +180,8 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
       // given ...
       const create = createMiddlewareMock(jest)
       const mockNotification = jest.fn()
-      // @ts-ignore
 
-      // when ... we respond to the fetchUserSkillsFailureFlow action
+      // when ... we respond to the addUserSkillsFailure action
       const action = addUserSkillsFailure('FAILED')
       const { invoke, next } = create(SUT.addUserSkillsFailureFlow({ notification: mockNotification }))
       invoke(action)
