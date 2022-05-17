@@ -35,7 +35,8 @@
     "test": "jest --ci --config jest.node.config.js --verbose -w 1",
     "test:ui": "jest --ci --config jest.ui.config.js --verbose",
     "test:ui:watch": "npm run test:ui -- --watch",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.17",
@@ -106,7 +107,7 @@
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-module-resolver": "^1.4.0",
     "firebase-tools": "^9.23.3",
-    "husky": "^7.0.4",
+    "husky": "^8.0.0",
     "jest": "^27.5.1",
     "jest-watch-typeahead": "^1.1.0",
     "metro-react-native-babel-preset": "^0.70.2",
@@ -146,11 +147,5 @@
       "json",
       "node"
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run _git:pre-commit",
-      "pre-push": "npm run _git:pre-push"
-    }
   }
 }
