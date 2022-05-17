@@ -8,6 +8,7 @@ import Card from '~/components/Card'
 import Header from '~/components/Header'
 import ViewContainer from '~/components/ViewContainer'
 import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
+import { UserSkillsField } from '~/modules/MySkills/Form/MySkillsForm.types'
 import { SkillsFilterField } from '~/modules/Skills'
 
 import styles from './MySkillsForm.styles'
@@ -17,7 +18,7 @@ interface Props {
     HomeNavigationTypes.HomeNavigatorParamsList,
     HomeNavigationTypes.HomeNavigationRoutes.MySkills
   >
-  form: FormikProps<any>
+  form: FormikProps<UserSkillsField>
 }
 const MySkillsForm = ({ navigation, form }: Props) => {
   const { t } = useTranslation()
