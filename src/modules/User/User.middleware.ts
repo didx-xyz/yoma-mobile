@@ -1,9 +1,11 @@
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
-import { actions as ApiActions, utils as ApiUtils } from '~/api'
+import { actions as ApiActions } from '~/api'
 import { constants as ApiUsersConstants } from '~/api/users'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
+import * as ReduxUtils from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
 import { fetchUserFromOAuthSuccess } from '../Auth/Auth.reducer'
@@ -159,11 +161,8 @@ export const fetchUserCredentialsFlow: Middleware =
   action => {
     const result = next(action)
     if (fetchUserCredentials.match(action)) {
-      const state = getState()
-      const userId = selectId(state)
-      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG)(
-        userId,
-      )
+      const config = ReduxUtils.buildConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_ID_CONFIG, getState())
+
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
@@ -203,7 +202,8 @@ export const uploadUserPhotoFlow =
         const photoPayload = createPayload(imageData)
         dispatch(uploadUserPhotoSuccess(photoPayload))
       } catch (error) {
-        dispatch(uploadUserPhotoFailure(error))
+        const errorMessage = typeof error === 'string' ? error : i18n.t('Oops something went wrong! Please try again.')
+        dispatch(uploadUserPhotoFailure(errorMessage))
       }
     }
     return result
@@ -216,9 +216,8 @@ export const uploadUserPhotoSuccessFlow: Middleware =
     const result = next(action)
 
     if (uploadUserPhotoSuccess.match(action)) {
-      const state = getState()
-      const userId = selectId(state)
-      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG)(userId)
+      const config = ReduxUtils.buildConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG, getState())
+
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {

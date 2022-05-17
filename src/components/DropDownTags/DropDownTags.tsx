@@ -3,7 +3,8 @@ import { without } from 'ramda'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import DropDownPicker, { ItemType } from 'react-native-dropdown-picker'
+import DropDownPicker from 'react-native-dropdown-picker'
+import type { DropDownPickerProps } from 'react-native-dropdown-picker'
 
 import { Colors } from '~/styles'
 import { textOrSpace } from '~/utils/strings.utils'
@@ -14,12 +15,11 @@ import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDownTags.styles'
 
 type Props = Omit<
-  React.ComponentProps<typeof DropDownPicker>,
-  'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'
+  DropDownPickerProps<any>,
+  'open' | 'setOpen' | 'setValue' | 'setItems' | 'onChangeValue' | 'value'
 > & {
   name: string
   label: string
-  items: ItemType<any>[]
 }
 
 const renderTags = (tags: string[], onDelete: (tag: string) => void) =>

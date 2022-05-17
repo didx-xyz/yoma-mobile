@@ -39,7 +39,7 @@ export const extractCredentialsByType = (type: ApiUserTypes.UserCredentialTypes)
 
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
   mergeRight({
-    credentialItemId: ReduxUtils.extractId(action),
+    credentialItemId: ReduxUtils.extractIdFromAction(action),
   })
 
 export const extractUserCredentialFormValues = (

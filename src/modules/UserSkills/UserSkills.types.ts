@@ -20,6 +20,17 @@ export interface UserSkillsResponse {
   meta: ApiResponseMeta
 }
 
+export type SkillAdded = string
+
+export interface UserAddSkillsResponse {
+  data: {
+    data: { skills: SkillAdded[] }
+    meta: ApiResponseMeta
+  }
+  status: number
+  statusText?: string | undefined
+}
+
 export interface NormalisedUserSkills {
   ids: string[]
   entities: Record<string, UserSkill>

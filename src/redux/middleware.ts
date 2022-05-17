@@ -133,7 +133,7 @@ const featureModuleMiddleware = [
   UserSkillsMiddleware.fetchUserSkillsFlow,
   UserSkillsMiddleware.fetchUserSkillsSuccessFlow,
   UserSkillsMiddleware.addUserSkillsFlow,
-  UserSkillsMiddleware.addUserSkillsSuccessFlow,
+  UserSkillsMiddleware.addUserSkillsSuccessFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.addUserSkillsFailureFlow({ notification: showSimpleMessage }),
 ]
 

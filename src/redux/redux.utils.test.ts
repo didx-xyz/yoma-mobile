@@ -1,3 +1,6 @@
+import { userStateFixture } from '~/modules/User/User.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './redux.utils'
 
 describe('src/utils/redux.utils', () => {
@@ -180,7 +183,7 @@ describe('src/utils/redux.utils', () => {
       }
 
       // when ... we want to extract the id from the rest of the payload
-      const result = SUT.extractId(mockPayload)
+      const result = SUT.extractIdFromAction(mockPayload)
 
       // then ... the data should be extracted correctly
       expect(result).toEqual('ID')
@@ -206,6 +209,23 @@ describe('src/utils/redux.utils', () => {
 
       // then ...
       expect(result).toBe('ENTITY DATA')
+    })
+  })
+  describe('buildConfig', () => {
+    it('should extract the entities property from payload', () => {
+      // given ...
+      const stateMock = rootStateFixture({
+        user: userStateFixture({ id: 'USER ID' }),
+      })
+      const configMock = { key: 'SOME VALUE', endpoint: 'SOME VALUE' }
+      // when ...
+      const result = SUT.buildConfig(configMock, stateMock)
+
+      // then ...
+      expect(result).toEqual({
+        key: 'SOME VALUE',
+        endpoint: ['USER ID', 'SOME VALUE'],
+      })
     })
   })
 })

@@ -199,7 +199,6 @@ export const createUserQualificationCertificateSuccessFlow =
     const result = next(action)
 
     if (createUserQualificationCertificateSuccess.match(action)) {
-      console.log({ action })
       const credential = ReduxUtils.extractDataFromResponseAction(action)
       const normalisedCredential = normalise([credential])
       dispatch(updateUserQualifications(normalisedCredential))
