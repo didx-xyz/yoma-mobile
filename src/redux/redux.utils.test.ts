@@ -180,7 +180,7 @@ describe('src/utils/redux.utils', () => {
       }
 
       // when ... we want to extract the id from the rest of the payload
-      const result = SUT.extractId(mockPayload)
+      const result = SUT.extractIdFromAction(mockPayload)
 
       // then ... the data should be extracted correctly
       expect(result).toEqual('ID')

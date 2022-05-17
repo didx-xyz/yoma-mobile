@@ -1,10 +1,13 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { applySpec, concat, evolve, identity, keys, mergeDeepRight, path, pick, pipe, prop, uniq } from 'ramda'
 
+import { utils as ApiUtils } from '~/api'
+import { selectId } from '~/modules/User/User.selector'
 import * as Types from '~/types/general.types'
+import { StdObj } from '~/types/general.types'
 import { objFromListWith } from '~/utils/ramda.utils'
 
-import { NormalisedData } from './redux.types'
+import { NormalisedData, RootState } from './redux.types'
 
 export const normalise = (data: Types.StdObj[], identifier = 'id') =>
   pipe(
@@ -24,6 +27,8 @@ export const updateNormalisedReducer = (state: Types.StdObj, action: PayloadActi
   )(action.payload)
 
 export const selectNormalised = pick(['ids', 'entities'])
-export const extractId = path(['payload', 'id'])
+export const extractIdFromAction = path(['payload', 'id'])
 export const extractDataFromResponseAction = path(['payload', 'data', 'data'])
 export const extractEntitiesFromNormalisedAction = path(['payload', 'entities'])
+export const buildConfig = (preset: StdObj, state: RootState) =>
+  pipe(selectId, ApiUtils.prependValueToEndpointInConfig(preset))(state)

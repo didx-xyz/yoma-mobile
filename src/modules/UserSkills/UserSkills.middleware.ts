@@ -30,10 +30,7 @@ export const fetchUserSkillsFlow: Middleware =
   action => {
     const result = next(action)
     if (fetchUserSkills.match(action)) {
-      const config = pipe(
-        selectId,
-        ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG),
-      )(getState())
+      const config = ReduxUtils.buildConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG, getState())
 
       dispatch(
         ApiActions.apiRequest(
@@ -81,10 +78,7 @@ export const addUserSkillsFlow: Middleware =
   action => {
     const result = next(action)
     if (addUserSkills.match(action)) {
-      const config = pipe(
-        selectId,
-        ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_ADD_CONFIG),
-      )(getState())
+      const config = ReduxUtils.buildConfig(ApiUsersConstants.USERS_SKILLS_ADD_CONFIG, getState())
 
       dispatch(
         ApiActions.apiRequest(
