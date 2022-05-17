@@ -22,13 +22,7 @@ const MySkillsFormContainer = ({ navigation }: Props) => {
   }
 
   return (
-    <Formik
-      initialValues={INITIAL_VALUES}
-      enableReinitialize
-      validateOnMount
-      validationSchema={schema}
-      onSubmit={handleSubmit}
-    >
+    <Formik initialValues={INITIAL_VALUES} validationSchema={schema} onSubmit={handleSubmit}>
       {(formikHandlers: any) => <MySkillsForm navigation={navigation} form={formikHandlers} />}
     </Formik>
   )

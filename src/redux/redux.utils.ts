@@ -1,8 +1,9 @@
 import { PayloadAction } from '@reduxjs/toolkit'
 import { applySpec, concat, evolve, identity, keys, mergeDeepRight, path, pick, pipe, prop, uniq } from 'ramda'
 
-import * as Types from '../types/general.types'
-import { objFromListWith } from '../utils/ramda.utils'
+import * as Types from '~/types/general.types'
+import { objFromListWith } from '~/utils/ramda.utils'
+
 import { NormalisedData } from './redux.types'
 
 export const normalise = (data: Types.StdObj[], identifier = 'id') =>

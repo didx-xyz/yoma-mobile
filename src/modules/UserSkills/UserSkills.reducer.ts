@@ -2,7 +2,13 @@ import { createAction, createReducer } from '@reduxjs/toolkit'
 
 import * as ReduxUtils from '~/redux/redux.utils'
 
-import { NormalisedUserSkills, SkillAdded, UserSkillsResponse, UserSkillsState } from './UserSkills.types'
+import {
+  NormalisedUserSkills,
+  SkillAdded,
+  UserAddSkillsResponse,
+  UserSkillsResponse,
+  UserSkillsState,
+} from './UserSkills.types'
 
 const name = '[User: Skills]'
 export const INITIAL_STATE = {
@@ -15,8 +21,8 @@ export const fetchUserSkillsSuccess = createAction<UserSkillsResponse>(`${name} 
 export const fetchUserSkillsFailure = createAction<string>(`${name} fetchUserSkillsFailure`)
 
 export const addUserSkills = createAction<SkillAdded[]>(`${name} addUserSkills`)
-export const addUserSkillsSuccess = createAction(`${name} addUserSkillsSuccess`)
-export const addUserSkillsFailure = createAction(`${name} addUserSkillsFailure`)
+export const addUserSkillsSuccess = createAction<UserAddSkillsResponse>(`${name} addUserSkillsSuccess`)
+export const addUserSkillsFailure = createAction<string>(`${name} addUserSkillsFailure`)
 
 export const setUserSkills = createAction<NormalisedUserSkills>(`${name} setUserSkills`)
 export const updateUserSkills = createAction<NormalisedUserSkills>(`${name} updateUserSkills`)

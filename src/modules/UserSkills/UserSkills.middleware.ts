@@ -1,14 +1,15 @@
 import i18n from 'i18next'
-import { mergeRight } from 'ramda'
+import { mergeRight, pipe, prop } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '~/api'
 import { constants as ApiUsersConstants } from '~/api/users'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import { utils as NavigationUtils } from '~/modules/Navigation'
+import * as NavigationUtils from '~/modules/Navigation/Navigation.utils'
 import { selectId } from '~/modules/User/User.selector'
 import { prepareAddSkillsForNormalisation } from '~/modules/UserSkills/UserSkills.utils'
 import * as ReduxUtils from '~/redux/redux.utils'
+import { StdObj } from '~/types/general.types'
 import { showSimpleMessage } from '~/utils/error'
 
 import {
@@ -21,7 +22,7 @@ import {
   setUserSkills,
   updateUserSkills,
 } from './UserSkills.reducer'
-import { UserSkillKeys } from './UserSkills.types'
+import { UserSkill, UserSkillKeys } from './UserSkills.types'
 
 export const fetchUserSkillsFlow: Middleware =
   ({ dispatch, getState }) =>
@@ -29,9 +30,11 @@ export const fetchUserSkillsFlow: Middleware =
   action => {
     const result = next(action)
     if (fetchUserSkills.match(action)) {
-      const state = getState()
-      const userId = selectId(state)
-      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG)(userId)
+      const config = pipe(
+        selectId,
+        ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_GET_BY_ID_CONFIG),
+      )(getState())
+
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
@@ -50,8 +53,9 @@ export const fetchUserSkillsSuccessFlow: Middleware =
   action => {
     const result = next(action)
     if (fetchUserSkillsSuccess.match(action)) {
-      const data = ReduxUtils.extractDataFromResponseAction(action)
-      const skills = ReduxUtils.normalise(data, UserSkillKeys.SkillName)
+      const skills = pipe(ReduxUtils.extractDataFromResponseAction, (s: StdObj[]) =>
+        ReduxUtils.normalise(s, UserSkillKeys.SkillName),
+      )(action)
 
       dispatch(setUserSkills(skills))
     }
@@ -77,9 +81,11 @@ export const addUserSkillsFlow: Middleware =
   action => {
     const result = next(action)
     if (addUserSkills.match(action)) {
-      const state = getState()
-      const userId = selectId(state)
-      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_ADD_CONFIG)(userId)
+      const config = pipe(
+        selectId,
+        ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_SKILLS_ADD_CONFIG),
+      )(getState())
+
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
@@ -100,10 +106,14 @@ export const addUserSkillsSuccessFlow =
   action => {
     const result = next(action)
     if (addUserSkillsSuccess.match(action)) {
-      const { skills } = ReduxUtils.extractDataFromResponseAction(action)
-      const preparedSkills = prepareAddSkillsForNormalisation(skills)
-      const normalisedSkills = ReduxUtils.normalise(preparedSkills, UserSkillKeys.SkillName)
-      dispatch(updateUserSkills(normalisedSkills))
+      const skills = pipe(
+        ReduxUtils.extractDataFromResponseAction,
+        prop('skills'),
+        prepareAddSkillsForNormalisation,
+        (s: UserSkill[]) => ReduxUtils.normalise(s, UserSkillKeys.SkillName),
+      )(action)
+
+      dispatch(updateUserSkills(skills))
       NavigationUtils.navigate(HomeNavigationRoutes.Home)
       notification('success', i18n.t('Your skills have been added.'))
     }
@@ -118,8 +128,9 @@ export const addUserSkillsFailureFlow =
     const result = next(action)
 
     if (addUserSkillsFailure.match(action)) {
-      console.log({ action })
-      notification('danger', i18n.t('An error occurred.'), i18n.t('Oops something went wrong! Please try again.'))
+      const errorMessage =
+        typeof action.payload === 'string' ? action.payload : i18n.t('Oops something went wrong! Please try again.')
+      notification('danger', i18n.t('An error occurred.'), errorMessage)
     }
     return result
   }

@@ -2,8 +2,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { ScrollView } from 'react-native'
 
-import FirstTimeCard from '../../components/FirstTimeCard'
-import ViewContainer from '../../components/ViewContainer'
+import FirstTimeCard from '~/components/FirstTimeCard'
+import ViewContainer from '~/components/ViewContainer'
+
 import { AboutWidget } from '../About'
 import { CompletedChallengesWidget } from '../CompletedChallenges'
 import { EducationWidget } from '../Education'
