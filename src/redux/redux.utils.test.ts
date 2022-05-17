@@ -1,8 +1,7 @@
-import { USER_RESPONSE, userStateFixture } from '~/modules/User/User.fixture'
+import { userStateFixture } from '~/modules/User/User.fixture'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
 import * as SUT from './redux.utils'
-import { buildConfig } from './redux.utils'
 
 describe('src/utils/redux.utils', () => {
   describe('normalise', () => {
