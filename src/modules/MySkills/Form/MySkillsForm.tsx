@@ -8,10 +8,10 @@ import Card from '~/components/Card'
 import Header from '~/components/Header'
 import ViewContainer from '~/components/ViewContainer'
 import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
-import { UserSkillsField } from '~/modules/MySkills/Form/MySkillsForm.types'
-import { SkillsFilterField } from '~/modules/Skills'
+import SkillsSelectField from '~/modules/SkillSelectField'
 
 import styles from './MySkillsForm.styles'
+import { UserSkillsField } from './MySkillsForm.types'
 
 interface Props {
   navigation: NativeStackNavigationProp<
@@ -31,7 +31,7 @@ const MySkillsForm = ({ navigation, form }: Props) => {
         actionItem={<ButtonSave onPress={form.handleSubmit} />}
       />
       <Card>
-        <SkillsFilterField name="skills" placeholder={t('Skills developed:')} />
+        <SkillsSelectField name="skills" label={t('Skills developed:')} searchPlaceholder={t('Enter skill names')} />
       </Card>
     </ViewContainer>
   )

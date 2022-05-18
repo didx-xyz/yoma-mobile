@@ -1,4 +1,5 @@
-import SUT, { INITIAL_STATE, clearSkills, setFilterSearchTerm, setSkills } from './Skills.reducer'
+import { skillsInitialStateFixture } from './Skills.fixtures'
+import SUT, { INITIAL_STATE, clearSkills, setSkills } from './Skills.reducer'
 
 describe('modules/Skills/Skills.reducer', () => {
   describe('setSkills', () => {
@@ -50,26 +51,10 @@ describe('modules/Skills/Skills.reducer', () => {
       expect(result).toEqual(skillsMock)
     })
   })
-  describe('setFilterSearchTerm', () => {
-    it('should correctly set skills filter searchTerm', () => {
-      // given ...an initial state
-      const state = {
-        ids: ['id1', 'id2', 'id3'],
-        entities: {
-          id1: 'Skill 1',
-          id2: 'Skill 2',
-          id3: 'Skill 3',
-        },
-      }
-      // when ... we setFilterSearchTerm
-      const action = setFilterSearchTerm('skill')
-
-      // @ts-ignore
-      const result = SUT(state, action)
-
-      // then ... state should include the new skills
-      expect(result).toEqual({
-        searchTerm: 'skill',
+  describe('clearSkills', () => {
+    it('should clear skills state', () => {
+      // give ... skills in state
+      const state = skillsInitialStateFixture({
         ids: ['id1', 'id2', 'id3'],
         entities: {
           id1: 'Skill 1',
@@ -77,19 +62,6 @@ describe('modules/Skills/Skills.reducer', () => {
           id3: 'Skill 3',
         },
       })
-    })
-  })
-  describe('clearSkills', () => {
-    it('should clear skills state', () => {
-      // give ... skills in state
-      const state = {
-        ids: ['id1', 'id2', 'id3'],
-        entities: {
-          id1: 'Skill 1',
-          id2: 'Skill 2',
-          id3: 'Skill 3',
-        },
-      }
       //when we clearSkills
       const action = clearSkills()
       const result = SUT(state, action)

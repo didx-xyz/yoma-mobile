@@ -9,27 +9,25 @@ import Card from '~/components/Card'
 import CheckBox from '~/components/CheckBox'
 import DateRangeSelect from '~/components/DateRangeSelect'
 import DropDown, { types as DropDownTypes } from '~/components/DropDown'
-import DropDownTags from '~/components/DropDownTags'
 import FormLayout from '~/components/FormLayout'
 import Header from '~/components/Header'
 import InfoModal from '~/components/InfoModal'
 import Input from '~/components/Input'
 import Text, { MetaLevels } from '~/components/Typography'
 import ViewContainer from '~/components/ViewContainer'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
+import SkillsSelectField from '~/modules/SkillSelectField'
 import { Colors } from '~/styles'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import styles from './ExperienceForm.styles'
 
 interface Props {
-  onFilterSkills: (value: string) => void
-  skills: DropDownTypes.DropDownItem[]
   organisations: DropDownTypes.DropDownItem[]
   form: FormikProps<any>
   navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
 }
 
-const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, form }: Props) => {
+const ExperienceForm = ({ navigation, organisations, form }: Props) => {
   const { t } = useTranslation()
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
   const [showInfoModal, setShowInfoModal] = useState<boolean>(false)
@@ -66,15 +64,7 @@ const ExperienceForm = ({ navigation, skills, organisations, onFilterSkills, for
             />
             <DateRangeSelect label={t('When did you work here?')} />
             <Input name={'description'} label={t('Description')} multiline />
-            <DropDownTags
-              items={skills}
-              multiple
-              searchable
-              searchPlaceholder={t('Search skills')}
-              onChangeSearchText={onFilterSkills}
-              label={t('Skills developed')}
-              name={'skillNames'}
-            />
+            <SkillsSelectField name="skillNames" searchPlaceholder={t('Search skills')} label={t('Skills developed')} />
             <TouchableOpacity onPress={() => setShowInfoModal(true)}>
               <Text.Meta level={MetaLevels.SmallBold} color={Colors.PrimaryGreen}>
                 {t('Find inspiration on how to write a great profile.')}
