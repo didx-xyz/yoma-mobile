@@ -1,17 +1,19 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Text, { HeaderLevels } from '~/components/Typography'
-import ViewContainer from '~/components/ViewContainer'
-
-import styles from './Courses.styles'
+import { CircleSmallGreenYellowSplatter } from '~/assets/images'
+import ComingSoon from '~/components/ComingSoon'
+import { Colors } from '~/styles'
 
 const Courses = () => {
   const { t } = useTranslation()
   return (
-    <ViewContainer style={styles.container}>
-      <Text.Header level={HeaderLevels.H1}>{t('Courses')}</Text.Header>
-    </ViewContainer>
+    <ComingSoon
+      pageName={t('Courses')}
+      description={t('Upskill and show your skills on Yoma in order to reach your goals.')}
+      heroBgColor={Colors.PrimaryYellow}
+      BottomCircle={CircleSmallGreenYellowSplatter}
+    />
   )
 }
 
