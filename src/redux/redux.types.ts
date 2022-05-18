@@ -1,4 +1,5 @@
-import { StdObj } from '../types/general.types'
+import { StdObj } from '~/types/general.types'
+
 import rootReducer from './reducers'
 
 export type RootState = ReturnType<typeof rootReducer>

@@ -6,8 +6,9 @@ describe('modules/Education/EducationForm/EducationForm.selector', () => {
   describe('default', () => {
     it('should return state props required by EducationForm with an empty state', () => {
       const state = rootStateFixture()
+
       // when ... we call the selector
-      const result = SUT(state as never) // temp fix - need to look into why this is doing this...
+      const result = SUT(state)
 
       // then ... should return result as expected
       expect(result).toEqual({
@@ -23,7 +24,8 @@ describe('modules/Education/EducationForm/EducationForm.selector', () => {
             id2: { value: 'Org 2', key: 'id2' },
           },
         },
-      }) as never // temp fix - need to look into why this is doing this...
+      })
+
       // when ... we call the selector
       const result = SUT(stateMock)
 

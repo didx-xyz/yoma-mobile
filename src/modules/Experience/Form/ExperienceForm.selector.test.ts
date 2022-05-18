@@ -23,7 +23,7 @@ describe('modules/Experience/Experience.selector', () => {
         },
       })
       // when ... we call the selector
-      const result = SUT.default(mockState as never) // no idea why it expects state to be never...
+      const result = SUT.default(mockState) // no idea why it expects state to be never...
 
       // then ... should return the data required by the experience view
       expect(result).toEqual({
