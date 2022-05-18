@@ -3,6 +3,7 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiQualificationConstants } from '~/api/qualifications'
+import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
@@ -37,6 +38,7 @@ export const createQualificationSuccessFlow: Middleware =
     if (createQualificationSuccess.match(action)) {
       const Qualification = extractDataFromResponseAction(action)
       dispatch(UserQualificationsActions.createUserQualification(Qualification))
+      dispatch(UserSkillsActions.fetchUserSkills())
     }
 
     return result
