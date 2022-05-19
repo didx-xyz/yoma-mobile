@@ -9,7 +9,7 @@ const Courses = () => {
   const { t } = useTranslation()
   return (
     <ComingSoon
-      pageName={t('Courses')}
+      subject={t('Courses')}
       byLine={t('Upskill and show your skills on Yoma in order to reach your goals.')}
       heroBgColor={Colors.PrimaryYellow}
       BottomImg={CircleSmallGreenYellowSplatter}

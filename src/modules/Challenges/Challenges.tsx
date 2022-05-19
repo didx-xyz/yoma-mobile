@@ -9,7 +9,7 @@ const Challenges = () => {
   const { t } = useTranslation()
   return (
     <ComingSoon
-      pageName={t('Challenges')}
+      subject={t('Challenges')}
       byLine={t('Make a difference, earn rewards and build your CV by taking part in our impact challenges.')}
       heroBgColor={Colors.PrimaryBlue}
       BottomImg={CircleSmallYellowBlueSplatter}

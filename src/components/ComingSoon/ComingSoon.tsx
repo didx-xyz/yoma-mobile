@@ -11,12 +11,13 @@ import { Colors, colors } from '~/styles'
 import styles from './ComingSoon.styles'
 
 interface Props {
-  pageName: string
+  subject: string
+  isSingularSubject?: boolean
   byLine: string
   heroBgColor: Colors
   BottomImg: typeof Svg
 }
-const ComingSoon = ({ pageName, byLine, heroBgColor, BottomImg }: Props) => {
+const ComingSoon = ({ subject, byLine, heroBgColor, BottomImg, isSingularSubject = false }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -28,8 +29,8 @@ const ComingSoon = ({ pageName, byLine, heroBgColor, BottomImg }: Props) => {
         <BottomImg style={styles.bottomCircle} />
         <View style={styles.header}>
           <Text.Header level={HeaderLevels.H2}>
-            <Span color={Colors.White}>{pageName} </Span>
-            {t('are')}
+            <Span color={Colors.White}>{subject} </Span>
+            {isSingularSubject ? t('is') : t('are')}
           </Text.Header>
           <Text.Header level={HeaderLevels.H2}>{t('coming soon')}!</Text.Header>
         </View>
