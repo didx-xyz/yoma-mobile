@@ -27,8 +27,7 @@ const styles = {
     position: 'absolute',
     left: 10,
     right: 10,
-    bottom: 200,
-    top: 100,
+    top: 120,
     borderRadius: 25,
     padding: 20,
     overflow: 'hidden',
@@ -43,6 +42,9 @@ const styles = {
     bottom: -19,
     left: 16,
   } as ImageStyle,
+  content: {
+    paddingBottom: 120,
+  } as ViewStyle,
   header: {
     marginBottom: 10,
   } as ViewStyle,

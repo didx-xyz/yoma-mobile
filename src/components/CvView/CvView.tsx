@@ -2,8 +2,9 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { View } from 'react-native'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../modules/HomeNavigation/HomeNavigation.types'
-import { WithChildren } from '../../types/react.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { WithChildren } from '~/types/react.types'
+
 import { ButtonAdd } from '../Button'
 import EmptyCard from '../EmptyCard'
 import Header from '../Header'

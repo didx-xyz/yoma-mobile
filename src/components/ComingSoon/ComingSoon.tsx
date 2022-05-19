@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
+import { ScrollView, View } from 'react-native'
 import Svg from 'react-native-svg/lib/typescript'
 
 import { CirclePurple } from '~/assets/images'
@@ -27,14 +27,16 @@ const ComingSoon = ({ subject, byLine, heroBgColor, BottomImg, isPluralSubject =
       </View>
       <View style={[styles.hero, { backgroundColor: colors[heroBgColor] }]}>
         <BottomImg style={styles.bottomCircle} />
-        <View style={styles.header}>
-          <Text.Header level={HeaderLevels.H2}>
-            <Span color={Colors.White}>{subject} </Span>
-            {isPluralSubject ? t('is') : t('are')}
-          </Text.Header>
-          <Text.Header level={HeaderLevels.H2}>{t('coming soon')}!</Text.Header>
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Text.Header level={HeaderLevels.H2}>
+              <Span color={Colors.White}>{subject} </Span>
+              {isPluralSubject ? t('is') : t('are')}
+            </Text.Header>
+            <Text.Header level={HeaderLevels.H2}>{t('coming soon')}!</Text.Header>
+          </View>
+          <Text.Body color={Colors.White}>{byLine}</Text.Body>
         </View>
-        <Text.Body color={Colors.White}>{byLine}</Text.Body>
       </View>
     </ViewContainer>
   )
