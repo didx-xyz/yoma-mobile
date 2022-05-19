@@ -13,7 +13,7 @@ const Marketplace = () => {
       byLine={t('Record your growth on Yoma, unlock skills through opportunities and earn rewards!')}
       heroBgColor={Colors.PrimaryGreen}
       BottomImg={CircleSmallYellowGreenSplatter}
-      isSingularSubject
+      isPluralSubject={false}
     />
   )
 }

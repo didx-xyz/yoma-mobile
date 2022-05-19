@@ -12,12 +12,12 @@ import styles from './ComingSoon.styles'
 
 interface Props {
   subject: string
-  isSingularSubject?: boolean
+  isPluralSubject?: boolean
   byLine: string
   heroBgColor: Colors
   BottomImg: typeof Svg
 }
-const ComingSoon = ({ subject, byLine, heroBgColor, BottomImg, isSingularSubject = false }: Props) => {
+const ComingSoon = ({ subject, byLine, heroBgColor, BottomImg, isPluralSubject = true }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -30,7 +30,7 @@ const ComingSoon = ({ subject, byLine, heroBgColor, BottomImg, isSingularSubject
         <View style={styles.header}>
           <Text.Header level={HeaderLevels.H2}>
             <Span color={Colors.White}>{subject} </Span>
-            {isSingularSubject ? t('is') : t('are')}
+            {isPluralSubject ? t('is') : t('are')}
           </Text.Header>
           <Text.Header level={HeaderLevels.H2}>{t('coming soon')}!</Text.Header>
         </View>
