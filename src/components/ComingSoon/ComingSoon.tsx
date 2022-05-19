@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, View } from 'react-native'
+import { View } from 'react-native'
 import Svg from 'react-native-svg/lib/typescript'
 
 import { CirclePurple } from '~/assets/images'
