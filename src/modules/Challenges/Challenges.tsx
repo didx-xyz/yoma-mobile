@@ -1,17 +1,19 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Text, { HeaderLevels } from '~/components/Typography'
-
-import ViewContainer from '../../components/ViewContainer/ViewContainer'
-import styles from './Challenges.styles'
+import { CircleSmallYellowBlueSplatter } from '~/assets/images'
+import ComingSoon from '~/components/ComingSoon'
+import { Colors } from '~/styles'
 
 const Challenges = () => {
   const { t } = useTranslation()
   return (
-    <ViewContainer style={styles.container}>
-      <Text.Header level={HeaderLevels.H1}>{t('Challenges')}</Text.Header>
-    </ViewContainer>
+    <ComingSoon
+      pageName={t('Challenges')}
+      byLine={t('Make a difference, earn rewards and build your CV by taking part in our impact challenges.')}
+      heroBgColor={Colors.PrimaryBlue}
+      BottomImg={CircleSmallYellowBlueSplatter}
+    />
   )
 }
 

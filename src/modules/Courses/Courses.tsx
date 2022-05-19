@@ -10,7 +10,7 @@ const Courses = () => {
   return (
     <ComingSoon
       pageName={t('Courses')}
-      description={t('Upskill and show your skills on Yoma in order to reach your goals.')}
+      byLine={t('Upskill and show your skills on Yoma in order to reach your goals.')}
       heroBgColor={Colors.PrimaryYellow}
       BottomImg={CircleSmallGreenYellowSplatter}
     />
