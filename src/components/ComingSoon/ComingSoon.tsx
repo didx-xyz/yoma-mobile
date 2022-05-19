@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import Svg from 'react-native-svg/lib/typescript'
@@ -14,9 +14,9 @@ interface Props {
   pageName: string
   description: string
   heroBgColor: Colors
-  BottomCircle: typeof Svg
+  BottomImg: typeof Svg
 }
-const ComingSoon = ({ pageName, description, heroBgColor, BottomCircle }: Props) => {
+const ComingSoon = ({ pageName, description, heroBgColor, BottomImg }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -25,7 +25,7 @@ const ComingSoon = ({ pageName, description, heroBgColor, BottomCircle }: Props)
         <CirclePurple style={styles.bgCircle} />
       </View>
       <View style={[styles.hero, { backgroundColor: colors[heroBgColor] }]}>
-        <BottomCircle style={styles.bottomCircle} />
+        <BottomImg style={styles.bottomCircle} />
         <View style={styles.header}>
           <Text.Header level={HeaderLevels.H2}>
             <Span color={Colors.White}>{pageName} </Span>

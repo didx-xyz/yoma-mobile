@@ -12,7 +12,7 @@ const Courses = () => {
       pageName={t('Courses')}
       description={t('Upskill and show your skills on Yoma in order to reach your goals.')}
       heroBgColor={Colors.PrimaryYellow}
-      BottomCircle={CircleSmallGreenYellowSplatter}
+      BottomImg={CircleSmallGreenYellowSplatter}
     />
   )
 }
