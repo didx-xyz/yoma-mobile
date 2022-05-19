@@ -12,11 +12,11 @@ import styles from './ComingSoon.styles'
 
 interface Props {
   pageName: string
-  description: string
+  byLine: string
   heroBgColor: Colors
   BottomImg: typeof Svg
 }
-const ComingSoon = ({ pageName, description, heroBgColor, BottomImg }: Props) => {
+const ComingSoon = ({ pageName, byLine, heroBgColor, BottomImg }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -33,7 +33,7 @@ const ComingSoon = ({ pageName, description, heroBgColor, BottomImg }: Props) =>
           </Text.Header>
           <Text.Header level={HeaderLevels.H2}>{t('coming soon')}!</Text.Header>
         </View>
-        <Text.Body color={Colors.White}>{description}</Text.Body>
+        <Text.Body color={Colors.White}>{byLine}</Text.Body>
       </View>
     </ViewContainer>
   )
