@@ -11,12 +11,13 @@ import { Colors, colors } from '~/styles'
 import styles from './ComingSoon.styles'
 
 interface Props {
-  pageName: string
+  subject: string
+  isPluralSubject?: boolean
   byLine: string
   heroBgColor: Colors
   BottomImg: typeof Svg
 }
-const ComingSoon = ({ pageName, byLine, heroBgColor, BottomImg }: Props) => {
+const ComingSoon = ({ subject, byLine, heroBgColor, BottomImg, isPluralSubject = true }: Props) => {
   const { t } = useTranslation()
 
   return (
@@ -26,14 +27,16 @@ const ComingSoon = ({ pageName, byLine, heroBgColor, BottomImg }: Props) => {
       </View>
       <View style={[styles.hero, { backgroundColor: colors[heroBgColor] }]}>
         <BottomImg style={styles.bottomCircle} />
-        <View style={styles.header}>
-          <Text.Header level={HeaderLevels.H2}>
-            <Span color={Colors.White}>{pageName} </Span>
-            {t('are')}
-          </Text.Header>
-          <Text.Header level={HeaderLevels.H2}>{t('coming soon')}!</Text.Header>
+        <View style={styles.content}>
+          <View style={styles.header}>
+            <Text.Header level={HeaderLevels.H2}>
+              <Span color={Colors.White}>{subject} </Span>
+              {isPluralSubject ? t('is') : t('are')}
+            </Text.Header>
+            <Text.Header level={HeaderLevels.H2}>{t('coming soon')}!</Text.Header>
+          </View>
+          <Text.Body color={Colors.White}>{byLine}</Text.Body>
         </View>
-        <Text.Body color={Colors.White}>{byLine}</Text.Body>
       </View>
     </ViewContainer>
   )
