@@ -3,7 +3,8 @@ import { useTranslation } from 'react-i18next'
 
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewCredential, { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
-import { ExperienceNavigation } from '~/modules/Experience/View/ExperienceView.types'
+
+import { ExperienceNavigation } from './ExperienceView.types'
 
 interface Props {
   onAdd: () => void
