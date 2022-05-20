@@ -1,22 +1,18 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
 import { actions as JobActions, types as JobTypes } from '~/modules/Jobs'
 import * as FormUtils from '~/utils/form.utils'
 
 import ExperienceForm from './ExperienceForm'
 import { INITIAL_VALUES } from './ExperienceForm.constants'
 import selector from './ExperienceForm.selector'
+import { ExperienceFormNavigation } from './ExperienceForm.types'
 import { schema } from './ExperienceForm.validation'
 
 interface Props {
-  navigation: NativeStackNavigationProp<
-    HomeNavigationTypes.HomeNavigatorParamsList,
-    HomeNavigationTypes.HomeNavigationRoutes.Experience
-  >
+  navigation: ExperienceFormNavigation
 }
 const ExperienceFormContainer = ({ navigation }: Props) => {
   const dispatch = useDispatch()

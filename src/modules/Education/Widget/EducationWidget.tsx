@@ -1,16 +1,16 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvWidget, { CvWidgetList } from '../../../components/CvWidget'
-import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '../../../components/CvWidgetCredential'
-import { Colors } from '../../../styles'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import CvWidget, { CvWidgetList } from '~/components/CvWidget'
+import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '~/components/CvWidgetCredential'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { types as MyCvTypes } from '~/modules/MyCv'
+import { Colors } from '~/styles'
 
 interface Props {
   userQualifications: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
   count: number
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  navigation: MyCvTypes.MyCvNavigation
 }
 
 const EducationWidget = ({ userQualifications, count, navigation }: Props) => {
@@ -21,7 +21,7 @@ const EducationWidget = ({ userQualifications, count, navigation }: Props) => {
       badgeColor={Colors.PrimaryRed}
       title={t('Education')}
       noDataMessage={t('Which school, university or college did you attend?')}
-      onEdit={() => {
+      onAction={() => {
         navigation.navigate(HomeNavigationRoutes.Education)
       }}
     >

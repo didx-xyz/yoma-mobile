@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import CvWidget from '~/components/CvWidget'
 import Text, { TextAlign } from '~/components/Typography'
-
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 
 interface Props {
   biography: string
@@ -17,9 +16,10 @@ const AboutWidget = ({ biography, navigation }: Props) => {
     <CvWidget
       title={t('About')}
       noDataMessage={t('Your biography is one of the first things recruiters look at. Write a great one!')}
-      onEdit={() => {
+      onAction={() => {
         navigation.navigate(HomeNavigationRoutes.About)
       }}
+      isEditAction
     >
       <Text.Body align={TextAlign.Center}>{biography}</Text.Body>
     </CvWidget>

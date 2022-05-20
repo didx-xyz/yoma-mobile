@@ -15,6 +15,7 @@ import CompletedCourses from '../CompletedCourses'
 import Courses from '../Courses'
 import Education from '../Education'
 import Experience from '../Experience'
+import ExperienceForm from '../Experience/Form'
 import Marketplace from '../Marketplace'
 import MyCv from '../MyCv'
 import MySkills from '../MySkills/MySkills'
@@ -85,6 +86,7 @@ const HomeNavigation = () => {
       <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />
       <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
       <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
+      <Stack.Screen name={HomeNavigationRoutes.ExperienceForm} component={ExperienceForm} />
       <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
       <Stack.Screen name={HomeNavigationRoutes.MySkills} component={MySkills} />
       <Stack.Screen name={HomeNavigationRoutes.CompletedCourses} component={CompletedCourses} />

@@ -1,4 +1,3 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { FormikProps } from 'formik'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -15,16 +14,16 @@ import InfoModal from '~/components/InfoModal'
 import Input from '~/components/Input'
 import Text, { MetaLevels } from '~/components/Typography'
 import ViewContainer from '~/components/ViewContainer'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 import SkillsSelectField from '~/modules/SkillSelectField'
 import { Colors } from '~/styles'
 
 import styles from './ExperienceForm.styles'
+import { ExperienceFormNavigation } from './ExperienceForm.types'
 
 interface Props {
   organisations: DropDownTypes.DropDownItem[]
   form: FormikProps<any>
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: ExperienceFormNavigation
 }
 
 const ExperienceForm = ({ navigation, organisations, form }: Props) => {

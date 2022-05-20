@@ -1,14 +1,14 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { ExperienceNavigation } from '~/modules/Experience/View/ExperienceView.types'
+
 import ExperienceView from './ExperienceView'
 import selector from './ExperienceView.selector'
 
 interface Props {
   onAdd: () => void
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: ExperienceNavigation
 }
 const ExperienceViewContainer = ({ onAdd, navigation }: Props) => {
   const { userJobs } = useSelector(selector)

@@ -1,14 +1,13 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvView, { CvViewCredentialTypes, CvViewList } from '../../../components/CvView'
-import CvViewCredential from '../../../components/CvViewCredential'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import CvView, { CvViewList } from '~/components/CvView'
+import CvViewCredential, { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
+import { ExperienceNavigation } from '~/modules/Experience/View/ExperienceView.types'
 
 interface Props {
   onAdd: () => void
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: ExperienceNavigation
   userJobs: CvViewCredentialTypes.CvViewCredentialsData
 }
 

@@ -7,12 +7,16 @@ import { API_VERSION_PART } from '../api.constants'
 import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
 import { AuthEndpoints } from './auth.types'
 
+const REDIRECT_URL = 'com.yomamobile.auth://auth/sign-in'
+const OAUTH_CLIENT_ID = 'yoma-mobile-app'
+const OAUTH_SCOPES = ['openid', 'profile', 'yoma-api-v1', 'offline_access']
+
 export const OAUTH_SETUP_CONFIG: AuthConfiguration = {
   warmAndPrefetchChrome: true,
   issuer: Env.OAUTH_BASE_PATH,
-  scopes: ['openid', 'profile', 'yoma-api-v1', 'offline_access'],
-  clientId: 'yoma-mobile-app',
-  redirectUrl: 'com.yomamobile.auth://auth/sign-in',
+  scopes: OAUTH_SCOPES,
+  clientId: OAUTH_CLIENT_ID,
+  redirectUrl: REDIRECT_URL,
 }
 
 export const OAUTH_CONFIG: Partial<ApiMeta> = {

@@ -1,13 +1,15 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, path, pathOr, pipe, propOr } from 'ramda'
 
-import { CvViewCredentialTypes } from '../../../components/CvView'
+import { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
+import { NormalisedUserQualifications } from '~/modules/UserQualifications/UserQualifications.types'
+
 import { selectUserQualifications } from '../../UserQualifications/UserQualifications.selector'
 import { getEducationMetadata } from './EducationView.utils'
 
-export default createSelector<any, any, { userQualifications: CvViewCredentialTypes.CvViewCredentialsData }>(
+export default createSelector<any, { userQualifications: CvViewCredentialTypes.CvViewCredentialsData }>(
   selectUserQualifications,
-  qualifications => {
+  (qualifications: NormalisedUserQualifications) => {
     const ids = qualifications.ids
     const entities = map(
       pipe(

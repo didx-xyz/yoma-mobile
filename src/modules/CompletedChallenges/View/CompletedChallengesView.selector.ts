@@ -1,13 +1,15 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, path, pathOr, pipe, propOr } from 'ramda'
 
-import { types as CvViewCredentialTypes } from '../../../components/CvViewCredential'
-import { selectUserChallenges } from '../../UserChallenges/UserChallenges.selector'
+import { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
+import { selectUserChallenges } from '~/modules/UserChallenges/UserChallenges.selector'
+import { NormalisedUserChallenges } from '~/modules/UserChallenges/UserChallenges.types'
+
 import { getCompletedChallengesMetadata } from './CompletedChallengesView.utils'
 
-export default createSelector<any, any, { userChallenges: CvViewCredentialTypes.CvViewCredentialsData }>(
+export default createSelector<any, { userChallenges: CvViewCredentialTypes.CvViewCredentialsData }>(
   selectUserChallenges,
-  challenges => {
+  (challenges: NormalisedUserChallenges) => {
     const ids = challenges.ids
     const entities = map(
       pipe(
