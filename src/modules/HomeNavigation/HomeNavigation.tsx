@@ -10,14 +10,13 @@ import { applyAlphaToHex } from '~/styles/styles.utils'
 
 import About from '../About'
 import Challenges from '../Challenges'
-import CompletedChallenges from '../CompletedChallenges'
-import CompletedCourses from '../CompletedCourses'
+import CompletedChallenges, { CompletedChallengesForm } from '../CompletedChallenges'
 import Courses from '../Courses'
-import Education from '../Education'
+import Education, { EducationForm } from '../Education'
 import Experience, { ExperienceForm } from '../Experience'
 import Marketplace from '../Marketplace'
 import MyCv from '../MyCv'
-import MySkills from '../MySkills/MySkills'
+import MySkills, { MySkillsForm } from '../MySkills'
 import Profile from '../Profile'
 import { HomeNavigationRoutes, HomeTabRoutes } from './HomeNavigation.types'
 
@@ -77,21 +76,21 @@ const HomeTabs = () => {
   )
 }
 
-const HomeNavigation = () => {
-  return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
-      <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
-      <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
-      <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />
-      <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
-      <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
-      <Stack.Screen name={HomeNavigationRoutes.ExperienceForm} component={ExperienceForm} />
-      <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
-      <Stack.Screen name={HomeNavigationRoutes.MySkills} component={MySkills} />
-      <Stack.Screen name={HomeNavigationRoutes.CompletedCourses} component={CompletedCourses} />
-      <Stack.Screen name={HomeNavigationRoutes.CompletedChallenges} component={CompletedChallenges} />
-    </Stack.Navigator>
-  )
-}
+const HomeNavigation = () => (
+  <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
+    <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
+    <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />
+    <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
+    <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
+    <Stack.Screen name={HomeNavigationRoutes.ExperienceForm} component={ExperienceForm} />
+    <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
+    <Stack.Screen name={HomeNavigationRoutes.EducationForm} component={EducationForm} />
+    <Stack.Screen name={HomeNavigationRoutes.MySkills} component={MySkills} />
+    <Stack.Screen name={HomeNavigationRoutes.MySkillsForm} component={MySkillsForm} />
+    <Stack.Screen name={HomeNavigationRoutes.CompletedChallenges} component={CompletedChallenges} />
+    <Stack.Screen name={HomeNavigationRoutes.CompletedChallengesForm} component={CompletedChallengesForm} />
+  </Stack.Navigator>
+)
 
 export default HomeNavigation

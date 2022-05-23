@@ -22,14 +22,13 @@ const MySkillsWidget = ({ userSkills, count, navigation }: Props) => {
       title={t('My skills')}
       noDataMessage={t('Tell us what you are great at.')}
       onAction={() => {
-        navigation.navigate(HomeNavigationRoutes.MySkills)
+        navigation.navigate(HomeNavigationRoutes.MySkillsForm)
       }}
     >
       <CvWidgetList
         data={userSkills}
-        onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.MySkills)
-        }}
+        viewRoute={HomeNavigationRoutes.MySkills}
+        navigation={navigation}
         maxDisplay={3}
         RenderItem={CvWidgetSkill}
       />

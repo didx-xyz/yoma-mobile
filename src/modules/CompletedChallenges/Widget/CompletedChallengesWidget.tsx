@@ -21,14 +21,13 @@ const CompletedChallengesWidget = ({ userChallenges, count, navigation }: Props)
       title={t('Completed challenges')}
       noDataMessage={t('Have you completed any challenges yet?')}
       onAction={() => {
-        navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
+        navigation.navigate(HomeNavigationRoutes.CompletedChallengesForm)
       }}
     >
       <CvWidgetList
         data={userChallenges}
-        onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
-        }}
+        viewRoute={HomeNavigationRoutes.CompletedChallenges}
+        navigation={navigation}
         RenderItem={CvWidgetCredential}
       />
     </CvWidget>

@@ -14,6 +14,7 @@ interface Props {
 }
 const ExperienceWidget = ({ userJobs, count, navigation }: Props) => {
   const { t } = useTranslation()
+
   return (
     <CvWidget
       count={count}
@@ -26,9 +27,8 @@ const ExperienceWidget = ({ userJobs, count, navigation }: Props) => {
     >
       <CvWidgetList
         data={userJobs}
-        onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.Experience)
-        }}
+        viewRoute={HomeNavigationRoutes.Experience}
+        navigation={navigation}
         RenderItem={CvWidgetCredential}
       />
     </CvWidget>

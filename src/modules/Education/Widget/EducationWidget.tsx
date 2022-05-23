@@ -22,14 +22,13 @@ const EducationWidget = ({ userQualifications, count, navigation }: Props) => {
       title={t('Education')}
       noDataMessage={t('Which school, university or college did you attend?')}
       onAction={() => {
-        navigation.navigate(HomeNavigationRoutes.Education)
+        navigation.navigate(HomeNavigationRoutes.EducationForm)
       }}
     >
       <CvWidgetList
         data={userQualifications}
-        onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.Education)
-        }}
+        viewRoute={HomeNavigationRoutes.Education}
+        navigation={navigation}
         RenderItem={CvWidgetCredential}
       />
     </CvWidget>
