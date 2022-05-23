@@ -2,10 +2,10 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvWidget, { CvWidgetList } from '../../../components/CvWidget'
-import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '../../../components/CvWidgetCredential'
-import { Colors } from '../../../styles'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import CvWidget, { CvWidgetList } from '~/components/CvWidget'
+import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '~/components/CvWidgetCredential'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { Colors } from '~/styles'
 
 interface Props {
   userChallenges: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
@@ -20,15 +20,14 @@ const CompletedChallengesWidget = ({ userChallenges, count, navigation }: Props)
       badgeColor={Colors.SecondaryPurple}
       title={t('Completed challenges')}
       noDataMessage={t('Have you completed any challenges yet?')}
-      onEdit={() => {
-        navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
+      onAction={() => {
+        navigation.navigate(HomeNavigationRoutes.CompletedChallengesForm)
       }}
     >
       <CvWidgetList
         data={userChallenges}
-        onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.CompletedChallenges)
-        }}
+        viewRoute={HomeNavigationRoutes.CompletedChallenges}
+        navigation={navigation}
         RenderItem={CvWidgetCredential}
       />
     </CvWidget>

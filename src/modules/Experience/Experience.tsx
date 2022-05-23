@@ -1,26 +1,22 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { useState } from 'react'
+import React from 'react'
 
-import Optional from '../../components/Optional'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import ExperienceForm from './Form'
+import { ExperienceNavigation } from '~/modules/Experience/View/ExperienceView.types'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+
 import ExperienceView from './View'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Experience>
+  navigation: ExperienceNavigation
 }
 
 const Experience = ({ navigation }: Props) => {
-  const [isEditing, setIsEditing] = useState(false)
-
-  const handleAddUserJob = () => {
-    setIsEditing(true)
-  }
-
   return (
-    <Optional condition={isEditing} fallback={<ExperienceView onAdd={handleAddUserJob} navigation={navigation} />}>
-      <ExperienceForm navigation={navigation} />
-    </Optional>
+    <ExperienceView
+      onAdd={() => {
+        navigation.navigate(HomeNavigationRoutes.ExperienceForm)
+      }}
+      navigation={navigation}
+    />
   )
 }
 

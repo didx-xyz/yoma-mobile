@@ -1,6 +1,6 @@
 import { applySpec, compose, isEmpty, join, pathOr, pick, pipe, reject, values } from 'ramda'
 
-import { formatStartEndWithDurationString } from '../../../utils/dates.utils'
+import { formatStartEndWithDurationString } from '~/utils/dates.utils'
 
 export const getExperienceMetadata = pipe(
   applySpec({
