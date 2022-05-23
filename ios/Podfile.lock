@@ -36,20 +36,6 @@ PODS:
     - React-Core (= 0.66.0)
     - React-jsi (= 0.66.0)
     - ReactCommon/turbomodule/core (= 0.66.0)
-  - FBSDKCoreKit (9.3.0):
-    - FBSDKCoreKit/Basics (= 9.3.0)
-    - FBSDKCoreKit/Core (= 9.3.0)
-  - FBSDKCoreKit/Basics (9.3.0)
-  - FBSDKCoreKit/Core (9.3.0):
-    - FBSDKCoreKit/Basics
-  - FBSDKLoginKit (9.3.0):
-    - FBSDKLoginKit/Login (= 9.3.0)
-  - FBSDKLoginKit/Login (9.3.0):
-    - FBSDKCoreKit (~> 9.3.0)
-  - FBSDKShareKit (9.3.0):
-    - FBSDKShareKit/Share (= 9.3.0)
-  - FBSDKShareKit/Share (9.3.0):
-    - FBSDKCoreKit (~> 9.3.0)
   - Firebase/CoreOnly (8.8.0):
     - FirebaseCore (= 8.8.0)
   - FirebaseCore (8.8.0):
@@ -127,18 +113,10 @@ PODS:
     - GoogleUtilities/Environment (~> 7.2)
     - nanopb (~> 2.30908.0)
     - PromisesObjC (< 3.0, >= 1.2)
-  - GoogleSignIn (5.0.2):
-    - AppAuth (~> 1.2)
-    - GTMAppAuth (~> 1.0)
-    - GTMSessionFetcher/Core (~> 1.1)
   - GoogleUtilities/Environment (7.5.2):
     - PromisesObjC (< 3.0, >= 1.2)
   - GoogleUtilities/Logger (7.5.2):
     - GoogleUtilities/Environment
-  - GTMAppAuth (1.2.2):
-    - AppAuth/Core (~> 1.4)
-    - GTMSessionFetcher/Core (~> 1.5)
-  - GTMSessionFetcher/Core (1.7.0)
   - libevent (2.1.12)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
@@ -345,28 +323,14 @@ PODS:
   - React-jsinspector (0.66.0)
   - React-logger (0.66.0):
     - glog
-  - react-native-app-auth (6.4.0):
+  - react-native-app-auth (6.4.3):
     - AppAuth (= 1.4.0)
     - React-Core
-  - react-native-document-picker (6.1.1):
+  - react-native-document-picker (8.1.0):
     - React-Core
-  - react-native-fbsdk-next (4.6.0):
+  - react-native-flipper (0.143.0):
     - React-Core
-    - react-native-fbsdk-next/Core (= 4.6.0)
-    - react-native-fbsdk-next/Login (= 4.6.0)
-    - react-native-fbsdk-next/Share (= 4.6.0)
-  - react-native-fbsdk-next/Core (4.6.0):
-    - FBSDKCoreKit (~> 9.3)
-    - React-Core
-  - react-native-fbsdk-next/Login (4.6.0):
-    - FBSDKLoginKit (~> 9.3)
-    - React-Core
-  - react-native-fbsdk-next/Share (4.6.0):
-    - FBSDKShareKit (~> 9.3)
-    - React-Core
-  - react-native-flipper (0.81.0):
-    - React-Core
-  - react-native-safe-area-context (3.3.2):
+  - react-native-safe-area-context (3.4.1):
     - React-Core
   - React-perflogger (0.66.0)
   - React-RCTActionSheet (0.66.0):
@@ -433,36 +397,32 @@ PODS:
     - React-jsi (= 0.66.0)
     - React-logger (= 0.66.0)
     - React-perflogger (= 0.66.0)
-  - RNCAsyncStorage (1.15.9):
+  - RNCAsyncStorage (1.17.3):
     - React-Core
-  - RNCMaskedView (0.1.11):
-    - React
   - RNDateTimePicker (3.5.2):
     - React-Core
   - RNFBApp (12.9.1):
     - Firebase/CoreOnly (= 8.8.0)
     - React-Core
-  - RNGestureHandler (1.10.3):
+  - RNGestureHandler (2.4.1):
     - React-Core
-  - RNGoogleSignin (6.0.1):
-    - GoogleSignIn (~> 5.0.0)
-    - React-Core
-  - RNImageCropPicker (0.36.4):
+  - RNImageCropPicker (0.37.3):
     - React-Core
     - React-RCTImage
-    - RNImageCropPicker/QBImagePickerController (= 0.36.4)
+    - RNImageCropPicker/QBImagePickerController (= 0.37.3)
     - TOCropViewController
-  - RNImageCropPicker/QBImagePickerController (0.36.4):
+  - RNImageCropPicker/QBImagePickerController (0.37.3):
     - React-Core
     - React-RCTImage
     - TOCropViewController
-  - RNLocalize (2.1.5):
+  - RNLocalize (2.2.1):
     - React-Core
-  - RNScreens (2.18.1):
+  - RNScreens (3.13.1):
     - React-Core
-  - RNSVG (12.1.1):
-    - React
-  - RNVectorIcons (8.1.0):
+    - React-RCTImage
+  - RNSVG (12.3.0):
+    - React-Core
+  - RNVectorIcons (9.1.0):
     - React-Core
   - TOCropViewController (2.6.0)
   - UMAppLoader (2.2.0)
@@ -525,7 +485,6 @@ DEPENDENCIES:
   - React-logger (from `../node_modules/react-native/ReactCommon/logger`)
   - react-native-app-auth (from `../node_modules/react-native-app-auth`)
   - react-native-document-picker (from `../node_modules/react-native-document-picker`)
-  - react-native-fbsdk-next (from `../node_modules/react-native-fbsdk-next`)
   - react-native-flipper (from `../node_modules/react-native-flipper`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -541,11 +500,9 @@ DEPENDENCIES:
   - React-runtimeexecutor (from `../node_modules/react-native/ReactCommon/runtimeexecutor`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
-  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
-  - "RNGoogleSignin (from `../node_modules/@react-native-google-signin/google-signin`)"
   - RNImageCropPicker (from `../node_modules/react-native-image-crop-picker`)
   - RNLocalize (from `../node_modules/react-native-localize`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -561,9 +518,6 @@ SPEC REPOS:
   trunk:
     - AppAuth
     - CocoaAsyncSocket
-    - FBSDKCoreKit
-    - FBSDKLoginKit
-    - FBSDKShareKit
     - Firebase
     - FirebaseCore
     - FirebaseCoreDiagnostics
@@ -578,10 +532,7 @@ SPEC REPOS:
     - FlipperKit
     - fmt
     - GoogleDataTransport
-    - GoogleSignIn
     - GoogleUtilities
-    - GTMAppAuth
-    - GTMSessionFetcher
     - libevent
     - nanopb
     - OpenSSL-Universal
@@ -638,8 +589,6 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-app-auth"
   react-native-document-picker:
     :path: "../node_modules/react-native-document-picker"
-  react-native-fbsdk-next:
-    :path: "../node_modules/react-native-fbsdk-next"
   react-native-flipper:
     :path: "../node_modules/react-native-flipper"
   react-native-safe-area-context:
@@ -670,16 +619,12 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   RNCAsyncStorage:
     :path: "../node_modules/@react-native-async-storage/async-storage"
-  RNCMaskedView:
-    :path: "../node_modules/@react-native-community/masked-view"
   RNDateTimePicker:
     :path: "../node_modules/@react-native-community/datetimepicker"
   RNFBApp:
     :path: "../node_modules/@react-native-firebase/app"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
-  RNGoogleSignin:
-    :path: "../node_modules/@react-native-google-signin/google-signin"
   RNImageCropPicker:
     :path: "../node_modules/react-native-image-crop-picker"
   RNLocalize:
@@ -713,9 +658,6 @@ SPEC CHECKSUMS:
   EXSecureStore: 051e95a9624704313c50e8c95ee65033ce210aee
   FBLazyVector: 6816ca39e1cc8beffd2a96783f518296789d1c48
   FBReactNativeSpec: 3b1e86618e902743fde35b40cf9ebd100fd655b7
-  FBSDKCoreKit: 0d1ae58388a458b8222f72025804cdc84eb5d0c3
-  FBSDKLoginKit: aea68df6121c5e165ccae2fabfdc83c4644ee40f
-  FBSDKShareKit: 70889c97c62f0c6b3ccb8b999e73a85f19024001
   Firebase: 629510f1a9ddb235f3a7c5c8ceb23ba887f0f814
   FirebaseCore: 98b29e3828f0a53651c363937a7f7d92a19f1ba2
   FirebaseCoreDiagnostics: fe77f42da6329d6d83d21fd9d621a6b704413bfc
@@ -731,10 +673,7 @@ SPEC CHECKSUMS:
   fmt: ff9d55029c625d3757ed641535fd4a75fedc7ce9
   glog: 5337263514dd6f09803962437687240c5dc39aa4
   GoogleDataTransport: 85fd18ff3019bb85d3f2c551d04c481dedf71fc9
-  GoogleSignIn: 7137d297ddc022a7e0aa4619c86d72c909fa7213
   GoogleUtilities: 8de2a97a17e15b6b98e38e8770e2d129a57c0040
-  GTMAppAuth: ad5c2b70b9a8689e1a04033c9369c4915bfcbe89
-  GTMSessionFetcher: 43748f93435c2aa068b1cbe39655aaf600652e91
   libevent: 4049cae6c81cdb3654a443be001fb9bdceff7913
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   OpenSSL-Universal: 1aa4f6a6ee7256b83db99ec1ccdaa80d10f9af9b
@@ -751,11 +690,10 @@ SPEC CHECKSUMS:
   React-jsiexecutor: 6a05173dc0142abc582bd4edd2d23146b8cc218a
   React-jsinspector: be95ad424ba9f7b817aff22732eb9b1b810a000a
   React-logger: 9a9cd87d4ea681ae929b32ef580638ff1b50fb24
-  react-native-app-auth: ed620d57f4b2bfc96c28ca264133c324a575a645
-  react-native-document-picker: 855e3468ac80f886d46cfc9ed132a4469ecaf817
-  react-native-fbsdk-next: a0dd8905af573ec4d21b7bc398423ccaa2ce2b07
-  react-native-flipper: 558237babdf0ee5d5360ebac860d3a5d1d9fc133
-  react-native-safe-area-context: 5cf05f49df9d17261e40e518481f2e334c6cd4b5
+  react-native-app-auth: bd3be305a5cbac5baa8574253480d90b5c5522e7
+  react-native-document-picker: e54f06b94104d91f651db1db378898fe2ba7050b
+  react-native-flipper: df8e2a7e5dcc857033d925ad8c7e8c52760b8e06
+  react-native-safe-area-context: 5b8a418400eb3d8364aa87300e865c0262cc17b9
   React-perflogger: 1f554c2b684e2f484f9edcdfdaeedab039fbaca8
   React-RCTActionSheet: 610d5a5d71ab4808734782c8bca6a12ec3563672
   React-RCTAnimation: ec6ed97370ace32724c253f29f0586cafcab8126
@@ -768,17 +706,15 @@ SPEC CHECKSUMS:
   React-RCTVibration: 53b92d54b923283638cb0186da7a5c2d2b70a49b
   React-runtimeexecutor: 4bb657a97aa74568d9ed634c8bd478299bb8a3a6
   ReactCommon: eb059748e842a1a86025ebbd4ac9d99e74492f88
-  RNCAsyncStorage: d599364c12b1ddb042cc2d7ab6f8258962b83097
-  RNCMaskedView: f127cd9652acfa31b91dcff613e07ba18b774db6
+  RNCAsyncStorage: bef53cb70c06b8eff11bab4a848de86ad4488c39
   RNDateTimePicker: c9911be59b1f8670b9f244b85af3a7c295e175ed
   RNFBApp: ece97bfe0a926247591c0aa0bdfe384f06cf46b5
-  RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
-  RNGoogleSignin: e64616a4080cf7d83f4b292fad82d174587444e2
-  RNImageCropPicker: 73891a709e6fd8a47d32104d942757971f220aee
-  RNLocalize: 13a971fd888f2933504a745983f781dc52feeab6
-  RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
-  RNSVG: 551acb6562324b1d52a4e0758f7ca0ec234e278f
-  RNVectorIcons: 31cebfcf94e8cf8686eb5303ae0357da64d7a5a4
+  RNGestureHandler: 4f4986408310a43f1606c391f38f76e0d6e790d5
+  RNImageCropPicker: 44e2807bc410741f35d4c45b6586aedfe3da39d2
+  RNLocalize: 414c99a0f6625a58dfee7f5780678d98c4ffabc2
+  RNScreens: 40a2cb40a02a609938137a1e0acfbf8fc9eebf19
+  RNSVG: 302bfc9905bd8122f08966dc2ce2d07b7b52b9f8
+  RNVectorIcons: 7923e585eaeb139b9f4531d25a125a1500162a0b
   TOCropViewController: 3105367e808b7d3d886a74ff59bf4804e7d3ab38
   UMAppLoader: db2dae4bc3085e21f56d6d9cf7783d08c5999af4
   UMCore: ad33bbda30dee343a248e3696f30502092d9842d
@@ -787,6 +723,6 @@ SPEC CHECKSUMS:
   Yoga: c11abbf5809216c91fcd62f5571078b83d9b6720
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
 
-PODFILE CHECKSUM: 88ec784857245901678bcba419b158b137a02613
+PODFILE CHECKSUM: afd49c790c6227332c1db093caadeb62e689ca7c
 
 COCOAPODS: 1.11.2
