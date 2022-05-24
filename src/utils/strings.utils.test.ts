@@ -35,4 +35,16 @@ describe('strings.utils', () => {
       expect(result).toEqual(expected)
     })
   })
+  describe('trunc', () => {
+    it('should truncate the given text at the given length', () => {
+      const result = SUT.trunc('truth in advertising and dinosaurs with skateboards have much in common.', 21)
+      expect(result).toBe('truth in advertising...')
+      expect(result.length).toBe(23)
+    })
+    it('should return the given string if the text is less than the given length', () => {
+      const result = SUT.trunc('truth in advertising.', 100)
+      expect(result).toBe('truth in advertising.')
+      expect(result.length).toBe(21)
+    })
+  })
 })

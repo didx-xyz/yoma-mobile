@@ -1,6 +1,7 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from '~/styles'
+
 import { ButtonSizes, ButtonVariants } from './Button.types'
 
 const baseStyle = {

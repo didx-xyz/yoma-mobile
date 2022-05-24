@@ -1,10 +1,11 @@
-import { rootStateFixture } from '../../../redux/redux.fixture'
-import { challengesStateFixture } from '../../Challenges/Challenges.fixture'
+import { challengesStateFixture } from '~/modules/Challenges/Challenges.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import SUT from './CompletedChallengesForm.selector'
 
 describe('modules/CompletedChallenges/Form/CompletedChallengesForm.selector', () => {
   describe('selector', () => {
-    it(`should return empty data for challenges and dropdown data, 
+    it(`should return empty data for challenges and dropdown data,
     when we load the completed challenges form, given an empty state`, () => {
       // given ... an empty state
       const stateMock = rootStateFixture()

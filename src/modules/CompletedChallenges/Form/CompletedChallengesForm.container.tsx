@@ -1,11 +1,10 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { CompleteChallengesNavigation } from '~/modules/CompletedChallenges/types'
 import * as FormUtils from '~/utils/form.utils'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
 import { actions as UserChallengesActions } from '../../UserChallenges'
 import { schema } from './CompletedChallengeForm.validation'
 import CompletedChallengesForm from './CompletedChallengesForm'
@@ -14,7 +13,7 @@ import selector from './CompletedChallengesForm.selector'
 import { FormFields } from './CompletedChallengesForm.types'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
+  navigation: CompleteChallengesNavigation
 }
 const CompletedChallengesFormContainer = ({ navigation }: Props) => {
   const { challenges, challengesDropDown } = useSelector(selector)

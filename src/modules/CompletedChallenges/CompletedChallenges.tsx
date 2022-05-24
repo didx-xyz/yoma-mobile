@@ -1,25 +1,21 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { useState } from 'react'
+import React from 'react'
 
-import Optional from '../../components/Optional'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import CompletedChallengesForm from './Form'
+import { CompleteChallengesNavigation } from '~/modules/CompletedChallenges/types'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+
 import CompletedChallengesView from './View'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.CompletedChallenges>
+  navigation: CompleteChallengesNavigation
 }
 
-const CompletedChallenges = ({ navigation }: Props) => {
-  const [isEditing, setIsEditing] = useState(false)
-
-  const handleAdd = () => setIsEditing(true)
-
-  return (
-    <Optional condition={isEditing} fallback={<CompletedChallengesView onAdd={handleAdd} navigation={navigation} />}>
-      <CompletedChallengesForm navigation={navigation} />
-    </Optional>
-  )
-}
+const CompletedChallenges = ({ navigation }: Props) => (
+  <CompletedChallengesView
+    onAdd={() => {
+      navigation.navigate(HomeNavigationRoutes.CompletedChallengesForm)
+    }}
+    navigation={navigation}
+  />
+)
 
 export default CompletedChallenges

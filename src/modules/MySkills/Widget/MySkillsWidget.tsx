@@ -21,7 +21,7 @@ const MySkillsWidget = ({ userSkills, count, navigation }: Props) => {
       badgeColor={Colors.PrimaryGreen}
       title={t('My skills')}
       noDataMessage={t('Tell us what you are great at.')}
-      onAction={() => {
+      onActionPress={() => {
         navigation.navigate(HomeNavigationRoutes.MySkillsForm)
       }}
     >

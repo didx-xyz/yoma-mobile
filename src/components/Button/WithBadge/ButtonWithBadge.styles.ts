@@ -1,23 +1,22 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../../styles'
-import * as StyleUtils from '../../../styles/styles.utils'
+import { Colors, colors } from '~/styles'
+import { utils as StyleUtils } from '~/styles'
 
 const styles = {
   button: {
     flexDirection: 'row',
-    paddingRight: 40,
+    height: 40,
+    borderRadius: 1,
+    alignItems: 'center',
+    paddingLeft: 8,
+    position: 'relative',
   } as ViewStyle,
   badge: {
     ...StyleUtils.dropShadow(-1.69, 6.77, 14.55, Colors.Black, 3),
     backgroundColor: colors[Colors.White],
-    marginLeft: 10,
-    borderRadius: 10,
-    position: 'absolute',
-    right: 0,
-    alignItems: 'flex-end',
-    justifyContent: 'center',
-    marginRight: 10,
+    borderRadius: 20,
+    marginRight: 8,
   } as ViewStyle,
 }
 

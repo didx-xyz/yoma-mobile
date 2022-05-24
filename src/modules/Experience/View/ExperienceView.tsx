@@ -18,7 +18,7 @@ const ExperienceView = ({ userJobs, navigation, onAdd }: Props) => {
     <CvView
       title={t('Experience')}
       noDataMessage={t('Where do you currently work?')}
-      onAdd={onAdd}
+      onAction={onAdd}
       navigation={navigation}
     >
       <CvViewList data={userJobs} RenderItem={CvViewCredential} />

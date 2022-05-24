@@ -17,7 +17,7 @@ interface Props extends FCWithChildren {
   noDataMessage: string
   count?: number
   badgeColor?: Colors
-  onAction: () => void
+  onActionPress: () => void
   isEditAction?: boolean
 }
 const CvWidget = ({
@@ -25,7 +25,7 @@ const CvWidget = ({
   noDataMessage,
   count,
   badgeColor = Colors.White,
-  onAction,
+  onActionPress,
   children,
   isEditAction = false,
 }: Props) => (
@@ -35,7 +35,7 @@ const CvWidget = ({
       count={count}
       header={title}
       hasCountBadge={isNotNil(count) as boolean}
-      actionItem={isEditAction ? <IconButtonEdit onPress={onAction} /> : <IconButtonAdd onPress={onAction} />}
+      actionItem={isEditAction ? <IconButtonEdit onPress={onActionPress} /> : <IconButtonAdd onPress={onActionPress} />}
       hasBorder
     />
     <View style={styles.content}>

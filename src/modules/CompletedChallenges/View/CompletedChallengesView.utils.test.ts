@@ -1,6 +1,7 @@
 import { mergeDeepRight } from 'ramda'
 
-import { USER_CHALLENGES_RESPONSE_MOCK } from '../../UserChallenges/UserChallenges.fixtures'
+import { USER_CHALLENGES_RESPONSE_MOCK } from '~/modules/UserChallenges/UserChallenges.fixtures'
+
 import * as SUT from './CompletedChallengesView.utils'
 
 describe('modules/CompletedChallenges/CompletedChallengesView/CompletedChallengesView.utils', () => {
