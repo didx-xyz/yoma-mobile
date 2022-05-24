@@ -43,6 +43,9 @@ const styles = {
   loading: {
     paddingRight: 10,
   } as ViewStyle,
+  content: {
+    alignItems: 'center',
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
