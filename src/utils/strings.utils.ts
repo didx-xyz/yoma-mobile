@@ -1,4 +1,4 @@
-import { __, concat, gt, head, join, juxt, length, lt, pipe, tail, take, toUpper, trim, unless, when } from 'ramda'
+import { __, concat, gt, head, join, juxt, length, pipe, tail, take, toUpper, trim, unless } from 'ramda'
 
 export const getUppercasedHead = (data: string) => pipe(trim, head, toUpper)(data)
 
