@@ -33,6 +33,7 @@ declare module 'ramda' {
   export function keys(...rest: any[]): any
   export function length(...rest: any[]): any
   export function lensPath(...rest: any[]): any
+  export function lt(...rest: any[]): any
   export function map(...rest: any[]): any
   export function merge(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
