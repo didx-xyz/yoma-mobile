@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { ActivityIndicator, StyleSheet, TextStyle, TouchableOpacity, View, ViewStyle } from 'react-native'
 
 import Optional from '~/components/Optional'
@@ -40,8 +40,6 @@ const Button = ({
   style,
   children,
 }: Props) => {
-  const [buttonStyle, setButtonStyle] = useState<ViewStyle>(styles[ButtonVariants.Primary])
-  const [labelColor, setLabelColor] = useState<Colors>(Colors.White)
   const [isButtonLoading, setButtonLoading] = useState<boolean>(false)
 
   const handlePress = useCallback(() => {
@@ -57,23 +55,22 @@ const Button = ({
     }
   }, [isLoadingEnabled, isLoading])
 
-  useEffect(() => {
+  const buttonStyle = useMemo(() => {
     const variantStyle = styles[variant]
     const sizeStyle = styles[size]
     const fullWidthStyle = isFullWidth ? styles.fullWidth : {}
-    const flattenedButtonStyles = StyleSheet.flatten([variantStyle, sizeStyle, fullWidthStyle, style])
-    setButtonStyle(flattenedButtonStyles)
-  }, [isFullWidth, variant, size, style])
+    return StyleSheet.flatten([variantStyle, sizeStyle, fullWidthStyle, style])
+  }, [isFullWidth, size, style, variant])
 
-  useEffect(() => {
+  const labelColor = useMemo(() => {
     const defaultVariantColor = MAP_VARIANT_TO_LABEL_COLOR[variant]
     const labelVariantColor = color || defaultVariantColor
-    setLabelColor(isDisabled ? Colors.MenuGrey : labelVariantColor)
-  }, [variant, color, isDisabled])
+    return isDisabled ? Colors.MenuGrey : labelVariantColor
+  }, [color, isDisabled, variant])
 
   return (
     <TouchableOpacity onPress={handlePress} disabled={isDisabled} style={buttonStyle}>
-      <HStack>
+      <HStack styles={styles.content}>
         <Optional condition={isButtonLoading}>
           <ActivityIndicator color={colors[Colors.White]} style={styles.loading} />
         </Optional>
