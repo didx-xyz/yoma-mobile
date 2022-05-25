@@ -24,7 +24,7 @@ const MySkillsView = ({ userSkills, onAdd, navigation }: Props) => {
     <CvView
       title={t('Skills')}
       noDataMessage={t('Tell us what you are great at.')}
-      onAdd={onAdd}
+      onAction={onAdd}
       navigation={navigation}
     >
       <View style={styles.container}>

@@ -4,8 +4,8 @@ import { View } from 'react-native'
 import Optional from '~/components/Optional'
 import Spacer from '~/components/Spacer'
 import Text, { Bold, HeaderLevels } from '~/components/Typography'
+import { Challenge } from '~/modules/Challenges/Challenges.types'
 
-import { Challenge } from '../../../Challenges/Challenges.types'
 import styles from './ChallengeInfo.styles'
 
 interface Props {

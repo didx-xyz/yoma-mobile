@@ -9,15 +9,13 @@ interface Props {
   navigation: ExperienceNavigation
 }
 
-const Experience = ({ navigation }: Props) => {
-  return (
-    <ExperienceView
-      onAdd={() => {
-        navigation.navigate(HomeNavigationRoutes.ExperienceForm)
-      }}
-      navigation={navigation}
-    />
-  )
-}
+const Experience = ({ navigation }: Props) => (
+  <ExperienceView
+    onAdd={() => {
+      navigation.navigate(HomeNavigationRoutes.ExperienceForm)
+    }}
+    navigation={navigation}
+  />
+)
 
 export default Experience

@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewCredential, { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
-
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 
 interface Props {
   onAdd: () => void
@@ -19,7 +18,7 @@ const EducationView = ({ onAdd, navigation, userQualifications }: Props) => {
     <CvView
       title={t('Education')}
       noDataMessage={t('Which school, university or college did you attend?')}
-      onAdd={onAdd}
+      onAction={onAdd}
       navigation={navigation}
     >
       <CvViewList data={userQualifications} RenderItem={CvViewCredential} />
