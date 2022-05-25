@@ -1,7 +1,7 @@
 import React from 'react'
 import { TouchableOpacity } from 'react-native'
 
-import { BackIconGrey } from '../../../assets/images'
+import { BackIconGrey } from '~/assets/images'
 
 interface Props {
   onPress: () => void

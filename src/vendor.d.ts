@@ -18,6 +18,8 @@ declare module 'ramda' {
   export function filter(...rest: any[]): any
   export function find(...rest: any[]): any
   export function flatten(...rest: any[]): any[]
+  export function gt(...rest: any[]): any
+  export function gte(...rest: any[]): any
   export function has(...rest: any[]): any
   export function head(...rest: any[]): any
   export function identity(...rest: any[]): any
@@ -29,7 +31,9 @@ declare module 'ramda' {
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
   export function keys(...rest: any[]): any
+  export function length(...rest: any[]): any
   export function lensPath(...rest: any[]): any
+  export function lt(...rest: any[]): any
   export function map(...rest: any[]): any
   export function merge(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
@@ -58,9 +62,11 @@ declare module 'ramda' {
   export function reject(...rest: any[]): any
   export function slice(...rest: any[]): any[]
   export function split(...rest: any[]): any[]
+  export function splitAt(...rest: any[]): any[]
   export function repeat(...rest: any[]): any[]
   export function tail(...rest: any[]): any[]
   export function tap(...rest: any[]): any[]
+  export function take(...rest: any[]): any
   export function toPairs(...rest: any[]): any
   export function toLower(...rest: any[]): any
   export function toUpper(...rest: any[]): any

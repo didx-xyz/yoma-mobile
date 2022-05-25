@@ -1,4 +1,5 @@
-import { Colors } from '../../styles'
+import { Colors } from '~/styles'
+
 import { ButtonVariants } from './Button.types'
 
 export const MAP_VARIANT_TO_LABEL_COLOR = {
