@@ -1,25 +1,21 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React, { useState } from 'react'
+import React from 'react'
 
-import Optional from '../../components/Optional'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import EducationForm from './Form'
+import { EducationNavigation } from '~/modules/Education/types'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+
 import EducationView from './View'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
+  navigation: EducationNavigation
 }
 
-const Education = ({ navigation }: Props) => {
-  const [isEditing, setIsEditing] = useState(false)
-
-  const handleAdd = () => setIsEditing(true)
-
-  return (
-    <Optional condition={isEditing} fallback={<EducationView onAdd={handleAdd} navigation={navigation} />}>
-      <EducationForm navigation={navigation} />
-    </Optional>
-  )
-}
+const Education = ({ navigation }: Props) => (
+  <EducationView
+    onAdd={() => {
+      navigation.navigate(HomeNavigationRoutes.EducationForm)
+    }}
+    navigation={navigation}
+  />
+)
 
 export default Education

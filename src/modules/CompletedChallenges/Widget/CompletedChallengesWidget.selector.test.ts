@@ -1,5 +1,6 @@
-import { rootStateFixture } from '../../../redux/redux.fixture'
-import { INITIAL_STATE } from '../../UserChallenges/UserChallenges.reducer'
+import { INITIAL_STATE } from '~/modules/UserChallenges/UserChallenges.reducer'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './CompletedChallengesWidget.selector'
 
 describe('modules/CompletedChallenges/CompletedChallengesWidget/CompletedChallengesWidget.selector', () => {

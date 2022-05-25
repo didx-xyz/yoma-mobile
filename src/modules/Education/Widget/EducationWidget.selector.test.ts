@@ -1,5 +1,6 @@
-import { rootStateFixture } from '../../../redux/redux.fixture'
-import { USER_QUALIFICATIONS_STATE_MOCK } from '../../UserQualifications/UserQualifications.fixture'
+import { USER_QUALIFICATIONS_STATE_MOCK } from '~/modules/UserQualifications/UserQualifications.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './EducationWidget.selector'
 
 describe('modules/Education/EducationWidget/EducationWidget.selector', () => {

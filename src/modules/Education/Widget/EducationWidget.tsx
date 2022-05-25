@@ -15,13 +15,14 @@ interface Props {
 
 const EducationWidget = ({ userQualifications, count, navigation }: Props) => {
   const { t } = useTranslation()
+
   return (
     <CvWidget
       count={count}
       badgeColor={Colors.PrimaryRed}
       title={t('Education')}
       noDataMessage={t('Which school, university or college did you attend?')}
-      onAction={() => {
+      onActionPress={() => {
         navigation.navigate(HomeNavigationRoutes.EducationForm)
       }}
     >

@@ -20,7 +20,7 @@ const CompletedChallengesView = ({ onAdd, userChallenges, navigation }: Props) =
     <CvView
       title={t('Challenges')}
       noDataMessage={t('Have you completed any challenges yet?')}
-      onAdd={onAdd}
+      onAction={onAdd}
       navigation={navigation}
     >
       <CvViewList data={userChallenges} RenderItem={CvViewCredential} />

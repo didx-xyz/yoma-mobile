@@ -21,7 +21,7 @@ const ExperienceWidget = ({ userJobs, count, navigation }: Props) => {
       badgeColor={Colors.SecondaryPurple}
       title={t('Experience')}
       noDataMessage={t('Where do you currently work?')}
-      onAction={() => {
+      onActionPress={() => {
         navigation.navigate(HomeNavigationRoutes.ExperienceForm)
       }}
     >
