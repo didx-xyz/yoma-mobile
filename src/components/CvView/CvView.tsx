@@ -5,19 +5,12 @@ import { View } from 'react-native'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 import { FCWithChildren } from '~/types/react.types'
 
-import { ButtonAdd, ButtonEdit } from '../Button'
 import EmptyCard from '../EmptyCard'
 import Header from '../Header'
 import Optional from '../Optional'
 import ViewContainer from '../ViewContainer'
+import ActionButton from './ActionButton'
 import styles from './CvView.styles'
-
-interface ActionButtonProps {
-  onAction: () => void
-  isEditAction: boolean
-}
-const ActionButton = ({ isEditAction, onAction }: ActionButtonProps) =>
-  isEditAction ? <ButtonEdit onPress={onAction} /> : <ButtonAdd onPress={onAction} />
 
 interface Props extends FCWithChildren {
   title: string
