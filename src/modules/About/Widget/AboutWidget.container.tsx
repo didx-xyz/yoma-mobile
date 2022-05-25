@@ -3,8 +3,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import selector from '../About.selector'
 import AboutWidget from './AboutWidget'
-import selector from './AboutWidget.selector'
 
 interface Props {
   navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
