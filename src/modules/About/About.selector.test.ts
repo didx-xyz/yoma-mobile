@@ -1,11 +1,12 @@
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './About.selector'
 
 describe('modules/About/About.selector', () => {
   describe('selector ', () => {
     it('should handle empty user state', () => {
       // given ...
-      const stateMock = rootStateFixture({})
+      const stateMock = rootStateFixture()
       // when ... we call the selector
       const result = SUT.default(stateMock)
       // then ... should return result as expected

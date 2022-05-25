@@ -3,6 +3,7 @@ export enum HomeNavigationRoutes {
   Profile = 'Profile',
   MyCv = 'MyCv',
   About = 'About',
+  AboutForm = 'AboutForm',
   Experience = 'Experience',
   ExperienceForm = 'ExperienceForm',
   Education = 'Education',
@@ -25,6 +26,7 @@ export type HomeNavigatorParamsList = {
   [HomeNavigationRoutes.Profile]: undefined
   [HomeNavigationRoutes.MyCv]: undefined
   [HomeNavigationRoutes.About]: undefined
+  [HomeNavigationRoutes.AboutForm]: undefined
   [HomeNavigationRoutes.Experience]: undefined
   [HomeNavigationRoutes.ExperienceForm]: undefined
   [HomeNavigationRoutes.Education]: undefined

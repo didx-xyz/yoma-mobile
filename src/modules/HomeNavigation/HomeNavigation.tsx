@@ -8,7 +8,7 @@ import { Colors, FontFamily, colors } from '~/styles'
 import fontStyles from '~/styles/font.styles'
 import { applyAlphaToHex } from '~/styles/styles.utils'
 
-import About from '../About'
+import About, { AboutForm } from '../About'
 import Challenges from '../Challenges'
 import CompletedChallenges, { CompletedChallengesForm } from '../CompletedChallenges'
 import Courses from '../Courses'
@@ -82,6 +82,7 @@ const HomeNavigation = () => (
     <Stack.Screen name={HomeNavigationRoutes.Profile} component={Profile} />
     <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />
     <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
+    <Stack.Screen name={HomeNavigationRoutes.AboutForm} component={AboutForm} />
     <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
     <Stack.Screen name={HomeNavigationRoutes.ExperienceForm} component={ExperienceForm} />
     <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
