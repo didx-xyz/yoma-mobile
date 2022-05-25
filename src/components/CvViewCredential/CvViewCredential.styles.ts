@@ -1,8 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '~/styles'
-
-import * as StyleUtils from '../../styles/styles.utils'
+import { Colors, utils as StyleUtils, colors } from '~/styles'
 
 const styles = {
   container: {

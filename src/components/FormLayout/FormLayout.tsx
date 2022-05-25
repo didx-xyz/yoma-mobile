@@ -1,7 +1,8 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import { WithChildren } from '../../types/react.types'
+import { WithChildren } from '~/types/react.types'
+
 import styles from './FormLayout.styles'
 
 type Props = WithChildren<{}>
