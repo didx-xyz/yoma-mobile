@@ -5,7 +5,7 @@ import CvViewSkill from '~/components/CvViewSkill'
 
 interface Props {
   name: string
-  count: number
+  count: number | null
   onPress: () => void
 }
 

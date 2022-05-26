@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, pipe, propOr } from 'ramda'
 
-import { selectUserSkills } from '../../UserSkills/UserSkills.selector'
+import { selectUserSkills } from '~/modules/UserSkills/UserSkills.selector'
 
 export default createSelector(selectUserSkills, userSkills => {
   const count = userSkills.ids.length
@@ -10,7 +10,7 @@ export default createSelector(selectUserSkills, userSkills => {
     map(
       applySpec({
         name: propOr('', 'skillName'),
-        count: propOr(1, 'count'),
+        count: propOr(null, 'count'),
       }),
     ),
   )(userSkills.entities)

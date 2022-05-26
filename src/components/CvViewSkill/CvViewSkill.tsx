@@ -8,7 +8,7 @@ import styles from './CvViewSkill.styles'
 
 interface Props {
   name: string
-  count: number
+  count: number | null
 }
 
 const CvViewSkill = ({ name, count }: Props) => (
@@ -16,10 +16,12 @@ const CvViewSkill = ({ name, count }: Props) => (
     <Text.Header level={HeaderLevels.H6} color={Colors.DarkGrey02}>
       {name}
     </Text.Header>
-    <Text.Body level={BodyLevels.Small} color={Colors.MenuGrey}>
-      {' '}
-      • {count}
-    </Text.Body>
+    {count ?? (
+      <Text.Body level={BodyLevels.Small} color={Colors.MenuGrey}>
+        {' '}
+        • {count}
+      </Text.Body>
+    )}
   </View>
 )
 
