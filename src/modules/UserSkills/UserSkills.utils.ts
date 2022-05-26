@@ -1,4 +1,6 @@
-import { SkillAdded, UserSkillKeys } from '~/modules/UserSkills/UserSkills.types'
+import { has } from 'ramda'
+
+import { SkillAdded, UserSkill, UserSkillKeys } from '~/modules/UserSkills/UserSkills.types'
 
 export const prepareAddSkillsForNormalisation = (data: SkillAdded[]) => {
   if (data.length === 0) {
@@ -9,4 +11,35 @@ export const prepareAddSkillsForNormalisation = (data: SkillAdded[]) => {
     [UserSkillKeys.SkillName]: skill,
     [UserSkillKeys.VerifiedBy]: null,
   }))
+}
+
+export const getSkillCounts = (data: UserSkill[]) => {
+  const count: Record<string, number> = {}
+  data.forEach((skill: UserSkill) => {
+    count[skill[UserSkillKeys.SkillName]] = has(skill[UserSkillKeys.SkillName])(count)
+      ? count[skill[UserSkillKeys.SkillName]] + 1
+      : 1
+  })
+
+  return count
+}
+
+export const getDedupeSkills = (data: UserSkill[]) => {
+  const dedupe: UserSkill[] = []
+  data.forEach(skill => {
+    if (!dedupe.find(dedupeSkill => dedupeSkill[UserSkillKeys.SkillName] === skill[UserSkillKeys.SkillName])) {
+      dedupe.push(skill)
+    }
+  })
+
+  return dedupe
+}
+
+export const addSkillCountToSkillsAndDedupe = (data: UserSkill[]) => {
+  const countSkills = getSkillCounts(data)
+  const dedupeSkills = getDedupeSkills(data)
+  return dedupeSkills.map(skill => {
+    const count = { [UserSkillKeys.Count]: countSkills[skill[UserSkillKeys.SkillName]] }
+    return { ...skill, ...count }
+  })
 }

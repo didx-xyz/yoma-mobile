@@ -1,14 +1,13 @@
 import i18n from 'i18next'
-import { mergeRight, pipe, prop } from 'ramda'
+import { mergeRight, pipe } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiUsersConstants } from '~/api/users'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
 import * as NavigationUtils from '~/modules/Navigation/Navigation.utils'
-import { prepareAddSkillsForNormalisation } from '~/modules/UserSkills/UserSkills.utils'
+import { addSkillCountToSkillsAndDedupe } from '~/modules/UserSkills/UserSkills.utils'
 import * as ReduxUtils from '~/redux/redux.utils'
-import { StdObj } from '~/types/general.types'
 import { showSimpleMessage } from '~/utils/error'
 
 import {
@@ -19,9 +18,8 @@ import {
   fetchUserSkillsFailure,
   fetchUserSkillsSuccess,
   setUserSkills,
-  updateUserSkills,
 } from './UserSkills.reducer'
-import { UserSkill, UserSkillKeys } from './UserSkills.types'
+import { UserSkillKeys } from './UserSkills.types'
 
 export const fetchUserSkillsFlow: Middleware =
   ({ dispatch, getState }) =>
@@ -49,8 +47,10 @@ export const fetchUserSkillsSuccessFlow: Middleware =
   action => {
     const result = next(action)
     if (fetchUserSkillsSuccess.match(action)) {
-      const skills = pipe(ReduxUtils.extractDataFromResponseAction, (s: StdObj[]) =>
-        ReduxUtils.normalise(s, UserSkillKeys.SkillName),
+      const skills = pipe(
+        ReduxUtils.extractDataFromResponseAction,
+        addSkillCountToSkillsAndDedupe,
+        ReduxUtils.normaliseFn(UserSkillKeys.SkillName),
       )(action)
 
       dispatch(setUserSkills(skills))
@@ -99,14 +99,7 @@ export const addUserSkillsSuccessFlow =
   action => {
     const result = next(action)
     if (addUserSkillsSuccess.match(action)) {
-      const skills = pipe(
-        ReduxUtils.extractDataFromResponseAction,
-        prop('skills'),
-        prepareAddSkillsForNormalisation,
-        (s: UserSkill[]) => ReduxUtils.normalise(s, UserSkillKeys.SkillName),
-      )(action)
-
-      dispatch(updateUserSkills(skills))
+      dispatch(fetchUserSkills())
       NavigationUtils.navigate(HomeNavigationRoutes.Home)
       notification('success', i18n.t('Your skills have been added.'))
     }

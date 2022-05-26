@@ -4,14 +4,16 @@ import { applySpec, map, pipe, propOr } from 'ramda'
 import { selectUserSkills } from '../../UserSkills/UserSkills.selector'
 
 export default createSelector(selectUserSkills, userSkills => {
+  const count = userSkills.ids.length
   const ids = userSkills.ids
   const entities = pipe(
     map(
       applySpec({
         name: propOr('', 'skillName'),
+        count: propOr(1, 'count'),
       }),
     ),
   )(userSkills.entities)
 
-  return { userSkills: { ids, entities } }
+  return { userSkills: { ids, entities }, count }
 })

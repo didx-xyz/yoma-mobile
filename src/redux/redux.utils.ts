@@ -18,6 +18,11 @@ export const normalise = (data: Types.StdObj[], identifier = 'id') =>
     }),
   )(data)
 
+export const normaliseFn =
+  (identifier = 'id') =>
+  (data: Types.StdObj[]) =>
+    normalise(data, identifier)
+
 export const updateNormalisedReducer = (state: Types.StdObj, action: PayloadAction<NormalisedData<any>>) =>
   pipe(
     evolve({

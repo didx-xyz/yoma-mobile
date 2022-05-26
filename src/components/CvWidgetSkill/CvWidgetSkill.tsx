@@ -1,23 +1,17 @@
 import React from 'react'
-import { Pressable, View } from 'react-native'
+import { Pressable } from 'react-native'
 
-import Text, { HeaderLevels } from '~/components/Typography'
-import { Colors } from '~/styles'
-
-import styles from './CvWidgetSkill.styles'
+import CvViewSkill from '~/components/CvViewSkill'
 
 interface Props {
   name: string
+  count: number
   onPress: () => void
 }
 
-const CvWidgetSkill = ({ name, onPress }: Props) => (
+const CvWidgetSkill = ({ name, count, onPress }: Props) => (
   <Pressable onPress={onPress}>
-    <View style={styles.container}>
-      <Text.Header level={HeaderLevels.H6} color={Colors.DarkGrey02}>
-        {name}
-      </Text.Header>
-    </View>
+    <CvViewSkill count={count} name={name} />
   </Pressable>
 )
 

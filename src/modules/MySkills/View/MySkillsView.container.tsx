@@ -12,9 +12,9 @@ interface Props {
 }
 
 const MySkillsViewContainer = ({ navigation, onAdd }: Props) => {
-  const { userSkills } = useSelector(selector)
+  const { userSkills, count } = useSelector(selector)
 
-  return <MySkillsView userSkills={userSkills} onAdd={onAdd} navigation={navigation} />
+  return <MySkillsView userSkills={userSkills} count={count} onAdd={onAdd} navigation={navigation} />
 }
 
 export default MySkillsViewContainer

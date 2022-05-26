@@ -1,17 +1,17 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CvWidget, { CvWidgetList } from '~/components/CvWidget'
 import CvWidgetSkill, { types as CvWidgetSkillTypes } from '~/components/CvWidgetSkill'
+import { types as MyCvTypes } from '~/modules/MyCv'
 import { Colors } from '~/styles'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { HomeNavigationRoutes } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {
   userSkills: CvWidgetSkillTypes.NormalisedCvWidgetSkillItems
   count: number
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  navigation: MyCvTypes.MyCvNavigation
 }
 const MySkillsWidget = ({ userSkills, count, navigation }: Props) => {
   const { t } = useTranslation()

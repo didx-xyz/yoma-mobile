@@ -8,11 +8,15 @@ export interface SkillVerification {
 export enum UserSkillKeys {
   SkillName = 'skillName',
   VerifiedBy = 'verifiedBy',
+  Visible = 'visible',
+  Count = 'count',
 }
 
 export interface UserSkill {
   [UserSkillKeys.SkillName]: string
   [UserSkillKeys.VerifiedBy]: SkillVerification | null
+  [UserSkillKeys.Visible]?: boolean | null
+  [UserSkillKeys.Count]?: number
 }
 
 export interface UserSkillsResponse {

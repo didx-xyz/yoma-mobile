@@ -1,141 +1,44 @@
-export const USER_SKILLS_RESPONSE_MOCK = [
-  [
-    {
-      skillName: 'Web Design',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Web Design',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Web Design',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Data Science',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Presentations',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Presentations',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Data Science',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Web Design',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Machine Learning',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Data Science',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Data Science',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Machine Learning',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Business Process Modeling',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Digital Marketing',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Digital Marketing',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Business Process Modeling',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Computer Literacy',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Computer Literacy',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Presentations',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Presentations',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Presentations',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Presentations',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Mobile Application Development',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Data Science',
-      verifiedBy: null,
-    },
-    {
-      skillName: 'Data Science',
-      verifiedBy: null,
-    },
-  ],
-]
-
 export const USER_SKILLS_STATE_MOCK = {
   entities: {
     'Web Design': {
       skillName: 'Web Design',
       verifiedBy: null,
+      count: 1,
     },
     'Data Science': {
       skillName: 'Data Science',
       verifiedBy: null,
+      count: 1,
     },
     Presentations: {
       skillName: 'Presentations',
       verifiedBy: null,
+      count: 3,
     },
     'Machine Learning': {
       skillName: 'Machine Learning',
       verifiedBy: null,
+      count: 1,
     },
     'Business Process Modeling': {
       skillName: 'Business Process Modeling',
       verifiedBy: null,
+      count: 1,
     },
     'Digital Marketing': {
       skillName: 'Digital Marketing',
       verifiedBy: null,
+      count: 1,
     },
     'Computer Literacy': {
       skillName: 'Computer Literacy',
       verifiedBy: null,
+      count: 1,
     },
     'Mobile Application Development': {
       skillName: 'Mobile Application Development',
       verifiedBy: null,
+      count: 1,
     },
   },
   ids: [
