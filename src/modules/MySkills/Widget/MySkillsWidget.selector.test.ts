@@ -1,5 +1,6 @@
-import { rootStateFixture } from '../../../redux/redux.fixture'
-import { USER_SKILLS_STATE_MOCK } from '../../UserSkills/UserSkills.fixture'
+import { USER_SKILLS_STATE_MOCK } from '~/modules/UserSkills/UserSkills.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './MySkillsWidget.selector'
 
 describe('modules/MySkills/MySkillsWidget/MySkillsWidget.selector', () => {
@@ -28,12 +29,15 @@ describe('modules/MySkills/MySkillsWidget/MySkillsWidget.selector', () => {
           entities: {
             'Web Design': {
               name: 'Web Design',
+              count: 1,
             },
             'Data Science': {
               name: 'Data Science',
+              count: 1,
             },
             Presentations: {
               name: 'Presentations',
+              count: 3,
             },
           },
         },

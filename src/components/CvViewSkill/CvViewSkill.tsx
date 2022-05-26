@@ -1,20 +1,27 @@
 import React from 'react'
 import { View } from 'react-native'
 
-import Text, { HeaderLevels } from '~/components/Typography'
+import Text, { BodyLevels, HeaderLevels } from '~/components/Typography'
+import { Colors } from '~/styles'
 
-import { Colors } from '../../styles'
 import styles from './CvViewSkill.styles'
 
 interface Props {
   name: string
+  count: number | null
 }
 
-const CvViewSkill = ({ name }: Props) => (
+const CvViewSkill = ({ name, count }: Props) => (
   <View style={styles.container}>
-    <Text.Header level={HeaderLevels.H6} color={Colors.PrimaryDarkGrey}>
+    <Text.Header level={HeaderLevels.H6} color={Colors.DarkGrey02}>
       {name}
     </Text.Header>
+    {count ?? (
+      <Text.Body level={BodyLevels.Small} color={Colors.MenuGrey}>
+        {' '}
+        • {count}
+      </Text.Body>
+    )}
   </View>
 )
 

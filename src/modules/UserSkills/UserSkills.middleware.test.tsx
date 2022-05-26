@@ -15,7 +15,6 @@ import {
   fetchUserSkillsFailure,
   fetchUserSkillsSuccess,
   setUserSkills,
-  updateUserSkills,
 } from './UserSkills.reducer'
 
 describe('modules/UserSkills/UserSkills.middleware', () => {
@@ -81,6 +80,7 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
                 name: 'Name',
                 logoUrl: 'Url',
               },
+              count: 1,
             },
           },
         }),
@@ -159,17 +159,7 @@ describe('modules/UserSkills/UserSkills.middleware', () => {
       invoke(action)
 
       // then ...normalise the data and set it in state
-      expect(store.dispatch).toHaveBeenCalledWith(
-        updateUserSkills({
-          ids: ['Skill'],
-          entities: {
-            Skill: {
-              skillName: 'Skill',
-              verifiedBy: null,
-            },
-          },
-        }),
-      )
+      expect(store.dispatch).toHaveBeenCalledWith(fetchUserSkills())
       expect(NavigationUtils.navigate).toHaveBeenCalled()
       expect(notificationMock).toHaveBeenCalled()
       expect(next).toHaveBeenCalledWith(action)

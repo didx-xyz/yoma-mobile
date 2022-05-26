@@ -15,17 +15,17 @@ import CredentialWidgetHeader from './Header'
 interface Props extends FCWithChildren {
   title: string
   noDataMessage: string
+  onActionPress: () => void
   count?: number
   badgeColor?: Colors
-  onActionPress: () => void
   isEditAction?: boolean
 }
 const CvWidget = ({
   title,
   noDataMessage,
   count,
-  badgeColor = Colors.White,
   onActionPress,
+  badgeColor = Colors.White,
   children,
   isEditAction = false,
 }: Props) => (
