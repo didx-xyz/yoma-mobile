@@ -1,4 +1,4 @@
-import { has } from 'ramda'
+import { has, map, mergeLeft, pipe } from 'ramda'
 
 import { SkillAdded, UserSkill, UserSkillKeys } from '~/modules/UserSkills/UserSkills.types'
 
@@ -37,9 +37,10 @@ export const getDedupeSkills = (data: UserSkill[]) => {
 
 export const addSkillCountToSkillsAndDedupe = (data: UserSkill[]) => {
   const countSkills = getSkillCounts(data)
-  const dedupeSkills = getDedupeSkills(data)
-  return dedupeSkills.map(skill => {
-    const count = { [UserSkillKeys.Count]: countSkills[skill[UserSkillKeys.SkillName]] }
-    return { ...skill, ...count }
-  })
+  return pipe(
+    getDedupeSkills,
+    map((skill: UserSkill) => {
+      return mergeLeft({ [UserSkillKeys.Count]: countSkills[skill[UserSkillKeys.SkillName]] })(skill)
+    }),
+  )(data)
 }
