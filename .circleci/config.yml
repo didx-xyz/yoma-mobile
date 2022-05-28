@@ -15,7 +15,7 @@ executors:
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
-#    resource_class: large
+    resource_class: large
 
 # --------------------------------
 # common : commands
