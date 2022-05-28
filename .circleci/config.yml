@@ -11,11 +11,11 @@ orbs:
 executors:
   node:
     docker:
-      - image: circleci/node:14.16.0-stretch
+      - image: cimg/node:14.19.3
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
-#    resource_class: large
+    resource_class: large
 
 # --------------------------------
 # common : commands
@@ -66,7 +66,7 @@ commands:
     description: 'Setup the node environment'
     steps:
       - node/install:
-          node-version: 14.16.0
+          node-version: lts/fermium
           install-npm: false
       - node/install-packages:
           cache-version: v1-{{ arch }}
