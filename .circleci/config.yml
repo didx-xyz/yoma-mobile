@@ -146,7 +146,6 @@ workflows:
               only:
                 - develop
                 - main
-                - YOMA-616_fix_fad_deployment
       - deploy-android-alpha:
           requires:
             - pull-request
