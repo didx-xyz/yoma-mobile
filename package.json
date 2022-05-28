@@ -128,7 +128,7 @@
     }
   },
   "resolutions": {
-    "@types/react": "^16"
+    "@types/react": "^17"
   },
   "jest": {
     "preset": "react-native",

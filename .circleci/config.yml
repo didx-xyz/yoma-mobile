@@ -11,7 +11,7 @@ orbs:
 executors:
   node:
     docker:
-      - image: circleci/node:14.16.0-stretch
+      - image: cimg/node:14.16.0-stretch
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
