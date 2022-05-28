@@ -11,7 +11,7 @@ orbs:
 executors:
   node:
     docker:
-      - image: cimg/node:lts/fermium
+      - image: cimg/node:fermium
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
