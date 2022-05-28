@@ -66,7 +66,7 @@ commands:
     description: 'Setup the node environment'
     steps:
       - node/install:
-          node-version: 14.16.0
+          node-version: lts/fermium
           install-npm: false
       - node/install-packages:
           cache-version: v1-{{ arch }}
