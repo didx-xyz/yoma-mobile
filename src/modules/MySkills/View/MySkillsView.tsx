@@ -3,14 +3,18 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
+import CountBadge from '~/components/CountBadge'
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewSkill, { types as CvViewSkillTypes } from '~/components/CvViewSkill'
+import Text, { HeaderLevels } from '~/components/Typography'
 import { types as HomNavigationTypes } from '~/modules/HomeNavigation'
+import { Colors } from '~/styles'
 
 import styles from './MySkillsView.styles'
 
 interface Props {
   onAdd: () => void
+  count: number
   userSkills: CvViewSkillTypes.NormalisedCvWidgetSkillItems
   navigation: NativeStackNavigationProp<
     HomNavigationTypes.HomeNavigatorParamsList,
@@ -18,7 +22,7 @@ interface Props {
   >
 }
 
-const MySkillsView = ({ userSkills, onAdd, navigation }: Props) => {
+const MySkillsView = ({ userSkills, count, onAdd, navigation }: Props) => {
   const { t } = useTranslation()
   return (
     <CvView
@@ -28,9 +32,18 @@ const MySkillsView = ({ userSkills, onAdd, navigation }: Props) => {
       navigation={navigation}
     >
       <View style={styles.container}>
-        <View style={styles.content}>
-          <CvViewList data={userSkills} RenderItem={CvViewSkill} />
-        </View>
+        <CvViewList
+          data={userSkills}
+          ListHeader={
+            <View style={styles.listHeader}>
+              <CountBadge count={count} color={Colors.PrimaryBlue} />
+              <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple} style={styles.listHeaderText}>
+                All Skills
+              </Text.Header>
+            </View>
+          }
+          RenderItem={CvViewSkill}
+        />
       </View>
     </CvView>
   )

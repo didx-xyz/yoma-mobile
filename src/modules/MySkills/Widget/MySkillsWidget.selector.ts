@@ -11,6 +11,7 @@ export default createSelector(selectUserSkills, userSkills => {
     map(
       applySpec({
         name: propOr('', 'skillName'),
+        count: propOr(null, 'count'),
       }),
     ),
   )(userSkills.entities)

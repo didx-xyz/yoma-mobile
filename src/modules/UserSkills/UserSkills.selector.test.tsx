@@ -1,4 +1,5 @@
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './UserSkills.selector'
 
 describe('modules/UserSkills/UserSkills.selector', () => {
