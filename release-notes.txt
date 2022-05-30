@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- YOMA-616 - fixing android deploying to FAD
+- deploying for test group
 
 Last 10 deployment release notes:
+- YOMA-616 - fixing android deploying to FAD
 YOMA-591 - feat(MySkills): adding skill count to each of the user's skills
 YOMA-590
 - Part 1 - Add/Edit Button
