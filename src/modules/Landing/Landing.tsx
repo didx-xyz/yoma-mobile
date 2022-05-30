@@ -5,10 +5,8 @@ import { View } from 'react-native'
 import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from '~/assets/images'
 import Background from '~/components/Background/Background'
 import Button, { ButtonSizes } from '~/components/Button'
-import Spacer from '~/components/Spacer'
 import Text, { HeaderLevels, TextAlign } from '~/components/Typography'
 import ViewContainer from '~/components/ViewContainer'
-import Sentry from '~/monitoring'
 import { Colors } from '~/styles'
 
 import styles from './Landing.styles'
@@ -44,22 +42,6 @@ const Landing = ({ onLogin }: Props) => {
           </Text.Header>
         </View>
         <View style={styles.actionsContainer}>
-          <Button
-            label="Native Crash"
-            onPress={() => {
-              Sentry.nativeCrash()
-            }}
-          />
-          <Spacer height={20} />
-          <Button
-            label="JS Crash"
-            onPress={() => {
-              setTimeout(() => {
-                throw new Error('My {3rd} Sentry error!')
-              }, 2000)
-            }}
-          />
-          <Spacer height={40} />
           <Button
             size={ButtonSizes.Default}
             label={t('Login')}
