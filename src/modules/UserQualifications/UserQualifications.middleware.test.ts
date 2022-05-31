@@ -1,9 +1,9 @@
 import { mergeRight } from 'ramda'
 
+import { createMiddlewareMock } from '~/../tests/tests.utils'
 import { actions as ApiActions, types as ApiTypes } from '~/api'
 import { types as ApiUserTypes, constants as ApiUsersConstants } from '~/api/users'
 
-import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as QualificationsActions } from '../Qualifications'
 import * as UserFixtures from '../User/User.fixture'
 import * as UserActions from '../User/User.reducer'
