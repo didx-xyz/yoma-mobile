@@ -27,8 +27,8 @@ declare module 'ramda' {
   export function ifElse(...rest: any[]): any
   export function includes(...rest: any[]): any
   export function is(...rest: any[]): any
-  export function isEmpty(...rest: any[]): any
-  export function isNil(...rest: any[]): any
+  export function isEmpty(...rest: any[]): boolean
+  export function isNil(...rest: any[]): boolean
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
   export function keys(...rest: any[]): any
