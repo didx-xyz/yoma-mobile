@@ -2,5 +2,6 @@
   "YOMA_API_BASE_PATH": "https://staging.api.yoma.africa/",
   "YOMA_WEB_BASE_PATH": "https://staging.app.yoma.africa/",
   "OAUTH_BASE_PATH": "https://staging.api.yoma.africa",
-  "ENVIRONMENT": "development"
+  "ENVIRONMENT": "development",
+  "SENTRY_TRACES_SAMPLE_RATE": 1.0
 }

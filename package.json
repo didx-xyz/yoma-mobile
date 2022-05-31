@@ -17,6 +17,7 @@
     "deploy:release:android": "cd android && bundle exec fastlane production_deploy",
     "make_env:dev": "node env/generate.js dev",
     "make_env:test": "node env/generate.js test",
+    "make_env:staging": "node env/generate.js staging",
     "format": "prettier --write .",
     "help": "npx package-json-help.js",
     "init": "npm i && npm-run-all make_env:dev init:ios",
