@@ -1,31 +1,16 @@
 Ver 0.0.1
 Latest:
-- deploying for test group
+- bug fix in Credential widget
 
 Last 10 deployment release notes:
-- YOMA-616 - fixing android deploying to FAD
-YOMA-591 - feat(MySkills): adding skill count to each of the user's skills
-YOMA-590
-- Part 1 - Add/Edit Button
-- Part 2 - feat(Utils: Strings): adding a trunc util
-- Part 3 - updating cv view components
-- Part 4 - feat(About): adding About view, along with refactors to widget and form
-- Part 5 - refactor(Cv modules): refactoring and updating the Modules
-YOMA-592 - feat(MyCv): widget navigation
-YOMA-536 - feat(Marketplace): creating Coming soon page
-YOMA-535 - feat(Challenges): adding Challenges Coming Soon page
-YOMA-534: feat(Courses): coming soon
-YOMA-614 - refactor(User Qualifications): save and fetch skills on submit
-YOMA-612
-- skills select implement throughout (take 2)
-- refactor(Jobs): adding fetch user skills on successful job save
-- refactor(Skills): adding Skills selector to Education and Experience forms
-- save user skills
-YOMA-572 - feat(Skills): adding select autocomplete
-YOMA-610
-- refactor(Button): implementing Optional
-- refactor(Landing): adding loading state to Login button
-YOMA-607
-- chore: react navigation upgrades and fixes
-- further upgrades
-YOMA-606 - feat(OUTH): SSO setup
+-  fixing android deploying to FAD
+- feat(MySkills): adding skill count to each of the user's skills
+- Add/Edit Button
+- feat(Utils: Strings): adding a trunc util
+- updating cv view components
+- feat(About): adding About view, along with refactors to widget and form
+- refactor(Cv modules): refactoring and updating the Modules
+- feat(MyCv): widget navigation
+- feat(Marketplace): creating Coming soon page
+- feat(Challenges): adding Challenges Coming Soon page
+- feat(Courses): coming soon
