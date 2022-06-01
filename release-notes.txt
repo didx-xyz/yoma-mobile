@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- bug fix in Credential widget
+- Adding Sentry
 
 Last 10 deployment release notes:
+- bug fix in Credential widget
 -  fixing android deploying to FAD
 - feat(MySkills): adding skill count to each of the user's skills
 - Add/Edit Button

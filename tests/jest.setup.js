@@ -29,6 +29,12 @@ jest.mock('react-native-localize', () => ({
 
 jest.mock('react-native-document-picker')
 jest.mock('react-native/Libraries/LogBox/LogBox')
+jest.mock('@sentry/react-native', () => ({
+  init: () => jest.fn(),
+  ReactNavigationInstrumentation: () => jest.fn(),
+  ReactNativeTracing: () => jest.fn(),
+  wrap: () => jest.fn(),
+}))
 
 function FormDataMock() {
   this.append = jest.fn()

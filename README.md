@@ -41,5 +41,7 @@ npm run test:watch
 ## Additional Docs
 
 1. [Prerequisites](docs/prerequisites.md)
-1. [Contributing](./CONTRIBUTING.md)
-1. [Gotchas](docs/gotchas.md)
+2. [Pull Requests](docs/pullRequests.md)
+3. [Code Style](docs/codeStyle.md)
+4. [Contributing](./CONTRIBUTING.md)
+5. [Gotchas](docs/gotchas.md)
