@@ -2,6 +2,7 @@ declare module 'form-data'
 declare module 'ramda' {
   export function __(...rest: any[]): any[]
   export function always(...rest: any[]): any[]
+  export function ascend(...rest: any[]): any[]
   export function assoc(...rest: any[]): any[]
   export function and(...rest: any[]): any
   export function add(...rest: any[]): any
@@ -32,6 +33,7 @@ declare module 'ramda' {
   export function join(...rest: any[]): any
   export function juxt(...rest: any[]): any
   export function keys(...rest: any[]): any
+  export function last(...rest: any[]): any
   export function length(...rest: any[]): any
   export function lensPath(...rest: any[]): any
   export function lt(...rest: any[]): any
@@ -62,6 +64,7 @@ declare module 'ramda' {
   export function reduceRight(...rest: any[]): any[]
   export function reject(...rest: any[]): any
   export function slice(...rest: any[]): any[]
+  export function sort(...rest: any[]): any[]
   export function split(...rest: any[]): any[]
   export function splitAt(...rest: any[]): any[]
   export function repeat(...rest: any[]): any[]

@@ -34,18 +34,18 @@ const MySkillsView = ({ userSkills, count, onAdd, navigation }: Props) => {
     >
       <View style={styles.container}>
         <CountryPicker />
-        <CvViewList
-          data={userSkills}
-          ListHeader={
-            <View style={styles.listHeader}>
-              <CountBadge count={count} color={Colors.PrimaryBlue} />
-              <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple} style={styles.listHeaderText}>
-                All Skills
-              </Text.Header>
-            </View>
-          }
-          RenderItem={CvViewSkill}
-        />
+        {/*<CvViewList*/}
+        {/*  data={userSkills}*/}
+        {/*  ListHeader={*/}
+        {/*    <View style={styles.listHeader}>*/}
+        {/*      <CountBadge count={count} color={Colors.PrimaryBlue} />*/}
+        {/*      <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple} style={styles.listHeaderText}>*/}
+        {/*        All Skills*/}
+        {/*      </Text.Header>*/}
+        {/*    </View>*/}
+        {/*  }*/}
+        {/*  RenderItem={CvViewSkill}*/}
+        {/*/>*/}
       </View>
     </CvView>
   )
