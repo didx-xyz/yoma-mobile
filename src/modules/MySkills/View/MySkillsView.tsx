@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import CountBadge from '~/components/CountBadge'
-import CountryPicker from '~/components/CountryPicker'
+import CountrySelector from '~/components/CountrySelector'
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewSkill, { types as CvViewSkillTypes } from '~/components/CvViewSkill'
 import Text, { HeaderLevels } from '~/components/Typography'
@@ -33,7 +33,7 @@ const MySkillsView = ({ userSkills, count, onAdd, navigation }: Props) => {
       navigation={navigation}
     >
       <View style={styles.container}>
-        <CountryPicker />
+        <CountrySelector searchPlaceholder={'Select the country'} />
         {/*<CvViewList*/}
         {/*  data={userSkills}*/}
         {/*  ListHeader={*/}

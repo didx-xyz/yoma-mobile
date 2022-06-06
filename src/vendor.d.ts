@@ -38,6 +38,7 @@ declare module 'ramda' {
   export function lensPath(...rest: any[]): any
   export function lt(...rest: any[]): any
   export function map(...rest: any[]): any
+  export function match(...rest: any[]): any
   export function merge(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
   export function mergeDeepRight(...rest: any[]): any
@@ -71,6 +72,7 @@ declare module 'ramda' {
   export function tail(...rest: any[]): any[]
   export function tap(...rest: any[]): any[]
   export function take(...rest: any[]): any
+  export function test(...rest: any[]): any
   export function toPairs(...rest: any[]): any
   export function toLower(...rest: any[]): any
   export function toUpper(...rest: any[]): any

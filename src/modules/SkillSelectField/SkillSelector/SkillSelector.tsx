@@ -1,6 +1,7 @@
 import React from 'react'
 
-import SkillsFilter from '../SkillsFilter'
+import ListFilter from '~/components/ListFilter/ListFilter'
+
 import SkillsResults from '../SkillsResults'
 import { useSkillsFilter } from './SkillSelector.hooks'
 
@@ -15,7 +16,7 @@ const SkillSelector = ({ searchPlaceholder, skills, onItemSelect }: Props) => {
 
   return (
     <>
-      <SkillsFilter searchPlaceholder={searchPlaceholder} setIsLoading={setIsLoading} setSearchTerm={setSearchTerm} />
+      <ListFilter searchPlaceholder={searchPlaceholder} setIsLoading={setIsLoading} setSearchTerm={setSearchTerm} />
       <SkillsResults skills={results} hasNoResults={hasNoResults} onItemSelect={onItemSelect} isLoading={isLoading} />
     </>
   )
