@@ -109,7 +109,6 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-jsx-a11y": "^6.5.1",
     "eslint-plugin-module-resolver": "^1.4.0",
-    "firebase-tools": "^9.23.3",
     "husky": "^8.0.0",
     "jest": "^27.5.1",
     "jest-watch-typeahead": "^1.1.0",
