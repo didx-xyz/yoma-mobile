@@ -1,13 +1,13 @@
-module.exports = {
-  presets: ['module:metro-react-native-babel-preset'],
-  plugins: [
+module.exports = function (api) {
+  api.cache(false);
+  const presets = ['module:metro-react-native-babel-preset'];
+  const plugins = [
     ['transform-inline-environment-variables'],
     [
       'module-resolver',
       {
-        root: ['./src'],
         alias: {
-          assets: './src/assets',
+          '^~/(.+)': './src/\\1'
         },
         extensions: [
           '.ios.ts',
@@ -20,5 +20,9 @@ module.exports = {
         ],
       },
     ],
-  ],
+  ]
+  return {
+    presets,
+    plugins
+  }
 };

@@ -80,10 +80,11 @@ import com.android.build.OutputFile
  */
 
 project.ext.react = [
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/@sentry/react-native/sentry.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -122,6 +123,11 @@ def jscFlavor = 'org.webkit:android-jsc:+'
  */
 def enableHermes = project.ext.react.get("enableHermes", false);
 
+/**
+ * Architectures to build native code for in debug.
+ */
+def nativeArchitectures = project.getProperties().get("reactNativeDebugArchitectures")
+
 android {
     ndkVersion rootProject.ext.ndkVersion
 
@@ -140,9 +146,12 @@ android {
         applicationId "com.yomamobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 38
+        versionCode 55
         versionName "0.0.1"
         multiDexEnabled true
+        manifestPlaceholders = [
+                appAuthRedirectScheme: 'com.yomamobile.auth'
+        ]
     }
     splits {
         abi {
@@ -171,6 +180,11 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.debug
+            if (nativeArchitectures) {
+                ndk {
+                    abiFilters nativeArchitectures.split(',')
+                }
+            }
         }
         release {
           signingConfig signingConfigs.release
@@ -204,15 +218,13 @@ dependencies {
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
 
-    implementation 'com.facebook.android:facebook-android-sdk:[5,6)'
-
+    // Unimodules
+    addUnimodulesDependencies()
 
     // Firebase setup:
     implementation platform('com.google.firebase:firebase-bom:28.1.0')
     implementation 'com.google.firebase:firebase-analytics'
 
-    // Unimodules
-    addUnimodulesDependencies()
 
     debugImplementation("com.facebook.flipper:flipper:${FLIPPER_VERSION}") {
         exclude group:'com.facebook.fbjni'

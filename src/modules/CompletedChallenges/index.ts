@@ -1,5 +1,7 @@
 import CompletedChallenges from './CompletedChallenges'
-import CompletedChallengesWidget from './Widget/CompletedChallengesWidget.container'
+import CompletedChallengesForm from './Form'
+import CompletedChallengesView from './View'
+import CompletedChallengesWidget from './Widget'
 
 export default CompletedChallenges
-export { CompletedChallengesWidget }
+export { CompletedChallengesWidget, CompletedChallengesForm, CompletedChallengesView }

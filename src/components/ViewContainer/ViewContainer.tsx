@@ -1,8 +1,9 @@
 import React from 'react'
 import { StatusBar, StatusBarProps, View, ViewStyle } from 'react-native'
-import { WithChildren } from 'types/react.types'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from '~/styles'
+import { WithChildren } from '~/types/react.types'
+
 import styles from './ViewContainer.styles'
 import { StatusBarStyle } from './ViewContainer.types'
 
@@ -11,6 +12,7 @@ type Props = StatusBarProps &
     statusHidden?: boolean
     statusBarStyle?: StatusBarStyle
     backgroundColor?: Colors
+    translucent?: boolean
     style?: ViewStyle
   }>
 
@@ -19,6 +21,7 @@ const ViewContainer = ({
   statusBarStyle = StatusBarStyle.DarkContent,
   statusHidden = false,
   backgroundColor = Colors.White,
+  translucent = false,
   style,
   ...statusBarProps
 }: Props) => {
@@ -28,6 +31,7 @@ const ViewContainer = ({
         hidden={statusHidden}
         barStyle={statusBarStyle}
         backgroundColor={colors[backgroundColor]}
+        translucent={translucent}
         {...statusBarProps}
       />
       {children}

@@ -12,4 +12,14 @@ describe('form.utils', () => {
       expect(result).toEqual(expected)
     })
   })
+  describe('sanitiseDateRange', () => {
+    it('should return json string values from given Date objects', () => {
+      const result = SUT.sanitiseDateRange({
+        startTime: new Date('2021-06-02T10:32:47.330Z'),
+        endTime: new Date('2021-08-02T10:32:47.330Z'),
+      })
+
+      expect(result).toEqual({ startTime: '2021-06-02T10:32:47.330Z', endTime: '2021-08-02T10:32:47.330Z' })
+    })
+  })
 })

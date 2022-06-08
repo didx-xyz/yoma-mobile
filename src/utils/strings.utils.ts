@@ -1,19 +1,10 @@
-import { filter, head, join, juxt, pipe, tail, toUpper, trim } from 'ramda'
-
-export const mapToDropDownArray = (array: Record<string, string>[], valueProp = 'key', labelProp = 'value') => {
-  return array.map((opt: Record<string, string>) => ({
-    label: opt[labelProp],
-    value: opt[valueProp],
-  }))
-}
+import { __, concat, gt, head, join, juxt, length, pipe, tail, take, toUpper, trim, unless } from 'ramda'
 
 export const getUppercasedHead = (data: string) => pipe(trim, head, toUpper)(data)
 
 export const capitalize = pipe(juxt([pipe(head, toUpper), tail]), join(''))
 
-export const filterStringArray = (value: string, array: string[]) =>
-  filter((element: string) => element !== value)(array)
-
 export const textOrSpace = (condition: boolean, text: string) => (condition ? text : ' ')
 
-export const dropElement = (value: string, array: string[]) => filter((element: string) => element !== value)(array)
+export const trunc = (text: string, len: number) =>
+  pipe(take(len), unless(pipe(length, gt(len)), pipe(trim, concat(__, '...'))), trim)(text)

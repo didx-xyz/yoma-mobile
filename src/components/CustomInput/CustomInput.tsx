@@ -1,7 +1,8 @@
 import { FormikErrors, FormikTouched } from 'formik'
 import React from 'react'
 import { TextInput, TextInputProps, View } from 'react-native'
-import { Colors, colors } from 'styles'
+
+import { Colors, colors } from '~/styles'
 
 import Optional from '../Optional'
 import Text, { MetaLevels, TextAlign } from '../Typography'

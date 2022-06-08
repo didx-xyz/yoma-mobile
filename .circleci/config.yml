@@ -11,7 +11,7 @@ orbs:
 executors:
   node:
     docker:
-      - image: circleci/node:14.16.0-stretch
+      - image: cimg/node:14.19.3
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
@@ -40,12 +40,18 @@ commands:
           command: npm run test
           environment:
             - NODE_OPTIONS: --max_old_space_size=8192
-  env:
-    description: 'Setup Env File'
+  env-test:
+    description: 'Setup Test Env File'
     steps:
       - run:
           name: 'Create Test Env'
-          command: npm run env:test
+          command: npm run make_env:test
+  env-staging:
+    description: 'Setup Staging Env File'
+    steps:
+      - run:
+          name: 'Create Staging Env'
+          command: npm run make_env:test
   bundle:
     description: 'Bundle Android JS code'
     steps:
@@ -56,7 +62,7 @@ commands:
     description: 'Setup the node environment'
     steps:
       - node/install:
-          node-version: 14.16.0
+          node-version: lts/fermium
           install-npm: false
       - node/install-packages:
           cache-version: v1-{{ arch }}
@@ -96,7 +102,7 @@ jobs:
       - node/install-packages
       - audit
       - lint
-      - env
+      - env-test
       - test
       - bundle
 
@@ -107,7 +113,7 @@ jobs:
       - checkout
       - setup-node
       - setup-ruby
-      - env
+      - env-staging
       - create_keystore
       - deploy-android-internal
 # --------------------------------

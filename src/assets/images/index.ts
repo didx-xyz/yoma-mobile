@@ -1,59 +1,27 @@
-import BackIcon from './BackIcon.svg'
-import BlueHollowCircle from './BlueHollowCircle.svg'
-import BlueRightCircle from './BlueRightCircle.svg'
-import BlueTick from './BlueTick.svg'
-import FacebookIcon from './FacebookIcon.svg'
-import GoogleIcon from './GoogleIcon.svg'
-import LightYellowPattern from './LightYellowPattern.svg'
-import Message from './Message.svg'
-import PurpleQuarter from './PurpleQuarter.svg'
-import PurpleSemiCircle from './PurpleSemiCircle.svg'
-import RLabsLogo from './RLabsLogo.svg'
-import RedSemiCircle from './RedSemiCircle.svg'
-import WhiteLogo from './WhiteLogo.svg'
-import YellowCircleLeft from './YellowCircleLeft.svg'
-import YellowCircleRight from './YellowCircleRight.svg'
-import AddIcon from './addIcon.svg'
-import CrossIcon from './crossIcon.svg'
-import BackIconGrey from './icon-back-grey.svg'
-import ChallengesIcon from './icon-challenges.svg'
-import CoursesIcon from './icon-courses.svg'
-import DigitalCvIcon from './icon-digital-cv.svg'
-import EditIcon from './icon-edit.svg'
-import IconInfo from './icon-info.svg'
-import ProfileIcon from './icon-profile.svg'
-import MarketplaceIcon from './marketplaceIcon.svg'
-import PurpleTopRightCircle from './purple-top-right-shade.svg'
-import YellowBottomLeftCircle from './yellow-bottom-left-shade.svg'
-import ZIcon from './zIcon.svg'
-
-export {
-  AddIcon,
-  BackIcon,
-  BackIconGrey,
-  BlueHollowCircle,
-  BlueRightCircle,
-  BlueTick,
-  ChallengesIcon,
-  CoursesIcon,
-  CrossIcon,
-  DigitalCvIcon,
-  EditIcon,
-  FacebookIcon,
-  GoogleIcon,
-  IconInfo,
-  LightYellowPattern,
-  MarketplaceIcon,
-  Message,
-  ProfileIcon,
-  PurpleQuarter,
-  PurpleSemiCircle,
-  PurpleTopRightCircle,
-  RedSemiCircle,
-  RLabsLogo,
-  WhiteLogo,
-  YellowBottomLeftCircle,
-  YellowCircleLeft,
-  YellowCircleRight,
-  ZIcon,
-}
+export { default as AddIcon } from './addIcon.svg'
+export { default as BackIcon } from './backIcon.svg'
+export { default as BackIconGrey } from './iconBackGrey.svg'
+export { default as BlueHollowCircle } from './blueHollowCircle.svg'
+export { default as BlueRightCircle } from './blueRightCircle.svg'
+export { default as BlueTick } from './blueTick.svg'
+export { default as ChallengesIcon } from './iconChallenges.svg'
+export { default as CoursesIcon } from './iconCourses.svg'
+export { default as CrossIcon } from './crossIcon.svg'
+export { default as DigitalCvIcon } from './iconDigitalCv.svg'
+export { default as EditIcon } from './iconEdit.svg'
+export { default as IconInfo } from './iconInfo.svg'
+export { default as LightYellowPattern } from './lightYellowPattern.svg'
+export { default as MarketplaceIcon } from './marketplaceIcon.svg'
+export { default as Message } from './message.svg'
+export { default as ProfileIcon } from './iconProfile.svg'
+export { default as PurpleSemiCircle } from './purpleSemiCircle.svg'
+export { default as PurpleTopRightCircle } from './purpleTopRightShade.svg'
+export { default as RedSemiCircle } from './redSemiCircle.svg'
+export { default as RLabsLogo } from './rLabsLogo.svg'
+export { default as WhiteLogo } from './whiteLogo.svg'
+export { default as YellowBottomLeftCircle } from './yellowBottomLeftShade.svg'
+export { default as ZIcon } from './zIcon.svg'
+export { default as CirclePurple } from './circlePurple.svg'
+export { default as CircleSmallGreenYellowSplatter } from './circleSmallGreenYellowSplatter.svg'
+export { default as CircleSmallYellowBlueSplatter } from './circleSmallYellowBlueSplatter.svg'
+export { default as CircleSmallYellowGreenSplatter } from './circleSmallYellowGreenSplatter.svg'

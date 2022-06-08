@@ -1,12 +1,15 @@
-import { UserCredentialTypes } from 'api/users/users.types'
-import { JOB_MOCK } from 'modules/Jobs/Jobs.test.fixtures'
 import { mergeRight } from 'ramda'
+
+import { UserCredentialTypes } from '~/api/users/users.types'
+import { JOB_MOCK } from '~/modules/Jobs/Jobs.test.fixtures'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '../../api'
 import { constants as ApiUsersConstants } from '../../api/users'
 import { createJob } from '../Jobs/Jobs.reducer'
+import * as UserFixtures from '../User/User.fixture'
 import * as UserActions from '../User/User.reducer'
+import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK, userJobsStateFixture } from './UserJobs.fixture'
 import * as SUT from './UserJobs.middleware'
 import {
   clearUserJobsFormValues,
@@ -22,7 +25,6 @@ import {
   setUserJobsFormValues,
   updateUserJobs,
 } from './UserJobs.reducer'
-import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK } from './UserJobs.test.fixtures'
 
 describe('modules/UserJobs/UserJobs.middleware', () => {
   describe('getUserJobsFromCredentialsFlow', () => {
@@ -79,7 +81,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseUserJobsFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseUserJobsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -100,7 +102,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseUserJobsFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseUserJobsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -203,7 +205,10 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         requestVerification: false,
       }
 
-      const create = createMiddlewareMock(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      const create = createMiddlewareMock(jest, {
+        user: UserFixtures.userStateFixture({ id: userId }),
+        userJobs: userJobsStateFixture({ formValues: mockFormValues }),
+      })
       // when ... we create the user's credentials
       const action = createUserJob(JOB_MOCK)
 
@@ -216,7 +221,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         ...mockFormValues,
         credentialItemId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       }
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
 
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
@@ -283,7 +288,10 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         requestVerification: false,
       }
 
-      const create = createMiddlewareMock(jest, { user: { id: userId }, userJobs: { formValues: mockFormValues } })
+      const create = createMiddlewareMock(jest, {
+        user: UserFixtures.userStateFixture({ id: userId }),
+        userJobs: userJobsStateFixture({ formValues: mockFormValues }),
+      })
       // when ... we create the user's credentials
       const action = fetchUserJobById('ID')
 
@@ -292,10 +300,10 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       // then ...
       // ... we should ensure the action continues onto next
-      const config = ApiUtils.prependIdToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
+      const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_GET_BY_TYPE_CONFIG)(
         userId,
       )
-      const configWithCredentialId = ApiUtils.appendIdToEndpointInConfig(config)(action.payload)
+      const configWithCredentialId = ApiUtils.appendValueToEndpointArrayInConfig(config)(action.payload)
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(

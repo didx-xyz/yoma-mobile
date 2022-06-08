@@ -1,4 +1,4 @@
-export type DropDownList = {
+export type DropDownItem = {
   label: string
   value: string
 }

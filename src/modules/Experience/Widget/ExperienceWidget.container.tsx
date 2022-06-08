@@ -1,18 +1,18 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useSelector } from 'react-redux'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { types as MyCvTypes } from '~/modules/MyCv'
+
 import ExperienceWidget from './ExperienceWidget'
 import selector from './ExperienceWidget.selector'
 
 interface Props {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  navigation: MyCvTypes.MyCvNavigation
 }
 
 const ExperienceWidgetContainer = ({ navigation }: Props) => {
-  const { userJobs } = useSelector(selector)
-  return <ExperienceWidget userJobs={userJobs} navigation={navigation} />
+  const { userJobs, count } = useSelector(selector)
+  return <ExperienceWidget userJobs={userJobs} count={count} navigation={navigation} />
 }
 
 export default ExperienceWidgetContainer

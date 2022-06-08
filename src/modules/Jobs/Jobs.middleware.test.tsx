@@ -1,5 +1,6 @@
-import { createUserJob } from 'modules/UserJobs/UserJobs.reducer'
 import { mergeRight } from 'ramda'
+
+import { createUserJob } from '~/modules/UserJobs/UserJobs.reducer'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'

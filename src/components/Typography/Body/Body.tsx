@@ -1,23 +1,19 @@
-import React, { useEffect, useState } from 'react'
-import { TextStyle } from 'react-native'
+import React, { useMemo } from 'react'
 
-import { GetComponentProps, WithChildren } from '../../../types/react.types'
+import { WithChildren } from '~/types/react.types'
+
 import Text from '../Text'
-import { TextAlign } from '../Text.types'
 import styles from './Body.styles'
 import { BodyLevels } from './Body.types'
 
 type Props = WithChildren<
-  GetComponentProps<typeof Text> & {
-    align?: TextAlign
+  React.ComponentProps<typeof Text> & {
     level?: BodyLevels
   }
 >
 const Body = ({ level = BodyLevels.Regular, children, ...props }: Props) => {
-  const [presetStyle, setPresetStyle] = useState<TextStyle>({})
-  useEffect(() => {
-    setPresetStyle(styles[level])
-  }, [level])
+  const presetStyle = useMemo(() => styles[level], [level])
+
   return (
     <Text presetStyle={presetStyle} {...props}>
       {children}

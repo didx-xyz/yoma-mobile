@@ -1,10 +1,11 @@
 import { mergeRight } from 'ramda'
-import { rootStateFixture } from 'redux/redux.test.fixtures'
-import { extractDataFromPayload } from 'utils/redux.utils'
+
+import { extractDataFromResponseAction } from '~/redux/redux.utils'
 
 import { createMiddlewareMock } from '../../../tests/tests.utils'
 import { actions as ApiActions } from '../../api'
 import { constants as ApiOrganisationsConstants } from '../../api/organisations'
+import { rootStateFixture } from '../../redux/redux.fixture'
 import * as SUT from './Organisations.middleware'
 import {
   fetchOrganisations,
@@ -98,7 +99,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
       invoke(action)
       // then ...validate setOrganisations
 
-      const data = extractDataFromPayload(action)
+      const data = extractDataFromResponseAction(action)
       expect(store.dispatch).toHaveBeenCalledWith(getOrganisationsSuccess(data))
     })
   })
@@ -117,7 +118,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseOrganisationsFlow(normaliseMock))
+      const { invoke, store, next } = create(SUT.normaliseOrganisationsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
@@ -138,7 +139,7 @@ describe('modules/Organisations/Organisations.middleware', () => {
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseOrganisationsFlow(normaliseMock))
+      const { invoke, store } = create(SUT.normaliseOrganisationsFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...

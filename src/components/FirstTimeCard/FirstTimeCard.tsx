@@ -1,8 +1,9 @@
-import { BlueRightCircle, LightYellowPattern, RLabsLogo } from 'assets/images'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors } from 'styles'
+
+import { BlueRightCircle, LightYellowPattern, RLabsLogo } from '~/assets/images'
+import { Colors } from '~/styles'
 
 import Background from '../Background/Background'
 import Button, { ButtonSizes } from '../Button'

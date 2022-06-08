@@ -1,32 +1,6 @@
 import * as SUT from './strings.utils'
 
 describe('strings.utils', () => {
-  describe('mapToDropDownArray', () => {
-    it('should return array of objects with keys label and value', () => {
-      const array = [
-        {
-          skill: 'SKILL1',
-          id: 'ID1',
-        },
-        {
-          skill: 'SKILL2',
-          id: 'ID2',
-        },
-        {
-          skill: 'SKILL3',
-          id: 'ID3',
-        },
-      ]
-
-      const result = SUT.mapToDropDownArray(array, 'id', 'skill')
-
-      expect(result).toMatchObject([
-        { label: 'SKILL1', value: 'ID1' },
-        { label: 'SKILL2', value: 'ID2' },
-        { label: 'SKILL3', value: 'ID3' },
-      ])
-    })
-  })
   describe('getUppercasedHead', () => {
     it.each([
       ['john', 'J'],
@@ -52,16 +26,6 @@ describe('strings.utils', () => {
       expect(result).toBe(expected)
     })
   })
-  describe('dropElement', () => {
-    it.each([
-      ['skill1', ['skill1', 'skill2', 'skill3'], ['skill2', 'skill3']],
-      ['test', ['skill1', 'skill2', 'skill3'], ['skill1', 'skill2', 'skill3']],
-      ['', ['skill1', 'skill2', 'skill3'], ['skill1', 'skill2', 'skill3']],
-    ])('should drop an element from array', (value, array, expected) => {
-      const result = SUT.dropElement(value, array)
-      expect(result).toEqual(expected)
-    })
-  })
   describe('textOrSpace', () => {
     it.each([
       [true, 'test', 'test'],
@@ -69,6 +33,18 @@ describe('strings.utils', () => {
     ])('should return a text if not empty or return space', (condition, data, expected) => {
       const result = SUT.textOrSpace(condition, data)
       expect(result).toEqual(expected)
+    })
+  })
+  describe('trunc', () => {
+    it('should truncate the given text at the given length', () => {
+      const result = SUT.trunc('truth in advertising and dinosaurs with skateboards have much in common.', 21)
+      expect(result).toBe('truth in advertising...')
+      expect(result.length).toBe(23)
+    })
+    it('should return the given string if the text is less than the given length', () => {
+      const result = SUT.trunc('truth in advertising.', 100)
+      expect(result).toBe('truth in advertising.')
+      expect(result.length).toBe(21)
     })
   })
 })

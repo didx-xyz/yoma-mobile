@@ -3,8 +3,9 @@ import { applySpec, map, path, pathOr, pick, pipe, propOr, slice } from 'ramda'
 
 import { selectUserChallenges } from '../../UserChallenges/UserChallenges.selector'
 
-export default createSelector(selectUserChallenges, challenges => {
-  const ids = slice(0, 2, challenges.ids)
+export default createSelector(selectUserChallenges, userChallenges => {
+  const count = userChallenges.ids.length
+  const ids = slice(0, 2, userChallenges.ids)
   const entities = pipe(
     pick(ids),
     map(
@@ -15,7 +16,7 @@ export default createSelector(selectUserChallenges, challenges => {
         isValidated: propOr(false, 'approved'),
       }),
     ),
-  )(challenges.entities)
+  )(userChallenges.entities)
 
-  return { challenges: { ids, entities } }
+  return { userChallenges: { ids, entities }, count }
 })

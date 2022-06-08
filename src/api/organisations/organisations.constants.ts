@@ -1,11 +1,14 @@
 import { mergeRight } from 'ramda'
 
+import { API_VERSION_PART } from '~/api/api.constants'
+
 import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
 import { OrganisationsEndpoints } from './organisations.types'
 
 export const ORGANISATIONS_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Organisations,
   method: ApiMethods.Get,
+  urlSuffix: API_VERSION_PART,
   isTokenRequired: true,
 }
 

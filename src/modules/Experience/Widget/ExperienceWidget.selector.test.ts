@@ -1,4 +1,5 @@
-import { rootStateFixture } from '../../../redux/redux.test.fixtures'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './ExperienceWidget.selector'
 
 describe('modules/Experience/ExperienceWidget/ExperienceWidget.selector', () => {
@@ -9,7 +10,7 @@ describe('modules/Experience/ExperienceWidget/ExperienceWidget.selector', () => 
       // when ...
       const result = SUT.default(state)
       // then ...
-      expect(result).toEqual({ userJobs: { ids: [], entities: {} } })
+      expect(result).toEqual({ count: 0, userJobs: { ids: [], entities: {} } })
     })
     it('should return the user jobs data in the expected format', () => {
       // given ...
@@ -76,6 +77,7 @@ describe('modules/Experience/ExperienceWidget/ExperienceWidget.selector', () => 
 
       // then ...
       expect(result).toEqual({
+        count: 3,
         userJobs: {
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {

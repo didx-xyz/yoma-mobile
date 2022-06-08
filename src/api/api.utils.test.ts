@@ -37,7 +37,7 @@ describe('api/api.utils', () => {
       })
     })
   })
-  describe('addIdBeforeEndpointInConfig', () => {
+  describe('prependValueToEndpointInConfig', () => {
     it('should insert the given id in front of the endpoint value when we provide the id, given a config with an endpoint key', () => {
       // given ... a config with an endpoint key
       const config = {
@@ -47,7 +47,7 @@ describe('api/api.utils', () => {
       }
       // when ... we provide the id
       //@ts-ignore
-      const result = SUT.prependIdToEndpointInConfig(config)(10)
+      const result = SUT.prependValueToEndpointInConfig(config)(10)
       // then ... should insert the given id in front of the endpoint value
       expect(result).toEqual({
         aKey: 'aValue',
@@ -56,7 +56,7 @@ describe('api/api.utils', () => {
       })
     })
   })
-  describe('appendIdToEndpointInConfig', () => {
+  describe('appendValueToEndpointArrayInConfig', () => {
     it('should insert the given id in end of the config endpoint array', () => {
       // given ... a config with an endpoint key
       const config = {
@@ -66,12 +66,31 @@ describe('api/api.utils', () => {
       }
       // when ... we provide the id
       //@ts-ignore
-      const result = SUT.appendIdToEndpointInConfig(config)(10)
+      const result = SUT.appendValueToEndpointArrayInConfig(config)(10)
       // then ... should insert the given id in end of the endpoint array
       expect(result).toEqual({
         aKey: 'aValue',
         anotherKey: 'anotherValue',
         endpoint: [5, 'SomeValue', 10],
+      })
+    })
+  })
+  describe('zipIdsIntoConfigEndpoint', () => {
+    it('should zip the given ids into an array of endpoints', () => {
+      // given ... a config with an endpoint key
+      const config = {
+        aKey: 'aValue',
+        anotherKey: 'anotherValue',
+        endpoint: ['endpoint1', 'endpoint2'],
+      }
+      // when ... we provide the id
+      //@ts-ignore
+      const result = SUT.zipIdsIntoConfigEndpoint([1, 2])(config)
+      // then ... should insert the given id in end of the endpoint array
+      expect(result).toEqual({
+        aKey: 'aValue',
+        anotherKey: 'anotherValue',
+        endpoint: [1, 'endpoint1', 2, 'endpoint2'],
       })
     })
   })
@@ -101,7 +120,6 @@ describe('api/api.utils', () => {
       expect(result).toEqual({ someKey: 'someValue' })
     })
   })
-
   describe('createTypeParam', () => {
     it('should return a new config back with the value added to the type key when we provide the value', () => {
       // when ... we provide a key and value
@@ -161,7 +179,7 @@ describe('api/api.utils', () => {
       expect(result).toEqual(undefined)
     })
   })
-  describe('getTokenFromState', () => {
+  describe('selectAuthToken', () => {
     it('should get the auth token when we request the token, given state with a token in it', () => {
       // given ... state with a token in it
       const mockedState = {
@@ -171,7 +189,7 @@ describe('api/api.utils', () => {
         },
       }
       // when ... we request the token
-      const result = SUT.getTokenFromState(mockedState)
+      const result = SUT.selectAuthToken(mockedState)
 
       // then ... should get the auth token
       expect(result).toBe('AUTH TOKEN')
@@ -182,13 +200,13 @@ describe('api/api.utils', () => {
         anotherKey: 'ANOTHER VALUE',
       }
       // when ... we request the token
-      const result = SUT.getTokenFromState(mockedState)
+      const result = SUT.selectAuthToken(mockedState)
 
       // then ... should get the auth token
       expect(result).toBe(null)
     })
   })
-  describe('getTokenIfRequired', () => {
+  describe('selectTokenIfRequired', () => {
     it('should return the token when the condition is met, given there is a token in state', () => {
       // given ... there is a token in state
       const mockedState = {
@@ -199,7 +217,7 @@ describe('api/api.utils', () => {
       }
       // when ... the condition is met
       //@ts-ignore - state is mocked for test
-      const result = SUT.getTokenIfRequired(mockedState)(true)
+      const result = SUT.selectTokenIfRequired(mockedState)(true)
 
       // then ... should return the token
       expect(result).toBe('AUTH TOKEN')
@@ -211,7 +229,7 @@ describe('api/api.utils', () => {
       }
       // when ... the token is required
       //@ts-ignore - state is mocked for test
-      const result = SUT.getTokenIfRequired(mockedState)(true)
+      const result = SUT.selectTokenIfRequired(mockedState)(true)
 
       // then ... should return null
       expect(result).toBe(null)
@@ -226,7 +244,7 @@ describe('api/api.utils', () => {
       }
       // when ... the token is not required
       //@ts-ignore - state is mocked for test
-      const result = SUT.getTokenIfRequired(mockedState)(false)
+      const result = SUT.selectTokenIfRequired(mockedState)(false)
 
       // then ... should return undefined
       expect(result).toBe(undefined)

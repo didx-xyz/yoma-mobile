@@ -1,5 +1,7 @@
-import { createMiddlewareMock } from '../../../tests/tests.utils'
+import { createMiddlewareMock } from '~/../tests/tests.utils'
+
 import { actions as AuthActions } from '../Auth'
+import * as ChallengesActions from '../Challenges/Challenges.reducer'
 import * as OrganisationsActions from '../Organisations/Organisations.reducer'
 import * as SkillsActions from '../Skills/Skills.reducer'
 import { actions as UserActions } from '../User'
@@ -66,10 +68,9 @@ describe('modules/App/App.middleware', () => {
       invoke(action)
 
       // then ... we should fetch data from all expected endpoints
-      expect(store.dispatch).toHaveBeenCalledWith(UserActions.fetchUserCredentials())
+      expect(store.dispatch).toHaveBeenCalledWith(ChallengesActions.fetchChallenges())
       expect(store.dispatch).toHaveBeenCalledWith(OrganisationsActions.fetchOrganisations())
       expect(store.dispatch).toHaveBeenCalledWith(SkillsActions.fetchSkills())
-      expect(store.dispatch).toHaveBeenCalledWith(UserSkillsActions.fetchUserSkills())
     })
   })
 })

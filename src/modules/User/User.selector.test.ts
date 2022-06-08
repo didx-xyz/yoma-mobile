@@ -1,7 +1,7 @@
-import { rootStateFixture } from 'redux/redux.test.fixtures'
+import { rootStateFixture } from '~/redux/redux.fixture'
 
+import { USER_RESPONSE } from './User.fixture'
 import * as SUT from './User.selector'
-import { USER_RESPONSE } from './User.test.fixtures'
 
 describe('modules/User/User.selector', () => {
   describe('selectUser ', () => {
@@ -59,7 +59,6 @@ describe('modules/User/User.selector', () => {
       expect(result).toEqual('BIOGRAPHY')
     })
   })
-
   describe('selectId ', () => {
     it('should return user property of the root state', () => {
       // given ... a valid user
@@ -80,7 +79,6 @@ describe('modules/User/User.selector', () => {
       expect(result).toBe('')
     })
   })
-
   describe('selectPhotoUrl ', () => {
     it('should return the default value for the photo url if none exists', () => {
       // given ... no user data available
@@ -101,7 +99,6 @@ describe('modules/User/User.selector', () => {
       expect(result).toBe('A PHOTO URL')
     })
   })
-
   describe('selectZltoBalance ', () => {
     it('should return the default value for the zlto balance if none exists', () => {
       // given ... no user data available

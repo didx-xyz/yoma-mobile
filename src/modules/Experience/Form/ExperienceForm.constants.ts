@@ -1,4 +1,4 @@
-import { UserJobFormFields } from '../../UserJobs/UserJobs.types'
+import { UserJobFormFields } from '~/modules/UserJobs/UserJobs.types'
 
 export const INITIAL_VALUES: UserJobFormFields = {
   title: '',

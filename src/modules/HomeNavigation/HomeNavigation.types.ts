@@ -3,11 +3,15 @@ export enum HomeNavigationRoutes {
   Profile = 'Profile',
   MyCv = 'MyCv',
   About = 'About',
+  AboutForm = 'AboutForm',
   Experience = 'Experience',
+  ExperienceForm = 'ExperienceForm',
   Education = 'Education',
+  EducationForm = 'EducationForm',
   MySkills = 'MySkills',
-  CompletedCourses = 'CompletedCourses',
-  UserChallenges = 'UserChallenges',
+  MySkillsForm = 'MySkillsForm',
+  CompletedChallenges = 'CompletedChallenges',
+  CompletedChallengesForm = 'CompletedChallengesForm',
 }
 
 export enum HomeTabRoutes {
@@ -22,9 +26,13 @@ export type HomeNavigatorParamsList = {
   [HomeNavigationRoutes.Profile]: undefined
   [HomeNavigationRoutes.MyCv]: undefined
   [HomeNavigationRoutes.About]: undefined
+  [HomeNavigationRoutes.AboutForm]: undefined
   [HomeNavigationRoutes.Experience]: undefined
+  [HomeNavigationRoutes.ExperienceForm]: undefined
   [HomeNavigationRoutes.Education]: undefined
+  [HomeNavigationRoutes.EducationForm]: undefined
   [HomeNavigationRoutes.MySkills]: undefined
-  [HomeNavigationRoutes.CompletedCourses]: undefined
-  [HomeNavigationRoutes.UserChallenges]: undefined
+  [HomeNavigationRoutes.MySkillsForm]: undefined
+  [HomeNavigationRoutes.CompletedChallenges]: undefined
+  [HomeNavigationRoutes.CompletedChallengesForm]: undefined
 }

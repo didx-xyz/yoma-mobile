@@ -1,11 +1,12 @@
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
-import { Normalise } from 'types/redux.types'
-import { showSimpleMessage } from 'utils/error'
-import { extractDataFromPayload } from 'utils/redux.utils'
+
+import { extractDataFromResponseAction } from '~/redux/redux.utils'
+import { showSimpleMessage } from '~/utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiOrganisationsConstants } from '../../api/organisations'
+import * as ReduxTypes from '../../redux/redux.types'
 import {
   fetchOrganisations,
   fetchOrganisationsFailure,
@@ -14,7 +15,7 @@ import {
   normaliseOrganisationsSuccess,
   setOrganisations,
 } from './Organisations.reducer'
-import { NormalisedOrganisations, Organisation } from './Organisations.types'
+import { Organisation } from './Organisations.types'
 
 export const fetchOrganisationsFlow: Middleware =
   ({ dispatch }) =>
@@ -41,14 +42,14 @@ export const fetchOrganisationsSuccessFlow: Middleware =
     const result = next(action)
 
     if (fetchOrganisationsSuccess.match(action)) {
-      const data = extractDataFromPayload(action)
+      const data = extractDataFromResponseAction(action)
       dispatch(getOrganisationsSuccess(data))
     }
     return result
   }
 
 export const normaliseOrganisationsFlow =
-  (normalise: Normalise<Organisation, NormalisedOrganisations>): Middleware =>
+  ({ normalise }: ReduxTypes.NormaliseDependency<Organisation>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {

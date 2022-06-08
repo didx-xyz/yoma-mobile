@@ -1,3 +1,3 @@
-import { RootState } from 'redux/redux.types'
+import { RootState } from '~/redux/redux.types'
 
 export const selectUserSkills = (state: RootState) => state.userSkills

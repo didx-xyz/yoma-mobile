@@ -1,41 +1,47 @@
-import { FormikProps, FormikValues } from 'formik'
+import { useField } from 'formik'
+import { without } from 'ramda'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { Colors } from 'styles'
-import { GetComponentProps } from 'types/react.types'
-import { dropElement, textOrSpace } from 'utils/strings.utils'
+import type { DropDownPickerProps } from 'react-native-dropdown-picker'
 
-import Tag from '../Tag'
+import { Colors } from '~/styles'
+import { textOrSpace } from '~/utils/strings.utils'
+
+import InputError from '../InputError'
+import Pill from '../Pill'
 import Text, { FontWeights, MetaLevels, TextAlign } from '../Typography'
 import styles from './DropDownTags.styles'
 
-type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
+type Props = Omit<
+  DropDownPickerProps<any>,
+  'open' | 'setOpen' | 'setValue' | 'setItems' | 'onChangeValue' | 'value'
+> & {
   name: string
   label: string
-  handlers: FormikProps<FormikValues>
 }
 
 const renderTags = (tags: string[], onDelete: (tag: string) => void) =>
-  tags.map((tag, index) => <Tag key={index} tag={tag} onDeleteTag={onDelete} />)
+  tags.map((tag, index) => <Pill key={index} name={tag} onDelete={onDelete} />)
 
-const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
+const DropDownTags = ({ name, label, ...props }: Props) => {
+  const [, { value, error, touched }, { setValue }] = useField(name)
+
   const [isOpen, setIsOpen] = useState(false)
   const [dropDownValue, setDropdownValue] = useState([])
-  const { handleChange, handleBlur, errors, values, touched, setFieldValue } = handlers
   const { t } = useTranslation()
 
-  const removeTag = (tag: string) => setDropdownValue(dropElement(tag, dropDownValue))
+  const removeTag = (tag: string) => setDropdownValue(without(tag)(dropDownValue))
 
   useEffect(() => {
-    if (values[name]) {
-      setDropdownValue(values[name])
+    if (value) {
+      setDropdownValue(value)
     }
-  }, [name, values])
+  }, [value])
 
   return (
-    <>
+    <View style={styles.container}>
       <Text.Meta level={MetaLevels.Small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
@@ -47,15 +53,13 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
         searchContainerStyle={styles.searchContainer}
         listMode={'MODAL'}
         onChangeValue={itemValue => {
-          if (values[name] !== itemValue) {
-            handleChange(name)
-            handleBlur(name)
-            setFieldValue(name, itemValue)
+          if (value !== itemValue) {
+            setValue(itemValue)
           }
         }}
         value={dropDownValue}
         open={isOpen}
-        setOpen={setIsOpen}
+        setOpen={() => setIsOpen(isCurrentlyOpen => !isCurrentlyOpen)}
         setValue={setDropdownValue}
         showArrowIcon={false}
         CloseIconComponent={() => (
@@ -64,14 +68,13 @@ const DropDownTags = ({ name, label, handlers, ...props }: Props) => {
           </Text.Body>
         )}
         closeIconContainerStyle={styles.save}
+        labelStyle={styles.pickerLabel}
         {...props}
       />
       <View style={styles.tagsContainer}>{renderTags(dropDownValue, removeTag)}</View>
       <View style={styles.divider} />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
-        {errors[name] && touched[name] ? errors[name] : ' '}
-      </Text.Meta>
-    </>
+      <InputError error={error} touched={touched} />
+    </View>
   )
 }
 

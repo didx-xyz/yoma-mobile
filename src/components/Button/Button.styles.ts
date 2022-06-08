@@ -1,6 +1,7 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from '~/styles'
+
 import { ButtonSizes, ButtonVariants } from './Button.types'
 
 const baseStyle = {
@@ -9,6 +10,7 @@ const baseStyle = {
   paddingHorizontal: 16,
   borderRadius: 60,
   borderWidth: 1,
+  minHeight: 40,
 } as ViewStyle
 
 const styles = {
@@ -37,6 +39,12 @@ const styles = {
     alignSelf: 'stretch',
     position: 'relative',
     marginHorizontal: 12,
+  } as ViewStyle,
+  loading: {
+    paddingRight: 10,
+  } as ViewStyle,
+  content: {
+    alignItems: 'center',
   } as ViewStyle,
 }
 

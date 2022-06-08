@@ -1,6 +1,7 @@
 import axios from 'axios'
 
-import Env from '../env.json'
+import Env from '~/env.json'
+
 import { apiCall } from './api.utils'
 
 const instance = axios.create({

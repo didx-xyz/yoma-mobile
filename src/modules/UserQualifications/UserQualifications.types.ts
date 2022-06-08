@@ -1,35 +1,42 @@
-import { NormalisedData } from '../../redux/redux.types'
-import { UserCredentialMeta } from '../User/User.types'
+import { DocumentPickerResponse } from 'react-native-document-picker'
 
-export interface QualificationOrganisationResponse {
-  id: string
-  title: string | null
-  description: string | null
-  instructions: string | null
-  url: string | null
-  createdAt: string
-  zltoReward: number | null
-  createdByAdmin: boolean
-  language: string | null
-  difficulty: string | null
-  timeValue: number | null
-  timePeriod: string | null
-  startTime: string | null
-  endTime: string | null
-  published: boolean
-  organisationId: string | null
-  organisationName: string | null
-  organisationLogoURL: string | null
-  organisationURL: string | null
-  organisationPrimaryContactName: string | null
-  organisationPrimaryContactEmail: string | null
-  organisationPrimaryContactPhone: string | null
-}
+import { types as ApiTypes } from '~/api'
+import { NormalisedData } from '~/redux/redux.types'
+import * as Types from '~/types/general.types'
 
-export interface UserQualification extends UserCredentialMeta {
-  qualification: QualificationOrganisationResponse
-}
+import { types as EducationFormTypes } from '../Education/Form'
+import { types as QualificationTypes } from '../Qualifications'
+import { types as UserTypes } from '../User'
+import { UserCredentialFormValues } from '../User/User.types'
 
 export type NormalisedUserQualifications = NormalisedData<UserQualification>
 
-export type UserQualificationsState = NormalisedUserQualifications
+export type UserQualificationsState = NormalisedUserQualifications & {
+  formValues: UserCredentialFormValues | {}
+}
+
+export interface UserQualification extends UserTypes.UserCredentialMeta {
+  qualification?: QualificationTypes.Qualification
+}
+
+export type CreateUserQualificationPayload = Types.Modify<
+  EducationFormTypes.FormFields,
+  {
+    startTime: string
+    endTime: string
+  }
+>
+
+export interface CreateUserQualificationCertificatePayload {
+  id: string
+  certificate: DocumentPickerResponse
+}
+
+export interface UserQualificationResponse {
+  data: UserQualification
+}
+
+export interface CreateUserQualificationSuccessResponse {
+  data: UserQualificationResponse
+  meta: ApiTypes.ApiResponseMeta
+}

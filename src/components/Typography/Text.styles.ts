@@ -1,6 +1,7 @@
 import { StyleSheet, TextStyle } from 'react-native'
 
-import { colors } from '../../styles'
+import { colors } from '~/styles'
+
 import { TextAlign } from './Text.types'
 import { fontWeights } from './fontWeights.styles'
 

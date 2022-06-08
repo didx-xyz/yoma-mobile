@@ -1,36 +1,39 @@
-import Text, { MetaLevels, TextAlign } from 'components/Typography'
-import { FormikProps, FormikValues } from 'formik'
+import { useField } from 'formik'
 import React, { useEffect, useState } from 'react'
+import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
-import { Colors } from 'styles'
-import { GetComponentProps } from 'types/react.types'
-import { textOrSpace } from 'utils/strings.utils'
 
+import Text, { MetaLevels } from '~/components/Typography'
+import { textOrSpace } from '~/utils/strings.utils'
+
+import InputError from '../InputError'
 import styles from './DropDown.styles'
 
-type Props = Omit<GetComponentProps<typeof DropDownPicker>, 'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'> & {
+type Props = Omit<
+  React.ComponentProps<typeof DropDownPicker>,
+  'open' | 'setOpen' | 'setValue' | 'setItems' | 'value'
+> & {
   name: string
   label: string
-  handlers: FormikProps<FormikValues>
 }
 
-const DropDown = ({ name, label, handlers, ...props }: Props) => {
+const DropDown = ({ name, label, ...props }: Props) => {
+  const [, { value, error, touched }, { setValue }] = useField(name)
   const [isOpen, setIsOpen] = useState(false)
   const [dropDownValue, setDropdownValue] = useState(null)
-  const { handleChange, handleBlur, values, errors, touched, setFieldValue } = handlers
 
   useEffect(() => {
-    if (values[name]) {
-      setDropdownValue(values[name])
+    if (value) {
+      setDropdownValue(value)
     }
-  }, [name, values])
+  }, [value])
 
   return (
-    <>
-      <Text.Meta level={MetaLevels.Small}>{textOrSpace(values[name] !== '', label)}</Text.Meta>
+    <View style={styles.container}>
+      <Text.Meta level={MetaLevels.Small}>{textOrSpace(value !== '', label)}</Text.Meta>
       <DropDownPicker
         style={styles.dropDown}
-        dropDownContainerStyle={styles.dropDownView}
+        dropDownContainerStyle={styles.dropDownContainer}
         placeholder={label}
         placeholderStyle={styles.placeholder}
         textStyle={styles.label}
@@ -38,22 +41,18 @@ const DropDown = ({ name, label, handlers, ...props }: Props) => {
         searchContainerStyle={styles.searchContainer}
         listMode={'MODAL'}
         onChangeValue={(itemValue: any) => {
-          if (values[name] !== itemValue) {
-            handleChange(name)
-            handleBlur(name)
-            setFieldValue(name, itemValue)
+          if (value !== itemValue) {
+            setValue(itemValue)
           }
         }}
         value={dropDownValue}
         open={isOpen}
-        setOpen={() => setIsOpen(!isOpen)}
+        setOpen={() => setIsOpen(isCurrentlyOpen => !isCurrentlyOpen)}
         setValue={setDropdownValue}
         {...props}
       />
-      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
-        {errors[name] && touched[name] ? errors[name] : ' '}
-      </Text.Meta>
-    </>
+      <InputError error={error} touched={touched} />
+    </View>
   )
 }
 

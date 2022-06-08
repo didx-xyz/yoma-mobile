@@ -1,32 +1,27 @@
 import { isAnyOf } from '@reduxjs/toolkit'
 import { mergeRight } from 'ramda'
+import { authorize as OAuthAuthorize } from 'react-native-app-auth'
 import { Middleware } from 'redux'
 
-import { actions as ApiActions } from '../../api'
-import { constants as ApiAuthConstants } from '../../api/auth'
-import { showSimpleMessage } from '../../utils/error'
+import { actions as ApiActions } from '~/api'
+import { constants as ApiAuthConstants } from '~/api/auth'
+import { showSimpleMessage } from '~/utils/error'
+
 // avoiding circular dependencies:
 import * as AppActions from '../App/App.reducer'
-import { AuthNavigationRoutes } from '../AuthNavigation/AuthNavigation.types'
 import { actions as ErrorActions } from '../Error'
-import * as Navigation from '../Navigation/Navigation.actions'
-import { Providers } from '../SSOAuth/SSOAuth.types'
-import { selectRegistrationCredentials, selectSocialLoginCredentials } from '../SSOAuth/SSOAuth.utils'
 import { selectors as UserSelectors } from '../User'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
-  authSocialLogin,
-  authSocialLoginFailure,
-  authSocialLoginSuccess,
-  authSocialRegistration,
-  authSocialRegistrationFailure,
-  authSocialRegistrationSuccess,
   authorize,
   authorizeWithRefreshTokenFailure,
   authorizeWithRefreshTokenSuccess,
   deleteSecureRefreshToken,
   deleteSecureRefreshTokenFailure,
   deleteSecureRefreshTokenSuccess,
+  fetchUserFromOAuth,
+  fetchUserFromOAuthFailure,
+  fetchUserFromOAuthSuccess,
   getSecureRefreshToken,
   getSecureRefreshTokenFailure,
   getSecureRefreshTokenSuccess,
@@ -35,21 +30,16 @@ import {
   loginSuccess,
   logout,
   noRefreshTokenInSecureStore,
-  register,
-  registerFailure,
-  registerSuccess,
   setAuthCredentials,
   setSecureRefreshToken,
   setSecureRefreshTokenFailure,
   setSecureRefreshTokenSuccess,
-  setUserLoginCredentials,
 } from './Auth.reducer'
-import { selectLoginCredentials } from './Auth.selector'
-import { SecureStorageRefreshToken } from './Auth.types'
+import { OAuthLoginSuccessResponse, SecureStorageRefreshToken } from './Auth.types'
 import {
   extractCredentialsFromAuthorizedPayload,
   extractRefreshTokenFromAuthorizedPayload,
-  selectLoginCredentialsFromRegistration,
+  prepareCredentials,
 } from './Auth.utils'
 
 export const authorizeFlow: Middleware =
@@ -70,11 +60,16 @@ export const getSecureRefreshTokenFlow =
   async action => {
     const result = next(action)
     if (getSecureRefreshToken.match(action)) {
-      await getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
-        .then((data: SecureStorageRefreshToken) => {
-          data === null ? dispatch(noRefreshTokenInSecureStore()) : dispatch(getSecureRefreshTokenSuccess(data))
-        })
-        .catch((error: any) => dispatch(getSecureRefreshTokenFailure(error.message)))
+      try {
+        const token: SecureStorageRefreshToken = await getSecureItem(SECURE_STORE_REFRESH_TOKEN_KEY)
+        if (token === null) {
+          dispatch(noRefreshTokenInSecureStore())
+          return result
+        }
+        dispatch(getSecureRefreshTokenSuccess(token))
+      } catch (error) {
+        dispatch(getSecureRefreshTokenFailure(error.message))
+      }
     }
     return result
   }
@@ -118,152 +113,34 @@ export const authorizeWithRefreshTokenFailureFlow: Middleware =
 export const loginFlow: Middleware =
   ({ dispatch }) =>
   next =>
-  action => {
+  async action => {
     const result = next(action)
 
     if (login.match(action)) {
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.LOGIN_CONFIG, {
-            onSuccess: loginSuccess,
-            onFailure: loginFailure,
-          }),
-          action.payload,
-        ),
-      )
-    }
-
-    return result
-  }
-
-export const authSocialLoginFlow =
-  ({ ssoAuth }: { ssoAuth: Function; notification: typeof showSimpleMessage }): Middleware =>
-  ({ dispatch }) =>
-  next =>
-  async action => {
-    const result = next(action)
-    if (authSocialLogin.match(action)) {
       try {
-        const authProvider = action.payload as Providers
-        const authData = await ssoAuth(authProvider)
-        if (authData !== false) {
-          const credentials = selectSocialLoginCredentials(authProvider, authData)
-          dispatch(authSocialLoginSuccess(credentials))
-        }
+        const result: OAuthLoginSuccessResponse = await OAuthAuthorize(ApiAuthConstants.OAUTH_SETUP_CONFIG)
+        dispatch(loginSuccess(result))
       } catch (error) {
-        dispatch(authSocialLoginFailure(error.message))
+        dispatch(loginFailure(error))
       }
     }
-    return result
-  }
-
-export const authSocialLoginSuccessFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (authSocialLoginSuccess.match(action)) {
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.LOGIN_SOCIAL_CONFIG, {
-            onSuccess: loginSuccess,
-            onFailure: loginFailure,
-          }),
-          action.payload,
-        ),
-      )
-    }
 
     return result
   }
 
-export const authSocialRegistrationFlow =
-  ({ ssoAuth }: { ssoAuth: Function }): Middleware =>
-  ({ dispatch }) =>
-  next =>
-  async action => {
-    const result = next(action)
-    if (authSocialRegistration.match(action)) {
-      try {
-        const authProvider = action.payload as Providers
-        const authData = await ssoAuth(authProvider)
-        if (authData !== false) {
-          const credentials = selectRegistrationCredentials(authProvider, authData)
-          dispatch(authSocialRegistrationSuccess(credentials))
-        }
-      } catch (error) {
-        dispatch(authSocialRegistrationFailure(error.message))
-      }
-    }
-    return result
-  }
-
-export const authSocialRegistrationSuccessFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (authSocialRegistrationSuccess.match(action)) {
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.REGISTER_SOCIAL_CONFIG, {
-            onSuccess: registerSuccess,
-            onFailure: registerFailure,
-          }),
-          action.payload,
-        ),
-      )
-    }
-    return result
-  }
-
-export const authSocialRegistrationFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (authSocialRegistrationFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      // @ts-ignore
-      notification('danger', 'An error occurred.', action.payload)
-    }
-
-    return result
-  }
-
-export const authSocialLoginFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (authSocialLoginFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      // @ts-ignore
-      notification('danger', 'An error occurred.', action.payload)
-    }
-
-    return result
-  }
-
-export const authorizeSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
+export const authorizeSuccessFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
     if (isAnyOf(loginSuccess, authorizeWithRefreshTokenSuccess)(action)) {
-      const credentials = extractCredentialsFromAuthorizedPayload(action)
+      const credentialsRaw = extractCredentialsFromAuthorizedPayload(action)
+      const credentials = prepareCredentials(credentialsRaw)
       const refreshToken = extractRefreshTokenFromAuthorizedPayload(action)
-      notification('success', 'Login Successful')
       dispatch(setAuthCredentials(credentials))
       dispatch(setSecureRefreshToken(refreshToken))
+      dispatch(fetchUserFromOAuth())
       dispatch(AppActions.hydrateApp())
     }
     return result
@@ -303,6 +180,26 @@ export const loginFailureFlow =
     return result
   }
 
+export const fetchUserFromOAuthFlow: Middleware =
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+
+    if (fetchUserFromOAuth.match(action)) {
+      dispatch(
+        ApiActions.apiRequest(
+          mergeRight(ApiAuthConstants.USER_INFO_CONFIG, {
+            onSuccess: fetchUserFromOAuthSuccess,
+            onFailure: fetchUserFromOAuthFailure,
+          }),
+        ),
+      )
+    }
+
+    return result
+  }
+
 export const logoutFlow: Middleware =
   ({ dispatch }) =>
   next =>
@@ -332,60 +229,6 @@ export const deleteSecureRefreshTokenFlow =
         .catch((error: any) => {
           dispatch(deleteSecureRefreshTokenFailure(error))
         })
-    }
-
-    return result
-  }
-
-export const registrationFlow: Middleware =
-  ({ dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (register.match(action)) {
-      const credentials = selectLoginCredentialsFromRegistration(action.payload)
-      dispatch(
-        ApiActions.apiRequest(
-          mergeRight(ApiAuthConstants.REGISTER_CONFIG, {
-            onSuccess: registerSuccess,
-            onFailure: registerFailure,
-          }),
-          action.payload,
-        ),
-      )
-      dispatch(setUserLoginCredentials(credentials))
-    }
-
-    return result
-  }
-
-export const registrationSuccessFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  ({ getState, dispatch }) =>
-  next =>
-  action => {
-    const result = next(action)
-
-    if (registerSuccess.match(action)) {
-      // TODO: this should be handled by the notification module
-      notification('success', 'Registration Successful')
-      const credentials = selectLoginCredentials(getState())
-      dispatch(login(credentials))
-    }
-    return result
-  }
-
-export const registrationFailureFlow =
-  ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
-  _store =>
-  next =>
-  action => {
-    const result = next(action)
-    if (registerFailure.match(action)) {
-      Navigation.navigate(AuthNavigationRoutes.Register)
-      // TODO: this should be handled by the notification module
-      notification('danger', 'Error', action.payload)
     }
 
     return result

@@ -15,7 +15,7 @@ interface Props {
 const InfoModal = ({ visible, closeModal, infoText }: Props) => {
   const { t } = useTranslation()
   return (
-    <Modal animationType="slide" transparent={true} visible={visible} onRequestClose={closeModal}>
+    <Modal animationType="fade" transparent={true} visible={visible} onRequestClose={closeModal}>
       <View style={styles.container}>
         <View style={styles.innerContainer}>
           <Text.Body>{infoText}</Text.Body>

@@ -7,19 +7,43 @@ describe('modules/Auth/Auth.utils', () => {
       const mockedAction = {
         type: 'LOGIN ACTION',
         payload: {
-          data: {
-            data: {
-              refreshToken: 'REFRESH_TOKEN',
-              token: 'USER_TOKEN',
-              expiresAt: 'EXPIRES_AT',
-            },
-          },
-          meta: {},
+          refreshToken: 'REFRESH_TOKEN',
+          token: 'USER_TOKEN',
+          expiresAt: 'EXPIRES_AT',
+          accessToken: 'TOKEN',
+          accessTokenExpirationDate: 'EXPIRES_AT',
+          idToken: 'ID_TOKEN',
+          tokenType: 'TOKEN_TYPE',
+          scopes: ['SCOPES'],
+          tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+          authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
         },
       }
 
       // when ... we want to extract the credentials from the rest of the payload
       const result = SUT.extractCredentialsFromAuthorizedPayload(mockedAction)
+      // then ... the credentials should be extracted correctly
+      expect(result).toEqual({
+        accessToken: 'TOKEN',
+        accessTokenExpirationDate: 'EXPIRES_AT',
+        idToken: 'ID_TOKEN',
+        tokenType: 'TOKEN_TYPE',
+        scopes: ['SCOPES'],
+        tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+        authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
+      })
+    })
+  })
+  describe('prepareCredentials', () => {
+    it('should rename the object keys', () => {
+      // given ... an object in the shape of the successful login response
+      const mockedAction = {
+        accessToken: 'USER_TOKEN',
+        accessTokenExpirationDate: 'EXPIRES_AT',
+      }
+
+      // when ... we want to extract the credentials from the rest of the payload
+      const result = SUT.prepareCredentials(mockedAction)
       // then ... the credentials should be extracted correctly
       expect(result).toEqual({ token: 'USER_TOKEN', expiresAt: 'EXPIRES_AT' })
     })
@@ -30,21 +54,22 @@ describe('modules/Auth/Auth.utils', () => {
       const mockedAction = {
         type: 'LOGIN ACTION',
         payload: {
-          data: {
-            data: {
-              refreshToken: 'REFRESH_TOKEN',
-              token: 'USER_TOKEN',
-              expiresAt: 'EXPIRES_AT',
-              otherProperty: 'SOME OTHER PROPERTY',
-            },
-          },
-          meta: {},
+          refreshToken: 'REFRESH_TOKEN',
+          token: 'USER_TOKEN',
+          expiresAt: 'EXPIRES_AT',
+          accessToken: 'TOKEN',
+          accessTokenExpirationDate: 'EXPIRES_AT',
+          idToken: 'ID_TOKEN',
+          tokenType: 'TOKEN_TYPE',
+          scopes: ['SCOPES'],
+          tokenAdditionalParameters: { aKey: 'TOKEN_ADDITIONAL_PARAMETERS' },
+          authorizeAdditionalParameters: { aKey: 'AUTHORIZE_ADDITIONAL_PARAMETERS' },
         },
       }
       // when ... we want to extract the refresh token from the rest of the payload
       const result = SUT.extractRefreshTokenFromAuthorizedPayload(mockedAction)
       // then ... the refresh token should be extracted correctly
-      expect(result).toEqual('REFRESH_TOKEN')
+      expect(result).toBe('REFRESH_TOKEN')
     })
     it('should handle the refresh token not being available', () => {
       // given ... a data without a refresh token
@@ -58,29 +83,6 @@ describe('modules/Auth/Auth.utils', () => {
       const result = SUT.extractRefreshTokenFromAuthorizedPayload(mockedAction)
       // then ... we should return the fallback value of an empty string
       expect(result).toEqual('')
-    })
-  })
-  describe('selectLoginCredentialsFromRegistration', () => {
-    it('should return the user email address and password from registration data', () => {
-      // given ... an object in the shape of the successful reegistration
-      const mockState = {
-        firstName: 'FIRST NAME',
-        lastName: 'LAST NAME',
-        email: 'USER EMAIL',
-        countryAlpha2: 'COUNTRY CODE',
-        password: 'USER PASSWORD',
-        confirmPassword: 'USER PASSWORD',
-        privacyInd: true,
-      }
-      const result = SUT.selectLoginCredentialsFromRegistration(mockState)
-      // then ... should return email and password
-      expect(result).toEqual({ email: 'USER EMAIL', password: 'USER PASSWORD' })
-    })
-    it('should handle the empty registration credentials', () => {
-      const mockState = {}
-      const result = SUT.selectLoginCredentialsFromRegistration(mockState)
-      // then ... we should return the fallback value of an empty object
-      expect(result).toEqual({})
     })
   })
 })

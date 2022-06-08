@@ -1,11 +1,9 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
 
-import { AddIcon } from '../../../assets/images'
-import { Colors } from '../../../styles'
-import Button, { ButtonVariants } from '../index'
-import styles from './ButtonAdd.styles'
+import { AddIcon } from '~/assets/images'
+
+import ButtonWithBadge from '../WithBadge'
 
 interface Props {
   onPress: () => void
@@ -13,21 +11,10 @@ interface Props {
 }
 const ButtonAdd = ({ onPress, isDisabled = false }: Props) => {
   const { t } = useTranslation()
-
   return (
-    <Button
-      variant={ButtonVariants.Clear}
-      label={t('Add')}
-      color={Colors.PrimaryGreen}
-      onPress={onPress}
-      style={styles.button}
-      isFullWidth={false}
-      isDisabled={isDisabled}
-    >
-      <View style={styles.badge}>
-        <AddIcon />
-      </View>
-    </Button>
+    <ButtonWithBadge onPress={onPress} label={t('Add')} isDisabled={isDisabled}>
+      {<AddIcon />}
+    </ButtonWithBadge>
   )
 }
 

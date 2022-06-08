@@ -1,33 +1,34 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvWidget, { CvWidgetCredential, CvWidgetList } from '../../../components/CvWidget'
-import { Colors } from '../../../styles'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
-import { NormalisedUserChallengeItem } from '../../UserChallenges/UserChallenges.types'
+import CvWidget, { CvWidgetList } from '~/components/CvWidget'
+import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '~/components/CvWidgetCredential'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { types as MyCvTypes } from '~/modules/MyCv'
+import { Colors } from '~/styles'
 
 interface Props {
-  challenges: NormalisedUserChallengeItem
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  userChallenges: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
+  count: number
+  navigation: MyCvTypes.MyCvNavigation
 }
-const CompletedChallengesWidget = ({ challenges, navigation }: Props) => {
+const CompletedChallengesWidget = ({ userChallenges, count, navigation }: Props) => {
   const { t } = useTranslation()
+
   return (
     <CvWidget
-      count={challenges.ids.length}
+      count={count}
       badgeColor={Colors.SecondaryPurple}
       title={t('Completed challenges')}
-      fallback={t('Have you completed any challenges yet?')}
-      onEdit={() => {
-        navigation.navigate(HomeNavigationRoutes.UserChallenges)
+      noDataMessage={t('Have you completed any challenges yet?')}
+      onActionPress={() => {
+        navigation.navigate(HomeNavigationRoutes.CompletedChallengesForm)
       }}
     >
       <CvWidgetList
-        data={challenges}
-        onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.UserChallenges)
-        }}
+        data={userChallenges}
+        viewRoute={HomeNavigationRoutes.CompletedChallenges}
+        navigation={navigation}
         RenderItem={CvWidgetCredential}
       />
     </CvWidget>

@@ -1,7 +1,7 @@
 import * as SUT from './error.utils'
 
 describe('modules/utils/error.utils', () => {
-  describe('extractErrorMessageFromPayload', () => {
+  describe('extractErrorResponseMessage', () => {
     it('should return the error message from payload', () => {
       // given ... an object in the shape of the failure response
       const mockedAction = {
@@ -18,7 +18,7 @@ describe('modules/utils/error.utils', () => {
       }
 
       // when ... we want to extract the data from the rest of the payload
-      const result = SUT.extractErrorMessageFromPayload(mockedAction)
+      const result = SUT.extractErrorResponseMessage(mockedAction)
       // then ... the data should be extracted correctly
       expect(result).toEqual('ERROR_MESSAGE')
     })

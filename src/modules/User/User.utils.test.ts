@@ -1,24 +1,29 @@
-import { UserCredentialTypes } from '../../api/users/users.types'
-import { USER_RESPONSE } from './User.test.fixtures'
+import { UserCredentialTypes } from '~/api/users/users.types'
+
+import { USER_RESPONSE } from './User.fixture'
 import * as SUT from './User.utils'
 
 describe('modules/User/User.utils', () => {
-  describe('extractUserFromLoginPayload', () => {
+  describe('extractUserFromPayload', () => {
     it('should return user data from login payload', () => {
       // given ... the auth success response
       const credentials = {
         payload: {
           data: {
-            data: {
-              user: USER_RESPONSE,
-            },
+            sub: 'MOCK_ID',
+            family_name: 'MOCK_LAST_NAME',
+            given_name: 'MOCK_FIRST_NAME',
           },
         },
       }
       // when extractUserFromLoginPayload
-      const result = SUT.extractUserFromLoginPayload(credentials)
+      const result = SUT.extractUserFromPayload(credentials)
       //then expect user response data
-      expect(result).toEqual(USER_RESPONSE)
+      expect(result).toEqual({
+        id: 'MOCK_ID',
+        lastName: 'MOCK_LAST_NAME',
+        firstName: 'MOCK_FIRST_NAME',
+      })
     })
   })
   describe('extractUserFromUserUpdateSuccess', () => {
@@ -76,36 +81,7 @@ describe('modules/User/User.utils', () => {
       expect(result.formData).toBe('FORM_DATA')
     })
   })
-  describe('prepareUserCredentialItemPayload', () => {
-    it('should return merged credential id with form values from state', () => {
-      // given ...
-      const mockPayload = {
-        payload: {
-          id: 'ID',
-          other: 'OTHER',
-        },
-      }
-      const mockFormValues = {
-        type: UserCredentialTypes.Job,
-        requestVerification: false,
-        startTime: 'START_TIME',
-        endTime: 'END_TIME',
-      }
-
-      // when ... we want to extract the data from the rest of the payload
-      const result = SUT.prepareUserCredentialItemPayload(mockPayload)(mockFormValues)
-
-      // then ... the data should be extracted correctly
-      expect(result).toEqual({
-        type: UserCredentialTypes.Job,
-        credentialItemId: 'ID',
-        requestVerification: false,
-        startTime: 'START_TIME',
-        endTime: 'END_TIME',
-      })
-    })
-  })
-  describe('extractCredential', () => {
+  describe('extractCredentialsByType', () => {
     it.each([
       [
         UserCredentialTypes.Challenge,
@@ -148,6 +124,35 @@ describe('modules/User/User.utils', () => {
       expect(result).toEqual(expected)
     })
   })
+  describe('prepareUserCredentialItemPayload', () => {
+    it('should return merged credential id with form values from state', () => {
+      // given ...
+      const mockPayload = {
+        payload: {
+          id: 'ID',
+          other: 'OTHER',
+        },
+      }
+      const mockFormValues = {
+        type: UserCredentialTypes.Job,
+        requestVerification: false,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      }
+
+      // when ... we want to extract the data from the rest of the payload
+      const result = SUT.prepareUserCredentialItemPayload(mockPayload)(mockFormValues)
+
+      // then ... the data should be extracted correctly
+      expect(result).toEqual({
+        type: UserCredentialTypes.Job,
+        credentialItemId: 'ID',
+        requestVerification: false,
+        startTime: 'START_TIME',
+        endTime: 'END_TIME',
+      })
+    })
+  })
   describe('extractUserCredentialFormValues', () => {
     it('should return the jobs credentials form values from state', () => {
       // given ... an object in the shape of the successful response
@@ -169,6 +174,53 @@ describe('modules/User/User.utils', () => {
         requestVerification: false,
         startTime: 'MOCK_DATE',
         endTime: 'MOCK_DATE',
+      })
+    })
+  })
+  describe('prepareCreateUserCredentialPayload', () => {
+    it('should correctly format the data payload for the create credential api call', () => {
+      // given
+      const actionPayload = {
+        credentialItemId: 'CHALLENGE ID',
+        startTime: '2020-09-09T22:00:00.000Z',
+        endTime: '2020-10-09T22:00:00.000Z',
+        requestVerification: false,
+        certificate: { name: 'SOME NAME', type: 'SOME TYPE' },
+      }
+
+      // when we prepare the payload
+      const result = SUT.prepareCreateUserCredentialPayload(UserCredentialTypes.Challenge)(actionPayload)
+
+      // then we should have a correctly formatted payload
+      expect(result).toEqual({
+        type: UserCredentialTypes.Challenge,
+        credentialItemId: 'CHALLENGE ID',
+        startTime: '2020-09-09T22:00:00.000Z',
+        endTime: '2020-10-09T22:00:00.000Z',
+        requestVerification: false,
+      })
+    })
+  })
+  describe('setFormValues', () => {
+    it('should extract the data from a typical response payload', () => {
+      // given ...
+      const state = {
+        ids: 'Normalised Ids array',
+        entities: 'Normalised Entities Object',
+        formValues: {},
+      }
+
+      const formValues = { value: 'NEW FORM OBJECT' }
+
+      // when ... we setFormValues
+      // @ts-ignore
+      const result = SUT.setFormValues(state, formValues)
+
+      // then ...
+      expect(result).toEqual({
+        ids: 'Normalised Ids array',
+        entities: 'Normalised Entities Object',
+        formValues: { value: 'NEW FORM OBJECT' },
       })
     })
   })

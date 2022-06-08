@@ -1,9 +1,10 @@
-import { StackNavigationProp } from '@react-navigation/stack'
-import { ZIcon } from 'assets/images'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from 'modules/HomeNavigation/HomeNavigation.types'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
-import { Colors } from 'styles'
+
+import { ZIcon } from '~/assets/images'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { Colors } from '~/styles'
 
 import ProfilePhoto from '../../components/ProfilePhoto'
 import Text, { Bold } from '../../components/Typography'
@@ -11,7 +12,7 @@ import { PROFILE_IMAGE_BORDER_WIDTH, PROFILE_IMAGE_RADIUS, PROFILE_IMAGE_SIZE } 
 import styles from './HomeHeader.styles'
 
 type Props = {
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
   profileImageUrl: string | null
   profileProgressPercentage?: number
   zltoBalance?: number

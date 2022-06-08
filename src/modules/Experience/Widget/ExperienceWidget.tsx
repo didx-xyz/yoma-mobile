@@ -1,33 +1,34 @@
-import { StackNavigationProp } from '@react-navigation/stack'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import CvWidget, { CvWidgetCredential, CvWidgetList } from '../../../components/CvWidget'
-import { Colors } from '../../../styles'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
-import { NormalisedUserJobs } from '../../UserJobs/UserJobs.types'
+import CvWidget, { CvWidgetList } from '~/components/CvWidget'
+import CvWidgetCredential, { types as CvWidgetCredentialTypes } from '~/components/CvWidgetCredential'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { types as MyCvTypes } from '~/modules/MyCv'
+import { Colors } from '~/styles'
 
 interface Props {
-  userJobs: NormalisedUserJobs
-  navigation: StackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  userJobs: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
+  count: number
+  navigation: MyCvTypes.MyCvNavigation
 }
-const ExperienceWidget = ({ userJobs, navigation }: Props) => {
+const ExperienceWidget = ({ userJobs, count, navigation }: Props) => {
   const { t } = useTranslation()
+
   return (
     <CvWidget
-      count={userJobs.ids.length}
+      count={count}
       badgeColor={Colors.SecondaryPurple}
       title={t('Experience')}
-      fallback={t('Where do you currently work?')}
-      onEdit={() => {
-        navigation.navigate(HomeNavigationRoutes.Experience)
+      noDataMessage={t('Where do you currently work?')}
+      onActionPress={() => {
+        navigation.navigate(HomeNavigationRoutes.ExperienceForm)
       }}
     >
       <CvWidgetList
         data={userJobs}
-        onViewAll={() => {
-          navigation.navigate(HomeNavigationRoutes.Experience)
-        }}
+        viewRoute={HomeNavigationRoutes.Experience}
+        navigation={navigation}
         RenderItem={CvWidgetCredential}
       />
     </CvWidget>

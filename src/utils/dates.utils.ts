@@ -1,4 +1,8 @@
 import { format, formatDuration, intervalToDuration, parseISO } from 'date-fns'
+import { format as formatFp } from 'date-fns/fp'
+import { always, apply, applySpec, compose, join, pipe, prop, props, values } from 'ramda'
+
+import { DATES_DIVIDER, DATE_DURATION_DIVIDER, DATE_TPL_MON_YEAR } from '../constants/date.constants'
 
 export const formatDateString = (formatter: string) => (dateString: string) => format(new Date(dateString), formatter)
 export const formatISOWithFallback =
@@ -13,3 +17,27 @@ export const formatIntervalToDuration = (startDate: string, endDate: string) => 
 
 export const dateToISOString = (date: Date) => date.toISOString()
 export const newDate = (str: string) => new Date(str)
+
+type FormatStartEndString = (args: { startDate: string; endDate: string }) => string
+export const formatStartEndString: FormatStartEndString = pipe(
+  applySpec({
+    start: compose(formatFp(DATE_TPL_MON_YEAR), newDate, prop('startDate')),
+    datesDivider: always(DATES_DIVIDER),
+    end: compose(formatFp(DATE_TPL_MON_YEAR), newDate, prop('endDate')),
+  }),
+  props(['start', 'datesDivider', 'end']),
+  join(' '),
+)
+
+type FormatStartEndWithDurationString = (args: { startDate: string; endDate: string }) => string
+export const formatStartEndWithDurationString: FormatStartEndWithDurationString = pipe(
+  applySpec({
+    startEndString: formatStartEndString,
+    durationDivider: always(DATE_DURATION_DIVIDER),
+    period: compose(apply(formatIntervalToDuration), values),
+  }),
+  props(['startEndString', 'durationDivider', 'period']),
+  join(' '),
+)
+
+export const toJSON = (date: Date) => date.toJSON()

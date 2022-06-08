@@ -1,16 +1,17 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 
-import { Colors } from '../../../styles'
+import { Colors } from '~/styles'
+
+import Button from '../Button'
 import { ButtonVariants } from '../Button.types'
-import Button from '../index'
 import styles from './ButtonSave.styles'
 
 interface Props {
   onPress: () => void
-  isDisabled: boolean
+  isDisabled?: boolean
 }
-const ButtonSave = ({ onPress, isDisabled }: Props) => {
+const ButtonSave = ({ onPress, isDisabled = false }: Props) => {
   const { t } = useTranslation()
 
   return (

@@ -1,31 +1,39 @@
-import { DropDownTags } from 'components'
-import { Formik, FormikProps, FormikValues } from 'formik'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import { FormikProps } from 'formik'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
 
-import { MOCK_USER_SKILLS_LIST, USER_SKILLS_INITIAL_VALUES } from './MySkillsForm.constants'
+import { ButtonSave } from '~/components/Button'
+import Card from '~/components/Card'
+import Header from '~/components/Header'
+import ViewContainer from '~/components/ViewContainer'
+import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
+import SkillsSelectField from '~/modules/SkillSelectField'
+
 import styles from './MySkillsForm.styles'
+import { UserSkillsField } from './MySkillsForm.types'
 
-const MySkillsForm = () => {
+interface Props {
+  navigation: NativeStackNavigationProp<
+    HomeNavigationTypes.HomeNavigatorParamsList,
+    HomeNavigationTypes.HomeNavigationRoutes.MySkills
+  >
+  form: FormikProps<UserSkillsField>
+}
+const MySkillsForm = ({ navigation, form }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <Formik initialValues={USER_SKILLS_INITIAL_VALUES} onSubmit={() => {}}>
-      {(formikHandlers: FormikProps<FormikValues>) => (
-        <View style={styles.form}>
-          <DropDownTags
-            items={MOCK_USER_SKILLS_LIST}
-            multiple
-            searchPlaceholder={t('Search skills')}
-            label={t('Skills developed')}
-            placeholder={t('Start typing to view suggestions')}
-            name={'skillNames'}
-            handlers={formikHandlers}
-          />
-        </View>
-      )}
-    </Formik>
+    <ViewContainer style={styles.container}>
+      <Header
+        navigation={navigation}
+        headerText={t('Add skills')}
+        actionItem={<ButtonSave onPress={form.handleSubmit} />}
+      />
+      <Card>
+        <SkillsSelectField name="skills" label={t('Skills developed:')} searchPlaceholder={t('Enter skill names')} />
+      </Card>
+    </ViewContainer>
   )
 }
 

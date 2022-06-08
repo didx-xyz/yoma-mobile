@@ -1,9 +1,13 @@
-import { connect } from 'react-redux'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 import Navigation from './Navigation'
 import selector from './Navigation.selector'
 
-const mapStateToProps = selector
-const mapDispatchToProps = null
+const NavigationContainer = () => {
+  const { isAuthorised } = useSelector(selector)
 
-export default connect(mapStateToProps, mapDispatchToProps)(Navigation as any)
+  return <Navigation isAuthorised={isAuthorised} />
+}
+
+export default NavigationContainer

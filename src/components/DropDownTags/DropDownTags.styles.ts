@@ -1,7 +1,8 @@
-import { fontWeights } from 'components/Typography/fontWeights.styles'
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
-import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { Colors, utils as StyleUtils, colors } from '~/styles'
+
+import { fontWeights } from '../Typography/fontWeights.styles'
 
 const baseTextStyle = {
   ...fontWeights.medium500,
@@ -10,12 +11,15 @@ const baseTextStyle = {
 } as TextStyle
 
 const styles = {
+  container: {
+    marginVertical: 20,
+  } as ViewStyle,
   dropDown: {
     height: 30,
     paddingHorizontal: 0,
     borderWidth: 0,
     borderRadius: 0,
-    borderColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
+    borderColor: StyleUtils.applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
   dropDownView: {
     height: 180,
@@ -27,7 +31,7 @@ const styles = {
     ...baseTextStyle,
   } as TextStyle,
   searchContainer: {
-    borderBottomColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
+    borderBottomColor: StyleUtils.applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
   search: {
     ...baseTextStyle,
@@ -42,9 +46,13 @@ const styles = {
   } as ViewStyle,
   divider: {
     height: 1,
-    backgroundColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
+    backgroundColor: StyleUtils.applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
     marginTop: 10,
   } as ViewStyle,
+  pickerLabel: {
+    ...baseTextStyle,
+    color: colors[Colors.MenuGrey],
+  } as TextStyle,
   save: {
     paddingRight: 10,
   } as ViewStyle,

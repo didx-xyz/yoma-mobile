@@ -1,5 +1,6 @@
-import { rootStateFixture } from '../../../redux/redux.test.fixtures'
-import { INITIAL_STATE } from '../../UserChallenges/UserChallenges.reducer'
+import { INITIAL_STATE } from '~/modules/UserChallenges/UserChallenges.reducer'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './CompletedChallengesWidget.selector'
 
 describe('modules/CompletedChallenges/CompletedChallengesWidget/CompletedChallengesWidget.selector', () => {
@@ -10,7 +11,7 @@ describe('modules/CompletedChallenges/CompletedChallengesWidget/CompletedChallen
       // when ...
       const result = SUT.default(state)
       // then ...
-      expect(result).toEqual({ challenges: INITIAL_STATE })
+      expect(result).toEqual({ userChallenges: INITIAL_STATE, count: 0 })
     })
     it('should return the user challenges data in the expected format', () => {
       // given ...
@@ -76,7 +77,8 @@ describe('modules/CompletedChallenges/CompletedChallengesWidget/CompletedChallen
       const result = SUT.default(state)
       // then ...
       expect(result).toEqual({
-        challenges: {
+        count: 3,
+        userChallenges: {
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {

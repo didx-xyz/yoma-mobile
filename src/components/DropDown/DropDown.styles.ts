@@ -1,6 +1,7 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
-import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { Colors, colors } from '~/styles'
+import { applyAlphaToHex } from '~/styles/styles.utils'
 
 import { fontWeights } from '../Typography/fontWeights.styles'
 
@@ -11,6 +12,9 @@ const baseTextStyle = {
 } as TextStyle
 
 const styles = {
+  container: {
+    marginBottom: 16,
+  } as ViewStyle,
   dropDown: {
     height: 30,
     paddingHorizontal: 0,
@@ -19,7 +23,7 @@ const styles = {
     borderRadius: 0,
     borderColor: applyAlphaToHex(colors[Colors.MenuGrey])(0.7),
   } as ViewStyle,
-  dropDownView: {
+  dropDownContainer: {
     height: 180,
     borderWidth: 0,
     elevation: 3,

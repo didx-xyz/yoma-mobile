@@ -1,73 +1,52 @@
-import { AuthEndpoints } from '../../api/auth/auth.types'
-import { UserResponse } from '../User/User.types'
-
-export interface ApiMetaResponse {
-  success: boolean
-  code: number
-  message: string | null
-}
+import { ApiResponseHeaders } from '~/api/api.types'
 
 export interface AuthRefreshTokenResponse {
   refreshToken: string
 }
 
-export interface AuthCredentialsResponse {
+export type OAuthAdditionalParams = { [name: string]: string } | undefined
+export type OAuthScopes = string[]
+
+export interface OAuthCredentialsResponse {
+  accessToken: string
+  accessTokenExpirationDate: string
+  idToken: string
+  tokenType: string
+  scopes: OAuthScopes
+  tokenAdditionalParameters?: OAuthAdditionalParams
+  authorizeAdditionalParameters?: OAuthAdditionalParams
+}
+
+export type OAuthLoginSuccessResponse = AuthRefreshTokenResponse & OAuthCredentialsResponse
+
+export type OAuthLoginFailureResponse = string
+
+export interface OAuthUserResponseData {
+  name: string
+  family_name: string
+  given_name: string
+  sub: string
+}
+
+export interface OAuthUserResponseHeaders extends ApiResponseHeaders {
+  'cache-control': string
+  pragma: string
+}
+
+export interface OAuthUserResponse {
+  data: OAuthUserResponseData
+  status: number
+  headers: OAuthUserResponseHeaders
+}
+
+export type AuthState = {
   token: string
   expiresAt: string
-  email?: string
-  password?: string
+  idToken: string
+  tokenType: string
+  scopes: OAuthScopes
+  tokenAdditionalParameters?: OAuthAdditionalParams
+  authorizeAdditionalParameters?: OAuthAdditionalParams
 }
-
-export interface AuthLoginSuccessData extends AuthCredentialsResponse, AuthRefreshTokenResponse {
-  user: UserResponse
-}
-
-export interface AuthLoginSuccessResponse {
-  data: { data: AuthLoginSuccessData }
-  meta: ApiMetaResponse
-}
-
-export type AuthLoginFailureResponse = string
-
-export type AuthState = AuthCredentialsResponse
-
-export type AuthLoginMiddleware = {
-  client: AuthEndpoints
-}
-
-export interface AuthCredentials {
-  email: string
-  password: string
-}
-
-export interface AuthRegistration {
-  firstName: string
-  lastName: string
-  email: string
-  countryAlpha2: string
-  password: string
-  confirmPassword: string
-  privacyInd: boolean
-}
-
-export interface AuthSocialRegistrationCredentials {
-  firstName: string
-  lastName: string
-  email: string
-  provider: string
-  providerKey: string
-  token: string
-}
-export interface AuthSocialLoginCredentials {
-  provider: string
-  providerKey: string
-  token: string
-}
-
-export type AuthRegistrationSuccessResponse = {
-  meta: ApiMetaResponse
-}
-
-export type AuthRegistrationFailureResponse = string
 
 export type SecureStorageRefreshToken = string | null

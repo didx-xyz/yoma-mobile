@@ -1,4 +1,4 @@
-import { USER_JOBS_MOCK } from 'modules/UserJobs/UserJobs.test.fixtures'
+import { USER_JOBS_MOCK } from '~/modules/UserJobs/UserJobs.fixture'
 
 import * as SUT from './UserJobs.utils'
 

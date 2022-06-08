@@ -1,6 +1,7 @@
 import { StyleSheet, ViewStyle } from 'react-native'
-import { Colors, colors } from 'styles'
-import { applyAlphaToHex } from 'styles/styles.utils'
+
+import { Colors, colors } from '~/styles'
+import { applyAlphaToHex } from '~/styles/styles.utils'
 
 const styles = {
   textInput: {

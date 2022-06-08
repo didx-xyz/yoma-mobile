@@ -1,4 +1,4 @@
-import { ApiMetaResponse } from 'modules/Auth/Auth.types'
+import { types as ApiTypes } from '~/api'
 
 export type Organisation = {
   key: string
@@ -12,7 +12,7 @@ export type NormalisedOrganisations = {
 
 export type OrganisationsResponse = {
   data: { data: Organisation[] }
-  meta: ApiMetaResponse
+  meta: ApiTypes.ApiResponseMeta
 }
 
 export interface OrganisationsState extends NormalisedOrganisations {}

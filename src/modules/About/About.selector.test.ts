@@ -1,8 +1,17 @@
-import { rootStateFixture } from '../../redux/redux.test.fixtures'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './About.selector'
 
 describe('modules/About/About.selector', () => {
   describe('selector ', () => {
+    it('should handle empty user state', () => {
+      // given ...
+      const stateMock = rootStateFixture()
+      // when ... we call the selector
+      const result = SUT.default(stateMock)
+      // then ... should return result as expected
+      expect(result).toEqual({ biography: '' })
+    })
     it('should select props as expected when available in state', () => {
       // given ...
       const stateMock = rootStateFixture({
@@ -29,14 +38,6 @@ describe('modules/About/About.selector', () => {
       const result = SUT.default(stateMock)
       // then ... should return result as expected
       expect(result).toEqual({ biography: 'BIOGRAPHY' })
-    })
-    it('should handle empty user state', () => {
-      // given ...
-      const stateMock = rootStateFixture({})
-      // when ... we call the selector
-      const result = SUT.default(stateMock)
-      // then ... should return result as expected
-      expect(result).toEqual({ biography: '' })
     })
   })
 })

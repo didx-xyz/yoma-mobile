@@ -3,23 +3,26 @@ import FormData from 'form-data'
 import { concat } from 'ramda'
 import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
-import * as ReduxUtils from 'utils/redux.utils'
 
-import { middleware as ApiMiddleware, utils as ApiUtils, apiConfig } from '../api'
-import { types as ApiUsersTypes } from '../api/users'
-import { middleware as AppMiddleware } from '../modules/App'
-import { middleware as AuthMiddleware } from '../modules/Auth'
-import { middleware as ErrorMiddleware } from '../modules/Error'
-import { middleware as JobsMiddleware } from '../modules/Jobs'
-import { middleware as OrganisationsMiddleware } from '../modules/Organisations'
-import ssoAuth from '../modules/SSOAuth'
-import { middleware as SkillsMiddleware } from '../modules/Skills'
-import { middleware as UserMiddleware, utils as UserUtils } from '../modules/User'
-import { middleware as UserChallengesMiddleware } from '../modules/UserChallenges'
-import { middleware as UserJobsMiddleware } from '../modules/UserJobs'
-import { middleware as UserQualificationsMiddleware } from '../modules/UserQualifications'
-import { middleware as UserSkillsMiddleware } from '../modules/UserSkills'
-import { showSimpleMessage } from '../utils/error'
+import { middleware as ApiMiddleware, utils as ApiUtils, apiConfig } from '~/api'
+import { types as ApiUsersTypes } from '~/api/users'
+import { middleware as AppMiddleware } from '~/modules/App'
+import { middleware as AuthMiddleware } from '~/modules/Auth'
+import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
+import { middleware as ErrorMiddleware } from '~/modules/Error'
+import { middleware as JobsMiddleware } from '~/modules/Jobs'
+import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
+import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
+import { middleware as SkillsMiddleware } from '~/modules/Skills'
+import { middleware as UserMiddleware, utils as UserUtils } from '~/modules/User'
+import { middleware as UserChallengesMiddleware } from '~/modules/UserChallenges'
+import { middleware as UserJobsMiddleware } from '~/modules/UserJobs'
+import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualifications'
+import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
+import { showSimpleMessage } from '~/utils/error'
+
+import * as Navigation from '../modules/Navigation/Navigation.utils'
+import * as ReduxUtils from './redux.utils'
 
 const createDebugger = require('redux-flipper').default
 
@@ -33,25 +36,20 @@ const commonMiddleware: Middleware[] = [
 
 const featureModuleMiddleware = [
   AuthMiddleware.authorizeFlow,
-  AuthMiddleware.authorizeSuccessFlow({ notification: showSimpleMessage }),
+  AuthMiddleware.authorizeSuccessFlow,
   AuthMiddleware.authorizeWithRefreshTokenFailureFlow,
   AuthMiddleware.authorizeWithRefreshTokenFlow,
-  AuthMiddleware.authSocialLoginFailureFlow({ notification: showSimpleMessage }),
-  AuthMiddleware.authSocialLoginFlow({ ssoAuth, notification: showSimpleMessage }),
-  AuthMiddleware.authSocialLoginSuccessFlow,
-  AuthMiddleware.authSocialRegistrationFailureFlow({ notification: showSimpleMessage }),
-  AuthMiddleware.authSocialRegistrationFlow({ ssoAuth }),
-  AuthMiddleware.authSocialRegistrationSuccessFlow,
+  AuthMiddleware.fetchUserFromOAuthFlow,
   AuthMiddleware.deleteSecureRefreshTokenFlow(SecureStore.deleteItemAsync),
   AuthMiddleware.getSecureRefreshTokenFlow(SecureStore.getItemAsync),
   AuthMiddleware.loginFailureFlow({ notification: showSimpleMessage }),
   AuthMiddleware.loginFlow,
   AuthMiddleware.logoutFlow,
-  AuthMiddleware.registrationFailureFlow({ notification: showSimpleMessage }),
-  AuthMiddleware.registrationFlow,
-  AuthMiddleware.registrationSuccessFlow({ notification: showSimpleMessage }),
   AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
   AuthMiddleware.unauthorizedFlow,
+  ChallengesMiddleware.fetchChallengesFlow,
+  ChallengesMiddleware.normaliseChallengesFlow({ normalise: ReduxUtils.normalise }),
+  ChallengesMiddleware.setChallengesFlow,
   ErrorMiddleware.categorizeErrorsFlow,
   JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
   JobsMiddleware.createJobFlow,
@@ -59,18 +57,31 @@ const featureModuleMiddleware = [
   OrganisationsMiddleware.fetchOrganisationsFailureFlow({ notification: showSimpleMessage }),
   OrganisationsMiddleware.fetchOrganisationsFlow,
   OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
-  OrganisationsMiddleware.normaliseOrganisationsFlow(ReduxUtils.normalise),
+  OrganisationsMiddleware.normaliseOrganisationsFlow({ normalise: ReduxUtils.normalise }),
   OrganisationsMiddleware.setOrganisationsFlow,
+  QualificationsMiddleware.createQualificationFlow,
+  QualificationsMiddleware.createQualificationSuccessFlow,
+  QualificationsMiddleware.createQualificationFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFlow,
   SkillsMiddleware.fetchSkillsSuccessFlow,
-  SkillsMiddleware.normaliseSkillsFlow(ReduxUtils.normalise),
+  SkillsMiddleware.normaliseSkillsFlow({ normalise: ReduxUtils.normalise }),
   SkillsMiddleware.setSkillsFlow,
+  UserChallengesMiddleware.setUserChallengeFormValuesFlow,
+  UserChallengesMiddleware.createUserChallengeFlow,
+  UserChallengesMiddleware.createUserChallengeSuccessFlow({
+    notification: showSimpleMessage,
+    navigate: Navigation.navigate,
+  }),
+  UserChallengesMiddleware.createUserChallengeFailureFlow({ notification: showSimpleMessage }),
+  UserChallengesMiddleware.createUserChallengeCertificateFlow,
+  UserChallengesMiddleware.createUserChallengeCertificateSuccessFlow({ normalise: ReduxUtils.normalise }),
+  UserChallengesMiddleware.createUserChallengeCertificateFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
-    ReduxUtils.extractDataFromPayload,
+    ReduxUtils.extractDataFromResponseAction,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),
   ),
-  UserChallengesMiddleware.normaliseUserChallengesFlow(ReduxUtils.normalise),
+  UserChallengesMiddleware.normaliseUserChallengesFlow({ normalise: ReduxUtils.normalise }),
   UserChallengesMiddleware.setUserChallengesFlow,
   UserJobsMiddleware.createUserJobFailureFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.createUserJobFlow,
@@ -79,15 +90,18 @@ const featureModuleMiddleware = [
   UserJobsMiddleware.fetchUserJobByIdFlow,
   UserJobsMiddleware.fetchUserJobByIdSuccessFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.getUserJobsFromCredentialsFlow(
-    ReduxUtils.extractDataFromPayload,
+    ReduxUtils.extractDataFromResponseAction,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Job),
   ),
-  UserJobsMiddleware.normaliseUserJobsFlow(ReduxUtils.normalise),
+  UserJobsMiddleware.normaliseUserJobsFlow({ normalise: ReduxUtils.normalise }),
   UserJobsMiddleware.setUserJobsFlow,
   UserJobsMiddleware.setUserJobsFormValuesFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
+  UserMiddleware.fetchUserDetailsFlow,
+  UserMiddleware.fetchUserDetailsSuccessFlow,
+  UserMiddleware.hydrateUserFlow,
   UserMiddleware.updateUserFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.updateUserFlow,
   UserMiddleware.updateUserPhotoFailureFlow({ notification: showSimpleMessage }),
@@ -100,14 +114,27 @@ const featureModuleMiddleware = [
   }),
   UserMiddleware.uploadUserPhotoSuccessFlow,
   UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
-    ReduxUtils.extractDataFromPayload,
+    ReduxUtils.extractDataFromResponseAction,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Qualification),
   ),
-  UserQualificationsMiddleware.normaliseUserQualificationsFlow(ReduxUtils.normalise),
+  UserQualificationsMiddleware.normaliseUserQualificationsFlow({ normalise: ReduxUtils.normalise }),
   UserQualificationsMiddleware.setUserQualificationsFlow,
+  UserQualificationsMiddleware.setUserQualificationFormValuesFlow,
+  UserQualificationsMiddleware.createUserQualificationFlow,
+  UserQualificationsMiddleware.createUserQualificationSuccessFlow({
+    normalise: ReduxUtils.normalise,
+    notification: showSimpleMessage,
+  }),
+  UserQualificationsMiddleware.createUserQualificationFailureFlow({ notification: showSimpleMessage }),
+  UserQualificationsMiddleware.createUserQualificationCertificateFlow,
+  UserQualificationsMiddleware.createUserQualificationCertificateSuccessFlow({ normalise: ReduxUtils.normalise }),
+  UserQualificationsMiddleware.createUserQualificationCertificateFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFlow,
   UserSkillsMiddleware.fetchUserSkillsSuccessFlow,
+  UserSkillsMiddleware.addUserSkillsFlow,
+  UserSkillsMiddleware.addUserSkillsSuccessFlow({ notification: showSimpleMessage }),
+  UserSkillsMiddleware.addUserSkillsFailureFlow({ notification: showSimpleMessage }),
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)

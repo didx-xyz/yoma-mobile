@@ -1,26 +1,25 @@
-import { StackNavigationProp } from '@react-navigation/stack'
-import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from 'assets/images'
-import { ViewContainer } from 'components'
-import { AuthNavigationRoutes, AuthNavigatorParamsList } from 'modules/AuthNavigation/AuthNavigation.types'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
-import { Colors } from 'styles'
 
-import Background from '../../components/Background/Background'
-import Button, { ButtonSizes, ButtonVariants } from '../../components/Button'
-import Text, { HeaderLevels, TextAlign } from '../../components/Typography'
+import { PurpleSemiCircle, RedSemiCircle, WhiteLogo } from '~/assets/images'
+import Background from '~/components/Background/Background'
+import Button, { ButtonSizes } from '~/components/Button'
+import Text, { HeaderLevels, TextAlign } from '~/components/Typography'
+import ViewContainer from '~/components/ViewContainer'
+import { Colors } from '~/styles'
+
 import styles from './Landing.styles'
 
 interface Props {
-  navigation: StackNavigationProp<AuthNavigatorParamsList, AuthNavigationRoutes.Landing>
+  onLogin: () => void
 }
 
-const Landing = ({ navigation }: Props) => {
+const Landing = ({ onLogin }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <ViewContainer>
+    <ViewContainer backgroundColor={Colors.PrimaryYellow}>
       <Background>
         <RedSemiCircle style={styles.redSemiCircle} />
         <View style={styles.purpleSemiCircleContainer}>
@@ -45,16 +44,11 @@ const Landing = ({ navigation }: Props) => {
         <View style={styles.actionsContainer}>
           <Button
             size={ButtonSizes.Default}
-            label={t('register')}
-            onPress={() => navigation.navigate(AuthNavigationRoutes.Register)}
+            label={t('Login')}
+            onPress={onLogin}
             style={styles.registerButton}
-          />
-          <Button
-            variant={ButtonVariants.Clear}
-            color={Colors.White}
-            label={t('login')}
-            onPress={() => navigation.navigate(AuthNavigationRoutes.Login)}
-            style={styles.loginButton}
+            loadingLabel="Logging you in..."
+            isLoadingEnabled
           />
         </View>
       </View>

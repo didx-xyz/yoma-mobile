@@ -1,14 +1,45 @@
-import { UserCredentialTypes } from 'api/users/users.types'
-import { ApiMetaResponse } from 'modules/Auth/Auth.types'
+import { DocumentPickerResponse } from 'react-native-document-picker'
+
+import { types as ApiTypes } from '~/api'
+import { UserCredentialTypes } from '~/api/users/users.types'
 
 import { UserChallenge } from '../UserChallenges/UserChallenges.types'
 import { UserJobCredential } from '../UserJobs/UserJobs.types'
 
+export interface UserDetails {
+  id: string
+  firstName: string
+  lastName: string
+  phoneNumber: null | string
+  biography: null | string
+  countryAlpha2: string
+  email: string
+  zltoWalletId: null | string
+  zltoBalance: number
+  covidChallengeCertificateURL: null | string
+  tideChallengeCertificateURL: null | string
+  photoURL: null | string
+  organisationId: null | string
+  organisation: null | string
+  organisationVerified: false | string
+  createdAt: string
+  lastLogin: null | string
+  age: null | string
+  gender: string
+}
+export interface UserDetailsResponse {
+  data: {
+    data: UserDetails
+    meta: ApiTypes.ApiResponseMeta
+    status: ApiTypes.ApiResponseStatus
+  }
+  headers: ApiTypes.ApiResponseHeaders
+}
+
 export interface UpdateUserResponse {
   data: UserResponse
-  meta: ApiMetaResponse
+  meta: ApiTypes.ApiResponseMeta
 }
-export type UpdateUserPhotoPayload = any
 export type UpdateUserFailureResponse = string
 
 export interface UserPayload {
@@ -18,21 +49,12 @@ export interface UserPayload {
   countryAlpha2?: string
   biography?: string
 }
-export interface PhotoUploadFormConfig {
-  formName: string
-  formInstance: any
-}
-
-export interface PhotoUploadFormData {
-  uri: string
-  name: string | 'default.jpg'
-  type: string
-}
 
 export type UploadUserPhotoFlowDependencies = { imagePicker: any; createPayload: any }
 
 export interface UserResponse {
   id: string
+  name: string
   firstName: string
   lastName: string
   phoneNumber: string | null
@@ -55,10 +77,10 @@ export interface UserResponse {
 export interface UserCredentialMeta {
   id: string
   verifiedAt: string | null
-  approved: boolean
+  approved: boolean | null
   approvalMessage: string | null
   startDate: string
-  endDate: string | null
+  endDate: string
   createdAt: string
   fileId: string | null
   fileURL: string | null
@@ -78,6 +100,7 @@ export interface UserCredentialFormValues {
   startTime: string
   endTime: string
   requestVerification: boolean
+  certificate?: DocumentPickerResponse
 }
 
-export type UserCredentials = UserChallenge | UserJobCredential[]
+export type UserCredentials = UserChallenge[] | UserJobCredential[]
