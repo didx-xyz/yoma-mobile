@@ -1,4 +1,4 @@
-[![Build status](https://build.appcenter.ms/v0.1/apps/6943e141-87aa-40d0-85d6-3226f2871d8f/branches/develop/badge)](https://appcenter.ms)
+[![Build status](https://build.appcenter.ms/v0.1/apps/4db1e1a9-cbf3-4f9f-80ca-8159a1fa1883/branches/develop/badge)](https://appcenter.ms)
 # Yoma Mobile App
 
 ## Available commands
