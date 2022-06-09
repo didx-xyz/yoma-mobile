@@ -1,4 +1,5 @@
-[![Build status](https://build.appcenter.ms/v0.1/apps/4db1e1a9-cbf3-4f9f-80ca-8159a1fa1883/branches/develop/badge)](https://appcenter.ms)
+[![CircleCI](https://dl.circleci.com/insights-snapshot/gh/didx-xyz/yoma-mobile/develop/deploy-android-alpha/badge.svg?window=30d)](https://app.circleci.com/insights/github/didx-xyz/yoma-mobile/workflows/deploy-android-alpha/overview?branch=develop&reporting-window=last-30-days&insights-snapshot=true)
+[![CircleCI](https://circleci.com/gh/didx-xyz/yoma-mobile/tree/develop.svg?style=svg)](https://circleci.com/gh/didx-xyz/yoma-mobile/tree/develop)
 # Yoma Mobile App
 
 ## Available commands
