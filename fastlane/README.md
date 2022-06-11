@@ -16,24 +16,19 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## Android
-### android clean
+### android deploy_internal
 ```
-fastlane android clean
+fastlane android deploy_internal
 ```
-Android beta deploy
-### android build
+Deploy a new Internal build to Google Play Store
+### android production_deploy
 ```
-fastlane android build
+fastlane android production_deploy
 ```
-
-### android distribute
-```
-fastlane android distribute
-```
-
+Deploy a new Production build to Google Play Store
 
 ----
 
-This README.md is auto-generated and will be re-generated every time [fastlane](https://fastlane.tools) is run.
+This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
 More information about fastlane can be found on [fastlane.tools](https://fastlane.tools).
 The documentation of fastlane can be found on [docs.fastlane.tools](https://docs.fastlane.tools).

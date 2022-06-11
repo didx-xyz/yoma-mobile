@@ -1,35 +1,68 @@
 default_platform(:android)
 
 platform :android do
-  desc "Android alpha deploy"
+  desc "Android deploy"
 
-  lane :clean do
-    gradle(task: 'clean', project_dir: './android')
-  end
-
-  lane :build do
-    gradle(
-        task: "assemble",
-        build_type: "Release",
-        project_dir: './android',
-        print_command: false,
-        flags: "--no-daemon --max-workers 2"
-      )
-  end
-
-  lane :distribute do
-    clean
-    build
-    firebase_app_distribution(
-      app: '1:1007644634835:android:8825d8828e786999602e26',
-      groups: 'yoma-testers',
-      firebase_cli_token: ENV['FIREBASE_TOKEN'],
-      release_notes_file: './release-notes.txt',
-      android_artifact_type:'APK',
-      debug: true,
+  desc "Android Build"
+  private_lane :build do |options|
+    versions = google_play_track_version_codes(
+      track: options[:track],
+      json_key_data: ENV["PLAYSTORE_CREDENTIALS"]
     )
+    current_version_code = versions[0].to_i
+    version_code = current_version_code + 1
+    version_name = "#{options[:build_name]}-v#{version_code}"
+    properties = {
+      "versionCode" => version_code,
+      "versionName" => version_name,
+    }
+
+    gradle(
+      task: "clean bundle",
+      build_type: "Release",
+      project_dir: './android',
+      properties: properties,
+      flags: "--no-daemon --max-workers 2"
+    )
+
+    version_code
+  end
+
+  desc "Deploy to Google Play"
+  private_lane :deploy do |options|
+    version = build(build_name: options[:build_name], track: options[:track])
+
+    upload_to_play_store(
+      track: options[:track],
+      json_key_data: ENV["PLAYSTORE_CREDENTIALS"],
+      release_status: 'draft',
+      skip_upload_apk: true,
+    )
+
+    slack(message: "New #{options[:build_name]} build(#{version}) available on google play")
+  end
+
+  desc "Deploy a new Internal build to Google Play Store"
+  lane :deploy_internal do
+    deploy(build_name: "Yoma Internal Testers", track: "internal")
+  end
+
+  desc "Deploy a new Production build to Google Play Store"
+  lane :production_deploy do
+    deploy(build_name: "Yoma", track: "production")
+  end
+
+  error do |lane, exception|
     slack(
-      message: "New test build has been deployed to Firebase App Distribution",
+      message: "An error has occurred in #{lane}",
+      success: false,
+      attachment_properties: {
+        fields: [{
+                   title: "Details",
+                   value: exception.to_s,
+                 }]
+      },
+      payload: { "Output" => exception.error_info.to_s }
     )
   end
 end

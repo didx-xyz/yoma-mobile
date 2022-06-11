@@ -1,0 +1,15 @@
+Ver 0.0.1
+Latest:
+- add filtered skills to state
+
+10 Most Recent:
+- updating UserChallenges widget component
+- adding selector for MyCV title bar
+- add organisations data to state
+- add skills data to state
+- merging MyChallenges into UserChallenges
+- adding generic list component for CvCard/MyCV
+- added jobs and user jobs to state
+- adding User Challenges credentials to state
+- adding helper utils for handling MyCV data
+- docs upgrade, no new features added.

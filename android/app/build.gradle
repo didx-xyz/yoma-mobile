@@ -162,14 +162,14 @@ android {
         }
     }
     signingConfigs {
-      release {
-        if (System.getenv("YOMA_UPLOAD_STORE_FILE") != null) {
-          storeFile file(System.getenv("YOMA_UPLOAD_STORE_FILE"))
-          storePassword System.getenv("YOMA_UPLOAD_STORE_PASSWORD")
-          keyAlias System.getenv("YOMA_UPLOAD_KEY_ALIAS")
-          keyPassword System.getenv("YOMA_UPLOAD_KEY_PASSWORD")
+        release {
+            if (System.getenv("PLAYSTORE_KEYSTORE_FILE") != null) {
+              storeFile file(System.getenv("PLAYSTORE_KEYSTORE_FILE"))
+              storePassword System.getenv("PLAYSTORE_KEYSTORE_PASSWORD")
+              keyAlias System.getenv("PLAYSTORE_KEY_ALIAS")
+              keyPassword System.getenv("PLAYSTORE_KEY_PASSWORD")
+            }
         }
-      }
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'

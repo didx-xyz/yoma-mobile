@@ -1,10 +1,11 @@
 Ver 0.0.1
 Latest:
-- Adding Sentry
+- getting app into playstore with changelog
 
 Last 10 deployment release notes:
+- Adding Sentry
 - bug fix in Credential widget
--  fixing android deploying to FAD
+- fixing android deploying to FAD
 - feat(MySkills): adding skill count to each of the user's skills
 - Add/Edit Button
 - feat(Utils: Strings): adding a trunc util
@@ -12,6 +13,3 @@ Last 10 deployment release notes:
 - feat(About): adding About view, along with refactors to widget and form
 - refactor(Cv modules): refactoring and updating the Modules
 - feat(MyCv): widget navigation
-- feat(Marketplace): creating Coming soon page
-- feat(Challenges): adding Challenges Coming Soon page
-- feat(Courses): coming soon

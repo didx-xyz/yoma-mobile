@@ -73,24 +73,22 @@ commands:
       - run: gem update bundler
       - ruby/install-deps:
           key: gems-v1-{{ arch }}
-  install-firebase-cli:
-    description: 'Install the FireBase CLI'
-    steps:
-      - run: sudo curl -sL firebase.tools | bash
+
   create_keystore:
-    description: 'Create Keystore Properties'
+    description: 'Create Keystore for PlayStore'
     steps:
       - run:
-          name: Create keystore properties
+          name: Create the keystore file for Google PlayStore from env variable
           command: npm run create:keystore
-  deploy-android-alpha:
-    description: 'Deploy the Android app to Firebase App Distribution'
+
+  deploy-android-internal:
+    description: 'Deploy the Android app to Google PlayStore on the Internal track'
     steps:
       - run:
-          name: 'Deploy the Android app to Firebase App Distribution'
+          name: 'Deploy the Android app to Google PlayStore on the Internal testing track'
           working_directory: ~/project
           resource_class: large
-          command: bundle exec fastlane android distribute
+          command: bundle exec fastlane android deploy_internal
 
 # --------------------------------
 # common : jobs
@@ -108,7 +106,7 @@ jobs:
       - test
       - bundle
 
-  deploy-android-alpha:
+  deploy-android-internal:
     working_directory: ~/project
     executor: android/android
     steps:
@@ -117,9 +115,7 @@ jobs:
       - setup-ruby
       - env-staging
       - create_keystore
-      - install-firebase-cli
-      - deploy-android-alpha
-
+      - deploy-android-internal
 # --------------------------------
 # common : workflows
 # --------------------------------
@@ -132,16 +128,18 @@ workflows:
           filters:
             branches:
               ignore:
+                - YOMA-474_setup_app_for_alpha_deployment_to_playstore
                 - develop
                 - main
-  deploy-android-alpha:
+  deploy-android-internal:
     jobs:
       - pull-request:
           filters:
             branches:
               only:
+                - YOMA-474_setup_app_for_alpha_deployment_to_playstore
                 - develop
                 - main
-      - deploy-android-alpha:
+      - deploy-android-internal:
           requires:
             - pull-request
