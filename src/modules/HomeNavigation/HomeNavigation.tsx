@@ -4,20 +4,21 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ChallengesIcon, CoursesIcon, DigitalCvIcon, MarketplaceIcon } from '~/assets/images'
+import About, { AboutForm } from '~/modules/About'
+import Challenges from '~/modules/Challenges'
+import CompletedChallenges, { CompletedChallengesForm } from '~/modules/CompletedChallenges'
+import CompletedCourses, { CompletedCoursesForm } from '~/modules/CompletedCourses'
+import Courses from '~/modules/Courses'
+import Education, { EducationForm } from '~/modules/Education'
+import Experience, { ExperienceForm } from '~/modules/Experience'
+import Marketplace from '~/modules/Marketplace'
+import MyCv from '~/modules/MyCv'
+import MySkills, { MySkillsForm } from '~/modules/MySkills'
+import Profile from '~/modules/Profile'
 import { Colors, FontFamily, colors } from '~/styles'
 import fontStyles from '~/styles/font.styles'
 import { applyAlphaToHex } from '~/styles/styles.utils'
 
-import About, { AboutForm } from '../About'
-import Challenges from '../Challenges'
-import CompletedChallenges, { CompletedChallengesForm } from '../CompletedChallenges'
-import Courses from '../Courses'
-import Education, { EducationForm } from '../Education'
-import Experience, { ExperienceForm } from '../Experience'
-import Marketplace from '../Marketplace'
-import MyCv from '../MyCv'
-import MySkills, { MySkillsForm } from '../MySkills'
-import Profile from '../Profile'
 import { HomeNavigationRoutes, HomeTabRoutes } from './HomeNavigation.types'
 
 const Stack = createNativeStackNavigator()
@@ -91,6 +92,8 @@ const HomeNavigation = () => (
     <Stack.Screen name={HomeNavigationRoutes.MySkillsForm} component={MySkillsForm} />
     <Stack.Screen name={HomeNavigationRoutes.CompletedChallenges} component={CompletedChallenges} />
     <Stack.Screen name={HomeNavigationRoutes.CompletedChallengesForm} component={CompletedChallengesForm} />
+    <Stack.Screen name={HomeNavigationRoutes.CompletedCourses} component={CompletedCourses} />
+    <Stack.Screen name={HomeNavigationRoutes.CompletedCoursesForm} component={CompletedCoursesForm} />
   </Stack.Navigator>
 )
 

@@ -4,14 +4,15 @@ import { ScrollView } from 'react-native'
 
 import FirstTimeCard from '~/components/FirstTimeCard'
 import ViewContainer from '~/components/ViewContainer'
+import { AboutWidget } from '~/modules/About'
+import { CompletedChallengesWidget } from '~/modules/CompletedChallenges'
+import { CompletedCoursesWidget } from '~/modules/CompletedCourses'
+import { EducationWidget } from '~/modules/Education'
+import { ExperienceWidget } from '~/modules/Experience'
+import HomeHeader from '~/modules/HomeHeader'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { MySkillsWidget } from '~/modules/MySkills'
 
-import { AboutWidget } from '../About'
-import { CompletedChallengesWidget } from '../CompletedChallenges'
-import { EducationWidget } from '../Education'
-import { ExperienceWidget } from '../Experience'
-import HomeHeader from '../HomeHeader'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import { MySkillsWidget } from '../MySkills'
 import styles from './MyCv.styles'
 
 interface Props {
@@ -27,6 +28,7 @@ const MyCv = ({ navigation }: Props) => (
       <ExperienceWidget navigation={navigation} />
       <EducationWidget navigation={navigation} />
       <MySkillsWidget navigation={navigation} />
+      <CompletedCoursesWidget navigation={navigation} />
       <CompletedChallengesWidget navigation={navigation} />
     </ScrollView>
   </ViewContainer>
