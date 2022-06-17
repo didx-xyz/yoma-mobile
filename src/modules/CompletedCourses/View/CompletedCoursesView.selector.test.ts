@@ -3,7 +3,7 @@ import { rootStateFixture } from '~/redux/redux.fixture'
 
 import * as SUT from './CompletedCoursesView.selector'
 
-describe('modules/CompletedCourses/CompletedCoursesView/CompletedCoursesView.selector', () => {
+describe('modules/UserQualifications/CompletedCoursesView/CompletedCoursesView.selector', () => {
   describe('default selector', () => {
     it('should handle an empty state', () => {
       const stateMock = rootStateFixture()

@@ -3,7 +3,7 @@ import { rootStateFixture } from '~/redux/redux.fixture'
 
 import * as SUT from './CompletedCoursesWidget.selector'
 
-describe('modules/CompletedCourses/CompletedCoursesWidget/CompletedCoursesWidget.selector', () => {
+describe('modules/UserQualifications/CompletedCoursesWidget/CompletedCoursesWidget.selector', () => {
   describe('default', function () {
     it('should correctly handle an empty state', () => {
       // given ...

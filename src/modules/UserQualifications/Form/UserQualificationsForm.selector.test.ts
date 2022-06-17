@@ -1,8 +1,8 @@
 import { rootStateFixture } from '~/redux/redux.fixture'
 
-import SUT from './CompletedCoursesForm.selector'
+import SUT from './UserQualificationsForm.selector'
 
-describe('modules/UserQualifications/CompletedCoursesForm/CompletedCoursesForm.selector', () => {
+describe('modules/UserQualifications/UserQualificationsForm/UserQualificationsForm.selector', () => {
   describe('default', () => {
     it('should return state props required by EducationForm with an empty state', () => {
       const state = rootStateFixture()
