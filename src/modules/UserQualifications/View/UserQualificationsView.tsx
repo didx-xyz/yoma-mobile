@@ -3,13 +3,21 @@ import React from 'react'
 
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewCredential, { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
-import { HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
 
 interface Props {
   title: string
   noDataMessage: string
   onAdd: () => void
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList>
+  navigation:
+    | NativeStackNavigationProp<
+        HomeNavigationTypes.HomeNavigatorParamsList,
+        HomeNavigationTypes.HomeNavigationRoutes.Education
+      >
+    | NativeStackNavigationProp<
+        HomeNavigationTypes.HomeNavigatorParamsList,
+        HomeNavigationTypes.HomeNavigationRoutes.CompletedCourses
+      >
   userQualifications: CvViewCredentialTypes.CvViewCredentialsData
 }
 const UserQualificationsView = ({ title, noDataMessage, onAdd, navigation, userQualifications }: Props) => (

@@ -24,10 +24,15 @@ import { Colors } from '~/styles'
 import styles from './UserQualificationsForm.styles'
 
 interface Props {
-  navigation: NativeStackNavigationProp<
-    HomeNavigationTypes.HomeNavigatorParamsList,
-    HomeNavigationTypes.HomeNavigationRoutes.Education
-  >
+  navigation:
+    | NativeStackNavigationProp<
+        HomeNavigationTypes.HomeNavigatorParamsList,
+        HomeNavigationTypes.HomeNavigationRoutes.Education
+      >
+    | NativeStackNavigationProp<
+        HomeNavigationTypes.HomeNavigatorParamsList,
+        HomeNavigationTypes.HomeNavigationRoutes.CompletedCourses
+      >
   organisationsDropDown: DropDownTypes.DropDownItem[]
   form: FormikProps<any>
 }
