@@ -1,27 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { applySpec, map, path, pathOr, pick, pipe, propOr, slice } from 'ramda'
 
-import { NormalisedCvWidgetCredentialItems } from '~/components/CvWidgetCredential/CvWidgetCredential.types'
-import { selectUserQualificationCredentials } from '~/modules/UserQualifications/UserQualifications.selector'
-import { NormalisedUserQualifications } from '~/modules/UserQualifications/UserQualifications.types'
+import {
+  selectUserQualificationCredentialsType,
+  selectUserQualificationCredentialsWidget,
+} from '~/modules/UserQualifications/UserQualifications.selector'
+import { UserQualificationsWidgetSelector } from '~/modules/UserQualifications/UserQualifications.types'
 
-export default createSelector<any, { userQualifications: NormalisedCvWidgetCredentialItems; count: number }>(
-  selectUserQualificationCredentials,
-  (userQualifications: NormalisedUserQualifications) => {
-    const count = userQualifications.ids.length
-    const ids = slice(0, 2, userQualifications.ids)
-    const entities = pipe(
-      pick(ids),
-      map(
-        applySpec({
-          name: pathOr('', ['qualification', 'title']),
-          startDate: propOr('', 'startDate'),
-          organisationLogoURL: path(['qualification', 'organisationLogoURL']),
-          isValidated: propOr(false, 'approved'),
-        }),
-      ),
-    )(userQualifications.entities)
+const selectEducationCredentials = selectUserQualificationCredentialsType(false)
 
-    return { userQualifications: { ids, entities }, count }
-  },
+export default createSelector<any, UserQualificationsWidgetSelector>(
+  selectUserQualificationCredentialsWidget(selectEducationCredentials),
+  ({ userQualifications, count }: UserQualificationsWidgetSelector) => ({ userQualifications, count }),
 )

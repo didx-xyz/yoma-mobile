@@ -2,6 +2,7 @@ import { DocumentPickerResponse } from 'react-native-document-picker'
 
 import { types as ApiTypes } from '~/api'
 import { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
+import { NormalisedCvWidgetCredentialItems } from '~/components/CvWidgetCredential/CvWidgetCredential.types'
 import { NormalisedData } from '~/redux/redux.types'
 import * as Types from '~/types/general.types'
 
@@ -42,4 +43,9 @@ export interface UserQualificationResponse {
 export interface CreateUserQualificationSuccessResponse {
   data: UserQualificationResponse
   meta: ApiTypes.ApiResponseMeta
+}
+
+export interface UserQualificationsWidgetSelector {
+  userQualifications: NormalisedCvWidgetCredentialItems
+  count: number
 }
