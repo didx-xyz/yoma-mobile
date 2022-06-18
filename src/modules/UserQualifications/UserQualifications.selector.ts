@@ -1,25 +1,22 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { applySpec, complement, equals, filter, map, not, path, pathOr, pick, pipe, prop, propOr, when } from 'ramda'
+import { applySpec, filter, map, path, pathOr, pick, pipe, prop, propOr, values } from 'ramda'
 
 import { RootState } from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
 
 import { NormalisedUserQualifications, UserQualificationsViewCredentials } from './UserQualifications.types'
-import { getUserQualificationsMetadata } from './UserQualifications.utils'
+import { filterEducationOrCourse, getUserQualificationsMetadata } from './UserQualifications.utils'
 
 export const selectUserQualifications = (state: RootState) => state.userQualifications
 export const selectUserQualificationCredentials = createSelector<any, NormalisedUserQualifications>(
   selectUserQualifications,
   pick(['ids', 'entities']),
 )
-export const selectUserQualificationCredentialsType = (isEducation: boolean) =>
+
+export const selectUserQualificationCredentialsType = (isCourse: boolean) =>
   createSelector(
     selectUserQualifications,
-    pipe(
-      prop('entities'),
-      filter(pipe(pathOr(false, ['qualification', 'createdByAdmin']), when(complement(equals(isEducation)), not))),
-      ReduxUtils.normalise,
-    ),
+    pipe(prop('entities'), filter(filterEducationOrCourse(isCourse)), values, ReduxUtils.normalise),
   )
 
 export const selectUserQualificationCredentialsWidget = (selector: any) =>

@@ -4,7 +4,7 @@ import SUT from './UserQualificationsForm.selector'
 
 describe('modules/UserQualifications/UserQualificationsForm/UserQualificationsForm.selector', () => {
   describe('default', () => {
-    it('should return state props required by EducationForm with an empty state', () => {
+    it('should return state props required by UserQualificationsForm with an empty state', () => {
       const state = rootStateFixture()
 
       // when ... we call the selector
@@ -15,7 +15,7 @@ describe('modules/UserQualifications/UserQualificationsForm/UserQualificationsFo
         organisations: [],
       })
     })
-    it('should return state props required by EducationForm with an populated state', () => {
+    it('should return state props required by UserQualificationsForm with an populated state', () => {
       const stateMock = rootStateFixture({
         organisations: {
           ids: ['id1', 'id2'],

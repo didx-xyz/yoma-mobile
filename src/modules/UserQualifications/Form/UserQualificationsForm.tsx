@@ -40,7 +40,7 @@ const UserQualificationsForm = ({ navigation, organisationsDropDown, form }: Pro
     <ViewContainer style={styles.container}>
       <Header
         navigation={navigation}
-        headerText={t('Education')}
+        headerText={t('UserQualifications')}
         actionItem={<ButtonSave onPress={form.handleSubmit} />}
       />
       <ScrollView>
@@ -51,7 +51,7 @@ const UserQualificationsForm = ({ navigation, organisationsDropDown, form }: Pro
             <DropDown
               items={organisationsDropDown}
               searchPlaceholder={t('Search organisations')}
-              label={t('School or Educational institution')}
+              label={t('School or UserQualificationsal institution')}
               name="organisationId"
             />
             <CountryPickerField name="countries" label={t('Country')} />
@@ -65,7 +65,7 @@ const UserQualificationsForm = ({ navigation, organisationsDropDown, form }: Pro
                 style={styles.bottomText}
                 onPress={() => setShowInfoModal(true)}
               >
-                {t('Find inspiration on how to write a great education description.')}
+                {t('Find inspiration on how to write a great UserQualifications description.')}
               </Text.Meta>
               <InfoModal
                 visible={showInfoModal}

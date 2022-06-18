@@ -19,4 +19,19 @@ describe('modules/UserQualifications/UserQualifications.utils', () => {
       expect(result).toStrictEqual([])
     })
   })
+  describe('getEducationOrCourse', () => {
+    it.each([
+      [false, { qualification: { createdByAdmin: true } }, true],
+      [false, { qualification: { createdByAdmin: false } }, false],
+      [true, { qualification: { createdByAdmin: true } }, false],
+      [true, { qualification: { createdByAdmin: false } }, true],
+    ])(
+      'should return the required metadata from a User Qualification Credential',
+      (isEducation, qualification, expected) => {
+        const result = SUT.filterEducationOrCourse(isEducation)(qualification)
+
+        expect(result).toBe(expected)
+      },
+    )
+  })
 })
