@@ -29,20 +29,17 @@ interface Props {
     HomeNavigationTypes.HomeNavigationRoutes.Education
   >
   organisationsDropDown: DropDownTypes.DropDownItem[]
+  title: string
   form: FormikProps<any>
 }
 
-const UserQualificationsForm = ({ navigation, organisationsDropDown, form }: Props) => {
+const UserQualificationsForm = ({ title, navigation, organisationsDropDown, form }: Props) => {
   const { t } = useTranslation()
   const [showInfoModal, setShowInfoModal] = useState(false)
 
   return (
     <ViewContainer style={styles.container}>
-      <Header
-        navigation={navigation}
-        headerText={t('UserQualifications')}
-        actionItem={<ButtonSave onPress={form.handleSubmit} />}
-      />
+      <Header navigation={navigation} headerText={title} actionItem={<ButtonSave onPress={form.handleSubmit} />} />
       <ScrollView>
         <FormGroup>
           <FormLayout>
