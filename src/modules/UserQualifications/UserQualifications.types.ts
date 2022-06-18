@@ -1,6 +1,7 @@
 import { DocumentPickerResponse } from 'react-native-document-picker'
 
 import { types as ApiTypes } from '~/api'
+import { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
 import { NormalisedData } from '~/redux/redux.types'
 import * as Types from '~/types/general.types'
 
@@ -26,6 +27,8 @@ export type CreateUserQualificationPayload = Types.Modify<
     endTime: string
   }
 >
+
+export type UserQualificationsViewCredentials = { userQualifications: CvViewCredentialTypes.CvViewCredentialsData }
 
 export interface CreateUserQualificationCertificatePayload {
   id: string
