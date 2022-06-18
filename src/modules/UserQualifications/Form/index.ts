@@ -1,5 +1,5 @@
-import CompletedCoursesForm from './CompletedCoursesForm.container'
-import * as types from './CompletedCoursesForm.types'
+import UserQualificationsForm from './UserQualificationsForm'
+import * as types from './UserQualificationsForm.types'
 
-export default CompletedCoursesForm
+export default UserQualificationsForm
 export { types }
