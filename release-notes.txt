@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Adding Sentry
+- Adding Qualification components to service courses and education
 
 Last 10 deployment release notes:
+- Adding Sentry
 - bug fix in Credential widget
 -  fixing android deploying to FAD
 - feat(MySkills): adding skill count to each of the user's skills
@@ -14,4 +15,3 @@ Last 10 deployment release notes:
 - feat(MyCv): widget navigation
 - feat(Marketplace): creating Coming soon page
 - feat(Challenges): adding Challenges Coming Soon page
-- feat(Courses): coming soon
