@@ -22,7 +22,6 @@ const AboutFormContainer = ({ navigation }: Props) => {
 
   const handleSubmit = useCallback(
     ({ biography }: FormFields) => {
-      console.log({ biography })
       dispatch(UserActions.updateUser({ biography }))
     },
     [dispatch],

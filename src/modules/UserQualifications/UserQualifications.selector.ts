@@ -27,7 +27,6 @@ export const selectUserQualificationCredentialsWidget = (selector: any) =>
   createSelector<any, UserQualificationsWidgetSelector>(
     selector,
     (userQualifications: NormalisedUserQualifications) => {
-      console.log({ in: '[selectUserQualificationCredentialsWidget]', userQualifications })
       const count = userQualifications.ids.length
       const ids = userQualifications.ids
       const entities = map(
