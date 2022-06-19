@@ -33,6 +33,7 @@ describe('modules/Education/EducationView/EducationView.selector', () => {
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
               title: 'Test Qualification',
+              createdByAdmin: true,
               metadata: ['Apr 2021'],
               iconUrl: null,
               isValidated: true,

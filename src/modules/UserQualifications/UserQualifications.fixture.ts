@@ -1,6 +1,6 @@
 import { createFixture } from '~/../tests/tests.utils'
 
-import { INITIAL_FORM_VALUES } from '../Education/Form/EducationForm.constants'
+import { INITIAL_FORM_VALUES } from './Form/UserQualificationsForm.constants'
 
 export const USER_QUALIFICATIONS_MOCK = [
   {

@@ -4,7 +4,11 @@ import { applySpec, filter, map, path, pathOr, pick, pipe, prop, propOr, values 
 import { RootState } from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
 
-import { NormalisedUserQualifications, UserQualificationsViewCredentials } from './UserQualifications.types'
+import {
+  NormalisedUserQualifications,
+  UserQualificationsViewCredentials,
+  UserQualificationsWidgetSelector,
+} from './UserQualifications.types'
 import { filterEducationOrCourse, getUserQualificationsMetadata } from './UserQualifications.utils'
 
 export const selectUserQualifications = (state: RootState) => state.userQualifications
@@ -20,7 +24,7 @@ export const selectUserQualificationCredentialsType = (isCourse: boolean) =>
   )
 
 export const selectUserQualificationCredentialsWidget = (selector: any) =>
-  createSelector<any, UserQualificationsViewCredentials>(
+  createSelector<any, UserQualificationsWidgetSelector>(
     selector,
     (userQualifications: NormalisedUserQualifications) => {
       const count = userQualifications.ids.length

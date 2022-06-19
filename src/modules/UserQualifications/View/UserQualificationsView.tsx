@@ -1,24 +1,27 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React from 'react'
+import React, { useCallback } from 'react'
 
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewCredential, { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
-import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
+import { EducationNavigation } from '~/modules/Education/types'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
 
 interface Props {
   title: string
   noDataMessage: string
-  onAdd: () => void
-  navigation: NativeStackNavigationProp<
-    HomeNavigationTypes.HomeNavigatorParamsList,
-    HomeNavigationTypes.HomeNavigationRoutes.Education
-  >
+  route: HomeNavigationRoutes
+  navigation: EducationNavigation
   userQualifications: CvViewCredentialTypes.CvViewCredentialsData
 }
-const UserQualificationsView = ({ title, noDataMessage, onAdd, navigation, userQualifications }: Props) => (
-  <CvView title={title} noDataMessage={noDataMessage} onAction={onAdd} navigation={navigation}>
-    <CvViewList data={userQualifications} RenderItem={CvViewCredential} />
-  </CvView>
-)
+const UserQualificationsView = ({ title, noDataMessage, route, navigation, userQualifications }: Props) => {
+  const onAdd = useCallback(() => {
+    navigation.navigate(route)
+  }, [navigation, route])
+
+  return (
+    <CvView title={title} noDataMessage={noDataMessage} onAction={onAdd} navigation={navigation}>
+      <CvViewList data={userQualifications} RenderItem={CvViewCredential} />
+    </CvView>
+  )
+}
 
 export default UserQualificationsView

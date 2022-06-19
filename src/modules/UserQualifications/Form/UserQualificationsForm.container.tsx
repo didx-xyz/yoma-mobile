@@ -1,10 +1,9 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import { pipe } from 'ramda'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
+import { EducationNavigation } from '~/modules/Education/types'
 import { actions as QualificationActions } from '~/modules/Qualifications'
 import * as FormUtils from '~/utils/form.utils'
 
@@ -15,10 +14,7 @@ import { FormFields } from './UserQualificationsForm.types'
 import { schema } from './UserQualificationsForm.validation'
 
 interface Props {
-  navigation: NativeStackNavigationProp<
-    HomeNavigationTypes.HomeNavigatorParamsList,
-    HomeNavigationTypes.HomeNavigationRoutes.Education
-  >
+  navigation: EducationNavigation
   title: string
 }
 const UserQualificationsFormContainer = ({ title, navigation }: Props) => {
