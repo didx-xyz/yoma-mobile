@@ -1,14 +1,4 @@
-import { createSelector } from '@reduxjs/toolkit'
+import { selectEducationCredentials } from '~/modules/Education/Education.selector'
+import { selectUserQualificationCredentialsWidget } from '~/modules/UserQualifications/UserQualifications.selector'
 
-import {
-  selectUserQualificationCredentialsType,
-  selectUserQualificationCredentialsWidget,
-} from '~/modules/UserQualifications/UserQualifications.selector'
-import { UserQualificationsWidgetSelector } from '~/modules/UserQualifications/UserQualifications.types'
-
-const selectEducationCredentials = selectUserQualificationCredentialsType(false)
-
-export default createSelector<any, UserQualificationsWidgetSelector>(
-  selectUserQualificationCredentialsWidget(selectEducationCredentials),
-  ({ userQualifications, count }: UserQualificationsWidgetSelector) => ({ userQualifications, count }),
-)
+export default selectUserQualificationCredentialsWidget(selectEducationCredentials)

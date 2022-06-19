@@ -1,21 +1,25 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { types as MyCvTypes } from '~/modules/MyCv'
 import { UserQualificationsWidget } from '~/modules/UserQualifications'
 import { Colors } from '~/styles'
 
 import selector from './EducationWidget.selector'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  navigation: MyCvTypes.MyCvNavigation
 }
 
 const EducationWidgetContainer = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const { userQualifications, count } = useSelector(selector)
+
+  useEffect(() => {
+    console.log({ userQualifications })
+  }, [userQualifications])
 
   return (
     <UserQualificationsWidget

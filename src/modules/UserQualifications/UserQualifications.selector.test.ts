@@ -1,6 +1,6 @@
 import { rootStateFixture } from '~/redux/redux.fixture'
 
-import { INITIAL_FORM_VALUES } from '../Education/Form/EducationForm.constants'
+import { INITIAL_FORM_VALUES } from './Form/UserQualificationsForm.constants'
 import { USER_QUALIFICATIONS_MOCK, USER_QUALIFICATIONS_STATE_MOCK } from './UserQualifications.fixture'
 import { INITIAL_STATE } from './UserQualifications.reducer'
 import * as SUT from './UserQualifications.selector'

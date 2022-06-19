@@ -1,38 +1,16 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { Formik } from 'formik'
-import { pipe } from 'ramda'
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
-import { actions as QualificationActions } from '~/modules/Qualifications'
-import * as FormUtils from '~/utils/form.utils'
-
-import EducationForm from './EducationForm'
-import { INITIAL_FORM_VALUES } from './EducationForm.constants'
-import selector from './EducationForm.selector'
-import { FormFields } from './EducationForm.types'
-import { schema } from './EducationForm.validation'
+import { EducationNavigation } from '~/modules/Education/types'
+import { UserQualificationsForm } from '~/modules/UserQualifications'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Education>
+  navigation: EducationNavigation
 }
 const EducationFormContainer = ({ navigation }: Props) => {
-  const { organisations } = useSelector(selector)
-  const dispatch = useDispatch()
+  const { t } = useTranslation()
 
-  const handleSubmit = (values: FormFields) => {
-    const qualification = pipe(FormUtils.sanitiseDateRange, FormUtils.countriesAsArray)(values)
-    dispatch(QualificationActions.createQualification(qualification))
-  }
-
-  return (
-    <Formik initialValues={INITIAL_FORM_VALUES} validationSchema={schema} onSubmit={handleSubmit}>
-      {formikHandlers => (
-        <EducationForm navigation={navigation} organisationsDropDown={organisations} form={formikHandlers} />
-      )}
-    </Formik>
-  )
+  return <UserQualificationsForm navigation={navigation} title={t('Education')} />
 }
 
 export default EducationFormContainer

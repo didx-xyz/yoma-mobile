@@ -1,10 +1,10 @@
 import { createAction } from '@reduxjs/toolkit'
 
-import { FormFields as EducationFormFields } from '../Education/Form/EducationForm.types'
+import { FormFields as UserQualificationFormFields } from '../UserQualifications/Form/UserQualificationsForm.types'
 import { Qualification } from './Qualifications.types'
 
 const name = '[Qualifications]'
 
-export const createQualification = createAction<EducationFormFields>(`${name} createQualification`)
+export const createQualification = createAction<UserQualificationFormFields>(`${name} createQualification`)
 export const createQualificationSuccess = createAction<Qualification>(`${name} createQualificationSuccess`)
 export const createQualificationFailure = createAction<string>(`${name} createQualificationFailure`)

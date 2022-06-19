@@ -47,7 +47,7 @@ const UserQualificationsForm = ({ title, navigation, organisationsDropDown, form
             <DropDown
               items={organisationsDropDown}
               searchPlaceholder={t('Search organisations')}
-              label={t('School or UserQualificationsal institution')}
+              label={t('School or Educational institution')}
               name="organisationId"
             />
             <CountryPickerField name="countries" label={t('Country')} />
@@ -61,7 +61,7 @@ const UserQualificationsForm = ({ title, navigation, organisationsDropDown, form
                 style={styles.bottomText}
                 onPress={() => setShowInfoModal(true)}
               >
-                {t('Find inspiration on how to write a great UserQualifications description.')}
+                {t('Find inspiration on how to write a great education description.')}
               </Text.Meta>
               <InfoModal
                 visible={showInfoModal}
