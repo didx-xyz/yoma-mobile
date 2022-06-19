@@ -146,7 +146,7 @@ android {
         applicationId "com.yomamobile"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 56
+        versionCode 57
         versionName "0.0.1"
         multiDexEnabled true
         manifestPlaceholders = [

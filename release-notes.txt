@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Adding Qualification components to service courses and education
+- Updating Eduction components to use UserQualification components and selectors
 
 Last 10 deployment release notes:
+- Adding Qualification components to service courses and education
 - Adding Sentry
 - bug fix in Credential widget
 -  fixing android deploying to FAD
@@ -14,4 +15,3 @@ Last 10 deployment release notes:
 - refactor(Cv modules): refactoring and updating the Modules
 - feat(MyCv): widget navigation
 - feat(Marketplace): creating Coming soon page
-- feat(Challenges): adding Challenges Coming Soon page
