@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 
@@ -16,10 +16,6 @@ interface Props {
 const EducationWidgetContainer = ({ navigation }: Props) => {
   const { t } = useTranslation()
   const { userQualifications, count } = useSelector(selector)
-
-  useEffect(() => {
-    console.log({ userQualifications })
-  }, [userQualifications])
 
   return (
     <UserQualificationsWidget
