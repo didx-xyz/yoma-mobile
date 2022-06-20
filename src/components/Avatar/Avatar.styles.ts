@@ -1,14 +1,14 @@
 import { ImageStyle, StyleSheet, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
-import { CIRCULAR_RADIUS_DIVISOR } from '../../styles/styles.constants'
+import { Colors, constants as StyleConstants, colors } from '~/styles'
+
 import { AVATAR_SIZE } from './Avatar.constants'
 
 const styles = {
   container: {
     width: AVATAR_SIZE,
     height: AVATAR_SIZE,
-    borderRadius: AVATAR_SIZE / CIRCULAR_RADIUS_DIVISOR,
+    borderRadius: AVATAR_SIZE / StyleConstants.CIRCULAR_RADIUS_DIVISOR,
     position: 'relative',
   } as ViewStyle,
   verifiedWrap: {
@@ -18,7 +18,7 @@ const styles = {
     zIndex: 2,
   } as ViewStyle,
   imageWrap: {
-    borderRadius: AVATAR_SIZE / CIRCULAR_RADIUS_DIVISOR,
+    borderRadius: AVATAR_SIZE / StyleConstants.CIRCULAR_RADIUS_DIVISOR,
     overflow: 'hidden',
     width: AVATAR_SIZE,
     height: AVATAR_SIZE,
@@ -32,7 +32,7 @@ const styles = {
     height: AVATAR_SIZE,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: AVATAR_SIZE / CIRCULAR_RADIUS_DIVISOR,
+    borderRadius: AVATAR_SIZE / StyleConstants.CIRCULAR_RADIUS_DIVISOR,
     backgroundColor: colors[Colors.LightGrey],
   } as ViewStyle,
 }

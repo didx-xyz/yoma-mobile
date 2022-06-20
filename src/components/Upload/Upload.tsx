@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next'
 import { TouchableOpacity, View } from 'react-native'
 import DocumentPicker from 'react-native-document-picker'
 
-import Text, { MetaLevels } from '../Typography'
+import Text, { MetaLevels } from '~/components/Typography'
+
 import styles from './Upload.styles'
 
 type Props = {

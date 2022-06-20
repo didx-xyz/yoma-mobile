@@ -2,9 +2,10 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
-import { Colors } from '../../styles'
-import DatePicker from '../DatePicker'
-import Text from '../Typography'
+import DatePicker from '~/components/DatePicker'
+import Text from '~/components/Typography'
+import { Colors } from '~/styles'
+
 import styles from './DateRangeSelect.styles'
 
 interface Props {

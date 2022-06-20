@@ -2,8 +2,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { Modal, View } from 'react-native'
 
-import Button from '../Button'
-import Text from '../Typography'
+import Button from '~/components/Button'
+import Text from '~/components/Typography'
+
 import styles from './InfoModal.styles'
 
 interface Props {
