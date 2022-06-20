@@ -143,11 +143,17 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       const result = SUT.selectUserQualificationCredentialsWidget(selectUserQualifications)(state)
       // then ...
       expect(result).toEqual({
-        count: 1,
+        count: 2,
         userQualifications: {
-          ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
+          ids: ['USER_QUALIFICATIONS_STATE_MOCK-001', 'USER_QUALIFICATIONS_STATE_MOCK-002'],
           entities: {
-            '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
+            'USER_QUALIFICATIONS_STATE_MOCK-001': {
+              name: 'Test Qualification',
+              startDate: '2021-04-15T00:00:00',
+              organisationLogoURL: null,
+              isValidated: true,
+            },
+            'USER_QUALIFICATIONS_STATE_MOCK-002': {
               name: 'Test Qualification',
               startDate: '2021-04-15T00:00:00',
               organisationLogoURL: null,
@@ -183,15 +189,23 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       // then ... should return the data required by the education view
       expect(result).toEqual({
         userQualifications: {
-          ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
+          ids: ['USER_QUALIFICATIONS_STATE_MOCK-001', 'USER_QUALIFICATIONS_STATE_MOCK-002'],
           entities: {
-            '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              title: 'Test Qualification',
+            'USER_QUALIFICATIONS_STATE_MOCK-001': {
               createdByAdmin: true,
-              metadata: ['Apr 2021'],
-              iconUrl: null,
-              isValidated: true,
               description: 'Test Graph',
+              iconUrl: null,
+              title: 'Test Qualification',
+              isValidated: true,
+              metadata: ['Apr 2021'],
+            },
+            'USER_QUALIFICATIONS_STATE_MOCK-002': {
+              createdByAdmin: false,
+              description: 'Test Graph',
+              iconUrl: null,
+              title: 'Test Qualification',
+              isValidated: true,
+              metadata: ['Apr 2021'],
             },
           },
         },

@@ -29,11 +29,11 @@ describe('modules/CompletedCourses/CompletedCoursesView/CompletedCoursesView.sel
       // then ... should return the data required by the CompletedCourses view
       expect(result).toEqual({
         userQualifications: {
-          ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
+          ids: ['USER_QUALIFICATIONS_STATE_MOCK-002'],
           entities: {
-            '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
+            'USER_QUALIFICATIONS_STATE_MOCK-002': {
               title: 'Test Qualification',
-              createdByAdmin: true,
+              createdByAdmin: false,
               metadata: ['Apr 2021'],
               iconUrl: null,
               isValidated: true,

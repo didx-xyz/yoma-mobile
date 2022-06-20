@@ -30,13 +30,13 @@ describe('modules/CompletedCourses/CompletedCoursesWidget/CompletedCoursesWidget
       expect(result).toEqual({
         count: 1,
         userQualifications: {
-          ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
+          ids: ['USER_QUALIFICATIONS_STATE_MOCK-002'],
           entities: {
-            '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              name: 'Test Qualification',
-              startDate: '2021-04-15T00:00:00',
-              organisationLogoURL: null,
+            'USER_QUALIFICATIONS_STATE_MOCK-002': {
               isValidated: true,
+              name: 'Test Qualification',
+              organisationLogoURL: null,
+              startDate: '2021-04-15T00:00:00',
             },
           },
         },

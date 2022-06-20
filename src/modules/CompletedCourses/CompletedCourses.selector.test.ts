@@ -32,10 +32,9 @@ describe('modules/CompletedCourses/CompletedCourses.selector', () => {
 
       // then ...
       expect(result).toEqual({
-        ids: ['id1', 'id3'],
+        ids: ['id2'],
         entities: {
-          id1: { id: 'id1', qualification: { createdByAdmin: true } },
-          id3: { id: 'id3', qualification: { createdByAdmin: true } },
+          id2: { id: 'id2', qualification: { createdByAdmin: false } },
         },
       })
     })
