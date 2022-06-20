@@ -3,6 +3,7 @@ import { pipe } from 'ramda'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { CompletedCoursesNavigation } from '~/modules/CompletedCourses/types'
 import { EducationNavigation } from '~/modules/Education/types'
 import { actions as QualificationActions } from '~/modules/Qualifications'
 import * as FormUtils from '~/utils/form.utils'
@@ -14,7 +15,7 @@ import { FormFields } from './UserQualificationsForm.types'
 import { schema } from './UserQualificationsForm.validation'
 
 interface Props {
-  navigation: EducationNavigation
+  navigation: EducationNavigation | CompletedCoursesNavigation
   title: string
 }
 const UserQualificationsFormContainer = ({ title, navigation }: Props) => {
