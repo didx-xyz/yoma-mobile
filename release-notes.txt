@@ -1,17 +1,16 @@
 Ver 0.0.1
 Latest:
-- Updating Eduction components to use UserQualification components and selectors
+- Adding Completed Courses to the CV
 
 Last 10 deployment release notes:
+- Updating Eduction components to use UserQualification components and selectors
 - Adding Qualification components to service courses and education
 - Adding Sentry
 - bug fix in Credential widget
--  fixing android deploying to FAD
+- fixing android deploying to FAD
 - feat(MySkills): adding skill count to each of the user's skills
 - Add/Edit Button
 - feat(Utils: Strings): adding a trunc util
 - updating cv view components
 - feat(About): adding About view, along with refactors to widget and form
-- refactor(Cv modules): refactoring and updating the Modules
-- feat(MyCv): widget navigation
-- feat(Marketplace): creating Coming soon page
+
