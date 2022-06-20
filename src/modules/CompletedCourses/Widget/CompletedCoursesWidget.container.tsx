@@ -21,7 +21,7 @@ const CompletedCoursesWidgetContainer = ({ navigation }: Props) => {
     <UserQualificationsWidget
       badgeColor={Colors.PrimaryRed}
       title={t('Completed courses')}
-      noDataMessage={t('Which school, university or college did you attend?')}
+      noDataMessage={t('Have you completed any courses yet?')}
       viewRoute={HomeNavigationRoutes.CompletedCourses}
       formRoute={HomeNavigationRoutes.CompletedCoursesForm}
       userQualifications={userQualifications}

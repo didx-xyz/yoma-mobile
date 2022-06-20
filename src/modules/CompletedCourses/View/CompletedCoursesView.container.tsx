@@ -17,8 +17,8 @@ const CompletedCoursesViewContainer = ({ navigation }: Props) => {
 
   return (
     <UserQualificationsView
-      title={t('Completed courses')}
-      noDataMessage={t('Which school, university or college did you attend?')}
+      title={t('Courses')}
+      noDataMessage={t('Have you completed any courses yet?')}
       route={HomeNavigationRoutes.CompletedCoursesForm}
       navigation={navigation}
       userQualifications={userQualifications}
