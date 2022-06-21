@@ -52,7 +52,7 @@ const ExperienceForm = ({ navigation, organisations, form }: Props) => {
             <DropDown
               items={organisations}
               name={'organisationId'}
-              label={'Company name'}
+              label={t('Company name')}
               searchable
               searchPlaceholder={t('Search organisation')}
             />

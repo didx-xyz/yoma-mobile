@@ -1,4 +1,3 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { ScrollView } from 'react-native'
 
@@ -10,13 +9,13 @@ import { CompletedCoursesWidget } from '~/modules/CompletedCourses'
 import { EducationWidget } from '~/modules/Education'
 import { ExperienceWidget } from '~/modules/Experience'
 import HomeHeader from '~/modules/HomeHeader'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 import { MySkillsWidget } from '~/modules/MySkills'
 
 import styles from './MyCv.styles'
+import { MyCvNavigation } from './MyCv.types'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
+  navigation: MyCvNavigation
 }
 
 const MyCv = ({ navigation }: Props) => (

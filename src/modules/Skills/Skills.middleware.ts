@@ -3,6 +3,7 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiSkillsConstants } from '~/api/skills'
+import * as Strings from '~/constants/strings.constants'
 import * as ReduxTypes from '~/redux/redux.types'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
@@ -81,7 +82,7 @@ export const fetchSkillsFailureFlow =
 
     if (fetchSkillsFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
     }
     return result
   }

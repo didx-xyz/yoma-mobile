@@ -2,10 +2,10 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
+import HomeNavigation from '~/modules/HomeNavigation'
+import Landing from '~/modules/Landing'
 import { setupSentryNavigation } from '~/monitoring'
 
-import HomeNavigation from '../HomeNavigation'
-import Landing from '../Landing'
 import linking from './Linking'
 import { navigationRef } from './Navigation.utils'
 

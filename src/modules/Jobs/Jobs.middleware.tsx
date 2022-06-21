@@ -1,8 +1,10 @@
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiJobsConstants } from '~/api/jobs'
+import * as Strings from '~/constants/strings.constants'
 import * as UserJobsActions from '~/modules/UserJobs/UserJobs.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
@@ -54,7 +56,7 @@ export const createJobFailureFlow =
 
     if (createJobFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
     }
     return result
   }

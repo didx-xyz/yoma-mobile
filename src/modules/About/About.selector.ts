@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 
-import * as userSelectors from '../User/User.selector'
+import { selectors as userSelectors } from '~/modules/User'
 
 export default createSelector<any, { biography: string }>(userSelectors.selectBiography, (biography: string) => ({
   biography,

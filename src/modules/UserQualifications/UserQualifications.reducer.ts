@@ -1,12 +1,10 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeRight } from 'ramda'
 
+import { Qualification } from '~/modules/Qualifications/Qualifications.types'
+import { types as UserTypes, utils as UserUtils } from '~/modules/User'
 import * as ReduxUtils from '~/redux/redux.utils'
 
-import { Qualification } from '../Qualifications/Qualifications.types'
-import { types as UserTypes } from '../User'
-import { UserCredentialFormValues } from '../User/User.types'
-import { setFormValues } from '../User/User.utils'
 import {
   CreateUserQualificationCertificatePayload,
   CreateUserQualificationSuccessResponse,
@@ -47,7 +45,7 @@ export const createUserQualificationCertificateFailure = createAction<string>(
   `${name} createUserQualificationCertificateFailure`,
 )
 
-export const setUserQualificationFormValues = createAction<UserCredentialFormValues>(
+export const setUserQualificationFormValues = createAction<UserTypes.UserCredentialFormValues>(
   `${name} setUserQualificationFormValues`,
 )
 export const clearUserQualificationFormValues = createAction(`${name} clearUserQualificationFormValues`)
@@ -56,7 +54,7 @@ const reducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setUserQualifications, (state, action) => mergeRight(state.formValues, action.payload))
   builder.addCase(updateUserQualifications, ReduxUtils.updateNormalisedReducer)
   builder.addCase(clearUserQualifications, (_state, _action) => INITIAL_STATE)
-  builder.addCase(setUserQualificationFormValues, (state, action) => setFormValues(state, action.payload))
+  builder.addCase(setUserQualificationFormValues, (state, action) => UserUtils.setFormValues(state, action.payload))
   builder.addCase(clearUserQualificationFormValues, (state, _action) => mergeRight(state, { formValues: {} }))
 })
 

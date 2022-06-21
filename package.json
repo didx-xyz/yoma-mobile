@@ -6,7 +6,7 @@
     "_code:lint:eslint": "eslint .",
     "_code:lint:prettier": "prettier --check .",
     "_git:pre-commit": "pretty-quick --staged",
-    "_git:pre-push": "npm-run-all code:lint",
+    "_git:pre-push":  "npm-run-all code:lint",
     "android": "react-native run-android",
     "bundle:android": "react-native bundle --platform android --entry-file index.js --bundle-output android.bundle --verbose",
     "clean:android": "cd android && ./gradlew clean && cd ..",

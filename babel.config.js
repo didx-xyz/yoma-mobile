@@ -7,7 +7,8 @@ module.exports = function (api) {
       'module-resolver',
       {
         alias: {
-          '^~/(.+)': './src/\\1'
+          '^~/(.+)': './src/\\1',
+          '^tests/(.+)': './tests/\\1'
         },
         extensions: [
           '.ios.ts',

@@ -1,8 +1,9 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeRight, omit } from 'ramda'
 
-import { updateNormalisedReducer } from '../../redux/redux.utils'
-import { types as UserTypes } from '../User'
+import { types as UserTypes } from '~/modules/User'
+import { updateNormalisedReducer } from '~/redux/redux.utils'
+
 import {
   CreateUserChallengePayload,
   CreateUserChallengeSuccessResponse,

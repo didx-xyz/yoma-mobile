@@ -1,12 +1,13 @@
-import { createMiddlewareMock } from '~/../tests/tests.utils'
+import { createMiddlewareMock } from 'tests/tests.utils'
 
-import { actions as AuthActions } from '../Auth'
-import * as ChallengesActions from '../Challenges/Challenges.reducer'
-import * as OrganisationsActions from '../Organisations/Organisations.reducer'
-import * as SkillsActions from '../Skills/Skills.reducer'
-import { actions as UserActions } from '../User'
-import { actions as UserChallengesActions } from '../UserChallenges'
-import { actions as UserSkillsActions } from '../UserSkills/'
+import { actions as AuthActions } from '~/modules/Auth'
+import * as ChallengesActions from '~/modules/Challenges/Challenges.reducer'
+import * as OrganisationsActions from '~/modules/Organisations/Organisations.reducer'
+import * as SkillsActions from '~/modules/Skills/Skills.reducer'
+import { actions as UserActions } from '~/modules/User'
+import { actions as UserChallengesActions } from '~/modules/UserChallenges'
+import { actions as UserSkillsActions } from '~/modules/UserSkills/'
+
 import * as SUT from './App.middleware'
 import { hydrateApp, resetAppData } from './App.reducer'
 

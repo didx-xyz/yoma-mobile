@@ -63,6 +63,7 @@ describe('modules/Organisations/Organisations.reducer', () => {
       }
       //when we clearOrganisations
       const action = clearOrganisations()
+      // @ts-ignore full type is not required for testing
       const result = SUT(state, action)
 
       // then ... should set the default Organisations state

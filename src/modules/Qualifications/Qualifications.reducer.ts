@@ -1,6 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
 
-import { FormFields as UserQualificationFormFields } from '../UserQualifications/Form/UserQualificationsForm.types'
+import { FormFields as UserQualificationFormFields } from '~/modules/UserQualifications/Form/UserQualificationsForm.types'
+
 import { Qualification } from './Qualifications.types'
 
 const name = '[Qualifications]'
