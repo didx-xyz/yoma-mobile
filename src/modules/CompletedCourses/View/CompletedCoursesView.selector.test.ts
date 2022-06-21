@@ -1,9 +1,9 @@
 import { USER_QUALIFICATIONS_STATE_MOCK } from '~/modules/UserQualifications/UserQualifications.fixture'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
-import * as SUT from './EducationView.selector'
+import * as SUT from './CompletedCoursesView.selector'
 
-describe('modules/Education/EducationView/EducationView.selector', () => {
+describe('modules/CompletedCourses/CompletedCoursesView/CompletedCoursesView.selector', () => {
   describe('default selector', () => {
     it('should handle an empty state', () => {
       const stateMock = rootStateFixture()
@@ -26,14 +26,14 @@ describe('modules/Education/EducationView/EducationView.selector', () => {
       // when ... we call the selector
       const result = SUT.default(mockState)
 
-      // then ... should return the data required by the education view
+      // then ... should return the data required by the CompletedCourses view
       expect(result).toEqual({
         userQualifications: {
-          ids: ['USER_QUALIFICATIONS_STATE_MOCK-001'],
+          ids: ['USER_QUALIFICATIONS_STATE_MOCK-002'],
           entities: {
-            'USER_QUALIFICATIONS_STATE_MOCK-001': {
+            'USER_QUALIFICATIONS_STATE_MOCK-002': {
               title: 'Test Qualification',
-              createdByAdmin: true,
+              createdByAdmin: false,
               metadata: ['Apr 2021'],
               iconUrl: null,
               isValidated: true,
