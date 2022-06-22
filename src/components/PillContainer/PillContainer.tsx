@@ -21,7 +21,7 @@ const PillContainer = ({ pills, onDelete, onAdd }: Props) => {
     <View style={styles.container}>
       {map((pill: string) => <Pill key={pill} name={pill} onDelete={onDelete} />)(pills)}
       <Pressable onPress={onAdd} style={styles.add}>
-        <Text.Body color={Colors.PrimaryDarkGrey}>+ t('Add Skills')</Text.Body>
+        <Text.Body color={Colors.PrimaryDarkGrey}>+ {t('Add Skills')}</Text.Body>
       </Pressable>
     </View>
   )
