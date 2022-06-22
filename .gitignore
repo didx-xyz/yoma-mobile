@@ -61,15 +61,16 @@ fastlane/.env
 # Bundle artifact
 *.jsbundle
 
-# CocoaPods
+# Ruby / CocoaPods
 /ios/Pods/
-
-# circle ci
-process.yml
+/vendor/bundle/
 
 # Ruby Gems (Bundler)
 /vendor
 /template/vendor
+
+# circle ci
+process.yml
 
 # iOS / CocoaPods
 /template/ios/build/
