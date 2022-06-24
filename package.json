@@ -65,7 +65,7 @@
     "react-native-dropdown-picker": "^5.4.0",
     "react-native-elements": "^3.3.2",
     "react-native-flash-message": "^0.2.1",
-    "react-native-flipper": "^0.143.0",
+    "react-native-flipper": "^0.146.1",
     "react-native-gesture-handler": "^2.4.1",
     "react-native-image-crop-picker": "^0.37.3",
     "react-native-localize": "^2.2.1",
