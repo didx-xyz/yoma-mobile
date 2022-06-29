@@ -1,6 +1,5 @@
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
-apply from: '../../node_modules/react-native-unimodules/gradle.groovy'
 
 import com.android.build.OutputFile
 
@@ -143,6 +142,7 @@ android {
         versionCode 58
         versionName "0.0.1"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
+        manifestPlaceholders = [appAuthRedirectScheme: 'com.yomamobile.auth']
         if (isNewArchitectureEnabled()) {
                     // We configure the NDK build only if you decide to opt-in for the New Architecture.
                     externalNativeBuild {
@@ -261,9 +261,6 @@ dependencies {
     implementation "com.facebook.react:react-native:+"  // From node_modules
 
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.0.0"
-
-    // Unimodules
-    addUnimodulesDependencies()
 
     // Firebase setup:
     implementation platform('com.google.firebase:firebase-bom:28.1.0')

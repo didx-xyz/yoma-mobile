@@ -1,12 +1,10 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-require_relative '../node_modules/react-native-unimodules/cocoapods.rb'
 
 platform :ios, '11.0'
 install! 'cocoapods', :deterministic_uuids => false
 
 target 'YomaMobile' do
-  use_unimodules!
   config = use_native_modules!
 
   # Flags change depending on the env values.

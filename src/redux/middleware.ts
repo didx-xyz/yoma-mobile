@@ -1,6 +1,6 @@
-import * as SecureStore from 'expo-secure-store'
 import FormData from 'form-data'
 import { concat } from 'ramda'
+import EncryptedStorage from 'react-native-encrypted-storage'
 import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
 
@@ -40,12 +40,12 @@ const featureModuleMiddleware = [
   AuthMiddleware.authorizeWithRefreshTokenFailureFlow,
   AuthMiddleware.authorizeWithRefreshTokenFlow,
   AuthMiddleware.fetchUserFromOAuthFlow,
-  AuthMiddleware.deleteSecureRefreshTokenFlow(SecureStore.deleteItemAsync),
-  AuthMiddleware.getSecureRefreshTokenFlow(SecureStore.getItemAsync),
+  AuthMiddleware.deleteSecureRefreshTokenFlow(EncryptedStorage.removeItem),
+  AuthMiddleware.getSecureRefreshTokenFlow(EncryptedStorage.getItem),
   AuthMiddleware.loginFailureFlow({ notification: showSimpleMessage }),
   AuthMiddleware.loginFlow,
   AuthMiddleware.logoutFlow,
-  AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
+  AuthMiddleware.setSecureRefreshTokenFlow(EncryptedStorage.setItem),
   AuthMiddleware.unauthorizedFlow,
   ChallengesMiddleware.fetchChallengesFlow,
   ChallengesMiddleware.normaliseChallengesFlow({ normalise: ReduxUtils.normalise }),
