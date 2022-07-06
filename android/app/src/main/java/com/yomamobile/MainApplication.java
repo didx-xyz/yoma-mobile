@@ -13,10 +13,6 @@ import com.yomamobile.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-// React Native Reanimated Alpha
-//import com.facebook.react.bridge.JSIModulePackage;
-//import com.swmansion.reanimated.ReanimatedJSIModulePackage;
-
 public class MainApplication extends Application implements ReactApplication {
 
   private final ReactNativeHost mReactNativeHost =
@@ -32,7 +28,6 @@ public class MainApplication extends Application implements ReactApplication {
           List<ReactPackage> packages = new PackageList(this).getPackages();
           // Packages that cannot be autolinked yet can be added manually here, for example:
           // packages.add(new MyReactNativePackage());
-
           return packages;
         }
 
@@ -40,14 +35,10 @@ public class MainApplication extends Application implements ReactApplication {
         protected String getJSMainModuleName() {
           return "index";
         }
-          // React Native Reanimated Alpha
-//          @Override
-//          protected JSIModulePackage getJSIModulePackage() {
-//              return new ReanimatedJSIModulePackage();
-//          }
       };
+
   private final ReactNativeHost mNewArchitectureNativeHost =
-        new MainApplicationReactNativeHost(this);
+      new MainApplicationReactNativeHost(this);
 
   @Override
   public ReactNativeHost getReactNativeHost() {
