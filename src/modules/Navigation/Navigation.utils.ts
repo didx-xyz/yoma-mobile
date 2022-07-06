@@ -1,9 +1,9 @@
-import * as React from 'react'
+import { createNavigationContainerRef } from '@react-navigation/native'
 
-import { StdObj } from '~/types/general.types'
+export const navigationRef = createNavigationContainerRef()
 
-export const navigationRef: React.RefObject<any> = React.createRef()
-
-export const navigate = (name: string, params: StdObj = {}) => {
-  navigationRef.current?.navigate(name, params)
+export const navigate = (name: never, params: never) => {
+  if (navigationRef.isReady()) {
+    navigationRef.navigate(name, params)
+  }
 }
