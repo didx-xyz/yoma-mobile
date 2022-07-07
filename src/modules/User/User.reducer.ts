@@ -17,8 +17,6 @@ export const INITIAL_STATE: UserDetails = {
   lastName: '',
   name: '',
   email: '',
-  age: '',
-  gender: '',
   countryAlpha2: '',
   phoneNumber: null,
   biography: '',

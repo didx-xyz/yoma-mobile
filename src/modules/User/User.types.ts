@@ -7,14 +7,14 @@ import { UserChallenge } from '../UserChallenges/UserChallenges.types'
 import { UserJobCredential } from '../UserJobs/UserJobs.types'
 
 export interface UserDetails {
-  age: null | string
+  age?: null | string
   biography: null | string
   countryAlpha2: string
   covidChallengeCertificateURL: null | string
   createdAt: string | null
   email: string
   firstName: string
-  gender: string
+  gender?: string
   id: string
   lastLogin: null | string
   name: null | string
