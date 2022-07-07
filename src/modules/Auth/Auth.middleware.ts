@@ -4,7 +4,6 @@ import { authorize as OAuthAuthorize } from 'react-native-app-auth'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
-import { ApiErrorResponse } from '~/api/api.types'
 import { constants as ApiAuthConstants } from '~/api/auth'
 import { showSimpleMessage } from '~/utils/error'
 
