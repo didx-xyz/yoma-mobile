@@ -3,5 +3,5 @@ export enum LandingNavigationRoutes {
 }
 
 export type LandingParamsList = {
-  [LandingNavigationRoutes.Authentication]: undefined
+  [LandingNavigationRoutes.Authentication]: never
 }

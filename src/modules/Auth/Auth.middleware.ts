@@ -68,7 +68,7 @@ export const getSecureRefreshTokenFlow =
         }
         dispatch(getSecureRefreshTokenSuccess(token))
       } catch (error) {
-        dispatch(getSecureRefreshTokenFailure(error.message))
+        dispatch(getSecureRefreshTokenFailure(error))
       }
     }
     return result
