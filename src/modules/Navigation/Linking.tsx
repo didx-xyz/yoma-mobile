@@ -1,7 +1,7 @@
 import { LinkingOptions, PathConfigMap } from '@react-navigation/native'
 
 import Env from '~/env.json'
-import { LandingNavigationRoutes, LandingParamsList } from '~/modules/Landing/Landing.types'
+import { LandingParamsList, ParamsList } from '~/modules/Landing/Landing.types'
 
 const screens: PathConfigMap<LandingParamsList> = {
   Authentication: {
@@ -11,11 +11,10 @@ const screens: PathConfigMap<LandingParamsList> = {
 }
 
 const config = {
-  initialRouteName: LandingNavigationRoutes.Authentication,
   screens,
 }
 
-const linking: LinkingOptions<LandingParamsList> = {
+const linking: LinkingOptions<ParamsList> = {
   prefixes: [Env.APP_SCHEME, Env.YOMA_WEB_BASE_PATH],
   config,
 }

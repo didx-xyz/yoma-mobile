@@ -1,10 +1,10 @@
 import { createNavigationContainerRef } from '@react-navigation/native'
 
-import { LandingParamsList } from '~/modules/Landing/Landing.types'
+import { ParamsList } from '~/modules/Landing/Landing.types'
 
-export const navigationRef = createNavigationContainerRef<LandingParamsList>()
+export const navigationRef = createNavigationContainerRef<ParamsList>()
 
-export const navigate = (name: never, params: never) => {
+export const navigate = (name?: keyof ParamsList, params?: never) => {
   if (navigationRef.isReady()) {
     navigationRef.navigate(name, params)
   }

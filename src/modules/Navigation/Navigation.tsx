@@ -2,7 +2,6 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import React from 'react'
 
-import { LandingNavigationRoutes } from '~/modules/Landing/Landing.types'
 import { setupSentryNavigation } from '~/monitoring'
 
 import HomeNavigation from '../HomeNavigation'
@@ -19,7 +18,7 @@ interface Props {
 const Navigation = ({ isAuthorised }: Props) => {
   return (
     <NavigationContainer ref={navigationRef} onReady={setupSentryNavigation} linking={linking}>
-      <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={LandingNavigationRoutes.Authentication}>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
         {isAuthorised ? (
           <Stack.Screen name="Authed" component={HomeNavigation} />
         ) : (
