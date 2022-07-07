@@ -24,10 +24,15 @@ const SkillsResults = ({ skills, hasNoResults, onItemSelect, isLoading = false }
   }, [isLoading, skills])
 
   const renderItem = useCallback(
-    ({ item }) => <SkillItem key={item} item={item} onPress={onItemSelect} />,
+    ({ item }: { item: string }) => <SkillItem key={item} item={item} onPress={onItemSelect} />,
     [onItemSelect],
   )
-  const getItemLayout = useCallback((data, index) => ({ length: 25, offset: 25 * index, index }), [])
+  const getItemLayout = useCallback(
+    (_d: any[] | null | undefined, index: number) => ({ length: 25, offset: 25 * index, index }),
+    [],
+  )
+
+  const getDivider = useCallback(() => <Divider />, [])
 
   return (
     <FlatList
@@ -36,7 +41,7 @@ const SkillsResults = ({ skills, hasNoResults, onItemSelect, isLoading = false }
       maxToRenderPerBatch={10}
       updateCellsBatchingPeriod={50}
       getItemLayout={getItemLayout}
-      ItemSeparatorComponent={() => <Divider />}
+      ItemSeparatorComponent={getDivider}
       data={data}
       ListEmptyComponent={<NoSkillsStates isLoading={isLoading} hasNoResult={hasNoResults} />}
       renderItem={renderItem}

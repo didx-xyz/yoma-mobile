@@ -53,13 +53,13 @@ export const getUserJobsFromCredentialsFlow =
   }
 
 export const normaliseUserJobsFlow =
-  ({ normalise }: NormaliseDependency<UserJobCredential>): Middleware =>
+  ({ normalise: normalisePayload }: NormaliseDependency<UserJobCredential>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
     if (getUserJobsSuccess.match(action)) {
-      const normalisedJobs = normalise(action.payload)
+      const normalisedJobs = normalisePayload(action.payload)
       dispatch(normaliseUserJobsSuccess(normalisedJobs))
     }
     return result
