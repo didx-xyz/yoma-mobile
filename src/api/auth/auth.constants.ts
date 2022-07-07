@@ -7,7 +7,7 @@ import { API_VERSION_PART } from '../api.constants'
 import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
 import { AuthEndpoints } from './auth.types'
 
-const REDIRECT_URL = 'com.yomamobile.auth://auth/sign-in'
+const REDIRECT_URL = `${Env.APP_SCHEME}auth/sign-in`
 const OAUTH_CLIENT_ID = 'yoma-mobile-app'
 const OAUTH_SCOPES = ['openid', 'profile', 'yoma-api-v1', 'offline_access']
 

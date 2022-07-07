@@ -1,10 +1,3 @@
-import { FormikValues } from 'formik'
-
-export interface ProfileFormState {
-  values: FormikValues
-  isValid: boolean
-}
-
 export interface ProfileFormUser {
   firstName: string
   lastName: string

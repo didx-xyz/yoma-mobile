@@ -1,6 +1,6 @@
 import { useField } from 'formik'
 import { without } from 'ramda'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 import DropDownPicker from 'react-native-dropdown-picker'
@@ -40,6 +40,15 @@ const DropDownTags = ({ name, label, ...props }: Props) => {
     }
   }, [value])
 
+  const closeIconComponent = useCallback(
+    () => (
+      <Text.Body align={TextAlign.Center} weight={FontWeights.Bold700} color={Colors.PrimaryGreen}>
+        {t('Done')}
+      </Text.Body>
+    ),
+    [t],
+  )
+
   return (
     <View style={styles.container}>
       <Text.Meta level={MetaLevels.Small}>{textOrSpace(dropDownValue.length > 0, label)}</Text.Meta>
@@ -62,11 +71,7 @@ const DropDownTags = ({ name, label, ...props }: Props) => {
         setOpen={() => setIsOpen(isCurrentlyOpen => !isCurrentlyOpen)}
         setValue={setDropdownValue}
         showArrowIcon={false}
-        CloseIconComponent={() => (
-          <Text.Body align={TextAlign.Center} weight={FontWeights.Bold700} color={Colors.PrimaryGreen}>
-            {t('Done')}
-          </Text.Body>
-        )}
+        CloseIconComponent={closeIconComponent}
         closeIconContainerStyle={styles.save}
         labelStyle={styles.pickerLabel}
         {...props}

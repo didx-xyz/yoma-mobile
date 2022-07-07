@@ -67,8 +67,9 @@ export const getSecureRefreshTokenFlow =
           return result
         }
         dispatch(getSecureRefreshTokenSuccess(token))
-      } catch (error) {
-        dispatch(getSecureRefreshTokenFailure(error.message))
+      } catch (error: any) {
+        const errorMessage = error.message || 'There has been an error'
+        dispatch(getSecureRefreshTokenFailure(errorMessage))
       }
     }
     return result
@@ -118,9 +119,9 @@ export const loginFlow: Middleware =
 
     if (login.match(action)) {
       try {
-        const result: OAuthLoginSuccessResponse = await OAuthAuthorize(ApiAuthConstants.OAUTH_SETUP_CONFIG)
-        dispatch(loginSuccess(result))
-      } catch (error) {
+        const response: OAuthLoginSuccessResponse = await OAuthAuthorize(ApiAuthConstants.OAUTH_SETUP_CONFIG)
+        dispatch(loginSuccess(response))
+      } catch (error: any) {
         dispatch(loginFailure(error))
       }
     }
