@@ -7,25 +7,26 @@ import { UserChallenge } from '../UserChallenges/UserChallenges.types'
 import { UserJobCredential } from '../UserJobs/UserJobs.types'
 
 export interface UserDetails {
-  id: string
-  firstName: string
-  lastName: string
-  phoneNumber: null | string
+  age: null | string
   biography: null | string
   countryAlpha2: string
-  email: string
-  zltoWalletId: null | string
-  zltoBalance: number
   covidChallengeCertificateURL: null | string
-  tideChallengeCertificateURL: null | string
-  photoURL: null | string
-  organisationId: null | string
-  organisation: null | string
-  organisationVerified: false | string
-  createdAt: string
-  lastLogin: null | string
-  age: null | string
+  createdAt: string | null
+  email: string
+  firstName: string
   gender: string
+  id: string
+  lastLogin: null | string
+  name: null | string
+  lastName: string
+  organisation: null | string
+  organisationId: null | string
+  organisationVerified: false | string
+  phoneNumber: string | null
+  photoURL: null | string
+  tideChallengeCertificateURL: null | string
+  zltoBalance: number
+  zltoWalletId: null | string
 }
 export interface UserDetailsResponse {
   data: {
@@ -45,7 +46,7 @@ export type UpdateUserFailureResponse = string
 export interface UserPayload {
   firstName?: string
   lastName?: string
-  phoneNumber?: string
+  phoneNumber?: string | null
   countryAlpha2?: string
   biography?: string
 }

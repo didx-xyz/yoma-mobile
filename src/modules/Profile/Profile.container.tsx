@@ -3,6 +3,8 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
+import { UserPayload } from '~/modules/User/User.types'
+
 import * as AuthActions from '../Auth/Auth.reducer'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import { actions as UserActions } from '../User'
@@ -21,8 +23,8 @@ const ProfileContainer = ({ navigation }: Props) => {
     dispatch(AuthActions.logout())
   }
 
-  const onProfileSave = (user: any) => {
-    dispatch(UserActions.updateUser(user))
+  const onProfileSave = (profileFormUser: UserPayload) => {
+    dispatch(UserActions.updateUser(profileFormUser))
   }
 
   const onPhotoSave = () => {

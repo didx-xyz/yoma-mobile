@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ChallengesIcon, CoursesIcon, DigitalCvIcon, MarketplaceIcon } from '~/assets/images'
@@ -37,8 +37,20 @@ const screenOptions = {
   },
 }
 
+interface TabInfo {
+  focused: boolean
+  color: string
+  size: number
+}
+
 const HomeTabs = () => {
   const { t } = useTranslation()
+
+  const getDigitalCvIcon = useCallback((tabInfo: TabInfo) => <DigitalCvIcon fill={tabInfo.color} />, [])
+  const getCoursesIcon = useCallback((tabInfo: TabInfo) => <CoursesIcon fill={tabInfo.color} />, [])
+  const getChallengesIcon = useCallback((tabInfo: TabInfo) => <ChallengesIcon fill={tabInfo.color} />, [])
+  const getMarketplaceIcon = useCallback((tabInfo: TabInfo) => <MarketplaceIcon fill={tabInfo.color} />, [])
+
   return (
     <Tab.Navigator screenOptions={screenOptions}>
       <Tab.Screen
@@ -46,7 +58,7 @@ const HomeTabs = () => {
         component={MyCv}
         options={{
           title: t('myCv'),
-          tabBarIcon: tabInfo => <DigitalCvIcon fill={tabInfo.color} />,
+          tabBarIcon: getDigitalCvIcon,
         }}
       />
       <Tab.Screen
@@ -54,7 +66,7 @@ const HomeTabs = () => {
         component={Courses}
         options={{
           title: t('courses'),
-          tabBarIcon: tabInfo => <CoursesIcon fill={tabInfo.color} />,
+          tabBarIcon: getCoursesIcon,
         }}
       />
       <Tab.Screen
@@ -62,7 +74,7 @@ const HomeTabs = () => {
         component={Challenges}
         options={{
           title: t('challenges'),
-          tabBarIcon: tabInfo => <ChallengesIcon fill={tabInfo.color} />,
+          tabBarIcon: getChallengesIcon,
         }}
       />
       <Tab.Screen
@@ -70,7 +82,7 @@ const HomeTabs = () => {
         component={Marketplace}
         options={{
           title: t('marketplace'),
-          tabBarIcon: tabInfo => <MarketplaceIcon fill={tabInfo.color} />,
+          tabBarIcon: getMarketplaceIcon,
         }}
       />
     </Tab.Navigator>

@@ -121,7 +121,7 @@ export const loginFlow: Middleware =
       try {
         const response: OAuthLoginSuccessResponse = await OAuthAuthorize(ApiAuthConstants.OAUTH_SETUP_CONFIG)
         dispatch(loginSuccess(response))
-      } catch (error) {
+      } catch (error: any) {
         dispatch(loginFailure(error))
       }
     }

@@ -6,8 +6,8 @@ export const schema = Yup.object().shape({
   organisationId: Yup.string().required('Required'),
   startTime: Yup.date().nullable().required('Required'),
   endTime: Yup.date()
-    .when('startTime', (eventStartDate: any, schema: any) =>
-      eventStartDate ? schema.min(eventStartDate, 'End date cannot be before start date') : schema,
+    .when('startTime', (eventStartDate: any, dateSchema: any) =>
+      eventStartDate ? dateSchema.min(eventStartDate, 'End date cannot be before start date') : dateSchema,
     )
     .nullable()
     .required('Required'),
