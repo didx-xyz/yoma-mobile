@@ -4,6 +4,7 @@ import { authorize as OAuthAuthorize } from 'react-native-app-auth'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
+import { ApiErrorResponse } from '~/api/api.types'
 import { constants as ApiAuthConstants } from '~/api/auth'
 import { showSimpleMessage } from '~/utils/error'
 
@@ -67,8 +68,9 @@ export const getSecureRefreshTokenFlow =
           return result
         }
         dispatch(getSecureRefreshTokenSuccess(token))
-      } catch (error) {
-        dispatch(getSecureRefreshTokenFailure(error))
+      } catch (error: any) {
+        const errorMessage = error.message || 'There has been an error'
+        dispatch(getSecureRefreshTokenFailure(errorMessage))
       }
     }
     return result
