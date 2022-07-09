@@ -13,7 +13,7 @@ import { nameHasDigitsOrSymbols } from '~/utils/regex'
 // Basic rules:
 // only numbers, +, -, whitespace and ().
 // It respects the parenthesis balance and there is always a number after a symbol.
-const PHONE_NUMBER_REGEX = /^([+]?[\s\d]+)?(\d{3}|[(]?\d+[)])?(-?\s?\d)+$/
+const PHONE_NUMBER_REGEX = /^[+]?([(][\s\d]+[)])?(-?\s?\d)+$/
 
 export const schema = () =>
   yup.object().shape({
