@@ -1,4 +1,5 @@
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import { challengesStateFixture } from './Challenges.fixture'
 import * as SUT from './Challenges.selectors'
 

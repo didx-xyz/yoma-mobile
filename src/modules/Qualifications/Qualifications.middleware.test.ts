@@ -1,10 +1,10 @@
 import { mergeRight } from 'ramda'
+import { createMiddlewareMock } from 'tests/tests.utils'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiQualificationsConstants } from '~/api/qualifications'
 import { actions as UserQualificationActions } from '~/modules/UserQualifications'
 
-import { createMiddlewareMock } from '../../../tests/tests.utils'
 import * as SUT from './Qualifications.middleware'
 import { createQualification, createQualificationFailure, createQualificationSuccess } from './Qualifications.reducer'
 
@@ -21,6 +21,7 @@ describe('modules/Qualifications/Qualifications.middleware', () => {
         endTime: '2021-09-02T13:02:27.839Z',
         countries: ['SOME COUNTRY'],
         skillNames: ['SKILL 1'],
+        certificate: null,
       }
       // when ... we create the user's credentials
       const action = createQualification(mockPayload)

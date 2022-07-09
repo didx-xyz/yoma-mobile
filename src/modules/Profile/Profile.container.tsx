@@ -1,17 +1,18 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import * as AuthActions from '../Auth/Auth.reducer'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import { actions as UserActions } from '../User'
+import * as AuthActions from '~/modules/Auth/Auth.reducer'
+import { actions as UserActions } from '~/modules/User'
+import { UserPayload } from '~/modules/User/User.types'
+
 import Profile from './Profile'
 import selector from './Profile.selector'
+import { ProfileNavigation } from './Profile.types'
 import { schema } from './Profile.validation'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
+  navigation: ProfileNavigation
 }
 const ProfileContainer = ({ navigation }: Props) => {
   const dispatch = useDispatch()
@@ -21,8 +22,8 @@ const ProfileContainer = ({ navigation }: Props) => {
     dispatch(AuthActions.logout())
   }
 
-  const onProfileSave = (user: any) => {
-    dispatch(UserActions.updateUser(user))
+  const onProfileSave = (profileFormUser: UserPayload) => {
+    dispatch(UserActions.updateUser(profileFormUser))
   }
 
   const onPhotoSave = () => {

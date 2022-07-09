@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Adding Completed Courses to the CV
+- fixing critical vulnerabilities
 
 Last 10 deployment release notes:
+- Adding Completed Courses to the CV
 - Updating Eduction components to use UserQualification components and selectors
 - Adding Qualification components to service courses and education
 - Adding Sentry

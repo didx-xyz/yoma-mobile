@@ -2,11 +2,11 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
 import { View } from 'react-native'
 
+import { ButtonBack } from '~/components/Button'
+import Text, { HeaderLevels } from '~/components/Typography'
 import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
 import { Colors } from '~/styles'
 
-import { ButtonBack } from '../Button'
-import Text, { HeaderLevels } from '../Typography'
 import styles from './Header.styles'
 
 type Props = {

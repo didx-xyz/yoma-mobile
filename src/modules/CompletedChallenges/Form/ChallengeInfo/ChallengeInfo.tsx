@@ -1,4 +1,5 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import Optional from '~/components/Optional'
@@ -13,21 +14,24 @@ interface Props {
 }
 
 const ChallengeInfo = ({ challenge }: Props) => {
+  const { t } = useTranslation()
   return (
     <View style={styles.container}>
-      <Text.Header level={HeaderLevels.H4}>About {challenge?.name}:</Text.Header>
+      <Text.Header level={HeaderLevels.H4}>
+        {t('About')} {challenge?.name}:
+      </Text.Header>
       <Spacer height={16} />
       <Text.Body>
-        <Bold>Challenge Host:</Bold> {challenge?.organisationName}
+        <Bold>{t('Challenge Host')}:</Bold> {challenge?.organisationName}
       </Text.Body>
       <Spacer height={8} />
       <Text.Body>
-        <Bold>Description:</Bold> {challenge?.description}
+        <Bold>{t('Description')}:</Bold> {challenge?.description}
       </Text.Body>
       <Optional condition={!!challenge?.skills && challenge?.skills.length > 0}>
         <Spacer height={8} />
         <Text.Body>
-          <Bold>Skills:</Bold> {challenge?.skills?.join(' | ')}
+          <Bold>{t('Skills')}:</Bold> {challenge?.skills?.join(' | ')}
         </Text.Body>
       </Optional>
     </View>

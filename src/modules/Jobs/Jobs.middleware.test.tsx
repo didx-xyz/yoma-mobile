@@ -1,10 +1,10 @@
 import { mergeRight } from 'ramda'
+import { createMiddlewareMock } from 'tests/tests.utils'
 
+import { actions as ApiActions } from '~/api'
+import { constants as ApiJobsConstants } from '~/api/jobs'
 import { createUserJob } from '~/modules/UserJobs/UserJobs.reducer'
 
-import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { actions as ApiActions } from '../../api'
-import { constants as ApiJobsConstants } from '../../api/jobs'
 import * as SUT from './Jobs.middleware'
 import { createJob, createJobFailure, createJobSuccess } from './Jobs.reducer'
 import { JOB_MOCK } from './Jobs.test.fixtures'

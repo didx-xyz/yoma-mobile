@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { Colors } from '../../styles'
-import Optional from '../Optional'
-import Text, { TextAlign } from '../Typography'
+import Optional from '~/components/Optional'
+import Text, { TextAlign } from '~/components/Typography'
+import { Colors } from '~/styles'
 
 interface Props {
   error?: string

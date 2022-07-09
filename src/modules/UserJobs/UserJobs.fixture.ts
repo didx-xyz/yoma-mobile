@@ -1,4 +1,5 @@
-import { createFixture } from '../../../tests/tests.utils'
+import { createFixture } from 'tests/tests.utils'
+
 import { UserJobCredential } from './UserJobs.types'
 
 export const USER_JOBS_MOCK: UserJobCredential[] = [

@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, pick, pipe, propOr, slice } from 'ramda'
 
-import { selectUserSkills } from '../../UserSkills/UserSkills.selector'
+import { selectUserSkills } from '~/modules/UserSkills/UserSkills.selector'
 
 export default createSelector(selectUserSkills, userSkills => {
   const count = userSkills.ids.length
