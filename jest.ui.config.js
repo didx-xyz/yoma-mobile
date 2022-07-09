@@ -14,7 +14,7 @@ const config = {
   },
   resolver: undefined,
   transformIgnorePatterns: [
-    'node_modules/(?!(@react-native|react-native)/.*)(?!(@react-navigation|react-navigation)/.*)(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|expo(nent)?|@expo(nent)?/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|@sentry/.*)',
+    'node_modules/(?!(@react-native|react-native)/.*)(?!(@react-navigation|react-navigation)/.*)(?!(jest-)?react-native|react-clone-referenced-element|@react-native-community|react-navigation|@react-navigation/.*|sentry-expo|native-base|@sentry/.*)',
   ],
 }
 

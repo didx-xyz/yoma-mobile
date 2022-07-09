@@ -8,8 +8,10 @@ export const schema = Yup.object().shape({
   organisationId: Yup.string().required(ValidationStrings.REQUIRED),
   startTime: Yup.date().nullable().required(ValidationStrings.REQUIRED),
   endTime: Yup.date()
-    .when('startTime', (eventStartDate: any, schema: any) =>
-      eventStartDate ? schema.min(eventStartDate, ValidationStrings.END_DATE_CANNOT_BE_BEFORE_START_DATE) : schema,
+    .when('startTime', (eventStartDate: any, dateSchema: any) =>
+      eventStartDate
+        ? dateSchema.min(eventStartDate, ValidationStrings.END_DATE_CANNOT_BE_BEFORE_START_DATE)
+        : dateSchema,
     )
     .nullable()
     .required(ValidationStrings.REQUIRED),

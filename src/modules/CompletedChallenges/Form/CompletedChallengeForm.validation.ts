@@ -9,8 +9,8 @@ export const schema = Yup.object().shape({
     .nullable()
     .required(Strings.REQUIRED),
   endTime: Yup.date()
-    .when('startDate', (eventStartDate: any, schema: any) =>
-      eventStartDate ? schema.min(eventStartDate, Strings.START_DATE_CANNOT_BE_IN_THE_FUTURE) : schema,
+    .when('startDate', (eventStartDate: any, dateSchema: any) =>
+      eventStartDate ? dateSchema.min(eventStartDate, Strings.START_DATE_CANNOT_BE_IN_THE_FUTURE) : dateSchema,
     )
     .max(new Date(), Strings.END_DATE_CANNOT_BE_IN_THE_FUTURE)
     .nullable()

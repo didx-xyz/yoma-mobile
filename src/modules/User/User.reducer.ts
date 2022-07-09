@@ -4,13 +4,14 @@ import { mergeDeepRight } from 'ramda'
 import {
   UpdateUserFailureResponse,
   UpdateUserResponse,
+  UserDetails,
   UserDetailsResponse,
   UserPayload,
   UserResponse,
 } from './User.types'
 
 const name = '[User]'
-export const INITIAL_STATE = {
+export const INITIAL_STATE: UserDetails = {
   id: '',
   firstName: '',
   lastName: '',

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import * as AuthActions from '~/modules/Auth/Auth.reducer'
 import { actions as UserActions } from '~/modules/User'
+import { UserPayload } from '~/modules/User/User.types'
 
 import Profile from './Profile'
 import selector from './Profile.selector'
@@ -21,8 +22,8 @@ const ProfileContainer = ({ navigation }: Props) => {
     dispatch(AuthActions.logout())
   }
 
-  const onProfileSave = (user: any) => {
-    dispatch(UserActions.updateUser(user))
+  const onProfileSave = (profileFormUser: UserPayload) => {
+    dispatch(UserActions.updateUser(profileFormUser))
   }
 
   const onPhotoSave = () => {
