@@ -1,11 +1,11 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeRight } from 'ramda'
 
+import { Job } from '~/modules/Jobs/Jobs.types'
 import { UserCredentialFormValues } from '~/modules/User/User.types'
+import { setFormValues } from '~/modules/User/User.utils'
 import { updateNormalisedReducer } from '~/redux/redux.utils'
 
-import { Job } from '../Jobs/Jobs.types'
-import { setFormValues } from '../User/User.utils'
 import { NormalisedUserJobs, UserJobCredential, UserJobsResponse, UserJobsState } from './UserJobs.types'
 
 const name = '[User: Jobs]'

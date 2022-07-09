@@ -1,4 +1,5 @@
-import { createFixture } from '../../../tests/tests.utils'
+import { createFixture } from 'tests/tests.utils'
+
 import { Organisation } from './Organisations.types'
 
 export const ORGANISATIONS_MOCK: Organisation[] = [

@@ -5,12 +5,14 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiAuthConstants } from '~/api/auth'
+import * as Strings from '~/constants/strings.constants'
+// avoiding circular dependencies:
+import * as AppActions from '~/modules/App/App.reducer'
+import { actions as ErrorActions } from '~/modules/Error'
+import { getErrorMessageWithFallback } from '~/modules/Error/error.utils'
+import { selectors as UserSelectors } from '~/modules/User'
 import { showSimpleMessage } from '~/utils/error'
 
-// avoiding circular dependencies:
-import * as AppActions from '../App/App.reducer'
-import { actions as ErrorActions } from '../Error'
-import { selectors as UserSelectors } from '../User'
 import { SECURE_STORE_REFRESH_TOKEN_KEY } from './Auth.constants'
 import {
   authorize,
@@ -67,9 +69,10 @@ export const getSecureRefreshTokenFlow =
           return result
         }
         dispatch(getSecureRefreshTokenSuccess(token))
-      } catch (error: any) {
-        const errorMessage = error.message || 'There has been an error'
-        dispatch(getSecureRefreshTokenFailure(errorMessage))
+      } catch (error) {
+        const message = getErrorMessageWithFallback(error)
+
+        dispatch(getSecureRefreshTokenFailure(message))
       }
     }
     return result
@@ -121,8 +124,9 @@ export const loginFlow: Middleware =
       try {
         const response: OAuthLoginSuccessResponse = await OAuthAuthorize(ApiAuthConstants.OAUTH_SETUP_CONFIG)
         dispatch(loginSuccess(response))
-      } catch (error: any) {
-        dispatch(loginFailure(error))
+      } catch (error) {
+        const message = getErrorMessageWithFallback(error)
+        dispatch(loginFailure(message))
       }
     }
 
@@ -159,7 +163,8 @@ export const setSecureRefreshTokenFlow =
           dispatch(setSecureRefreshTokenSuccess())
         })
         .catch((error: any) => {
-          dispatch(setSecureRefreshTokenFailure(error))
+          const message = getErrorMessageWithFallback(error)
+          dispatch(setSecureRefreshTokenFailure(message))
         })
     }
     return result
@@ -173,9 +178,9 @@ export const loginFailureFlow =
     const result = next(action)
 
     if (loginFailure.match(action)) {
-      // TODO: this should be handled by the notification module
-      // @ts-ignore
-      notification('danger', 'An error occurred.', action.payload.message)
+      const message = getErrorMessageWithFallback(action.payload)
+
+      notification('danger', Strings.AN_ERROR_OCCURRED, message)
     }
 
     return result

@@ -1,4 +1,5 @@
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import { USER_CHALLENGES_STATE_MOCK } from './UserChallenges.fixtures'
 import { INITIAL_STATE } from './UserChallenges.reducer'
 import * as SUT from './UserChallenges.selector'

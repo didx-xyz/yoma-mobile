@@ -2,10 +2,10 @@ import { useField } from 'formik'
 import React from 'react'
 import { Keyboard, TextInput, TextInputProps, View } from 'react-native'
 
+import InputError from '~/components/InputError'
+import Text, { MetaLevels } from '~/components/Typography'
 import { Colors, colors } from '~/styles'
 
-import InputError from '../InputError'
-import Text, { MetaLevels } from '../Typography'
 import styles from './Input.styles'
 
 type Props = TextInputProps & {

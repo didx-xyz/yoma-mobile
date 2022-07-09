@@ -1,5 +1,7 @@
-import { createMiddlewareMock } from '../../../tests/tests.utils'
-import * as ApiActions from '../../api/api.reducer'
+import { createMiddlewareMock } from 'tests/tests.utils'
+
+import * as ApiActions from '~/api/api.reducer'
+
 import * as SUT from './Error.middleware'
 import { unauthorizedError } from './Error.reducer'
 

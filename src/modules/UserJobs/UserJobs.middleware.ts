@@ -4,19 +4,20 @@ import { Middleware } from 'redux'
 import { actions as ApiActions, utils as ApiUtils } from '~/api'
 import { constants as ApiUsersConstants } from '~/api/users'
 import { UserCredentialTypes } from '~/api/users/users.types'
+import * as Strings from '~/constants/strings.constants'
 import { extractErrorResponseMessage } from '~/modules/Error/error.utils'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
 import * as JobsActions from '~/modules/Jobs/Jobs.reducer'
+import * as Navigation from '~/modules/Navigation/Navigation.utils'
+import * as UserActions from '~/modules/User/User.reducer'
 import * as UserSelectors from '~/modules/User/User.selector'
+import { UserCredentials } from '~/modules/User/User.types'
 import { extractUserCredentialFormValues, prepareUserCredentialItemPayload } from '~/modules/User/User.utils'
 import { NormaliseDependency } from '~/redux/redux.types'
 import { extractDataFromResponseAction, normalise } from '~/redux/redux.utils'
 import { StdFn } from '~/types/general.types'
 import { showSimpleMessage } from '~/utils/error'
 
-import * as Navigation from '../Navigation/Navigation.utils'
-import * as UserActions from '../User/User.reducer'
-import { UserCredentials } from '../User/User.types'
 import {
   clearUserJobsFormValues,
   createUserJob,
@@ -181,7 +182,7 @@ export const fetchUserJobByIdSuccessFlow =
       const normalisedJobs = normalise(userJob)
       dispatch(updateUserJobs(normalisedJobs))
       // TODO: this should be handled by the notification module
-      notification('success', 'Details saved!')
+      notification('success', Strings.DETAILS_SAVED)
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
     }
@@ -198,7 +199,7 @@ export const fetchUserJobByIdFailureFlow =
     if (fetchUserJobByIdFailure.match(action)) {
       const errorMessage = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
-      notification('danger', 'Error', errorMessage)
+      notification('danger', Strings.ERROR, errorMessage)
     }
     return result
   }

@@ -2,9 +2,8 @@ import { DocumentPickerResponse } from 'react-native-document-picker'
 
 import { types as ApiTypes } from '~/api'
 import { UserCredentialTypes } from '~/api/users/users.types'
-
-import { UserChallenge } from '../UserChallenges/UserChallenges.types'
-import { UserJobCredential } from '../UserJobs/UserJobs.types'
+import { UserChallenge } from '~/modules/UserChallenges/UserChallenges.types'
+import { UserJobCredential } from '~/modules/UserJobs/UserJobs.types'
 
 export interface UserDetails {
   age?: null | string

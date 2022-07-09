@@ -3,11 +3,12 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiQualificationConstants } from '~/api/qualifications'
+import * as Strings from '~/constants/strings.constants'
+import * as UserQualificationsActions from '~/modules/UserQualifications/UserQualifications.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
-import * as UserQualificationsActions from '../UserQualifications/UserQualifications.reducer'
 import { createQualification, createQualificationFailure, createQualificationSuccess } from './Qualifications.reducer'
 
 export const createQualificationFlow: Middleware =
@@ -53,7 +54,7 @@ export const createQualificationFailureFlow =
 
     if (createQualificationFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
     }
     return result
   }

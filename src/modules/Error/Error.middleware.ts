@@ -1,6 +1,7 @@
 import { Middleware } from 'redux'
 
-import { actions as ApiActions } from '../../api'
+import { actions as ApiActions } from '~/api'
+
 import { unauthorizedError } from './Error.reducer'
 
 export const categorizeErrorsFlow: Middleware =

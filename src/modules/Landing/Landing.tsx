@@ -47,7 +47,7 @@ const Landing = ({ onLogin }: Props) => {
             label={t('Login')}
             onPress={onLogin}
             style={styles.registerButton}
-            loadingLabel="Logging you in..."
+            loadingLabel={t('Logging you in...')}
             isLoadingEnabled
           />
         </View>

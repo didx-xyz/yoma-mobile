@@ -1,4 +1,7 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { DocumentPickerResponse } from 'react-native-document-picker'
+
+import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
 
 export type FormFields = {
   credentialItemId: string
@@ -7,3 +10,8 @@ export type FormFields = {
   requestVerification: boolean
   certificate: DocumentPickerResponse | null
 }
+
+export type CompletedChallengesNavigation = NativeStackNavigationProp<
+  HomeNavigationTypes.HomeNavigatorParamsList,
+  HomeNavigationTypes.HomeNavigationRoutes.CompletedChallenges
+>

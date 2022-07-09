@@ -2,9 +2,8 @@ import React from 'react'
 import { GestureResponderEvent, Image, TouchableOpacity, View, ViewStyle } from 'react-native'
 
 import { EditIcon, ProfileIcon } from '~/assets/images'
-import { Colors, colors } from '~/styles'
+import { Colors, constants as StyleConstants, colors } from '~/styles'
 
-import { CIRCULAR_RADIUS_DIVISOR } from '../../styles/styles.constants'
 import Optional from '../Optional'
 import ProgressCircle from '../ProgressCircle'
 import styles from './ProfilePhoto.styles'
@@ -48,7 +47,7 @@ const ProfilePhoto = ({
                 {
                   width: size,
                   height: size,
-                  borderRadius: size / CIRCULAR_RADIUS_DIVISOR,
+                  borderRadius: size / StyleConstants.CIRCULAR_RADIUS_DIVISOR,
                 },
               ]}
             >

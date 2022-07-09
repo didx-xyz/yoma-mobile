@@ -1,6 +1,6 @@
 import { mergeRight } from 'ramda'
+import { createMiddlewareMock } from 'tests/tests.utils'
 
-import { createMiddlewareMock } from '~/../tests/tests.utils'
 import { actions as ApiActions, utils as ApiUtils } from '~/api'
 import { constants as ApiUsersConstants } from '~/api/users'
 import { fetchUserFromOAuthSuccess } from '~/modules/Auth/Auth.reducer'

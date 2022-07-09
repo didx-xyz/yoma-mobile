@@ -1,6 +1,5 @@
 import { ApiResponseMeta } from '~/api/api.types'
-
-import * as UserTypes from '../User/User.types'
+import * as UserTypes from '~/modules/User/User.types'
 
 export interface UserJob {
   organisationURL: string

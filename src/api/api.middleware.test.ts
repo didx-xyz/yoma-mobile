@@ -1,4 +1,5 @@
-import { createMiddlewareMock } from '../../tests/tests.utils'
+import { createMiddlewareMock } from 'tests/tests.utils'
+
 import * as SUT from './api.middleware'
 import { apiError, apiRequest } from './api.reducer'
 

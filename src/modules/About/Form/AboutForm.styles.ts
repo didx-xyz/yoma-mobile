@@ -1,6 +1,6 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
-import textinputStyles from '~/components/Input/Input.styles'
+import textInputStyles from '~/components/Input/Input.styles'
 import { Colors, colors } from '~/styles'
 
 const styles = {
@@ -11,7 +11,7 @@ const styles = {
     flex: 1,
   } as ViewStyle,
   textInput: {
-    ...textinputStyles.textInput,
+    ...textInputStyles.textInput,
     width: '100%',
     flex: 1,
     paddingLeft: 0,

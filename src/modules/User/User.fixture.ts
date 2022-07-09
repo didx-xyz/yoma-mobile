@@ -1,4 +1,4 @@
-import { createFixture } from '~/../tests/tests.utils'
+import { createFixture } from 'tests/tests.utils'
 
 import { INITIAL_STATE } from './User.reducer'
 import { UserCredentials, UserResponse } from './User.types'
