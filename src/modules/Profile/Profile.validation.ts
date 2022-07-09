@@ -8,8 +8,12 @@ import {
 } from '~/modules/Profile/Profile.constants'
 import { nameHasDigitsOrSymbols } from '~/utils/regex'
 
-const PHONE_NUMBER_REG_EX =
-  /^((\\+[1-9]{1,4}[ \\-]*)|(\\(\d{2,3}\\)[ \\-]*)|(\d{2,4})[ \\-]*)*?\d{3,4}?[ \\-]*\d{3,4}?$/
+// Via this answer: https://stackoverflow.com/a/53297852
+// Goal is to be as accepting as possible with entered values.
+// Basic rules:
+// only numbers, +, -, whitespace and ().
+// It respects the parenthesis balance and there is always a number after a symbol.
+const PHONE_NUMBER_REGEX = /^([+]?[\s\d]+)?(\d{3}|[(]?\d+[)])?(-?\s?\d)+$/
 
 export const schema = () =>
   yup.object().shape({
@@ -41,9 +45,10 @@ export const schema = () =>
       .label('Email'),
     phoneNumber: yup
       .string()
-      .required(Strings.REQUIRED)
-      .matches(PHONE_NUMBER_REG_EX, PHONE_NUMBER_IS_NOT_VALID)
       .min(10, Strings.THE_VALUE_ENTERED_IS_TOO_SHORT)
-      .max(13, Strings.THE_VALUE_ENTERED_IS_TOO_LONG)
-      .nullable(),
+      .max(20, Strings.THE_VALUE_ENTERED_IS_TOO_LONG)
+      .matches(PHONE_NUMBER_REGEX, PHONE_NUMBER_IS_NOT_VALID)
+      .nullable()
+      .required(Strings.REQUIRED)
+      .label('Phone'),
   })

@@ -137,6 +137,7 @@ export const updateUserSuccessFlow =
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
+      console.log({ message: Strings.DETAILS_UPDATED })
       notification('success', Strings.DETAILS_UPDATED)
     }
     return result
