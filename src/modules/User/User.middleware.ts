@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -137,7 +138,7 @@ export const updateUserSuccessFlow =
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
-      notification('success', Strings.DETAILS_UPDATED)
+      notification('success', i18n.t(Strings.DETAILS_UPDATED))
     }
     return result
   }

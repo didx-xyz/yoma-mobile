@@ -20,6 +20,11 @@ export const setI18nConfig = () => {
   i18n.use(initReactI18next).init({
     resources: translationGetters,
     lng: languageTag,
+    // allow keys to be phrases having `:`, `.`
+    nsSeparator: false,
+    keySeparator: false,
+    // do not load a fallback
+    // fallbackLng: false,
     fallbackLng: 'en',
     debug: false,
     interpolation: {
