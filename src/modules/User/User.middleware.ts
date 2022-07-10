@@ -152,7 +152,11 @@ export const updateUserFailureFlow =
 
     if (updateUserFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
+      notification(
+        'danger',
+        i18n.t('general.errorOccurred'),
+        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN),
+      )
     }
     return result
   }
@@ -187,7 +191,11 @@ export const fetchUserCredentialsFailureFlow =
 
     if (fetchUserCredentialsFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
+      notification(
+        'danger',
+        i18n.t('general.errorOccurred'),
+        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN),
+      )
     }
     return result
   }
@@ -242,7 +250,7 @@ export const uploadUserPhotoFailureFlow =
 
     if (uploadUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, action.payload)
+      notification('danger', i18n.t('general.errorOccurred'), action.payload)
     }
     return result
   }
@@ -258,7 +266,7 @@ export const updateUserPhotoSuccessFlow =
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
       // TODO: this should be handled by the notification module
-      notification('success', Strings.DETAILS_UPDATED)
+      notification('success', i18n.t(Strings.DETAILS_UPDATED))
     }
     return result
   }
@@ -272,7 +280,7 @@ export const updateUserPhotoFailureFlow =
 
     if (updateUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, action.payload)
+      notification('danger', i18n.t('general.errorOccurred'), action.payload)
     }
     return result
   }

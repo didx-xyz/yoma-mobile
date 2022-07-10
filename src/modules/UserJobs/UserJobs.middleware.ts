@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -182,7 +183,7 @@ export const fetchUserJobByIdSuccessFlow =
       const normalisedJobs = normalise(userJob)
       dispatch(updateUserJobs(normalisedJobs))
       // TODO: this should be handled by the notification module
-      notification('success', Strings.DETAILS_SAVED)
+      notification('success', i18n.t(Strings.DETAILS_SAVED))
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
     }
@@ -199,7 +200,7 @@ export const fetchUserJobByIdFailureFlow =
     if (fetchUserJobByIdFailure.match(action)) {
       const errorMessage = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.ERROR, errorMessage)
+      notification('danger', i18n.t('general.error'), errorMessage)
     }
     return result
   }

@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import { mergeRight, of, pick } from 'ramda'
 import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
@@ -91,7 +92,7 @@ export const createUserChallengeSuccessFlow =
     if (createUserChallengeSuccess.match(action)) {
       const userChallenge = ReduxUtils.extractDataFromResponseAction(action)
       const normalisedUserChallenge = ReduxUtils.normalise(of(userChallenge))
-      notification('success', Strings.NEW_CHALLENGE_SUCCESSFULLY_CREATED)
+      notification('success', i18n.t(Strings.NEW_CHALLENGE_SUCCESSFULLY_CREATED))
       navigate(HomeNavigationRoutes.Home)
       dispatch(updateUserChallenges(normalisedUserChallenge))
       dispatch(createUserChallengeCertificate(userChallenge.id))
@@ -110,7 +111,7 @@ export const createUserChallengeFailureFlow =
     if (createUserChallengeFailure.match(action)) {
       const message = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.OOPS_SOMETHING_WENT_WRONG, message)
+      notification('danger', i18n.t('notification.general.error', { message }))
     }
     return result
   }
@@ -175,8 +176,8 @@ export const createUserChallengeCertificateFailureFlow =
       // TODO: this should be handled by the notification module
       notification(
         'danger',
-        Strings.AN_ERROR_OCCURRED,
-        Strings.OOPS_SOMETHING_WENT_WRONG_UPLOADING_YOUR_CHALLENGE_CERTIFICATE,
+        i18n.t('general.errorOccurred'),
+        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_UPLOADING_YOUR_CHALLENGE_CERTIFICATE),
       )
     }
     return result

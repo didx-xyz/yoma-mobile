@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -55,7 +56,11 @@ export const createJobFailureFlow =
 
     if (createJobFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
+      notification(
+        'danger',
+        i18n.t('general.errorOccurred'),
+        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN),
+      )
     }
     return result
   }
