@@ -107,7 +107,6 @@ export const createUserChallengeFailureFlow =
   next =>
   action => {
     const result = next(action)
-
     if (createUserChallengeFailure.match(action)) {
       const message = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
