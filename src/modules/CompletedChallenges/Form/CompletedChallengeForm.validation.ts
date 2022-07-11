@@ -1,19 +1,18 @@
+import i18n from 'i18next'
 import * as Yup from 'yup'
 
-import * as Strings from '~/constants/strings.constants'
-
 export const schema = Yup.object().shape({
-  credentialItemId: Yup.string().min(2).max(200).required(Strings.REQUIRED),
+  credentialItemId: Yup.string().min(2).max(200).required(i18n.t('forms.validation.required')),
   startTime: Yup.date()
-    .max(new Date(), Strings.START_DATE_CANNOT_BE_IN_THE_FUTURE)
+    .max(new Date(), i18n.t('forms.validation.noStartDateInFuture'))
     .nullable()
-    .required(Strings.REQUIRED),
+    .required(i18n.t('forms.validation.required')),
   endTime: Yup.date()
     .when('startDate', (eventStartDate: any, dateSchema: any) =>
-      eventStartDate ? dateSchema.min(eventStartDate, Strings.START_DATE_CANNOT_BE_IN_THE_FUTURE) : dateSchema,
+      eventStartDate ? dateSchema.min(eventStartDate, i18n.t('forms.validation.noStartDateInFuture')) : dateSchema,
     )
-    .max(new Date(), Strings.END_DATE_CANNOT_BE_IN_THE_FUTURE)
+    .max(new Date(), i18n.t('forms.validation.noEndDateInFuture'))
     .nullable()
-    .required(Strings.REQUIRED),
+    .required(i18n.t('forms.validation.required')),
   requestVerification: Yup.boolean(),
 })

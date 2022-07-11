@@ -23,7 +23,7 @@ const AboutWidget = ({ biography, navigation }: Props) => {
 
   return (
     <CvWidget
-      title={t('About')}
+      title={t('about.title')}
       noDataMessage={t('Your biography is one of the first things recruiters look at. Write a great one!')}
       onActionPress={() => {
         navigation.navigate(HomeNavigationRoutes.AboutForm)

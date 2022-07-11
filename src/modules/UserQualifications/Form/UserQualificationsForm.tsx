@@ -49,7 +49,11 @@ const UserQualificationsForm = ({ title, navigation, organisationsDropDown, form
             />
             <CountryPickerField name="countries" label={t('Country')} />
             <DateRangeSelect />
-            <SkillsSelectField name="skillNames" searchPlaceholder={t('Search skills')} label={t('Skills developed')} />
+            <SkillsSelectField
+              name="skillNames"
+              searchPlaceholder={t('Search skills')}
+              label={t('forms.label.skills')}
+            />
             <Upload name="certificate" label={t('Upload certification (if completed)')} />
             <View style={styles.bottom}>
               <Text.Meta

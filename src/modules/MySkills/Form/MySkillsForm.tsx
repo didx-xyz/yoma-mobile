@@ -27,7 +27,7 @@ const MySkillsForm = ({ navigation, form }: Props) => {
         actionItem={<ButtonSave onPress={form.handleSubmit} />}
       />
       <Card>
-        <SkillsSelectField name="skills" label={t('Skills developed:')} searchPlaceholder={t('Enter skill names')} />
+        <SkillsSelectField name="skills" label={t('forms.label.skills')} searchPlaceholder={t('Enter skill names')} />
       </Card>
     </ViewContainer>
   )

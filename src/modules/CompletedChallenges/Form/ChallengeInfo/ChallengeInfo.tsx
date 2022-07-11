@@ -18,7 +18,7 @@ const ChallengeInfo = ({ challenge }: Props) => {
   return (
     <View style={styles.container}>
       <Text.Header level={HeaderLevels.H4}>
-        {t('About')} {challenge?.name}:
+        {t('completedChallenges.title', { challenge: challenge?.name })}:
       </Text.Header>
       <Spacer height={16} />
       <Text.Body>
