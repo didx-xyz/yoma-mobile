@@ -6,14 +6,17 @@ import { Colors } from '~/styles'
 
 interface Props {
   error?: string
-  touched: boolean
 }
-const InputError = ({ error, touched }: Props) => (
-  <Optional condition={!!error && touched}>
-    <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
-      {error}
-    </Text.Meta>
-  </Optional>
-)
+const InputError = ({ error }: Props) => {
+  console.log({ in: 'InputError', error })
+
+  return (
+    <Optional condition={!!error}>
+      <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
+        {error}
+      </Text.Meta>
+    </Optional>
+  )
+}
 
 export default InputError
