@@ -55,7 +55,11 @@ export const createQualificationFailureFlow =
 
     if (createQualificationFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', i18n.t(''), i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN))
+      notification(
+        'danger',
+        i18n.t('general.errorOccurred'),
+        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN),
+      )
     }
     return result
   }
