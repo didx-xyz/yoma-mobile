@@ -1,12 +1,8 @@
+import i18n from 'i18next'
 import { path } from 'ramda'
 
-import * as Strings from '~/constants/strings.constants'
-
 export const extractErrorResponseMessage = path(['payload', 'data', 'meta', 'message'])
-export const getErrorMessageWithFallback = (
-  error: any,
-  fallbackMessage = Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN,
-) => {
+export const getErrorMessageWithFallback = (error: any, fallbackMessage = i18n.t('general.errorMessageTryAgain')) => {
   if (typeof error === 'string') {
     return error
   }

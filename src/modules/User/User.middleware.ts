@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
@@ -137,7 +138,7 @@ export const updateUserSuccessFlow =
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
-      notification('success', Strings.DETAILS_UPDATED)
+      notification('success', i18n.t(Strings.DETAILS_UPDATED))
     }
     return result
   }
@@ -151,7 +152,7 @@ export const updateUserFailureFlow =
 
     if (updateUserFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }
@@ -186,7 +187,7 @@ export const fetchUserCredentialsFailureFlow =
 
     if (fetchUserCredentialsFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }
@@ -241,7 +242,7 @@ export const uploadUserPhotoFailureFlow =
 
     if (uploadUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, action.payload)
+      notification('danger', i18n.t('general.errorOccurred'), action.payload)
     }
     return result
   }
@@ -257,7 +258,7 @@ export const updateUserPhotoSuccessFlow =
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
       // TODO: this should be handled by the notification module
-      notification('success', Strings.DETAILS_UPDATED)
+      notification('success', i18n.t(Strings.DETAILS_UPDATED))
     }
     return result
   }
@@ -271,7 +272,7 @@ export const updateUserPhotoFailureFlow =
 
     if (updateUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, action.payload)
+      notification('danger', i18n.t('general.errorOccurred'), action.payload)
     }
     return result
   }

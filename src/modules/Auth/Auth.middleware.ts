@@ -1,11 +1,11 @@
 import { isAnyOf } from '@reduxjs/toolkit'
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { authorize as OAuthAuthorize } from 'react-native-app-auth'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiAuthConstants } from '~/api/auth'
-import * as Strings from '~/constants/strings.constants'
 // avoiding circular dependencies:
 import * as AppActions from '~/modules/App/App.reducer'
 import { actions as ErrorActions } from '~/modules/Error'
@@ -180,7 +180,7 @@ export const loginFailureFlow =
     if (loginFailure.match(action)) {
       const message = getErrorMessageWithFallback(action.payload)
 
-      notification('danger', Strings.AN_ERROR_OCCURRED, message)
+      notification('danger', i18n.t('general.errorOccurred'), message)
     }
 
     return result

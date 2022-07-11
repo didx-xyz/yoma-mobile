@@ -63,7 +63,11 @@ const ExperienceForm = ({ navigation, organisations, form }: Props) => {
             />
             <DateRangeSelect label={t('When did you work here?')} />
             <Input name={'description'} label={t('Description')} multiline />
-            <SkillsSelectField name="skillNames" searchPlaceholder={t('Search skills')} label={t('Skills developed')} />
+            <SkillsSelectField
+              name="skillNames"
+              searchPlaceholder={t('Search skills')}
+              label={t('forms.label.skills')}
+            />
             <TouchableOpacity onPress={() => setShowInfoModal(true)}>
               <Text.Meta level={MetaLevels.SmallBold} color={Colors.PrimaryGreen}>
                 {t('Find inspiration on how to write a great profile.')}

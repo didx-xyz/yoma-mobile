@@ -35,7 +35,11 @@ const AboutForm = ({ navigation, form }: Props) => {
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
         }
       />
-      <Header navigation={navigation} headerText={t('About')} actionItem={<ButtonSave onPress={form.handleSubmit} />} />
+      <Header
+        navigation={navigation}
+        headerText={t('about.title')}
+        actionItem={<ButtonSave onPress={form.handleSubmit} />}
+      />
       <ScrollView>
         <Card style={styles.card}>
           <FormLayout>

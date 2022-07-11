@@ -65,7 +65,7 @@ const HomeTabs = () => {
         name={HomeTabRoutes.Courses}
         component={Courses}
         options={{
-          title: t('courses'),
+          title: t('Courses'),
           tabBarIcon: getCoursesIcon,
         }}
       />
@@ -73,7 +73,7 @@ const HomeTabs = () => {
         name={HomeTabRoutes.Challenges}
         component={Challenges}
         options={{
-          title: t('challenges'),
+          title: t('Challenges'),
           tabBarIcon: getChallengesIcon,
         }}
       />
