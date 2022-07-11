@@ -2,7 +2,6 @@ import i18n from 'i18next'
 import * as yup from 'yup'
 
 import * as Strings from '~/constants/strings.constants'
-import { THE_VALUE_ENTERED_IS_TOO_SHORT } from '~/constants/strings.constants'
 import { nameHasDigitsOrSymbols } from '~/utils/regex'
 
 const PHONE_NUMBER_REGEX = /^[+]?(\([\s\d]+\))?(-?\s?\d)+$/
