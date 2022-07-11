@@ -142,7 +142,7 @@ export const createUserJobFailureFlow =
     if (createUserJobFailure.match(action)) {
       const errorMessage = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
-      notification('danger', 'Error', errorMessage)
+      notification('danger', i18n.t('general.error'), errorMessage)
     }
     return result
   }

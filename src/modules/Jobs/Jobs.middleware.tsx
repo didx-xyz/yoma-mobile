@@ -4,7 +4,6 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiJobsConstants } from '~/api/jobs'
-import * as Strings from '~/constants/strings.constants'
 import * as UserJobsActions from '~/modules/UserJobs/UserJobs.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
@@ -56,11 +55,7 @@ export const createJobFailureFlow =
 
     if (createJobFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification(
-        'danger',
-        i18n.t('general.errorOccurred'),
-        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN),
-      )
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }

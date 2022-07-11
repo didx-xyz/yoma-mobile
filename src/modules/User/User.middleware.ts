@@ -152,11 +152,7 @@ export const updateUserFailureFlow =
 
     if (updateUserFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification(
-        'danger',
-        i18n.t('general.errorOccurred'),
-        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN),
-      )
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }
@@ -191,11 +187,7 @@ export const fetchUserCredentialsFailureFlow =
 
     if (fetchUserCredentialsFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification(
-        'danger',
-        i18n.t('general.errorOccurred'),
-        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN),
-      )
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }

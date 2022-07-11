@@ -24,7 +24,7 @@
     "Future proof your career and earn": "Future proof your career and earn",
     "general.error": "Error",
     "general.errorOccurred": "An error occurred.",
-    "general.errorMessage": "Oops something went wrong! {{message}}",
+    "general.errorMessageTryAgain": "Oops something went wrong! Please try again.",
     "getStarted": "Get Started",
     "Hosted by": "Hosted by",
     "I currently work here": "I currently work here",

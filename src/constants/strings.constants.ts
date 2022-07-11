@@ -1,4 +1,3 @@
-export const OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN = 'Oops something went wrong! Please try again.'
 export const DETAILS_UPDATED = 'Details updated'
 export const DETAILS_SAVED = 'Details saved!'
 export const NEW_CHALLENGE_SUCCESSFULLY_CREATED = 'New Challenge successfully created!'
