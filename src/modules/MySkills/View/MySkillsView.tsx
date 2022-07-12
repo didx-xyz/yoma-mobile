@@ -3,7 +3,6 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import CountBadge from '~/components/CountBadge'
-import CountrySelector from '~/components/CountrySelector'
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewSkill, { types as CvViewSkillTypes } from '~/components/CvViewSkill'
 import Text, { HeaderLevels } from '~/components/Typography'
@@ -29,19 +28,18 @@ const MySkillsView = ({ userSkills, count, onAdd, navigation }: Props) => {
       navigation={navigation}
     >
       <View style={styles.container}>
-        <CountrySelector searchPlaceholder={'Select the country'} />
-        {/*<CvViewList*/}
-        {/*  data={userSkills}*/}
-        {/*  ListHeader={*/}
-        {/*    <View style={styles.listHeader}>*/}
-        {/*      <CountBadge count={count} color={Colors.PrimaryBlue} />*/}
-        {/*      <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple} style={styles.listHeaderText}>*/}
-        {/*        {t('All Skills')}*/}
-        {/*      </Text.Header>*/}
-        {/*    </View>*/}
-        {/*  }*/}
-        {/*  RenderItem={CvViewSkill}*/}
-        {/*/>*/}
+        <CvViewList
+          data={userSkills}
+          ListHeader={
+            <View style={styles.listHeader}>
+              <CountBadge count={count} color={Colors.PrimaryBlue} />
+              <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple} style={styles.listHeaderText}>
+                {t('All Skills')}
+              </Text.Header>
+            </View>
+          }
+          RenderItem={CvViewSkill}
+        />
       </View>
     </CvView>
   )
