@@ -1,0 +1,11 @@
+export const DETAILS_UPDATED = 'Details updated'
+export const DETAILS_SAVED = 'Details saved!'
+export const NEW_CHALLENGE_SUCCESSFULLY_CREATED = 'New Challenge successfully created!'
+export const YOUR_QUALIFICATION_HAS_BEEN_ADDED = 'Your Qualification has been added.'
+export const OOPS_SOMETHING_WENT_WRONG_UPLOADING_YOUR_CHALLENGE_CERTIFICATE =
+  'Oops something went wrong uploading your challenge certificate. Please try again.'
+export const THE_VALUE_ENTERED_IS_TOO_SHORT = 'The value entered is too short'
+export const THE_VALUE_ENTERED_IS_TOO_LONG = 'The value entered is too long'
+export const FIRST_NAME_CANNOT_INCLUDE_NUMBERS_OR_SYMBOLS = 'First name cannot include numbers or symbols'
+export const LAST_NAME_CANNOT_INCLUDE_NUMBERS_OR_SYMBOLS = 'Last name cannot include numbers or symbols'
+export const PHONE_NUMBER_IS_NOT_VALID = 'Phone number is not valid'

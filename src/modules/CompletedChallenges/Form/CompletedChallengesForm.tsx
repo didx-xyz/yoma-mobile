@@ -1,4 +1,3 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { FormikProps } from 'formik'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -16,20 +15,17 @@ import Header from '~/components/Header'
 import Optional from '~/components/Optional'
 import Upload from '~/components/Upload'
 import ViewContainer from '~/components/ViewContainer'
+import { types as ChallengeTypes } from '~/modules/Challenges'
 
-import { types as ChallengeTypes } from '../../Challenges'
-import { types as HomeNavigationTypes } from '../../HomeNavigation'
 import ChallengeInfo from './ChallengeInfo'
 import styles from './CompletedChallengesForm.styles'
+import { CompletedChallengesNavigation } from './CompletedChallengesForm.types'
 
 interface Props {
   challenges: ChallengeTypes.NormalisedChallenges
   challengesDropDown: DropDownItem[]
   form: FormikProps<any>
-  navigation: NativeStackNavigationProp<
-    HomeNavigationTypes.HomeNavigatorParamsList,
-    HomeNavigationTypes.HomeNavigationRoutes.CompletedChallenges
-  >
+  navigation: CompletedChallengesNavigation
 }
 
 const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, form }: Props) => {

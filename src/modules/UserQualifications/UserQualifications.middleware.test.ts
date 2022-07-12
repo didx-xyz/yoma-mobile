@@ -1,12 +1,12 @@
 import { mergeRight } from 'ramda'
+import { createMiddlewareMock } from 'tests/tests.utils'
 
-import { createMiddlewareMock } from '~/../tests/tests.utils'
 import { actions as ApiActions, types as ApiTypes } from '~/api'
 import { types as ApiUserTypes, constants as ApiUsersConstants } from '~/api/users'
+import { actions as QualificationsActions } from '~/modules/Qualifications'
+import * as UserFixtures from '~/modules/User/User.fixture'
+import * as UserActions from '~/modules/User/User.reducer'
 
-import { actions as QualificationsActions } from '../Qualifications'
-import * as UserFixtures from '../User/User.fixture'
-import * as UserActions from '../User/User.reducer'
 import { userQualificationsStateFixture } from './UserQualifications.fixture'
 import * as SUT from './UserQualifications.middleware'
 import {

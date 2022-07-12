@@ -9,7 +9,7 @@ export const showSimpleMessage = (
   const messageOptions: MessageOptions = {
     message: message,
     description: description,
-    icon: { icon: 'auto', position: 'left' },
+    icon: { icon: 'auto', position: 'left', props: {} },
     type,
     duration: 2500,
     ...props,

@@ -1,11 +1,11 @@
 import React, { ReactNode } from 'react'
 import { View } from 'react-native'
 
+import CountBadge from '~/components/CountBadge'
+import Optional from '~/components/Optional'
 import Text, { HeaderLevels } from '~/components/Typography'
 import { Colors } from '~/styles'
 
-import CountBadge from '../../CountBadge'
-import Optional from '../../Optional'
 import { CV_WIDGET_COUNT_FALLBACK } from '../CvWidget.constants'
 import styles from './CredentialWidgetHeader.styles'
 

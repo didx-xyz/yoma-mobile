@@ -1,6 +1,6 @@
-import * as SecureStore from 'expo-secure-store'
 import FormData from 'form-data'
 import { concat } from 'ramda'
+import EncryptedStorage from 'react-native-encrypted-storage'
 import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
 
@@ -11,6 +11,7 @@ import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { middleware as JobsMiddleware } from '~/modules/Jobs'
+import * as Navigation from '~/modules/Navigation/Navigation.utils'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
 import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
@@ -21,7 +22,6 @@ import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualif
 import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
 import { showSimpleMessage } from '~/utils/error'
 
-import * as Navigation from '../modules/Navigation/Navigation.utils'
 import * as ReduxUtils from './redux.utils'
 
 const createDebugger = require('redux-flipper').default
@@ -40,12 +40,12 @@ const featureModuleMiddleware = [
   AuthMiddleware.authorizeWithRefreshTokenFailureFlow,
   AuthMiddleware.authorizeWithRefreshTokenFlow,
   AuthMiddleware.fetchUserFromOAuthFlow,
-  AuthMiddleware.deleteSecureRefreshTokenFlow(SecureStore.deleteItemAsync),
-  AuthMiddleware.getSecureRefreshTokenFlow(SecureStore.getItemAsync),
+  AuthMiddleware.deleteSecureRefreshTokenFlow(EncryptedStorage.removeItem),
+  AuthMiddleware.getSecureRefreshTokenFlow(EncryptedStorage.getItem),
   AuthMiddleware.loginFailureFlow({ notification: showSimpleMessage }),
   AuthMiddleware.loginFlow,
   AuthMiddleware.logoutFlow,
-  AuthMiddleware.setSecureRefreshTokenFlow(SecureStore.setItemAsync),
+  AuthMiddleware.setSecureRefreshTokenFlow(EncryptedStorage.setItem),
   AuthMiddleware.unauthorizedFlow,
   ChallengesMiddleware.fetchChallengesFlow,
   ChallengesMiddleware.normaliseChallengesFlow({ normalise: ReduxUtils.normalise }),

@@ -1,4 +1,5 @@
-import { createFixture } from '../../../tests/tests.utils'
+import { createFixture } from 'tests/tests.utils'
+
 import { Job } from './Jobs.types'
 
 export const JOB_MOCK: Job = {

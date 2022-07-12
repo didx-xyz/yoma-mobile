@@ -30,9 +30,9 @@ describe('modules/Education/EducationWidget/EducationWidget.selector', () => {
       expect(result).toEqual({
         count: 1,
         userQualifications: {
-          ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
+          ids: ['USER_QUALIFICATIONS_STATE_MOCK-001'],
           entities: {
-            '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
+            'USER_QUALIFICATIONS_STATE_MOCK-001': {
               name: 'Test Qualification',
               startDate: '2021-04-15T00:00:00',
               organisationLogoURL: null,

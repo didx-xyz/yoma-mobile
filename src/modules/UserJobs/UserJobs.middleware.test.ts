@@ -1,14 +1,14 @@
 import { mergeRight } from 'ramda'
+import { createMiddlewareMock } from 'tests/tests.utils'
 
+import { actions as ApiActions, utils as ApiUtils } from '~/api'
+import { constants as ApiUsersConstants } from '~/api/users'
 import { UserCredentialTypes } from '~/api/users/users.types'
+import { createJob } from '~/modules/Jobs/Jobs.reducer'
 import { JOB_MOCK } from '~/modules/Jobs/Jobs.test.fixtures'
+import * as UserFixtures from '~/modules/User/User.fixture'
+import * as UserActions from '~/modules/User/User.reducer'
 
-import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { constants as ApiUsersConstants } from '../../api/users'
-import { createJob } from '../Jobs/Jobs.reducer'
-import * as UserFixtures from '../User/User.fixture'
-import * as UserActions from '../User/User.reducer'
 import { USER_JOBS_MOCK, USER_JOBS_NORMALISED_MOCK, userJobsStateFixture } from './UserJobs.fixture'
 import * as SUT from './UserJobs.middleware'
 import {

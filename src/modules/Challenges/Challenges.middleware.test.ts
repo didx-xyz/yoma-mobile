@@ -1,9 +1,10 @@
 import { mergeRight } from 'ramda'
+import { createMiddlewareMock } from 'tests/tests.utils'
 
-import { createMiddlewareMock } from '../../../tests/tests.utils'
-import { actions as ApiActions } from '../../api'
-import { constants as ApiChallengesConstants } from '../../api/challenges'
-import { rootStateFixture } from '../../redux/redux.fixture'
+import { actions as ApiActions } from '~/api'
+import { constants as ApiChallengesConstants } from '~/api/challenges'
+import { rootStateFixture } from '~/redux/redux.fixture'
+
 import * as SUT from './Challenges.middleware'
 import {
   fetchChallenges,

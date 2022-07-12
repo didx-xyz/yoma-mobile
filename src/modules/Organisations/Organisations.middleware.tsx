@@ -1,12 +1,13 @@
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
+import { actions as ApiActions } from '~/api'
+import { constants as ApiOrganisationsConstants } from '~/api/organisations'
+import * as ReduxTypes from '~/redux/redux.types'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
-import { actions as ApiActions } from '../../api'
-import { constants as ApiOrganisationsConstants } from '../../api/organisations'
-import * as ReduxTypes from '../../redux/redux.types'
 import {
   fetchOrganisations,
   fetchOrganisationsFailure,
@@ -81,7 +82,7 @@ export const fetchOrganisationsFailureFlow =
 
     if (fetchOrganisationsFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }

@@ -2,7 +2,7 @@ import { useField } from 'formik'
 import { without } from 'ramda'
 import React, { useCallback, useState } from 'react'
 
-import Modal from '~/components/Modal/Modal'
+import Modal from '~/components/Modal'
 import { withoutElseAppend } from '~/utils/arrays.utils'
 
 import SkillSelector from './SkillSelector'

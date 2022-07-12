@@ -6,8 +6,10 @@ module.exports = function (api) {
     [
       'module-resolver',
       {
+        root: ['.'],
         alias: {
-          '^~/(.+)': './src/\\1'
+          '~': './src',
+          'tests': './tests'
         },
         extensions: [
           '.ios.ts',

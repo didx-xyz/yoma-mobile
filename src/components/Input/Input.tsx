@@ -2,10 +2,10 @@ import { useField } from 'formik'
 import React from 'react'
 import { Keyboard, TextInput, TextInputProps, View } from 'react-native'
 
+import InputError from '~/components/InputError'
+import Text, { MetaLevels } from '~/components/Typography'
 import { Colors, colors } from '~/styles'
 
-import InputError from '../InputError'
-import Text, { MetaLevels } from '../Typography'
 import styles from './Input.styles'
 
 type Props = TextInputProps & {
@@ -14,8 +14,8 @@ type Props = TextInputProps & {
 }
 
 const Input = ({ name, label, ...props }: Props) => {
-  const [{ value }, { touched, error }, { setValue }] = useField(name)
-
+  const [{ value }, { error }, { setValue }] = useField(name)
+  console.log({ error })
   return (
     <View style={styles.container}>
       <Text.Meta level={MetaLevels.Small}>{value !== '' ? label : ' '}</Text.Meta>
@@ -28,7 +28,7 @@ const Input = ({ name, label, ...props }: Props) => {
         onChangeText={setValue}
         {...props}
       />
-      <InputError touched={touched} error={error} />
+      <InputError error={error} />
     </View>
   )
 }

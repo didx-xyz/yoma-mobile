@@ -66,7 +66,7 @@ export const fetchUserSkillsFailureFlow =
     const result = next(action)
 
     if (fetchUserSkillsFailure.match(action)) {
-      notification('danger', i18n.t('An error occurred.'), i18n.t('Oops something went wrong! Please try again.'))
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }
@@ -114,9 +114,8 @@ export const addUserSkillsFailureFlow =
     const result = next(action)
 
     if (addUserSkillsFailure.match(action)) {
-      const errorMessage =
-        typeof action.payload === 'string' ? action.payload : i18n.t('Oops something went wrong! Please try again.')
-      notification('danger', i18n.t('An error occurred.'), errorMessage)
+      const errorMessage = typeof action.payload === 'string' ? action.payload : i18n.t('general.errorMessageTryAgain')
+      notification('danger', i18n.t('general.errorOccurred'), errorMessage)
     }
     return result
   }

@@ -1,12 +1,12 @@
 import { mergeRight } from 'ramda'
 import RNAppAuth from 'react-native-app-auth'
+import { createMiddlewareMock } from 'tests/tests.utils'
 
-import { createMiddlewareMock } from '~/../tests/tests.utils'
 import { actions as ApiActions } from '~/api'
 import { constants as ApiAuthConstants } from '~/api/auth'
+import { actions as AppActions } from '~/modules/App'
+import { actions as ErrorActions } from '~/modules/Error'
 
-import { actions as AppActions } from '../App'
-import { actions as ErrorActions } from '../Error'
 import * as SUT from './Auth.middleware'
 import {
   authorize,

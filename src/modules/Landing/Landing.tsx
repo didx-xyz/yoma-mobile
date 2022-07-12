@@ -44,10 +44,10 @@ const Landing = ({ onLogin }: Props) => {
         <View style={styles.actionsContainer}>
           <Button
             size={ButtonSizes.Default}
-            label={t('Login')}
+            label={t('Access Yoma')}
             onPress={onLogin}
             style={styles.registerButton}
-            loadingLabel="Logging you in..."
+            loadingLabel={t('Logging you in...')}
             isLoadingEnabled
           />
         </View>

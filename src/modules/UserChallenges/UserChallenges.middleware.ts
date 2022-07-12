@@ -1,23 +1,26 @@
+import i18n from 'i18next'
 import { mergeRight, of, pick } from 'ramda'
 import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
-import { actions as ApiActions, utils as ApiUtils } from '../../api'
-import { constants as ApiUsersConstants, types as ApiUsersTypes } from '../../api/users'
-import * as ReduxTypes from '../../redux/redux.types'
-import * as ReduxUtils from '../../redux/redux.utils'
-import * as Types from '../../types/general.types'
-import * as ErrorUtils from '../../utils/error'
-import { extractErrorResponseMessage } from '../Error/error.utils'
-import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
-import * as Navigation from '../Navigation/Navigation.utils'
+import { actions as ApiActions, utils as ApiUtils } from '~/api'
+import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/users'
+import * as Strings from '~/constants/strings.constants'
+import { extractErrorResponseMessage } from '~/modules/Error/error.utils'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import * as Navigation from '~/modules/Navigation/Navigation.utils'
 import {
   actions as UserActions,
   constants as UserConstants,
   selectors as UserSelectors,
   types as UserTypes,
   utils as UserUtils,
-} from '../User'
+} from '~/modules/User'
+import * as ReduxTypes from '~/redux/redux.types'
+import * as ReduxUtils from '~/redux/redux.utils'
+import * as Types from '~/types/general.types'
+import * as ErrorUtils from '~/utils/error'
+
 import {
   createUserChallenge,
   createUserChallengeCertificate,
@@ -89,7 +92,7 @@ export const createUserChallengeSuccessFlow =
     if (createUserChallengeSuccess.match(action)) {
       const userChallenge = ReduxUtils.extractDataFromResponseAction(action)
       const normalisedUserChallenge = ReduxUtils.normalise(of(userChallenge))
-      notification('success', 'New Challenge successfully created!')
+      notification('success', i18n.t(Strings.NEW_CHALLENGE_SUCCESSFULLY_CREATED))
       navigate(HomeNavigationRoutes.Home)
       dispatch(updateUserChallenges(normalisedUserChallenge))
       dispatch(createUserChallengeCertificate(userChallenge.id))
@@ -104,11 +107,10 @@ export const createUserChallengeFailureFlow =
   next =>
   action => {
     const result = next(action)
-
     if (createUserChallengeFailure.match(action)) {
       const message = extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
-      notification('danger', 'Oops something went wrong!', message)
+      notification('danger', i18n.t('general.errorOccurred'), message)
     }
     return result
   }
@@ -173,8 +175,8 @@ export const createUserChallengeCertificateFailureFlow =
       // TODO: this should be handled by the notification module
       notification(
         'danger',
-        'An error occurred.',
-        'Oops something went wrong uploading your challenge certificate. Please try again.',
+        i18n.t('general.errorOccurred'),
+        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_UPLOADING_YOUR_CHALLENGE_CERTIFICATE),
       )
     }
     return result

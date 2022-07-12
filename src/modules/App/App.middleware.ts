@@ -1,15 +1,16 @@
 import { Middleware } from 'redux'
 
 // avoiding circular dependencies:
-import * as AuthActions from '../Auth/Auth.reducer'
-import * as ChallengesActions from '../Challenges/Challenges.reducer'
-import * as OrganisationsActions from '../Organisations/Organisations.reducer'
-import * as SkillsActions from '../Skills/Skills.reducer'
-import * as UserActions from '../User/User.reducer'
-import * as UserChallengesActions from '../UserChallenges/UserChallenges.reducer'
-import * as UserJobsActions from '../UserJobs/UserJobs.reducer'
-import * as UserQualificationsActions from '../UserQualifications/UserQualifications.reducer'
-import * as UserSkillsActions from '../UserSkills/UserSkills.reducer'
+import * as AuthActions from '~/modules/Auth/Auth.reducer'
+import * as ChallengesActions from '~/modules/Challenges/Challenges.reducer'
+import * as OrganisationsActions from '~/modules/Organisations/Organisations.reducer'
+import * as SkillsActions from '~/modules/Skills/Skills.reducer'
+import * as UserActions from '~/modules/User/User.reducer'
+import * as UserChallengesActions from '~/modules/UserChallenges/UserChallenges.reducer'
+import * as UserJobsActions from '~/modules/UserJobs/UserJobs.reducer'
+import * as UserQualificationsActions from '~/modules/UserQualifications/UserQualifications.reducer'
+import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
+
 import { hydrateApp, resetAppData } from './App.reducer'
 
 export const appResetFlow: Middleware =
