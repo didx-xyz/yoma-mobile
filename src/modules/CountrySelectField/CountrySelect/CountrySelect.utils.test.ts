@@ -1,6 +1,6 @@
-import * as SUT from './CountrySelector.utils'
+import * as SUT from './CountrySelect.utils'
 
-describe('components/CountrySelector/CountrySelector.utils', () => {
+describe('components/CountrySelectField/CountrySelectField.utils', () => {
   describe('sortCountriesAsPairs', () => {
     it('should correctly filter the countries', () => {
       const countriesMock = {

@@ -7,16 +7,16 @@ import Divider from '~/components/Divider'
 import ListFilter from '~/components/ListFilter/ListFilter'
 import Text, { HeaderLevels } from '~/components/Typography'
 
-import CountryItem from './CountryItem'
-import { useCountriesFilter } from './CountrySelector.hooks'
-import { CountryListItem } from './CountrySelector.types'
-import { sortCountriesAsPairs } from './CountrySelector.utils'
+import CountryItem from '../CountryItem/CountryItem'
+import { useCountriesFilter } from './CountrySelect.hooks'
+import { CountryListItem } from './CountrySelect.types'
+import { sortCountriesAsPairs } from './CountrySelect.utils'
 
 interface Props {
   searchPlaceholder: string
 }
 
-const CountrySelector = ({ searchPlaceholder }: Props) => {
+const CountrySelect = ({ searchPlaceholder }: Props) => {
   const sortedCountries = useMemo(() => sortCountriesAsPairs(countries), [])
   const { results, setSearchTerm } = useCountriesFilter(sortedCountries)
 
@@ -32,4 +32,4 @@ const CountrySelector = ({ searchPlaceholder }: Props) => {
     </>
   )
 }
-export default CountrySelector
+export default CountrySelect

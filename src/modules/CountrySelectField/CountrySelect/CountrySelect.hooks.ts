@@ -1,7 +1,9 @@
+import Fuse from 'fuse.js'
 import { useEffect, useMemo, useState } from 'react'
 
-import { CountryListItem } from './CountrySelector.types'
-import { filterCountries } from './CountrySelector.utils'
+import { filterCountries } from '~/modules/CountrySelectField/CountrySelect/CountrySelect.utils'
+
+import { CountryListItem } from './CountrySelect.types'
 
 export const useCountriesFilter = (countries: CountryListItem[]) => {
   const [results, setResults] = useState<CountryListItem[]>([])
@@ -15,8 +17,14 @@ export const useCountriesFilter = (countries: CountryListItem[]) => {
 
   useEffect(() => {
     if (searchTerm.length > 1 && countries.length > 0) {
-      const filtered = filterCountries(countries, searchTerm) || []
-      setResults(filtered)
+      const fuse = new Fuse<CountryListItem>(countries, {
+        keys: ['name', 'native'],
+      })
+      const filtered = fuse.search(searchTerm) || []
+      const fil = filterCountries(searchTerm)(countries)
+      console.log({ searchTerm, filtered, fil })
+      const filteredCountries = filtered.map(result => result?.item)
+      setResults(filteredCountries)
     }
   }, [searchTerm, countries])
 

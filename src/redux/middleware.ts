@@ -1,3 +1,4 @@
+import { countries } from 'countries-list'
 import FormData from 'form-data'
 import { concat } from 'ramda'
 import EncryptedStorage from 'react-native-encrypted-storage'
@@ -9,6 +10,7 @@ import { types as ApiUsersTypes } from '~/api/users'
 import { middleware as AppMiddleware } from '~/modules/App'
 import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
+import { middleware as CountriesMiddleware } from '~/modules/Countries'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { middleware as JobsMiddleware } from '~/modules/Jobs'
 import * as Navigation from '~/modules/Navigation/Navigation.utils'
@@ -50,6 +52,9 @@ const featureModuleMiddleware = [
   ChallengesMiddleware.fetchChallengesFlow,
   ChallengesMiddleware.normaliseChallengesFlow({ normalise: ReduxUtils.normalise }),
   ChallengesMiddleware.setChallengesFlow,
+  CountriesMiddleware.getCountriesFlow({ countryList: countries }),
+  CountriesMiddleware.normaliseCountriesFlow,
+  CountriesMiddleware.setCountriesFlow,
   ErrorMiddleware.categorizeErrorsFlow,
   JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
   JobsMiddleware.createJobFlow,

@@ -40,6 +40,7 @@ declare module 'ramda' {
   export function lensPath(...rest: any[]): any
   export function lt(...rest: any[]): any
   export function map(...rest: any[]): any
+  export function mapObjIndexed(...rest: any[]): any
   export function match(...rest: any[]): any
   export function merge(...rest: any[]): any
   export function mergeAll(...rest: any[]): any
@@ -68,7 +69,7 @@ declare module 'ramda' {
   export function reject(...rest: any[]): any
   export function repeat(...rest: any[]): any[]
   export function slice(...rest: any[]): any[]
-  export function sort(...rest: any[]): any[]
+  export function sort(...rest: any[]): any
   export function split(...rest: any[]): any[]
   export function splitAt(...rest: any[]): any[]
   export function tail(...rest: any[]): any[]
