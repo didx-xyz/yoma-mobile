@@ -1,7 +1,8 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 
-import { CountriesState, CountryList, NormalisedCountries } from '~/modules/Countries/Countries.types'
 import { actionName } from '~/redux/redux.utils'
+
+import { CountriesState, CountryList, NormalisedCountries } from './Countries.types'
 
 const name = '[Countries]'
 const countryAction = actionName(name)
@@ -15,7 +16,7 @@ export const getCountries = createAction(countryAction('getCountries'))
 export const getCountriesSuccess = createAction<CountryList>(countryAction('getCountriesSuccess'))
 export const normaliseCountriesSuccess = createAction<NormalisedCountries>(countryAction('normaliseCountriesSuccess'))
 export const setCountries = createAction<NormalisedCountries>(countryAction('setCountries'))
-export const clearCountries = createAction<NormalisedCountries>(countryAction('clearCountries'))
+export const clearCountries = createAction(countryAction('clearCountries'))
 
 const CountriesReducer = createReducer(INITIAL_STATE, builder => {
   builder.addCase(setCountries, (_state, action) => action.payload)
