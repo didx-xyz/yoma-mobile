@@ -15,8 +15,8 @@ const ProfileForm = () => {
       <CountrySelectField
         name="countryAlpha2"
         label={t('Country')}
-        searchPlaceholder="Filter countries"
-        modalHeader="Select your country"
+        searchPlaceholder={t('Filter countries')}
+        modalHeader={t('Select your country')}
       />
       <Input name={'email'} label={t('Email')} keyboardType="email-address" autoCapitalize="none" />
       <Input name={'phoneNumber'} label={t('Cellphone')} keyboardType="phone-pad" autoCapitalize="none" />
