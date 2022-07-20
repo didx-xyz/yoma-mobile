@@ -8,7 +8,6 @@ export const useCountriesFilter = (countryIds: string[]) => {
   const minSearchTermLength = 3
 
   useEffect(() => {
-    console.log({ searchTerm })
     if (searchTerm.length < minSearchTermLength) {
       setResults(countryIds)
     }

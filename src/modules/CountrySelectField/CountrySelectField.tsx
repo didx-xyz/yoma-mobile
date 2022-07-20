@@ -26,7 +26,6 @@ const CountrySelectField = ({ name, label, modalHeader, searchPlaceholder, count
 
   const handleOnSelect = useCallback(
     (code?: string) => {
-      console.log({ code })
       if (code) {
         setValue(code)
         setModalOpen(false)
@@ -50,7 +49,7 @@ const CountrySelectField = ({ name, label, modalHeader, searchPlaceholder, count
       </View>
       <Modal setVisible={setModalOpen} isVisible={isModalOpen} closeLabel="Cancel">
         <Optional condition={!!modalHeader || !!label}>
-          <Text.Header level={HeaderLevels.H3} style={{ marginBottom: 8 }}>
+          <Text.Header level={HeaderLevels.H3} style={styles.modalHeader}>
             {modalHeader || label}
           </Text.Header>
         </Optional>

@@ -15,7 +15,6 @@ type Props = TextInputProps & {
 
 const Input = ({ name, label, ...props }: Props) => {
   const [{ value }, { error }, { setValue }] = useField(name)
-  console.log({ error })
   return (
     <View style={styles.container}>
       <Text.Meta level={MetaLevels.Small}>{value !== '' ? label : ' '}</Text.Meta>

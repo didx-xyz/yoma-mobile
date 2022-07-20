@@ -16,7 +16,7 @@ interface Props {
 const CountryItem = ({ item, countries, onPress }: Props) => (
   <Pressable onPress={onPress}>
     <View style={styles.container}>
-      <Text.Header style={{ paddingRight: 8 }} level={HeaderLevels.H4}>
+      <Text.Header style={styles.flag} level={HeaderLevels.H4}>
         {getEmojiFlag(countries[item].code || '')}
       </Text.Header>
       <Text.Body color={Colors.FontBlue}>{countries[item].name}</Text.Body>

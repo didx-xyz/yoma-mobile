@@ -1,4 +1,4 @@
-import { StyleSheet, ViewStyle } from 'react-native'
+import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 const styles = {
   container: {
@@ -6,6 +6,9 @@ const styles = {
     paddingHorizontal: 0,
     flexDirection: 'row',
   } as ViewStyle,
+  flag: {
+    paddingRight: 8,
+  } as TextStyle,
 }
 
 export default StyleSheet.create(styles)

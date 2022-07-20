@@ -1,3 +1,4 @@
+import { debounce } from 'lodash'
 import React, { useCallback } from 'react'
 import { ListRenderItemInfo, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
@@ -9,6 +10,7 @@ import { NormalisedCountries } from '~/modules/Countries/Countries.types'
 
 import CountryItem from '../CountryItem'
 import { useCountriesFilter } from './CountrySelect.hooks'
+import styles from './CountrySelect.styles'
 
 interface Props {
   searchPlaceholder?: string
@@ -29,7 +31,7 @@ const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Pro
 
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<string>) => (
-      <View style={{ paddingVertical: 8 }}>
+      <View style={styles.itemContainer}>
         <CountryItem item={item} countries={countriesByName.entities} onPress={() => handleItemSelect(item)} />
       </View>
     ),
@@ -38,7 +40,7 @@ const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Pro
 
   return (
     <>
-      <ListFilter searchPlaceholder={searchPlaceholder} setSearchTerm={setSearchTerm} />
+      <ListFilter searchPlaceholder={searchPlaceholder} setSearchTerm={debounce(setSearchTerm)} />
       <FlatList
         data={results}
         ListEmptyComponent={<Text.Header level={HeaderLevels.H5}>No Results</Text.Header>}
