@@ -8,7 +8,7 @@ import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/us
 import * as Strings from '~/constants/strings.constants'
 import { utils as ErrorUtils } from '~/modules/Error'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import { utils as NavigationUtils } from '~/modules/Navigation'
+import * as NavigationUtils from '~/modules/Navigation/Navigation.utils'
 import { actions as QualificationsActions } from '~/modules/Qualifications'
 import {
   actions as UserActions,

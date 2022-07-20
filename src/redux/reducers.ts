@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 
 import { reducer as auth } from '~/modules/Auth'
 import { reducer as challenges } from '~/modules/Challenges'
+import { reducer as countries } from '~/modules/Countries'
 import { reducer as jobs } from '~/modules/Jobs'
 import { reducer as organisations } from '~/modules/Organisations'
 import { reducer as skills } from '~/modules/Skills'
@@ -14,6 +15,7 @@ import { reducer as userSkills } from '~/modules/UserSkills'
 const rootReducer = combineReducers({
   auth,
   challenges,
+  countries,
   jobs,
   organisations,
   skills,
