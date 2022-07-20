@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Modal as RNModal, View } from 'react-native'
 
 import Button, { ButtonSizes, ButtonVariants } from '~/components/Button'
@@ -12,7 +13,8 @@ type Props = WithChildren<{
   isVisible: boolean
 }>
 
-const Modal = ({ setVisible, isVisible, closeLabel = 'done', children }: Props) => {
+const Modal = ({ setVisible, isVisible, closeLabel, children }: Props) => {
+  const { t } = useTranslation()
   const handleCloseModal = useCallback(() => {
     setVisible(false)
   }, [setVisible])
@@ -24,7 +26,7 @@ const Modal = ({ setVisible, isVisible, closeLabel = 'done', children }: Props) 
         <Button
           style={styles.button}
           size={ButtonSizes.Default}
-          label={closeLabel}
+          label={closeLabel || t('Done')}
           onPress={handleCloseModal}
           variant={ButtonVariants.Clear}
         />

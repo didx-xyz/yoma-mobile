@@ -1,5 +1,6 @@
 import { useField } from 'formik'
 import React, { useCallback, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import InputError from '~/components/InputError'
@@ -23,6 +24,7 @@ interface Props {
 const CountrySelectField = ({ name, label, modalHeader, searchPlaceholder, countriesByCode }: Props) => {
   const [, { value, error }, { setValue }] = useField(name)
   const [isModalOpen, setModalOpen] = useState<boolean>(false)
+  const { t } = useTranslation()
 
   const handleOnSelect = useCallback(
     (code?: string) => {
@@ -47,7 +49,7 @@ const CountrySelectField = ({ name, label, modalHeader, searchPlaceholder, count
         <CountryItem item={value} countries={countriesByCode.entities} onPress={handleOpenModal} />
         <InputError error={error} />
       </View>
-      <Modal setVisible={setModalOpen} isVisible={isModalOpen} closeLabel="Cancel">
+      <Modal setVisible={setModalOpen} isVisible={isModalOpen} closeLabel={t('Cancel')}>
         <Optional condition={!!modalHeader || !!label}>
           <Text.Header level={HeaderLevels.H3} style={styles.modalHeader}>
             {modalHeader || label}

@@ -28,7 +28,6 @@ const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Pro
     },
     [countriesByName, onItemSelect],
   )
-
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<string>) => (
       <View style={styles.itemContainer}>

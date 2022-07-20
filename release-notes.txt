@@ -1,6 +1,6 @@
 Ver 0.0.1
 Latest:
-- creating Country Picker
+- creating and implementing Country Picker
 
 Last 10 deployment release notes:
 - fixing critical vulnerabilities

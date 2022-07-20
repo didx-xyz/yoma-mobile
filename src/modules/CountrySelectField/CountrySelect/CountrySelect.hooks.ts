@@ -1,11 +1,10 @@
 import Fuse from 'fuse.js'
+import { map, prop } from 'ramda'
 import { useEffect, useMemo, useState } from 'react'
 
-export const useCountriesFilter = (countryIds: string[]) => {
+export const useCountriesFilter = (countryIds: string[], minSearchTermLength = 3) => {
   const [results, setResults] = useState<string[]>([])
   const [searchTerm, setSearchTerm] = useState<string>('')
-
-  const minSearchTermLength = 3
 
   useEffect(() => {
     if (searchTerm.length < minSearchTermLength) {
@@ -19,15 +18,15 @@ export const useCountriesFilter = (countryIds: string[]) => {
         shouldSort: true,
         threshold: 0.6,
         location: 10,
-        includeScore: true,
         minMatchCharLength: minSearchTermLength,
       }
       const fuse = new Fuse<string>(countryIds, fuseOptions)
       const filtered = fuse.search(searchTerm)
-      const filteredCountries = filtered.map(result => result?.item)
+      const filteredCountries = map(prop('item'))(filtered)
+
       setResults(filteredCountries)
     }
-  }, [searchTerm, countryIds])
+  }, [searchTerm, countryIds, minSearchTermLength])
 
   const hasNoResults = useMemo(() => searchTerm !== '' && results.length === 0, [results.length, searchTerm])
 
