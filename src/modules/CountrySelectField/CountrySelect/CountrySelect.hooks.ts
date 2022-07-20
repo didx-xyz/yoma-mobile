@@ -10,7 +10,7 @@ export const useCountriesFilter = (countryIds: string[], minSearchTermLength = 3
     if (searchTerm.length < minSearchTermLength) {
       setResults(countryIds)
     }
-  }, [countryIds, searchTerm])
+  }, [countryIds, minSearchTermLength, searchTerm])
 
   useEffect(() => {
     if (searchTerm.length >= minSearchTermLength && !!countryIds) {
