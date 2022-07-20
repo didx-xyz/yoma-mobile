@@ -1,7 +1,7 @@
 import { useField } from 'formik'
 import React, { useCallback } from 'react'
 import { View } from 'react-native'
-import CountryPicker from 'react-native-country-picker-modal'
+import CountryPicker, { Country } from 'react-native-country-picker-modal'
 
 import { Colors, colors } from '~/styles'
 
@@ -18,7 +18,7 @@ const CountryPickerField = ({ name, label, ...props }: Props) => {
   const [, { value, error, touched }, { setValue }] = useField(name)
 
   const handleOnSelect = useCallback(
-    country => {
+    (country: Country) => {
       setValue(country.cca2)
     },
     [setValue],

@@ -1,2 +1,1 @@
-// export { default } from './MySkillsView.container'
-export { default } from './Testing'
+export { default } from './MySkillsView.container'

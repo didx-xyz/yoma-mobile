@@ -1,25 +1,40 @@
-import React, { useMemo } from 'react'
-import { ListRenderItemInfo } from 'react-native'
+import React, { useCallback } from 'react'
+import { ListRenderItemInfo, View } from 'react-native'
 import { FlatList } from 'react-native-gesture-handler'
 
 import Divider from '~/components/Divider'
-import ListFilter from '~/components/ListFilter/ListFilter'
+import ListFilter from '~/components/ListFilter'
 import Text, { HeaderLevels } from '~/components/Typography'
 import { NormalisedCountries } from '~/modules/Countries/Countries.types'
 
-import CountryItem from '../CountryItem/CountryItem'
+import CountryItem from '../CountryItem'
 import { useCountriesFilter } from './CountrySelect.hooks'
-import { CountryListItem } from './CountrySelect.types'
-import { sortCountriesAsPairs } from './CountrySelect.utils'
 
 interface Props {
-  searchPlaceholder: string
-  countries: NormalisedCountries
+  searchPlaceholder?: string
+  countriesByName: NormalisedCountries
+  onItemSelect: (code?: string) => void
 }
 
-const CountrySelect = ({ searchPlaceholder, countries }: Props) => {
-  const sortedCountries = useMemo(() => sortCountriesAsPairs(countries), [countries])
-  const { results, setSearchTerm } = useCountriesFilter(sortedCountries)
+const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Props) => {
+  const { results, setSearchTerm } = useCountriesFilter(countriesByName.ids)
+
+  const itemSeparator = useCallback(() => <Divider />, [])
+  const handleItemSelect = useCallback(
+    (item: string) => {
+      onItemSelect(countriesByName.entities[item].code || undefined)
+    },
+    [countriesByName, onItemSelect],
+  )
+
+  const renderItem = useCallback(
+    ({ item }: ListRenderItemInfo<string>) => (
+      <View style={{ paddingVertical: 8 }}>
+        <CountryItem item={item} countries={countriesByName.entities} onPress={() => handleItemSelect(item)} />
+      </View>
+    ),
+    [countriesByName.entities, handleItemSelect],
+  )
 
   return (
     <>
@@ -27,8 +42,8 @@ const CountrySelect = ({ searchPlaceholder, countries }: Props) => {
       <FlatList
         data={results}
         ListEmptyComponent={<Text.Header level={HeaderLevels.H5}>No Results</Text.Header>}
-        ItemSeparatorComponent={() => <Divider />}
-        renderItem={({ item }: ListRenderItemInfo<CountryListItem>) => <CountryItem item={item} />}
+        ItemSeparatorComponent={itemSeparator}
+        renderItem={renderItem}
       />
     </>
   )

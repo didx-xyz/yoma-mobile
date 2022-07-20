@@ -1,16 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { Country } from 'countries-list'
-import { evolve, mapObjIndexed, mergeRight, pipe, prop, values } from 'ramda'
+import { evolve, pipe } from 'ramda'
 
-import { selectCountries } from '~/modules/Countries/Countries.selector'
+import { NormalisedCountries } from '~/modules/Countries/Countries.types'
 import { normaliseFn, sortIDs } from '~/redux/redux.utils'
 
-export default createSelector(
-  selectCountries,
+import { selectCountriesWithCode } from '../CountrySelectField.selector'
+
+export default createSelector<any, NormalisedCountries>(
+  selectCountriesWithCode,
   pipe(
-    prop('entities'),
-    mapObjIndexed((value: Country, key: string) => mergeRight({ code: key }, value)),
-    values,
     normaliseFn('name'),
     evolve({
       ids: sortIDs,

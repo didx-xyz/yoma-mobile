@@ -1,3 +1,3 @@
-import CountrySelectContainer from './CountrySelect.container'
+import CountrySelect from './CountrySelect.container'
 
-export default CountrySelectContainer
+export default CountrySelect

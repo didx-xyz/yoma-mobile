@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- fixing critical vulnerabilities
+- creating Country Picker
 
 Last 10 deployment release notes:
+- fixing critical vulnerabilities
 - Adding Completed Courses to the CV
 - Updating Eduction components to use UserQualification components and selectors
 - Adding Qualification components to service courses and education

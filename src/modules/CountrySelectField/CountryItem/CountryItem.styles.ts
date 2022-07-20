@@ -2,7 +2,9 @@ import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
   container: {
-    paddingVertical: 16,
+    paddingVertical: 8,
+    paddingHorizontal: 0,
+    flexDirection: 'row',
   } as ViewStyle,
 }
 

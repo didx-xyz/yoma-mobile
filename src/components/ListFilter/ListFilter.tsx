@@ -1,4 +1,3 @@
-import { debounce } from 'lodash'
 import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { TextInput } from 'react-native'
@@ -23,7 +22,7 @@ const ListFilter = ({ setSearchTerm, setIsLoading, searchPlaceholder }: Props) =
     <Stack styles={styles.container}>
       <TextInput
         onTextInput={onTextInput}
-        onChangeText={debounce(setSearchTerm, 750)}
+        onChangeText={setSearchTerm}
         placeholder={searchPlaceholder || t('Search')}
         style={styles.filterInput}
       />

@@ -6,10 +6,9 @@ import { Colors, colors } from '~/styles'
 const styles = StyleSheet.create({
   container: {
     position: 'relative',
-    borderStyle: 'solid',
-    borderColor: '#ddd',
-    borderBottomWidth: 1,
-    marginBottom: 10,
+    marginVertical: 8,
+    backgroundColor: colors[Colors.BackgroundGrey],
+    borderRadius: 8,
   } as ViewStyle,
   filterInput: {
     borderBottomColor: colors[Colors.MenuGrey],

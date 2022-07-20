@@ -8,10 +8,11 @@ import styles from './Modal.style'
 
 type Props = WithChildren<{
   setVisible: (state: boolean) => void
+  closeLabel?: string
   isVisible: boolean
 }>
 
-const Modal = ({ setVisible, isVisible, children }: Props) => {
+const Modal = ({ setVisible, isVisible, closeLabel = 'done', children }: Props) => {
   const handleCloseModal = useCallback(() => {
     setVisible(false)
   }, [setVisible])
@@ -23,7 +24,7 @@ const Modal = ({ setVisible, isVisible, children }: Props) => {
         <Button
           style={styles.button}
           size={ButtonSizes.Default}
-          label="Done"
+          label={closeLabel}
           onPress={handleCloseModal}
           variant={ButtonVariants.Clear}
         />

@@ -27,7 +27,7 @@ const SkillsSelectField = ({ name, label, searchPlaceholder, skills }: Props) =>
   )
 
   const handleDelete = useCallback(
-    skill => {
+    (skill: string) => {
       const selectedSkills = without(skill)(value)
       setValue(selectedSkills)
     },
