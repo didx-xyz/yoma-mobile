@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- creating and implementing Country Picker
+- fixing circle ci ruby deployments
 
-Last 10 deployment release notes:
+Previous deployment release notes:
+- creating and implementing Country Picker
 - fixing critical vulnerabilities
 - Adding Completed Courses to the CV
 - Updating Eduction components to use UserQualification components and selectors
