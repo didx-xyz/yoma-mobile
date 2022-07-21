@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- fixing circle ci ruby deployments
+- swapping in FlashList (faster list component) for Country selector
 
 Previous deployment release notes:
+- fixing circle ci ruby deployments
 - creating and implementing Country Picker
 - fixing critical vulnerabilities
 - Adding Completed Courses to the CV
