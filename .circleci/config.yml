@@ -144,7 +144,6 @@ workflows:
               only:
                 - develop
                 - main
-                - fix_circleci_ruby_version_issue
       - deploy-android-alpha:
           requires:
             - pull-request
