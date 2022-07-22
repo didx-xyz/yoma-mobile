@@ -1,24 +1,28 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import React from 'react'
+import * as React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { ChallengesIcon, CoursesIcon, DigitalCvIcon, MarketplaceIcon } from '~/assets/images'
-import About, { AboutForm } from '~/modules/About'
-import Challenges from '~/modules/Challenges'
-import CompletedChallenges, { CompletedChallengesForm } from '~/modules/CompletedChallenges'
 import CompletedCourses, { CompletedCoursesForm } from '~/modules/CompletedCourses'
-import Courses from '~/modules/Courses'
-import Education, { EducationForm } from '~/modules/Education'
-import Experience, { ExperienceForm } from '~/modules/Experience'
-import Marketplace from '~/modules/Marketplace'
-import MyCv from '~/modules/MyCv'
-import MySkills, { MySkillsForm } from '~/modules/MySkills'
-import Profile from '~/modules/Profile'
 import { Colors, FontFamily, colors } from '~/styles'
 import fontStyles from '~/styles/font.styles'
 import { applyAlphaToHex } from '~/styles/styles.utils'
 
+import About, { AboutForm } from '../About'
+import Challenges from '../Challenges'
+import CompletedChallenges, { CompletedChallengesForm } from '../CompletedChallenges'
+//import Courses from '../Courses'
+import Education, { EducationForm } from '../Education'
+import Experience, { ExperienceForm } from '../Experience'
+import Marketplace from '../Marketplace'
+import MyCv from '../MyCv'
+import MySkills, { MySkillsForm } from '../MySkills'
+import Opportunities from '../Opportunities'
+import Listing from '../Opportunities/Listing'
+import Detailed from '../Opportunities/Listing/Detailed'
+import VerifyCourse from '../Opportunities/Listing/VerifyCourse'
+import Profile from '../Profile'
 import { HomeNavigationRoutes, HomeTabRoutes } from './HomeNavigation.types'
 
 const Stack = createNativeStackNavigator()
@@ -50,10 +54,10 @@ const HomeTabs = () => {
         }}
       />
       <Tab.Screen
-        name={HomeTabRoutes.Courses}
-        component={Courses}
+        name={HomeTabRoutes.Opportunities}
+        component={Opportunities}
         options={{
-          title: t('courses'),
+          title: t('Opportunities'),
           tabBarIcon: tabInfo => <CoursesIcon fill={tabInfo.color} />,
         }}
       />
@@ -80,6 +84,14 @@ const HomeTabs = () => {
 const HomeNavigation = () => (
   <Stack.Navigator screenOptions={{ headerShown: false }}>
     <Stack.Screen name={HomeNavigationRoutes.AboutForm} component={AboutForm} />
+    <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
+    <Stack.Screen name={HomeNavigationRoutes.Detailed} component={Detailed} options={{ headerShown: true }} />
+    <Stack.Screen name={HomeNavigationRoutes.VerifyCourse} component={VerifyCourse} options={{ headerShown: true }} />
+    <Stack.Screen name={HomeNavigationRoutes.ExperienceForm} component={ExperienceForm} />
+    <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
+    <Stack.Screen name={HomeNavigationRoutes.EducationForm} component={EducationForm} />
+    <Stack.Screen name={HomeNavigationRoutes.Listing} component={Listing} />
+    <Stack.Screen name={HomeNavigationRoutes.MySkills} component={MySkills} />
     <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
     <Stack.Screen name={HomeNavigationRoutes.CompletedChallengesForm} component={CompletedChallengesForm} />
     <Stack.Screen name={HomeNavigationRoutes.CompletedChallenges} component={CompletedChallenges} />

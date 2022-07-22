@@ -4,6 +4,7 @@ export enum UsersEndpoints {
   Certificate = 'certificate',
   Photo = 'photo',
   Skills = 'skills',
+  Products = 'products',
 }
 
 export enum UserCredentialTypes {

@@ -48,6 +48,9 @@ const styles = {
     flexDirection: 'row',
     marginVertical: 10,
   } as TextStyle,
+  logoView: {
+    marginHorizontal: 5,
+  } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)

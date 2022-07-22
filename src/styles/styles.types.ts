@@ -1,6 +1,7 @@
 export enum Colors {
   BackgroundGrey = 'backgroundGrey',
   Black = 'black',
+  Blue = 'Blue',
   DarkGrey02 = 'darkGrey02',
   FacebookBlue = 'facebookBlue',
   FontBlue = 'fontBlue',
@@ -21,6 +22,7 @@ export enum Colors {
   SecondaryPurple = 'secondaryPurple',
   SecondaryRed = 'secondaryRed',
   Transparent = 'transparent',
+  Yellow = 'yellow',
   White = 'white',
 }
 

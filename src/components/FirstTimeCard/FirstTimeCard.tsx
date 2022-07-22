@@ -33,7 +33,9 @@ const FirstTimeCard = () => {
       </Text.Header>
       <View style={styles.hostedText}>
         <Text.Body color={Colors.SecondaryDarkBlue}>{t('Hosted by')}</Text.Body>
-        <RLabsLogo />
+        <View style={styles.logoView}>
+          <RLabsLogo />
+        </View>
       </View>
       <View style={styles.progressBar}>
         <View style={styles.innerProgressbar} />

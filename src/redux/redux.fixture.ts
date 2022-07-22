@@ -2,6 +2,7 @@ import { createFixture } from '../../tests/tests.utils'
 import { INITIAL_STATE as AUTH_INITIAL_STATE } from '../modules/Auth/Auth.reducer'
 import { INITIAL_STATE as CHALLENGES_INITIAL_STATE } from '../modules/Challenges/Challenges.reducer'
 import { INITIAL_STATE as JOBS_INITIAL_STATE } from '../modules/Jobs/Jobs.reducer'
+import { INITIAL_STATE as OPPORTUNITIES_INITIAL_STATE } from '../modules/Opportunities/Opportunities.reducer'
 import { INITIAL_STATE as ORGANISATIONS_INITIAL_STATE } from '../modules/Organisations/Organisations.reducer'
 import { INITIAL_STATE as SKILLS_INITIAL_STATE } from '../modules/Skills/Skills.reducer'
 import { INITIAL_STATE as USER_INITIAL_STATE } from '../modules/User/User.reducer'
@@ -16,6 +17,7 @@ export const defaultRootState: RootState = {
   challenges: CHALLENGES_INITIAL_STATE,
   jobs: JOBS_INITIAL_STATE,
   organisations: ORGANISATIONS_INITIAL_STATE,
+  opportunities: OPPORTUNITIES_INITIAL_STATE,
   skills: SKILLS_INITIAL_STATE,
   user: USER_INITIAL_STATE,
   userChallenges: USER_CHALLENGES_INITIAL_STATE,

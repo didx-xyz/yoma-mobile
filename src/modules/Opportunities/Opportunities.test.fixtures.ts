@@ -1,0 +1,35 @@
+import { createFixture } from '../../../tests/tests.utils'
+import { opportunities } from './Opportunities.types'
+
+export const OPPORTUNITIES_MOCK: opportunities = {
+  id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
+  title: 'TITLE',
+  description: 'DESCRIPTION',
+  createdAt: '2021-08-02T13:24:27.839Z',
+  createdByAdmin: true,
+  language: 'EN',
+  published: true,
+  skills: ['string'],
+  countries: [],
+  unverifiedCredentials: 0,
+  approvedCredentials: 0,
+  rejectedCredentials: 0,
+  totalZLTORewarded: 0,
+  skillsLearned: 0,
+  organisationId: '',
+  organisationName: '',
+  organisationLogoURL: '',
+  organisationURL: '',
+  organisationPrimaryContactName: '',
+  organisationPrimaryContactEmail: '',
+  organisationPrimaryContactPhone: null,
+  instructions: null,
+  url: '',
+  zltoReward: 0,
+  difficulty: '',
+  timeValue: null,
+  timePeriod: null,
+  startTime: null,
+  endTime: null,
+}
+export const OpportunitiesFixture = createFixture(OPPORTUNITIES_MOCK)

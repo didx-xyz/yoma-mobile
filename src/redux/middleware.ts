@@ -11,6 +11,7 @@ import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { middleware as JobsMiddleware } from '~/modules/Jobs'
+import { middleware as OpportunitiesMiddleware } from '~/modules/Opportunities'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
 import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
@@ -54,6 +55,11 @@ const featureModuleMiddleware = [
   JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
   JobsMiddleware.createJobFlow,
   JobsMiddleware.createJobSuccessFlow,
+  OpportunitiesMiddleware.fetchOpportunitiesFailureFlow({ notification: showSimpleMessage }),
+  OpportunitiesMiddleware.fetchOpportunitiesFlow,
+  OpportunitiesMiddleware.fetchOpportunitiesSuccessFlow,
+  OpportunitiesMiddleware.normaliseOpportunitiesFlow({ normalise: ReduxUtils.normalise }),
+  OpportunitiesMiddleware.setOpportunitiesFlow,
   OrganisationsMiddleware.fetchOrganisationsFailureFlow({ notification: showSimpleMessage }),
   OrganisationsMiddleware.fetchOrganisationsFlow,
   OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
