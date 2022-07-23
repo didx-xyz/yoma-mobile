@@ -35,11 +35,9 @@ describe('Skills/SkillsFilter/SkillsFilter.hooks', () => {
 
       await act(async () => {
         result.current.setSearchTerm('web')
-        result.current.setIsLoading(true)
       })
 
       expect(result.current.searchTerm).toBe('web')
-      expect(result.current.isLoading).toBe(false)
       expect(result.current.results).toEqual(['Web Design'])
     })
   })
