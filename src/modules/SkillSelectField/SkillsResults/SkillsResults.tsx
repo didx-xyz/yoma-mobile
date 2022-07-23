@@ -1,5 +1,5 @@
+import { FlashList, ListRenderItemInfo } from '@shopify/flash-list'
 import React, { useCallback, useEffect, useState } from 'react'
-import { FlatList } from 'react-native'
 
 import Divider from '~/components/Divider'
 import SkillItem from '~/modules/SkillSelectField/SkillItem'
@@ -9,42 +9,29 @@ interface Props {
   skills: string[]
   onItemSelect: (skill: string) => void
   hasNoResults: boolean
-  isLoading: boolean
 }
 
-const SkillsResults = ({ skills, hasNoResults, onItemSelect, isLoading = false }: Props) => {
+const SkillsResults = ({ skills, hasNoResults, onItemSelect }: Props) => {
   const [data, setData] = useState(skills)
 
   useEffect(() => {
-    if (isLoading) {
-      setData([])
-    } else {
-      setData(skills)
-    }
-  }, [isLoading, skills])
+    setData(skills)
+  }, [skills])
 
   const renderItem = useCallback(
-    ({ item }: { item: string }) => <SkillItem key={item} item={item} onPress={onItemSelect} />,
+    ({ item }: ListRenderItemInfo<string>) => <SkillItem key={item} item={item} onPress={onItemSelect} />,
     [onItemSelect],
-  )
-  const getItemLayout = useCallback(
-    (_d: any[] | null | undefined, index: number) => ({ length: 25, offset: 25 * index, index }),
-    [],
   )
 
   const getDivider = useCallback(() => <Divider />, [])
 
   return (
-    <FlatList
-      windowSize={11}
-      initialNumToRender={20}
-      maxToRenderPerBatch={10}
-      updateCellsBatchingPeriod={50}
-      getItemLayout={getItemLayout}
+    <FlashList
       ItemSeparatorComponent={getDivider}
       data={data}
-      ListEmptyComponent={<NoSkillsStates isLoading={isLoading} hasNoResult={hasNoResults} />}
+      ListEmptyComponent={<NoSkillsStates hasNoResult={hasNoResults} />}
       renderItem={renderItem}
+      estimatedItemSize={100}
     />
   )
 }

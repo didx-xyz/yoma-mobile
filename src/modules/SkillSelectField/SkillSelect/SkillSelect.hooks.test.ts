@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks'
 import { act } from 'react-test-renderer'
 
-import * as SUT from './SkillSelector.hooks'
+import * as SUT from './SkillSelect.hooks'
 
 describe('Skills/SkillsFilter/SkillsFilter.hooks', () => {
   describe('useSkillsFilter', () => {
@@ -35,11 +35,9 @@ describe('Skills/SkillsFilter/SkillsFilter.hooks', () => {
 
       await act(async () => {
         result.current.setSearchTerm('web')
-        result.current.setIsLoading(true)
       })
 
       expect(result.current.searchTerm).toBe('web')
-      expect(result.current.isLoading).toBe(false)
       expect(result.current.results).toEqual(['Web Design'])
     })
   })
