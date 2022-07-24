@@ -1,6 +1,6 @@
 Ver 0.0.1
 Latest:
-- Manually linking Flashlist to Android  
+- Manually linking Flashlist to Android  (testing)
 
 Previous deployment release notes:
 - swapping in FlashList (faster list component) for Country selector
