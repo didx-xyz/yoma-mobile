@@ -12,6 +12,7 @@ import com.facebook.soloader.SoLoader;
 import com.yomamobile.newarchitecture.MainApplicationReactNativeHost;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
+import com.shopify.reactnative.flash_list.ReactNativeFlashListPackage
 
 public class MainApplication extends Application implements ReactApplication {
 
