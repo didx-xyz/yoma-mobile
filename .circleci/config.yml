@@ -144,6 +144,7 @@ workflows:
               only:
                 - develop
                 - main
+                - YOMA-640_fix_android_deploy_failing
       - deploy-android-alpha:
           requires:
             - pull-request
