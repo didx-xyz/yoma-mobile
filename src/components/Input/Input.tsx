@@ -14,8 +14,7 @@ type Props = TextInputProps & {
 }
 
 const Input = ({ name, label, ...props }: Props) => {
-  const [{ value }, { touched, error }, { setValue }] = useField(name)
-
+  const [{ value }, { error }, { setValue }] = useField(name)
   return (
     <View style={styles.container}>
       <Text.Meta level={MetaLevels.Small}>{value !== '' ? label : ' '}</Text.Meta>
@@ -28,7 +27,7 @@ const Input = ({ name, label, ...props }: Props) => {
         onChangeText={setValue}
         {...props}
       />
-      <InputError touched={touched} error={error} />
+      <InputError error={error} />
     </View>
   )
 }

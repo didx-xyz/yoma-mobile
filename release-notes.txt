@@ -1,8 +1,12 @@
 Ver 0.0.1
 Latest:
-- fixing critical vulnerabilities
+- reverting FlashList
 
-Last 10 deployment release notes:
+Previous deployment release notes:
+- swapping in FlashList (faster list component) for Country selector
+- fixing circle ci ruby deployments
+- creating and implementing Country Picker
+- fixing critical vulnerabilities
 - Adding Completed Courses to the CV
 - Updating Eduction components to use UserQualification components and selectors
 - Adding Qualification components to service courses and education

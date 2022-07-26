@@ -20,6 +20,7 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   button: {
     alignSelf: 'flex-end',
+    marginRight: 0,
   } as ViewStyle,
 })
 
