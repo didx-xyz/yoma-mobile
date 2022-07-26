@@ -11,7 +11,7 @@ orbs:
 executors:
   node:
     docker:
-      - image: cimg/node:14.19.3
+      - image: cimg/node:16.16.0
         auth:
           username: $DOCKERHUB_USERNAME
           password: $DOCKERHUB_PASSWORD
