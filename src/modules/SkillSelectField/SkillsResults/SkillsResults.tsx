@@ -5,6 +5,7 @@ import { FlatList } from 'react-native-gesture-handler'
 import Divider from '~/components/Divider'
 import SkillItem from '~/modules/SkillSelectField/SkillItem'
 import NoSkillsStates from '~/modules/SkillSelectField/SkillsResults/NoSkillsStates'
+import { MaybeNil } from '~/types/general.types'
 
 interface Props {
   skills: string[]
@@ -25,7 +26,7 @@ const SkillsResults = ({ skills, hasNoResults, onItemSelect }: Props) => {
   )
 
   const getItemLayout = useCallback(
-    (_d: any[] | null | undefined, index: number) => ({ length: 25, offset: 25 * index, index }),
+    (_d: MaybeNil<string[]>, index: number) => ({ length: 25, offset: 25 * index, index }),
     [],
   )
 
