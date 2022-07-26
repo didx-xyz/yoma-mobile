@@ -7,7 +7,6 @@ orbs:
 # --------------------------------
 # common : executors
 # --------------------------------
-
 executors:
   node:
     docker:
@@ -20,7 +19,6 @@ executors:
 # --------------------------------
 # common : commands
 # --------------------------------
-
 commands:
   audit:
     description: 'Audit CI'
@@ -97,7 +95,6 @@ commands:
 # --------------------------------
 # common : jobs
 # --------------------------------
-
 jobs:
   pull-request:
     executor: node
@@ -121,11 +118,11 @@ jobs:
       - create_keystore
       - install-firebase-cli
       - deploy-android-alpha
+    resource_class: large
 
 # --------------------------------
 # common : workflows
 # --------------------------------
-
 workflows:
   version: 2
   validate-branch:
