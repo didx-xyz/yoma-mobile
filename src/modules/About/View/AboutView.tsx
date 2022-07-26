@@ -18,7 +18,7 @@ const AboutView = ({ onEdit, biography, navigation }: Props) => {
 
   return (
     <CvView
-      title={t('About')}
+      title={t('about.title')}
       noDataMessage={t('Which school, university or college did you attend?')}
       onAction={onEdit}
       isEditAction

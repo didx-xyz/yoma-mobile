@@ -1,3 +1,4 @@
+import i18n from 'i18next'
 import { mergeRight, omit, pick, pipe } from 'ramda'
 import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
@@ -7,7 +8,7 @@ import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/us
 import * as Strings from '~/constants/strings.constants'
 import { utils as ErrorUtils } from '~/modules/Error'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import { utils as NavigationUtils } from '~/modules/Navigation'
+import * as NavigationUtils from '~/modules/Navigation/Navigation.utils'
 import { actions as QualificationsActions } from '~/modules/Qualifications'
 import {
   actions as UserActions,
@@ -141,7 +142,7 @@ export const createUserQualificationSuccessFlow =
       }
       dispatch(clearUserQualificationFormValues())
       NavigationUtils.navigate(HomeNavigationRoutes.Home)
-      notification('success', Strings.YOUR_QUALIFICATION_HAS_BEEN_ADDED)
+      notification('success', i18n.t(Strings.YOUR_QUALIFICATION_HAS_BEEN_ADDED))
     }
     return result
   }
@@ -156,7 +157,7 @@ export const createUserQualificationFailureFlow =
     if (createUserQualificationFailure.match(action)) {
       const errorMessage = ErrorUtils.extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.ERROR, errorMessage)
+      notification('danger', i18n.t('general.error'), errorMessage)
     }
     return result
   }
@@ -218,8 +219,8 @@ export const createUserQualificationCertificateFailureFlow =
       // TODO: this should be handled by the notification module
       notification(
         'danger',
-        Strings.AN_ERROR_OCCURRED,
-        Strings.OOPS_SOMETHING_WENT_WRONG_UPLOADING_YOUR_CHALLENGE_CERTIFICATE,
+        i18n.t('general.errorOccurred'),
+        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_UPLOADING_YOUR_CHALLENGE_CERTIFICATE),
       )
     }
     return result

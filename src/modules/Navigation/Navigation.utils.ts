@@ -4,7 +4,7 @@ import { ParamsList } from '~/modules/Landing/Landing.types'
 
 export const navigationRef = createNavigationContainerRef<ParamsList>()
 
-export const navigate = (name: keyof ParamsList, params?: never) => {
+export const navigate = (name: keyof ParamsList, params?: ParamsList) => {
   if (navigationRef.isReady()) {
     navigationRef.navigate(name, params)
   }

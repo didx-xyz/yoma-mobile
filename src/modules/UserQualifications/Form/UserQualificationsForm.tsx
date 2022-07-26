@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 
 import { ButtonSave } from '~/components/Button'
-import CountryPickerField from '~/components/CountryPickerField'
 import DateRangeSelect from '~/components/DateRangeSelect'
 import DropDown, { types as DropDownTypes } from '~/components/DropDown'
 import FormGroup from '~/components/FormGroup'
@@ -16,6 +15,7 @@ import Text, { MetaLevels } from '~/components/Typography'
 import Upload from '~/components/Upload'
 import ViewContainer from '~/components/ViewContainer'
 import { CompletedCoursesNavigation } from '~/modules/CompletedCourses/types'
+import CountrySelectField from '~/modules/CountrySelectField/CountrySelectField.container'
 import { EducationNavigation } from '~/modules/Education/types'
 import SkillsSelectField from '~/modules/SkillSelectField'
 import { Colors } from '~/styles'
@@ -47,9 +47,18 @@ const UserQualificationsForm = ({ title, navigation, organisationsDropDown, form
               label={t('School or Educational institution')}
               name="organisationId"
             />
-            <CountryPickerField name="countries" label={t('Country')} />
+            <CountrySelectField
+              name="countries"
+              label={t('Country')}
+              searchPlaceholder={t('Filter countries')}
+              modalHeader={t('Select qualification country')}
+            />
             <DateRangeSelect />
-            <SkillsSelectField name="skillNames" searchPlaceholder={t('Search skills')} label={t('Skills developed')} />
+            <SkillsSelectField
+              name="skillNames"
+              searchPlaceholder={t('Search skills')}
+              label={t('forms.label.skills')}
+            />
             <Upload name="certificate" label={t('Upload certification (if completed)')} />
             <View style={styles.bottom}>
               <Text.Meta

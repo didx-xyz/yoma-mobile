@@ -3,6 +3,7 @@ import { Middleware } from 'redux'
 // avoiding circular dependencies:
 import * as AuthActions from '~/modules/Auth/Auth.reducer'
 import * as ChallengesActions from '~/modules/Challenges/Challenges.reducer'
+import * as CountriesActions from '~/modules/Countries/Countries.reducer'
 import * as OrganisationsActions from '~/modules/Organisations/Organisations.reducer'
 import * as SkillsActions from '~/modules/Skills/Skills.reducer'
 import * as UserActions from '~/modules/User/User.reducer'
@@ -37,6 +38,7 @@ export const hydrateAppFlow: Middleware =
   action => {
     const result = next(action)
     if (hydrateApp.match(action)) {
+      dispatch(CountriesActions.getCountries())
       dispatch(ChallengesActions.fetchChallenges())
       dispatch(OrganisationsActions.fetchOrganisations())
       dispatch(SkillsActions.fetchSkills())

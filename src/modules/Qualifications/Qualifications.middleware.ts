@@ -1,9 +1,9 @@
+import i18n from 'i18next'
 import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiQualificationConstants } from '~/api/qualifications'
-import * as Strings from '~/constants/strings.constants'
 import * as UserQualificationsActions from '~/modules/UserQualifications/UserQualifications.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
@@ -54,7 +54,7 @@ export const createQualificationFailureFlow =
 
     if (createQualificationFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', Strings.AN_ERROR_OCCURRED, Strings.OOPS_SOMETHING_WENT_WRONG_PLEASE_TRY_AGAIN)
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }
