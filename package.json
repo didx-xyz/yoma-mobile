@@ -67,7 +67,7 @@
     "react-native-elements": "^3.3.2",
     "react-native-encrypted-storage": "^4.0.2",
     "react-native-flash-message": "^0.2.1",
-    "react-native-flipper": "^0.153.0",
+    "react-native-flipper": "^0.155.0",
     "react-native-gesture-handler": "^2.5.0",
     "react-native-image-crop-picker": "^0.38.0",
     "react-native-localize": "^2.2.2",
