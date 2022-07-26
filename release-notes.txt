@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- swapping in FlashList (faster list component) for Country selector
+- reverting FlashList
 
 Previous deployment release notes:
+- swapping in FlashList (faster list component) for Country selector
 - fixing circle ci ruby deployments
 - creating and implementing Country Picker
 - fixing critical vulnerabilities
