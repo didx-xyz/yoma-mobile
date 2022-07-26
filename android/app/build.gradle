@@ -134,7 +134,7 @@ android {
     ndkVersion rootProject.ext.ndkVersion
 
     compileSdkVersion rootProject.ext.compileSdkVersion
-
+    
     defaultConfig {
         applicationId "com.yomamobile"
         minSdkVersion rootProject.ext.minSdkVersion
