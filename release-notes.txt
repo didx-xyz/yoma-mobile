@@ -1,9 +1,9 @@
 Ver 0.0.1
 Latest:
-- updates to packages (cont)
+- swapping in FlashList for Country select and Skills select (again)
 
 Previous deployment release notes:
-- swapping in FlashList (faster list component) for Country selector
+- updates to packages (cont)
 - fixing circle ci ruby deployments
 - creating and implementing Country Picker
 - fixing critical vulnerabilities
