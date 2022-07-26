@@ -1,6 +1,6 @@
 Ver 0.0.1
 Latest:
-- reverting FlashList
+- updates to packages
 
 Previous deployment release notes:
 - swapping in FlashList (faster list component) for Country selector
