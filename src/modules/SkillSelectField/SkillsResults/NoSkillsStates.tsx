@@ -1,27 +1,16 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { ActivityIndicator } from 'react-native'
 
-import Spacer from '~/components/Spacer'
 import { Stack } from '~/components/Stack'
 import Text, { HeaderLevels, TextAlign } from '~/components/Typography'
 import { Colors } from '~/styles'
 
 interface Props {
-  isLoading: boolean
   hasNoResult: boolean
 }
 
-const NoSkillsStates = ({ isLoading, hasNoResult }: Props) => {
+const NoSkillsStates = ({ hasNoResult }: Props) => {
   const { t } = useTranslation()
-  if (isLoading) {
-    return (
-      <>
-        <Spacer height={20} />
-        <ActivityIndicator size="large" />
-      </>
-    )
-  }
 
   if (hasNoResult) {
     return (

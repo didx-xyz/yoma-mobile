@@ -1,6 +1,6 @@
-import * as SUT from './SkillSelector.utils'
+import * as SUT from './SkillSelect.utils'
 
-describe('modules/SkillSelectField/SkillSelector/SkillSelector.utils', () => {
+describe('modules/SkillSelectField/SkillSelect/SkillSelect.utils', () => {
   describe('filterSkills', () => {
     it.each([
       ['we', ['Web Design']],
