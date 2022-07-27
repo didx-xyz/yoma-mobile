@@ -141,6 +141,7 @@ workflows:
               only:
                 - develop
                 - main
+                - YOMA-636_implementing_flashlist
       - deploy-android-alpha:
           requires:
             - pull-request
