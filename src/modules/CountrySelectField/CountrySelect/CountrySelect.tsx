@@ -1,7 +1,7 @@
+import { FlashList, ListRenderItemInfo } from '@shopify/flash-list'
 import { debounce } from 'lodash'
 import React, { useCallback } from 'react'
-import { ListRenderItemInfo, View } from 'react-native'
-import { FlatList } from 'react-native-gesture-handler'
+import { View } from 'react-native'
 
 import Divider from '~/components/Divider'
 import ListFilter from '~/components/ListFilter'
@@ -40,11 +40,12 @@ const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Pro
   return (
     <>
       <ListFilter searchPlaceholder={searchPlaceholder} setSearchTerm={debounce(setSearchTerm)} />
-      <FlatList
+      <FlashList
         data={results}
         ListEmptyComponent={<Text.Header level={HeaderLevels.H5}>No Results</Text.Header>}
         ItemSeparatorComponent={itemSeparator}
         renderItem={renderItem}
+        estimatedItemSize={54}
       />
     </>
   )
