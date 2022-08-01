@@ -1,8 +1,10 @@
-import { assoc, chain, complement, curry, isNil, keys, map, reduce, zipObj } from 'ramda'
+import { addIndex, assoc, chain, complement, curry, isNil, keys, map, reduce, zipObj } from 'ramda'
 
 import { StdObj } from '~/types/general.types'
 
 export const isNotNil = complement(isNil)
+
+export const mapIndex = addIndex(map)
 
 // via: https://github.com/ramda/ramda/wiki/Cookbook#make-an-object-out-of-a-list-with-keys-derived-from-each-element
 export const objFromListWith = curry((fn: Function, list: any[]) => chain(zipObj, map(fn))(list))
