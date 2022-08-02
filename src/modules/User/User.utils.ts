@@ -1,6 +1,26 @@
-import { always, applySpec, equals, filter, find, keys, mergeRight, omit, path, pick, pipe, prop, toLower } from 'ramda'
+import {
+  always,
+  applySpec,
+  complement,
+  equals,
+  filter,
+  find,
+  isNil,
+  keys,
+  mergeRight,
+  omit,
+  path,
+  pathOr,
+  pick,
+  pipe,
+  prop,
+  propOr,
+  toLower,
+  when,
+} from 'ramda'
 
 import { types as ApiUserTypes } from '~/api/users'
+import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
 import * as ReduxTypes from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
@@ -36,6 +56,9 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
 
 export const extractCredentialsByType = (type: ApiUserTypes.UserCredentialTypes) =>
   filter(pipe(keys, find(equals(toLower(type)))))
+
+export const extractCredentialsFromOpportunityByType = (type: ApiUserTypes.UserCredentialOpportunityTypes) =>
+  filter(pipe(pathOr('', ['opportunity', 'type']), equals(toLower(type))))
 
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
   mergeRight({

@@ -97,6 +97,7 @@ const featureModuleMiddleware = [
   UserJobsMiddleware.getUserJobsFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
     UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Job),
+    UserUtils.extractCredentialsFromOpportunityByType(ApiUsersTypes.UserCredentialOpportunityTypes.Job),
   ),
   UserJobsMiddleware.normaliseUserJobsFlow({ normalise: ReduxUtils.normalise }),
   UserJobsMiddleware.setUserJobsFlow,

@@ -41,6 +41,7 @@ export const getUserJobsFromCredentialsFlow =
   (
     extractDataFromPayload: StdFn<any, UserCredentials>,
     extractJobs: StdFn<UserCredentials, UserJobCredential[]>,
+    extractJobsFromOpportunities: StdFn<UserCredentials, UserJobCredential[]>,
   ): Middleware =>
   ({ dispatch }) =>
   next =>
@@ -48,7 +49,10 @@ export const getUserJobsFromCredentialsFlow =
     const result = next(action)
     if (UserActions.fetchUserCredentialsSuccess.match(action)) {
       const data = extractDataFromPayload(action)
-      const jobs = extractJobs(data)
+      const credentialJobs = extractJobs(data)
+      const opportunityJobs = extractJobsFromOpportunities(data)
+      const jobs = mergeRight(credentialJobs, opportunityJobs)
+
       dispatch(getUserJobsSuccess(jobs))
     }
     return result
