@@ -60,7 +60,7 @@
     "patch-package": "^6.4.7",
     "ramda": "^0.27.2",
     "react": "18.0.0",
-    "react-i18next": "^11.18.0",
+    "react-i18next": "^11.18.1",
     "react-native": "0.69.1",
     "react-native-app-auth": "^6.4.3",
     "react-native-document-picker": "^8.1.1",
