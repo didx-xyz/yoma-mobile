@@ -4,9 +4,12 @@ import { fontWeights } from '~/components/Typography/fontWeights.styles'
 
 const styles = {
   container: {
-    padding: 3,
-    paddingLeft: 0,
-    ...fontWeights.medium500,
+    ...fontWeights.bold700,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    height: 10,
+    top: -2,
   } as ViewStyle,
 }
 

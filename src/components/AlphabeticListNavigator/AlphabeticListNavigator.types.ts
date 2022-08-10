@@ -1,4 +1,5 @@
 export interface NavLetter {
-  id: number
+  index: number
   name: string
+  isSpacer?: boolean
 }
