@@ -1,4 +1,4 @@
-import { act, renderHook } from '@testing-library/react-hooks'
+import { renderHook } from '@testing-library/react-hooks'
 
 import * as SUT from './AlphabeticListNavigator.hooks'
 
@@ -16,7 +16,7 @@ describe('components/AlphabeticListNavigator/AlphabeticListNavigator.hooks', () 
       const { result } = renderHook(() => SUT.useLetterNavigation(5, ['apples', 'axe', 'beef', 'coffee']))
       expect(result.current.letters).toEqual([
         { name: 'a', index: 0 },
-        { name: '•', index: 1, isSpacer: true },
+        { name: '•', index: 2, isSpacer: true },
         { name: 'c', index: 3 },
       ])
     })
