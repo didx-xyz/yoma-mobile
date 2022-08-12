@@ -17,7 +17,7 @@ const indexedLetter = (name: string, index: number) => ({
 const addSpacerWhenOdd =
   (bullet = '•') =>
   (item: NavLetter, index: number) =>
-    when(always(isOdd(index)), always({ name: bullet, index, isSpacer: true }))(item)
+    when(always(isOdd(index)), always({ name: bullet, index: item.index, isSpacer: true }))(item)
 
 export const navLetters = (shouldAddBullets: boolean) =>
   pipe(mapIndex(indexedLetter), uniqBy(prop('name')), when(always(shouldAddBullets), mapIndex(addSpacerWhenOdd('•'))))

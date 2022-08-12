@@ -2,7 +2,7 @@ import { FlashList, ListRenderItemInfo } from '@shopify/flash-list'
 import { debounce } from 'lodash'
 import React, { useCallback, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
+import { LayoutChangeEvent, View } from 'react-native'
 
 import AlphabeticListNavigator, { types as AlphabeticListNavigatorTypes } from '~/components/AlphabeticListNavigator'
 import Divider from '~/components/Divider'
@@ -39,6 +39,11 @@ const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Pro
     }
   }, [])
 
+  const onContainerLayout = useCallback((event: LayoutChangeEvent) => {
+    const { height } = event.nativeEvent.layout
+    setViewHeight(height)
+  }, [])
+
   const itemSeparator = useCallback(
     () => (
       <View style={styles.divider}>
@@ -57,13 +62,7 @@ const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Pro
   )
 
   return (
-    <View
-      style={styles.container}
-      onLayout={event => {
-        const { height } = event.nativeEvent.layout
-        setViewHeight(height)
-      }}
-    >
+    <View style={styles.container} onLayout={onContainerLayout}>
       <ListFilter searchPlaceholder={searchPlaceholder} setSearchTerm={debounce(setSearchTerm)} />
       <View style={styles.listContainer}>
         <FlashList

@@ -23,5 +23,16 @@ describe('components/AlphabeticListNavigator.utils', () => {
         { name: 'g', index: 8 },
       ])
     })
+    it('should inject bullets if condition is true', () => {
+      const data = ['add', 'art', 'bat', 'card', 'cat', 'client', 'elope', 'end', 'grail']
+      const result = SUT.navLetters(true)(data)
+      expect(result).toEqual([
+        { name: 'a', index: 0 },
+        { name: '•', index: 2, isSpacer: true },
+        { name: 'c', index: 3 },
+        { name: '•', index: 6, isSpacer: true },
+        { name: 'g', index: 8 },
+      ])
+    })
   })
 })
