@@ -87,11 +87,7 @@ const HomeNavigation = () => (
     <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
     <Stack.Screen name={HomeNavigationRoutes.Detailed} component={Detailed} options={{ headerShown: true }} />
     <Stack.Screen name={HomeNavigationRoutes.VerifyCourse} component={VerifyCourse} options={{ headerShown: true }} />
-    <Stack.Screen name={HomeNavigationRoutes.ExperienceForm} component={ExperienceForm} />
-    <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
-    <Stack.Screen name={HomeNavigationRoutes.EducationForm} component={EducationForm} />
     <Stack.Screen name={HomeNavigationRoutes.Listing} component={Listing} />
-    <Stack.Screen name={HomeNavigationRoutes.MySkills} component={MySkills} />
     <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
     <Stack.Screen name={HomeNavigationRoutes.CompletedChallengesForm} component={CompletedChallengesForm} />
     <Stack.Screen name={HomeNavigationRoutes.CompletedChallenges} component={CompletedChallenges} />
@@ -100,7 +96,6 @@ const HomeNavigation = () => (
     <Stack.Screen name={HomeNavigationRoutes.EducationForm} component={EducationForm} />
     <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
     <Stack.Screen name={HomeNavigationRoutes.ExperienceForm} component={ExperienceForm} />
-    <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
     <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
     <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />
     <Stack.Screen name={HomeNavigationRoutes.MySkillsForm} component={MySkillsForm} />

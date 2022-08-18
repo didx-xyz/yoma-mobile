@@ -1,6 +1,5 @@
 import { types as ApiTypes } from '~/api'
 import { ApiResponseHeaders } from '~/api/api.types'
-import { NormalisedData } from '~/redux/redux.types'
 
 export interface opportunities {
   [x: string]: any
@@ -45,11 +44,11 @@ export interface OpportunitiesResponse {
   }
 }
 
-export type NormalisedOpportunities = NormalisedData<opportunities>
-// export type NormalisedOpportunities = {
-//   ids: string[]
-//   entities: Record<string, opportunities>
-// }
+// export type NormalisedOpportunities = NormalisedData<opportunities>
+export type NormalisedOpportunities = {
+  ids: string[]
+  entities: Record<string, opportunities>
+}
 
 export interface opportunitiesResponseHeaders extends ApiResponseHeaders {
   OrganisationId: string

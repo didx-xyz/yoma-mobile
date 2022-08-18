@@ -6,7 +6,7 @@ import { showSimpleMessage } from '~/utils/error'
 
 import { actions as ApiActions } from '../../api'
 import { constants as ApiOpportunitiesConstants } from '../../api/opportunities'
-//import * as ReduxTypes from '../../redux/redux.types'
+import * as ReduxTypes from '../../redux/redux.types'
 import {
   fetchOpportunities,
   fetchOpportunitiesFailure,
@@ -15,10 +15,7 @@ import {
   normaliseOpportunitiesSuccess,
   setOpportunities,
 } from './Opportunities.reducer'
-
-// import { opportunities } from './Opportunities.types'
-
-//import { opportunities } from './Opportunities.types'
+import { opportunities } from './Opportunities.types'
 
 export const fetchOpportunitiesFlow: Middleware =
   ({ dispatch }) =>
@@ -51,19 +48,19 @@ export const fetchOpportunitiesSuccessFlow: Middleware =
     return result
   }
 
-// export const normaliseOpportunitiesFlow =
-//   ({ normalise }: ReduxTypes.NormaliseDependency<opportunities>): Middleware =>
-//   ({ dispatch }) =>
-//   next =>
-//   action => {
-//     const result = next(action)
-//     if (fetchOpportunitiesSuccess.match(action)) {
-//       const data = extractDataFromResponseAction(action)
-//       const Opportunities = normalise(data)
-//       dispatch(setOpportunities(Opportunities))
-//     }
-//     return result
-//   }
+export const normaliseOpportunitiesFlow =
+  ({ normalise }: ReduxTypes.NormaliseDependency<opportunities>): Middleware =>
+  ({ dispatch }) =>
+  next =>
+  action => {
+    const result = next(action)
+    if (fetchOpportunitiesSuccess.match(action)) {
+      const data = extractDataFromResponseAction(action)
+      const normalisedOpportunities = normalise(data)
+      dispatch(normaliseOpportunitiesSuccess(normalisedOpportunities))
+    }
+    return result
+  }
 
 export const setOpportunitiesFlow: Middleware =
   ({ dispatch }) =>

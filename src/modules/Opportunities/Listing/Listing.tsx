@@ -28,7 +28,6 @@ const Listing = ({ navigation }: Props) => {
   //const test: opportunities = DATA.entities as opportunities
 
   const [data, setData] = useState(DATA)
-  console.log(DATA)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -68,7 +67,8 @@ const Listing = ({ navigation }: Props) => {
               {itemData.timePeriod} • {itemData.difficulty} •
             </Text>
             <Text style={styles.bottomText}>
-              • Starts <DateDisplay date={itemData.startTime} template={'dd MMM yyyy'} />• 30 participants
+              • Starts{itemData?.startTime && <DateDisplay date={itemData.startTime} template={'dd MMM yyyy'} />}• 30
+              participants
             </Text>
           </View>
           <TouchableOpacity style={styles.tokensView}>
