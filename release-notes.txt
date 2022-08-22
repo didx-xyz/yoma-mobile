@@ -1,8 +1,9 @@
 `Ver 0.0.1
 Latest:
-- Adding alphabetic list navigator to country select
+- No new features (docs-only update)
 
 Previous deployment release notes:
+- Adding alphabetic list navigator to country select
 - swapping in FlashList for Country select and Skills select (again)
 - updates to packages (cont)
 - fixing circle ci ruby deployments
