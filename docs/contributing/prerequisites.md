@@ -20,26 +20,6 @@
   
 ------------
 
-## iOS Prerequisites & Setup
-
-### Minimal system dependencies to run the project
-
-- [Brew](https://brew.sh/)
-
-### Setup
-
-- [Install XCode](https://developer.apple.com/xcode/)
-
-### Install extensions
-
-- Install Pods
-
-    ```bash
-    npx pod-install ios
-    ```
-
-------------
-
 ## Android Prerequisites & Setup
 
 ### Setup
@@ -53,7 +33,6 @@
     - Android NDK (for node integration)
 
 1. Export android environment variables:
-
     ```bash
     export ANDROID_HOME=/Users/<username>/Library/Android/sdk/
     export PATH=$PATH:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
@@ -71,3 +50,25 @@
       ``npm run android``)
 
 [reference](https://developer.android.com/studio/run/emulator)
+
+------------
+
+## iOS Prerequisites & Setup 
+_(Not necessary right now as it's primarily an Android app. Not sure it's even working atm)_
+
+### Minimal system dependencies to run the project
+
+- [Brew](https://brew.sh/)
+
+### Setup
+
+- [Install XCode](https://developer.apple.com/xcode/)
+
+### Install extensions
+
+- Install Pods
+
+    ```bash
+    npx pod-install ios
+    ```
+
