@@ -10,9 +10,9 @@ _Please make sure you you select your operating system and then "Android" for th
 Once that's complete, please also do the following: 
 - [Node & NPM](https://nodejs.org/en/):
     1. Install a node version management package: [install NVM](https://github.com/nvm-sh/nvm)
-    1. install the Node version listed in the `.node-version` file in root:
-       `nvm install <VERSION>` - **Running the
-       correct node version is very important**
+    2. install the Node version listed in the `.node-version` file in root:
+         `nvm install <VERSION>` - **Running the
+         correct node version is very important**
 - [CircleCI](https://circleci.com)'s command line tool:
     - on Mac `brew install circleci`
     - or [alternative installation](https://circleci.com/docs/2.0/local-cli/#installation)
