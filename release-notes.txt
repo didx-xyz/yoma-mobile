@@ -1,8 +1,9 @@
 `Ver 0.0.1
 Latest:
-- No new features (docs-only update)
+- fix: Re-adding bottom tabs
 
 Previous deployment release notes:
+- No new features (docs-only update)
 - Adding alphabetic list navigator to country select
 - swapping in FlashList for Country select and Skills select (again)
 - updates to packages (cont)

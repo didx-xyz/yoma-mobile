@@ -90,7 +90,7 @@ const HomeTabs = () => {
 }
 
 const HomeNavigation = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={HomeNavigationRoutes.MyCv}>
+  <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={HomeNavigationRoutes.Home}>
     <Stack.Screen name={HomeNavigationRoutes.AboutForm} component={AboutForm} />
     <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
     <Stack.Screen name={HomeNavigationRoutes.CompletedChallengesForm} component={CompletedChallengesForm} />
