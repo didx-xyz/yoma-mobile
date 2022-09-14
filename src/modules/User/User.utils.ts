@@ -1,4 +1,5 @@
 import { always, applySpec, equals, filter, find, keys, mergeRight, omit, path, pick, pipe, prop, toLower } from 'ramda'
+import { Platform } from 'react-native'
 
 import { types as ApiUserTypes } from '~/api/users'
 import * as ReduxTypes from '~/redux/redux.types'
@@ -23,11 +24,11 @@ export const extractUserFromUpdateUserPayload = pick([
   'biography',
 ])
 
-export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any) => {
-  const photoPayload = new formInstance()
+export const createPhotoFormPayload = (imageResponse: any) => {
+  const photoPayload = new FormData()
 
   photoPayload.append(USER_PHOTO_FORM_DATA_NAME, {
-    uri: imageResponse.path,
+    uri: Platform.OS === 'ios' ? imageResponse.path.replace('file://', '') : imageResponse.path,
     name: imageResponse.filename || 'default.jpg',
     type: imageResponse.mime,
   })

@@ -1,5 +1,4 @@
 import { countries } from 'countries-list'
-import FormData from 'form-data'
 import { concat } from 'ramda'
 import EncryptedStorage from 'react-native-encrypted-storage'
 import ImagePicker from 'react-native-image-crop-picker'
@@ -115,7 +114,7 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.uploadUserPhotoFlow({
     imagePicker: ImagePicker,
-    createPayload: UserUtils.createPhotoFormPayload(FormData),
+    createPayload: UserUtils.createPhotoFormPayload,
   }),
   UserMiddleware.uploadUserPhotoSuccessFlow,
   UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(

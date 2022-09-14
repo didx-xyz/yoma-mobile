@@ -1,8 +1,10 @@
-`Ver 0.0.1
+Ver 0.0.1
+
 Latest:
-- fix: Re-adding bottom tabs
+
 
 Previous deployment release notes:
+- fix: Re-adding bottom tabs
 - No new features (docs-only update)
 - Adding alphabetic list navigator to country select
 - swapping in FlashList for Country select and Skills select (again)

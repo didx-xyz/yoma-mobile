@@ -200,10 +200,12 @@ export const uploadUserPhotoFlow =
     const result = next(action)
     if (uploadUserPhoto.match(action)) {
       try {
-        const imageData = await imagePicker.openCamera(CAPTURE_IMAGE_OPTIONS)
+        const imageData = await imagePicker.openPicker(CAPTURE_IMAGE_OPTIONS)
         const photoPayload = createPayload(imageData)
+        console.log(photoPayload)
         dispatch(uploadUserPhotoSuccess(photoPayload))
       } catch (error) {
+        console.log(error)
         const message = getErrorMessageWithFallback(error)
         dispatch(uploadUserPhotoFailure(message))
       }
@@ -218,7 +220,10 @@ export const uploadUserPhotoSuccessFlow: Middleware =
     const result = next(action)
 
     if (uploadUserPhotoSuccess.match(action)) {
+      console.log({ action })
       const config = ReduxUtils.buildConfig(ApiUsersConstants.USERS_PHOTO_CREATE_CONFIG, getState())
+      const payload = action.payload
+      console.log({ payload })
 
       dispatch(
         ApiActions.apiRequest(
