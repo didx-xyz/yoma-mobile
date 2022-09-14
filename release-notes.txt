@@ -1,8 +1,11 @@
-Ver 0.0.1
+`Ver 0.0.1
 Latest:
-- swapping in FlashList for Country select and Skills select (again)
+- fix: Re-adding bottom tabs
 
 Previous deployment release notes:
+- No new features (docs-only update)
+- Adding alphabetic list navigator to country select
+- swapping in FlashList for Country select and Skills select (again)
 - updates to packages (cont)
 - fixing circle ci ruby deployments
 - creating and implementing Country Picker

@@ -1,8 +1,10 @@
 import { FlashList, ListRenderItemInfo } from '@shopify/flash-list'
 import { debounce } from 'lodash'
-import React, { useCallback } from 'react'
-import { View } from 'react-native'
+import React, { useCallback, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { LayoutChangeEvent, View } from 'react-native'
 
+import AlphabeticListNavigator, { types as AlphabeticListNavigatorTypes } from '~/components/AlphabeticListNavigator'
 import Divider from '~/components/Divider'
 import ListFilter from '~/components/ListFilter'
 import Text, { HeaderLevels } from '~/components/Typography'
@@ -17,16 +19,38 @@ interface Props {
   countriesByName: NormalisedCountries
   onItemSelect: (code?: string) => void
 }
-
 const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Props) => {
+  const [viewHeight, setViewHeight] = useState(0)
+  const { t } = useTranslation()
+  const flashListRef = useRef<FlashList<string> | null>(null)
   const { results, setSearchTerm } = useCountriesFilter(countriesByName.ids)
 
-  const itemSeparator = useCallback(() => <Divider />, [])
   const handleItemSelect = useCallback(
     (item: string) => {
       onItemSelect(countriesByName.entities[item].code || undefined)
     },
     [countriesByName, onItemSelect],
+  )
+  const handleNavPress = useCallback((letter: AlphabeticListNavigatorTypes.NavLetter) => {
+    if (flashListRef.current) {
+      flashListRef.current.scrollToIndex({
+        index: letter.index,
+      })
+    }
+  }, [])
+
+  const onContainerLayout = useCallback((event: LayoutChangeEvent) => {
+    const { height } = event.nativeEvent.layout
+    setViewHeight(height)
+  }, [])
+
+  const itemSeparator = useCallback(
+    () => (
+      <View style={styles.divider}>
+        <Divider />
+      </View>
+    ),
+    [],
   )
   const renderItem = useCallback(
     ({ item }: ListRenderItemInfo<string>) => (
@@ -38,16 +62,22 @@ const CountrySelect = ({ searchPlaceholder, countriesByName, onItemSelect }: Pro
   )
 
   return (
-    <>
+    <View style={styles.container} onLayout={onContainerLayout}>
       <ListFilter searchPlaceholder={searchPlaceholder} setSearchTerm={debounce(setSearchTerm)} />
-      <FlashList
-        data={results}
-        ListEmptyComponent={<Text.Header level={HeaderLevels.H5}>No Results</Text.Header>}
-        ItemSeparatorComponent={itemSeparator}
-        renderItem={renderItem}
-        estimatedItemSize={54}
-      />
-    </>
+      <View style={styles.listContainer}>
+        <FlashList
+          ref={flashListRef}
+          data={results}
+          ListEmptyComponent={<Text.Header level={HeaderLevels.H5}>{t('No Results')}</Text.Header>}
+          ItemSeparatorComponent={itemSeparator}
+          renderItem={renderItem}
+          estimatedItemSize={54}
+        />
+        <View style={styles.alphabeticNavContainer}>
+          <AlphabeticListNavigator onNav={handleNavPress} data={results} listContainerHeight={viewHeight} />
+        </View>
+      </View>
+    </View>
   )
 }
 export default CountrySelect
