@@ -3,7 +3,7 @@ import { mergeRight } from 'ramda'
 import { API_VERSION_PART } from '~/api/api.constants'
 
 import { ApiClients, ApiMeta, ApiMethods } from '../api.types'
-import { UsersEndpoints } from './users.types'
+import { UserCredentialOpportunityTypes, UserCredentialTypes, UsersEndpoints } from './users.types'
 
 export const USERS_CONFIG: Partial<ApiMeta> = {
   client: ApiClients.Users,
@@ -44,3 +44,9 @@ export const USERS_PHOTO_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONF
   endpoint: UsersEndpoints.Photo,
   additionalHeaders: { 'Content-Type': 'multipart/form-data' },
 })
+export const USER_CREDENTIAL_OPPORTUNITY_TYPES_MAP = {
+  [UserCredentialTypes.Assignment]: UserCredentialOpportunityTypes.Assignment,
+  [UserCredentialTypes.Challenge]: UserCredentialOpportunityTypes.Challenge,
+  [UserCredentialTypes.Job]: UserCredentialOpportunityTypes.Job,
+  [UserCredentialTypes.Qualification]: UserCredentialOpportunityTypes.Qualification,
+}

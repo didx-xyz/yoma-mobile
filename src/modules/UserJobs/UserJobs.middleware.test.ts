@@ -33,11 +33,14 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const create = createMiddlewareMock(jest)
       const credentialsResponseMock = ['job1', 'job1', 'assignment1', 'job2']
       const extractDataFromPayloadMock = jest.fn()
-      const extractJobsMock = jest.fn()
+      const extractJobsMock = jest.fn(() => [])
+      const extractJobsFromOpportunities = jest.fn(() => [])
       const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
 
       // when ...
-      const { invoke, next } = create(SUT.getUserJobsFromCredentialsFlow(extractDataFromPayloadMock, extractJobsMock))
+      const { invoke, next } = create(
+        SUT.getUserJobsFromCredentialsFlow(extractDataFromPayloadMock, extractJobsMock, extractJobsFromOpportunities),
+      )
       invoke(action)
 
       // then ...
@@ -54,9 +57,10 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       // when ... we intercept the data and extract jobs
       const extractDataFromPayloadMock = jest.fn()
       const extractJobsMock = jest.fn(() => jobCredentialsMock)
+      const extractJobsFromOpportunities = jest.fn(() => [])
       const { invoke, store } = create(
         // @ts-ignore - actual shape of data doesn't matter
-        SUT.getUserJobsFromCredentialsFlow(extractDataFromPayloadMock, extractJobsMock),
+        SUT.getUserJobsFromCredentialsFlow(extractDataFromPayloadMock, extractJobsMock, extractJobsFromOpportunities),
       )
       invoke(action)
 

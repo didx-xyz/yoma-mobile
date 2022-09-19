@@ -14,7 +14,8 @@ export enum UserCredentialTypes {
 }
 
 export enum UserCredentialOpportunityTypes {
+  Assignment = 'taskopportunity',
+  Challenge = 'impactopportunity',
   Job = 'jobopportunity',
   Qualification = 'learningopportunity',
-  Challenge = 'impactopportunity',
 }
