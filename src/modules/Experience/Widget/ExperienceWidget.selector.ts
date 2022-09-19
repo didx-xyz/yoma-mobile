@@ -1,6 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { applySpec, map, path, pathOr, pick, pipe, propOr, slice } from 'ramda'
+import { applySpec, map, pick, pipe, slice } from 'ramda'
 
+import { constants as UserConstants } from '~/modules/User'
 import { selectors as UserJobsSelectors } from '~/modules/UserJobs'
 
 export default createSelector(UserJobsSelectors.selectUserJobs, userJobs => {
@@ -8,14 +9,7 @@ export default createSelector(UserJobsSelectors.selectUserJobs, userJobs => {
   const ids = slice(0, 2, userJobs.ids)
   const entities = pipe(
     pick(ids),
-    map(
-      applySpec({
-        name: pathOr('', ['job', 'title']),
-        startDate: propOr('', 'startDate'),
-        organisationLogoURL: path(['job', 'organisationLogoURL']),
-        isValidated: propOr(false, 'approved'),
-      }),
-    ),
+    map(applySpec(UserConstants.USER_CREDENTIAL_WIDGET_SELECTOR_SPEC)),
   )(userJobs.entities)
 
   return { userJobs: { ids, entities }, count }
