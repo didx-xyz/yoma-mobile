@@ -1,5 +1,5 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { applySpec, map, mergeRight, pipe } from 'ramda'
+import { applySpec, map, mergeRight } from 'ramda'
 
 import { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
 import { constants as UserConstants } from '~/modules/User'
