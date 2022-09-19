@@ -24,7 +24,6 @@ import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualif
 import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
 import { showSimpleMessage } from '~/utils/error'
 
-import { filterOpportunityCredentials } from '../modules/User/User.utils'
 import * as ReduxUtils from './redux.utils'
 
 const createDebugger = require('redux-flipper').default
@@ -85,7 +84,7 @@ const featureModuleMiddleware = [
   UserChallengesMiddleware.createUserChallengeCertificateFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Challenge, filterOpportunityCredentials),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Challenge),
   ),
   UserChallengesMiddleware.normaliseUserChallengesFlow({ normalise: ReduxUtils.normalise }),
   UserChallengesMiddleware.setUserChallengesFlow,
@@ -97,7 +96,7 @@ const featureModuleMiddleware = [
   UserJobsMiddleware.fetchUserJobByIdSuccessFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.getUserJobsFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Job, filterOpportunityCredentials),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Job),
   ),
   UserJobsMiddleware.normaliseUserJobsFlow({ normalise: ReduxUtils.normalise }),
   UserJobsMiddleware.setUserJobsFlow,
@@ -121,7 +120,7 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoSuccessFlow,
   UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Qualification, filterOpportunityCredentials),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Qualification),
   ),
   UserQualificationsMiddleware.normaliseUserQualificationsFlow({ normalise: ReduxUtils.normalise }),
   UserQualificationsMiddleware.setUserQualificationsFlow,

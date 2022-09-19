@@ -44,9 +44,3 @@ export const USERS_PHOTO_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONF
   endpoint: UsersEndpoints.Photo,
   additionalHeaders: { 'Content-Type': 'multipart/form-data' },
 })
-export const USER_CREDENTIAL_OPPORTUNITY_TYPES_MAP = {
-  [UserCredentialTypes.Assignment]: UserCredentialOpportunityTypes.Assignment,
-  [UserCredentialTypes.Challenge]: UserCredentialOpportunityTypes.Challenge,
-  [UserCredentialTypes.Job]: UserCredentialOpportunityTypes.Job,
-  [UserCredentialTypes.Qualification]: UserCredentialOpportunityTypes.Qualification,
-}

@@ -1,12 +1,9 @@
 import {
   always,
   applySpec,
-  equals,
   filter,
-  find,
   has,
   isEmpty,
-  keys,
   mergeRight,
   omit,
   path,
@@ -15,11 +12,10 @@ import {
   pipe,
   prop,
   reject,
-  toLower,
   values,
 } from 'ramda'
 
-import { constants as ApiUserConstants, types as ApiUserTypes } from '~/api/users'
+import { types as ApiUserTypes } from '~/api/users'
 import * as ReduxTypes from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
@@ -53,20 +49,11 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
   return photoPayload
 }
 
-// legacy, and currently unused.
-export const filterRootCredentials = (type: ApiUserTypes.UserCredentialTypes) => pipe(keys, find(equals(toLower(type))))
 export const filterOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
-  safeWhen(
-    has('opportunity'),
-    pathEq(['opportunity', 'type'], ApiUserConstants.USER_CREDENTIAL_OPPORTUNITY_TYPES_MAP[type]),
-  )
+  safeWhen(has('opportunity'), pathEq(['opportunity', 'type'], ApiUserTypes.UserCredentialOpportunityTypes[type]))
 
-type ExtractUserCredentialsFilter = typeof filterRootCredentials | typeof filterOpportunityCredentials
-
-export const extractUserCredentials = (
-  type: ApiUserTypes.UserCredentialTypes,
-  filterFn: ExtractUserCredentialsFilter,
-) => filter(filterFn(type))
+export const extractUserCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
+  filter(filterOpportunityCredentials(type))
 
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
   mergeRight({
