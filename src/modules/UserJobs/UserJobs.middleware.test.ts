@@ -173,8 +173,9 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         startTime: 'START_TIME',
         endTime: 'END_TIME',
       }
+
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = createJob(formDataMock)
+      const action = JobsActions.createJob(formDataMock)
 
       // when ...
       const { invoke, store } = create(SUT.setUserJobsFormValuesFlow)
