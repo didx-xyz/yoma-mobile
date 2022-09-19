@@ -1,7 +1,6 @@
 import { UserCredentialTypes } from '~/api/users/users.types'
 
 import { USER_RESPONSE } from './User.fixture'
-import { filterOpportunityCredentials } from './User.utils'
 import * as SUT from './User.utils'
 
 describe('modules/User/User.utils', () => {
