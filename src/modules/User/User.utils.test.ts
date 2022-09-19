@@ -1,6 +1,7 @@
 import { UserCredentialTypes } from '~/api/users/users.types'
 
 import { USER_RESPONSE } from './User.fixture'
+import { filterOpportunityCredentials } from './User.utils'
 import * as SUT from './User.utils'
 
 describe('modules/User/User.utils', () => {
@@ -86,8 +87,6 @@ describe('modules/User/User.utils', () => {
       [
         UserCredentialTypes.Assignment,
         [
-          { assignment: 'ASSIGNMENT DATA 1', meta: 'META' },
-          { assignment: 'ASSIGNMENT DATA 2', meta: 'META' },
           {
             opportunity: {
               type: 'taskopportunity',
@@ -100,8 +99,6 @@ describe('modules/User/User.utils', () => {
       [
         UserCredentialTypes.Job,
         [
-          { job: 'JOB DATA 1', meta: 'META' },
-          { job: 'JOB DATA 2', meta: 'META' },
           {
             opportunity: {
               type: 'jobopportunity',
@@ -114,11 +111,27 @@ describe('modules/User/User.utils', () => {
       [
         UserCredentialTypes.Challenge,
         [
-          { challenge: 'CHALLENGE DATA 1', meta: 'META' },
-          { challenge: 'CHALLENGE DATA 2', meta: 'META' },
+          {
+            opportunity: {
+              type: 'impactopportunity',
+              title: 'Challenge 1',
+            },
+            meta: 'META',
+          },
         ],
       ],
-      [UserCredentialTypes.Qualification, [{ qualification: 'QUALIFICATION DATA 1', meta: 'META' }]],
+      [
+        UserCredentialTypes.Qualification,
+        [
+          {
+            opportunity: {
+              type: 'learningopportunity',
+              title: 'Qualification 1',
+            },
+            meta: 'META',
+          },
+        ],
+      ],
     ])('should correctly extract all of a given credential type from a list of credentials', (type, expected) => {
       // given ... an array of all credential data for a user
       const credentialsMock = [
@@ -136,6 +149,20 @@ describe('modules/User/User.utils', () => {
           },
           meta: 'META',
         },
+        {
+          opportunity: {
+            type: 'impactopportunity',
+            title: 'Challenge 1',
+          },
+          meta: 'META',
+        },
+        {
+          opportunity: {
+            type: 'learningopportunity',
+            title: 'Qualification 1',
+          },
+          meta: 'META',
+        },
         { qualification: 'QUALIFICATION DATA 1', meta: 'META' },
         { assignment: 'ASSIGNMENT DATA 1', meta: 'META' },
         { job: 'JOB DATA 1', meta: 'META' },
@@ -146,7 +173,7 @@ describe('modules/User/User.utils', () => {
       ]
 
       // when we want to get all the credentials of a given type
-      const result = SUT.extractUserCredentials(type)(credentialsMock)
+      const result = SUT.extractUserCredentials(type, SUT.filterOpportunityCredentials)(credentialsMock)
 
       //then expect that we have a list of challenge credentials
       expect(result).toEqual(expected)
