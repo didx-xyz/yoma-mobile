@@ -15,7 +15,7 @@ export default createSelector<any, { userJobs: CvViewCredentialTypes.CvViewCrede
   UserJobsSelectors.selectUserJobs,
   (jobs: UserJobsTypes.NormalisedUserJobs) => {
     const ids = jobs.ids
-    const entities = map(pipe(applySpec(EXPERIENCE_VIEW_SELECTOR_SPEC)))(jobs.entities)
+    const entities = map(applySpec(EXPERIENCE_VIEW_SELECTOR_SPEC))(jobs.entities)
     return { userJobs: { ids, entities } }
   },
 )
