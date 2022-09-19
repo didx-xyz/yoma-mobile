@@ -45,7 +45,7 @@ export const USER_QUALIFICATIONS_STATE_MOCK = {
   ids: ['USER_QUALIFICATIONS_STATE_MOCK-001', 'USER_QUALIFICATIONS_STATE_MOCK-002'],
   entities: {
     'USER_QUALIFICATIONS_STATE_MOCK-001': {
-      qualification: {
+      opportunity: {
         organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
         organisationName: 'Test Org',
         organisationLogoURL: null,
@@ -68,6 +68,7 @@ export const USER_QUALIFICATIONS_STATE_MOCK = {
         organisationPrimaryContactName: null,
         organisationPrimaryContactEmail: null,
         organisationPrimaryContactPhone: null,
+        type: 'learningopportunity',
       },
       id: 'USER_QUALIFICATIONS_STATE_MOCK-001',
       verifiedAt: '2021-05-02T00:00:00',
@@ -81,7 +82,7 @@ export const USER_QUALIFICATIONS_STATE_MOCK = {
       requestVerification: true,
     },
     'USER_QUALIFICATIONS_STATE_MOCK-002': {
-      qualification: {
+      opportunity: {
         organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
         organisationName: 'Test Org',
         organisationLogoURL: null,
@@ -104,6 +105,7 @@ export const USER_QUALIFICATIONS_STATE_MOCK = {
         organisationPrimaryContactName: null,
         organisationPrimaryContactEmail: null,
         organisationPrimaryContactPhone: null,
+        type: 'learningopportunity',
       },
       id: 'USER_QUALIFICATIONS_STATE_MOCK-002',
       verifiedAt: '2021-05-02T00:00:00',

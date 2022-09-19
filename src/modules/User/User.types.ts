@@ -87,12 +87,8 @@ export interface UserCredentialMeta {
   requestVerification: boolean
 }
 
-export interface OpportunityCredential {
+export interface OpportunityCredentialPartial {
   type: UserCredentialOpportunityTypes
-}
-
-export interface UserOpportunity extends UserCredentialMeta {
-  opportunity: OpportunityCredential
 }
 
 export interface UserCredentialItemPayload {
