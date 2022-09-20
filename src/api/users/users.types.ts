@@ -12,3 +12,10 @@ export enum UserCredentialTypes {
   Job = 'Job',
   Qualification = 'Qualification',
 }
+
+export enum UserCredentialOpportunityTypes {
+  Assignment = 'taskopportunity',
+  Challenge = 'impactopportunity',
+  Job = 'jobopportunity',
+  Qualification = 'learningopportunity',
+}

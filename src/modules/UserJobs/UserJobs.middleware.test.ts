@@ -2,9 +2,8 @@ import { mergeRight } from 'ramda'
 import { createMiddlewareMock } from 'tests/tests.utils'
 
 import { actions as ApiActions, utils as ApiUtils } from '~/api'
-import { constants as ApiUsersConstants } from '~/api/users'
-import { UserCredentialTypes } from '~/api/users/users.types'
-import { createJob } from '~/modules/Jobs/Jobs.reducer'
+import { types as ApiUserTypes, constants as ApiUsersConstants } from '~/api/users'
+import { actions as JobsActions } from '~/modules/Jobs'
 import { JOB_MOCK } from '~/modules/Jobs/Jobs.test.fixtures'
 import * as UserFixtures from '~/modules/User/User.fixture'
 import * as UserActions from '~/modules/User/User.reducer'
@@ -33,7 +32,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const create = createMiddlewareMock(jest)
       const credentialsResponseMock = ['job1', 'job1', 'assignment1', 'job2']
       const extractDataFromPayloadMock = jest.fn()
-      const extractJobsMock = jest.fn()
+      const extractJobsMock = jest.fn(() => [])
       const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
 
       // when ...
@@ -150,7 +149,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
 
       const formDataMock = 'Form Data'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = createJob(formDataMock)
+      const action = JobsActions.createJob(formDataMock)
 
       // when ...
       const { invoke, store, next } = create(SUT.setUserJobsFormValuesFlow)
@@ -174,8 +173,9 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
         startTime: 'START_TIME',
         endTime: 'END_TIME',
       }
+
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = createJob(formDataMock)
+      const action = JobsActions.createJob(formDataMock)
 
       // when ...
       const { invoke, store } = create(SUT.setUserJobsFormValuesFlow)
@@ -185,7 +185,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
       expect(store.dispatch).toHaveBeenCalledWith(
         setUserJobsFormValues({
-          type: UserCredentialTypes.Job,
+          type: ApiUserTypes.UserCredentialTypes.Job,
           startTime: 'START_TIME',
           endTime: 'END_TIME',
           requestVerification: false,
@@ -199,7 +199,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const userId = 'A USER ID'
 
       const mockFormValues = {
-        type: UserCredentialTypes.Job,
+        type: ApiUserTypes.UserCredentialTypes.Job,
         startTime: 'START_TIME',
         endTime: 'END_TIME',
         requestVerification: false,
@@ -282,7 +282,7 @@ describe('modules/UserJobs/UserJobs.middleware', () => {
       const userId = 'A USER ID'
 
       const mockFormValues = {
-        type: UserCredentialTypes.Job,
+        type: ApiUserTypes.UserCredentialTypes.Job,
         startTime: 'START_TIME',
         endTime: 'END_TIME',
         requestVerification: false,

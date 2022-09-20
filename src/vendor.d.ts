@@ -17,9 +17,11 @@ declare module 'ramda' {
   export function compose(...rest: any[]): any
   export function concat(...rest: any[]): any[]
   export function contains(...rest: any[]): any
+  export function converge(...rest: any[]): any
   export function curry(...rest: any[]): any
   export function equals(...rest: any[]): any
   export function evolve(...rest: any[]): any
+  export function F(...rest: any[]): false
   export function filter(...rest: any[]): any
   export function find(...rest: any[]): any
   export function flatten(...rest: any[]): any[]
@@ -59,6 +61,7 @@ declare module 'ramda' {
   export function omit(...rest: any[]): any
   export function path(...rest: any[]): any
   export function pathOr(...rest: any[]): any
+  export function pathEq(...rest: any[]): any
   export function pick(...rest: any[]): any
   export function pipe(...rest: any[]): any
   export function prepend(...rest: any[]): any
