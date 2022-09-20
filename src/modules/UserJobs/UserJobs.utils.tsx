@@ -12,7 +12,7 @@ export const extractUserJobFromData = pipe(
     'fileId',
     'fileURL',
     'requestVerification',
-    'job',
+    'opportunity',
   ]),
   of,
 )
