@@ -19,11 +19,12 @@ interface Props {
 const AboutWidget = ({ biography, navigation }: Props) => {
   const { t } = useTranslation()
 
-  const biographyShort = useMemo(() => trunc(biography, 120), [biography])
+  const biographyShort = useMemo(() => biography && trunc(biography, 120), [biography])
 
   return (
     <CvWidget
       title={t('about.title')}
+      hasContent={!!biography}
       noDataMessage={t('Your biography is one of the first things recruiters look at. Write a great one!')}
       onActionPress={() => {
         navigation.navigate(HomeNavigationRoutes.AboutForm)

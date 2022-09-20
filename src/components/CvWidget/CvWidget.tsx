@@ -1,13 +1,13 @@
 import React from 'react'
 import { View } from 'react-native'
 
+import { IconButtonAdd, IconButtonEdit } from '~/components/IconButton'
+import Optional from '~/components/Optional'
+import Text, { TextAlign } from '~/components/Typography'
 import { Colors } from '~/styles'
 import { FCWithChildren } from '~/types/react.types'
 import { isNotNil } from '~/utils/ramda.utils'
 
-import { IconButtonAdd, IconButtonEdit } from '../IconButton'
-import Optional from '../Optional'
-import Text, { TextAlign } from '../Typography'
 import styles from './CvWidget.styles'
 import { shouldShowContent } from './CvWidget.utils'
 import CredentialWidgetHeader from './Header'
@@ -16,6 +16,7 @@ interface Props extends FCWithChildren {
   title: string
   noDataMessage: string
   onActionPress: () => void
+  hasContent?: boolean
   count?: number
   badgeColor?: Colors
   isEditAction?: boolean
@@ -23,6 +24,7 @@ interface Props extends FCWithChildren {
 const CvWidget = ({
   title,
   noDataMessage,
+  hasContent,
   count,
   onActionPress,
   badgeColor = Colors.White,
@@ -40,7 +42,7 @@ const CvWidget = ({
     />
     <View style={styles.content}>
       <Optional
-        condition={shouldShowContent(count, children)}
+        condition={shouldShowContent(count, hasContent, children)}
         fallback={<Text.Body align={TextAlign.Center}>{noDataMessage}</Text.Body>}
       >
         {children}
