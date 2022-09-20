@@ -73,9 +73,9 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
         userQualifications: {
           ids: ['id1', 'id2', 'id3'],
           entities: {
-            id1: { id: 'id1', qualification: { createdByAdmin: true } },
-            id2: { id: 'id2', qualification: { createdByAdmin: false } },
-            id3: { id: 'id3', qualification: { createdByAdmin: true } },
+            id1: { id: 'id1', opportunity: { createdByAdmin: true } },
+            id2: { id: 'id2', opportunity: { createdByAdmin: false } },
+            id3: { id: 'id3', opportunity: { createdByAdmin: true } },
           },
           formValues: INITIAL_FORM_VALUES,
         },
@@ -88,8 +88,8 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       expect(result).toEqual({
         ids: ['id1', 'id3'],
         entities: {
-          id1: { id: 'id1', qualification: { createdByAdmin: true } },
-          id3: { id: 'id3', qualification: { createdByAdmin: true } },
+          id1: { id: 'id1', opportunity: { createdByAdmin: true } },
+          id3: { id: 'id3', opportunity: { createdByAdmin: true } },
         },
       })
     })
@@ -99,9 +99,9 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
         userQualifications: {
           ids: ['id1', 'id2', 'id3'],
           entities: {
-            id1: { id: 'id1', qualification: { createdByAdmin: true } },
-            id2: { id: 'id2', qualification: { createdByAdmin: false } },
-            id3: { id: 'id3', qualification: { createdByAdmin: true } },
+            id1: { id: 'id1', opportunity: { createdByAdmin: true } },
+            id2: { id: 'id2', opportunity: { createdByAdmin: false } },
+            id3: { id: 'id3', opportunity: { createdByAdmin: true } },
           },
           formValues: INITIAL_FORM_VALUES,
         },
@@ -114,7 +114,7 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
       expect(result).toEqual({
         ids: ['id2'],
         entities: {
-          id2: { id: 'id2', qualification: { createdByAdmin: false } },
+          id2: { id: 'id2', opportunity: { createdByAdmin: false } },
         },
       })
     })

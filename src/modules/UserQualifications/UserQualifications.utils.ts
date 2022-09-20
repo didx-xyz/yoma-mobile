@@ -9,4 +9,4 @@ export const getUserQualificationsMetadata = UserUtils.getCredentialViewMetadata
 })
 
 export const filterEducationOrCourse = (isCourse: boolean) =>
-  pipe(pathOr(false, ['qualification', 'createdByAdmin']), when(always(isCourse), not))
+  pipe(pathOr(false, ['opportunity', 'createdByAdmin']), when(always(isCourse), not))
