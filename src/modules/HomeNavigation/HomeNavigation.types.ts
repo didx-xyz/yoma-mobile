@@ -1,3 +1,5 @@
+import { opportunities } from '../Opportunities/Opportunities.types'
+
 export enum HomeNavigationRoutes {
   About = 'About',
   AboutForm = 'AboutForm',
@@ -13,10 +15,13 @@ export enum HomeNavigationRoutes {
   MyCv = 'MyCv',
   MySkills = 'MySkills',
   MySkillsForm = 'MySkillsForm',
-  Detailed = 'Detailed',
-  Listing = 'Listing',
-  VerifyCourse = 'Verify Challenge',
+  Courses = 'Courses',
+  CourseDetails = 'CourseDetails',
+  CourseVerification = 'CourseVerification',
   Profile = 'Profile',
+  Opportunities = 'Opportunities',
+  MyWeb = 'MyWeb',
+  Search = 'Search',
 }
 
 export enum HomeTabRoutes {
@@ -41,9 +46,11 @@ export type HomeNavigatorParamsList = {
   [HomeNavigationRoutes.MyCv]: undefined
   [HomeNavigationRoutes.MySkills]: undefined
   [HomeNavigationRoutes.MySkillsForm]: undefined
-  [HomeNavigationRoutes.CompletedChallenges]: undefined
-  [HomeNavigationRoutes.CompletedChallengesForm]: undefined
-  [HomeNavigationRoutes.Detailed]: undefined
-  [HomeNavigationRoutes.VerifyCourse]: undefined
+  [HomeNavigationRoutes.Courses]: undefined
+  [HomeNavigationRoutes.CourseDetails]: opportunities
+  [HomeNavigationRoutes.CourseVerification]: opportunities
   [HomeNavigationRoutes.Profile]: undefined
+  [HomeNavigationRoutes.Opportunities]: undefined
+  [HomeNavigationRoutes.MyWeb]: { url: string | null }
+  [HomeNavigationRoutes.Search]: undefined
 }

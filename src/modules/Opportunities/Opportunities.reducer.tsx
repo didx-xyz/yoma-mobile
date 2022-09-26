@@ -25,7 +25,7 @@ export const INITIAL_STATE = {
   description: '',
   zltoReward: 999,
   totalZLTORewarded: 234,
-} as OpportunitiesState
+} as unknown as OpportunitiesState
 
 export const setOpportunities = createAction<NormalisedOpportunities>(`${name} setOpportunities`)
 export const getOpportunitiesSuccess = createAction<opportunities[]>(`${name} getOpportunitiesSuccess`)

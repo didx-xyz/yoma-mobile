@@ -1,8 +1,15 @@
-Ver 0.0.1
+`Ver 0.0.1
 Latest:
-- Adding Completed Courses to the CV
+- No new features (docs-only update)
 
-Last 10 deployment release notes:
+Previous deployment release notes:
+- Adding alphabetic list navigator to country select
+- swapping in FlashList for Country select and Skills select (again)
+- updates to packages (cont)
+- fixing circle ci ruby deployments
+- creating and implementing Country Picker
+- fixing critical vulnerabilities
+- Adding Completed Courses to the CV
 - Updating Eduction components to use UserQualification components and selectors
 - Adding Qualification components to service courses and education
 - Adding Sentry

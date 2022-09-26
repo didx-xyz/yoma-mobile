@@ -1,30 +1,27 @@
-//import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import React from 'react'
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+import React, { useState } from 'react'
 import { ScrollView } from 'react-native'
 
-import Card from '~/components/Card'
-import FirstTimeCard from '~/components/FirstTimeCard'
 import ViewContainer from '~/components/ViewContainer'
 
-import Banner from '../Banner'
+import CustomBanner from '../../components/CustomBanner'
+import Courses from '../Courses'
 import HomeHeader from '../HomeHeader'
-//import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import Listing from './Listing'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import styles from './Opportunities.styles'
 
-// interface Props {
-//   navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
-// }
+interface Props {
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
+}
 
-const Opportunities = ({ navigation }) => {
+const Opportunities = ({ navigation }: Props) => {
+  const [isBannerShow, setBannerShow] = useState(true)
   return (
     <ViewContainer style={styles.container}>
       <HomeHeader navigation={navigation} />
-      <Banner />
-      <ScrollView contentContainerStyle={styles.scrollInnerContainer}>
-        <FirstTimeCard />
-        <Card />
-        <Listing navigation={navigation} />
+      <CustomBanner isBannerShow={isBannerShow} setBannerShow={setBannerShow} />
+      <ScrollView contentContainerStyle={styles.scrollInnerContainer} onScroll={() => setBannerShow(false)}>
+        <Courses navigation={navigation} />
       </ScrollView>
     </ViewContainer>
   )

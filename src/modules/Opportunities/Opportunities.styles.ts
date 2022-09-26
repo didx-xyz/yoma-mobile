@@ -9,7 +9,8 @@ const styles = {
     // justifyContent: 'center',
   } as ViewStyle,
   scrollInnerContainer: {
-    paddingVertical: 15,
+    paddingVertical: 5,
+    alignItems: 'center',
   } as ViewStyle,
 }
 

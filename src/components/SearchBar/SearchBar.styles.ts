@@ -1,5 +1,7 @@
 import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
+import fontStyles from '~/styles/font.styles'
+
 import { Colors, colors } from '../../styles'
 
 const styles = {
@@ -15,8 +17,9 @@ const styles = {
   } as ViewStyle,
   textInput: {
     flex: 1,
-    fontSize: 18,
-    fontFamily: 'Montserrat-SemiBold',
+    fontSize: 14,
+    color: colors[Colors.PrimaryDarkGrey],
+    fontFamily: fontStyles.medium,
   } as TextStyle,
   viewSearch: {
     justifyContent: 'center',
@@ -25,23 +28,19 @@ const styles = {
     height: 40,
   } as TextStyle,
   iconSearch: {
-    height: 20,
-    width: 20,
+    height: 15,
+    width: 15,
   } as ImageStyle,
   searchContainer: {
-    width: '90%',
+    width: '100%',
     height: 40,
-    borderRadius: 15,
     flexDirection: 'row',
-    // marginHorizontal: 10,
   } as ViewStyle,
   container: {
     height: 40,
-    width: '95%',
-    borderRadius: 15,
-    marginHorizontal: 15,
-    alignItems: 'stretch',
-    backgroundColor: colors[Colors.White],
+    width: '100%',
+    borderRadius: 10,
+    backgroundColor: colors[Colors.BackgroundGrey],
   } as ViewStyle,
 }
 export default StyleSheet.create(styles)

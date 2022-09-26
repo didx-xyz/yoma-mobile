@@ -1,4 +1,4 @@
-import { createFixture } from '../../../tests/tests.utils'
+import { createFixture } from 'tests/tests.utils'
 
 const CHALLENGES_STATE_MOCK = {
   entities: {

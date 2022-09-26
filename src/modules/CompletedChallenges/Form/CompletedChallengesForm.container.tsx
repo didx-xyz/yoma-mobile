@@ -3,9 +3,9 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { CompleteChallengesNavigation } from '~/modules/CompletedChallenges/types'
+import { actions as UserChallengesActions } from '~/modules/UserChallenges'
 import * as FormUtils from '~/utils/form.utils'
 
-import { actions as UserChallengesActions } from '../../UserChallenges'
 import { schema } from './CompletedChallengeForm.validation'
 import CompletedChallengesForm from './CompletedChallengesForm'
 import { INITIAL_FORM_VALUES } from './CompletedChallengesForm.constants'

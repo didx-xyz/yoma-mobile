@@ -23,8 +23,15 @@ const SECONDARY_KHAKI = '#AE9C3E'
 const SECONDARY_PURPLE = '#5F65B9'
 const SECONDARY_RED = '#A33232'
 const TRANSPARENT = 'transparent'
-const YELLOW = '#FCF1E1'
 const WHITE = '#FFFFFF'
+const YELLOW = '#FCF1E1'
+const LIGHT_WHITE = '#E5E5E5'
+const LIGHT_PURPLE = '#B899C1'
+const LIGHT_BLUE = '#BDD5E3'
+const LIGHT_GREEN = '#A6E1D0'
+const PRIMARY_LIGHT_PURPLE = '#5C3268'
+const PRIMARY_LIGHT_BLUE = '#0D74B5'
+const PRIMARY_LIGHT_GREEN = '#3B8B73'
 
 export default {
   [Colors.BackgroundGrey]: BACKGROUND_GREY,
@@ -50,6 +57,13 @@ export default {
   [Colors.SecondaryPurple]: SECONDARY_PURPLE,
   [Colors.SecondaryRed]: SECONDARY_RED,
   [Colors.Transparent]: TRANSPARENT,
-  [Colors.Yellow]: YELLOW,
   [Colors.White]: WHITE,
+  [Colors.Yellow]: YELLOW,
+  [Colors.LightWhite]: LIGHT_WHITE,
+  [Colors.LightPurple]: LIGHT_PURPLE,
+  [Colors.LightBlue]: LIGHT_BLUE,
+  [Colors.LightGreen]: LIGHT_GREEN,
+  [Colors.PrimaryLightPurple]: PRIMARY_LIGHT_PURPLE,
+  [Colors.PrimaryLightBlue]: PRIMARY_LIGHT_BLUE,
+  [Colors.PrimaryLightGreen]: PRIMARY_LIGHT_GREEN,
 }

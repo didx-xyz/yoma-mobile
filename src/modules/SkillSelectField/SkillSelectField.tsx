@@ -2,10 +2,10 @@ import { useField } from 'formik'
 import { without } from 'ramda'
 import React, { useCallback, useState } from 'react'
 
-import Modal from '~/components/Modal/Modal'
+import Modal from '~/components/Modal'
 import { withoutElseAppend } from '~/utils/arrays.utils'
 
-import SkillSelector from './SkillSelector'
+import SkillSelect from './SkillSelect'
 import SkillsInput from './SkillsInput'
 
 interface Props {
@@ -27,7 +27,7 @@ const SkillsSelectField = ({ name, label, searchPlaceholder, skills }: Props) =>
   )
 
   const handleDelete = useCallback(
-    skill => {
+    (skill: string) => {
       const selectedSkills = without(skill)(value)
       setValue(selectedSkills)
     },
@@ -49,7 +49,7 @@ const SkillsSelectField = ({ name, label, searchPlaceholder, skills }: Props) =>
         onAdd={handleOpenModal}
       />
       <Modal setVisible={setModalOpen} isVisible={isModalOpen}>
-        <SkillSelector searchPlaceholder={searchPlaceholder} onItemSelect={handleItemSelect} skills={skills} />
+        <SkillSelect searchPlaceholder={searchPlaceholder} onItemSelect={handleItemSelect} skills={skills} />
       </Modal>
     </>
   )

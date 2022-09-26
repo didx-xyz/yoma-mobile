@@ -1,6 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from '~/styles'
 
 const dropShadow = {
   elevation: 3,
@@ -18,6 +18,14 @@ const styles = {
     ...dropShadow,
     height: 50,
     backgroundColor: colors[Colors.White],
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+  } as ViewStyle,
+  contanier1: {
+    paddingHorizontal: 20,
+    height: 50,
+    backgroundColor: colors[Colors.PrimaryGreen],
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: 'row',

@@ -3,10 +3,9 @@ import { useTranslation } from 'react-i18next'
 
 import CvWidget, { CvWidgetList } from '~/components/CvWidget'
 import CvWidgetSkill, { types as CvWidgetSkillTypes } from '~/components/CvWidgetSkill'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
 import { types as MyCvTypes } from '~/modules/MyCv'
 import { Colors } from '~/styles'
-
-import { HomeNavigationRoutes } from '../../HomeNavigation/HomeNavigation.types'
 
 interface Props {
   userSkills: CvWidgetSkillTypes.NormalisedCvWidgetSkillItems

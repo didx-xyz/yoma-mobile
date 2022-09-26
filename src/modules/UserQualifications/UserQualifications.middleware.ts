@@ -1,26 +1,27 @@
+import i18n from 'i18next'
 import { mergeRight, omit, pick, pipe } from 'ramda'
 import { DocumentPickerResponse } from 'react-native-document-picker'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions, utils as ApiUtils } from '~/api'
 import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/users'
-import { NormaliseDependency } from '~/redux/redux.types'
-import * as ReduxTypes from '~/redux/redux.types'
-import * as ReduxUtils from '~/redux/redux.utils'
-import * as GeneralTypes from '~/types/general.types'
-import { showSimpleMessage } from '~/utils/error'
-
-import { utils as ErrorUtils } from '../Error'
-import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
-import { utils as NavigationUtils } from '../Navigation'
-import { actions as QualificationsActions } from '../Qualifications'
+import * as Strings from '~/constants/strings.constants'
+import { utils as ErrorUtils } from '~/modules/Error'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import * as NavigationUtils from '~/modules/Navigation/Navigation.utils'
+import { actions as QualificationsActions } from '~/modules/Qualifications'
 import {
   actions as UserActions,
   constants as UserConstants,
   selectors as UserSelectors,
   types as UserTypes,
   utils as UserUtils,
-} from '../User'
+} from '~/modules/User'
+import * as ReduxTypes from '~/redux/redux.types'
+import * as ReduxUtils from '~/redux/redux.utils'
+import * as GeneralTypes from '~/types/general.types'
+import { showSimpleMessage } from '~/utils/error'
+
 import {
   clearUserQualificationFormValues,
   createUserQualification,
@@ -56,7 +57,7 @@ export const getUserQualificationsFromCredentialsFlow =
   }
 
 export const normaliseUserQualificationsFlow =
-  ({ normalise }: NormaliseDependency<UserQualification>): Middleware =>
+  ({ normalise }: ReduxTypes.NormaliseDependency<UserQualification>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
@@ -125,7 +126,7 @@ export const createUserQualificationSuccessFlow =
   ({
     normalise,
     notification,
-  }: NormaliseDependency<UserQualification> & { notification: typeof showSimpleMessage }): Middleware =>
+  }: ReduxTypes.NormaliseDependency<UserQualification> & { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch, getState }) =>
   next =>
   action => {
@@ -141,7 +142,7 @@ export const createUserQualificationSuccessFlow =
       }
       dispatch(clearUserQualificationFormValues())
       NavigationUtils.navigate(HomeNavigationRoutes.Home)
-      notification('success', 'Your Qualification has been added.')
+      notification('success', i18n.t(Strings.YOUR_QUALIFICATION_HAS_BEEN_ADDED))
     }
     return result
   }
@@ -156,7 +157,7 @@ export const createUserQualificationFailureFlow =
     if (createUserQualificationFailure.match(action)) {
       const errorMessage = ErrorUtils.extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
-      notification('danger', 'Error', errorMessage)
+      notification('danger', i18n.t('general.error'), errorMessage)
     }
     return result
   }
@@ -218,8 +219,8 @@ export const createUserQualificationCertificateFailureFlow =
       // TODO: this should be handled by the notification module
       notification(
         'danger',
-        'An error occurred.',
-        'Oops something went wrong uploading your challenge certificate. Please try again.',
+        i18n.t('general.errorOccurred'),
+        i18n.t(Strings.OOPS_SOMETHING_WENT_WRONG_UPLOADING_YOUR_CHALLENGE_CERTIFICATE),
       )
     }
     return result

@@ -6,18 +6,18 @@ import { SearchIcon } from '~/assets/images'
 import styles from './SearchBar.styles'
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function Searchbar({ value, updateSearch }: any) {
+export default function Searchbar({ value, updateSearch, backgroundColor, onSearch, onFocus }: any) {
   const [query, setQuery] = useState<any | null>(null)
   const [error, setError] = useState<any | null>(null)
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { backgroundColor: backgroundColor }]}>
       <View style={styles.searchContainer}>
-        <View style={styles.viewSearch}>
+        <TouchableOpacity style={styles.viewSearch} onPress={() => onSearch(value)}>
           <SearchIcon style={styles.iconSearch} />
-        </View>
+        </TouchableOpacity>
         <TextInput
-          value={query}
+          value={value}
           placeholder="Search"
           style={styles.textInput}
           onChangeText={text => {
@@ -33,6 +33,7 @@ export default function Searchbar({ value, updateSearch }: any) {
               setError('Please only enter alphabets')
             }
           }}
+          onFocus={onFocus}
         />
         {query ? (
           <TouchableOpacity onPress={() => setQuery('')} style={styles.viewClear} />

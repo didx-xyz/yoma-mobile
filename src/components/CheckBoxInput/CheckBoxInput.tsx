@@ -12,7 +12,7 @@ const CheckBoxInput = ({ name, ...props }: Props) => {
   const [, { value }, { setValue }] = useField(name)
 
   const handlePress = useCallback(() => {
-    setIsChecked(isChecked => !isChecked)
+    setIsChecked(prevState => !prevState)
   }, [])
 
   useEffect(() => {

@@ -1,17 +1,17 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch } from 'react-redux'
 
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
-import { actions as UserSkillsActions } from '../../UserSkills'
+import { MySkillsNavigation } from '~/modules/MySkills/types'
+import { actions as UserSkillsActions } from '~/modules/UserSkills'
+
 import MySkillsForm from './MySkillsForm'
 import { INITIAL_VALUES } from './MySkillsForm.constants'
 import { UserSkillsField } from './MySkillsForm.types'
 import { schema } from './MySkillsForm.validation'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MySkills>
+  navigation: MySkillsNavigation
 }
 
 const MySkillsFormContainer = ({ navigation }: Props) => {

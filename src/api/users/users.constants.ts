@@ -44,7 +44,3 @@ export const USERS_PHOTO_CREATE_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONF
   endpoint: UsersEndpoints.Photo,
   additionalHeaders: { 'Content-Type': 'multipart/form-data' },
 })
-
-export const USERS_PRODUCTS_ALL_CONFIG: Partial<ApiMeta> = mergeRight(USERS_CONFIG, {
-  endpoint: UsersEndpoints.Products,
-})

@@ -4,8 +4,7 @@ import { useTranslation } from 'react-i18next'
 
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewCredential, { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
-
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../../HomeNavigation/HomeNavigation.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 
 interface Props {
   onAdd: () => void

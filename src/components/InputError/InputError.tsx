@@ -1,15 +1,14 @@
 import React from 'react'
 
-import { Colors } from '../../styles'
-import Optional from '../Optional'
-import Text, { TextAlign } from '../Typography'
+import Optional from '~/components/Optional'
+import Text, { TextAlign } from '~/components/Typography'
+import { Colors } from '~/styles'
 
 interface Props {
   error?: string
-  touched: boolean
 }
-const InputError = ({ error, touched }: Props) => (
-  <Optional condition={!!error && touched}>
+const InputError = ({ error }: Props) => (
+  <Optional condition={!!error}>
     <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
       {error}
     </Text.Meta>

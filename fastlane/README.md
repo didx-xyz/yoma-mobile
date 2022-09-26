@@ -1,39 +1,48 @@
 fastlane documentation
-================
+----
+
 # Installation
 
 Make sure you have the latest version of the Xcode command line tools installed:
 
-```
+```sh
 xcode-select --install
 ```
 
-Install _fastlane_ using
-```
-[sudo] gem install fastlane -NV
-```
-or alternatively using `brew install fastlane`
+For _fastlane_ installation instructions, see [Installing _fastlane_](https://docs.fastlane.tools/#installing-fastlane)
 
 # Available Actions
+
 ## Android
+
 ### android clean
-```
-fastlane android clean
-```
-Android beta deploy
-### android build
-```
-fastlane android build
+
+```sh
+[bundle exec] fastlane android clean
 ```
 
+Android alpha deploy
+
+### android build
+
+```sh
+[bundle exec] fastlane android build
+```
+
+
+
 ### android distribute
+
+```sh
+[bundle exec] fastlane android distribute
 ```
-fastlane android distribute
-```
+
 
 
 ----
 
-This README.md is auto-generated and will be re-generated every time [fastlane](https://fastlane.tools) is run.
-More information about fastlane can be found on [fastlane.tools](https://fastlane.tools).
-The documentation of fastlane can be found on [docs.fastlane.tools](https://docs.fastlane.tools).
+This README.md is auto-generated and will be re-generated every time [_fastlane_](https://fastlane.tools) is run.
+
+More information about _fastlane_ can be found on [fastlane.tools](https://fastlane.tools).
+
+The documentation of _fastlane_ can be found on [docs.fastlane.tools](https://docs.fastlane.tools).

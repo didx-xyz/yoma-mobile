@@ -13,7 +13,7 @@ const baseTextStyle = {
 
 const styles = {
   container: {
-    marginBottom: 16,
+    marginBottom: 40,
   } as ViewStyle,
   dropDown: {
     height: 30,

@@ -1,5 +1,9 @@
+import { NativeStackNavigationProp } from '@react-navigation/native-stack'
+
 import { types as ApiTypes } from '~/api'
 import { ApiResponseHeaders } from '~/api/api.types'
+
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 
 export interface opportunities {
   [x: string]: any
@@ -14,7 +18,7 @@ export interface opportunities {
   skillsLearned: number | null
   organisationId: string | null
   organisationName: string | null
-  organisationLogoURL: string | null
+  organisationLogoURL: string | undefined
   organisationURL: string | null
   organisationPrimaryContactName: string | null
   organisationPrimaryContactEmail: string | null
@@ -31,7 +35,7 @@ export interface opportunities {
   published: boolean | null
   timeValue: string | null
   timePeriod: string | null
-  startTime: string | null
+  startTime: string
   endTime: string | null
 }
 
@@ -55,3 +59,8 @@ export interface opportunitiesResponseHeaders extends ApiResponseHeaders {
   yomapartnerToken: string
 }
 export type OpportunitiesState = opportunities
+
+export type OpportunitiesNavigation = NativeStackNavigationProp<
+  HomeNavigatorParamsList,
+  HomeNavigationRoutes.Opportunities
+>

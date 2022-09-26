@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { CompletedCoursesNavigation } from '~/modules/CompletedCourses/types'
 import { EducationNavigation } from '~/modules/Education/types'
-import { actions as QualificationActions } from '~/modules/Qualifications'
 import * as FormUtils from '~/utils/form.utils'
 
+import { actions as UserQualificationActions } from '../../UserQualifications'
 import UserQualificationsForm from './UserQualificationsForm'
 import { INITIAL_FORM_VALUES } from './UserQualificationsForm.constants'
 import selector from './UserQualificationsForm.selector'
@@ -25,7 +25,7 @@ const UserQualificationsFormContainer = ({ title, navigation }: Props) => {
 
   const handleSubmit = (values: FormFields) => {
     const qualification = pipe(FormUtils.sanitiseDateRange, FormUtils.countriesAsArray)(values)
-    dispatch(QualificationActions.createQualification(qualification))
+    dispatch(UserQualificationActions.setUserQualificationFormValues(qualification))
   }
 
   return (

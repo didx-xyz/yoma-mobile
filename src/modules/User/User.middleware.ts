@@ -4,13 +4,15 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiUsersConstants } from '~/api/users'
+import * as Strings from '~/constants/strings.constants'
+import { fetchUserFromOAuthSuccess } from '~/modules/Auth/Auth.reducer'
+import { getErrorMessageWithFallback } from '~/modules/Error/error.utils'
+import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import * as Navigation from '~/modules/Navigation/Navigation.utils'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import * as ReduxUtils from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
-import { fetchUserFromOAuthSuccess } from '../Auth/Auth.reducer'
-import { HomeNavigationRoutes } from '../HomeNavigation/HomeNavigation.types'
-import * as Navigation from '../Navigation/Navigation.utils'
 import { CAPTURE_IMAGE_OPTIONS } from './User.constants'
 import {
   fetchUserCredentials,
@@ -136,7 +138,7 @@ export const updateUserSuccessFlow =
       //TODO: add navigation as a dependency
       Navigation.navigate(HomeNavigationRoutes.Home)
       // TODO: this should be handled by the notification module
-      notification('success', 'Details Updated')
+      notification('success', i18n.t(Strings.DETAILS_UPDATED))
     }
     return result
   }
@@ -150,7 +152,7 @@ export const updateUserFailureFlow =
 
     if (updateUserFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }
@@ -185,7 +187,7 @@ export const fetchUserCredentialsFailureFlow =
 
     if (fetchUserCredentialsFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', 'Oops something went wrong! Please try again.')
+      notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }
     return result
   }
@@ -202,8 +204,8 @@ export const uploadUserPhotoFlow =
         const photoPayload = createPayload(imageData)
         dispatch(uploadUserPhotoSuccess(photoPayload))
       } catch (error) {
-        const errorMessage = typeof error === 'string' ? error : i18n.t('Oops something went wrong! Please try again.')
-        dispatch(uploadUserPhotoFailure(errorMessage))
+        const message = getErrorMessageWithFallback(error)
+        dispatch(uploadUserPhotoFailure(message))
       }
     }
     return result
@@ -240,7 +242,7 @@ export const uploadUserPhotoFailureFlow =
 
     if (uploadUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', action.payload)
+      notification('danger', i18n.t('general.errorOccurred'), action.payload)
     }
     return result
   }
@@ -256,7 +258,7 @@ export const updateUserPhotoSuccessFlow =
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
       // TODO: this should be handled by the notification module
-      notification('success', 'Details Updated')
+      notification('success', i18n.t(Strings.DETAILS_UPDATED))
     }
     return result
   }
@@ -270,7 +272,7 @@ export const updateUserPhotoFailureFlow =
 
     if (updateUserPhotoFailure.match(action)) {
       // TODO: this should be handled by the notification module
-      notification('danger', 'An error occurred.', action.payload)
+      notification('danger', i18n.t('general.errorOccurred'), action.payload)
     }
     return result
   }

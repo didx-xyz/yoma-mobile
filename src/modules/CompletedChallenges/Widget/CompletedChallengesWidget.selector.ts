@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, path, pathOr, pick, pipe, propOr, slice } from 'ramda'
 
-import { selectUserChallenges } from '../../UserChallenges/UserChallenges.selector'
+import { selectUserChallenges } from '~/modules/UserChallenges/UserChallenges.selector'
 
 export default createSelector(selectUserChallenges, userChallenges => {
   const count = userChallenges.ids.length

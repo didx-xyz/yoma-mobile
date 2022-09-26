@@ -2,7 +2,8 @@ import { cleanup, render } from '@testing-library/react-native'
 import React from 'react'
 import 'react-native'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors } from '~/styles'
+
 import Text from './Text'
 import { FontWeights, TextAlign } from './Text.types'
 

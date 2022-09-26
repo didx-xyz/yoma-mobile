@@ -1,14 +1,17 @@
+import i18n from 'i18next'
 import * as Yup from 'yup'
 
 export const schema = Yup.object().shape({
-  title: Yup.string().min(2).max(200).required('Required'),
-  description: Yup.string().min(2).max(1000).required('Required'),
-  organisationId: Yup.string().required('Required'),
-  startTime: Yup.date().nullable().required('Required'),
+  title: Yup.string().min(2).max(200).required(i18n.t('forms.validation.required')),
+  description: Yup.string().min(2).max(1000).required(i18n.t('forms.validation.required')),
+  organisationId: Yup.string().required(i18n.t('forms.validation.required')),
+  startTime: Yup.date().nullable().required(i18n.t('forms.validation.required')),
   endTime: Yup.date()
-    .when('startTime', (eventStartDate: any, schema: any) =>
-      eventStartDate ? schema.min(eventStartDate, 'End date cannot be before start date') : schema,
+    .when('startTime', (eventStartDate: any, dateSchema: any) =>
+      eventStartDate
+        ? dateSchema.min(eventStartDate, i18n.t('forms.validation.endDateNotBeforeStartDate'))
+        : dateSchema,
     )
     .nullable()
-    .required('Required'),
+    .required(i18n.t('forms.validation.required')),
 })

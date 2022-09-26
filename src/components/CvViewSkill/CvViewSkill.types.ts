@@ -1,6 +1,7 @@
 import React from 'react'
 
-import * as Types from '../../types/general.types'
+import * as Types from '~/types/general.types'
+
 import CvViewSkill from './CvViewSkill'
 
 export interface NormalisedCvWidgetSkillItems {
