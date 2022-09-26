@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { textOrSpace } from '../../utils/strings.utils'
-import Text, { MetaLevels } from '../Typography'
+import Text, { MetaLevels } from '~/modules/Typography'
+import { textOrSpace } from '~/utils/strings.utils'
 
 interface Props {
   label?: string
