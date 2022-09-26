@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Text, { MetaLevels } from '~/modules/Typography'
+import Text, { MetaLevels } from '~/components/Typography'
 import { textOrSpace } from '~/utils/strings.utils'
 
 interface Props {
