@@ -77,6 +77,7 @@ declare module 'ramda' {
   export function sort(...rest: any[]): any
   export function split(...rest: any[]): any[]
   export function splitAt(...rest: any[]): any[]
+  export function T(...rest: any[]): any
   export function tail(...rest: any[]): any[]
   export function take(...rest: any[]): any
   export function take(...rest: any[]): any
