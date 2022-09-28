@@ -21,8 +21,9 @@ export const INITIAL_STATE = {
 } as UserChallengesState
 
 export const getUserChallengesSuccess = createAction<UserChallenge[]>(`${name} getUserChallengesSuccess`)
-export const normaliseUserChallengesSuccess = createAction<NormalisedUserChallenges>(`${name} normaliseUserChallenges
-Success`)
+export const normaliseUserChallengesSuccess = createAction<NormalisedUserChallenges>(
+  `${name} normaliseUserChallengesSuccess`,
+)
 export const createUserChallenge = createAction<CreateUserChallengePayload>(`${name} createUserChallenge`)
 export const createUserChallengeSuccess = createAction<CreateUserChallengeSuccessResponse>(
   `${name} createUserChallengeSuccess`,

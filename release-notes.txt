@@ -1,8 +1,11 @@
 `Ver 0.0.1
 Latest:
-- No new features (docs-only update)
+- fix: empty fields causing app to break
 
 Previous deployment release notes:
+- fix: handling new API data shape for User Credentials
+- fix: Re-adding bottom tabs
+- No new features (docs-only update)
 - Adding alphabetic list navigator to country select
 - swapping in FlashList for Country select and Skills select (again)
 - updates to packages (cont)

@@ -1,3 +1,4 @@
+import { isNil } from 'ramda'
 import React from 'react'
 
 import Optional from '~/components/Optional'
@@ -6,9 +7,10 @@ import { Colors } from '~/styles'
 
 interface Props {
   error?: string
+  touched?: boolean
 }
-const InputError = ({ error }: Props) => (
-  <Optional condition={!!error}>
+const InputError = ({ error, touched }: Props) => (
+  <Optional condition={!!error && (touched || isNil(touched))}>
     <Text.Meta color={Colors.PrimaryRed} align={TextAlign.Right}>
       {error}
     </Text.Meta>

@@ -8,7 +8,7 @@ import HomeHeader from './HomeHeader'
 import selector from './HomeHeader.selector'
 
 interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes>
+  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
 }
 const HomeHeaderContainer = ({ navigation }: Props) => {
   const { zltoBalance, profileImageUrl } = useSelector(selector)

@@ -3,7 +3,6 @@ export enum UsersEndpoints {
   Credentials = 'credentials',
   Certificate = 'certificate',
   Photo = 'photo',
-  Products = 'products',
   Skills = 'skills',
 }
 
@@ -12,4 +11,11 @@ export enum UserCredentialTypes {
   Challenge = 'Challenge',
   Job = 'Job',
   Qualification = 'Qualification',
+}
+
+export enum UserCredentialOpportunityTypes {
+  Assignment = 'taskopportunity',
+  Challenge = 'impactopportunity',
+  Job = 'jobopportunity',
+  Qualification = 'learningopportunity',
 }

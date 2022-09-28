@@ -1,5 +1,16 @@
-import { isNil } from 'ramda'
+import { isNil, lt } from 'ramda'
 import { ReactNode } from 'react'
 
-export const shouldShowContent = (count: number | undefined, children: ReactNode): boolean =>
-  !!children && ((!!count && count > 0) || isNil(count))
+import { isNotNil } from '~/utils/ramda.utils'
+
+export const shouldShowContent = (
+  count: number | undefined,
+  shouldOverride: boolean | undefined,
+  children: ReactNode,
+): boolean => {
+  if (isNotNil(children) && isNil(shouldOverride)) {
+    return (isNotNil(count) && lt(0, count)) || isNil(count)
+  }
+
+  return !!shouldOverride
+}

@@ -22,14 +22,6 @@ const styles = {
     justifyContent: 'space-between',
     flexDirection: 'row',
   } as ViewStyle,
-  contanier1: {
-    paddingHorizontal: 20,
-    height: 50,
-    backgroundColor: colors[Colors.PrimaryGreen],
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    flexDirection: 'row',
-  } as ViewStyle,
   saveText: {
     paddingRight: 20,
   } as TextStyle,

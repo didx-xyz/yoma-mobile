@@ -1,33 +1,20 @@
-import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React from 'react'
-//import { useTranslation } from 'react-i18next'
-import { View } from 'react-native'
+import { useTranslation } from 'react-i18next'
 
-import { CirclePurple } from '~/assets/images'
-import ViewContainer from '~/components/ViewContainer'
+import { CircleSmallYellowGreenSplatter } from '~/assets/images'
+import ComingSoon from '~/components/ComingSoon'
+import { Colors } from '~/styles'
 
-import HomeHeader from '../HomeHeader'
-import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
-import List from './List'
-import styles from './Marketplace.styles'
-
-interface Props {
-  navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.MyCv>
-  zltoBalance: number
-}
-
-const Marketplace = ({ navigation }: Props) => {
-  //const { t } = useTranslation()
+const Marketplace = () => {
+  const { t } = useTranslation()
   return (
-    <ViewContainer style={styles.container}>
-      <HomeHeader navigation={navigation} />
-      <View>
-        <View style={styles.bgContainer}>
-          <CirclePurple style={styles.bgCircle} />
-        </View>
-      </View>
-      <List zltoBalance={0} />
-    </ViewContainer>
+    <ComingSoon
+      subject={t('Marketplace')}
+      byLine={t('Record your growth on Yoma, unlock skills through opportunities and earn rewards!')}
+      heroBgColor={Colors.PrimaryGreen}
+      BottomImg={CircleSmallYellowGreenSplatter}
+      isPluralSubject={false}
+    />
   )
 }
 

@@ -9,13 +9,6 @@ export const mapToDropDownArray = curry(
       value: opt[valueProp],
     }))(array),
 )
-export const mapToFilterModal = curry(
-  (array: Record<string, string>[], valueProp = 'value', labelProp = 'key'): DropDownTypes.DropDownItem[] =>
-    map((opt: Record<string, string>) => ({
-      label: opt[labelProp],
-      value: opt[valueProp],
-    }))(array),
-)
 
 const ascendByDropDownLabel = ascend(prop('label'))
 

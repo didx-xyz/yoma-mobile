@@ -31,8 +31,10 @@ export interface UserJobFormFields {
   endTime: string | null
 }
 
+interface UserJobOpportunityCredential extends UserJob, UserTypes.OpportunityCredentialPartial {}
+
 export interface UserJobCredential extends UserTypes.UserCredentialMeta {
-  job: UserJob
+  opportunity: UserJobOpportunityCredential
 }
 export interface UserJobsResponse {
   data: { data: UserJobCredential }
@@ -42,16 +44,6 @@ export interface UserJobsResponse {
 export interface NormalisedUserJobs {
   ids: string[]
   entities: Record<string, UserJobCredential>
-}
-
-export type UserJobItem = {
-  job: any
-  startDate: string
-  endDate: string
-}
-export type UserJobsFormState = {
-  values: UserJobFormFields
-  isValid: boolean
 }
 
 export interface UserJobsState extends NormalisedUserJobs {
