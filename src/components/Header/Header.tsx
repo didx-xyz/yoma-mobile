@@ -16,10 +16,11 @@ type Props = {
   >
   headerText: string | React.ReactNode
   actionItem?: React.ReactNode
+  headCombine?: Boolean
 }
 
-const Header = ({ navigation, headerText, actionItem }: Props) => (
-  <View style={styles.container}>
+const Header = ({ navigation, headerText, actionItem, headCombine }: Props) => (
+  <View style={headCombine ? styles.containerCombined : styles.container}>
     <ButtonBack onPress={navigation.goBack} />
     <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple}>
       {headerText}

@@ -25,7 +25,7 @@ const styles = {
     backgroundColor: colors[Colors.PrimaryRed],
     borderRadius: 18,
     height: '100%',
-    width: '50%',
+    width: '10%',
   } as ViewStyle,
   percentText: {
     textAlign: 'right',

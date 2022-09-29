@@ -85,6 +85,10 @@
     "The value entered is too long": "The value entered is too long",
     "First name cannot include numbers or symbols": "First name cannot include numbers or symbols",
     "Last name cannot include numbers or symbols": "Last name cannot include numbers or symbols",
-    "Phone number is not valid": "Phone number is not valid"
+    "Phone number is not valid": "Phone number is not valid",
+    "Skills developed": "Skills developed",
+    "Request verification of completion from provider": "Request verification of completion from provider",
+    "Upload completion certificate": "Upload completion certificate",
+    "Find out more on how verification works": "Find out more on how verification works"
   }
 }
