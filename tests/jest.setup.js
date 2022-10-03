@@ -1,3 +1,5 @@
+import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock'
+
 /* eslint-disable no-undef */
 jest.mock('react-native-localize', () => ({
   getLocales: () => [
@@ -27,6 +29,7 @@ jest.mock('react-native-localize', () => ({
   }),
 }))
 
+jest.mock('@react-native-async-storage/async-storage', () => mockAsyncStorage)
 jest.mock('react-native-document-picker')
 jest.mock('react-native/Libraries/LogBox/LogBox')
 jest.mock('@sentry/react-native', () => ({
