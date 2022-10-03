@@ -133,6 +133,7 @@ workflows:
               ignore:
                 - develop
                 - main
+                - Apex-updates
   deploy-android-alpha:
     jobs:
       - pull-request:
@@ -141,6 +142,7 @@ workflows:
               only:
                 - develop
                 - main
+                - Apex-updates
       - deploy-android-alpha:
           requires:
             - pull-request
