@@ -79,6 +79,7 @@ const Search = ({ navigation }: Props) => {
       })
   }
 
+  // eslint-disable-next-line react/no-unstable-nested-components
   const _renderResults = ({ item }: any) => (
     <TouchableOpacity style={styles.resultContainer} onPress={() => onSearch(item)}>
       <SearchIcon />
@@ -89,6 +90,7 @@ const Search = ({ navigation }: Props) => {
     </TouchableOpacity>
   )
 
+  // eslint-disable-next-line react/no-unstable-nested-components
   const _renderCoures = ({ item }: any) => {
     return <CourseWidget navigation={navigation} item={item} />
   }
