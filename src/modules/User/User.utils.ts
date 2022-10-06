@@ -21,7 +21,7 @@ import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
 import { renameKeys, safeWhen } from '~/utils/ramda.utils'
 
-import { USER_PHOTO_FORM_DATA_NAME } from './User.constants'
+import { USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
 
 export const extractUserFromPayload = pipe(
@@ -47,6 +47,17 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
     type: imageResponse.mime,
   })
   return photoPayload
+}
+
+export const createCertificateFormPayload = (formInstance: any) => (certificateResponse: any) => {
+  const certificatePayload = new formInstance()
+
+  certificatePayload.append(USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, {
+    uri: certificateResponse.uri,
+    name: certificateResponse.name,
+    type: certificateResponse.type,
+  })
+  return certificatePayload
 }
 
 export const filterOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>

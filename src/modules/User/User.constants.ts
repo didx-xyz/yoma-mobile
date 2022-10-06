@@ -13,7 +13,7 @@ export const CAPTURE_IMAGE_OPTIONS: Options = {
 }
 
 export const USER_PHOTO_FORM_DATA_NAME = 'Photo'
-export const USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME = 'File'
+export const USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME = 'file'
 
 export const USER_CREDENTIAL_WIDGET_SELECTOR_SPEC = {
   name: pathOr('', ['opportunity', 'title']),

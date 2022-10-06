@@ -3,6 +3,7 @@ export enum UsersEndpoints {
   Credentials = 'credentials',
   Certificate = 'certificate',
   Photo = 'photo',
+  Products = 'products',
   Skills = 'skills',
 }
 
