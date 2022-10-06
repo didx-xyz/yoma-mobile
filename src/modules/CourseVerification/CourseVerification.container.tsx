@@ -12,8 +12,8 @@ type Props = {
 }
 
 const CourseVerificationContainer = ({ navigation }: Props) => {
-  const handleSubmit = (values: any) => {
-    console.log('CourseVerificationContainer', values)
+  const handleSubmit = async (values: any) => {
+    console.log('formValues::', values)
   }
   return (
     <Formik initialValues={INITIAL_VALUES} enableReinitialize validationSchema={schema} onSubmit={handleSubmit}>

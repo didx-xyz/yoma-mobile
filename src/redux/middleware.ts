@@ -85,7 +85,9 @@ const featureModuleMiddleware = [
     navigate: Navigation.navigate,
   }),
   UserChallengesMiddleware.createUserChallengeFailureFlow({ notification: showSimpleMessage }),
-  UserChallengesMiddleware.createUserChallengeCertificateFlow,
+  UserChallengesMiddleware.createUserChallengeCertificateFlow({
+    createPayload: UserUtils.createCertificateFormPayload(FormData),
+  }),
   UserChallengesMiddleware.createUserChallengeCertificateSuccessFlow({ normalise: ReduxUtils.normalise }),
   UserChallengesMiddleware.createUserChallengeCertificateFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(

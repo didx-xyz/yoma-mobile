@@ -116,6 +116,7 @@ export const createUserChallengeFailureFlow =
   }
 
 export const createUserChallengeCertificateFlow: Middleware =
+  ({ createPayload }: any): Middleware =>
   ({ dispatch, getState }) =>
   next =>
   action => {
@@ -129,10 +130,10 @@ export const createUserChallengeCertificateFlow: Middleware =
         const config = ApiUtils.zipIdsIntoConfigEndpoint([userId, action.payload])(
           ApiUsersConstants.USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG,
         )
-
-        const formData = new FormData()
-        const fileData = pick(['uri', 'type', 'name'], certificate)
-        formData.append(UserConstants.USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
+        const certificatePayload = createPayload(certificate)
+        // const formData = new FormData()
+        // const fileData = pick(['uri', 'type', 'name'], certificate)
+        // formData.append(UserConstants.USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
 
         dispatch(
           ApiActions.apiRequest(
@@ -140,7 +141,7 @@ export const createUserChallengeCertificateFlow: Middleware =
               onSuccess: createUserChallengeCertificateSuccess,
               onFailure: createUserChallengeCertificateFailure,
             }),
-            formData,
+            ...certificatePayload,
           ),
         )
       }
