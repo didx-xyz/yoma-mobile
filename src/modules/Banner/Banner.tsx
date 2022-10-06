@@ -30,6 +30,7 @@ const data = [
 ]
 
 export default class Banner extends React.Component {
+  // eslint-disable-next-line @typescript-eslint/no-shadow
   renderPage(data: { key: string; title: string; text: string; color: string }, index: React.Key | null | undefined) {
     return (
       <View key={index} style={[styles.container1, { backgroundColor: data.color }]}>
@@ -45,7 +46,7 @@ export default class Banner extends React.Component {
   render() {
     return (
       <Carousel loop index={0} pageSize={BannerWidth} pageIndicatorStyle={{ backgroundColor: colors[Colors.White] }}>
-        {data.map((data, index) => this.renderPage(data, index))}
+        {data.map((item, index) => this.renderPage(item, index))}
       </Carousel>
     )
   }

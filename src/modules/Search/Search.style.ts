@@ -137,6 +137,10 @@ const styles = StyleSheet.create({
   tokenAmount: {
     paddingLeft: 4,
   } as TextStyle,
+  typeToSearch: {
+    marginTop: 50,
+    textAlign: 'center',
+  } as ViewStyle,
 })
 
 export default styles

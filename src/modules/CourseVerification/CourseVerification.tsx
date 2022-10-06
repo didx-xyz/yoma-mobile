@@ -3,6 +3,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
+import DocumentPicker from 'react-native-document-picker'
 
 import Button from '~/components/Button'
 import Card from '~/components/Card'
@@ -42,14 +43,28 @@ const CourseVerification = ({ navigation, form }: Props) => {
               label={t('Request verification of completion from provider')}
               onPress={() => {
                 setIsVerified(!isVerified)
-                form.values.isVerified = !isVerified
+                form.values.requestVerification = !isVerified
               }}
             />
           </ViewContainer>
           <Button
             label={t('Upload completion certificate')}
             style={styles.buttonStyle}
-            onPress={() => form.handleSubmit()}
+            onPress={async () => {
+              try {
+                const res = await DocumentPicker.pick({
+                  type: [DocumentPicker.types.images, DocumentPicker.types.pdf],
+                })
+                form.values.certificate = res[0]
+                form.values.credentialItemId = data.id
+                form.handleSubmit()
+              } catch (err) {
+                if (DocumentPicker.isCancel(err)) {
+                } else {
+                  throw err
+                }
+              }
+            }}
           />
           <View style={styles.verticalLine} />
           <Link style={styles.linkStyle} onPress={goto}>

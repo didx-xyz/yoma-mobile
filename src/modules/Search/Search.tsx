@@ -79,17 +79,21 @@ const Search = ({ navigation }: Props) => {
       })
   }
 
+  // eslint-disable-next-line react/no-unstable-nested-components
   const _renderResults = ({ item }: any) => (
     <TouchableOpacity style={styles.resultContainer} onPress={() => onSearch(item)}>
       <SearchIcon />
       <View style={styles.rendertextContainer}>
         <Text.Body style={styles.renderText}>{item}</Text.Body>
-        <View style={styles.verticalLine}></View>
+        <View style={styles.verticalLine} />
       </View>
     </TouchableOpacity>
   )
 
-  const _renderCoures = ({ item }: any) => <CourseWidget navigation={navigation} item={item} />
+  // eslint-disable-next-line react/no-unstable-nested-components
+  const _renderCoures = ({ item }: any) => {
+    return <CourseWidget navigation={navigation} item={item} />
+  }
 
   return (
     <>
@@ -106,9 +110,7 @@ const Search = ({ navigation }: Props) => {
           <Text.Body style={styles.text}>{t('Cancel')}</Text.Body>
         </TouchableOpacity>
       </View>
-      {!results && !courses && (
-        <Text.Body style={{ marginTop: 50, textAlign: 'center' }}>Type to start your search</Text.Body>
-      )}
+      {!results && !courses && <Text.Body style={styles.typeToSearch}>Type to start your search</Text.Body>}
       {results ? (
         <View style={styles.searchResultContainer}>
           <Text.Header level={HeaderLevels.H3}>Results</Text.Header>

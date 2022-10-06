@@ -13,6 +13,8 @@ export interface UserChallenge extends UserTypes.UserCredentialMeta {
   opportunity?: ChallengeOpportunityCredential
 }
 
+export type UploadUserCertificateFlowDependencies = { createPayload: any }
+
 export interface UserChallengeResponse {
   data: UserChallenge
 }

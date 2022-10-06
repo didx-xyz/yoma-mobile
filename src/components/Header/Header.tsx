@@ -10,10 +10,7 @@ import { Colors } from '~/styles'
 import styles from './Header.styles'
 
 type Props = {
-  navigation: NativeStackNavigationProp<
-    HomeNavigationTypes.HomeNavigatorParamsList,
-    HomeNavigationTypes.HomeNavigationRoutes
-  >
+  navigation: NativeStackNavigationProp<HomeNavigationTypes.HomeNavigatorParamsList>
   headerText: string | React.ReactNode
   actionItem?: React.ReactNode
   headCombine?: Boolean

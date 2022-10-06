@@ -1,7 +1,9 @@
-import { VerificationFields } from './CourseVerification.type'
+import { FormFields } from '../CompletedChallenges/Form/CompletedChallengesForm.types'
 
-export const INITIAL_VALUES: VerificationFields = {
+export const INITIAL_VALUES: FormFields = {
+  credentialItemId: '',
   startTime: null,
   endTime: null,
-  isVerified: false,
+  requestVerification: false,
+  certificate: null,
 }

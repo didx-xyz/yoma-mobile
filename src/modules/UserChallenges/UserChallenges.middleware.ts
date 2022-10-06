@@ -11,7 +11,6 @@ import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.ty
 import * as Navigation from '~/modules/Navigation/Navigation.utils'
 import {
   actions as UserActions,
-  constants as UserConstants,
   selectors as UserSelectors,
   types as UserTypes,
   utils as UserUtils,
@@ -35,7 +34,7 @@ import {
   updateUserChallenges,
 } from './UserChallenges.reducer'
 import { selectFormCertificate } from './UserChallenges.selector'
-import { UserChallenge } from './UserChallenges.types'
+import { UploadUserCertificateFlowDependencies, UserChallenge } from './UserChallenges.types'
 
 export const setUserChallengeFormValuesFlow: Middleware =
   ({ dispatch }) =>
@@ -115,7 +114,8 @@ export const createUserChallengeFailureFlow =
     return result
   }
 
-export const createUserChallengeCertificateFlow: Middleware =
+export const createUserChallengeCertificateFlow =
+  ({ createPayload }: UploadUserCertificateFlowDependencies): Middleware =>
   ({ dispatch, getState }) =>
   next =>
   action => {
@@ -129,10 +129,10 @@ export const createUserChallengeCertificateFlow: Middleware =
         const config = ApiUtils.zipIdsIntoConfigEndpoint([userId, action.payload])(
           ApiUsersConstants.USERS_CREDENTIALS_CREATE_CERTIFICATE_CONFIG,
         )
-
-        const formData = new FormData()
-        const fileData = pick(['uri', 'type', 'name'], certificate)
-        formData.append(UserConstants.USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
+        const certificatePayload = createPayload(certificate)
+        // const formData = new FormData()
+        // const fileData = pick(['uri', 'type', 'name'], certificate)
+        // formData.append(UserConstants.USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME, fileData)
 
         dispatch(
           ApiActions.apiRequest(
@@ -140,7 +140,7 @@ export const createUserChallengeCertificateFlow: Middleware =
               onSuccess: createUserChallengeCertificateSuccess,
               onFailure: createUserChallengeCertificateFailure,
             }),
-            formData,
+            ...certificatePayload,
           ),
         )
       }

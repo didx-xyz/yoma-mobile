@@ -5,7 +5,6 @@ import { SearchIcon } from '~/assets/images'
 
 import styles from './SearchBar.styles'
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function Searchbar({ value, updateSearch, backgroundColor, onSearch, onFocus }: any) {
   const [query, setQuery] = useState<any | null>(null)
   const [error, setError] = useState<any | null>(null)
