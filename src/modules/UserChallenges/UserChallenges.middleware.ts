@@ -7,7 +7,7 @@ import { actions as ApiActions, utils as ApiUtils } from '~/api'
 import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/users'
 import * as Strings from '~/constants/strings.constants'
 import { extractErrorResponseMessage } from '~/modules/Error/error.utils'
-import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
+import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 import * as Navigation from '~/modules/Navigation/Navigation.utils'
 import {
   actions as UserActions,

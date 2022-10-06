@@ -171,10 +171,12 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
         userChallenges: userChallengesStateFixture(),
       })
 
+      const createPayload = jest.fn()
+
       // when ... we create the user's credentials
       const action = createUserChallengeCertificate('A CREDENTIAL ID')
 
-      const { store, invoke, next } = create(SUT.createUserChallengeCertificateFlow)
+      const { store, invoke, next } = create(SUT.createUserChallengeCertificateFlow({ createPayload }))
       invoke(action)
 
       // then ...
@@ -190,11 +192,11 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
           formValues: { certificate: { uri: 'FILE URI', type: 'FILE TYPE', name: 'FILE NAME' } },
         }),
       })
-
+      const createPayload = jest.fn(x => [x])
       // when ... we create the user's credentials
       const action = createUserChallengeCertificate('A CREDENTIAL ID')
 
-      const { store, invoke, next } = create(SUT.createUserChallengeCertificateFlow)
+      const { store, invoke, next } = create(SUT.createUserChallengeCertificateFlow({ createPayload }))
       invoke(action)
 
       // then ...
