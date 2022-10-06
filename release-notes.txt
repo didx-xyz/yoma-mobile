@@ -1,6 +1,6 @@
 Ver 0.0.1
 Latest:
-- Marketplace feature
+- Marketplace feature (update 001)
 
 Previous deployment release notes:
 - fix: empty fields causing app to break
