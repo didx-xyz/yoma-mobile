@@ -54,7 +54,6 @@ const Courses = ({ navigation }: Props) => {
     setData(OppData)
   }, [DATA])
   useEffect(() => {
-    console.log(filterData, 'FilterData')
     if (isFiltered) {
       apiConfig
         .createApiClient(
@@ -96,7 +95,6 @@ const Courses = ({ navigation }: Props) => {
   const addFilter = () => {
     setModalOpen(true)
   }
-  console.log(data, 'DATA:::')
   return (
     <>
       <SafeAreaView style={styles.container}>

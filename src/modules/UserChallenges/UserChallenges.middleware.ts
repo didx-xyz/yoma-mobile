@@ -11,7 +11,6 @@ import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.ty
 import * as Navigation from '~/modules/Navigation/Navigation.utils'
 import {
   actions as UserActions,
-  constants as UserConstants,
   selectors as UserSelectors,
   types as UserTypes,
   utils as UserUtils,
@@ -35,7 +34,7 @@ import {
   updateUserChallenges,
 } from './UserChallenges.reducer'
 import { selectFormCertificate } from './UserChallenges.selector'
-import { UserChallenge } from './UserChallenges.types'
+import { UploadUserCertificateFlowDependencies, UserChallenge } from './UserChallenges.types'
 
 export const setUserChallengeFormValuesFlow: Middleware =
   ({ dispatch }) =>
@@ -115,8 +114,8 @@ export const createUserChallengeFailureFlow =
     return result
   }
 
-export const createUserChallengeCertificateFlow: Middleware =
-  ({ createPayload }: any): Middleware =>
+export const createUserChallengeCertificateFlow =
+  ({ createPayload }: UploadUserCertificateFlowDependencies): Middleware =>
   ({ dispatch, getState }) =>
   next =>
   action => {

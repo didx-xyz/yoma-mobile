@@ -1,8 +1,10 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 import { Formik } from 'formik'
 import React from 'react'
+import { useDispatch } from 'react-redux'
 
 import { HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
+import { actions as UserChallanges } from '../UserChallenges'
 import CourseVerification from './CourseVerification'
 import { INITIAL_VALUES } from './CourseVerification.constants'
 import { schema } from './CourseVerification.validation'
@@ -12,8 +14,9 @@ type Props = {
 }
 
 const CourseVerificationContainer = ({ navigation }: Props) => {
-  const handleSubmit = async (values: any) => {
-    console.log('formValues::', values)
+  const dispatch = useDispatch()
+  const handleSubmit = (values: any) => {
+    dispatch(UserChallanges.createUserChallenge(values))
   }
   return (
     <Formik initialValues={INITIAL_VALUES} enableReinitialize validationSchema={schema} onSubmit={handleSubmit}>

@@ -1,14 +1,10 @@
 import { useRoute } from '@react-navigation/core'
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { mergeRight } from 'ramda'
 import React, { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ScrollView, View } from 'react-native'
 import DocumentPicker from 'react-native-document-picker'
-import { useDispatch, useSelector } from 'react-redux'
 
-import { apiConfig, utils as ApiUtils } from '~/api'
-import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/users'
 import Button from '~/components/Button'
 import Card from '~/components/Card'
 import CheckBox from '~/components/CheckBox'
@@ -19,7 +15,6 @@ import ViewContainer from '~/components/ViewContainer'
 import { HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 
 import { opportunities } from '../Opportunities/Opportunities.types'
-import { actions as UserChallanges } from '../UserChallenges'
 import styles from './CourseVerification.style'
 
 type Props = {
@@ -28,12 +23,9 @@ type Props = {
 }
 
 const CourseVerification = ({ navigation, form }: Props) => {
-  const userId = useSelector(state => state.user.id)
-
   const [isVerified, setIsVerified] = useState(false)
   const { t } = useTranslation()
   const route = useRoute()
-  const dispatch = useDispatch()
   const data: opportunities = route.params as opportunities
   const goto = () => {}
   return (
@@ -65,30 +57,13 @@ const CourseVerification = ({ navigation, form }: Props) => {
                 })
                 form.values.certificate = res[0]
                 form.values.credentialItemId = data.id
-                console.log(form.values, 'formValues')
-
-                // const config = ApiUtils.prependValueToEndpointInConfig(
-                //   ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG,
-                // )(userId)
-                // apiConfig
-                //   .createApiClient(
-                //     mergeRight(config, {
-                //       data: form.values,
-                //     }),
-                //   )
-                //   .then(res => {
-                //     console.log('response', res)
-                //   })
-
-                dispatch(UserChallanges.createUserChallenge(form.values))
-                // fetch(`https://staging.api.yoma.africa/api/v1/users/${userId}/credentials/c88e1c73-a738-48ab-167f-08daa155160f/certificate`)
+                form.handleSubmit()
               } catch (err) {
                 if (DocumentPicker.isCancel(err)) {
                 } else {
                   throw err
                 }
               }
-              form.handleSubmit()
             }}
           />
           <View style={styles.verticalLine} />
