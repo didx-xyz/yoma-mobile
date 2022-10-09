@@ -4,7 +4,7 @@ import Text, { MetaLevels } from '~/components/Typography'
 import { textOrSpace } from '~/utils/strings.utils'
 
 interface Props {
-  label?: string
+  label?: string | React.ReactNode
   isVisible?: boolean
 }
 const InputLabel = ({ isVisible, label = '' }: Props) => (

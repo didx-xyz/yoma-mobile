@@ -1,7 +1,6 @@
 import { StyleSheet, ViewStyle } from 'react-native'
 
-import { Colors, colors } from '~/styles'
-import { applyAlphaToHex } from '~/styles/styles.utils'
+import { Colors, utils as StyleUtils, colors } from '~/styles'
 
 const styles = StyleSheet.create({
   container: {
@@ -9,7 +8,7 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
   } as ViewStyle,
   add: {
-    backgroundColor: applyAlphaToHex(colors[Colors.PrimaryDarkGrey])(0.15),
+    backgroundColor: StyleUtils.applyAlphaToHex(colors[Colors.PrimaryDarkGrey])(0.15),
     borderRadius: 33,
     paddingHorizontal: 10,
     marginHorizontal: 5,
