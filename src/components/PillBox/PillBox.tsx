@@ -7,7 +7,7 @@ import Pill from '~/components/Pill'
 import Text from '~/components/Typography'
 import { Colors } from '~/styles'
 
-import styles from './PillContainer.styles'
+import styles from './PillBox.styles'
 
 interface Props {
   pills: string[]
@@ -15,7 +15,7 @@ interface Props {
   onAdd: () => void
 }
 
-const PillContainer = ({ pills, onDelete, onAdd }: Props) => {
+const PillBox = ({ pills, onDelete, onAdd }: Props) => {
   const { t } = useTranslation()
   return (
     <View style={styles.container}>
@@ -27,4 +27,4 @@ const PillContainer = ({ pills, onDelete, onAdd }: Props) => {
   )
 }
 
-export default PillContainer
+export default PillBox

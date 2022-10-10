@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Fixing Education
+- Fixing Skills selector (can select multiple skills)
 
 Previous deployment release notes:
+- Fixing Education
 - fix: empty fields causing app to break
 - fix: handling new API data shape for User Credentials
 - fix: Re-adding bottom tabs
@@ -14,5 +15,3 @@ Previous deployment release notes:
 - creating and implementing Country Picker
 - fixing critical vulnerabilities
 - Adding Completed Courses to the CV
-
-

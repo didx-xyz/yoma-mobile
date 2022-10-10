@@ -43,7 +43,6 @@ const DropDown = ({ name, label, ...props }: Props) => {
       <InputLabel label={label} isVisible={value !== ''} />
       <DropDownPicker
         style={styles.dropDown}
-        dropDownContainerStyle={styles.dropDownContainer}
         placeholder={label}
         placeholderStyle={styles.placeholder}
         textStyle={styles.label}

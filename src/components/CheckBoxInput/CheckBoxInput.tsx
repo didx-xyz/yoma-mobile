@@ -1,27 +1,27 @@
 import { useField } from 'formik'
 import React, { useCallback, useEffect, useState } from 'react'
 
-import CheckBox from '../CheckBox'
+import CheckBoxLabelled from '../CheckBoxLabelled'
 
-interface Props extends Omit<React.ComponentProps<typeof CheckBox>, 'isChecked' | 'onPress'> {
+interface Props extends Omit<React.ComponentProps<typeof CheckBoxLabelled>, 'isSelected' | 'onPress'> {
   name: string
 }
 
 const CheckBoxInput = ({ name, ...props }: Props) => {
-  const [isChecked, setIsChecked] = useState(false)
+  const [isSelected, setIsSelected] = useState(false)
   const [, { value }, { setValue }] = useField(name)
 
   const handlePress = useCallback(() => {
-    setIsChecked(prevState => !prevState)
+    setIsSelected(prevState => !prevState)
   }, [])
 
   useEffect(() => {
-    if (isChecked !== value) {
-      setValue(isChecked)
+    if (isSelected !== value) {
+      setValue(isSelected)
     }
-  }, [isChecked, setValue, value])
+  }, [isSelected, setValue, value])
 
-  return <CheckBox {...props} isChecked={isChecked} onPress={handlePress} />
+  return <CheckBoxLabelled {...props} isSelected={isSelected} onPress={handlePress} />
 }
 
 export default CheckBoxInput

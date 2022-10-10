@@ -20,7 +20,7 @@ const SkillsFilter = ({ searchPlaceholder, setSearchTerm, setIsLoading }: Props)
   }, [setIsLoading])
 
   return (
-    <Stack styles={styles.container}>
+    <Stack style={styles.container}>
       <TextInput
         onTextInput={onTextInput}
         onChangeText={debounce(setSearchTerm, 750)}

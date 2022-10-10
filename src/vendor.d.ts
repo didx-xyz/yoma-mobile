@@ -1,6 +1,6 @@
 declare module 'form-data'
 declare module 'ramda' {
-  export function __(...rest: any[]): any[]
+  export function __(...rest: any[]): any
   export function add(...rest: any[]): any
   export function addIndex(...rest: any[]): any
   export function always(...rest: any[]): any[]
@@ -19,6 +19,7 @@ declare module 'ramda' {
   export function contains(...rest: any[]): any
   export function converge(...rest: any[]): any
   export function curry(...rest: any[]): any
+  export function curryN(...rest: any[]): any
   export function equals(...rest: any[]): any
   export function evolve(...rest: any[]): any
   export function F(...rest: any[]): false
