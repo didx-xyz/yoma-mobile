@@ -31,6 +31,7 @@ const SkillsResults = ({ skills, hasNoResults, onItemSelect }: Props) => {
       data={data}
       ListEmptyComponent={<NoSkillsStates hasNoResult={hasNoResults} />}
       renderItem={renderItem}
+      estimatedItemSize={100}
     />
   )
 }
