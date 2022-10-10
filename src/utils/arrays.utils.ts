@@ -1,4 +1,4 @@
-import { append, ascend, concat, curry, ifElse, includes, map, pipe, prop, sort, uniq, without } from 'ramda'
+import { append, ascend, concat, curry, curryN, ifElse, includes, map, pipe, prop, sort, uniq, without } from 'ramda'
 
 import { types as DropDownTypes } from '~/components/DropDown'
 
@@ -16,4 +16,4 @@ export const sortDropDownArray = sort(ascendByDropDownLabel)
 
 export const withoutElseAppend = (element: any) => ifElse(includes(element), without(element), append(element))
 
-export const addUnique = pipe(concat, uniq)
+export const concatUnique = curryN(2, pipe(concat, uniq))

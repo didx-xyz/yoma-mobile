@@ -19,6 +19,7 @@ declare module 'ramda' {
   export function contains(...rest: any[]): any
   export function converge(...rest: any[]): any
   export function curry(...rest: any[]): any
+  export function curryN(...rest: any[]): any
   export function equals(...rest: any[]): any
   export function evolve(...rest: any[]): any
   export function F(...rest: any[]): false

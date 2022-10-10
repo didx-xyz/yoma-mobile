@@ -1,9 +1,9 @@
 import { useField } from 'formik'
 import { without } from 'ramda'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useState } from 'react'
 
 import Modal from '~/components/Modal'
-import { addUnique, setOf, withoutElseAppend } from '~/utils/arrays.utils'
+import { concatUnique } from '~/utils/arrays.utils'
 
 import SkillSelect from './SkillSelect'
 import SkillsInput from './SkillsInput'
@@ -38,7 +38,7 @@ const SkillsSelectField = ({ name, label, searchPlaceholder, skills }: Props) =>
   const onModalClose = useCallback(
     (visibility: boolean) => {
       if (!visibility) {
-        const updatedValue = addUnique(internalSkills, value)
+        const updatedValue = concatUnique(internalSkills, value)
         setValue(updatedValue)
       }
     },

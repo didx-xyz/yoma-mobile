@@ -41,4 +41,12 @@ describe('arrays.utils', () => {
       expect(result).toEqual(['skill 1', 'skill 3', 'skill 4'])
     })
   })
+  describe('concatUnique', () => {
+    it('should join two lists removing any duplicates', () => {
+      const skillsMock = ['skill 1', 'skill 2', 'skill 3']
+      const result = SUT.concatUnique(['skill 1', 'skill 3', 'skill 4'])(skillsMock)
+
+      expect(result).toEqual(['skill 1', 'skill 3', 'skill 4', 'skill 2'])
+    })
+  })
 })
