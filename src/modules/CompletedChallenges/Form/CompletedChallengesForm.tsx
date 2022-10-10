@@ -33,10 +33,6 @@ const CompletedChallengesForm = ({ navigation, challenges, challengesDropDown, f
   const [hasSelectedChallenge, setHasSelectedChallenge] = useState(false)
 
   useEffect(() => {
-    console.log({ challengesDropDown })
-  }, [challengesDropDown])
-
-  useEffect(() => {
     setHasSelectedChallenge(form.values.credentialItemId !== '')
   }, [form.values.credentialItemId])
 
