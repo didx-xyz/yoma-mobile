@@ -43,10 +43,8 @@ const CountrySelectField = ({ name, label, modalHeader, searchPlaceholder, count
   return (
     <>
       <View style={styles.container}>
-        <Optional condition={!!label}>
-          <InputLabel label={label} />
-        </Optional>
-        <CountryItem item={value} countries={countriesByCode.entities} onPress={handleOpenModal} />
+        <InputLabel label={label} isVisible={!!label && !!value} />
+        <CountryItem item={value} countries={countriesByCode.entities} onPress={handleOpenModal} placeholder={label} />
         <InputError error={error} />
       </View>
       <Modal setVisible={setModalOpen} isVisible={isModalOpen} closeLabel={t('Cancel')}>

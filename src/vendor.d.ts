@@ -1,6 +1,6 @@
 declare module 'form-data'
 declare module 'ramda' {
-  export function __(...rest: any[]): any[]
+  export function __(...rest: any[]): any
   export function add(...rest: any[]): any
   export function addIndex(...rest: any[]): any
   export function always(...rest: any[]): any[]
@@ -17,9 +17,12 @@ declare module 'ramda' {
   export function compose(...rest: any[]): any
   export function concat(...rest: any[]): any[]
   export function contains(...rest: any[]): any
+  export function converge(...rest: any[]): any
   export function curry(...rest: any[]): any
+  export function curryN(...rest: any[]): any
   export function equals(...rest: any[]): any
   export function evolve(...rest: any[]): any
+  export function F(...rest: any[]): false
   export function filter(...rest: any[]): any
   export function find(...rest: any[]): any
   export function flatten(...rest: any[]): any[]
@@ -59,6 +62,7 @@ declare module 'ramda' {
   export function omit(...rest: any[]): any
   export function path(...rest: any[]): any
   export function pathOr(...rest: any[]): any
+  export function pathEq(...rest: any[]): any
   export function pick(...rest: any[]): any
   export function pipe(...rest: any[]): any
   export function prepend(...rest: any[]): any
@@ -74,6 +78,7 @@ declare module 'ramda' {
   export function sort(...rest: any[]): any
   export function split(...rest: any[]): any[]
   export function splitAt(...rest: any[]): any[]
+  export function T(...rest: any[]): any
   export function tail(...rest: any[]): any[]
   export function take(...rest: any[]): any
   export function take(...rest: any[]): any

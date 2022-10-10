@@ -1,7 +1,7 @@
 import React, { memo, useCallback, useState } from 'react'
 import { Pressable } from 'react-native'
 
-import Radio from '~/components/Radio'
+import Checkbox from '~/components/Checkbox'
 import { HStack } from '~/components/Stack'
 import Text from '~/components/Typography'
 
@@ -21,8 +21,8 @@ const SkillItem = memo(({ item, onPress }: Props) => {
 
   return (
     <Pressable onPress={handleOnPress} style={styles.container}>
-      <HStack>
-        <Radio isSelected={isSelected} />
+      <HStack style={styles.hStack}>
+        <Checkbox isSelected={isSelected} />
         <Text.Body>{item}</Text.Body>
       </HStack>
     </Pressable>

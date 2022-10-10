@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pressable, View } from 'react-native'
 
@@ -19,32 +19,26 @@ interface Props {
 const AboutWidget = ({ biography, navigation }: Props) => {
   const { t } = useTranslation()
 
-  const biographyShort = useMemo(() => trunc(biography, 120), [biography])
+  const biographyShort = useMemo(() => biography && trunc(biography, 120), [biography])
+  const onFormNavigate = useCallback(() => {
+    navigation.navigate(HomeNavigationRoutes.AboutForm)
+  }, [navigation])
+  const onViewAllNavigate = useCallback(() => navigation.navigate(HomeNavigationRoutes.About), [navigation])
 
   return (
     <CvWidget
       title={t('about.title')}
+      hasContent={!!biography}
       noDataMessage={t('Your biography is one of the first things recruiters look at. Write a great one!')}
-      onActionPress={() => {
-        navigation.navigate(HomeNavigationRoutes.AboutForm)
-      }}
+      onActionPress={onFormNavigate}
       isEditAction
     >
       <View style={styles.container}>
-        <Pressable
-          style={styles.content}
-          onPress={() => {
-            navigation.navigate(HomeNavigationRoutes.About)
-          }}
-        >
+        <Pressable style={styles.content} onPress={onViewAllNavigate}>
           <Text.Body>{biographyShort}</Text.Body>
         </Pressable>
         <Divider />
-        <Button
-          label={t('View All')}
-          variant={ButtonVariants.Clear}
-          onPress={() => navigation.navigate(HomeNavigationRoutes.About)}
-        />
+        <Button label={t('View All')} variant={ButtonVariants.Clear} onPress={onViewAllNavigate} />
       </View>
     </CvWidget>
   )

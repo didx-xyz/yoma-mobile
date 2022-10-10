@@ -81,33 +81,87 @@ describe('modules/User/User.utils', () => {
       expect(result.formData).toBe('FORM_DATA')
     })
   })
-  describe('extractCredentialsByType', () => {
+  describe('extractUserCredentials', () => {
     it.each([
       [
-        UserCredentialTypes.Challenge,
+        UserCredentialTypes.Assignment,
         [
-          { challenge: 'CHALLENGE DATA 1', meta: 'META' },
-          { challenge: 'CHALLENGE DATA 2', meta: 'META' },
+          {
+            opportunity: {
+              type: 'taskopportunity',
+              title: 'Assignment 1',
+            },
+            meta: 'META',
+          },
         ],
       ],
       [
         UserCredentialTypes.Job,
         [
-          { job: 'JOB DATA 1', meta: 'META' },
-          { job: 'JOB DATA 2', meta: 'META' },
+          {
+            opportunity: {
+              type: 'jobopportunity',
+              title: 'Job 1',
+            },
+            meta: 'META',
+          },
         ],
       ],
       [
-        UserCredentialTypes.Assignment,
+        UserCredentialTypes.Challenge,
         [
-          { assignment: 'ASSIGNMENT DATA 1', meta: 'META' },
-          { assignment: 'ASSIGNMENT DATA 2', meta: 'META' },
+          {
+            opportunity: {
+              type: 'impactopportunity',
+              title: 'Challenge 1',
+            },
+            meta: 'META',
+          },
         ],
       ],
-      [UserCredentialTypes.Qualification, [{ qualification: 'QUALIFICATION DATA 1', meta: 'META' }]],
+      [
+        UserCredentialTypes.Qualification,
+        [
+          {
+            opportunity: {
+              type: 'learningopportunity',
+              title: 'Qualification 1',
+            },
+            meta: 'META',
+          },
+        ],
+      ],
     ])('should correctly extract all of a given credential type from a list of credentials', (type, expected) => {
       // given ... an array of all credential data for a user
       const credentialsMock = [
+        {
+          opportunity: {
+            type: 'jobopportunity',
+            title: 'Job 1',
+          },
+          meta: 'META',
+        },
+        {
+          opportunity: {
+            type: 'taskopportunity',
+            title: 'Assignment 1',
+          },
+          meta: 'META',
+        },
+        {
+          opportunity: {
+            type: 'impactopportunity',
+            title: 'Challenge 1',
+          },
+          meta: 'META',
+        },
+        {
+          opportunity: {
+            type: 'learningopportunity',
+            title: 'Qualification 1',
+          },
+          meta: 'META',
+        },
         { qualification: 'QUALIFICATION DATA 1', meta: 'META' },
         { assignment: 'ASSIGNMENT DATA 1', meta: 'META' },
         { job: 'JOB DATA 1', meta: 'META' },
@@ -118,7 +172,7 @@ describe('modules/User/User.utils', () => {
       ]
 
       // when we want to get all the credentials of a given type
-      const result = SUT.extractCredentialsByType(type)(credentialsMock)
+      const result = SUT.extractUserCredentials(type)(credentialsMock)
 
       //then expect that we have a list of challenge credentials
       expect(result).toEqual(expected)

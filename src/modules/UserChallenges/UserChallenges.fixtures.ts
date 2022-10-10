@@ -1,16 +1,17 @@
 import { createFixture } from 'tests/tests.utils'
 
+import { UserCredentialOpportunityTypes } from '../../api/users/users.types'
 import { UserChallenge } from './UserChallenges.types'
 
 export const USER_CHALLENGES_RESPONSE_MOCK: UserChallenge[] = [
   {
-    challenge: {
+    opportunity: {
       organisationId: '6baf2197-8f85-4289-477d-08d92e9cc88c',
       organisationName: 'IDDQD',
       organisationLogoURL:
         'https://yoma-test-file-storage.s3.eu-west-1.amazonaws.com/Staging/Certificates/f89346a2-7635-40b0-8afd-a23a829dd8c0?X-Amz-Expires=1800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNSETAVPYWP7TMB/20210919/eu-west-1/s3/aws4_request&X-Amz-Date=20210919T213142Z&X-Amz-SignedHeaders=host&X-Amz-Signature=99051fbc05dc0c91648311647c24f43fab9412eb225c2d9bade2f96716ef0312',
       id: '61b3783c-2f7b-46b5-2e05-08d92e9e2636',
-      name: 'Make Your Own Bingo!',
+      title: 'Make Your Own Bingo!',
       description: 'What fun',
       url: null,
       createdAt: '2021-06-13T19:05:03.0410213',
@@ -20,6 +21,7 @@ export const USER_CHALLENGES_RESPONSE_MOCK: UserChallenge[] = [
       startTime: '2021-06-12T22:00:00',
       endTime: '2021-06-16T22:00:00',
       published: true,
+      type: UserCredentialOpportunityTypes.Challenge,
     },
     id: 'bb0e0248-4a76-40df-0cea-08d9794fa862',
     verifiedAt: null,
@@ -33,12 +35,12 @@ export const USER_CHALLENGES_RESPONSE_MOCK: UserChallenge[] = [
     requestVerification: true,
   },
   {
-    challenge: {
+    opportunity: {
       organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
       organisationName: 'Test Org',
       organisationLogoURL: null,
       id: '210a91ff-38b9-42f2-9b50-b6655bbf0f7c',
-      name: 'Test Graph',
+      title: 'Test Graph',
       description: 'Test Graph',
       url: null,
       createdAt: '2021-02-01T00:00:00',
@@ -48,6 +50,7 @@ export const USER_CHALLENGES_RESPONSE_MOCK: UserChallenge[] = [
       startTime: '2021-02-01T00:00:00',
       endTime: null,
       published: true,
+      type: UserCredentialOpportunityTypes.Challenge,
     },
     id: '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5',
     verifiedAt: '2021-05-02T00:00:00',
@@ -61,12 +64,12 @@ export const USER_CHALLENGES_RESPONSE_MOCK: UserChallenge[] = [
     requestVerification: true,
   },
   {
-    challenge: {
+    opportunity: {
       organisationId: 'XXXdf1bc-10b8-445c-0b4a-08d81d3203ed',
       organisationName: 'Test Org 2',
       organisationLogoURL: null,
       id: 'XXXa91ff-38b9-42f2-9b50-b6655bbf0f7c',
-      name: 'Test Graph2',
+      title: 'Test Graph2',
       description: 'Test Graph2',
       url: null,
       createdAt: '2021-02-01T00:00:00',
@@ -76,6 +79,7 @@ export const USER_CHALLENGES_RESPONSE_MOCK: UserChallenge[] = [
       startTime: '2021-02-01T00:00:00',
       endTime: null,
       published: true,
+      type: UserCredentialOpportunityTypes.Challenge,
     },
     id: 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5',
     verifiedAt: '2021-05-02T00:00:00',
@@ -94,12 +98,12 @@ export const USER_CHALLENGES_STATE_MOCK = {
   ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
   entities: {
     '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-      challenge: {
+      opportunity: {
         organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
         organisationName: 'Test Org',
         organisationLogoURL: null,
         id: '210a91ff-38b9-42f2-9b50-b6655bbf0f7c',
-        name: 'Test Graph',
+        title: 'Test Graph',
         description: 'Test Graph',
         url: null,
         createdAt: '2021-02-01T00:00:00',
@@ -109,6 +113,7 @@ export const USER_CHALLENGES_STATE_MOCK = {
         startTime: '2021-02-01T00:00:00',
         endTime: null,
         published: true,
+        type: UserCredentialOpportunityTypes.Challenge,
       },
       id: '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5',
       verifiedAt: '2021-05-02T00:00:00',
@@ -122,12 +127,12 @@ export const USER_CHALLENGES_STATE_MOCK = {
       requestVerification: true,
     },
     'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-      challenge: {
+      opportunity: {
         organisationId: 'XXXdf1bc-10b8-445c-0b4a-08d81d3203ed',
         organisationName: 'Test Org 2',
         organisationLogoURL: null,
         id: 'XXXa91ff-38b9-42f2-9b50-b6655bbf0f7c',
-        name: 'Test Graph2',
+        title: 'Test Graph2',
         description: 'Test Graph2',
         url: null,
         createdAt: '2021-02-01T00:00:00',
@@ -137,6 +142,7 @@ export const USER_CHALLENGES_STATE_MOCK = {
         startTime: '2021-02-01T00:00:00',
         endTime: null,
         published: true,
+        type: UserCredentialOpportunityTypes.Challenge,
       },
       id: 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5',
       verifiedAt: '2021-05-02T00:00:00',
@@ -151,5 +157,4 @@ export const USER_CHALLENGES_STATE_MOCK = {
     },
   },
 }
-export const userChallengesFixtures = createFixture(USER_CHALLENGES_RESPONSE_MOCK)
 export const userChallengesStateFixture = createFixture(USER_CHALLENGES_STATE_MOCK)

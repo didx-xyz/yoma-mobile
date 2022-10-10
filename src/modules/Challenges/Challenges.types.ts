@@ -9,7 +9,7 @@ export interface Challenge {
   endTime: string | null
   id: string
   language: string
-  name: string
+  title: string
   organisationId: string
   organisationLogoURL: string | null
   organisationName: string

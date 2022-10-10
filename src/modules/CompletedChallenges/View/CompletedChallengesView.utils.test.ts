@@ -13,7 +13,7 @@ describe('modules/CompletedChallenges/CompletedChallengesView/CompletedChallenge
     })
     it('should correctly handle if a property is empty', () => {
       const result = SUT.getCompletedChallengesMetadata(
-        mergeDeepRight(USER_CHALLENGES_RESPONSE_MOCK[0], { challenge: { organisationName: undefined } }),
+        mergeDeepRight(USER_CHALLENGES_RESPONSE_MOCK[0], { opportunity: { organisationName: undefined } }),
       )
       expect(result.length).toBe(1)
       expect(result).toStrictEqual(['Jun 2021 - Sep 2021'])

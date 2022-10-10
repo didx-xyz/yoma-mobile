@@ -5,7 +5,7 @@ import { ScrollView, TouchableOpacity } from 'react-native'
 
 import { ButtonSave } from '~/components/Button'
 import Card from '~/components/Card'
-import CheckBox from '~/components/CheckBox'
+import CheckBoxLabelled from '~/components/CheckBoxLabelled'
 import DateRangeSelect from '~/components/DateRangeSelect'
 import DropDown, { types as DropDownTypes } from '~/components/DropDown'
 import FormLayout from '~/components/FormLayout'
@@ -56,8 +56,8 @@ const ExperienceForm = ({ navigation, organisations, form }: Props) => {
               searchable
               searchPlaceholder={t('Search organisation')}
             />
-            <CheckBox
-              isChecked={isWorkingHere}
+            <CheckBoxLabelled
+              isSelected={isWorkingHere}
               label={t('I currently work here')}
               onPress={() => setIsWorkingHere(!isWorkingHere)}
             />

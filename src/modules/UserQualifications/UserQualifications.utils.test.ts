@@ -21,10 +21,10 @@ describe('modules/UserQualifications/UserQualifications.utils', () => {
   })
   describe('getEducationOrCourse', () => {
     it.each([
-      [false, { qualification: { createdByAdmin: true } }, true],
-      [false, { qualification: { createdByAdmin: false } }, false],
-      [true, { qualification: { createdByAdmin: true } }, false],
-      [true, { qualification: { createdByAdmin: false } }, true],
+      [false, { opportunity: { createdByAdmin: true } }, true],
+      [false, { opportunity: { createdByAdmin: false } }, false],
+      [true, { opportunity: { createdByAdmin: true } }, false],
+      [true, { opportunity: { createdByAdmin: false } }, true],
     ])(
       'should return the required metadata from a User Qualification Credential',
       (isEducation, qualification, expected) => {

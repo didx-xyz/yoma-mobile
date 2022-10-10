@@ -4,7 +4,7 @@ import { View } from 'react-native'
 import Divider from '~/components/Divider'
 import InputError from '~/components/InputError'
 import Optional from '~/components/Optional'
-import PillContainer from '~/components/PillContainer'
+import PillBox from '~/components/PillBox'
 import Spacer from '~/components/Spacer'
 import Text, { HeaderLevels } from '~/components/Typography'
 
@@ -23,7 +23,7 @@ const SkillsInput = ({ skills, label, onDelete, onAdd, touched, error }: Props) 
     <Optional condition={!!label}>
       <Text.Header level={HeaderLevels.H6}>{label}</Text.Header>
     </Optional>
-    <PillContainer pills={skills} onDelete={onDelete} onAdd={onAdd} />
+    <PillBox pills={skills} onDelete={onDelete} onAdd={onAdd} />
     <Spacer height={10} />
     <Divider />
     <InputError error={error} touched={touched} />

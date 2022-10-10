@@ -1,7 +1,7 @@
 import { DocumentPickerResponse } from 'react-native-document-picker'
 
 import { types as ApiTypes } from '~/api'
-import { UserCredentialTypes } from '~/api/users/users.types'
+import { UserCredentialOpportunityTypes, UserCredentialTypes } from '~/api/users/users.types'
 import { UserChallenge } from '~/modules/UserChallenges/UserChallenges.types'
 import { UserJobCredential } from '~/modules/UserJobs/UserJobs.types'
 
@@ -85,6 +85,10 @@ export interface UserCredentialMeta {
   fileId: string | null
   fileURL: string | null
   requestVerification: boolean
+}
+
+export interface OpportunityCredentialPartial {
+  type: UserCredentialOpportunityTypes
 }
 
 export interface UserCredentialItemPayload {

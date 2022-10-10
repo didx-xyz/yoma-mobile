@@ -1,3 +1,4 @@
+import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
 import * as SUT from './ExperienceWidget.selector'
@@ -23,13 +24,14 @@ describe('modules/Experience/ExperienceWidget/ExperienceWidget.selector', () => 
           ],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              job: {
+              opportunity: {
                 organisationName: 'Test Org',
                 organisationLogoURL: null,
                 id: '210a91ff-38b9-42f2-9b50-b6655bbf0f7c',
                 title: 'Test Graph',
                 description: 'Test Graph',
                 url: null,
+                type: UserCredentialOpportunityTypes.Job,
                 otherData: 'OTHER DATA',
               },
               approved: true,
@@ -39,13 +41,14 @@ describe('modules/Experience/ExperienceWidget/ExperienceWidget.selector', () => 
               otherData: 'OTHER DATA',
             },
             'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              job: {
+              opportunity: {
                 organisationName: 'Test Org 2',
                 organisationLogoURL: null,
                 id: 'XXXa91ff-38b9-42f2-9b50-b6655bbf0f7c',
                 title: 'Test Graph2',
                 description: 'Test Graph2',
                 url: 'https://google.com',
+                type: UserCredentialOpportunityTypes.Job,
                 otherData: 'OTHER DATA',
               },
               approved: false,
@@ -55,13 +58,14 @@ describe('modules/Experience/ExperienceWidget/ExperienceWidget.selector', () => 
               otherData: 'OTHER DATA',
             },
             'XXXbdc39-cccc-4e1e-948f-5d33a2cfb3b5': {
-              job: {
+              opportunity: {
                 organisationName: 'Test Org 2',
                 organisationLogoURL: 'https://google.com',
                 id: 'XXXa91ff-38b9-42f2-9b50-b6655bbf0f7c',
                 title: 'Test Graph2',
                 description: 'Test Graph2',
                 url: 'https://google.com',
+                type: UserCredentialOpportunityTypes.Job,
                 otherData: 'OTHER DATA',
               },
               approved: false,

@@ -1,11 +1,25 @@
-import { always, applySpec, equals, filter, find, keys, mergeRight, omit, path, pick, pipe, prop, toLower } from 'ramda'
+import {
+  always,
+  applySpec,
+  filter,
+  has,
+  isEmpty,
+  mergeRight,
+  omit,
+  path,
+  pathEq,
+  pick,
+  pipe,
+  prop,
+  reject,
+  values, equals, find, keys, toLower } from 'ramda'
 import { Platform } from 'react-native'
 
 import { types as ApiUserTypes } from '~/api/users'
 import * as ReduxTypes from '~/redux/redux.types'
 import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
-import { renameKeys } from '~/utils/ramda.utils'
+import { renameKeys, safeWhen } from '~/utils/ramda.utils'
 
 import { USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
@@ -35,8 +49,11 @@ export const createPhotoFormPayload = (imageResponse: any) => {
   return photoPayload
 }
 
-export const extractCredentialsByType = (type: ApiUserTypes.UserCredentialTypes) =>
-  filter(pipe(keys, find(equals(toLower(type)))))
+export const filterOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
+  safeWhen(has('opportunity'), pathEq(['opportunity', 'type'], ApiUserTypes.UserCredentialOpportunityTypes[type]))
+
+export const extractUserCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
+  filter(filterOpportunityCredentials(type))
 
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
   mergeRight({
@@ -59,3 +76,5 @@ export const prepareCreateUserCredentialPayload = (type: ApiUserTypes.UserCreden
 
 export const setFormValues = (state: ReduxTypes.NormalisedData, formValues: Types.StdObj) =>
   Object.assign(state, { formValues })
+
+export const getCredentialViewMetadata = (spec: Record<string, any>) => pipe(applySpec(spec), values, reject(isEmpty))

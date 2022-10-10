@@ -83,7 +83,7 @@ const featureModuleMiddleware = [
   UserChallengesMiddleware.createUserChallengeCertificateFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Challenge),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Challenge),
   ),
   UserChallengesMiddleware.normaliseUserChallengesFlow({ normalise: ReduxUtils.normalise }),
   UserChallengesMiddleware.setUserChallengesFlow,
@@ -95,7 +95,7 @@ const featureModuleMiddleware = [
   UserJobsMiddleware.fetchUserJobByIdSuccessFlow({ notification: showSimpleMessage }),
   UserJobsMiddleware.getUserJobsFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Job),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Job),
   ),
   UserJobsMiddleware.normaliseUserJobsFlow({ normalise: ReduxUtils.normalise }),
   UserJobsMiddleware.setUserJobsFlow,
@@ -119,7 +119,7 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoSuccessFlow,
   UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractCredentialsByType(ApiUsersTypes.UserCredentialTypes.Qualification),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Qualification),
   ),
   UserQualificationsMiddleware.normaliseUserQualificationsFlow({ normalise: ReduxUtils.normalise }),
   UserQualificationsMiddleware.setUserQualificationsFlow,
