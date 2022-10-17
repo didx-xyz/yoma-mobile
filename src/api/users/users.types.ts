@@ -9,7 +9,7 @@ export enum UsersEndpoints {
 export enum UserCredentialTypes {
   Assignment = 'Assignment',
   Challenge = 'Challenge',
-  Job = 'Job',
+  WorkExperience = 'WorkExperience',
   Qualification = 'Qualification',
 }
 

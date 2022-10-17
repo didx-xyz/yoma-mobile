@@ -12,16 +12,16 @@ import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as CountriesMiddleware } from '~/modules/Countries'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
-import { middleware as JobsMiddleware } from '~/modules/Jobs'
 import * as Navigation from '~/modules/Navigation/Navigation.utils'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
 import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '~/modules/User'
 import { middleware as UserChallengesMiddleware } from '~/modules/UserChallenges'
-import { middleware as UserJobsMiddleware } from '~/modules/UserJobs'
 import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualifications'
 import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
+import { middleware as UserWorkExperiencesMiddleware } from '~/modules/UserWorkExperience'
+import { middleware as WorkExperienceMiddleware } from '~/modules/WorkExperience'
 import { showSimpleMessage } from '~/utils/error'
 
 import * as ReduxUtils from './redux.utils'
@@ -56,9 +56,6 @@ const featureModuleMiddleware = [
   CountriesMiddleware.normaliseCountriesFlow,
   CountriesMiddleware.setCountriesFlow,
   ErrorMiddleware.categorizeErrorsFlow,
-  JobsMiddleware.createJobFailureFlow({ notification: showSimpleMessage }),
-  JobsMiddleware.createJobFlow,
-  JobsMiddleware.createJobSuccessFlow,
   OrganisationsMiddleware.fetchOrganisationsFailureFlow({ notification: showSimpleMessage }),
   OrganisationsMiddleware.fetchOrganisationsFlow,
   OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
@@ -88,19 +85,19 @@ const featureModuleMiddleware = [
   ),
   UserChallengesMiddleware.normaliseUserChallengesFlow({ normalise: ReduxUtils.normalise }),
   UserChallengesMiddleware.setUserChallengesFlow,
-  UserJobsMiddleware.createUserJobFailureFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.createUserJobFlow,
-  UserJobsMiddleware.createUserJobSuccessFlow,
-  UserJobsMiddleware.fetchUserJobByIdFailureFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.fetchUserJobByIdFlow,
-  UserJobsMiddleware.fetchUserJobByIdSuccessFlow({ notification: showSimpleMessage }),
-  UserJobsMiddleware.getUserJobsFromCredentialsFlow(
+  UserWorkExperiencesMiddleware.createUserWorkExperienceFailureFlow({ notification: showSimpleMessage }),
+  UserWorkExperiencesMiddleware.createUserWorkExperienceFlow,
+  UserWorkExperiencesMiddleware.createUserWorkExperienceSuccessFlow,
+  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdFailureFlow({ notification: showSimpleMessage }),
+  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdFlow,
+  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdSuccessFlow({ notification: showSimpleMessage }),
+  UserWorkExperiencesMiddleware.getUserWorkExperiencesFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Job),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.WorkExperience),
   ),
-  UserJobsMiddleware.normaliseUserJobsFlow({ normalise: ReduxUtils.normalise }),
-  UserJobsMiddleware.setUserJobsFlow,
-  UserJobsMiddleware.setUserJobsFormValuesFlow,
+  UserWorkExperiencesMiddleware.normaliseUserWorkExperiencesFlow({ normalise: ReduxUtils.normalise }),
+  UserWorkExperiencesMiddleware.setUserWorkExperiencesFlow,
+  UserWorkExperiencesMiddleware.setUserWorkExperiencesFormValuesFlow,
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
@@ -140,6 +137,9 @@ const featureModuleMiddleware = [
   UserSkillsMiddleware.addUserSkillsFlow,
   UserSkillsMiddleware.addUserSkillsSuccessFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.addUserSkillsFailureFlow({ notification: showSimpleMessage }),
+  WorkExperienceMiddleware.createWorkExperienceFailureFlow({ notification: showSimpleMessage }),
+  WorkExperienceMiddleware.createWorkExperienceFlow,
+  WorkExperienceMiddleware.createWorkExperienceSuccessFlow,
 ]
 
 const middleware = concat(commonMiddleware, featureModuleMiddleware)
