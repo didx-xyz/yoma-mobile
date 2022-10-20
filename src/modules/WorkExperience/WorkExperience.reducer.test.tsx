@@ -26,7 +26,7 @@ describe('modules/WorkExperience/WorkExperience.reducer', () => {
       const action = clearWorkExperiences()
       const result = SUT(mockState, action)
 
-      // then ... should set the default Jobs state
+      // then ... should set the default Work Experiences state
       expect(result).toEqual(INITIAL_STATE)
     })
   })

@@ -6,8 +6,8 @@ import { types as ApiUserTypes, constants as ApiUsersConstants } from '~/api/use
 import * as UserFixtures from '~/modules/User/User.fixture'
 import * as UserActions from '~/modules/User/User.reducer'
 import { actions as WorkExperienceActions } from '~/modules/WorkExperience'
+import { WORK_EXPERIENCE_MOCK } from '~/modules/WorkExperience/WorkExperience.test.fixtures'
 
-import { WORK_EXPERIENCE_MOCK } from '../WorkExperience/WorkExperience.test.fixtures'
 import {
   USER_WORK_EXPERIENCE_MOCK,
   USER_WORK_EXPERIENCE_NORMALISED_MOCK,

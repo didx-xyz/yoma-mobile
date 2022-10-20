@@ -3,7 +3,7 @@ import { rootStateFixture } from '~/redux/redux.fixture'
 import * as SUT from './UserWorkExperience.selector'
 
 describe('modules/UserWorkExperience/UserWorkExperience.selector', () => {
-  describe('selectUserWorkExperiences ', () => {
+  describe('selectUserWorkExperiences', () => {
     it('should return UserWorkExperience property of the root state', () => {
       const stateMock = rootStateFixture({
         userWorkExperiences: 'UserWorkExperience Object',
@@ -21,19 +21,19 @@ describe('modules/UserWorkExperience/UserWorkExperience.selector', () => {
       const result = SUT.selectUserWorkExperiences(state)
 
       // then ... should return result as expected
-      expect(result).toEqual(state.userJobs)
+      expect(result).toEqual(state.userWorkExperiences)
     })
   })
   describe('selectFormValues', () => {
     it('should return formValues object from the userJobs state', () => {
-      const userJobsStateMock = {
+      const userWorkExperiencesStateMock = {
         ids: 'IDS',
         entities: 'ENTITIES_DATA',
         formValues: 'FORM_VALUES',
       }
 
       const mockState = rootStateFixture({
-        userJobs: userJobsStateMock,
+        userWorkExperiences: userWorkExperiencesStateMock,
       })
       // when ... we call the selector
       const result = SUT.selectFormValues(mockState)
