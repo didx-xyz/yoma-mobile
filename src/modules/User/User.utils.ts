@@ -21,7 +21,7 @@ import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
 import { renameKeys, safeWhen } from '~/utils/ramda.utils'
 
-import { USER_PHOTO_FORM_DATA_NAME } from './User.constants'
+import { USER_CREDENTIAL_TYPES_MAP, USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
 
 export const extractUserFromPayload = pipe(
@@ -50,7 +50,7 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
 }
 
 export const filterOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
-  safeWhen(has('opportunity'), pathEq(['opportunity', 'type'], ApiUserTypes.UserCredentialOpportunityTypes[type]))
+  safeWhen(has('opportunity'), pathEq(['opportunity', 'type'], USER_CREDENTIAL_TYPES_MAP[type]))
 
 export const extractUserCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
   filter(filterOpportunityCredentials(type))

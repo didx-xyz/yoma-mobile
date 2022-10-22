@@ -1,6 +1,8 @@
 import { path, pathOr, propOr } from 'ramda'
 import { Options } from 'react-native-image-crop-picker'
 
+import { types as ApiUserTypes } from '~/api/users'
+
 export const CAPTURE_IMAGE_OPTIONS: Options = {
   cropping: true,
   includeBase64: true,
@@ -26,4 +28,14 @@ export const USER_CREDENTIAL_VIEW_SELECTOR_SPEC = {
   description: pathOr('', ['opportunity', 'description']),
   iconUrl: path(['opportunity', 'organisationLogoURL']),
   isValidated: propOr(false, 'approved'),
+}
+
+export const USER_CREDENTIAL_TYPES_MAP: Record<
+  ApiUserTypes.UserCredentialTypes,
+  ApiUserTypes.UserCredentialOpportunityTypes
+> = {
+  [ApiUserTypes.UserCredentialTypes.Assignment]: ApiUserTypes.UserCredentialOpportunityTypes.Assignment,
+  [ApiUserTypes.UserCredentialTypes.Challenge]: ApiUserTypes.UserCredentialOpportunityTypes.Challenge,
+  [ApiUserTypes.UserCredentialTypes.Qualification]: ApiUserTypes.UserCredentialOpportunityTypes.Qualification,
+  [ApiUserTypes.UserCredentialTypes.WorkExperience]: ApiUserTypes.UserCredentialOpportunityTypes.WorkExperience,
 }
