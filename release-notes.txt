@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Fixing Skills selector (can select multiple skills)
+- creating WorkExperience credentials, updated Widgets to 'Work Experience'
 
 Previous deployment release notes:
+- Fixing Skills selector (can select multiple skills)
 - Fixing Education
 - fix: empty fields causing app to break
 - fix: handling new API data shape for User Credentials

@@ -8,7 +8,7 @@ import { UserCredentialTypes } from '~/api/users/users.types'
 import * as Strings from '~/constants/strings.constants'
 import { extractErrorResponseMessage } from '~/modules/Error/error.utils'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import * as Navigation from '~/modules/Navigation/Navigation.utils'
+import { types as NavigationTypes, utils as NavigationUtils } from '~/modules/Navigation'
 import * as UserActions from '~/modules/User/User.reducer'
 import * as UserSelectors from '~/modules/User/User.selector'
 import { UserCredentials } from '~/modules/User/User.types'
@@ -18,7 +18,6 @@ import { extractDataFromResponseAction, normalise } from '~/redux/redux.utils'
 import { StdFn } from '~/types/general.types'
 import { showSimpleMessage } from '~/utils/error'
 
-import { ParamsList } from '../Landing/Landing.types'
 import * as WorkExperienceActions from '../WorkExperience/WorkExperience.reducer'
 import {
   clearUserWorkExperiencesFormValues,
@@ -185,7 +184,7 @@ export const fetchUserWorkExperienceByIdSuccessFlow =
       // TODO: this should be handled by the notification module
       notification('success', i18n.t(Strings.DETAILS_SAVED))
       //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Home as keyof ParamsList)
+      NavigationUtils.navigate(HomeNavigationRoutes.Home as keyof NavigationTypes.ParamsList)
     }
     return result
   }

@@ -12,7 +12,7 @@ import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as CountriesMiddleware } from '~/modules/Countries'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
-import * as Navigation from '~/modules/Navigation/Navigation.utils'
+import { utils as NavigationUtils } from '~/modules/Navigation'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
 import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
@@ -73,7 +73,7 @@ const featureModuleMiddleware = [
   UserChallengesMiddleware.createUserChallengeFlow,
   UserChallengesMiddleware.createUserChallengeSuccessFlow({
     notification: showSimpleMessage,
-    navigate: Navigation.navigate,
+    navigate: NavigationUtils.navigate,
   }),
   UserChallengesMiddleware.createUserChallengeFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.createUserChallengeCertificateFlow,

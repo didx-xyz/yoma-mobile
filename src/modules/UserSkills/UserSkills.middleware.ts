@@ -5,12 +5,11 @@ import { Middleware } from 'redux'
 import { actions as ApiActions } from '~/api'
 import { constants as ApiUsersConstants } from '~/api/users'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import * as NavigationUtils from '~/modules/Navigation/Navigation.utils'
+import { types as NavigationTypes, utils as NavigationUtils } from '~/modules/Navigation'
 import { addSkillCountToSkillsAndDedupe } from '~/modules/UserSkills/UserSkills.utils'
 import * as ReduxUtils from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
-import { ParamsList } from '../Landing/Landing.types'
 import {
   addUserSkills,
   addUserSkillsFailure,
@@ -101,7 +100,7 @@ export const addUserSkillsSuccessFlow =
     const result = next(action)
     if (addUserSkillsSuccess.match(action)) {
       dispatch(fetchUserSkills())
-      NavigationUtils.navigate(HomeNavigationRoutes.Home as keyof ParamsList)
+      NavigationUtils.navigate(HomeNavigationRoutes.Home as keyof NavigationTypes.ParamsList)
       notification('success', i18n.t('Your skills have been added.'))
     }
     return result
