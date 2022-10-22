@@ -5,7 +5,7 @@ const styles = {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingVertical: 12,
+    paddingVertical: 10,
   } as ViewStyle,
 }
 

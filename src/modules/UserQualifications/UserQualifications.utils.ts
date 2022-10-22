@@ -1,10 +1,10 @@
 import { always, compose, isEmpty, not, pathOr, pipe, propOr, unless, when } from 'ramda'
 
 import { DATE_TPL_MON_YEAR } from '~/constants/date.constants'
-import { utils as UserUtils } from '~/modules/User'
+import { getCredentialViewMetadata } from '~/modules/User/User.utils'
 import { formatDateString } from '~/utils/dates.utils'
 
-export const getUserQualificationsMetadata = UserUtils.getCredentialViewMetadata({
+export const getUserQualificationsMetadata = getCredentialViewMetadata({
   endData: compose(unless(isEmpty, formatDateString(DATE_TPL_MON_YEAR)), propOr('', 'endDate')),
 })
 

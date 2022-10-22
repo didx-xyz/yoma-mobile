@@ -124,10 +124,10 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
       const { store, invoke, next } = create(
         SUT.createUserChallengeSuccessFlow({ notification: notificationMock, navigate: navigateMock }),
       )
-      // when ... we respond to the createUserJobSuccess action
+      // when ... we respond to the createUserChallengeSuccess action
       invoke(action)
 
-      // then ...validate createUserJobSuccessFlow
+      // then ...validate createUserChallengeSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
         updateUserChallenges({
@@ -155,7 +155,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
 
       const { invoke, next } = create(SUT.createUserChallengeFailureFlow({ notification: notificationMock }))
 
-      // when ... we respond to the createUserJobFailures action
+      // when ... we respond to the createUserChallengeFailure action
       invoke(action)
 
       // then ...validate failure
@@ -230,10 +230,10 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
         // @ts-ignore - normalise mock isn't typesafe
         SUT.createUserChallengeCertificateSuccessFlow({ normalise: normaliseMock }),
       )
-      // when ... we respond to the createUserJobSuccess action
+      // when ... we respond to the createUserChallengeCertificateSuccess action
       invoke(action)
 
-      // then ...validate createUserJobSuccessFlow
+      // then ...validate createUserChallengeCertificateSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
       // @ts-ignore - testing we're returning correctly. correctly typed value not necessary
       expect(store.dispatch).toHaveBeenCalledWith(updateUserChallenges('NORMALISED CREDENTIAL'))
@@ -248,7 +248,7 @@ describe('modules/UserChallenges/UserChallenges.middleware', () => {
 
       const { invoke, next } = create(SUT.createUserChallengeFailureFlow({ notification: notificationMock }))
 
-      // when ... we respond to the createUserJobFailures action
+      // when ... we respond to the createUserChallengeFailure action
       invoke(action)
 
       // then ...validate failure

@@ -3,7 +3,8 @@ import { DocumentPickerResponse } from 'react-native-document-picker'
 import { types as ApiTypes } from '~/api'
 import { UserCredentialOpportunityTypes, UserCredentialTypes } from '~/api/users/users.types'
 import { UserChallenge } from '~/modules/UserChallenges/UserChallenges.types'
-import { UserJobCredential } from '~/modules/UserJobs/UserJobs.types'
+
+import { UserWorkExperienceCredential } from '../UserWorkExperience/UserWorkExperience.types'
 
 export interface UserDetails {
   age?: null | string
@@ -107,4 +108,4 @@ export interface UserCredentialFormValues {
   certificate?: DocumentPickerResponse
 }
 
-export type UserCredentials = UserChallenge[] | UserJobCredential[]
+export type UserCredentials = UserChallenge[] | UserWorkExperienceCredential[]

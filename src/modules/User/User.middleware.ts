@@ -8,7 +8,7 @@ import * as Strings from '~/constants/strings.constants'
 import { fetchUserFromOAuthSuccess } from '~/modules/Auth/Auth.reducer'
 import { getErrorMessageWithFallback } from '~/modules/Error/error.utils'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import * as Navigation from '~/modules/Navigation/Navigation.utils'
+import { types as NavigationTypes, utils as NavigationUtils } from '~/modules/Navigation'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import * as ReduxUtils from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
@@ -136,7 +136,7 @@ export const updateUserSuccessFlow =
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
       //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Home)
+      NavigationUtils.navigate(HomeNavigationRoutes.Home as keyof NavigationTypes.ParamsList)
       // TODO: this should be handled by the notification module
       notification('success', i18n.t(Strings.DETAILS_UPDATED))
     }

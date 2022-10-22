@@ -8,7 +8,7 @@ import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/us
 import * as Strings from '~/constants/strings.constants'
 import { extractErrorResponseMessage } from '~/modules/Error/error.utils'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import * as Navigation from '~/modules/Navigation/Navigation.utils'
+import { types as NavigationTypes, utils as NavigationUtils } from '~/modules/Navigation'
 import {
   actions as UserActions,
   constants as UserConstants,
@@ -82,7 +82,7 @@ export const createUserChallengeSuccessFlow =
     navigate,
   }: {
     notification: typeof ErrorUtils.showSimpleMessage
-    navigate: typeof Navigation.navigate
+    navigate: typeof NavigationUtils.navigate
   }): Middleware =>
   ({ dispatch }) =>
   next =>
@@ -93,7 +93,7 @@ export const createUserChallengeSuccessFlow =
       const userChallenge = ReduxUtils.extractDataFromResponseAction(action)
       const normalisedUserChallenge = ReduxUtils.normalise(of(userChallenge))
       notification('success', i18n.t(Strings.NEW_CHALLENGE_SUCCESSFULLY_CREATED))
-      navigate(HomeNavigationRoutes.Home)
+      navigate(HomeNavigationRoutes.Home as keyof NavigationTypes.ParamsList)
       dispatch(updateUserChallenges(normalisedUserChallenge))
       dispatch(createUserChallengeCertificate(userChallenge.id))
     }

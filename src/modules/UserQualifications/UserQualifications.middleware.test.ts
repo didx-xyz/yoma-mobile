@@ -263,10 +263,10 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
         // @ts-ignore - mocking a quasi-response so typing for normalise function fails
         SUT.createUserQualificationSuccessFlow({ normalise: normaliseMock, notification: notificationMock }),
       )
-      // when ... we respond to the createUserJobSuccess action
+      // when ... we respond to the createUserQualificationSuccess action
       invoke(action)
 
-      // then ...validate createUserJobSuccessFlow
+      // then ...validate createUserQualificationSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
         updateUserQualifications({
@@ -334,10 +334,10 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
         // @ts-ignore - mocking a quasi-response so typing for normalise function fails
         SUT.createUserQualificationSuccessFlow({ normalise: normaliseMock, notification: notificationMock }),
       )
-      // when ... we respond to the createUserJobSuccess action
+      // when ... we respond to the createUserQualificationSuccess action
       invoke(action)
 
-      // then ...validate createUserJobSuccessFlow
+      // then ...validate createUserQualificationSuccessFlow
       expect(store.dispatch).not.toHaveBeenCalledWith(
         // @ts-ignore - certificate type is incorrect, but sufficiently correct for testing
         createUserQualificationCertificate({ id: 'CREDENTIAL ID', certificate: 'IMAGE CERT' }),
@@ -353,7 +353,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
 
       const { invoke, next } = create(SUT.createUserQualificationFailureFlow({ notification: notificationMock }))
 
-      // when ... we respond to the createUserJobFailures action
+      // when ... we respond to the createUserQualificationFailure action
       invoke(action)
 
       // then ...validate failure
@@ -420,10 +420,10 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
         // @ts-ignore - normalise mock isn't typesafe
         SUT.createUserQualificationCertificateSuccessFlow({ normalise: normaliseMock }),
       )
-      // when ... we respond to the createUserJobSuccess action
+      // when ... we respond to the createUserQualificationCertificateSuccessFlow action
       invoke(action)
 
-      // then ...validate createUserJobSuccessFlow
+      // then ...validate createUserQualificationCertificateSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
       // @ts-ignore - testing we're returning correctly. correctly typed value not necessary
       expect(store.dispatch).toHaveBeenCalledWith(updateUserQualifications('NORMALISED CREDENTIAL'))
@@ -438,7 +438,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
 
       const { invoke, next } = create(SUT.createUserQualificationFailureFlow({ notification: notificationMock }))
 
-      // when ... we respond to the createUserJobFailures action
+      // when ... we respond to the createUserQualificationFailure action
       invoke(action)
 
       // then ...validate failure

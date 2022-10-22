@@ -9,13 +9,13 @@ export enum UsersEndpoints {
 export enum UserCredentialTypes {
   Assignment = 'Assignment',
   Challenge = 'Challenge',
-  Job = 'Job',
+  WorkExperience = 'Workexperience',
   Qualification = 'Qualification',
 }
 
 export enum UserCredentialOpportunityTypes {
   Assignment = 'taskopportunity',
   Challenge = 'impactopportunity',
-  Job = 'jobopportunity',
+  WorkExperience = 'jobopportunity',
   Qualification = 'learningopportunity',
 }

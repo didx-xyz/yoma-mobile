@@ -1,7 +1,9 @@
 import { LinkingOptions, PathConfigMap } from '@react-navigation/native'
 
 import Env from '~/env.json'
-import { LandingParamsList, ParamsList } from '~/modules/Landing/Landing.types'
+import { LandingParamsList } from '~/modules/Landing/Landing.types'
+
+import { ParamsList } from './Navigation.types'
 
 const screens: PathConfigMap<LandingParamsList> = {
   Authentication: {
