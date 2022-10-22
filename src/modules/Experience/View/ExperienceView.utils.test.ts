@@ -1,7 +1,8 @@
 import { mergeDeepRight } from 'ramda'
 
-import { USER_WORK_EXPERIENCE_MOCK } from '../../UserWorkExperience/UserWorkExperience.fixture'
-import * as SUT from './WorkExperienceView.utils'
+import { USER_WORK_EXPERIENCE_MOCK } from '~/modules/UserWorkExperience/UserWorkExperience.fixture'
+
+import * as SUT from './ExperienceView.utils'
 
 describe('modules/WorkExperience/WorkExperience.utils', () => {
   describe('getExperienceMetadata', () => {

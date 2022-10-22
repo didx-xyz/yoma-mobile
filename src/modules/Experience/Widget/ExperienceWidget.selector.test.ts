@@ -1,9 +1,9 @@
 import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
-import * as SUT from './WorkExperienceWidget.selector'
+import * as SUT from './ExperienceWidget.selector'
 
-describe('modules/WorkExperience/WorkExperienceWidget/WorkExperienceWidget.selector', () => {
+describe('modules/WorkExperience/ExperienceWidget/ExperienceWidget.selector', () => {
   describe('default', function () {
     it('should correctly handle an empty state', () => {
       // given ...
@@ -31,7 +31,7 @@ describe('modules/WorkExperience/WorkExperienceWidget/WorkExperienceWidget.selec
                 title: 'Test Graph',
                 description: 'Test Graph',
                 url: null,
-                type: UserCredentialOpportunityTypes.Job,
+                type: UserCredentialOpportunityTypes.WorkExperience,
                 otherData: 'OTHER DATA',
               },
               approved: true,
@@ -48,7 +48,7 @@ describe('modules/WorkExperience/WorkExperienceWidget/WorkExperienceWidget.selec
                 title: 'Test Graph2',
                 description: 'Test Graph2',
                 url: 'https://google.com',
-                type: UserCredentialOpportunityTypes.Job,
+                type: UserCredentialOpportunityTypes.WorkExperience,
                 otherData: 'OTHER DATA',
               },
               approved: false,
@@ -65,7 +65,7 @@ describe('modules/WorkExperience/WorkExperienceWidget/WorkExperienceWidget.selec
                 title: 'Test Graph2',
                 description: 'Test Graph2',
                 url: 'https://google.com',
-                type: UserCredentialOpportunityTypes.Job,
+                type: UserCredentialOpportunityTypes.WorkExperience,
                 otherData: 'OTHER DATA',
               },
               approved: false,

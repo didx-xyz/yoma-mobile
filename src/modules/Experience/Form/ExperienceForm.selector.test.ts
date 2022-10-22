@@ -1,6 +1,6 @@
 import { rootStateFixture } from '~/redux/redux.fixture'
 
-import * as SUT from './WorkExperienceForm.selector'
+import * as SUT from './ExperienceForm.selector'
 
 describe('modules/WorkExperience/WorkExperience.selector', () => {
   describe('default selector', () => {

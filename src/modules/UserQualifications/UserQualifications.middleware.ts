@@ -8,7 +8,9 @@ import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/us
 import * as Strings from '~/constants/strings.constants'
 import { utils as ErrorUtils } from '~/modules/Error'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import { types as NavigationTypes, utils as NavigationUtils } from '~/modules/Navigation'
+// importing directly to solve circular references
+import * as NavigationTypes from '~/modules/Navigation/Navigation.types'
+import * as NavigationUtils from '~/modules/Navigation/Navigation.utils'
 import { actions as QualificationsActions } from '~/modules/Qualifications'
 import {
   actions as UserActions,

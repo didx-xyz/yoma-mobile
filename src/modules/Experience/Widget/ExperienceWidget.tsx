@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 
 import CvWidget, { CvWidgetList } from '~/components/CvWidget'
@@ -12,18 +12,20 @@ interface Props {
   count: number
   navigation: MyCvTypes.MyCvNavigation
 }
-const WorkExperienceWidget = ({ userWorkExperiences, count, navigation }: Props) => {
+const ExperienceWidget = ({ userWorkExperiences, count, navigation }: Props) => {
   const { t } = useTranslation()
+
+  const onActionPress = useCallback(() => {
+    navigation.navigate(HomeNavigationRoutes.WorkExperienceForm)
+  }, [navigation])
 
   return (
     <CvWidget
       count={count}
       badgeColor={Colors.SecondaryPurple}
-      title={t('Work Experience')}
+      title={t('Experience')}
       noDataMessage={t('Where do you currently work?')}
-      onActionPress={() => {
-        navigation.navigate(HomeNavigationRoutes.WorkExperienceForm)
-      }}
+      onActionPress={onActionPress}
     >
       <CvWidgetList
         data={userWorkExperiences}
@@ -34,4 +36,4 @@ const WorkExperienceWidget = ({ userWorkExperiences, count, navigation }: Props)
     </CvWidget>
   )
 }
-export default WorkExperienceWidget
+export default ExperienceWidget

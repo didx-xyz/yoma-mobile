@@ -10,6 +10,7 @@ export enum UserCredentialTypes {
   Assignment = 'Assignment',
   Challenge = 'Challenge',
   WorkExperience = 'Workexperience',
+  Education = 'Education',
   Qualification = 'Qualification',
 }
 

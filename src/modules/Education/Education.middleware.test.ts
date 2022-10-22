@@ -6,8 +6,8 @@ import { constants as ApiQualificationsConstants } from '~/api/qualifications'
 import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
 import { actions as UserQualificationActions } from '~/modules/UserQualifications'
 
-import * as SUT from './Qualifications.middleware'
-import { createQualification, createQualificationFailure, createQualificationSuccess } from './Qualifications.reducer'
+import * as SUT from './Education.middleware'
+import { createQualification, createQualificationFailure, createQualificationSuccess } from './Education.reducer'
 
 describe('modules/Qualifications/Qualifications.middleware', () => {
   describe('createQualificationFlow', () => {

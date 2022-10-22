@@ -15,16 +15,16 @@ import LabelledHint from '~/components/LabelledHint'
 import ViewContainer from '~/components/ViewContainer'
 import SkillsSelectField from '~/modules/SkillSelectField'
 
-import styles from './WorkExperienceForm.styles'
-import { WorkExperienceFormNavigation } from './WorkExperienceForm.types'
+import styles from './ExperienceForm.styles'
+import { ExperienceFormNavigation } from './ExperienceForm.types'
 
 interface Props {
   organisations: DropDownTypes.DropDownItem[]
   form: FormikProps<any>
-  navigation: WorkExperienceFormNavigation
+  navigation: ExperienceFormNavigation
 }
 
-const WorkExperienceForm = ({ navigation, organisations, form }: Props) => {
+const ExperienceForm = ({ navigation, organisations, form }: Props) => {
   const { t } = useTranslation()
   const [isWorkingHere, setIsWorkingHere] = useState<boolean>(false)
 
@@ -71,4 +71,4 @@ const WorkExperienceForm = ({ navigation, organisations, form }: Props) => {
   )
 }
 
-export default WorkExperienceForm
+export default ExperienceForm

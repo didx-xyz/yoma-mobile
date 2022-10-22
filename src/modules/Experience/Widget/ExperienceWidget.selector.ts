@@ -2,7 +2,8 @@ import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, pick, pipe, slice } from 'ramda'
 
 import { constants as UserConstants } from '~/modules/User'
-import { selectors as UserWorkExperiencesSelectors } from '~/modules/UserWorkExperience'
+// importing directly to solve circular references
+import * as UserWorkExperiencesSelectors from '~/modules/UserWorkExperience/UserWorkExperience.selector'
 
 export default createSelector(UserWorkExperiencesSelectors.selectUserWorkExperiences, userWorkExperiences => {
   const count = userWorkExperiences.ids.length

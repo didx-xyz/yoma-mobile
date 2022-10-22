@@ -1,9 +1,9 @@
 import { USER_WORK_EXPERIENCE_NORMALISED_MOCK } from '~/modules/UserWorkExperience/UserWorkExperience.fixture'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
-import * as SUT from './WorkExperienceView.selector'
+import * as SUT from './ExperienceView.selector'
 
-describe('modules/WorkExperience/WorkExperience.selector', () => {
+describe('modules/Experience/Experience.selector', () => {
   describe('default selector', () => {
     it('should handle an empty state', () => {
       const stateMock = rootStateFixture()

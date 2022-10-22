@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import CvView, { CvViewList } from '~/components/CvView'
 import CvViewCredential, { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
 
-import { WorkExperienceNavigation } from './WorkExperienceView.types'
+import { WorkExperienceNavigation } from './ExperienceView.types'
 
 interface Props {
   onAdd: () => void
@@ -12,7 +12,7 @@ interface Props {
   userWorkExperiences: CvViewCredentialTypes.CvViewCredentialsData
 }
 
-const WorkExperienceView = ({ userWorkExperiences, navigation, onAdd }: Props) => {
+const ExperienceView = ({ userWorkExperiences, navigation, onAdd }: Props) => {
   const { t } = useTranslation()
   return (
     <CvView
@@ -26,4 +26,4 @@ const WorkExperienceView = ({ userWorkExperiences, navigation, onAdd }: Props) =
   )
 }
 
-export default WorkExperienceView
+export default ExperienceView

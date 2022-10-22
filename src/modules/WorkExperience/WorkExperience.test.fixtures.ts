@@ -8,8 +8,6 @@ export const WORK_EXPERIENCE_MOCK: WorkExperience = {
   description: 'DESCRIPTION',
   createdAt: '2021-08-02T13:24:27.839Z',
   createdByAdmin: true,
-  language: 'EN',
-  published: true,
   skills: ['string'],
 }
 export const workExperienceFixture = createFixture(WORK_EXPERIENCE_MOCK)
