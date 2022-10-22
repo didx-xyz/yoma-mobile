@@ -1,9 +1,9 @@
 import { compose, pathOr, pick } from 'ramda'
 
-import { utils as UserUtils } from '~/modules/User'
+import { getCredentialViewMetadata } from '~/modules/User/User.utils'
 import { formatStartEndString } from '~/utils/dates.utils'
 
-export const getCompletedChallengesMetadata = UserUtils.getCredentialViewMetadata({
+export const getCompletedChallengesMetadata = getCredentialViewMetadata({
   organisation: pathOr('', ['opportunity', 'organisationName']),
   startEnd: compose(formatStartEndString, pick(['startDate', 'endDate'])),
 })
