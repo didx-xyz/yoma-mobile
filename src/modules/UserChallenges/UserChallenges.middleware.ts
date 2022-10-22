@@ -21,6 +21,7 @@ import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
 import * as ErrorUtils from '~/utils/error'
 
+import { ParamsList } from '../Landing/Landing.types'
 import {
   createUserChallenge,
   createUserChallengeCertificate,
@@ -93,7 +94,7 @@ export const createUserChallengeSuccessFlow =
       const userChallenge = ReduxUtils.extractDataFromResponseAction(action)
       const normalisedUserChallenge = ReduxUtils.normalise(of(userChallenge))
       notification('success', i18n.t(Strings.NEW_CHALLENGE_SUCCESSFULLY_CREATED))
-      navigate(HomeNavigationRoutes.Home)
+      navigate(HomeNavigationRoutes.Home as keyof ParamsList)
       dispatch(updateUserChallenges(normalisedUserChallenge))
       dispatch(createUserChallengeCertificate(userChallenge.id))
     }

@@ -14,6 +14,7 @@ import {
 } from './UserWorkExperience.types'
 
 const name = '[User: Work Experience]'
+
 export const INITIAL_STATE = {
   ids: [],
   entities: {},

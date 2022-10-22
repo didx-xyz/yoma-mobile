@@ -10,6 +10,7 @@ import { addSkillCountToSkillsAndDedupe } from '~/modules/UserSkills/UserSkills.
 import * as ReduxUtils from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
+import { ParamsList } from '../Landing/Landing.types'
 import {
   addUserSkills,
   addUserSkillsFailure,
@@ -100,7 +101,7 @@ export const addUserSkillsSuccessFlow =
     const result = next(action)
     if (addUserSkillsSuccess.match(action)) {
       dispatch(fetchUserSkills())
-      NavigationUtils.navigate(HomeNavigationRoutes.Home)
+      NavigationUtils.navigate(HomeNavigationRoutes.Home as keyof ParamsList)
       notification('success', i18n.t('Your skills have been added.'))
     }
     return result

@@ -42,8 +42,8 @@ export const createWorkExperienceSuccessFlow: Middleware =
     const result = next(action)
 
     if (createWorkExperienceSuccess.match(action)) {
-      const job = extractDataFromResponseAction(action)
-      dispatch(UserWorkExperience.createUserWorkExperience(job))
+      const workExperience = extractDataFromResponseAction(action)
+      dispatch(UserWorkExperience.createUserWorkExperience(workExperience))
       dispatch(UserSkillsActions.fetchUserSkills())
     }
 

@@ -13,6 +13,7 @@ import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import * as ReduxUtils from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
+import { ParamsList } from '../Landing/Landing.types'
 import { CAPTURE_IMAGE_OPTIONS } from './User.constants'
 import {
   fetchUserCredentials,
@@ -136,7 +137,7 @@ export const updateUserSuccessFlow =
       const user = extractUserFromUserUpdateSuccess(action)
       dispatch(setUser(user))
       //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Home)
+      Navigation.navigate(HomeNavigationRoutes.Home as keyof ParamsList)
       // TODO: this should be handled by the notification module
       notification('success', i18n.t(Strings.DETAILS_UPDATED))
     }

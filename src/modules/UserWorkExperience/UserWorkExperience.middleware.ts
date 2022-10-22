@@ -18,6 +18,7 @@ import { extractDataFromResponseAction, normalise } from '~/redux/redux.utils'
 import { StdFn } from '~/types/general.types'
 import { showSimpleMessage } from '~/utils/error'
 
+import { ParamsList } from '../Landing/Landing.types'
 import * as WorkExperienceActions from '../WorkExperience/WorkExperience.reducer'
 import {
   clearUserWorkExperiencesFormValues,
@@ -102,7 +103,6 @@ export const createUserWorkExperienceFlow: Middleware =
 
       const formValues = selectFormValues(state)
       const userWorkExperiencePayload = prepareUserCredentialItemPayload(action)(formValues)
-
       const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
 
       dispatch(
@@ -185,7 +185,7 @@ export const fetchUserWorkExperienceByIdSuccessFlow =
       // TODO: this should be handled by the notification module
       notification('success', i18n.t(Strings.DETAILS_SAVED))
       //TODO: add navigation as a dependency
-      Navigation.navigate(HomeNavigationRoutes.Home)
+      Navigation.navigate(HomeNavigationRoutes.Home as keyof ParamsList)
     }
     return result
   }

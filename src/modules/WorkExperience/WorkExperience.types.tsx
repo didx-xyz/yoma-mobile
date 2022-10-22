@@ -19,8 +19,6 @@ export interface WorkExperienceResponse {
 export interface WorkExperienceRequest {
   title: string
   description: string
-  language: string
-  published: boolean
   skillNames: string[]
   organisationId: string
   startTime: string | null

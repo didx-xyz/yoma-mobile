@@ -23,8 +23,6 @@ export interface UserWorkExperience {
 export interface UserWorkExperienceFormFields {
   title: string
   description: string
-  language: string
-  published: boolean
   skillNames: string[]
   organisationId: string
   startTime: string | null

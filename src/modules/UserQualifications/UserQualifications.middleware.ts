@@ -22,6 +22,7 @@ import * as ReduxUtils from '~/redux/redux.utils'
 import * as GeneralTypes from '~/types/general.types'
 import { showSimpleMessage } from '~/utils/error'
 
+import { ParamsList } from '../Landing/Landing.types'
 import {
   clearUserQualificationFormValues,
   createUserQualification,
@@ -141,7 +142,7 @@ export const createUserQualificationSuccessFlow =
         dispatch(createUserQualificationCertificate({ id: data.id, certificate }))
       }
       dispatch(clearUserQualificationFormValues())
-      NavigationUtils.navigate(HomeNavigationRoutes.Home)
+      NavigationUtils.navigate(HomeNavigationRoutes.Home as keyof ParamsList)
       notification('success', i18n.t(Strings.YOUR_QUALIFICATION_HAS_BEEN_ADDED))
     }
     return result

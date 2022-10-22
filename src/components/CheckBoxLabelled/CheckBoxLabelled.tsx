@@ -17,7 +17,7 @@ type Props = {
 const CheckBoxLabelled = ({ label, isSelected, onPress }: Props) => {
   return (
     <Pressable
-      hitSlop={20}
+      hitSlop={10}
       onPress={onPress}
       style={({ pressed }) => [
         {

@@ -2,11 +2,10 @@ import { StyleSheet, ViewStyle } from 'react-native'
 
 const styles = {
   container: {
-    flex: 1,
+    paddingVertical: 8,
     flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
   } as ViewStyle,
+  icon: { marginRight: 4 } as ViewStyle,
 }
 
 export default StyleSheet.create(styles)
