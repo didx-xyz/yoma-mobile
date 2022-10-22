@@ -19,7 +19,7 @@ const WorkExperienceWidget = ({ userWorkExperiences, count, navigation }: Props)
     <CvWidget
       count={count}
       badgeColor={Colors.SecondaryPurple}
-      title={t('WorkExperience')}
+      title={t('Work Experience')}
       noDataMessage={t('Where do you currently work?')}
       onActionPress={() => {
         navigation.navigate(HomeNavigationRoutes.WorkExperienceForm)

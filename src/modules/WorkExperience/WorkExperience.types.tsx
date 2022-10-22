@@ -6,8 +6,6 @@ export interface WorkExperience {
   description: string
   createdAt: string
   createdByAdmin: boolean
-  language: string
-  published: boolean
   skills: string[]
 }
 

@@ -14,8 +14,6 @@ export const INITIAL_STATE = {
   description: '',
   createdAt: '',
   createdByAdmin: false,
-  language: '',
-  published: false,
   skills: [],
 } as WorkExperienceState
 
