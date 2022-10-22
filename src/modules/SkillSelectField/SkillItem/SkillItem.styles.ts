@@ -9,6 +9,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     alignContent: 'center',
   } as ViewStyle,
+  hStack: {
+    alignItems: 'center',
+  } as ViewStyle,
 })
 
 export default styles

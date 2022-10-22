@@ -8,19 +8,22 @@ import { types as AuthTypes } from './auth/'
 import { types as OrgTypes } from './organisations'
 import { types as SkillsTypes } from './skills'
 import { types as UsersTypes } from './users'
+import { types as WorkExperienceTypes } from './workExperience'
 
 export type ApiEndpoints =
   | AuthTypes.AuthEndpoints
   | UsersTypes.UsersEndpoints
   | SkillsTypes.SkillsEndpoints
   | OrgTypes.OrganisationsEndpoints
+  | WorkExperienceTypes.WorkExperienceEndpoints
 
 export enum ApiClients {
   Auth = 'auth',
   Challenges = 'challenges',
-  Jobs = 'jobs',
+  WorkExperience = 'workexperience',
   OAuth = 'connect',
   Organisations = 'organisations',
+  Opportunities = 'opportunities',
   Qualifications = 'qualifications',
   Skills = 'skills',
   Users = 'users',

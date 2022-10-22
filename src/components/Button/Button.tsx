@@ -70,7 +70,7 @@ const Button = ({
 
   return (
     <TouchableOpacity onPress={handlePress} disabled={isDisabled} style={buttonStyle}>
-      <HStack styles={styles.content}>
+      <HStack style={styles.content}>
         <Optional condition={isButtonLoading}>
           <ActivityIndicator color={colors[Colors.White]} style={styles.loading} />
         </Optional>

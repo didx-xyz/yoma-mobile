@@ -3,8 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { View } from 'react-native'
 
 import DatePicker from '~/components/DatePicker'
-import Text from '~/components/Typography'
-import { Colors } from '~/styles'
+import InputLabel from '~/components/InputLabel'
 
 import styles from './DateRangeSelect.styles'
 
@@ -17,7 +16,7 @@ const DateRangeSelect = ({ label }: Props) => {
 
   return (
     <>
-      {label && <Text.Body color={Colors.MenuGrey}>{label}</Text.Body>}
+      <InputLabel label={label} isVisible={!!label} />
       <View style={styles.row}>
         <DatePicker name="startTime" label={t('Start date')} />
         <DatePicker name="endTime" label={t('End date')} />

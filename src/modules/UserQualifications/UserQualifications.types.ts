@@ -5,29 +5,20 @@ import { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
 import { NormalisedCvWidgetCredentialItems } from '~/components/CvWidgetCredential/CvWidgetCredential.types'
 import { types as QualificationTypes } from '~/modules/Qualifications'
 import { types as UserTypes } from '~/modules/User'
-import { UserCredentialFormValues } from '~/modules/User/User.types'
 import { NormalisedData } from '~/redux/redux.types'
-import * as Types from '~/types/general.types'
-
-import { types as UserQualificationFormTypes } from './Form'
 
 export type NormalisedUserQualifications = NormalisedData<UserQualification>
 
 export type UserQualificationsState = NormalisedUserQualifications & {
-  formValues: UserCredentialFormValues | {}
+  formValues: UserTypes.UserCredentialFormValues | {}
 }
+interface UserQualificationOpportunityCredential
+  extends QualificationTypes.Qualification,
+    UserTypes.OpportunityCredentialPartial {}
 
 export interface UserQualification extends UserTypes.UserCredentialMeta {
-  qualification?: QualificationTypes.Qualification
+  opportunity?: UserQualificationOpportunityCredential
 }
-
-export type CreateUserQualificationPayload = Types.Modify<
-  UserQualificationFormTypes.FormFields,
-  {
-    startTime: string
-    endTime: string
-  }
->
 
 export type UserQualificationsViewCredentials = { userQualifications: CvViewCredentialTypes.CvViewCredentialsData }
 

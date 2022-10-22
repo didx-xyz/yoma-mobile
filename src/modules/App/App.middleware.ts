@@ -8,9 +8,9 @@ import * as OrganisationsActions from '~/modules/Organisations/Organisations.red
 import * as SkillsActions from '~/modules/Skills/Skills.reducer'
 import * as UserActions from '~/modules/User/User.reducer'
 import * as UserChallengesActions from '~/modules/UserChallenges/UserChallenges.reducer'
-import * as UserJobsActions from '~/modules/UserJobs/UserJobs.reducer'
 import * as UserQualificationsActions from '~/modules/UserQualifications/UserQualifications.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
+import * as UserWorkExperienceActions from '~/modules/UserWorkExperience/UserWorkExperience.reducer'
 
 import { hydrateApp, resetAppData } from './App.reducer'
 
@@ -24,7 +24,7 @@ export const appResetFlow: Middleware =
       dispatch(AuthActions.clearAuth())
       dispatch(UserActions.clearUser())
       dispatch(UserChallengesActions.clearUserChallenges())
-      dispatch(UserJobsActions.clearUserJobs())
+      dispatch(UserWorkExperienceActions.clearUserWorkExperiences())
       dispatch(UserQualificationsActions.clearUserQualifications())
       dispatch(UserSkillsActions.clearUserSkills())
     }

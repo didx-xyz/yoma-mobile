@@ -8,17 +8,17 @@ const getDirection = (row: boolean, column: boolean) => ((column && row) || row 
 type Props = WithChildren<{
   isRow?: boolean
   isColumn?: boolean
-  styles?: ViewStyle
+  style?: ViewStyle
 }>
-const Stack = ({ styles = {}, children, isRow = false, isColumn = true }: Props) => {
-  const [style, setStyle] = useState<ViewStyle>()
+const Stack = ({ style = {}, children, isRow = false, isColumn = true }: Props) => {
+  const [styles, setStyles] = useState<ViewStyle>()
 
   useEffect(() => {
     const direction = getDirection(isRow, isColumn)
-    setStyle(prevStyle => StyleSheet.flatten([prevStyle, { flexDirection: direction }]))
+    setStyles(prevStyle => StyleSheet.flatten([prevStyle, { flexDirection: direction }]))
   }, [isRow, isColumn])
 
-  const containerStyles = useMemo(() => StyleSheet.flatten([styles, style]), [style, styles])
+  const containerStyles = useMemo(() => StyleSheet.flatten([style, styles]), [style, styles])
 
   return <View style={containerStyles}>{children}</View>
 }

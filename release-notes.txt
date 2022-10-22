@@ -1,21 +1,18 @@
 Ver 0.0.1
 Latest:
-- swapping in FlashList for Country select and Skills select (again)
+- creating WorkExperience credentials, updated Widgets to 'Work Experience'
 
 Previous deployment release notes:
+- Fixing Skills selector (can select multiple skills)
+- Fixing Education
+- fix: empty fields causing app to break
+- fix: handling new API data shape for User Credentials
+- fix: Re-adding bottom tabs
+- No new features (docs-only update)
+- Adding alphabetic list navigator to country select
+- swapping in FlashList for Country select and Skills select (again)
 - updates to packages (cont)
 - fixing circle ci ruby deployments
 - creating and implementing Country Picker
 - fixing critical vulnerabilities
 - Adding Completed Courses to the CV
-- Updating Eduction components to use UserQualification components and selectors
-- Adding Qualification components to service courses and education
-- Adding Sentry
-- bug fix in Credential widget
-- fixing android deploying to FAD
-- feat(MySkills): adding skill count to each of the user's skills
-- Add/Edit Button
-- feat(Utils: Strings): adding a trunc util
-- updating cv view components
-- feat(About): adding About view, along with refactors to widget and form
-

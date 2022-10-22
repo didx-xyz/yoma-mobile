@@ -7,7 +7,6 @@ import { ButtonSave } from '~/components/Button'
 import DateRangeSelect from '~/components/DateRangeSelect'
 import DropDown, { types as DropDownTypes } from '~/components/DropDown'
 import FormGroup from '~/components/FormGroup'
-import FormLayout from '~/components/FormLayout'
 import Header from '~/components/Header'
 import InfoModal from '~/components/InfoModal'
 import Input from '~/components/Input'
@@ -38,46 +37,40 @@ const UserQualificationsForm = ({ title, navigation, organisationsDropDown, form
       <Header navigation={navigation} headerText={title} actionItem={<ButtonSave onPress={form.handleSubmit} />} />
       <ScrollView>
         <FormGroup>
-          <FormLayout>
-            <Input name="title" label={t('Qualification')} />
-            <Input name="description" label={t('Description')} multiline />
-            <DropDown
-              items={organisationsDropDown}
-              searchPlaceholder={t('Search organisations')}
-              label={t('School or Educational institution')}
-              name="organisationId"
+          <Input name="title" label={t('Qualification')} />
+          <Input name="description" label={t('Description')} multiline />
+          <DropDown
+            items={organisationsDropDown}
+            searchPlaceholder={t('Search organisations')}
+            label={t('School or Educational institution')}
+            name="organisationId"
+          />
+          <CountrySelectField
+            name="countries"
+            label={t('Country')}
+            searchPlaceholder={t('Filter countries')}
+            modalHeader={t('Select qualification country')}
+          />
+          <DateRangeSelect />
+          <SkillsSelectField name="skillNames" searchPlaceholder={t('Search skills')} label={t('forms.label.skills')} />
+          <Upload name="certificate" label={t('Upload certification (if completed)')} />
+          <View style={styles.bottom}>
+            <Text.Meta
+              level={MetaLevels.SmallBold}
+              color={Colors.PrimaryGreen}
+              style={styles.bottomText}
+              onPress={() => setShowInfoModal(true)}
+            >
+              {t('Find inspiration on how to write a great education description.')}
+            </Text.Meta>
+            <InfoModal
+              visible={showInfoModal}
+              closeModal={() => setShowInfoModal(false)}
+              infoText={
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
+              }
             />
-            <CountrySelectField
-              name="countries"
-              label={t('Country')}
-              searchPlaceholder={t('Filter countries')}
-              modalHeader={t('Select qualification country')}
-            />
-            <DateRangeSelect />
-            <SkillsSelectField
-              name="skillNames"
-              searchPlaceholder={t('Search skills')}
-              label={t('forms.label.skills')}
-            />
-            <Upload name="certificate" label={t('Upload certification (if completed)')} />
-            <View style={styles.bottom}>
-              <Text.Meta
-                level={MetaLevels.SmallBold}
-                color={Colors.PrimaryGreen}
-                style={styles.bottomText}
-                onPress={() => setShowInfoModal(true)}
-              >
-                {t('Find inspiration on how to write a great education description.')}
-              </Text.Meta>
-              <InfoModal
-                visible={showInfoModal}
-                closeModal={() => setShowInfoModal(false)}
-                infoText={
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
-                }
-              />
-            </View>
-          </FormLayout>
+          </View>
         </FormGroup>
       </ScrollView>
     </ViewContainer>

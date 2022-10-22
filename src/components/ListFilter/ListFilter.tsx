@@ -19,7 +19,7 @@ const ListFilter = ({ setSearchTerm, setIsLoading, searchPlaceholder }: Props) =
   }, [setIsLoading])
 
   return (
-    <Stack styles={styles.container}>
+    <Stack style={styles.container}>
       <TextInput
         onTextInput={onTextInput}
         onChangeText={setSearchTerm}

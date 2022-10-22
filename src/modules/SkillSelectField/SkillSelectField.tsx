@@ -3,7 +3,7 @@ import { without } from 'ramda'
 import React, { useCallback, useState } from 'react'
 
 import Modal from '~/components/Modal'
-import { withoutElseAppend } from '~/utils/arrays.utils'
+import { concatUnique } from '~/utils/arrays.utils'
 
 import SkillSelect from './SkillSelect'
 import SkillsInput from './SkillsInput'
@@ -17,14 +17,11 @@ interface Props {
 const SkillsSelectField = ({ name, label, searchPlaceholder, skills }: Props) => {
   const [{ value }, { touched, error }, { setValue }] = useField(name)
   const [isModalOpen, setModalOpen] = useState<boolean>(false)
+  const [internalSkills, setInternalSkills] = useState<string[]>([])
 
-  const handleItemSelect = useCallback(
-    (skill: string) => {
-      const selectedSkills = withoutElseAppend(skill)(value)
-      setValue(selectedSkills)
-    },
-    [setValue, value],
-  )
+  const handleItemSelect = useCallback((skill: string) => {
+    setInternalSkills((prevState: string[]) => [...prevState, skill])
+  }, [])
 
   const handleDelete = useCallback(
     (skill: string) => {
@@ -38,6 +35,24 @@ const SkillsSelectField = ({ name, label, searchPlaceholder, skills }: Props) =>
     setModalOpen(true)
   }, [])
 
+  const onModalClose = useCallback(
+    (visibility: boolean) => {
+      if (!visibility) {
+        const updatedValue = concatUnique(internalSkills, value)
+        setValue(updatedValue)
+      }
+    },
+    [internalSkills, setValue, value],
+  )
+
+  const handleSetVisible = useCallback(
+    (visibility: boolean) => {
+      onModalClose(visibility)
+      setModalOpen(visibility)
+    },
+    [onModalClose],
+  )
+
   return (
     <>
       <SkillsInput
@@ -48,7 +63,7 @@ const SkillsSelectField = ({ name, label, searchPlaceholder, skills }: Props) =>
         onDelete={handleDelete}
         onAdd={handleOpenModal}
       />
-      <Modal setVisible={setModalOpen} isVisible={isModalOpen}>
+      <Modal setVisible={handleSetVisible} isVisible={isModalOpen}>
         <SkillSelect searchPlaceholder={searchPlaceholder} onItemSelect={handleItemSelect} skills={skills} />
       </Modal>
     </>

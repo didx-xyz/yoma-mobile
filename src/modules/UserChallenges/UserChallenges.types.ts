@@ -7,8 +7,10 @@ import { types as UserTypes } from '~/modules/User'
 import * as ReduxTypes from '~/redux/redux.types'
 import * as Types from '~/types/general.types'
 
+interface ChallengeOpportunityCredential extends ChallengesTypes.Challenge, UserTypes.OpportunityCredentialPartial {}
+
 export interface UserChallenge extends UserTypes.UserCredentialMeta {
-  challenge?: ChallengesTypes.Challenge
+  opportunity?: ChallengeOpportunityCredential
 }
 
 export interface UserChallengeResponse {

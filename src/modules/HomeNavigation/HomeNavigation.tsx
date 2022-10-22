@@ -10,11 +10,11 @@ import CompletedChallenges, { CompletedChallengesForm } from '~/modules/Complete
 import CompletedCourses, { CompletedCoursesForm } from '~/modules/CompletedCourses'
 import Courses from '~/modules/Courses'
 import Education, { EducationForm } from '~/modules/Education'
-import Experience, { ExperienceForm } from '~/modules/Experience'
 import Marketplace from '~/modules/Marketplace'
 import MyCv from '~/modules/MyCv'
 import MySkills, { MySkillsForm } from '~/modules/MySkills'
 import Profile from '~/modules/Profile'
+import WorkExperience, { WorkExperienceForm } from '~/modules/WorkExperience'
 import { Colors, FontFamily, colors } from '~/styles'
 import fontStyles from '~/styles/font.styles'
 import { applyAlphaToHex } from '~/styles/styles.utils'
@@ -90,7 +90,7 @@ const HomeTabs = () => {
 }
 
 const HomeNavigation = () => (
-  <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={HomeNavigationRoutes.MyCv}>
+  <Stack.Navigator screenOptions={{ headerShown: false }} initialRouteName={HomeNavigationRoutes.Home}>
     <Stack.Screen name={HomeNavigationRoutes.AboutForm} component={AboutForm} />
     <Stack.Screen name={HomeNavigationRoutes.About} component={About} />
     <Stack.Screen name={HomeNavigationRoutes.CompletedChallengesForm} component={CompletedChallengesForm} />
@@ -99,8 +99,8 @@ const HomeNavigation = () => (
     <Stack.Screen name={HomeNavigationRoutes.CompletedCourses} component={CompletedCourses} />
     <Stack.Screen name={HomeNavigationRoutes.EducationForm} component={EducationForm} />
     <Stack.Screen name={HomeNavigationRoutes.Education} component={Education} />
-    <Stack.Screen name={HomeNavigationRoutes.ExperienceForm} component={ExperienceForm} />
-    <Stack.Screen name={HomeNavigationRoutes.Experience} component={Experience} />
+    <Stack.Screen name={HomeNavigationRoutes.WorkExperienceForm} component={WorkExperienceForm} />
+    <Stack.Screen name={HomeNavigationRoutes.WorkExperience} component={WorkExperience} />
     <Stack.Screen name={HomeNavigationRoutes.Home} component={HomeTabs} />
     <Stack.Screen name={HomeNavigationRoutes.MyCv} component={MyCv} />
     <Stack.Screen name={HomeNavigationRoutes.MySkillsForm} component={MySkillsForm} />

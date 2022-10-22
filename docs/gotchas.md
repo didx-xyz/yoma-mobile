@@ -1,3 +1,3 @@
 # Yoma Mobile :: Gotchas
 
-<- When you run into one, list it here ->
+ [When you run into one, list it here]::

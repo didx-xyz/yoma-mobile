@@ -3,7 +3,7 @@ import React from 'react'
 import { Keyboard, TextInput, TextInputProps, View } from 'react-native'
 
 import InputError from '~/components/InputError'
-import Text, { MetaLevels } from '~/components/Typography'
+import InputLabel from '~/components/InputLabel'
 import { Colors, colors } from '~/styles'
 
 import styles from './Input.styles'
@@ -14,10 +14,10 @@ type Props = TextInputProps & {
 }
 
 const Input = ({ name, label, ...props }: Props) => {
-  const [{ value }, { error }, { setValue }] = useField(name)
+  const [{ value }, { error, touched }, { setValue }] = useField(name)
   return (
     <View style={styles.container}>
-      <Text.Meta level={MetaLevels.Small}>{value !== '' ? label : ' '}</Text.Meta>
+      <InputLabel label={label} isVisible={value !== ''} />
       <TextInput
         placeholderTextColor={colors[Colors.MenuGrey]}
         placeholder={label}
@@ -27,7 +27,7 @@ const Input = ({ name, label, ...props }: Props) => {
         onChangeText={setValue}
         {...props}
       />
-      <InputError error={error} />
+      <InputError error={error} touched={touched} />
     </View>
   )
 }

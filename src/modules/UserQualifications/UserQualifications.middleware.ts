@@ -8,7 +8,7 @@ import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/us
 import * as Strings from '~/constants/strings.constants'
 import { utils as ErrorUtils } from '~/modules/Error'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import * as NavigationUtils from '~/modules/Navigation/Navigation.utils'
+import { types as NavigationTypes, utils as NavigationUtils } from '~/modules/Navigation'
 import { actions as QualificationsActions } from '~/modules/Qualifications'
 import {
   actions as UserActions,
@@ -141,7 +141,7 @@ export const createUserQualificationSuccessFlow =
         dispatch(createUserQualificationCertificate({ id: data.id, certificate }))
       }
       dispatch(clearUserQualificationFormValues())
-      NavigationUtils.navigate(HomeNavigationRoutes.Home)
+      NavigationUtils.navigate(HomeNavigationRoutes.Home as keyof NavigationTypes.ParamsList)
       notification('success', i18n.t(Strings.YOUR_QUALIFICATION_HAS_BEEN_ADDED))
     }
     return result

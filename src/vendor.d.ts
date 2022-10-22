@@ -1,24 +1,28 @@
 declare module 'form-data'
 declare module 'ramda' {
-  export function __(...rest: any[]): any[]
+  export function __(...rest: any[]): any
   export function add(...rest: any[]): any
+  export function addIndex(...rest: any[]): any
   export function always(...rest: any[]): any[]
-  export function ascend(...rest: any[]): any[]
-  export function assoc(...rest: any[]): any[]
   export function and(...rest: any[]): any
   export function append(...rest: any[]): any
   export function apply(...rest: any[]): any
   export function applySpec(...rest: any[]): any
   export function ascend(...rest: any[]): any[]
+  export function ascend(...rest: any[]): any[]
+  export function assoc(...rest: any[]): any[]
   export function assoc(...rest: any[]): any[]
   export function chain(...rest: any[]): any
   export function complement(...rest: any[]): any
   export function compose(...rest: any[]): any
   export function concat(...rest: any[]): any[]
   export function contains(...rest: any[]): any
+  export function converge(...rest: any[]): any
   export function curry(...rest: any[]): any
+  export function curryN(...rest: any[]): any
   export function equals(...rest: any[]): any
   export function evolve(...rest: any[]): any
+  export function F(...rest: any[]): false
   export function filter(...rest: any[]): any
   export function find(...rest: any[]): any
   export function flatten(...rest: any[]): any[]
@@ -29,6 +33,7 @@ declare module 'ramda' {
   export function identity(...rest: any[]): any
   export function ifElse(...rest: any[]): any
   export function includes(...rest: any[]): any
+  export function indexOf(...rest: any[]): any
   export function is(...rest: any[]): any
   export function isEmpty(...rest: any[]): boolean
   export function isNil(...rest: any[]): boolean
@@ -57,6 +62,7 @@ declare module 'ramda' {
   export function omit(...rest: any[]): any
   export function path(...rest: any[]): any
   export function pathOr(...rest: any[]): any
+  export function pathEq(...rest: any[]): any
   export function pick(...rest: any[]): any
   export function pipe(...rest: any[]): any
   export function prepend(...rest: any[]): any
@@ -72,10 +78,11 @@ declare module 'ramda' {
   export function sort(...rest: any[]): any
   export function split(...rest: any[]): any[]
   export function splitAt(...rest: any[]): any[]
+  export function T(...rest: any[]): any
   export function tail(...rest: any[]): any[]
   export function take(...rest: any[]): any
-  export function tap(...rest: any[]): any[]
   export function take(...rest: any[]): any
+  export function tap(...rest: any[]): any[]
   export function test(...rest: any[]): any
   export function toLower(...rest: any[]): any
   export function toPairs(...rest: any[]): any
@@ -83,6 +90,8 @@ declare module 'ramda' {
   export function trim(...rest: any[]): any
   export function type(...rest: any[]): any
   export function uniq(...rest: any[]): any
+  export function uniqBy(...rest: any[]): any
+  export function uniqWith(...rest: any[]): any
   export function unless(...rest: any[]): any
   export function values(...rest: any[]): any
   export function view(...rest: any[]): any

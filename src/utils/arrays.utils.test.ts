@@ -36,9 +36,17 @@ describe('arrays.utils', () => {
     })
     it('should remove a skill from the list if it is already in the list', () => {
       const skillsMock = ['skill 1', 'skill 2', 'skill 3', 'skill 4']
-      const result = SUT.withoutElseAppend('skill 4')(skillsMock)
+      const result = SUT.withoutElseAppend('skill 2')(skillsMock)
 
-      expect(result).toEqual(['skill 1', 'skill 2', 'skill 3'])
+      expect(result).toEqual(['skill 1', 'skill 3', 'skill 4'])
+    })
+  })
+  describe('concatUnique', () => {
+    it('should join two lists removing any duplicates', () => {
+      const skillsMock = ['skill 1', 'skill 2', 'skill 3']
+      const result = SUT.concatUnique(['skill 1', 'skill 3', 'skill 4'])(skillsMock)
+
+      expect(result).toEqual(['skill 1', 'skill 3', 'skill 4', 'skill 2'])
     })
   })
 })
