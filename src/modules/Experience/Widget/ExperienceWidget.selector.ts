@@ -10,7 +10,7 @@ export default createSelector(UserWorkExperiencesSelectors.selectUserWorkExperie
   const ids = slice(0, 2, userWorkExperiences.ids)
   const entities = pipe(
     pick(ids),
-    map(applySpec(UserConstants.USER_CREDENTIAL_WIDGET_SELECTOR_SPEC)),
+    map(applySpec(UserConstants.USER_OPPORTUNITY_CREDENTIAL_WIDGET_SELECTOR_SPEC)),
   )(userWorkExperiences.entities)
 
   return { userWorkExperiences: { ids, entities }, count }

@@ -10,7 +10,7 @@ import {
 
 import { getExperienceMetadata } from './ExperienceView.utils'
 
-const EXPERIENCE_VIEW_SELECTOR_SPEC = mergeRight(UserConstants.USER_CREDENTIAL_VIEW_SELECTOR_SPEC, {
+const EXPERIENCE_VIEW_SELECTOR_SPEC = mergeRight(UserConstants.USER_OPPORTUNITY_CREDENTIAL_VIEW_SELECTOR_SPEC, {
   metadata: getExperienceMetadata,
 })
 

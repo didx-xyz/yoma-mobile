@@ -2,7 +2,7 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 
 import { EducationNavigation } from '~/modules/Education/types'
-import { UserQualificationsForm } from '~/modules/UserQualifications'
+import { UserEducationForm } from '~/modules/UserEducation'
 
 interface Props {
   navigation: EducationNavigation
@@ -10,7 +10,7 @@ interface Props {
 const EducationFormContainer = ({ navigation }: Props) => {
   const { t } = useTranslation()
 
-  return <UserQualificationsForm navigation={navigation} title={t('Education')} />
+  return <UserEducationForm navigation={navigation} title={t('Education')} />
 }
 
 export default EducationFormContainer

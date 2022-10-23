@@ -3,26 +3,26 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
-import { constants as ApiQualificationConstants } from '~/api/qualifications'
-import * as UserQualificationsActions from '~/modules/UserQualifications/UserQualifications.reducer'
+import { constants as ApiEducationConstants } from '~/api/education'
+import * as UserEducationActions from '~/modules/UserEducation/UserEducation.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
 
-import { createQualification, createQualificationFailure, createQualificationSuccess } from './Education.reducer'
+import { createEducation, createEducationFailure, createEducationSuccess } from './Education.reducer'
 
-export const createQualificationFlow: Middleware =
+export const createEducationFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (createQualification.match(action)) {
+    if (createEducation.match(action)) {
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiQualificationConstants.QUALIFICATIONS_CREATE_CONFIG, {
-            onSuccess: createQualificationSuccess,
-            onFailure: createQualificationFailure,
+          mergeRight(ApiEducationConstants.EDUCATION_CREATE_CONFIG, {
+            onSuccess: createEducationSuccess,
+            onFailure: createEducationFailure,
           }),
           action.payload,
         ),
@@ -30,29 +30,29 @@ export const createQualificationFlow: Middleware =
     }
     return result
   }
-export const createQualificationSuccessFlow: Middleware =
+export const createEducationSuccessFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (createQualificationSuccess.match(action)) {
-      const Qualification = extractDataFromResponseAction(action)
-      dispatch(UserQualificationsActions.createUserQualification(Qualification))
+    if (createEducationSuccess.match(action)) {
+      const Education = extractDataFromResponseAction(action)
+      dispatch(UserEducationActions.createUserEducation(Education))
       dispatch(UserSkillsActions.fetchUserSkills())
     }
 
     return result
   }
 
-export const createQualificationFailureFlow =
+export const createEducationFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
   action => {
     const result = next(action)
 
-    if (createQualificationFailure.match(action)) {
+    if (createEducationFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification('danger', i18n.t('general.errorOccurred'), i18n.t('general.errorMessageTryAgain'))
     }

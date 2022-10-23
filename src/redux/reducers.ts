@@ -7,10 +7,9 @@ import { reducer as organisations } from '~/modules/Organisations'
 import { reducer as skills } from '~/modules/Skills'
 import { reducer as user } from '~/modules/User'
 import { reducer as userChallenges } from '~/modules/UserChallenges'
-import { reducer as userQualifications } from '~/modules/UserQualifications'
+import { reducer as userEducation } from '~/modules/UserEducation'
 import { reducer as userSkills } from '~/modules/UserSkills'
 import { reducer as userWorkExperiences } from '~/modules/UserWorkExperience'
-import { reducer as workExperiences } from '~/modules/WorkExperience'
 
 const rootReducer = combineReducers({
   auth,
@@ -20,10 +19,9 @@ const rootReducer = combineReducers({
   skills,
   user,
   userChallenges,
-  userQualifications,
+  userEducation,
   userSkills,
   userWorkExperiences,
-  workExperiences,
 })
 
 export default rootReducer

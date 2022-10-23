@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
 import { types as MyCvTypes } from '~/modules/MyCv'
-import { UserQualificationsWidget } from '~/modules/UserQualifications'
+import { EducationWidget } from '~/modules/UserEducation'
 import { Colors } from '~/styles'
 
 import selector from './CompletedCoursesWidget.selector'
@@ -18,7 +18,7 @@ const CompletedCoursesWidgetContainer = ({ navigation }: Props) => {
   const { userQualifications, count } = useSelector(selector)
 
   return (
-    <UserQualificationsWidget
+    <EducationWidget
       badgeColor={Colors.PrimaryRed}
       title={t('Completed courses')}
       noDataMessage={t('Have you completed any courses yet?')}

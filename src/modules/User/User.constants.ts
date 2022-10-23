@@ -17,13 +17,13 @@ export const CAPTURE_IMAGE_OPTIONS: Options = {
 export const USER_PHOTO_FORM_DATA_NAME = 'Photo'
 export const USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME = 'File'
 
-export const USER_CREDENTIAL_WIDGET_SELECTOR_SPEC = {
+export const USER_OPPORTUNITY_CREDENTIAL_WIDGET_SELECTOR_SPEC = {
   name: pathOr('', ['opportunity', 'title']),
   startDate: propOr('', 'startDate'),
   organisationLogoURL: path(['opportunity', 'organisationLogoURL']),
   isValidated: propOr(false, 'approved'),
 }
-export const USER_CREDENTIAL_VIEW_SELECTOR_SPEC = {
+export const USER_OPPORTUNITY_CREDENTIAL_VIEW_SELECTOR_SPEC = {
   title: pathOr('', ['opportunity', 'title']),
   description: pathOr('', ['opportunity', 'description']),
   iconUrl: path(['opportunity', 'organisationLogoURL']),
@@ -32,9 +32,10 @@ export const USER_CREDENTIAL_VIEW_SELECTOR_SPEC = {
 
 export const USER_CREDENTIAL_TYPES_MAP: Record<
   ApiUserTypes.UserCredentialTypes,
-  ApiUserTypes.UserCredentialOpportunityTypes
+  ApiUserTypes.UserCredentialOpportunityTypes | undefined
 > = {
   [ApiUserTypes.UserCredentialTypes.Assignment]: ApiUserTypes.UserCredentialOpportunityTypes.Assignment,
+  [ApiUserTypes.UserCredentialTypes.Education]: undefined,
   [ApiUserTypes.UserCredentialTypes.Challenge]: ApiUserTypes.UserCredentialOpportunityTypes.Challenge,
   [ApiUserTypes.UserCredentialTypes.Qualification]: ApiUserTypes.UserCredentialOpportunityTypes.Qualification,
   [ApiUserTypes.UserCredentialTypes.WorkExperience]: ApiUserTypes.UserCredentialOpportunityTypes.WorkExperience,

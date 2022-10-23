@@ -1,6 +1,6 @@
-import { INITIAL_FORM_VALUES } from '~/modules/UserQualifications/Form/UserQualificationsForm.constants'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
+import { INITIAL_FORM_VALUES } from '../UserEducation/Form/UserEducationForm.constants'
 import * as SUT from './CompletedCourses.selector'
 
 describe('modules/CompletedCourses/CompletedCourses.selector', () => {

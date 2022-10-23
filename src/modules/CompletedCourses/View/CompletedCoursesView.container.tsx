@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux'
 
 import { CompletedCoursesNavigation } from '~/modules/CompletedCourses/types'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import { UserQualificationsView } from '~/modules/UserQualifications'
+import { UserEducationView } from '~/modules/UserEducation'
 
 import selector from './CompletedCoursesView.selector'
 
@@ -16,7 +16,7 @@ const CompletedCoursesViewContainer = ({ navigation }: Props) => {
   const { t } = useTranslation()
 
   return (
-    <UserQualificationsView
+    <UserEducationView
       title={t('Courses')}
       noDataMessage={t('Have you completed any courses yet?')}
       route={HomeNavigationRoutes.CompletedCoursesForm}

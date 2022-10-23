@@ -11,14 +11,14 @@ import { middleware as AppMiddleware } from '~/modules/App'
 import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as CountriesMiddleware } from '~/modules/Countries'
+import { middleware as EducationMiddleware } from '~/modules/Education'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { utils as NavigationUtils } from '~/modules/Navigation'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
-import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '~/modules/User'
 import { middleware as UserChallengesMiddleware } from '~/modules/UserChallenges'
-import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualifications'
+import { middleware as UserEducationMiddleware } from '~/modules/UserEducation'
 import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
 import { middleware as UserWorkExperiencesMiddleware } from '~/modules/UserWorkExperience'
 import { middleware as WorkExperienceMiddleware } from '~/modules/WorkExperience'
@@ -61,9 +61,9 @@ const featureModuleMiddleware = [
   OrganisationsMiddleware.fetchOrganisationsSuccessFlow,
   OrganisationsMiddleware.normaliseOrganisationsFlow({ normalise: ReduxUtils.normalise }),
   OrganisationsMiddleware.setOrganisationsFlow,
-  QualificationsMiddleware.createQualificationFlow,
-  QualificationsMiddleware.createQualificationSuccessFlow,
-  QualificationsMiddleware.createQualificationFailureFlow({ notification: showSimpleMessage }),
+  EducationMiddleware.createEducationFlow,
+  EducationMiddleware.createEducationSuccessFlow,
+  EducationMiddleware.createEducationFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFlow,
   SkillsMiddleware.fetchSkillsSuccessFlow,
@@ -115,22 +115,22 @@ const featureModuleMiddleware = [
     createPayload: UserUtils.createPhotoFormPayload(FormData),
   }),
   UserMiddleware.uploadUserPhotoSuccessFlow,
-  UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
+  UserEducationMiddleware.getUserEducationFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Qualification),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Education),
   ),
-  UserQualificationsMiddleware.normaliseUserQualificationsFlow({ normalise: ReduxUtils.normalise }),
-  UserQualificationsMiddleware.setUserQualificationsFlow,
-  UserQualificationsMiddleware.setUserQualificationFormValuesFlow,
-  UserQualificationsMiddleware.createUserQualificationFlow,
-  UserQualificationsMiddleware.createUserQualificationSuccessFlow({
+  UserEducationMiddleware.normaliseUserEducationFlow({ normalise: ReduxUtils.normalise }),
+  UserEducationMiddleware.setUserEducationFlow,
+  UserEducationMiddleware.setUserEducationFormValuesFlow,
+  UserEducationMiddleware.createUserEducationFlow,
+  UserEducationMiddleware.createUserEducationSuccessFlow({
     normalise: ReduxUtils.normalise,
     notification: showSimpleMessage,
   }),
-  UserQualificationsMiddleware.createUserQualificationFailureFlow({ notification: showSimpleMessage }),
-  UserQualificationsMiddleware.createUserQualificationCertificateFlow,
-  UserQualificationsMiddleware.createUserQualificationCertificateSuccessFlow({ normalise: ReduxUtils.normalise }),
-  UserQualificationsMiddleware.createUserQualificationCertificateFailureFlow({ notification: showSimpleMessage }),
+  UserEducationMiddleware.createUserEducationFailureFlow({ notification: showSimpleMessage }),
+  UserEducationMiddleware.createUserEducationCertificateFlow,
+  UserEducationMiddleware.createUserEducationCertificateSuccessFlow({ normalise: ReduxUtils.normalise }),
+  UserEducationMiddleware.createUserEducationCertificateFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFailureFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.fetchUserSkillsFlow,
   UserSkillsMiddleware.fetchUserSkillsSuccessFlow,

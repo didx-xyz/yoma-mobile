@@ -2,14 +2,14 @@ import { mergeRight } from 'ramda'
 import { createMiddlewareMock } from 'tests/tests.utils'
 
 import { actions as ApiActions } from '~/api'
-import { constants as ApiQualificationsConstants } from '~/api/qualifications'
-import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
-import { actions as UserQualificationActions } from '~/modules/UserQualifications'
+import { constants as ApiQualificationsConstants } from '~/api/education'
+import { UserCredentialTypes } from '~/api/users/users.types'
+import { actions as UserQualificationActions } from '~/modules/UserEducation'
 
 import * as SUT from './Education.middleware'
-import { createQualification, createQualificationFailure, createQualificationSuccess } from './Education.reducer'
+import { createEducation, createEducationFailure, createEducationSuccess } from './Education.reducer'
 
-describe('modules/Qualifications/Qualifications.middleware', () => {
+describe('modules/Education/Education.middleware', () => {
   describe('createQualificationFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
@@ -23,10 +23,10 @@ describe('modules/Qualifications/Qualifications.middleware', () => {
         countries: ['SOME COUNTRY'],
         skillNames: ['SKILL 1'],
         certificate: null,
-        type: UserCredentialOpportunityTypes.Qualification,
+        type: UserCredentialTypes.Education,
       }
       // when ... we create the user's credentials
-      const action = createQualification(mockPayload)
+      const action = createEducation(mockPayload)
       // @ts-ignore
       const { store, invoke, next } = create(SUT.createQualificationFlow)
       invoke(action)
@@ -36,9 +36,9 @@ describe('modules/Qualifications/Qualifications.middleware', () => {
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(ApiQualificationsConstants.QUALIFICATIONS_CREATE_CONFIG, {
-            onSuccess: createQualificationSuccess,
-            onFailure: createQualificationFailure,
+          mergeRight(ApiQualificationsConstants.EDUCATION_CREATE_CONFIG, {
+            onSuccess: createEducationSuccess,
+            onFailure: createEducationFailure,
           }),
           action.payload,
         ),
@@ -60,10 +60,10 @@ describe('modules/Qualifications/Qualifications.middleware', () => {
         },
       }
       // @ts-ignore
-      const action = createQualificationSuccess(mockedPayload)
+      const action = createEducationSuccess(mockedPayload)
       // @ts-ignore
       const { invoke, next } = create(SUT.createQualificationSuccessFlow)
-      // when ... we respond to the createQualificationSuccess action
+      // when ... we respond to the createEducationSuccess action
       invoke(action)
 
       // then ...validate createQualificationSuccessFlow
@@ -85,10 +85,10 @@ describe('modules/Qualifications/Qualifications.middleware', () => {
       }
 
       // @ts-ignore
-      const action = createQualificationSuccess(mockedPayload)
+      const action = createEducationSuccess(mockedPayload)
       // @ts-ignore
       const { store, invoke } = create(SUT.createQualificationSuccessFlow)
-      // when ... we respond to the createQualificationSuccess action
+      // when ... we respond to the createEducationSuccess action
       invoke(action)
 
       // then ...validate createQualificationSuccessFlow
@@ -102,7 +102,7 @@ describe('modules/Qualifications/Qualifications.middleware', () => {
     it('should correctly handle Qualification create failure', () => {
       // given ...
       const create = createMiddlewareMock(jest)
-      const action = createQualificationFailure('FAILED')
+      const action = createEducationFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore
       const { invoke } = create(SUT.createQualificationFailureFlow({ notification: mockNotification }))

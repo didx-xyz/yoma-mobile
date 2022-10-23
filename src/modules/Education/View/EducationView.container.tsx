@@ -4,24 +4,24 @@ import { useSelector } from 'react-redux'
 
 import { EducationNavigation } from '~/modules/Education/types'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
-import { UserQualificationsView } from '~/modules/UserQualifications'
 
+import EducationView from './EducationView'
 import selector from './EducationView.selector'
 
 interface Props {
   navigation: EducationNavigation
 }
 const EducationViewContainer = ({ navigation }: Props) => {
-  const { userQualifications } = useSelector(selector)
+  const { userEducation } = useSelector(selector)
   const { t } = useTranslation()
 
   return (
-    <UserQualificationsView
+    <EducationView
       title={t('Education')}
       noDataMessage={t('Which school, university or college did you attend?')}
       route={HomeNavigationRoutes.EducationForm}
       navigation={navigation}
-      userQualifications={userQualifications}
+      userEducation={userEducation}
     />
   )
 }

@@ -1,3 +1,3 @@
-import { selectUserQualificationCredentialsType } from '~/modules/UserQualifications/UserQualifications.selector'
+import { selectUserQualificationCredentialsType } from '../UserEducation/UserEducation.selector'
 
 export const selectEducationCredentials = selectUserQualificationCredentialsType(false)

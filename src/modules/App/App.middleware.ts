@@ -8,10 +8,10 @@ import * as OrganisationsActions from '~/modules/Organisations/Organisations.red
 import * as SkillsActions from '~/modules/Skills/Skills.reducer'
 import * as UserActions from '~/modules/User/User.reducer'
 import * as UserChallengesActions from '~/modules/UserChallenges/UserChallenges.reducer'
-import * as UserQualificationsActions from '~/modules/UserQualifications/UserQualifications.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import * as UserWorkExperienceActions from '~/modules/UserWorkExperience/UserWorkExperience.reducer'
 
+import * as UserQualificationsActions from '../UserEducation/UserEducation.reducer'
 import { hydrateApp, resetAppData } from './App.reducer'
 
 export const appResetFlow: Middleware =

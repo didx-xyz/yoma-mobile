@@ -1,6 +1,6 @@
-import { USER_QUALIFICATIONS_STATE_MOCK } from '~/modules/UserQualifications/UserQualifications.fixture'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
+import { USER_QUALIFICATIONS_STATE_MOCK } from '../../UserEducation/UserEducation.fixture'
 import * as SUT from './CompletedCoursesWidget.selector'
 
 describe('modules/CompletedCourses/CompletedCoursesWidget/CompletedCoursesWidget.selector', () => {
@@ -19,7 +19,7 @@ describe('modules/CompletedCourses/CompletedCoursesWidget/CompletedCoursesWidget
         },
       })
     })
-    it('should return the user qualifications data in the expected format', () => {
+    it('should return the user education data in the expected format', () => {
       // given ...
       const state = rootStateFixture({
         userQualifications: USER_QUALIFICATIONS_STATE_MOCK,

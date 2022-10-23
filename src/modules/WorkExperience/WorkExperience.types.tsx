@@ -22,5 +22,3 @@ export interface WorkExperienceRequest {
   startTime: string | null
   endTime: string | null
 }
-
-export type WorkExperienceState = WorkExperience

@@ -5,6 +5,7 @@ import { StdObj } from '~/types/general.types'
 
 import { prepareApiRequest } from './api.utils'
 import { types as AuthTypes } from './auth/'
+import { types as EducationTypes } from './education'
 import { types as OrgTypes } from './organisations'
 import { types as SkillsTypes } from './skills'
 import { types as UsersTypes } from './users'
@@ -16,6 +17,7 @@ export type ApiEndpoints =
   | SkillsTypes.SkillsEndpoints
   | OrgTypes.OrganisationsEndpoints
   | WorkExperienceTypes.WorkExperienceEndpoints
+  | EducationTypes.EducationEndpoints
 
 export enum ApiClients {
   Auth = 'auth',
@@ -24,7 +26,7 @@ export enum ApiClients {
   OAuth = 'connect',
   Organisations = 'organisations',
   Opportunities = 'opportunities',
-  Qualifications = 'qualifications',
+  Education = 'education',
   Skills = 'skills',
   Users = 'users',
 }

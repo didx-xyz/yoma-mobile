@@ -7,9 +7,12 @@ import { selectors as UserChallengesSelectors, types as UserChallengesTypes } fr
 
 import { getCompletedChallengesMetadata } from './CompletedChallengesView.utils'
 
-const COMPLETED_CHALLENGES_VIEW_SELECTOR_SPEC = mergeRight(UserConstants.USER_CREDENTIAL_VIEW_SELECTOR_SPEC, {
-  metadata: getCompletedChallengesMetadata,
-})
+const COMPLETED_CHALLENGES_VIEW_SELECTOR_SPEC = mergeRight(
+  UserConstants.USER_OPPORTUNITY_CREDENTIAL_VIEW_SELECTOR_SPEC,
+  {
+    metadata: getCompletedChallengesMetadata,
+  },
+)
 
 export default createSelector<any, { userChallenges: CvViewCredentialTypes.CvViewCredentialsData }>(
   UserChallengesSelectors.selectUserChallenges,
