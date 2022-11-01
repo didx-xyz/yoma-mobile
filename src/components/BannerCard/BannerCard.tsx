@@ -1,14 +1,20 @@
 import React, { useMemo } from 'react'
 import { Image, StyleSheet, View, ViewStyle } from 'react-native'
 
-import { Colors } from '../../styles'
-import Card from '../Card'
-import Text, { HeaderLevels } from '../Typography'
+import Card from '~/components/Card'
+import Text, { HeaderLevels } from '~/components/Typography'
+import { Colors } from '~/styles'
+
 import styles from './BannerCard.styles'
+
+interface Offset {
+  x: number
+  y: number
+}
 
 interface Background {
   imageSrc?: number
-  imageOffset?: { x: number; y: number }
+  imageOffset?: Offset
   color?: Colors
 }
 
@@ -17,14 +23,17 @@ interface Content {
   titleColor?: Colors
   body: string
   bodyColor?: Colors
-  offset?: { x: number; y: number }
+  offset?: Offset
 }
 
 interface Props {
+  content: Content
   background?: Background
-  content?: Content
   height?: number
 }
+
+const OFFSET_FALLBACK = 0
+const safeOffset = (offset?: Offset) => (value: 'x' | 'y') => offset?.[value] || OFFSET_FALLBACK
 
 const BannerCard = ({ background, content, height = 190 }: Props) => {
   const containerStyles = useMemo(
@@ -33,35 +42,34 @@ const BannerCard = ({ background, content, height = 190 }: Props) => {
     [background?.color, height],
   )
 
-  const backgroundStyles = useMemo(
-    () =>
-      StyleSheet.flatten([
-        styles.backgroundImage,
-        {
-          height,
-          left: background?.imageOffset?.x,
-          top: background?.imageOffset?.y,
-        },
-      ]),
-    [background?.imageOffset?.x, background?.imageOffset?.y, height],
-  )
+  const backgroundStyles = useMemo(() => {
+    const safeImageOffset = safeOffset(background?.imageOffset)
+    return StyleSheet.flatten([
+      styles.backgroundImage,
+      {
+        height,
+        left: safeImageOffset('x'),
+        top: safeImageOffset('y'),
+      },
+    ])
+  }, [background?.imageOffset, height])
 
-  const contentStyles = useMemo(
-    () => StyleSheet.flatten([styles.content, { marginLeft: content?.offset?.x, marginTop: content?.offset?.y }]),
-    [content?.offset?.x, content?.offset?.y],
-  )
+  const contentStyles = useMemo(() => {
+    const safeContentOffset = safeOffset(content?.offset)
+    return { marginLeft: safeContentOffset('x'), marginTop: safeContentOffset('y') }
+  }, [content?.offset])
 
   return (
     <Card style={containerStyles} corners="bubble">
       <View style={backgroundStyles}>
-        {!!background?.imageSrc && <Image source={background!.imageSrc as number} />}
+        {!!background && !!background.imageSrc && <Image source={background.imageSrc} />}
       </View>
       <View style={contentStyles}>
         <Text.Header level={HeaderLevels.H4} color={content?.titleColor}>
-          {content?.title}
+          {content.title}
         </Text.Header>
         <Text.Header level={HeaderLevels.H6} color={content?.bodyColor}>
-          {content?.body}
+          {content.body}
         </Text.Header>
       </View>
     </Card>

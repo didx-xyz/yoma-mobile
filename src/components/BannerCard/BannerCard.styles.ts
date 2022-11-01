@@ -6,13 +6,8 @@ const styles = {
   } as ViewStyle,
   backgroundImage: {
     position: 'absolute',
-    top: 0,
     right: 0,
     bottom: 0,
-  } as ViewStyle,
-  content: {
-    marginLeft: 125,
-    marginRight: 30,
   } as ViewStyle,
 }
 
