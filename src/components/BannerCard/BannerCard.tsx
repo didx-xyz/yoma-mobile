@@ -22,7 +22,7 @@ const BannerCard = ({ background, content, height = 190 }: Props) => {
     [background?.color, height],
   )
 
-  const backgroundStyles = useMemo(() => {
+  const imageStyles = useMemo(() => {
     const safeImageOffset = safeOffset(background?.imageOffset)
     return StyleSheet.flatten([
       styles.backgroundImage,
@@ -41,9 +41,7 @@ const BannerCard = ({ background, content, height = 190 }: Props) => {
 
   return (
     <Card style={containerStyles} corners="bubble">
-      <View style={backgroundStyles}>
-        {!!background && !!background.imageSrc && <Image source={background.imageSrc} />}
-      </View>
+      <View style={imageStyles}>{!!background && !!background.imageSrc && <Image source={background.imageSrc} />}</View>
       <View style={contentStyles}>
         <Text.Header level={HeaderLevels.H4} color={content?.titleColor}>
           {content.title}
