@@ -25,3 +25,5 @@ export { default as CirclePurple } from './circlePurple.svg'
 export { default as CircleSmallGreenYellowSplatter } from './circleSmallGreenYellowSplatter.svg'
 export { default as CircleSmallYellowBlueSplatter } from './circleSmallYellowBlueSplatter.svg'
 export { default as CircleSmallYellowGreenSplatter } from './circleSmallYellowGreenSplatter.svg'
+
+export const BANNER_BG_GIRL_ON_BLUE = require('./bannerBgGirlOnBlue.png')

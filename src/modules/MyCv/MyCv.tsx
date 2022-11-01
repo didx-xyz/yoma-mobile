@@ -1,7 +1,7 @@
 import React from 'react'
 import { ScrollView } from 'react-native'
 
-import FirstTimeCard from '~/components/FirstTimeCard'
+import { StayTunedBannerCard } from '~/components/BannerCard'
 import ViewContainer from '~/components/ViewContainer'
 import { AboutWidget } from '~/modules/About'
 import { CompletedChallengesWidget } from '~/modules/CompletedChallenges'
@@ -22,7 +22,7 @@ const MyCv = ({ navigation }: Props) => (
   <ViewContainer style={styles.container}>
     <HomeHeader navigation={navigation} />
     <ScrollView contentContainerStyle={styles.scrollInnerContainer}>
-      <FirstTimeCard />
+      <StayTunedBannerCard />
       <AboutWidget navigation={navigation} />
       <WorkExperienceWidget navigation={navigation} />
       <EducationWidget navigation={navigation} />

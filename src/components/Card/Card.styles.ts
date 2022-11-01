@@ -7,7 +7,9 @@ const styles = {
     backgroundColor: colors[Colors.White],
     borderRadius: 12,
     elevation: 3,
-    margin: 10,
+    marginHorizontal: 10,
+    marginBottom: 10,
+    marginTop: 0,
   } as ViewStyle,
 }
 
