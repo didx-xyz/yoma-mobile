@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- creating WorkExperience credentials, updated Widgets to 'Work Experience'
+- adding generic banner
 
 Previous deployment release notes:
+- creating WorkExperience credentials, updated Widgets to 'Work Experience'
 - Fixing Skills selector (can select multiple skills)
 - Fixing Education
 - fix: empty fields causing app to break
