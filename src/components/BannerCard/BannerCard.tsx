@@ -6,34 +6,14 @@ import Text, { HeaderLevels } from '~/components/Typography'
 import { Colors } from '~/styles'
 
 import styles from './BannerCard.styles'
-
-interface Offset {
-  x: number
-  y: number
-}
-
-interface Background {
-  imageSrc?: number
-  imageOffset?: Offset
-  color?: Colors
-}
-
-interface Content {
-  title: string
-  titleColor?: Colors
-  body: string
-  bodyColor?: Colors
-  offset?: Offset
-}
+import { safeOffset } from './BannerCard.utils'
+import { Background, Content } from './types'
 
 interface Props {
   content: Content
   background?: Background
   height?: number
 }
-
-const OFFSET_FALLBACK = 0
-const safeOffset = (offset?: Offset) => (value: 'x' | 'y') => offset?.[value] || OFFSET_FALLBACK
 
 const BannerCard = ({ background, content, height = 190 }: Props) => {
   const containerStyles = useMemo(
