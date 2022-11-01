@@ -9,18 +9,18 @@ import styles from './Card.styles'
 
 type Props = ReactTypes.WithChildren<{
   backgroundColor?: Colors
+  corners?: 'bubble' | 'curved' | 'sharp'
   style?: ViewStyle
-  corners?: 'bubble' | 'round' | 'square'
 }>
 
-const Card = ({ children, backgroundColor = Colors.White, corners = 'round', style }: Props) => {
-  const viewStyles = useMemo(() => {
+const Card = ({ children, backgroundColor = Colors.White, corners = 'curved', style }: Props) => {
+  const containerStyles = useMemo(() => {
     const colorStyle = { backgroundColor: colors[backgroundColor] }
     const cornersStyle = { borderRadius: CORNERS_MAP[corners] }
     return StyleSheet.flatten([styles.container, colorStyle, cornersStyle, style])
   }, [backgroundColor, corners, style])
 
-  return <View style={viewStyles}>{children}</View>
+  return <View style={containerStyles}>{children}</View>
 }
 
 export default Card
