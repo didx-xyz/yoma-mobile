@@ -1,20 +1,23 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
-import { FormikValues } from 'formik'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
 
-export interface ProfileFormState {
-  values: FormikValues
-  isValid: boolean
+export enum Fields {
+  Firstname = 'firstName',
+  Lastname = 'lastName',
+  Email = 'email',
+  Country = 'countryAlpha2',
+  PhoneNumber = 'phoneNumber',
+  PhotoURL = 'photoURL',
 }
 
-export interface ProfileFormUser {
-  firstName: string
-  lastName: string
-  email: string | null
-  countryAlpha2: string | null
-  phoneNumber: string | null
-  photoURL: string | null
+export interface FormFields {
+  [Fields.Firstname]: string
+  [Fields.Lastname]: string
+  [Fields.Email]: string | null
+  [Fields.Country]: string | null
+  [Fields.PhoneNumber]: string | null
+  [Fields.PhotoURL]: string | null
 }
 
 export type ProfileNavigation = NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>

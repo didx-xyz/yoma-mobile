@@ -4,6 +4,7 @@ import { types as ApiTypes } from '~/api'
 import { UserCredentialOpportunityTypes, UserCredentialTypes } from '~/api/users/users.types'
 import { UserChallenge } from '~/modules/UserChallenges/UserChallenges.types'
 
+import { Fields } from '../Profile/Profile.types'
 import { UserWorkExperienceCredential } from '../UserWorkExperience/UserWorkExperience.types'
 
 export interface UserDetails {
@@ -44,10 +45,10 @@ export interface UpdateUserResponse {
 export type UpdateUserFailureResponse = string
 
 export interface UserPayload {
-  firstName?: string
-  lastName?: string
-  phoneNumber?: string | null
-  countryAlpha2?: string
+  [Fields.Firstname]?: string
+  [Fields.Lastname]?: string
+  [Fields.PhoneNumber]?: string | null
+  [Fields.Country]?: string
   biography?: string
 }
 

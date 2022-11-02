@@ -1,12 +1,13 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeDeepRight } from 'ramda'
 
+import { types as ProfileTypes } from '~/modules/Profile'
+
 import {
   UpdateUserFailureResponse,
   UpdateUserResponse,
   UserDetails,
   UserDetailsResponse,
-  UserPayload,
   UserResponse,
 } from './User.types'
 
@@ -44,7 +45,7 @@ export const hydrateUser = createAction(`${name} hydrateUser`)
 
 export const setUser = createAction<UserResponse>(`${name} setUser`)
 export const clearUser = createAction(`${name} clearUser`)
-export const updateUser = createAction<UserPayload>(`${name} updateUser`)
+export const updateUser = createAction<ProfileTypes.FormFields>(`${name} updateUser`)
 export const updateUserSuccess = createAction<UpdateUserResponse>(`${name} updateUserSuccess`)
 export const updateUserFailure = createAction<UpdateUserFailureResponse>(`${name} updateUserFailure`)
 export const uploadUserPhoto = createAction(`${name} uploadUserPhoto`)

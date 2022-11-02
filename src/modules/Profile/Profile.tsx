@@ -16,13 +16,13 @@ import { Colors } from '~/styles'
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '../HomeNavigation/HomeNavigation.types'
 import ProfileForm from './Profile.form'
 import styles from './Profile.styles'
-import { ProfileFormUser } from './Profile.types'
+import { FormFields } from './Profile.types'
 
 interface Props {
   onLogoutUser: () => void
   onPhotoSave: () => void
-  user: ProfileFormUser
-  form: FormikProps<any>
+  user: FormFields
+  form: FormikProps<FormFields>
   navigation: NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
 }
 

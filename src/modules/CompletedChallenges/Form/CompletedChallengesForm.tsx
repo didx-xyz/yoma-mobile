@@ -19,12 +19,12 @@ import { types as ChallengeTypes } from '~/modules/Challenges'
 
 import ChallengeInfo from './ChallengeInfo'
 import styles from './CompletedChallengesForm.styles'
-import { CompletedChallengesNavigation } from './CompletedChallengesForm.types'
+import { CompletedChallengesNavigation, FormFields } from './CompletedChallengesForm.types'
 
 interface Props {
   challenges: ChallengeTypes.NormalisedChallenges
   challengesDropDown: DropDownItem[]
-  form: FormikProps<any>
+  form: FormikProps<FormFields>
   navigation: CompletedChallengesNavigation
 }
 

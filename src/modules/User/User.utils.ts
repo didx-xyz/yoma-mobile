@@ -36,6 +36,7 @@ export const extractUserFromUpdateUserPayload = pick([
   'phoneNumber',
   'countryAlpha2',
   'biography',
+  'email',
 ])
 
 export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any) => {
