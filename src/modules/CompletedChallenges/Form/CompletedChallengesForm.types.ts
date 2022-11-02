@@ -3,7 +3,7 @@ import { DocumentPickerResponse } from 'react-native-document-picker'
 
 import { types as HomeNavigationTypes } from '~/modules/HomeNavigation'
 
-export type FormFields = {
+export interface FormFields {
   credentialItemId: string
   startTime: Date | null
   endTime: Date | null

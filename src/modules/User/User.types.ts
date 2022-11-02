@@ -43,12 +43,14 @@ export interface UpdateUserResponse {
 }
 export type UpdateUserFailureResponse = string
 
-export interface UserPayload {
-  firstName?: string
-  lastName?: string
-  phoneNumber?: string | null
-  countryAlpha2?: string
-  biography?: string
+export enum UserFields {
+  Firstname = 'firstName',
+  Lastname = 'lastName',
+  Email = 'email',
+  Country = 'countryAlpha2',
+  PhoneNumber = 'phoneNumber',
+  PhotoURL = 'photoURL',
+  Biography = 'biography',
 }
 
 export type UploadUserPhotoFlowDependencies = { imagePicker: any; createPayload: any }

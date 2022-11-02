@@ -50,14 +50,16 @@ describe('modules/User/User.utils', () => {
         lastName: 'LAST_NAME',
         photoURL: 'PHOTO_URL',
         countryAlpha2: 'COUNTRY_ALPHA2',
+        email: 'EMAIL',
         otherKey: 'OTHER_KEY',
       }
       const userPatchPayload = {
         firstName: 'FIRST_NAME',
         lastName: 'LAST_NAME',
+        email: 'EMAIL',
         countryAlpha2: 'COUNTRY_ALPHA2',
       }
-      // when extractUserFromUpdateUserPayload
+      // when
       const result = SUT.extractUserFromUpdateUserPayload(userUpdateData)
 
       //then expect user patch payload be returned

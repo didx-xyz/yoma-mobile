@@ -22,7 +22,7 @@ import * as Types from '~/types/general.types'
 import { renameKeys, safeWhen } from '~/utils/ramda.utils'
 
 import { USER_CREDENTIAL_TYPES_MAP, USER_PHOTO_FORM_DATA_NAME } from './User.constants'
-import { UserCredentialFormValues, UserCredentialItemPayload } from './User.types'
+import { UserCredentialFormValues, UserCredentialItemPayload, UserFields } from './User.types'
 
 export const extractUserFromPayload = pipe(
   path(['payload', 'data']),
@@ -31,11 +31,12 @@ export const extractUserFromPayload = pipe(
 
 export const extractUserFromUserUpdateSuccess = path(['payload', 'data', 'data'])
 export const extractUserFromUpdateUserPayload = pick([
-  'firstName',
-  'lastName',
-  'phoneNumber',
-  'countryAlpha2',
-  'biography',
+  UserFields.Firstname,
+  UserFields.Lastname,
+  UserFields.PhoneNumber,
+  UserFields.Country,
+  UserFields.Biography,
+  UserFields.Email,
 ])
 
 export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any) => {
