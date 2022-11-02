@@ -4,7 +4,6 @@ import { types as ApiTypes } from '~/api'
 import { UserCredentialOpportunityTypes, UserCredentialTypes } from '~/api/users/users.types'
 import { UserChallenge } from '~/modules/UserChallenges/UserChallenges.types'
 
-import { Fields } from '../Profile/Profile.types'
 import { UserWorkExperienceCredential } from '../UserWorkExperience/UserWorkExperience.types'
 
 export interface UserDetails {
@@ -44,12 +43,22 @@ export interface UpdateUserResponse {
 }
 export type UpdateUserFailureResponse = string
 
+export enum UserFields {
+  Firstname = 'firstName',
+  Lastname = 'lastName',
+  Email = 'email',
+  Country = 'countryAlpha2',
+  PhoneNumber = 'phoneNumber',
+  PhotoURL = 'photoURL',
+  Biography = 'biography',
+}
+
 export interface UserPayload {
-  [Fields.Firstname]?: string
-  [Fields.Lastname]?: string
-  [Fields.PhoneNumber]?: string | null
-  [Fields.Country]?: string
-  biography?: string
+  [UserFields.Firstname]?: string
+  [UserFields.Lastname]?: string
+  [UserFields.PhoneNumber]?: string | null
+  [UserFields.Country]?: string
+  [UserFields.Biography]?: string
 }
 
 export type UploadUserPhotoFlowDependencies = { imagePicker: any; createPayload: any }

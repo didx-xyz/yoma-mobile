@@ -1,23 +1,15 @@
 import { NativeStackNavigationProp } from '@react-navigation/native-stack'
 
 import { HomeNavigationRoutes, HomeNavigatorParamsList } from '~/modules/HomeNavigation/HomeNavigation.types'
-
-export enum Fields {
-  Firstname = 'firstName',
-  Lastname = 'lastName',
-  Email = 'email',
-  Country = 'countryAlpha2',
-  PhoneNumber = 'phoneNumber',
-  PhotoURL = 'photoURL',
-}
+import { types as UserTypes } from '~/modules/User'
 
 export interface FormFields {
-  [Fields.Firstname]: string
-  [Fields.Lastname]: string
-  [Fields.Email]: string | null
-  [Fields.Country]: string | null
-  [Fields.PhoneNumber]: string | null
-  [Fields.PhotoURL]: string | null
+  [UserTypes.UserFields.Firstname]: string
+  [UserTypes.UserFields.Lastname]: string
+  [UserTypes.UserFields.Email]: string | null
+  [UserTypes.UserFields.Country]: string | null
+  [UserTypes.UserFields.PhoneNumber]: string | null
+  [UserTypes.UserFields.PhotoURL]: string | null
 }
 
 export type ProfileNavigation = NativeStackNavigationProp<HomeNavigatorParamsList, HomeNavigationRoutes.Profile>
