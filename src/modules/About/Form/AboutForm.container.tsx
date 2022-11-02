@@ -3,7 +3,8 @@ import React from 'react'
 import { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { actions as UserActions } from '~/modules/User'
+// importing directly to avoid circular dependencies
+import * as UserActions from '~/modules/User/User.reducer'
 
 import selector from '../About.selector'
 import { AboutNavigation } from '../types'

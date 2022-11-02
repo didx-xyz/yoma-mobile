@@ -4,7 +4,6 @@ import { ScrollView } from 'react-native'
 import { StayTunedBannerCard } from '~/components/BannerCard'
 import ViewContainer from '~/components/ViewContainer'
 import { AboutWidget } from '~/modules/About'
-import { CompletedChallengesWidget } from '~/modules/CompletedChallenges'
 import { CompletedCoursesWidget } from '~/modules/CompletedCourses'
 import { EducationWidget } from '~/modules/Education'
 import HomeHeader from '~/modules/HomeHeader'
@@ -28,7 +27,6 @@ const MyCv = ({ navigation }: Props) => (
       <EducationWidget navigation={navigation} />
       <MySkillsWidget navigation={navigation} />
       <CompletedCoursesWidget navigation={navigation} />
-      <CompletedChallengesWidget navigation={navigation} />
     </ScrollView>
   </ViewContainer>
 )

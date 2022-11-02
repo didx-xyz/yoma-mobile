@@ -2,8 +2,10 @@ import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, mergeRight } from 'ramda'
 
 import { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
-import { constants as UserConstants } from '~/modules/User'
-import { selectors as UserChallengesSelectors, types as UserChallengesTypes } from '~/modules/UserChallenges'
+// importing directly to avoid circular dependencies
+import * as UserConstants from '~/modules/User/User.constants'
+import * as UserChallengesSelectors from '~/modules/UserChallenges/UserChallenges.selector'
+import * as UserChallengesTypes from '~/modules/UserChallenges/UserChallenges.types'
 
 import { getCompletedChallengesMetadata } from './CompletedChallengesView.utils'
 

@@ -1,3 +1,5 @@
+import { UserFields } from '~/modules/User/User.types'
+
 export type FormFields = {
-  biography: string
+  [UserFields.Biography]: string
 }
