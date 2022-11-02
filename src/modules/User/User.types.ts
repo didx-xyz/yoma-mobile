@@ -53,14 +53,6 @@ export enum UserFields {
   Biography = 'biography',
 }
 
-export interface UserPayload {
-  [UserFields.Firstname]?: string
-  [UserFields.Lastname]?: string
-  [UserFields.PhoneNumber]?: string | null
-  [UserFields.Country]?: string
-  [UserFields.Biography]?: string
-}
-
 export type UploadUserPhotoFlowDependencies = { imagePicker: any; createPayload: any }
 
 export interface UserResponse {
