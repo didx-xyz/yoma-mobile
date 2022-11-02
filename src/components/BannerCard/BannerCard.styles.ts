@@ -3,6 +3,7 @@ import { StyleSheet, ViewStyle } from 'react-native'
 const styles = {
   container: {
     overflow: 'hidden',
+    marginTop: 0,
   } as ViewStyle,
   backgroundImage: {
     position: 'absolute',
