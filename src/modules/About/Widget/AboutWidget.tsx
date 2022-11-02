@@ -38,7 +38,7 @@ const AboutWidget = ({ biography, navigation }: Props) => {
           <Text.Body>{biographyShort}</Text.Body>
         </Pressable>
         <Divider />
-        <Button label={t('View All')} variant={ButtonVariants.Clear} onPress={onViewAllNavigate} />
+        <Button label={t('View Full Biography')} variant={ButtonVariants.Clear} onPress={onViewAllNavigate} />
       </View>
     </CvWidget>
   )

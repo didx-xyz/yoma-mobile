@@ -1,8 +1,9 @@
 Ver 0.0.1
 Latest:
-- Fixing update email on profile update.
+- Removing 'info' section in About form, updating About widget 'View All' to 'View Full Biography'
 
 Previous deployment release notes:
+- Fixing update email on profile update.
 - adding generic banner
 - creating WorkExperience credentials, updated Widgets to 'Work Experience'
 - Fixing Skills selector (can select multiple skills)
