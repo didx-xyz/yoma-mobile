@@ -5,6 +5,7 @@ import { actions as ApiActions } from '~/api'
 import { constants as ApiQualificationsConstants } from '~/api/qualifications'
 import { actions as UserQualificationActions } from '~/modules/UserQualifications'
 
+import { UserCredentialTypes } from '../../api/users/users.types'
 import * as SUT from './Education.middleware'
 import { createEducation, createEducationFailure, createEducationSuccess } from './Education.reducer'
 
@@ -22,6 +23,7 @@ describe('modules/Education/Education.middleware', () => {
         countries: ['SOME COUNTRY'],
         skillNames: ['SKILL 1'],
         certificate: null,
+        type: UserCredentialTypes.Education,
       }
       // when ... we create the user's credentials
       const action = createEducation(mockPayload)

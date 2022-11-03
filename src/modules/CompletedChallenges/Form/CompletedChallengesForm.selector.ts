@@ -6,7 +6,7 @@ import { Challenge } from '~/modules/Challenges/Challenges.types'
 
 export default createSelector(selectChallenges, challenges => {
   const challengesDropDown = pipe(
-    map((challenge: Challenge) => ({ value: challenge.id, label: challenge.name })),
+    map((challenge: Challenge) => ({ value: challenge.id, label: challenge.title })),
     values,
   )(challenges.entities)
   return { challenges, challengesDropDown }
