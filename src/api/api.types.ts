@@ -20,13 +20,14 @@ export type ApiEndpoints =
 export enum ApiClients {
   Auth = 'auth',
   Challenges = 'challenges',
-  WorkExperience = 'workexperience',
+  Education = 'education',
   OAuth = 'connect',
-  Organisations = 'organisations',
   Opportunities = 'opportunities',
+  Organisations = 'organisations',
   Qualifications = 'qualifications',
   Skills = 'skills',
   Users = 'users',
+  WorkExperience = 'workexperience',
 }
 
 export enum ApiMethods {

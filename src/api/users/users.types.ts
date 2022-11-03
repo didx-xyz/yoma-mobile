@@ -11,6 +11,7 @@ export enum UserCredentialTypes {
   Challenge = 'Challenge',
   WorkExperience = 'Workexperience',
   Qualification = 'Qualification',
+  Education = 'Education',
 }
 
 export enum UserCredentialOpportunityTypes {

@@ -1,7 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, pick, pipe, slice } from 'ramda'
 
-import { constants as UserConstants } from '~/modules/User'
+import * as UserConstants from '~/modules/User/User.constants'
 import { selectUserChallenges } from '~/modules/UserChallenges/UserChallenges.selector'
 
 export default createSelector(selectUserChallenges, userChallenges => {

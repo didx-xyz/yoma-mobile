@@ -4,9 +4,9 @@ import React from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { actions as QualificationActions } from '~/modules/Qualifications'
 import * as FormUtils from '~/utils/form.utils'
 
+import { createEducation } from '../Education.reducer'
 import { EducationNavigation } from '../types'
 import EducationForm from './EducationForm'
 import { INITIAL_FORM_VALUES } from './EducationForm.constants'
@@ -25,7 +25,7 @@ const EducationFormContainer = ({ navigation }: Props) => {
 
   const handleSubmit = (values: FormFields) => {
     const education = pipe(FormUtils.sanitiseDateRange, FormUtils.countriesAsArray)(values)
-    dispatch(QualificationActions.createQualification(education))
+    dispatch(createEducation(education))
   }
 
   return (

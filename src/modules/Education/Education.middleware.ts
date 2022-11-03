@@ -3,7 +3,7 @@ import { mergeRight } from 'ramda'
 import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
-import { constants as ApiEducationConstants } from '~/api/qualifications'
+import { constants as ApiEducationConstants } from '~/api/education'
 import * as UserEducationActions from '~/modules/UserQualifications/UserQualifications.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
@@ -20,7 +20,7 @@ export const createEducationFlow: Middleware =
     if (createEducation.match(action)) {
       dispatch(
         ApiActions.apiRequest(
-          mergeRight(ApiEducationConstants.QUALIFICATIONS_CREATE_CONFIG, {
+          mergeRight(ApiEducationConstants.EDUCATION_CREATE_CONFIG, {
             onSuccess: createEducationSuccess,
             onFailure: createEducationFailure,
           }),

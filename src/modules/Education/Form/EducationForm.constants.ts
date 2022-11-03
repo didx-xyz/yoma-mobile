@@ -1,10 +1,10 @@
-import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
+import { UserCredentialTypes } from '~/api/users/users.types'
 
 import type { FormFields } from './EducationForm.types'
 
 export const INITIAL_FORM_VALUES: FormFields = {
   title: '',
-  type: UserCredentialOpportunityTypes.Qualification,
+  type: UserCredentialTypes.Education,
   description: '',
   organisationId: '',
   startTime: null,

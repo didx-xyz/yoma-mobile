@@ -1,10 +1,10 @@
 import { DocumentPickerResponse } from 'react-native-document-picker'
 
-import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
+import { UserCredentialTypes } from '~/api/users/users.types'
 
 export type FormFields = {
   title: string
-  type: UserCredentialOpportunityTypes
+  type: UserCredentialTypes
   description: string
   organisationId: string
   countries: string[] | null
