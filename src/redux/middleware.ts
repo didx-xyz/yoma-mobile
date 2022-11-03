@@ -11,6 +11,7 @@ import { middleware as AppMiddleware } from '~/modules/App'
 import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
 import { middleware as CountriesMiddleware } from '~/modules/Countries'
+import { middleware as EducationMiddleware } from '~/modules/Education'
 import { middleware as ErrorMiddleware } from '~/modules/Error'
 import { utils as NavigationUtils } from '~/modules/Navigation'
 import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
@@ -64,6 +65,9 @@ const featureModuleMiddleware = [
   QualificationsMiddleware.createQualificationFlow,
   QualificationsMiddleware.createQualificationSuccessFlow,
   QualificationsMiddleware.createQualificationFailureFlow({ notification: showSimpleMessage }),
+  EducationMiddleware.createEducationFlow,
+  EducationMiddleware.createEducationSuccessFlow,
+  EducationMiddleware.createEducationFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFailureFlow({ notification: showSimpleMessage }),
   SkillsMiddleware.fetchSkillsFlow,
   SkillsMiddleware.fetchSkillsSuccessFlow,
