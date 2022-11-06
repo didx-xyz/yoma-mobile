@@ -50,8 +50,8 @@ export const getUserEducationFromCredentialsFlow =
     const result = next(action)
     if (UserActions.fetchUserCredentialsSuccess.match(action)) {
       const data = extractDataFromPayload(action)
-      const qualifications = extractEducation(data)
-      dispatch(getUserEducationSuccess(qualifications))
+      const education = extractEducation(data)
+      dispatch(getUserEducationSuccess(education))
     }
     return result
   }

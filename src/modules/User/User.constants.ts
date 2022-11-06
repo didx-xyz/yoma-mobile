@@ -32,10 +32,12 @@ export const USER_CREDENTIAL_VIEW_SELECTOR_SPEC = {
 
 export const USER_CREDENTIAL_TYPES_MAP: Record<
   ApiUserTypes.UserCredentialTypes,
-  ApiUserTypes.UserCredentialOpportunityTypes
+  ApiUserTypes.UserCredentialOpportunityTypes | null
 > = {
   [ApiUserTypes.UserCredentialTypes.Assignment]: ApiUserTypes.UserCredentialOpportunityTypes.Assignment,
   [ApiUserTypes.UserCredentialTypes.Challenge]: ApiUserTypes.UserCredentialOpportunityTypes.Challenge,
   [ApiUserTypes.UserCredentialTypes.Qualification]: ApiUserTypes.UserCredentialOpportunityTypes.Qualification,
-  [ApiUserTypes.UserCredentialTypes.WorkExperience]: ApiUserTypes.UserCredentialOpportunityTypes.WorkExperience,
+  [ApiUserTypes.UserCredentialTypes.WorkExperience]: null,
+  [ApiUserTypes.UserCredentialTypes.Education]: null,
+  [ApiUserTypes.UserCredentialTypes.Opportunity]: null,
 }

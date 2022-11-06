@@ -86,7 +86,7 @@ const featureModuleMiddleware = [
   UserChallengesMiddleware.createUserChallengeCertificateFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Challenge),
+    UserUtils.extractUserOpportunityCredentials(ApiUsersTypes.UserCredentialTypes.Challenge),
   ),
   UserChallengesMiddleware.normaliseUserChallengesFlow({ normalise: ReduxUtils.normalise }),
   UserChallengesMiddleware.setUserChallengesFlow,
@@ -125,7 +125,7 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoSuccessFlow,
   UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Qualification),
+    UserUtils.extractUserOpportunityCredentials(ApiUsersTypes.UserCredentialTypes.Qualification),
   ),
   UserQualificationsMiddleware.normaliseUserQualificationsFlow({ normalise: ReduxUtils.normalise }),
   UserQualificationsMiddleware.setUserQualificationsFlow,

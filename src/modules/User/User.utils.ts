@@ -1,9 +1,12 @@
 import {
   always,
   applySpec,
+  equals,
   filter,
+  find,
   has,
   isEmpty,
+  keys,
   mergeRight,
   omit,
   path,
@@ -12,7 +15,9 @@ import {
   pipe,
   prop,
   reject,
+  toLower,
   values,
+  when,
 } from 'ramda'
 
 import { types as ApiUserTypes } from '~/api/users'
@@ -50,10 +55,13 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
   return photoPayload
 }
 
+export const filterCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
+  pipe(keys, find(pipe(toLower, equals(toLower(type)))))
+export const extractUserCredentials = (type: ApiUserTypes.UserCredentialTypes) => filter(filterCredentials(type))
+
 export const filterOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
   safeWhen(has('opportunity'), pathEq(['opportunity', 'type'], USER_CREDENTIAL_TYPES_MAP[type]))
-
-export const extractUserCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
+export const extractUserOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
   filter(filterOpportunityCredentials(type))
 
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
