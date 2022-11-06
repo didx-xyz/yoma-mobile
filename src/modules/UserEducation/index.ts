@@ -1,18 +1,7 @@
-import UserQualificationsForm from './Form'
-import * as middleware from './UserQualifications.middleware'
-import reducer, * as actions from './UserQualifications.reducer'
-import * as selectors from './UserQualifications.selector'
-import * as types from './UserQualifications.types'
-import UserQualificationsView from './View'
-import UserQualificationsWidget from './Widget'
+import * as middleware from './UserEducation.middleware'
+import reducer, * as actions from './UserEducation.reducer'
+import * as selectors from './UserEducation.selector'
+import * as types from './UserEducation.types'
+import * as utils from './UserEducation.utils'
 
-export {
-  actions,
-  reducer,
-  middleware,
-  types,
-  selectors,
-  UserQualificationsForm,
-  UserQualificationsWidget,
-  UserQualificationsView,
-}
+export { actions, reducer, middleware, types, selectors, utils }

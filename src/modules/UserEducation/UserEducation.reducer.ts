@@ -1,61 +1,61 @@
 import { createAction, createReducer } from '@reduxjs/toolkit'
 import { mergeRight } from 'ramda'
 
-import { Qualification } from '~/modules/Qualifications/Qualifications.types'
 import { types as UserTypes, utils as UserUtils } from '~/modules/User'
 import * as ReduxUtils from '~/redux/redux.utils'
 
+import { types as EducationTypes } from '../Education'
 import {
-  CreateUserQualificationCertificatePayload,
-  CreateUserQualificationSuccessResponse,
-  NormalisedUserQualifications,
-  UserQualification,
-  UserQualificationsState,
-} from './UserQualifications.types'
+  CreateUserEducationCertificatePayload,
+  CreateUserEducationSuccessResponse,
+  NormalisedUserEducation,
+  UserEducation,
+  UserEducationState,
+} from './UserEducation.types'
 
-const name = '[User: Qualifications]'
+const name = '[User: Education]'
 export const INITIAL_STATE = {
   ids: [],
   entities: {},
   formValues: {},
-} as UserQualificationsState
+} as UserEducationState
 
-export const getUserQualificationsSuccess = createAction<UserQualification[]>(`${name} getUserQualificationsSuccess`)
-export const normaliseUserQualificationsSuccess = createAction<NormalisedUserQualifications>(
-  `${name} normaliseUserQualificationsSuccess`,
-)
-
-export const createUserQualification = createAction<Qualification>(`${name} createUserQualification`)
-export const createUserQualificationSuccess = createAction<CreateUserQualificationSuccessResponse>(
-  `${name} createUserQualificationSuccess`,
-)
-export const createUserQualificationFailure = createAction<string>(`${name} createUserQualificationFailure`)
-
-export const setUserQualifications = createAction<NormalisedUserQualifications>(`${name} setUserQualifications`)
-export const updateUserQualifications = createAction<NormalisedUserQualifications>(`${name} updateUserQualifications`)
-export const clearUserQualifications = createAction(`${name} clearUserQualifications`)
-
-export const createUserQualificationCertificate = createAction<CreateUserQualificationCertificatePayload>(
-  `${name} createUserQualificationCertificate`,
-)
-export const createUserQualificationCertificateSuccess = createAction<UserTypes.UserCredentialMeta>(
-  `${name} createUserQualificationCertificateSuccess`,
-)
-export const createUserQualificationCertificateFailure = createAction<string>(
-  `${name} createUserQualificationCertificateFailure`,
+export const getUserEducationSuccess = createAction<UserEducation[]>(`${name} getUserEducationSuccess`)
+export const normaliseUserEducationSuccess = createAction<NormalisedUserEducation>(
+  `${name} normaliseUserEducationSuccess`,
 )
 
-export const setUserQualificationFormValues = createAction<UserTypes.UserCredentialFormValues>(
-  `${name} setUserQualificationFormValues`,
+export const createUserEducation = createAction<EducationTypes.Education>(`${name} createUserEducation`)
+export const createUserEducationSuccess = createAction<CreateUserEducationSuccessResponse>(
+  `${name} createUserEducationSuccess`,
 )
-export const clearUserQualificationFormValues = createAction(`${name} clearUserQualificationFormValues`)
+export const createUserEducationFailure = createAction<string>(`${name} createUserEducationFailure`)
+
+export const setUserEducation = createAction<NormalisedUserEducation>(`${name} setUserEducation`)
+export const updateUserEducation = createAction<NormalisedUserEducation>(`${name} updateUserEducation`)
+export const clearUserEducation = createAction(`${name} clearUserEducation`)
+
+export const createUserEducationCertificate = createAction<CreateUserEducationCertificatePayload>(
+  `${name} createUserEducationCertificate`,
+)
+export const createUserEducationCertificateSuccess = createAction<UserTypes.UserCredentialMeta>(
+  `${name} createUserEducationCertificateSuccess`,
+)
+export const createUserEducationCertificateFailure = createAction<string>(
+  `${name} createUserEducationCertificateFailure`,
+)
+
+export const setUserEducationFormValues = createAction<UserTypes.UserCredentialFormValues>(
+  `${name} setUserEducationFormValues`,
+)
+export const clearUserEducationFormValues = createAction(`${name} clearUserEducationFormValues`)
 
 const reducer = createReducer(INITIAL_STATE, builder => {
-  builder.addCase(setUserQualifications, (state, action) => mergeRight(state.formValues, action.payload))
-  builder.addCase(updateUserQualifications, ReduxUtils.updateNormalisedReducer)
-  builder.addCase(clearUserQualifications, (_state, _action) => INITIAL_STATE)
-  builder.addCase(setUserQualificationFormValues, (state, action) => UserUtils.setFormValues(state, action.payload))
-  builder.addCase(clearUserQualificationFormValues, (state, _action) => mergeRight(state, { formValues: {} }))
+  builder.addCase(setUserEducation, (state, action) => mergeRight(state.formValues, action.payload))
+  builder.addCase(updateUserEducation, ReduxUtils.updateNormalisedReducer)
+  builder.addCase(clearUserEducation, (_state, _action) => INITIAL_STATE)
+  builder.addCase(setUserEducationFormValues, (state, action) => UserUtils.setFormValues(state, action.payload))
+  builder.addCase(clearUserEducationFormValues, (state, _action) => mergeRight(state, { formValues: {} }))
 })
 
 export default reducer

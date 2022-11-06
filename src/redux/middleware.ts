@@ -19,6 +19,7 @@ import { middleware as QualificationsMiddleware } from '~/modules/Qualifications
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '~/modules/User'
 import { middleware as UserChallengesMiddleware } from '~/modules/UserChallenges'
+import { middleware as UserEducationMiddleware } from '~/modules/UserEducation'
 import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualifications'
 import { middleware as UserSkillsMiddleware } from '~/modules/UserSkills'
 import { middleware as UserWorkExperiencesMiddleware } from '~/modules/UserWorkExperience'
@@ -89,19 +90,22 @@ const featureModuleMiddleware = [
   ),
   UserChallengesMiddleware.normaliseUserChallengesFlow({ normalise: ReduxUtils.normalise }),
   UserChallengesMiddleware.setUserChallengesFlow,
-  UserWorkExperiencesMiddleware.createUserWorkExperienceFailureFlow({ notification: showSimpleMessage }),
-  UserWorkExperiencesMiddleware.createUserWorkExperienceFlow,
-  UserWorkExperiencesMiddleware.createUserWorkExperienceSuccessFlow,
-  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdFailureFlow({ notification: showSimpleMessage }),
-  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdFlow,
-  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdSuccessFlow({ notification: showSimpleMessage }),
-  UserWorkExperiencesMiddleware.getUserWorkExperiencesFromCredentialsFlow(
+  UserEducationMiddleware.getUserEducationFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.WorkExperience),
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Education),
   ),
-  UserWorkExperiencesMiddleware.normaliseUserWorkExperiencesFlow({ normalise: ReduxUtils.normalise }),
-  UserWorkExperiencesMiddleware.setUserWorkExperiencesFlow,
-  UserWorkExperiencesMiddleware.setUserWorkExperiencesFormValuesFlow,
+  UserEducationMiddleware.normaliseUserEducationFlow({ normalise: ReduxUtils.normalise }),
+  UserEducationMiddleware.setUserEducationFlow,
+  UserEducationMiddleware.setUserEducationFormValuesFlow,
+  UserEducationMiddleware.createUserEducationFlow,
+  UserEducationMiddleware.createUserEducationSuccessFlow({
+    normalise: ReduxUtils.normalise,
+    notification: showSimpleMessage,
+  }),
+  UserEducationMiddleware.createUserEducationFailureFlow({ notification: showSimpleMessage }),
+  UserEducationMiddleware.createUserEducationCertificateFlow,
+  UserEducationMiddleware.createUserEducationCertificateSuccessFlow({ normalise: ReduxUtils.normalise }),
+  UserEducationMiddleware.createUserEducationCertificateFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.fetchUserCredentialsFailureFlow({ notification: showSimpleMessage }),
   UserMiddleware.fetchUserCredentialsFlow,
   UserMiddleware.setUserOnAuthFlow,
@@ -141,6 +145,19 @@ const featureModuleMiddleware = [
   UserSkillsMiddleware.addUserSkillsFlow,
   UserSkillsMiddleware.addUserSkillsSuccessFlow({ notification: showSimpleMessage }),
   UserSkillsMiddleware.addUserSkillsFailureFlow({ notification: showSimpleMessage }),
+  UserWorkExperiencesMiddleware.createUserWorkExperienceFailureFlow({ notification: showSimpleMessage }),
+  UserWorkExperiencesMiddleware.createUserWorkExperienceFlow,
+  UserWorkExperiencesMiddleware.createUserWorkExperienceSuccessFlow,
+  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdFailureFlow({ notification: showSimpleMessage }),
+  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdFlow,
+  UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdSuccessFlow({ notification: showSimpleMessage }),
+  UserWorkExperiencesMiddleware.getUserWorkExperiencesFromCredentialsFlow(
+    ReduxUtils.extractDataFromResponseAction,
+    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.WorkExperience),
+  ),
+  UserWorkExperiencesMiddleware.normaliseUserWorkExperiencesFlow({ normalise: ReduxUtils.normalise }),
+  UserWorkExperiencesMiddleware.setUserWorkExperiencesFlow,
+  UserWorkExperiencesMiddleware.setUserWorkExperiencesFormValuesFlow,
   WorkExperienceMiddleware.createWorkExperienceFailureFlow({ notification: showSimpleMessage }),
   WorkExperienceMiddleware.createWorkExperienceFlow,
   WorkExperienceMiddleware.createWorkExperienceSuccessFlow,

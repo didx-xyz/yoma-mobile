@@ -1,9 +1,9 @@
 import { createFixture } from 'tests/tests.utils'
 
-import { UserCredentialOpportunityTypes } from '../../api/users/users.types'
-import { INITIAL_FORM_VALUES } from './Form/UserQualificationsForm.constants'
+import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
+import { INITIAL_FORM_VALUES } from '~/modules/Education/Form/EducationForm.constants'
 
-export const USER_QUALIFICATIONS_MOCK = [
+export const USER_EDUCATION_MOCK = [
   {
     opportunity: {
       organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
@@ -43,7 +43,7 @@ export const USER_QUALIFICATIONS_MOCK = [
   },
 ]
 
-export const USER_QUALIFICATIONS_STATE_MOCK = {
+export const USER_EDUCATION_STATE_MOCK = {
   ids: ['USER_QUALIFICATIONS_STATE_MOCK-001', 'USER_QUALIFICATIONS_STATE_MOCK-002'],
   entities: {
     'USER_QUALIFICATIONS_STATE_MOCK-001': {
@@ -124,4 +124,4 @@ export const USER_QUALIFICATIONS_STATE_MOCK = {
   formFields: INITIAL_FORM_VALUES,
 }
 
-export const userQualificationsStateFixture = createFixture(USER_QUALIFICATIONS_STATE_MOCK)
+export const userEducationStateFixture = createFixture(USER_EDUCATION_STATE_MOCK)

@@ -1,14 +1,14 @@
 import SUT, {
   INITIAL_STATE,
-  clearUserQualificationFormValues,
-  clearUserQualifications,
-  setUserQualificationFormValues,
-  setUserQualifications,
-  updateUserQualifications,
-} from './UserQualifications.reducer'
+  clearUserEducation,
+  clearUserEducationFormValues,
+  setUserEducation,
+  setUserEducationFormValues,
+  updateUserEducation,
+} from './UserEducation.reducer'
 
-describe('modules/UserQualifications/UserQualifications.redux', () => {
-  describe('setUserQualifications', () => {
+describe('modules/UserEducation/UserEducation.redux', () => {
+  describe('setUserEducation', () => {
     it('should correctly add the qualifications credentials', () => {
       // given ...an initial state
       const state = INITIAL_STATE
@@ -17,13 +17,13 @@ describe('modules/UserQualifications/UserQualifications.redux', () => {
       const qualificationsMock = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Qualification 1',
-          id2: 'Qualification 2',
-          id3: 'Qualification 3',
+          id1: 'Education 1',
+          id2: 'Education 2',
+          id3: 'Education 3',
         },
       }
       // @ts-ignore
-      const action = setUserQualifications(qualificationsMock)
+      const action = setUserEducation(qualificationsMock)
       const result = SUT(state, action)
 
       // then ... state should include the new qualifications
@@ -34,8 +34,8 @@ describe('modules/UserQualifications/UserQualifications.redux', () => {
       const state = {
         ids: ['idA', 'idB'],
         entities: {
-          idA: 'Qualification A',
-          idB: 'Qualification B',
+          idA: 'Education A',
+          idB: 'Education B',
         },
       }
 
@@ -43,13 +43,13 @@ describe('modules/UserQualifications/UserQualifications.redux', () => {
       const qualificationsMock = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Qualification 1',
-          id2: 'Qualification 2',
-          id3: 'Qualification 3',
+          id1: 'Education 1',
+          id2: 'Education 2',
+          id3: 'Education 3',
         },
       }
       // @ts-ignore - the shape of the data doesn't matter
-      const action = setUserQualifications(qualificationsMock)
+      const action = setUserEducation(qualificationsMock)
       // @ts-ignore - the shape of the data doesn't matter
       const result = SUT(state, action)
 
@@ -57,75 +57,75 @@ describe('modules/UserQualifications/UserQualifications.redux', () => {
       expect(result).toEqual(qualificationsMock)
     })
   })
-  describe('updateUserQualifications', () => {
-    it('should correctly update the userQualifications state', () => {
+  describe('updateUserEducation', () => {
+    it('should correctly update the userEducation state', () => {
       // given ...an initial state
       const state = INITIAL_STATE
 
-      // when ... we add new Qualifications
-      const QualificationsMock = {
+      // when ... we add new Education
+      const EducationMock = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Qualification 1',
-          id2: 'Qualification 2',
-          id3: 'Qualification 3',
+          id1: 'Education 1',
+          id2: 'Education 2',
+          id3: 'Education 3',
         },
         formValues: {},
       }
       // @ts-ignore
-      const action = updateUserQualifications(QualificationsMock)
+      const action = updateUserEducation(EducationMock)
       const result = SUT(state, action)
 
-      // then ... state should include the new Qualifications
-      expect(result).toEqual(QualificationsMock)
+      // then ... state should include the new Education
+      expect(result).toEqual(EducationMock)
     })
     it('should merge updated values with normalised state', () => {
       // given ...an initial state
       const state = {
         ids: ['idA', 'idB'],
         entities: {
-          idA: 'Qualification A',
-          idB: 'Qualification B',
+          idA: 'Education A',
+          idB: 'Education B',
         },
       }
 
-      // when ... we add new Qualifications
-      const QualificationsMock = {
+      // when ... we add new Education
+      const EducationMock = {
         ids: ['idC'],
         entities: {
-          idC: 'Qualification C',
+          idC: 'Education C',
         },
       }
       // @ts-ignore - the shape of the data doesn't matter
-      const action = updateUserQualifications(QualificationsMock)
+      const action = updateUserEducation(EducationMock)
       // @ts-ignore - the shape of the data doesn't matter
       const result = SUT(state, action)
 
-      // then ... state should include the new Qualifications
+      // then ... state should include the new Education
       expect(result).toEqual({
         ids: ['idA', 'idB', 'idC'],
         entities: {
-          idA: 'Qualification A',
-          idB: 'Qualification B',
-          idC: 'Qualification C',
+          idA: 'Education A',
+          idB: 'Education B',
+          idC: 'Education C',
         },
       })
     })
   })
-  describe('clearUserQualifications', () => {
+  describe('clearUserEducation', () => {
     it('should correctly clear the qualifications credentials', () => {
       // given ...an initial state
       const state = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Qualification 1',
-          id2: 'Qualification 2',
-          id3: 'Qualification 3',
+          id1: 'Education 1',
+          id2: 'Education 2',
+          id3: 'Education 3',
         },
       }
 
       // when ... we clear qualifications
-      const action = clearUserQualifications()
+      const action = clearUserEducation()
       // @ts-ignore
       const result = SUT(state, action)
 
@@ -133,8 +133,8 @@ describe('modules/UserQualifications/UserQualifications.redux', () => {
       expect(result).toEqual(INITIAL_STATE)
     })
   })
-  describe('setUserQualificationsFormValues', () => {
-    it('should temporarily set form values for userQualifications create/update API', () => {
+  describe('setUserEducationFormValues', () => {
+    it('should temporarily set form values for userEducation create/update API', () => {
       // given ...an initial state
       const state = {
         ids: 'Normalised Ids array',
@@ -143,13 +143,13 @@ describe('modules/UserQualifications/UserQualifications.redux', () => {
 
       const formValues = 'Temporary Form Object'
 
-      // when ... we setUserQualificationsFormValues
+      // when ... we setUserEducationFormValues
       // @ts-ignore
-      const action = setUserQualificationFormValues(formValues)
+      const action = setUserEducationFormValues(formValues)
       // @ts-ignore
       const result = SUT(state, action)
 
-      // then ... state should include the new Qualifications
+      // then ... state should include the new Education
       expect(result).toEqual({
         ids: 'Normalised Ids array',
         entities: 'Normalised Entities Object',
@@ -161,54 +161,54 @@ describe('modules/UserQualifications/UserQualifications.redux', () => {
       const state = {
         ids: ['idA', 'idB'],
         entities: {
-          idA: 'Qualification A',
-          idB: 'Qualification B',
+          idA: 'Education A',
+          idB: 'Education B',
         },
       }
 
-      // when ... we add new Qualifications
-      const QualificationsMock = {
+      // when ... we add new Education
+      const EducationMock = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Qualification 1',
-          id2: 'Qualification 2',
-          id3: 'Qualification 3',
+          id1: 'Education 1',
+          id2: 'Education 2',
+          id3: 'Education 3',
         },
       }
       // @ts-ignore - the shape of the data doesn't matter
-      const action = setUserQualifications(QualificationsMock)
+      const action = setUserEducation(EducationMock)
       // @ts-ignore - the shape of the data doesn't matter
       const result = SUT(state, action)
 
-      // then ... state should include the new Qualifications
-      expect(result).toEqual(QualificationsMock)
+      // then ... state should include the new Education
+      expect(result).toEqual(EducationMock)
     })
   })
-  describe('clearUserQualificationsFormValues', () => {
+  describe('clearUserEducationFormValues', () => {
     it('should correctly clear the form data', () => {
       // given ...an initial state
       const state = {
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Qualification 1',
-          id2: 'Qualification 2',
-          id3: 'Qualification 3',
+          id1: 'Education 1',
+          id2: 'Education 2',
+          id3: 'Education 3',
         },
         formValues: 'form data',
       }
 
-      // when ... we clear Qualifications
-      const action = clearUserQualificationFormValues()
+      // when ... we clear Education
+      const action = clearUserEducationFormValues()
       // @ts-ignore
       const result = SUT(state, action)
 
-      // then ... state should include the new Qualifications
+      // then ... state should include the new Education
       expect(result).toEqual({
         ids: ['id1', 'id2', 'id3'],
         entities: {
-          id1: 'Qualification 1',
-          id2: 'Qualification 2',
-          id3: 'Qualification 3',
+          id1: 'Education 1',
+          id2: 'Education 2',
+          id3: 'Education 3',
         },
         formValues: {},
       })

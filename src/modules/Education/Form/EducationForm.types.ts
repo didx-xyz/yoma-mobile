@@ -6,7 +6,7 @@ export type FormFields = {
   title: string
   type: UserCredentialTypes
   description: string
-  organisationId: stringw
+  organisationId: string
   countries: string[] | null
   startTime: string | Date | null
   endTime: string | Date | null

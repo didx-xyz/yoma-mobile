@@ -7,7 +7,7 @@ import { types as MyCvTypes } from '~/modules/MyCv'
 import { Colors } from '~/styles'
 
 interface Props {
-  userQualifications: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
+  userEducation: CvWidgetCredentialTypes.NormalisedCvWidgetCredentialItems
   count: number
   title: string
   badgeColor: Colors
@@ -18,7 +18,7 @@ interface Props {
 }
 
 const UserQualificationsWidget = ({
-  userQualifications,
+  userEducation,
   count,
   badgeColor,
   title,
@@ -36,12 +36,7 @@ const UserQualificationsWidget = ({
       navigation.navigate(formRoute)
     }}
   >
-    <CvWidgetList
-      data={userQualifications}
-      viewRoute={viewRoute}
-      navigation={navigation}
-      RenderItem={CvWidgetCredential}
-    />
+    <CvWidgetList data={userEducation} viewRoute={viewRoute} navigation={navigation} RenderItem={CvWidgetCredential} />
   </CvWidget>
 )
 export default UserQualificationsWidget

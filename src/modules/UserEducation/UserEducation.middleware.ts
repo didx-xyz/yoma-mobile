@@ -6,10 +6,10 @@ import { Middleware } from 'redux'
 import { actions as ApiActions, utils as ApiUtils } from '~/api'
 import { constants as ApiUsersConstants, types as ApiUsersTypes } from '~/api/users'
 import * as Strings from '~/constants/strings.constants'
+import { actions as EducationActions } from '~/modules/Education'
 import { utils as ErrorUtils } from '~/modules/Error'
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
 import { types as NavigationTypes, utils as NavigationUtils } from '~/modules/Navigation'
-import { actions as QualificationsActions } from '~/modules/Qualifications'
 import {
   actions as UserActions,
   constants as UserConstants,
@@ -23,26 +23,26 @@ import * as GeneralTypes from '~/types/general.types'
 import { showSimpleMessage } from '~/utils/error'
 
 import {
-  clearUserQualificationFormValues,
-  createUserQualification,
-  createUserQualificationCertificate,
-  createUserQualificationCertificateFailure,
-  createUserQualificationCertificateSuccess,
-  createUserQualificationFailure,
-  createUserQualificationSuccess,
-  getUserQualificationsSuccess,
-  normaliseUserQualificationsSuccess,
-  setUserQualificationFormValues,
-  setUserQualifications,
-  updateUserQualifications,
-} from './UserQualifications.reducer'
-import { selectFormCertificate, selectFormValues } from './UserQualifications.selector'
-import { UserQualification } from './UserQualifications.types'
+  clearUserEducationFormValues,
+  createUserEducation,
+  createUserEducationCertificate,
+  createUserEducationCertificateFailure,
+  createUserEducationCertificateSuccess,
+  createUserEducationFailure,
+  createUserEducationSuccess,
+  getUserEducationSuccess,
+  normaliseUserEducationSuccess,
+  setUserEducation,
+  setUserEducationFormValues,
+  updateUserEducation,
+} from './UserEducation.reducer'
+import { selectFormCertificate, selectFormValues } from './UserEducation.selector'
+import { UserEducation } from './UserEducation.types'
 
-export const getUserQualificationsFromCredentialsFlow =
+export const getUserEducationFromCredentialsFlow =
   (
     extractDataFromPayload: GeneralTypes.StdFn<any, UserTypes.UserCredentials>,
-    extractQualifications: GeneralTypes.StdFn<UserTypes.UserCredentials, UserQualification[]>,
+    extractEducation: GeneralTypes.StdFn<UserTypes.UserCredentials, UserEducation[]>,
   ): Middleware =>
   ({ dispatch }) =>
   next =>
@@ -50,111 +50,111 @@ export const getUserQualificationsFromCredentialsFlow =
     const result = next(action)
     if (UserActions.fetchUserCredentialsSuccess.match(action)) {
       const data = extractDataFromPayload(action)
-      const qualifications = extractQualifications(data)
-      dispatch(getUserQualificationsSuccess(qualifications))
+      const qualifications = extractEducation(data)
+      dispatch(getUserEducationSuccess(qualifications))
     }
     return result
   }
 
-export const normaliseUserQualificationsFlow =
-  ({ normalise }: ReduxTypes.NormaliseDependency<UserQualification>): Middleware =>
+export const normaliseUserEducationFlow =
+  ({ normalise }: ReduxTypes.NormaliseDependency<UserEducation>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (getUserQualificationsSuccess.match(action)) {
-      const normalisedQualifications = normalise(action.payload)
-      dispatch(normaliseUserQualificationsSuccess(normalisedQualifications))
+    if (getUserEducationSuccess.match(action)) {
+      const normalisedEducation = normalise(action.payload)
+      dispatch(normaliseUserEducationSuccess(normalisedEducation))
     }
     return result
   }
 
-export const setUserQualificationsFlow: Middleware =
+export const setUserEducationFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (normaliseUserQualificationsSuccess.match(action)) {
-      dispatch(setUserQualifications(action.payload))
+    if (normaliseUserEducationSuccess.match(action)) {
+      dispatch(setUserEducation(action.payload))
     }
     return result
   }
 
-export const setUserQualificationFormValuesFlow: Middleware =
+export const setUserEducationFormValuesFlow: Middleware =
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
-    if (QualificationsActions.createQualification.match(action)) {
-      const formValues = UserUtils.extractUserCredentialFormValues(ApiUsersTypes.UserCredentialTypes.Qualification)(
+    if (EducationActions.createEducation.match(action)) {
+      const formValues = UserUtils.extractUserCredentialFormValues(ApiUsersTypes.UserCredentialTypes.Education)(
         action.payload,
       )
-      dispatch(setUserQualificationFormValues(formValues))
+      dispatch(setUserEducationFormValues(formValues))
     }
     return result
   }
 
-export const createUserQualificationFlow: Middleware =
+export const createUserEducationFlow: Middleware =
   ({ getState, dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (createUserQualification.match(action)) {
+    if (createUserEducation.match(action)) {
       const state = getState()
       const userId = UserSelectors.selectId(state)
 
       const formValues = pipe(selectFormValues, omit(['certificate']))(state)
-      const userQualificationsPayload = UserUtils.prepareUserCredentialItemPayload(action)(formValues)
+      const userEducationPayload = UserUtils.prepareUserCredentialItemPayload(action)(formValues)
 
       const config = ApiUtils.prependValueToEndpointInConfig(ApiUsersConstants.USERS_CREDENTIALS_CREATE_CONFIG)(userId)
 
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: createUserQualificationSuccess,
-            onFailure: createUserQualificationFailure,
+            onSuccess: createUserEducationSuccess,
+            onFailure: createUserEducationFailure,
           }),
-          userQualificationsPayload,
+          userEducationPayload,
         ),
       )
     }
     return result
   }
 
-export const createUserQualificationSuccessFlow =
+export const createUserEducationSuccessFlow =
   ({
     normalise,
     notification,
-  }: ReduxTypes.NormaliseDependency<UserQualification> & { notification: typeof showSimpleMessage }): Middleware =>
+  }: ReduxTypes.NormaliseDependency<UserEducation> & { notification: typeof showSimpleMessage }): Middleware =>
   ({ dispatch, getState }) =>
   next =>
   action => {
     const result = next(action)
-    if (createUserQualificationSuccess.match(action)) {
+    if (createUserEducationSuccess.match(action)) {
       const state = getState()
       const certificate = selectFormCertificate(state) as DocumentPickerResponse | undefined
       const data = ReduxUtils.extractDataFromResponseAction(action)
       const normalised = normalise([data])
-      dispatch(updateUserQualifications(normalised))
+      dispatch(updateUserEducation(normalised))
       if (certificate) {
-        dispatch(createUserQualificationCertificate({ id: data.id, certificate }))
+        dispatch(createUserEducationCertificate({ id: data.id, certificate }))
       }
-      dispatch(clearUserQualificationFormValues())
+      dispatch(clearUserEducationFormValues())
       NavigationUtils.navigate(HomeNavigationRoutes.Home as keyof NavigationTypes.ParamsList)
       notification('success', i18n.t(Strings.YOUR_QUALIFICATION_HAS_BEEN_ADDED))
     }
     return result
   }
 
-export const createUserQualificationFailureFlow =
+export const createUserEducationFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
   action => {
     const result = next(action)
 
-    if (createUserQualificationFailure.match(action)) {
+    if (createUserEducationFailure.match(action)) {
       const errorMessage = ErrorUtils.extractErrorResponseMessage(action)
       // TODO: this should be handled by the notification module
       notification('danger', i18n.t('general.error'), errorMessage)
@@ -162,13 +162,13 @@ export const createUserQualificationFailureFlow =
     return result
   }
 
-export const createUserQualificationCertificateFlow: Middleware =
+export const createUserEducationCertificateFlow: Middleware =
   ({ dispatch, getState }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (createUserQualificationCertificate.match(action)) {
+    if (createUserEducationCertificate.match(action)) {
       const state = getState()
       const userId = UserSelectors.selectId(state)
       const config = ApiUtils.zipIdsIntoConfigEndpoint([userId, action.payload.id])(
@@ -182,8 +182,8 @@ export const createUserQualificationCertificateFlow: Middleware =
       dispatch(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: createUserQualificationCertificateSuccess,
-            onFailure: createUserQualificationCertificateFailure,
+            onSuccess: createUserEducationCertificateSuccess,
+            onFailure: createUserEducationCertificateFailure,
           }),
           formData,
         ),
@@ -192,30 +192,30 @@ export const createUserQualificationCertificateFlow: Middleware =
     return result
   }
 
-export const createUserQualificationCertificateSuccessFlow =
-  ({ normalise }: ReduxTypes.NormaliseDependency<UserQualification>): Middleware =>
+export const createUserEducationCertificateSuccessFlow =
+  ({ normalise }: ReduxTypes.NormaliseDependency<UserEducation>): Middleware =>
   ({ dispatch }) =>
   next =>
   action => {
     const result = next(action)
 
-    if (createUserQualificationCertificateSuccess.match(action)) {
+    if (createUserEducationCertificateSuccess.match(action)) {
       const credential = ReduxUtils.extractDataFromResponseAction(action)
       const normalisedCredential = normalise([credential])
-      dispatch(updateUserQualifications(normalisedCredential))
+      dispatch(updateUserEducation(normalisedCredential))
     }
 
     return result
   }
 
-export const createUserQualificationCertificateFailureFlow =
+export const createUserEducationCertificateFailureFlow =
   ({ notification }: { notification: typeof showSimpleMessage }): Middleware =>
   _store =>
   next =>
   action => {
     const result = next(action)
 
-    if (createUserQualificationCertificateFailure.match(action)) {
+    if (createUserEducationCertificateFailure.match(action)) {
       // TODO: this should be handled by the notification module
       notification(
         'danger',

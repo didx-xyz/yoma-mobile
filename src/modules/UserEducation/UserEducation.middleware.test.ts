@@ -3,129 +3,129 @@ import { createMiddlewareMock } from 'tests/tests.utils'
 
 import { actions as ApiActions, types as ApiTypes } from '~/api'
 import { types as ApiUserTypes, constants as ApiUsersConstants } from '~/api/users'
-import { actions as QualificationsActions } from '~/modules/Qualifications'
+import { actions as EducationActions } from '~/modules/Education'
 import * as UserFixtures from '~/modules/User/User.fixture'
 import * as UserActions from '~/modules/User/User.reducer'
 
-import { userQualificationsStateFixture } from './UserQualifications.fixture'
-import * as SUT from './UserQualifications.middleware'
+import { userEducationStateFixture } from './UserEducation.fixture'
+import * as SUT from './UserEducation.middleware'
 import {
-  clearUserQualificationFormValues,
-  createUserQualification,
-  createUserQualificationCertificate,
-  createUserQualificationCertificateSuccess,
-  createUserQualificationFailure,
-  createUserQualificationSuccess,
-  getUserQualificationsSuccess,
-  normaliseUserQualificationsSuccess,
-  setUserQualificationFormValues,
-  setUserQualifications,
-  updateUserQualifications,
-} from './UserQualifications.reducer'
+  clearUserEducationFormValues,
+  createUserEducation,
+  createUserEducationCertificate,
+  createUserEducationCertificateSuccess,
+  createUserEducationFailure,
+  createUserEducationSuccess,
+  getUserEducationSuccess,
+  normaliseUserEducationSuccess,
+  setUserEducation,
+  setUserEducationFormValues,
+  updateUserEducation,
+} from './UserEducation.reducer'
 
-describe('modules/UserQualifications/UserQualifications.middleware', () => {
-  describe('getUserQualificationsFromCredentialsFlow', () => {
-    it(' should intercept the credentials data and pass on the correct qualifications data', () => {
+describe('modules/UserEducation/UserEducation.middleware', () => {
+  describe('getUserEducationFromCredentialsFlow', () => {
+    it(' should intercept the credentials data and pass on the correct education data', () => {
       // given ...credential data in an action payload
       const create = createMiddlewareMock(jest)
-      const credentialsResponseMock = ['qualification1', 'job1', 'assignment1', 'qualification2']
-      const qualificationCredentialsMock = ['qualification1', 'qualification2']
+      const credentialsResponseMock = ['education1', 'job1', 'assignment1', 'education2']
+      const educationCredentialsMock = ['education1', 'education2']
       const action = UserActions.fetchUserCredentialsSuccess(credentialsResponseMock)
 
-      // when ... we intercept the data and extract qualifications
+      // when ... we intercept the data and extract education
       const extractDataFromPayloadMock = jest.fn()
-      const extractQualificationsMock = jest.fn(() => qualificationCredentialsMock)
+      const extractEducationMock = jest.fn(() => educationCredentialsMock)
       const { invoke, store, next } = create(
         // @ts-ignore - actual shape of data doesn't matter
-        SUT.getUserQualificationsFromCredentialsFlow(extractDataFromPayloadMock, extractQualificationsMock),
+        SUT.getUserEducationFromCredentialsFlow(extractDataFromPayloadMock, extractEducationMock),
       )
       invoke(action)
 
       // then ... we should pass on the extracted data
-      expect(extractQualificationsMock).toHaveBeenCalled()
+      expect(extractEducationMock).toHaveBeenCalled()
       // @ts-ignore - actual shape of data doesn't matter
-      expect(store.dispatch).toHaveBeenCalledWith(getUserQualificationsSuccess(qualificationCredentialsMock))
+      expect(store.dispatch).toHaveBeenCalledWith(getUserEducationSuccess(educationCredentialsMock))
       expect(next).toHaveBeenCalledWith(action)
     })
   })
-  describe('normaliseUserQualificationsFlow', () => {
+  describe('normaliseUserEducationFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareMock(jest)
-      const qualificationCredentialsMock = [{ id1: 'qualification1' }, { id2: 'qualification2' }]
-      const normalisedQualificationsMock = {
+      const educationCredentialsMock = [{ id1: 'education1' }, { id2: 'education2' }]
+      const normalisedEducationMock = {
         ids: ['id1', 'id2'],
-        entries: { id1: 'qualification 1', id2: 'qualification 2' },
+        entries: { id1: 'education 1', id2: 'education 2' },
       }
-      const normaliseMock = jest.fn(() => normalisedQualificationsMock)
+      const normaliseMock = jest.fn(() => normalisedEducationMock)
       // @ts-ignore - data shape doesn't matter for test
-      const action = getUserQualificationsSuccess(qualificationCredentialsMock)
+      const action = getUserEducationSuccess(educationCredentialsMock)
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store, next } = create(SUT.normaliseUserQualificationsFlow({ normalise: normaliseMock }))
+      const { invoke, store, next } = create(SUT.normaliseUserEducationFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
       expect(store.dispatch).toHaveBeenCalled()
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should normalise and forward the qualification credentials', () => {
+    it('should normalise and forward the education credentials', () => {
       // given ...
       const create = createMiddlewareMock(jest)
-      const qualificationCredentialsMock = [{ id1: 'qualification1' }, { id2: 'qualification2' }]
-      const normalisedQualificationsMock = {
+      const educationCredentialsMock = [{ id1: 'education1' }, { id2: 'education2' }]
+      const normalisedEducationMock = {
         ids: ['id1', 'id2'],
-        entries: { id1: 'qualification 1', id2: 'qualification 2' },
+        entries: { id1: 'education 1', id2: 'education 2' },
       }
-      const normaliseMock = jest.fn(() => normalisedQualificationsMock)
+      const normaliseMock = jest.fn(() => normalisedEducationMock)
       // @ts-ignore - data shape doesn't matter for test
-      const action = getUserQualificationsSuccess(qualificationCredentialsMock)
+      const action = getUserEducationSuccess(educationCredentialsMock)
 
       // when ...
       // @ts-ignore - data shape doesn't matter for test
-      const { invoke, store } = create(SUT.normaliseUserQualificationsFlow({ normalise: normaliseMock }))
+      const { invoke, store } = create(SUT.normaliseUserEducationFlow({ normalise: normaliseMock }))
       invoke(action)
 
       // then ...
       // @ts-ignore - data shape doesn't matter for test
-      expect(store.dispatch).toHaveBeenCalledWith(normaliseUserQualificationsSuccess(normalisedQualificationsMock))
+      expect(store.dispatch).toHaveBeenCalledWith(normaliseUserEducationSuccess(normalisedEducationMock))
     })
   })
-  describe('setUserQualificationsFlow', () => {
+  describe('setUserEducationFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareMock(jest)
 
-      const normalisedQualificationsMock = 'NORMALISED CHALLENGES DATA'
+      const normalisedEducationMock = 'NORMALISED CHALLENGES DATA'
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = normaliseUserQualificationsSuccess(normalisedQualificationsMock)
+      const action = normaliseUserEducationSuccess(normalisedEducationMock)
 
       // when ...
-      const { invoke, store, next } = create(SUT.setUserQualificationsFlow)
+      const { invoke, store, next } = create(SUT.setUserEducationFlow)
       invoke(action)
 
       // then ...
       expect(store.dispatch).toHaveBeenCalled()
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should set the normalised qualification data', () => {
+    it('should set the normalised education data', () => {
       // given ...
       const create = createMiddlewareMock(jest)
 
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      const action = normaliseUserQualificationsSuccess('NORMALISED CHALLENGES DATA')
+      const action = normaliseUserEducationSuccess('NORMALISED CHALLENGES DATA')
 
-      // when ... we have qualifications data to store in state
-      const { invoke, store } = create(SUT.setUserQualificationsFlow)
+      // when ... we have education data to store in state
+      const { invoke, store } = create(SUT.setUserEducationFlow)
       invoke(action)
 
       // then ...we want to forward it with our reducer action
       // @ts-ignore - ignoring data that's not 100% correct, as it's immaterial to this test
-      expect(store.dispatch).toHaveBeenCalledWith(setUserQualifications('NORMALISED CHALLENGES DATA'))
+      expect(store.dispatch).toHaveBeenCalledWith(setUserEducation('NORMALISED CHALLENGES DATA'))
     })
   })
-  describe('setUserQualificationFormValuesFlow', () => {
+  describe('setUserEducationFormValuesFlow', () => {
     it('should correctly set the form values in state', () => {
       // given ... state with a user id
       const create = createMiddlewareMock(jest, {
@@ -133,8 +133,8 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       })
 
       // when ... we create the user's credentials
-      const action = QualificationsActions.createQualification({
-        credentialItemId: 'QUALIFICATION ID',
+      const action = EducationActions.createEducation({
+        credentialItemId: 'EDUCATION ID',
         startTime: '2020-09-09T22:00:00.000Z',
         endTime: '2020-10-09T22:00:00.000Z',
         requestVerification: false,
@@ -142,7 +142,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
         certificate: 'SOME FILE DATA',
       })
 
-      const { store, invoke, next } = create(SUT.setUserQualificationFormValuesFlow)
+      const { store, invoke, next } = create(SUT.setUserEducationFormValuesFlow)
       invoke(action)
 
       // then ...
@@ -151,25 +151,25 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       // ... we should submit the uri to be saved to state
       // @ts-ignore file shape isn't required for the test
       expect(store.dispatch).toHaveBeenCalledWith(
-        setUserQualificationFormValues({
+        setUserEducationFormValues({
           startTime: '2020-09-09T22:00:00.000Z',
           endTime: '2020-10-09T22:00:00.000Z',
           requestVerification: false,
           // @ts-ignore file shape isn't required for the test
           certificate: 'SOME FILE DATA',
-          type: ApiUserTypes.UserCredentialTypes.Qualification,
+          type: ApiUserTypes.UserCredentialTypes.Education,
         }),
       )
     })
   })
-  describe('createUserQualificationFlow', () => {
+  describe('createUserEducationFlow', () => {
     it('should correctly call the api middleware with the payload and correct meta', () => {
       // given ... state with a user id
       const create = createMiddlewareMock(jest, {
         user: UserFixtures.userStateFixture({ id: 'A USER ID' }),
-        userQualifications: userQualificationsStateFixture({
+        userEducation: userEducationStateFixture({
           formValues: {
-            type: ApiUserTypes.UserCredentialTypes.Qualification,
+            type: ApiUserTypes.UserCredentialTypes.Education,
             startTime: '2020-09-09T22:00:00.000Z',
             endTime: '2020-10-09T22:00:00.000Z',
             requestVerification: false,
@@ -179,13 +179,13 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       })
 
       // when ... we create the user's credentials
-      // @ts-ignore - we don't need the entire qualification payload for the test
-      const action = createUserQualification({
-        id: 'QUALIFICATION ID',
+      // @ts-ignore - we don't need the entire education payload for the test
+      const action = createUserEducation({
+        id: 'EDUCATION ID',
         title: 'SOME TITLE',
       })
 
-      const { store, invoke, next } = create(SUT.createUserQualificationFlow)
+      const { store, invoke, next } = create(SUT.createUserEducationFlow)
       invoke(action)
 
       // then ...
@@ -200,12 +200,12 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
           mergeRight(config, {
-            onSuccess: createUserQualificationSuccess,
-            onFailure: createUserQualificationFailure,
+            onSuccess: createUserEducationSuccess,
+            onFailure: createUserEducationFailure,
           }),
           {
-            type: ApiUserTypes.UserCredentialTypes.Qualification,
-            credentialItemId: 'QUALIFICATION ID',
+            type: ApiUserTypes.UserCredentialTypes.Education,
+            credentialItemId: 'EDUCATION ID',
             startTime: '2020-09-09T22:00:00.000Z',
             endTime: '2020-10-09T22:00:00.000Z',
             requestVerification: false,
@@ -214,13 +214,13 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       )
     })
   })
-  describe('createUserQualificationSuccessFlow', () => {
+  describe('createUserEducationSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareMock(jest, {
-        userQualifications: userQualificationsStateFixture({
+        userEducation: userEducationStateFixture({
           formValues: {
-            type: ApiUserTypes.UserCredentialTypes.Qualification,
+            type: ApiUserTypes.UserCredentialTypes.Education,
             startTime: '2020-09-09T22:00:00.000Z',
             endTime: '2020-10-09T22:00:00.000Z',
             requestVerification: false,
@@ -231,7 +231,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       const responseMock = {
         data: {
           data: {
-            challenge: 'QUALIFICATION DATA',
+            challenge: 'EDUCATION DATA',
             id: 'CREDENTIAL ID',
             otherData: 'OTHER DATA',
           },
@@ -257,19 +257,19 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       }))
 
       // @ts-ignore - mocking a quasi-response so typing fails
-      const action = createUserQualificationSuccess(responseMock)
+      const action = createUserEducationSuccess(responseMock)
 
       const { store, invoke, next } = create(
         // @ts-ignore - mocking a quasi-response so typing for normalise function fails
-        SUT.createUserQualificationSuccessFlow({ normalise: normaliseMock, notification: notificationMock }),
+        SUT.createUserEducationSuccessFlow({ normalise: normaliseMock, notification: notificationMock }),
       )
-      // when ... we respond to the createUserQualificationSuccess action
+      // when ... we respond to the createUserEducationSuccess action
       invoke(action)
 
-      // then ...validate createUserQualificationSuccessFlow
+      // then ...validate createUserEducationSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
-        updateUserQualifications({
+        updateUserEducation({
           ids: ['CREDENTIAL ID'],
           entities: {
             'CREDENTIAL ID': {
@@ -284,15 +284,15 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       expect(normaliseMock).toHaveBeenCalled()
       expect(store.dispatch).toHaveBeenCalledWith(
         // @ts-ignore - certificate type is incorrect, but sufficiently correct for testing
-        createUserQualificationCertificate({ id: 'CREDENTIAL ID', certificate: 'IMAGE CERT' }),
+        createUserEducationCertificate({ id: 'CREDENTIAL ID', certificate: 'IMAGE CERT' }),
       )
-      expect(store.dispatch).toHaveBeenCalledWith(clearUserQualificationFormValues())
+      expect(store.dispatch).toHaveBeenCalledWith(clearUserEducationFormValues())
     })
     it('should correctly skip calling certificate if none exists', () => {
       const create = createMiddlewareMock(jest, {
-        userQualifications: userQualificationsStateFixture({
+        userEducation: userEducationStateFixture({
           formValues: {
-            type: ApiUserTypes.UserCredentialTypes.Qualification,
+            type: ApiUserTypes.UserCredentialTypes.Education,
             startTime: '2020-09-09T22:00:00.000Z',
             endTime: '2020-10-09T22:00:00.000Z',
             requestVerification: false,
@@ -302,7 +302,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       const responseMock = {
         data: {
           data: {
-            challenge: 'QUALIFICATION DATA',
+            challenge: 'EDUCATION DATA',
             id: 'CREDENTIAL ID',
             otherData: 'OTHER DATA',
           },
@@ -328,32 +328,32 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       }))
 
       // @ts-ignore - mocking a quasi-response so typing fails
-      const action = createUserQualificationSuccess(responseMock)
+      const action = createUserEducationSuccess(responseMock)
 
       const { store, invoke } = create(
         // @ts-ignore - mocking a quasi-response so typing for normalise function fails
-        SUT.createUserQualificationSuccessFlow({ normalise: normaliseMock, notification: notificationMock }),
+        SUT.createUserEducationSuccessFlow({ normalise: normaliseMock, notification: notificationMock }),
       )
-      // when ... we respond to the createUserQualificationSuccess action
+      // when ... we respond to the createUserEducationSuccess action
       invoke(action)
 
-      // then ...validate createUserQualificationSuccessFlow
+      // then ...validate createUserEducationSuccessFlow
       expect(store.dispatch).not.toHaveBeenCalledWith(
         // @ts-ignore - certificate type is incorrect, but sufficiently correct for testing
-        createUserQualificationCertificate({ id: 'CREDENTIAL ID', certificate: 'IMAGE CERT' }),
+        createUserEducationCertificate({ id: 'CREDENTIAL ID', certificate: 'IMAGE CERT' }),
       )
     })
   })
-  describe('createUserQualificationFailureFlow', () => {
+  describe('createUserEducationFailureFlow', () => {
     it('should correctly handle job credentials create failure', () => {
       // given ...
       const create = createMiddlewareMock(jest)
-      const action = createUserQualificationFailure('FAILED')
+      const action = createUserEducationFailure('FAILED')
       const notificationMock = jest.fn()
 
-      const { invoke, next } = create(SUT.createUserQualificationFailureFlow({ notification: notificationMock }))
+      const { invoke, next } = create(SUT.createUserEducationFailureFlow({ notification: notificationMock }))
 
-      // when ... we respond to the createUserQualificationFailure action
+      // when ... we respond to the createUserEducationFailure action
       invoke(action)
 
       // then ...validate failure
@@ -361,18 +361,18 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       expect(notificationMock).toHaveBeenCalled()
     })
   })
-  describe('createUserQualificationCertificateFlow', () => {
+  describe('createUserEducationCertificateFlow', () => {
     it('should correctly call the api middleware with the payload and correct meta', () => {
       // given ... state with a user id
       const create = createMiddlewareMock(jest, {
         user: UserFixtures.userStateFixture({ id: 'A USER ID' }),
-        userQualifications: userQualificationsStateFixture({
+        userEducation: userEducationStateFixture({
           formValues: { certificate: { uri: 'FILE URI', type: 'FILE TYPE', name: 'FILE NAME' } },
         }),
       })
 
       // when ... we create the user's credentials
-      const action = createUserQualificationCertificate({
+      const action = createUserEducationCertificate({
         id: 'A CREDENTIAL ID',
         certificate: {
           uri: 'FILE URI',
@@ -383,7 +383,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
         },
       })
 
-      const { store, invoke, next } = create(SUT.createUserQualificationCertificateFlow)
+      const { store, invoke, next } = create(SUT.createUserEducationCertificateFlow)
       invoke(action)
 
       // then ...
@@ -393,7 +393,7 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       expect(store.dispatch).toHaveBeenCalled()
     })
   })
-  describe('createUserQualificationCertificateSuccessFlow', () => {
+  describe('createUserEducationCertificateSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareMock(jest)
@@ -414,31 +414,31 @@ describe('modules/UserQualifications/UserQualifications.middleware', () => {
       const normaliseMock = jest.fn(() => 'NORMALISED CREDENTIAL')
 
       // @ts-ignore - mocking a quasi-response so typing fails
-      const action = createUserQualificationCertificateSuccess(responseMock)
+      const action = createUserEducationCertificateSuccess(responseMock)
 
       const { store, invoke, next } = create(
         // @ts-ignore - normalise mock isn't typesafe
-        SUT.createUserQualificationCertificateSuccessFlow({ normalise: normaliseMock }),
+        SUT.createUserEducationCertificateSuccessFlow({ normalise: normaliseMock }),
       )
-      // when ... we respond to the createUserQualificationCertificateSuccessFlow action
+      // when ... we respond to the createUserEducationCertificateSuccessFlow action
       invoke(action)
 
-      // then ...validate createUserQualificationCertificateSuccessFlow
+      // then ...validate createUserEducationCertificateSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
       // @ts-ignore - testing we're returning correctly. correctly typed value not necessary
-      expect(store.dispatch).toHaveBeenCalledWith(updateUserQualifications('NORMALISED CREDENTIAL'))
+      expect(store.dispatch).toHaveBeenCalledWith(updateUserEducation('NORMALISED CREDENTIAL'))
     })
   })
-  describe('createUserQualificationCertificateFailureFlow', () => {
+  describe('createUserEducationCertificateFailureFlow', () => {
     it('should correctly handle job credentials create failure', () => {
       // given ...
       const create = createMiddlewareMock(jest)
-      const action = createUserQualificationFailure('FAILED')
+      const action = createUserEducationFailure('FAILED')
       const notificationMock = jest.fn()
 
-      const { invoke, next } = create(SUT.createUserQualificationFailureFlow({ notification: notificationMock }))
+      const { invoke, next } = create(SUT.createUserEducationFailureFlow({ notification: notificationMock }))
 
-      // when ... we respond to the createUserQualificationFailure action
+      // when ... we respond to the createUserEducationFailure action
       invoke(action)
 
       // then ...validate failure

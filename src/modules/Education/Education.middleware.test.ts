@@ -2,15 +2,15 @@ import { mergeRight } from 'ramda'
 import { createMiddlewareMock } from 'tests/tests.utils'
 
 import { actions as ApiActions } from '~/api'
-import { constants as ApiQualificationsConstants } from '~/api/qualifications'
-import { actions as UserQualificationActions } from '~/modules/UserQualifications'
+import { constants as ApiEducationConstants } from '~/api/education'
+import { UserCredentialTypes } from '~/api/users/users.types'
+import { actions as UserEducationActions } from '~/modules/UserEducation'
 
-import { UserCredentialTypes } from '../../api/users/users.types'
 import * as SUT from './Education.middleware'
 import { createEducation, createEducationFailure, createEducationSuccess } from './Education.reducer'
 
 describe('modules/Education/Education.middleware', () => {
-  describe('createQualificationFlow', () => {
+  describe('createEducationFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareMock(jest)
@@ -36,7 +36,7 @@ describe('modules/Education/Education.middleware', () => {
       expect(next).toHaveBeenCalledWith(action)
       expect(store.dispatch).toHaveBeenCalledWith(
         ApiActions.apiRequest(
-          mergeRight(ApiQualificationsConstants.QUALIFICATIONS_CREATE_CONFIG, {
+          mergeRight(ApiEducationConstants.EDUCATION_CREATE_CONFIG, {
             onSuccess: createEducationSuccess,
             onFailure: createEducationFailure,
           }),
@@ -45,13 +45,13 @@ describe('modules/Education/Education.middleware', () => {
       )
     })
   })
-  describe('createQualificationSuccessFlow', () => {
+  describe('createEducationSuccessFlow', () => {
     it('should correctly handle being called', () => {
       // given ...
       const create = createMiddlewareMock(jest)
       const mockedPayload = {
         data: {
-          data: 'QUALIFICATION DATA',
+          data: 'EDUCATION DATA',
         },
         meta: {
           success: true,
@@ -63,19 +63,19 @@ describe('modules/Education/Education.middleware', () => {
       const action = createEducationSuccess(mockedPayload)
       // @ts-ignore
       const { invoke, next } = create(SUT.creatEducationSuccessFlow)
-      // when ... we respond to the createQualificationSuccess action
+      // when ... we respond to the createEducationSuccess action
       invoke(action)
 
-      // then ...validate createQualificationSuccessFlow
+      // then ...validate createEducationSuccessFlow
       expect(next).toHaveBeenCalledWith(action)
     })
-    it('should correctly handle Qualification create success', () => {
+    it('should correctly handle Education create success', () => {
       // given ...
       const create = createMiddlewareMock(jest)
 
       const mockedPayload = {
         data: {
-          data: 'QUALIFICATION DATA',
+          data: 'EDUCATION DATA',
         },
         meta: {
           success: true,
@@ -88,18 +88,18 @@ describe('modules/Education/Education.middleware', () => {
       const action = createEducationSuccess(mockedPayload)
       // @ts-ignore
       const { store, invoke } = create(SUT.creatEducationSuccessFlow)
-      // when ... we respond to the createQualificationSuccess action
+      // when ... we respond to the createEducationSuccess action
       invoke(action)
 
-      // then ...validate createQualificationSuccessFlow
+      // then ...validate createEducationSuccessFlow
       expect(store.dispatch).toHaveBeenCalledWith(
         // @ts-ignore
-        UserQualificationActions.createUserQualification('QUALIFICATION DATA'),
+        UserEducationActions.createUserEducation('EDUCATION DATA'),
       )
     })
   })
-  describe('createQualificationFailureFlow', () => {
-    it('should correctly handle Qualification create failure', () => {
+  describe('createEducationFailureFlow', () => {
+    it('should correctly handle Education create failure', () => {
       // given ...
       const create = createMiddlewareMock(jest)
       const action = createEducationFailure('FAILED')
@@ -107,7 +107,7 @@ describe('modules/Education/Education.middleware', () => {
       // @ts-ignore
       const { invoke } = create(SUT.creatEducationFailureFlow({ notification: mockNotification }))
 
-      // when ... we respond to the createQualificationFailures action
+      // when ... we respond to the createEducationFailures action
       invoke(action)
 
       // then ...validate failure

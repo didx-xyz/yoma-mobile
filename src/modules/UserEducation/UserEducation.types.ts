@@ -3,40 +3,38 @@ import { DocumentPickerResponse } from 'react-native-document-picker'
 import { types as ApiTypes } from '~/api'
 import { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
 import { NormalisedCvWidgetCredentialItems } from '~/components/CvWidgetCredential/CvWidgetCredential.types'
-import { types as QualificationTypes } from '~/modules/Qualifications'
+import { types as EducationTypes } from '~/modules/Education'
 import { types as UserTypes } from '~/modules/User'
 import { NormalisedData } from '~/redux/redux.types'
 
-export type NormalisedUserQualifications = NormalisedData<UserQualification>
+export type NormalisedUserEducation = NormalisedData<UserEducation>
 
-export type UserQualificationsState = NormalisedUserQualifications & {
+export type UserEducationState = NormalisedUserEducation & {
   formValues: UserTypes.UserCredentialFormValues | {}
 }
-interface UserQualificationOpportunityCredential
-  extends QualificationTypes.Qualification,
-    UserTypes.OpportunityCredentialPartial {}
+interface UserEducationOpportunityCredential extends EducationTypes.Education, UserTypes.OpportunityCredentialPartial {}
 
-export interface UserQualification extends UserTypes.UserCredentialMeta {
-  opportunity?: UserQualificationOpportunityCredential
+export interface UserEducation extends UserTypes.UserCredentialMeta {
+  opportunity?: UserEducationOpportunityCredential
 }
 
-export type UserQualificationsViewCredentials = { userQualifications: CvViewCredentialTypes.CvViewCredentialsData }
+export type UserEducationViewCredentials = { userEducation: CvViewCredentialTypes.CvViewCredentialsData }
 
-export interface CreateUserQualificationCertificatePayload {
+export interface CreateUserEducationCertificatePayload {
   id: string
   certificate: DocumentPickerResponse
 }
 
-export interface UserQualificationResponse {
-  data: UserQualification
+export interface UserEducationResponse {
+  data: UserEducation
 }
 
-export interface CreateUserQualificationSuccessResponse {
-  data: UserQualificationResponse
+export interface CreateUserEducationSuccessResponse {
+  data: UserEducationResponse
   meta: ApiTypes.ApiResponseMeta
 }
 
-export interface UserQualificationsWidgetSelector {
-  userQualifications: NormalisedCvWidgetCredentialItems
+export interface UserEducationWidgetSelector {
+  userEducation: NormalisedCvWidgetCredentialItems
   count: number
 }

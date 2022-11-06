@@ -4,7 +4,7 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiEducationConstants } from '~/api/education'
-import * as UserEducationActions from '~/modules/UserQualifications/UserQualifications.reducer'
+import * as UserEducationActions from '~/modules/UserEducation/UserEducation.reducer'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
@@ -38,7 +38,7 @@ export const createEducationSuccessFlow: Middleware =
 
     if (createEducationSuccess.match(action)) {
       const Education = extractDataFromResponseAction(action)
-      dispatch(UserEducationActions.createUserQualification(Education))
+      dispatch(UserEducationActions.createUserEducation(Education))
       dispatch(UserSkillsActions.fetchUserSkills())
     }
 
