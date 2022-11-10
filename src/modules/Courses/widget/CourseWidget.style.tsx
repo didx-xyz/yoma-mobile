@@ -5,7 +5,7 @@ import { applyAlphaToHex } from '~/styles/styles.utils'
 
 import { Colors, colors } from '../../../styles'
 
-const IMAGE_CONTAINER_SIZE = 40
+// const IMAGE_CONTAINER_SIZE = 40
 const PROFILE_IMAGE_SIZE = 35
 
 const styles = {
@@ -19,6 +19,7 @@ const styles = {
   OrganizationInfoContainer: {
     flexDirection: 'row',
     height: 25,
+    width: '95%',
   } as ViewStyle,
   nameContainer: {
     width: '90%',
@@ -30,9 +31,8 @@ const styles = {
     color: colors[Colors.DarkGrey02],
   } as TextStyle,
   imageViewContainer: {
-    borderRadius: 10,
-    height: IMAGE_CONTAINER_SIZE,
-    width: IMAGE_CONTAINER_SIZE,
+    position: 'absolute',
+    right: -9,
   } as ViewStyle,
   profileImage: {
     height: PROFILE_IMAGE_SIZE,

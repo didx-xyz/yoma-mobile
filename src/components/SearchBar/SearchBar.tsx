@@ -13,11 +13,12 @@ export default function Searchbar({ value, updateSearch, backgroundColor, onSear
     <View style={[styles.container, { backgroundColor: backgroundColor }]}>
       <View style={styles.searchContainer}>
         <TouchableOpacity style={styles.viewSearch} onPress={() => onSearch(value)}>
-          <SearchIcon style={styles.iconSearch} />
+          <SearchIcon height={12} />
         </TouchableOpacity>
         <TextInput
           value={value}
           placeholder="Search"
+          placeholderTextColor="#565B6F"
           style={styles.textInput}
           onChangeText={text => {
             var letters = /^$|^[a-zA-Z._\b ]+$/

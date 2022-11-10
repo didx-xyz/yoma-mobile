@@ -30,6 +30,12 @@ const styles = {
     justifyContent: 'space-between',
     flexDirection: 'row',
   } as ViewStyle,
+  headerText: {
+    flex: 1,
+    position: 'absolute',
+    textAlign: 'center',
+    width: '100%',
+  } as TextStyle,
   saveText: {
     paddingRight: 20,
   } as TextStyle,

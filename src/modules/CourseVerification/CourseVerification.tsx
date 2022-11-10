@@ -33,7 +33,7 @@ const CourseVerification = ({ navigation, form }: Props) => {
       <Header navigation={navigation} headerText=" Verify Challenge " actionItem={<View />} />
       <ScrollView>
         <Card style={styles.card}>
-          <Text.Body style={[styles.name]}>{t('Congratulations for completing the')} </Text.Body>
+          <Text.Body style={[styles.name]}>{t('Congratulations for completing')} </Text.Body>
           <Text.Body style={styles.title}>{data?.title}</Text.Body>
           <Text.Body style={styles.text}>{t('Please let us know when you completed the challenge')}</Text.Body>
           <DateRangeSelect />
@@ -68,7 +68,7 @@ const CourseVerification = ({ navigation, form }: Props) => {
           />
           <View style={styles.verticalLine} />
           <Link style={styles.linkStyle} onPress={goto}>
-            {t('Find out more on how verification works.')}
+            {/* {t('Find out more on how verification works.')} */}
           </Link>
         </Card>
       </ScrollView>

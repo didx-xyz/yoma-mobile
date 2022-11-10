@@ -23,12 +23,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     padding: 10,
     backgroundColor: '#FFFFFF',
+    paddingTop: 15,
     marginBottom: 20,
   } as ViewStyle,
   modalHeaderTitle: {
     color: '#41204B',
-    fontFamily: fontStyles.bold,
-    fontSize: 20,
+    fontFamily: fontStyles.semibold,
+    fontSize: 16,
   } as ViewStyle,
   button: {
     flexDirection: 'row',
@@ -47,10 +48,15 @@ const styles = StyleSheet.create({
   filterItemContainer: {
     padding: 10,
     backgroundColor: colors[Colors.White],
+    paddingTop: 15,
+    borderBottomWidth: 0.8,
+    borderBottomColor: '#DAE0ED',
   } as ViewStyle,
   fitlerItem: {
+    marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingBottom: 12,
   } as ViewStyle,
   filterItemView: {
     flexDirection: 'row',

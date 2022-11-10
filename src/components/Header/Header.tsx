@@ -19,7 +19,7 @@ type Props = {
 const Header = ({ navigation, headerText, actionItem, headCombine }: Props) => (
   <View style={headCombine ? styles.containerCombined : styles.container}>
     <ButtonBack onPress={navigation.goBack} />
-    <Text.Header level={HeaderLevels.H5} color={Colors.PrimaryPurple}>
+    <Text.Header level={HeaderLevels.H5} style={styles.headerText} color={Colors.PrimaryPurple}>
       {headerText}
     </Text.Header>
     {actionItem}

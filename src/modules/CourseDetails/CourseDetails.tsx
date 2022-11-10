@@ -69,13 +69,13 @@ const CourseDetials = ({ navigation }: Props) => {
             </View>
             <View>
               <Button
-                label={t('Go to Opportunity')}
+                label={t('Go to opportunity')}
                 onPress={() => navigation.navigate(HomeNavigationRoutes.MyWeb, { url: data.organisationURL })}
                 style={styles.button1}
               />
               <Button
                 color={Colors.PrimaryGreen}
-                label={t('I have Completed this')}
+                label={t('I have completed this')}
                 style={styles.button2}
                 onPress={() => navigation.navigate(HomeNavigationRoutes.CourseVerification, data)}
               />

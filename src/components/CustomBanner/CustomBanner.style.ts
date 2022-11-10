@@ -1,5 +1,7 @@
 import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
+import fontStyles from '~/styles/font.styles'
+
 import { Colors, colors } from '../../styles'
 
 const BannerWidth = Dimensions.get('window').width
@@ -31,15 +33,16 @@ const styles = {
     alignSelf: 'center',
   } as ViewStyle,
   text: {
-    fontFamily: 'Montserrat-Bold',
-    fontSize: 13,
-    color: colors[Colors.White],
+    fontFamily: fontStyles.semibold,
+    fontSize: 12,
+    color: '#E4CFEA',
     width: '100%',
     textAlign: 'center',
   } as TextStyle,
   title: {
-    fontFamily: 'Montserrat-SemiBold',
-    fontSize: 16,
+    fontFamily: 'Bold',
+    fontSize: 13,
+    fontWeight: 'bold',
     color: colors[Colors.White],
   } as TextStyle,
 }

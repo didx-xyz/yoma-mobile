@@ -27,13 +27,13 @@ const styles = {
   } as TextStyle,
   title: {
     marginTop: 10,
-    width: '65%',
+    width: '100%',
     fontFamily: 'Montserrat-SemiBold',
     fontSize: 18,
     color: colors[Colors.PrimaryPurple],
   } as TextStyle,
   text: {
-    width: '65%',
+    width: '100%',
     marginTop: 10,
     fontFamily: 'Montserrat-Medium',
     fontSize: 14,
