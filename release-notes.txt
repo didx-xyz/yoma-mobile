@@ -1,4 +1,7 @@
 Ver 0.0.1
+Build 75:
+- Styling issues on opportunities
+
 Latest:
 - Marketplace feature (update 001)
 
