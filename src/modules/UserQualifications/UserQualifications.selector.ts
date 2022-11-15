@@ -30,13 +30,15 @@ export const selectUserQualificationCredentialsWidget = (selector: any) =>
     (userQualifications: NormalisedUserQualifications) => {
       const count = userQualifications.ids.length
       const ids = userQualifications.ids
-      const entities = map(applySpec(UserConstants.USER_CREDENTIAL_WIDGET_SELECTOR_SPEC))(userQualifications.entities)
+      const entities = map(applySpec(UserConstants.USER_OPPORTUNITY_CREDENTIAL_WIDGET_SELECTOR_SPEC))(
+        userQualifications.entities,
+      )
 
       return { userQualifications: { ids, entities }, count }
     },
   )
 
-const USER_QUALIFICATION_VIEW_SELECTOR_SPEC = mergeRight(UserConstants.USER_CREDENTIAL_VIEW_SELECTOR_SPEC, {
+const USER_QUALIFICATION_VIEW_SELECTOR_SPEC = mergeRight(UserConstants.USER_OPPORTUNITY_CREDENTIAL_VIEW_SELECTOR_SPEC, {
   metadata: getUserQualificationsMetadata,
   createdByAdmin: pathOr(false, ['opportunity', 'createdByAdmin']),
 })

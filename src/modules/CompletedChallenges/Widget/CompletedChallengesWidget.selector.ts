@@ -9,7 +9,7 @@ export default createSelector(selectUserChallenges, userChallenges => {
   const ids = slice(0, 2, userChallenges.ids)
   const entities = pipe(
     pick(ids),
-    map(applySpec(UserConstants.USER_CREDENTIAL_WIDGET_SELECTOR_SPEC)),
+    map(applySpec(UserConstants.USER_OPPORTUNITY_CREDENTIAL_WIDGET_SELECTOR_SPEC)),
   )(userChallenges.entities)
 
   return { userChallenges: { ids, entities }, count }

@@ -1,11 +1,11 @@
 import { createFixture } from 'tests/tests.utils'
 
-import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
+import { UserCredentialTypes } from '~/api/users/users.types'
 import { INITIAL_FORM_VALUES } from '~/modules/Education/Form/EducationForm.constants'
 
 export const USER_EDUCATION_MOCK = [
   {
-    opportunity: {
+    education: {
       organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
       organisationName: 'Test Org',
       organisationLogoURL: null,
@@ -28,7 +28,7 @@ export const USER_EDUCATION_MOCK = [
       organisationPrimaryContactName: null,
       organisationPrimaryContactEmail: null,
       organisationPrimaryContactPhone: null,
-      type: UserCredentialOpportunityTypes.Qualification,
+      type: UserCredentialTypes.Education,
     },
     id: '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5',
     verifiedAt: '2021-05-02T00:00:00',
@@ -44,15 +44,15 @@ export const USER_EDUCATION_MOCK = [
 ]
 
 export const USER_EDUCATION_STATE_MOCK = {
-  ids: ['USER_QUALIFICATIONS_STATE_MOCK-001', 'USER_QUALIFICATIONS_STATE_MOCK-002'],
+  ids: ['USER_EDUCATION_STATE_MOCK-001', 'USER_EDUCATION_STATE_MOCK-002'],
   entities: {
-    'USER_QUALIFICATIONS_STATE_MOCK-001': {
-      opportunity: {
+    'USER_EDUCATION_STATE_MOCK-001': {
+      education: {
         organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
         organisationName: 'Test Org',
         organisationLogoURL: null,
         id: '210a91ff-38b9-42f2-9b50-b6655bbf0f7c',
-        title: 'Test Qualification',
+        title: 'Test Education',
         description: 'Test Graph',
         url: null,
         createdAt: '2021-02-01T00:00:00',
@@ -70,9 +70,9 @@ export const USER_EDUCATION_STATE_MOCK = {
         organisationPrimaryContactName: null,
         organisationPrimaryContactEmail: null,
         organisationPrimaryContactPhone: null,
-        type: UserCredentialOpportunityTypes.Qualification,
+        type: UserCredentialTypes.Education,
       },
-      id: 'USER_QUALIFICATIONS_STATE_MOCK-001',
+      id: 'USER_EDUCATION_STATE_MOCK-001',
       verifiedAt: '2021-05-02T00:00:00',
       approved: true,
       approvalMessage: null,
@@ -83,13 +83,13 @@ export const USER_EDUCATION_STATE_MOCK = {
       fileURL: null,
       requestVerification: true,
     },
-    'USER_QUALIFICATIONS_STATE_MOCK-002': {
-      opportunity: {
+    'USER_EDUCATION_STATE_MOCK-002': {
+      education: {
         organisationId: '7f9df1bc-10b8-445c-0b4a-08d81d3203ed',
         organisationName: 'Test Org',
         organisationLogoURL: null,
         id: '210a91ff-38b9-42f2-9b50-b6655bbf0f7c',
-        title: 'Test Qualification',
+        title: 'Test Education',
         description: 'Test Graph',
         url: null,
         createdAt: '2021-02-01T00:00:00',
@@ -107,9 +107,9 @@ export const USER_EDUCATION_STATE_MOCK = {
         organisationPrimaryContactName: null,
         organisationPrimaryContactEmail: null,
         organisationPrimaryContactPhone: null,
-        type: UserCredentialOpportunityTypes.Qualification,
+        type: UserCredentialTypes.Education,
       },
-      id: 'USER_QUALIFICATIONS_STATE_MOCK-002',
+      id: 'USER_EDUCATION_STATE_MOCK-002',
       verifiedAt: '2021-05-02T00:00:00',
       approved: true,
       approvalMessage: null,

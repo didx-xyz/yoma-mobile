@@ -11,13 +11,14 @@ import {
   omit,
   path,
   pathEq,
+  pathOr,
   pick,
   pipe,
   prop,
+  propOr,
   reject,
   toLower,
   values,
-  when,
 } from 'ramda'
 
 import { types as ApiUserTypes } from '~/api/users'
@@ -60,7 +61,10 @@ export const filterCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
 export const extractUserCredentials = (type: ApiUserTypes.UserCredentialTypes) => filter(filterCredentials(type))
 
 export const filterOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
-  safeWhen(has('opportunity'), pathEq(['opportunity', 'type'], USER_CREDENTIAL_TYPES_MAP[type]))
+  safeWhen(
+    has(ApiUserTypes.UserCredentialTypes.Opportunity),
+    pathEq(['opportunity', 'type'], USER_CREDENTIAL_TYPES_MAP[type]),
+  )
 export const extractUserOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
   filter(filterOpportunityCredentials(type))
 
@@ -87,3 +91,17 @@ export const setFormValues = (state: ReduxTypes.NormalisedData, formValues: Type
   Object.assign(state, { formValues })
 
 export const getCredentialViewMetadata = (spec: Record<string, any>) => pipe(applySpec(spec), values, reject(isEmpty))
+
+export const getUserCredentialWidgetSelectorSpec = (cred: ApiUserTypes.UserCredentialTypes) => ({
+  name: pathOr('', [cred, 'title']),
+  startDate: propOr('', 'startDate'),
+  organisationLogoURL: path([cred, 'organisationLogoURL']),
+  isValidated: propOr(false, 'approved'),
+})
+
+export const getUserCredentialViewSelectorSpec = (cred: ApiUserTypes.UserCredentialTypes) => ({
+  title: pathOr('', [cred, 'title']),
+  description: pathOr('', [cred, 'description']),
+  iconUrl: path([cred, 'organisationLogoURL']),
+  isValidated: propOr(false, 'approved'),
+})

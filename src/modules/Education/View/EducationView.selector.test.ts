@@ -29,11 +29,17 @@ describe('modules/Education/EducationView/EducationView.selector', () => {
       // then ... should return the data required by the education view
       expect(result).toEqual({
         userEducation: {
-          ids: ['USER_EDUCATION_STATE_MOCK-001'],
+          ids: ['USER_EDUCATION_STATE_MOCK-001', 'USER_EDUCATION_STATE_MOCK-002'],
           entities: {
             'USER_EDUCATION_STATE_MOCK-001': {
               title: 'Test Education',
-              createdByAdmin: true,
+              metadata: ['Apr 2021'],
+              iconUrl: null,
+              isValidated: true,
+              description: 'Test Graph',
+            },
+            'USER_EDUCATION_STATE_MOCK-002': {
+              title: 'Test Education',
               metadata: ['Apr 2021'],
               iconUrl: null,
               isValidated: true,

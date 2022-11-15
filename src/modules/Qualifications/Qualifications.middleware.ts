@@ -4,7 +4,7 @@ import { Middleware } from 'redux'
 
 import { actions as ApiActions } from '~/api'
 import { constants as ApiQualificationConstants } from '~/api/qualifications'
-import * as UserQualificationsActions from '~/modules/UserQualifications/UserQualifications.reducer'
+import { actions as UserQualificationsActions } from '~/modules/UserQualifications'
 import * as UserSkillsActions from '~/modules/UserSkills/UserSkills.reducer'
 import { extractDataFromResponseAction } from '~/redux/redux.utils'
 import { showSimpleMessage } from '~/utils/error'
