@@ -11,16 +11,13 @@ export enum UsersEndpoints {
 //  Work Experience. All others are opportunity types.
 
 export enum UserCredentialTypes {
-  Assignment = 'Assignment',
-  Challenge = 'Challenge',
   Education = 'education',
   Opportunity = 'opportunity',
-  Qualification = 'Qualification',
   WorkExperience = 'workExperience',
 }
 
 export enum UserCredentialOpportunityTypes {
-  Assignment = 'taskopportunity',
-  Challenge = 'impactopportunity',
-  Qualification = 'learningopportunity',
+  Task = 'taskopportunity',
+  Impact = 'impactopportunity',
+  Learning = 'learningopportunity',
 }

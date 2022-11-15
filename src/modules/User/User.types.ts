@@ -5,6 +5,7 @@ import { UserCredentialOpportunityTypes, UserCredentialTypes } from '~/api/users
 import { UserChallenge } from '~/modules/UserChallenges/UserChallenges.types'
 
 import { UserWorkExperienceCredential } from '../UserWorkExperience/UserWorkExperience.types'
+import { USER_CREDENTIALS } from './User.constants'
 
 export interface UserDetails {
   age?: null | string

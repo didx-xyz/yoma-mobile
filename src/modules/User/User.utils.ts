@@ -27,7 +27,7 @@ import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
 import { renameKeys, safeWhen } from '~/utils/ramda.utils'
 
-import { USER_CREDENTIAL_TYPES_MAP, USER_PHOTO_FORM_DATA_NAME } from './User.constants'
+import { USER_CREDENTIALS, USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { UserCredentialFormValues, UserCredentialItemPayload, UserFields } from './User.types'
 
 export const extractUserFromPayload = pipe(
@@ -60,12 +60,10 @@ export const filterCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
   pipe(keys, find(pipe(toLower, equals(toLower(type)))))
 export const extractUserCredentials = (type: ApiUserTypes.UserCredentialTypes) => filter(filterCredentials(type))
 
-export const filterOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
-  safeWhen(
-    has(ApiUserTypes.UserCredentialTypes.Opportunity),
-    pathEq(['opportunity', 'type'], USER_CREDENTIAL_TYPES_MAP[type]),
-  )
-export const extractUserOpportunityCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
+export const filterOpportunityCredentials = (type: keyof typeof USER_CREDENTIALS) =>
+  safeWhen(has(ApiUserTypes.UserCredentialTypes.Opportunity), pathEq(['opportunity', 'type'], USER_CREDENTIALS[type]))
+
+export const extractUserOpportunityCredentials = (type: keyof typeof USER_CREDENTIALS) =>
   filter(filterOpportunityCredentials(type))
 
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>

@@ -1,8 +1,7 @@
+import { path, pathOr, propOr } from 'ramda'
 import { Options } from 'react-native-image-crop-picker'
 
-import { types as ApiUserTypes } from '~/api/users'
-
-import { getUserCredentialViewSelectorSpec, getUserCredentialWidgetSelectorSpec } from './User.utils'
+import { UserCredentialOpportunityTypes, UserCredentialTypes } from '~/api/users/users.types'
 
 export const CAPTURE_IMAGE_OPTIONS: Options = {
   cropping: true,
@@ -18,22 +17,18 @@ export const CAPTURE_IMAGE_OPTIONS: Options = {
 export const USER_PHOTO_FORM_DATA_NAME = 'Photo'
 export const USER_CREDENTIAL_CERTIFICATE_FORM_DATA_NAME = 'File'
 
-export const USER_OPPORTUNITY_CREDENTIAL_WIDGET_SELECTOR_SPEC = getUserCredentialWidgetSelectorSpec(
-  ApiUserTypes.UserCredentialTypes.Opportunity,
-)
-
-export const USER_OPPORTUNITY_CREDENTIAL_VIEW_SELECTOR_SPEC = getUserCredentialViewSelectorSpec(
-  ApiUserTypes.UserCredentialTypes.Opportunity,
-)
-
-export const USER_CREDENTIAL_TYPES_MAP: Record<
-  ApiUserTypes.UserCredentialTypes,
-  ApiUserTypes.UserCredentialOpportunityTypes | null
-> = {
-  [ApiUserTypes.UserCredentialTypes.Assignment]: ApiUserTypes.UserCredentialOpportunityTypes.Assignment,
-  [ApiUserTypes.UserCredentialTypes.Challenge]: ApiUserTypes.UserCredentialOpportunityTypes.Challenge,
-  [ApiUserTypes.UserCredentialTypes.Qualification]: ApiUserTypes.UserCredentialOpportunityTypes.Qualification,
-  [ApiUserTypes.UserCredentialTypes.WorkExperience]: null,
-  [ApiUserTypes.UserCredentialTypes.Education]: null,
-  [ApiUserTypes.UserCredentialTypes.Opportunity]: null,
+export const USER_OPPORTUNITY_CREDENTIAL_WIDGET_SELECTOR_SPEC = {
+  name: pathOr('', [UserCredentialTypes.Opportunity, 'title']),
+  startDate: propOr('', 'startDate'),
+  organisationLogoURL: path([UserCredentialTypes.Opportunity, 'organisationLogoURL']),
+  isValidated: propOr(false, 'approved'),
 }
+
+export const USER_OPPORTUNITY_CREDENTIAL_VIEW_SELECTOR_SPEC = {
+  title: pathOr('', [UserCredentialTypes.Opportunity, 'title']),
+  description: pathOr('', [UserCredentialTypes.Opportunity, 'description']),
+  iconUrl: path([UserCredentialTypes.Opportunity, 'organisationLogoURL']),
+  isValidated: propOr(false, 'approved'),
+}
+
+export const USER_CREDENTIALS = { ...UserCredentialTypes, ...UserCredentialOpportunityTypes }

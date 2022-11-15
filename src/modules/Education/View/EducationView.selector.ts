@@ -2,7 +2,9 @@ import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, path, pathOr, propOr } from 'ramda'
 
 import { types as ApiUserTypes } from '~/api/users'
-import { selectors as UserEducationSelectors, utils as UserEducationUtils } from '~/modules/UserEducation'
+// destructured to avoid circular dependencies
+import * as UserEducationSelectors from '~/modules/UserEducation/UserEducation.selector'
+import * as UserEducationUtils from '~/modules/UserEducation/UserEducation.utils'
 import type * as UserEducationTypes from '~/modules/UserEducation/types'
 
 export default createSelector<any, UserEducationTypes.UserEducationViewCredentials>(
