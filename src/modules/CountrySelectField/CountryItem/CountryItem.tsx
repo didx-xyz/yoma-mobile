@@ -32,7 +32,7 @@ const CountryItem = ({ item, placeholder = '', countries, onPress, showDropdown 
         </Optional>
       </View>
       <Optional condition={showDropdown}>
-        <BackIconGrey style={{ alignSelf: 'flex-end', transform: [{ rotate: '-90deg' }] }} />
+        <BackIconGrey style={styles.icon} />
       </Optional>
     </View>
   </Pressable>

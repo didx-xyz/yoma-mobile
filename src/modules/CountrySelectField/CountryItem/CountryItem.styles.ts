@@ -1,4 +1,4 @@
-import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
+import { ImageStyle, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 const styles = {
   container: {
@@ -17,6 +17,10 @@ const styles = {
   flag: {
     paddingRight: 8,
   } as TextStyle,
+  icon: {
+    alignSelf: 'flex-end',
+    transform: [{ rotate: '-90deg' }],
+  } as ImageStyle,
 }
 
 export default StyleSheet.create(styles)
