@@ -1,25 +1,23 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { applySpec, map, path, pathOr, propOr } from 'ramda'
+import { applySpec, map, mergeRight } from 'ramda'
 
-import { types as ApiUserTypes } from '~/api/users'
 import type { types as CvViewCredentialTypes } from '~/components/CvViewCredential'
+import { CredentialTypes } from '~/modules/User/User.types'
+import { getUserCredentialViewSelectorSpec } from '~/modules/User/User.utils'
 import * as UserWorkExperiencesSelectors from '~/modules/UserWorkExperience/UserWorkExperience.selector'
+import { getUserWorkExperienceMetadata } from '~/modules/UserWorkExperience/UserWorkExperience.utils'
 import type { types as UserWorkExperiencesTypes } from '~/modules/UserWorkExperience/types'
-
-import { getExperienceMetadata } from './WorkExperienceView.utils'
 
 export default createSelector<any, { userWorkExperiences: CvViewCredentialTypes.CvViewCredentialsData }>(
   UserWorkExperiencesSelectors.selectUserWorkExperiences,
   (workExperiences: UserWorkExperiencesTypes.NormalisedUserWorkExperience) => {
     const ids = workExperiences.ids
     const entities = map(
-      applySpec({
-        title: pathOr('', [ApiUserTypes.UserCredentialTypes.WorkExperience, 'title']),
-        description: pathOr('', [ApiUserTypes.UserCredentialTypes.WorkExperience, 'description']),
-        iconUrl: path([ApiUserTypes.UserCredentialTypes.WorkExperience, 'organisationLogoURL']),
-        isValidated: propOr(false, 'approved'),
-        metadata: getExperienceMetadata,
-      }),
+      applySpec(
+        mergeRight(getUserCredentialViewSelectorSpec(CredentialTypes.WorkExperience), {
+          metadata: getUserWorkExperienceMetadata,
+        }),
+      ),
     )(workExperiences.entities)
     return { userWorkExperiences: { ids, entities } }
   },

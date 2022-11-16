@@ -1,10 +1,11 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { applySpec, map, path, pathOr, propOr } from 'ramda'
+import { applySpec, map, mergeRight } from 'ramda'
 
-import { types as ApiUserTypes } from '~/api/users'
+import { CredentialTypes } from '~/modules/User/User.types'
+import { getUserCredentialViewSelectorSpec } from '~/modules/User/User.utils'
 // destructured to avoid circular dependencies
 import * as UserEducationSelectors from '~/modules/UserEducation/UserEducation.selector'
-import * as UserEducationUtils from '~/modules/UserEducation/UserEducation.utils'
+import { getUserEducationMetadata } from '~/modules/UserEducation/UserEducation.utils'
 import type * as UserEducationTypes from '~/modules/UserEducation/types'
 
 export default createSelector<any, UserEducationTypes.UserEducationViewCredentials>(
@@ -12,14 +13,13 @@ export default createSelector<any, UserEducationTypes.UserEducationViewCredentia
   (userEducation: UserEducationTypes.NormalisedUserEducation) => {
     const ids = userEducation.ids
     const entities = map(
-      applySpec({
-        title: pathOr('', [ApiUserTypes.UserCredentialTypes.Education, 'title']),
-        description: pathOr('', [ApiUserTypes.UserCredentialTypes.Education, 'description']),
-        iconUrl: path([ApiUserTypes.UserCredentialTypes.Education, 'organisationLogoURL']),
-        isValidated: propOr(false, 'approved'),
-        metadata: UserEducationUtils.getUserEducationMetadata,
-      }),
+      applySpec(
+        mergeRight(getUserCredentialViewSelectorSpec(CredentialTypes.Education), {
+          metadata: getUserEducationMetadata,
+        }),
+      ),
     )(userEducation.entities)
+    console.log({ i: 'EducationView.selector', entities })
     return { userEducation: { ids, entities } }
   },
 )

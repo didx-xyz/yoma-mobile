@@ -6,7 +6,6 @@ import ImagePicker from 'react-native-image-crop-picker'
 import { Middleware } from 'redux'
 
 import { middleware as ApiMiddleware, utils as ApiUtils, apiConfig } from '~/api'
-import { types as ApiUsersTypes } from '~/api/users'
 import { middleware as AppMiddleware } from '~/modules/App'
 import { middleware as AuthMiddleware } from '~/modules/Auth'
 import { middleware as ChallengesMiddleware } from '~/modules/Challenges'
@@ -18,6 +17,7 @@ import { middleware as OrganisationsMiddleware } from '~/modules/Organisations'
 import { middleware as QualificationsMiddleware } from '~/modules/Qualifications'
 import { middleware as SkillsMiddleware } from '~/modules/Skills'
 import { middleware as UserMiddleware, utils as UserUtils } from '~/modules/User'
+import { CredentialTypes } from '~/modules/User/User.types'
 import { middleware as UserChallengesMiddleware } from '~/modules/UserChallenges'
 import { middleware as UserEducationMiddleware } from '~/modules/UserEducation'
 import { middleware as UserQualificationsMiddleware } from '~/modules/UserQualifications'
@@ -86,13 +86,13 @@ const featureModuleMiddleware = [
   UserChallengesMiddleware.createUserChallengeCertificateFailureFlow({ notification: showSimpleMessage }),
   UserChallengesMiddleware.getUserChallengesFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserOpportunityCredentials(ApiUsersTypes.UserCredentialTypes.Challenge),
+    UserUtils.extractUserOpportunityCredentials(CredentialTypes.Task),
   ),
   UserChallengesMiddleware.normaliseUserChallengesFlow({ normalise: ReduxUtils.normalise }),
   UserChallengesMiddleware.setUserChallengesFlow,
   UserEducationMiddleware.getUserEducationFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.Education),
+    UserUtils.extractUserCredentials(CredentialTypes.Education),
   ),
   UserEducationMiddleware.normaliseUserEducationFlow({ normalise: ReduxUtils.normalise }),
   UserEducationMiddleware.setUserEducationFlow,
@@ -125,7 +125,7 @@ const featureModuleMiddleware = [
   UserMiddleware.uploadUserPhotoSuccessFlow,
   UserQualificationsMiddleware.getUserQualificationsFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserOpportunityCredentials(ApiUsersTypes.UserCredentialTypes.Qualification),
+    UserUtils.extractUserOpportunityCredentials(CredentialTypes.Learning),
   ),
   UserQualificationsMiddleware.normaliseUserQualificationsFlow({ normalise: ReduxUtils.normalise }),
   UserQualificationsMiddleware.setUserQualificationsFlow,
@@ -153,7 +153,7 @@ const featureModuleMiddleware = [
   UserWorkExperiencesMiddleware.fetchUserWorkExperienceByIdSuccessFlow({ notification: showSimpleMessage }),
   UserWorkExperiencesMiddleware.getUserWorkExperiencesFromCredentialsFlow(
     ReduxUtils.extractDataFromResponseAction,
-    UserUtils.extractUserCredentials(ApiUsersTypes.UserCredentialTypes.WorkExperience),
+    UserUtils.extractUserCredentials(CredentialTypes.WorkExperience),
   ),
   UserWorkExperiencesMiddleware.normaliseUserWorkExperiencesFlow({ normalise: ReduxUtils.normalise }),
   UserWorkExperiencesMiddleware.setUserWorkExperiencesFlow,

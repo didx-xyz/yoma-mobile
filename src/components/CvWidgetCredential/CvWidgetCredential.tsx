@@ -8,13 +8,13 @@ import Avatar from '../Avatar'
 import styles from './CvWidgetCredential.styles'
 
 interface Props {
-  name: string
+  title: string
   onPress: () => void
   startDate: string
   isValidated: boolean
   organisationLogoURL?: string
 }
-const CvWidgetCredential = ({ name, startDate, organisationLogoURL, onPress, isValidated }: Props) => {
+const CvWidgetCredential = ({ title, startDate, organisationLogoURL, onPress, isValidated }: Props) => {
   const [formattedDate, setFormattedDate] = useState('')
 
   useEffect(() => {
@@ -26,10 +26,10 @@ const CvWidgetCredential = ({ name, startDate, organisationLogoURL, onPress, isV
     <Pressable onPress={onPress}>
       <View style={styles.container}>
         <View style={styles.imageWrap}>
-          <Avatar name={name} url={organisationLogoURL} isValidated={isValidated} />
+          <Avatar name={title} url={organisationLogoURL} isValidated={isValidated} />
         </View>
         <View style={styles.content}>
-          <Text.Header level={HeaderLevels.H6}>{name}</Text.Header>
+          <Text.Header level={HeaderLevels.H6}>{title}</Text.Header>
           <Text.Body level={BodyLevels.Small}>{formattedDate}</Text.Body>
         </View>
       </View>

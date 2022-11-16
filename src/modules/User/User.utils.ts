@@ -27,8 +27,8 @@ import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
 import { renameKeys, safeWhen } from '~/utils/ramda.utils'
 
-import { USER_CREDENTIALS, USER_PHOTO_FORM_DATA_NAME } from './User.constants'
-import { UserCredentialFormValues, UserCredentialItemPayload, UserFields } from './User.types'
+import { USER_CREDENTIALS, USER_PHOTO_FORM_DATA_NAME, UserCredentialsT } from './User.constants'
+import { CredentialTypes, UserCredentialFormValues, UserCredentialItemPayload, UserFields } from './User.types'
 
 export const extractUserFromPayload = pipe(
   path(['payload', 'data']),
@@ -56,15 +56,13 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
   return photoPayload
 }
 
-export const filterCredentials = (type: ApiUserTypes.UserCredentialTypes) =>
-  pipe(keys, find(pipe(toLower, equals(toLower(type)))))
-export const extractUserCredentials = (type: ApiUserTypes.UserCredentialTypes) => filter(filterCredentials(type))
+export const filterCredentials = (type: CredentialTypes) => pipe(keys, find(pipe(toLower, equals(toLower(type)))))
+export const extractUserCredentials = (type: CredentialTypes) => filter(filterCredentials(type))
 
-export const filterOpportunityCredentials = (type: keyof typeof USER_CREDENTIALS) =>
-  safeWhen(has(ApiUserTypes.UserCredentialTypes.Opportunity), pathEq(['opportunity', 'type'], USER_CREDENTIALS[type]))
+export const filterOpportunityCredentials = (type: CredentialTypes) =>
+  safeWhen(has(CredentialTypes.Opportunity), pathEq([CredentialTypes.Opportunity, 'type'], type))
 
-export const extractUserOpportunityCredentials = (type: keyof typeof USER_CREDENTIALS) =>
-  filter(filterOpportunityCredentials(type))
+export const extractUserOpportunityCredentials = (type: CredentialTypes) => filter(filterOpportunityCredentials(type))
 
 export const prepareUserCredentialItemPayload = (action: any): Types.StdFn<any, UserCredentialItemPayload> =>
   mergeRight({
@@ -90,14 +88,14 @@ export const setFormValues = (state: ReduxTypes.NormalisedData, formValues: Type
 
 export const getCredentialViewMetadata = (spec: Record<string, any>) => pipe(applySpec(spec), values, reject(isEmpty))
 
-export const getUserCredentialWidgetSelectorSpec = (cred: ApiUserTypes.UserCredentialTypes) => ({
-  name: pathOr('', [cred, 'title']),
+export const getUserCredentialWidgetSelectorSpec = (cred: CredentialTypes) => ({
+  title: pathOr('', [cred, 'title']),
   startDate: propOr('', 'startDate'),
   organisationLogoURL: path([cred, 'organisationLogoURL']),
   isValidated: propOr(false, 'approved'),
 })
 
-export const getUserCredentialViewSelectorSpec = (cred: ApiUserTypes.UserCredentialTypes) => ({
+export const getUserCredentialViewSelectorSpec = (cred: CredentialTypes) => ({
   title: pathOr('', [cred, 'title']),
   description: pathOr('', [cred, 'description']),
   iconUrl: path([cred, 'organisationLogoURL']),

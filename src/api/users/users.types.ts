@@ -6,14 +6,14 @@ export enum UsersEndpoints {
   Skills = 'skills',
 }
 
-// TODO: Refactor this into 2 separate types. It should be a mapping for Credential types. The
-//  second list should be of Opportunity types. Credential types are: Opportunity, Education and
-//  Work Experience. All others are opportunity types.
-
 export enum UserCredentialTypes {
-  Education = 'education',
-  Opportunity = 'opportunity',
-  WorkExperience = 'workExperience',
+  Assignment = 'Assignment',
+  Challenge = 'Challenge',
+  Education = 'Education',
+  Job = 'Job',
+  Opportunity = 'Opportunity',
+  Qualification = 'Qualification',
+  WorkExperience = 'Workexperience',
 }
 
 export enum UserCredentialOpportunityTypes {
