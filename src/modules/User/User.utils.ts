@@ -27,7 +27,7 @@ import * as ReduxUtils from '~/redux/redux.utils'
 import * as Types from '~/types/general.types'
 import { renameKeys, safeWhen } from '~/utils/ramda.utils'
 
-import { USER_CREDENTIALS, USER_PHOTO_FORM_DATA_NAME, UserCredentialsT } from './User.constants'
+import { USER_PHOTO_FORM_DATA_NAME } from './User.constants'
 import { CredentialTypes, UserCredentialFormValues, UserCredentialItemPayload, UserFields } from './User.types'
 
 export const extractUserFromPayload = pipe(

@@ -1,7 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map } from 'ramda'
 
-import { types as ApiUserTypes } from '~/api/users'
 import { utils as UserUtils } from '~/modules/User'
 import { selectUserEducationCredentials } from '~/modules/UserEducation/UserEducation.selector'
 import type { NormalisedUserEducation, UserEducationWidgetSelector } from '~/modules/UserEducation/UserEducation.types'
