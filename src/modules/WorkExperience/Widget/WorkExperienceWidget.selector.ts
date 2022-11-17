@@ -1,10 +1,9 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map, pick, pipe, slice } from 'ramda'
 
-import { utils as UserUtils } from '~/modules/User'
+import { CredentialTypes } from '~/modules/User/User.types'
+import * as UserUtils from '~/modules/User/User.utils'
 import { selectors as UserWorkExperiencesSelectors } from '~/modules/UserWorkExperience'
-
-import { CredentialTypes } from '../../User/User.types'
 
 export default createSelector(UserWorkExperiencesSelectors.selectUserWorkExperiences, userWorkExperiences => {
   const count = userWorkExperiences.ids.length
