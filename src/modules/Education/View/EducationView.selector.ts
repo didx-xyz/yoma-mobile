@@ -19,7 +19,6 @@ export default createSelector<any, UserEducationTypes.UserEducationViewCredentia
         }),
       ),
     )(userEducation.entities)
-    console.log({ i: 'EducationView.selector', entities })
     return { userEducation: { ids, entities } }
   },
 )
