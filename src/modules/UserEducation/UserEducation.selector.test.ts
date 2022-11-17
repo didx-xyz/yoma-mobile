@@ -6,7 +6,7 @@ import { INITIAL_STATE } from './UserEducation.reducer'
 import * as SUT from './UserEducation.selector'
 
 describe('modules/UserEducation/UserEducation.selector', () => {
-  describe('selectUserEducation', function () {
+  describe('selectUserEducation', () => {
     it('should correctly handle an empty state', () => {
       // given ...
       const state = rootStateFixture()
@@ -75,7 +75,7 @@ describe('modules/UserEducation/UserEducation.selector', () => {
       expect(result).toEqual('FORM_VALUES')
     })
   })
-  describe('selectFormCertificate', function () {
+  describe('selectFormCertificate', () => {
     it('should correctly handle an empty state', () => {
       // given ...
       const state = rootStateFixture()

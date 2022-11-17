@@ -36,6 +36,7 @@ export const extractUserFromPayload = pipe(
 )
 
 export const extractUserFromUserUpdateSuccess = path(['payload', 'data', 'data'])
+
 export const extractUserFromUpdateUserPayload = pick([
   UserFields.Firstname,
   UserFields.Lastname,
@@ -57,6 +58,7 @@ export const createPhotoFormPayload = (formInstance: any) => (imageResponse: any
 }
 
 export const filterCredentials = (type: CredentialTypes) => pipe(keys, find(pipe(toLower, equals(toLower(type)))))
+
 export const extractUserCredentials = (type: CredentialTypes) => filter(filterCredentials(type))
 
 export const filterOpportunityCredentials = (type: CredentialTypes) =>
