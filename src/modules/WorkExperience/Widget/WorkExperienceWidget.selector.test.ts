@@ -24,14 +24,13 @@ describe('modules/WorkExperience/WorkExperienceWidget/WorkExperienceWidget.selec
           ],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              opportunity: {
+              workExperience: {
                 organisationName: 'Test Org',
                 organisationLogoURL: null,
                 id: '210a91ff-38b9-42f2-9b50-b6655bbf0f7c',
                 title: 'Test Graph',
                 description: 'Test Graph',
                 url: null,
-                type: UserCredentialOpportunityTypes.Job,
                 otherData: 'OTHER DATA',
               },
               approved: true,
@@ -41,14 +40,13 @@ describe('modules/WorkExperience/WorkExperienceWidget/WorkExperienceWidget.selec
               otherData: 'OTHER DATA',
             },
             'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              opportunity: {
+              workExperience: {
                 organisationName: 'Test Org 2',
                 organisationLogoURL: null,
                 id: 'XXXa91ff-38b9-42f2-9b50-b6655bbf0f7c',
                 title: 'Test Graph2',
                 description: 'Test Graph2',
                 url: 'https://google.com',
-                type: UserCredentialOpportunityTypes.Job,
                 otherData: 'OTHER DATA',
               },
               approved: false,
@@ -58,14 +56,13 @@ describe('modules/WorkExperience/WorkExperienceWidget/WorkExperienceWidget.selec
               otherData: 'OTHER DATA',
             },
             'XXXbdc39-cccc-4e1e-948f-5d33a2cfb3b5': {
-              opportunity: {
+              workExperience: {
                 organisationName: 'Test Org 2',
                 organisationLogoURL: 'https://google.com',
                 id: 'XXXa91ff-38b9-42f2-9b50-b6655bbf0f7c',
                 title: 'Test Graph2',
                 description: 'Test Graph2',
                 url: 'https://google.com',
-                type: UserCredentialOpportunityTypes.Job,
                 otherData: 'OTHER DATA',
               },
               approved: false,
@@ -86,13 +83,13 @@ describe('modules/WorkExperience/WorkExperienceWidget/WorkExperienceWidget.selec
           ids: ['88bbdc39-4146-4e1e-948f-5d33a2cfb3b5', 'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5'],
           entities: {
             '88bbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              name: 'Test Graph',
+              title: 'Test Graph',
               startDate: '2021-04-15T00:00:00',
               organisationLogoURL: null,
               isValidated: true,
             },
             'XXXbdc39-4146-4e1e-948f-5d33a2cfb3b5': {
-              name: 'Test Graph2',
+              title: 'Test Graph2',
               startDate: '2021-04-15T00:00:00',
               organisationLogoURL: null,
               isValidated: false,
