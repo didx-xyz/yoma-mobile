@@ -1,8 +1,6 @@
 import { path, pathOr, propOr } from 'ramda'
 import { Options } from 'react-native-image-crop-picker'
 
-import { UserCredentialOpportunityTypes, UserCredentialTypes } from '~/api/users/users.types'
-
 import { CredentialTypes } from './User.types'
 
 export const CAPTURE_IMAGE_OPTIONS: Options = {
@@ -32,6 +30,3 @@ export const USER_OPPORTUNITY_CREDENTIAL_VIEW_SELECTOR_SPEC = {
   iconUrl: path([CredentialTypes.Opportunity, 'organisationLogoURL']),
   isValidated: propOr(false, 'approved'),
 }
-
-export type UserCredentialsT = typeof USER_CREDENTIALS
-export const USER_CREDENTIALS = { ...UserCredentialTypes, ...UserCredentialOpportunityTypes }
