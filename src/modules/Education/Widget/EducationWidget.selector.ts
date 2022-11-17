@@ -1,18 +1,17 @@
 import { createSelector } from '@reduxjs/toolkit'
 import { applySpec, map } from 'ramda'
 
-import { utils as UserUtils } from '~/modules/User'
+import * as UserTypes from '~/modules/User/User.types'
+import * as UserUtils from '~/modules/User/User.utils'
 import { selectUserEducationCredentials } from '~/modules/UserEducation/UserEducation.selector'
 import type { NormalisedUserEducation, UserEducationWidgetSelector } from '~/modules/UserEducation/UserEducation.types'
-
-import { CredentialTypes } from '../../User/User.types'
 
 export default createSelector<any, UserEducationWidgetSelector>(
   selectUserEducationCredentials,
   (userEducation: NormalisedUserEducation) => {
     const count = userEducation.ids.length
     const ids = userEducation.ids
-    const entities = map(applySpec(UserUtils.getUserCredentialWidgetSelectorSpec(CredentialTypes.Education)))(
+    const entities = map(applySpec(UserUtils.getUserCredentialWidgetSelectorSpec(UserTypes.CredentialTypes.Education)))(
       userEducation.entities,
     )
 
