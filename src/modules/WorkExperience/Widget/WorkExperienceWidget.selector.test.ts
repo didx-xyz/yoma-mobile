@@ -1,4 +1,3 @@
-import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
 import * as SUT from './WorkExperienceWidget.selector'
