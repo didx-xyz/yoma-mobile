@@ -14,7 +14,7 @@ const CHALLENGES_STATE_MOCK = {
       organisationName: 'Cartedo',
       organisationLogoURL: 'https://pbs.twimg.com/profile_images/1069767596306780160/bBLu6cCU_400x400.png',
       id: '2598575f-5caf-42ff-f314-08d7fc042142',
-      name: 'Covid-19',
+      title: 'Covid-19',
       description:
         'COVID-19 is impacting us all as we deal with the new normal of social distancing and lockdowns. Misinformation and fake news amplify our fears. Hard realities like loss of income, job insecurity, stalled education, food shortages and lack of cleanwater, force us to explore unique ways to cope. While we cannot always prevent such impacts, we can be better prepared. UNICEF has partnered with Cartedo to empower youth across Africa to solve a series of global grand challenges and positively impact communities while developing employability skills. We believe that youth have unique perspectives on these challenges and should be given the opportunity to become knowledge producers. This is your chance to Be seen, Be heard and Be the Change!',
       url: 'https://app.cartedo.com/project/8/covid-19-challenge',
@@ -39,7 +39,7 @@ const CHALLENGES_STATE_MOCK = {
       organisationLogoURL:
         'https://yoma-test-file-storage.s3.eu-west-1.amazonaws.com/Staging/Certificates/f89346a2-7635-40b0-8afd-a23a829dd8c0?X-Amz-Expires=1800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNSETAVPYWP7TMB/20210915/eu-west-1/s3/aws4_request&X-Amz-Date=20210915T193543Z&X-Amz-SignedHeaders=host&X-Amz-Signature=065ede63c49706a5e16b6b2e2d92d40459d17e20bf92ad858e840317868bb802',
       id: '19fcf710-d250-48ba-b630-08d81d3222f2',
-      name: 'Test Retool Challenge',
+      title: 'Test Retool Challenge',
       description: 'Testing',
       url: 'www.google.com',
       createdAt: '2020-06-30T20:15:51.458944',
@@ -62,7 +62,7 @@ const CHALLENGES_STATE_MOCK = {
       organisationName: 'Cartedo',
       organisationLogoURL: 'https://pbs.twimg.com/profile_images/1069767596306780160/bBLu6cCU_400x400.png',
       id: '4fc8c0a4-8856-41e4-34e1-08d86faaeb08',
-      name: 'Tideturners Challenge',
+      title: 'Tideturners Challenge',
       description:
         'This challenge gives young people an opportunity to explore how we might address the challenges of plastic pollution on land and sea, with a focus on finding sustainable alternatives to plastic while inspiring behavior change in the production and consumption of plastic among young people and their communities. We are looking for ideas to solve real challenges faced by real people, just like you. This challenge offers you the opportunity to develop future-ready employability skills alike design thinking while contributing to the global efforts to beat plastic pollution.\n\nAs you progress through this challenge you will use a human-centered design approach to discover different ways in which plastic waste and plastic pollution is affecting marine, land and human life, define these challenges from a human-centered perspective and develop innovative solutions to these challenges.',
       url: 'https://app.cartedo.com/project/9/plastic-tide-turners-challenge',
@@ -86,7 +86,7 @@ const CHALLENGES_STATE_MOCK = {
       organisationName: 'Employer',
       organisationLogoURL: null,
       id: '04cd1679-e013-4de9-565a-08d8d4b42f40',
-      name: 'Test Challenge',
+      title: 'Test Challenge',
       description: 'Test Challenge',
       url: null,
       createdAt: '2021-02-19T08:56:02.4857815',
@@ -110,7 +110,7 @@ const CHALLENGES_STATE_MOCK = {
       organisationLogoURL:
         'https://yoma-test-file-storage.s3.eu-west-1.amazonaws.com/Staging/Certificates/f89346a2-7635-40b0-8afd-a23a829dd8c0?X-Amz-Expires=1800&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA2MNSETAVPYWP7TMB/20210915/eu-west-1/s3/aws4_request&X-Amz-Date=20210915T193543Z&X-Amz-SignedHeaders=host&X-Amz-Signature=065ede63c49706a5e16b6b2e2d92d40459d17e20bf92ad858e840317868bb802',
       id: '61b3783c-2f7b-46b5-2e05-08d92e9e2636',
-      name: 'Make Your Own Bingo!',
+      title: 'Make Your Own Bingo!',
       description: 'What fun',
       url: null,
       createdAt: '2021-06-13T19:05:03.0410213',

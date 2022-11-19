@@ -28,7 +28,7 @@ describe('modules/Education/Education.middleware', () => {
       // when ... we create the user's credentials
       const action = createEducation(mockPayload)
       // @ts-ignore
-      const { store, invoke, next } = create(SUT.creatEducationFlow)
+      const { store, invoke, next } = create(SUT.createEducationFlow)
       invoke(action)
 
       // then ...
@@ -62,7 +62,7 @@ describe('modules/Education/Education.middleware', () => {
       // @ts-ignore
       const action = createEducationSuccess(mockedPayload)
       // @ts-ignore
-      const { invoke, next } = create(SUT.creatEducationSuccessFlow)
+      const { invoke, next } = create(SUT.createEducationSuccessFlow)
       // when ... we respond to the createEducationSuccess action
       invoke(action)
 
@@ -87,7 +87,7 @@ describe('modules/Education/Education.middleware', () => {
       // @ts-ignore
       const action = createEducationSuccess(mockedPayload)
       // @ts-ignore
-      const { store, invoke } = create(SUT.creatEducationSuccessFlow)
+      const { store, invoke } = create(SUT.createEducationSuccessFlow)
       // when ... we respond to the createEducationSuccess action
       invoke(action)
 
@@ -105,7 +105,7 @@ describe('modules/Education/Education.middleware', () => {
       const action = createEducationFailure('FAILED')
       const mockNotification = jest.fn()
       // @ts-ignore
-      const { invoke } = create(SUT.creatEducationFailureFlow({ notification: mockNotification }))
+      const { invoke } = create(SUT.createEducationFailureFlow({ notification: mockNotification }))
 
       // when ... we respond to the createEducationFailures action
       invoke(action)

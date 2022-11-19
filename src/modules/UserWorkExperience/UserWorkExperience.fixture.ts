@@ -1,7 +1,5 @@
 import { createFixture } from 'tests/tests.utils'
 
-import { UserCredentialOpportunityTypes } from '~/api/users/users.types'
-
 import { UserWorkExperienceCredential } from './UserWorkExperience.types'
 
 export const USER_WORK_EXPERIENCE_MOCK: UserWorkExperienceCredential[] = [
@@ -16,8 +14,7 @@ export const USER_WORK_EXPERIENCE_MOCK: UserWorkExperienceCredential[] = [
     fileId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
     fileURL: 'string',
     requestVerification: true,
-    opportunity: {
-      type: UserCredentialOpportunityTypes.Job,
+    workExperience: {
       id: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
       title: 'TITLE',
       description: 'DESCRIPTION',

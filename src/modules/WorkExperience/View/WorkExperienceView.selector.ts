@@ -5,8 +5,9 @@ import type { types as CvViewCredentialTypes } from '~/components/CvViewCredenti
 import { CredentialTypes } from '~/modules/User/User.types'
 import { getUserCredentialViewSelectorSpec } from '~/modules/User/User.utils'
 import * as UserWorkExperiencesSelectors from '~/modules/UserWorkExperience/UserWorkExperience.selector'
-import { getUserWorkExperienceMetadata } from '~/modules/UserWorkExperience/UserWorkExperience.utils'
 import type { types as UserWorkExperiencesTypes } from '~/modules/UserWorkExperience/types'
+
+import { getExperienceMetadata } from './WorkExperienceView.utils'
 
 export default createSelector<any, { userWorkExperiences: CvViewCredentialTypes.CvViewCredentialsData }>(
   UserWorkExperiencesSelectors.selectUserWorkExperiences,
@@ -15,7 +16,7 @@ export default createSelector<any, { userWorkExperiences: CvViewCredentialTypes.
     const entities = map(
       applySpec(
         mergeRight(getUserCredentialViewSelectorSpec(CredentialTypes.WorkExperience), {
-          metadata: getUserWorkExperienceMetadata,
+          metadata: getExperienceMetadata,
         }),
       ),
     )(workExperiences.entities)

@@ -16,7 +16,7 @@ export const extractUserWorkExperienceFromData = pipe(
     'fileId',
     'fileURL',
     'requestVerification',
-    'opportunity',
+    'workExperience',
   ]),
   of,
 )

@@ -29,10 +29,8 @@ export interface UserWorkExperienceFormFields {
   endTime: string | null
 }
 
-interface UserWorkExperienceOpportunityCredential extends UserWorkExperience, UserTypes.OpportunityCredentialPartial {}
-
 export interface UserWorkExperienceCredential extends UserTypes.UserCredentialMeta {
-  opportunity: UserWorkExperienceOpportunityCredential
+  workExperience: UserWorkExperience
 }
 export interface UserWorkExperienceResponse {
   data: { data: UserWorkExperienceCredential }

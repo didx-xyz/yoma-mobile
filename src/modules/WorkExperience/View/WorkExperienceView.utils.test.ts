@@ -12,7 +12,7 @@ describe('modules/WorkExperience/WorkExperience.utils', () => {
     })
     it('should correctly handle if a property is empty', () => {
       const result = SUT.getExperienceMetadata(
-        mergeDeepRight(USER_WORK_EXPERIENCE_MOCK[0], { opportunity: { countries: undefined } }),
+        mergeDeepRight(USER_WORK_EXPERIENCE_MOCK[0], { workExperience: { countries: undefined } }),
       )
       expect(result.length).toBe(2)
       expect(result).toStrictEqual(['NAME', 'Jun 2021 - Aug 2021 • 2 months'])
