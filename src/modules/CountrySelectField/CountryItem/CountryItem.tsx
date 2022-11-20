@@ -2,11 +2,11 @@ import { getEmojiFlag } from 'countries-list'
 import React from 'react'
 import { Pressable, View } from 'react-native'
 
-import { BackIconGrey } from '~/assets/images'
+import { ChevronDownIcon } from '~/assets/images'
 import Optional from '~/components/Optional'
 import Text, { HeaderLevels } from '~/components/Typography'
 import { CountryList } from '~/modules/Countries/Countries.types'
-import { Colors } from '~/styles'
+import { Colors, colors } from '~/styles'
 
 import styles from './CountryItem.styles'
 
@@ -32,7 +32,7 @@ const CountryItem = ({ item, placeholder = '', countries, onPress, showDropdown 
         </Optional>
       </View>
       <Optional condition={showDropdown}>
-        <BackIconGrey style={styles.icon} />
+        <ChevronDownIcon fill={colors[Colors.MenuGrey]} />
       </Optional>
     </View>
   </Pressable>

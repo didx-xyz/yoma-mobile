@@ -17,10 +17,6 @@ const styles = {
   flag: {
     paddingRight: 8,
   } as TextStyle,
-  icon: {
-    alignSelf: 'flex-end',
-    transform: [{ rotate: '-90deg' }],
-  } as ImageStyle,
 }
 
 export default StyleSheet.create(styles)
