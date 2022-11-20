@@ -1,16 +1,45 @@
+import { Formik } from 'formik'
+import { pipe } from 'ramda'
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { EducationNavigation } from '~/modules/Education/types'
-import { UserQualificationsForm } from '~/modules/UserQualifications'
+import * as FormUtils from '~/utils/form.utils'
+
+import { createEducation } from '../Education.reducer'
+import { EducationNavigation } from '../types'
+import EducationForm from './EducationForm'
+import { INITIAL_FORM_VALUES } from './EducationForm.constants'
+import selector from './EducationForm.selector'
+import { FormFields } from './EducationForm.types'
+import { schema } from './EducationForm.validation'
 
 interface Props {
   navigation: EducationNavigation
 }
 const EducationFormContainer = ({ navigation }: Props) => {
   const { t } = useTranslation()
+  const { organisations } = useSelector(selector)
 
-  return <UserQualificationsForm navigation={navigation} title={t('Education')} />
+  const dispatch = useDispatch()
+
+  const handleSubmit = (values: FormFields) => {
+    const education = pipe(FormUtils.sanitiseDateRange, FormUtils.countriesAsArray)(values)
+    dispatch(createEducation(education))
+  }
+
+  return (
+    <Formik initialValues={INITIAL_FORM_VALUES} validationSchema={schema} onSubmit={handleSubmit}>
+      {formikHandlers => (
+        <EducationForm
+          title={t('Education')}
+          navigation={navigation}
+          organisationsDropDown={organisations}
+          form={formikHandlers}
+        />
+      )}
+    </Formik>
+  )
 }
 
 export default EducationFormContainer

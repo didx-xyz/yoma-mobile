@@ -1,4 +1,4 @@
-import { USER_QUALIFICATIONS_STATE_MOCK } from '~/modules/UserQualifications/UserQualifications.fixture'
+import { USER_EDUCATION_STATE_MOCK } from '~/modules/UserEducation/UserEducation.fixture'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
 import * as SUT from './EducationWidget.selector'
@@ -13,27 +13,33 @@ describe('modules/Education/EducationWidget/EducationWidget.selector', () => {
       // then ...
       expect(result).toEqual({
         count: 0,
-        userQualifications: {
+        userEducation: {
           ids: [],
           entities: {},
         },
       })
     })
-    it('should return the user qualifications data in the expected format', () => {
+    it('should return the user education data in the expected format', () => {
       // given ...
       const state = rootStateFixture({
-        userQualifications: USER_QUALIFICATIONS_STATE_MOCK,
+        userEducation: USER_EDUCATION_STATE_MOCK,
       })
       // when ...
       const result = SUT.default(state)
       // then ...
       expect(result).toEqual({
-        count: 1,
-        userQualifications: {
-          ids: ['USER_QUALIFICATIONS_STATE_MOCK-001'],
+        count: 2,
+        userEducation: {
+          ids: ['USER_EDUCATION_STATE_MOCK-001', 'USER_EDUCATION_STATE_MOCK-002'],
           entities: {
-            'USER_QUALIFICATIONS_STATE_MOCK-001': {
-              name: 'Test Qualification',
+            'USER_EDUCATION_STATE_MOCK-001': {
+              title: 'Test Education',
+              startDate: '2021-04-15T00:00:00',
+              organisationLogoURL: null,
+              isValidated: true,
+            },
+            'USER_EDUCATION_STATE_MOCK-002': {
+              title: 'Test Education',
               startDate: '2021-04-15T00:00:00',
               organisationLogoURL: null,
               isValidated: true,

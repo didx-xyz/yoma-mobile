@@ -148,13 +148,13 @@ describe('modules/CompletedChallenges/CompletedChallenges.selector', () => {
           ids: ['USER_QUALIFICATIONS_STATE_MOCK-001', 'USER_QUALIFICATIONS_STATE_MOCK-002'],
           entities: {
             'USER_QUALIFICATIONS_STATE_MOCK-001': {
-              name: 'Test Qualification',
+              title: 'Test Qualification',
               startDate: '2021-04-15T00:00:00',
               organisationLogoURL: null,
               isValidated: true,
             },
             'USER_QUALIFICATIONS_STATE_MOCK-002': {
-              name: 'Test Qualification',
+              title: 'Test Qualification',
               startDate: '2021-04-15T00:00:00',
               organisationLogoURL: null,
               isValidated: true,

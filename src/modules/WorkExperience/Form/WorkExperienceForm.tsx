@@ -11,7 +11,6 @@ import DropDown, { types as DropDownTypes } from '~/components/DropDown'
 import FormLayout from '~/components/FormLayout'
 import Header from '~/components/Header'
 import Input from '~/components/Input'
-import LabelledHint from '~/components/LabelledHint'
 import ViewContainer from '~/components/ViewContainer'
 import SkillsSelectField from '~/modules/SkillSelectField'
 
@@ -57,12 +56,6 @@ const WorkExperienceForm = ({ navigation, organisations, form }: Props) => {
               name="skillNames"
               searchPlaceholder={t('Search skills')}
               label={t('forms.label.skills')}
-            />
-            <LabelledHint
-              label={t('Find inspiration on how to write a great profile.')}
-              modalContent={
-                'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis mauris purus. Quisque malesuada ornare mauris sed feugiat. Cras lectus est, iaculis quis nulla cursus, finibus gravida massa. Donec condimentum porta nisi, eu egestas risus ullamcorper in. In et magna mauris. '
-              }
             />
           </FormLayout>
         </Card>

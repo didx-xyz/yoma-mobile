@@ -2,10 +2,11 @@ import { Formik } from 'formik'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { CompleteChallengesNavigation } from '~/modules/CompletedChallenges/types'
-import { actions as UserChallengesActions } from '~/modules/UserChallenges'
+// working around require cycle.
+import * as UserChallengesActions from '~/modules/UserChallenges/UserChallenges.reducer'
 import * as FormUtils from '~/utils/form.utils'
 
+import { CompleteChallengesNavigation } from '../types'
 import { schema } from './CompletedChallengeForm.validation'
 import CompletedChallengesForm from './CompletedChallengesForm'
 import { INITIAL_FORM_VALUES } from './CompletedChallengesForm.constants'

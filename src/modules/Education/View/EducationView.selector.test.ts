@@ -1,4 +1,4 @@
-import { USER_QUALIFICATIONS_STATE_MOCK } from '~/modules/UserQualifications/UserQualifications.fixture'
+import { USER_EDUCATION_STATE_MOCK } from '~/modules/UserEducation/UserEducation.fixture'
 import { rootStateFixture } from '~/redux/redux.fixture'
 
 import * as SUT from './EducationView.selector'
@@ -13,27 +13,33 @@ describe('modules/Education/EducationView/EducationView.selector', () => {
 
       // then ... should return result as expected
       expect(result).toEqual({
-        userQualifications: {
+        userEducation: {
           ids: [],
           entities: {},
         },
       })
     })
-    it('should return userQualifications, skills and organisations lists', () => {
+    it('should return userEducation, skills and organisations lists', () => {
       const mockState = rootStateFixture({
-        userQualifications: USER_QUALIFICATIONS_STATE_MOCK,
+        userEducation: USER_EDUCATION_STATE_MOCK,
       })
       // when ... we call the selector
       const result = SUT.default(mockState)
 
       // then ... should return the data required by the education view
       expect(result).toEqual({
-        userQualifications: {
-          ids: ['USER_QUALIFICATIONS_STATE_MOCK-001'],
+        userEducation: {
+          ids: ['USER_EDUCATION_STATE_MOCK-001', 'USER_EDUCATION_STATE_MOCK-002'],
           entities: {
-            'USER_QUALIFICATIONS_STATE_MOCK-001': {
-              title: 'Test Qualification',
-              createdByAdmin: true,
+            'USER_EDUCATION_STATE_MOCK-001': {
+              title: 'Test Education',
+              metadata: ['Apr 2021'],
+              iconUrl: null,
+              isValidated: true,
+              description: 'Test Graph',
+            },
+            'USER_EDUCATION_STATE_MOCK-002': {
+              title: 'Test Education',
               metadata: ['Apr 2021'],
               iconUrl: null,
               isValidated: true,

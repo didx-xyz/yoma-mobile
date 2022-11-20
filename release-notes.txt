@@ -1,8 +1,10 @@
 Ver 0.0.1
 Latest:
-- Removing 'info' section in About form, updating About widget 'View All' to 'View Full Biography'
+- Fixing up education (Create and Widget/View) (YOMA-721)
+- Removing hint for education creation (YOMA-720)
 
 Previous deployment release notes:
+- Removing 'info' section in About form, updating About widget 'View All' to 'View Full Biography'
 - Fixing update email on profile update.
 - adding generic banner
 - creating WorkExperience credentials, updated Widgets to 'Work Experience'

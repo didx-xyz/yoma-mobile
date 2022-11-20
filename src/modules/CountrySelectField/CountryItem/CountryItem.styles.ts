@@ -5,6 +5,14 @@ const styles = {
     paddingVertical: 8,
     paddingHorizontal: 0,
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    width: '100%',
+  } as ViewStyle,
+  content: {
+    padding: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
   } as ViewStyle,
   flag: {
     paddingRight: 8,

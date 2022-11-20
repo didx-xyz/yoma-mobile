@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux'
 
 import { HomeNavigationRoutes } from '~/modules/HomeNavigation/HomeNavigation.types'
 import { types as MyCvTypes } from '~/modules/MyCv'
-import { UserQualificationsWidget } from '~/modules/UserQualifications'
 import { Colors } from '~/styles'
 
+import EducationWidget from './EducationWidget'
 import selector from './EducationWidget.selector'
 
 interface Props {
@@ -15,16 +15,16 @@ interface Props {
 
 const EducationWidgetContainer = ({ navigation }: Props) => {
   const { t } = useTranslation()
-  const { userQualifications, count } = useSelector(selector)
+  const { userEducation, count } = useSelector(selector)
 
   return (
-    <UserQualificationsWidget
+    <EducationWidget
       badgeColor={Colors.PrimaryRed}
       title={t('Education')}
       noDataMessage={t('Which school, university or college did you attend?')}
       viewRoute={HomeNavigationRoutes.Education}
       formRoute={HomeNavigationRoutes.EducationForm}
-      userQualifications={userQualifications}
+      userEducation={userEducation}
       count={count}
       navigation={navigation}
     />

@@ -7,6 +7,7 @@ import { INITIAL_STATE as ORGANISATIONS_INITIAL_STATE } from '~/modules/Organisa
 import { INITIAL_STATE as SKILLS_INITIAL_STATE } from '~/modules/Skills/Skills.reducer'
 import { INITIAL_STATE as USER_INITIAL_STATE } from '~/modules/User/User.reducer'
 import { INITIAL_STATE as USER_CHALLENGES_INITIAL_STATE } from '~/modules/UserChallenges/UserChallenges.reducer'
+import { INITIAL_STATE as USER_EDUCATION_INITIAL_STATE } from '~/modules/UserEducation/UserEducation.reducer'
 import { INITIAL_STATE as USER_QUALIFICATIONS_INITIAL_STATE } from '~/modules/UserQualifications/UserQualifications.reducer'
 import { INITIAL_STATE as USER_SKILLS_INITIAL_STATE } from '~/modules/UserSkills/UserSkills.reducer'
 import { INITIAL_STATE as USER_WORK_EXPERIENCES_INITIAL_STATE } from '~/modules/UserWorkExperience/UserWorkExperience.reducer'
@@ -22,7 +23,8 @@ export const defaultRootState: RootState = {
   skills: SKILLS_INITIAL_STATE,
   user: USER_INITIAL_STATE,
   userChallenges: USER_CHALLENGES_INITIAL_STATE,
-  userQualifications: USER_QUALIFICATIONS_INITIAL_STATE,
+  userEducation: USER_QUALIFICATIONS_INITIAL_STATE,
+  userQualifications: USER_EDUCATION_INITIAL_STATE,
   userSkills: USER_SKILLS_INITIAL_STATE,
   userWorkExperiences: USER_WORK_EXPERIENCES_INITIAL_STATE,
   workExperiences: WORK_EXPERIENCES_INITIAL_STATE,

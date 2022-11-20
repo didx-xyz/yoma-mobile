@@ -4,7 +4,7 @@ import { getCredentialViewMetadata } from '~/modules/User/User.utils'
 import { formatStartEndWithDurationString } from '~/utils/dates.utils'
 
 export const getExperienceMetadata = getCredentialViewMetadata({
-  organisation: pathOr(null, ['opportunity', 'organisationName']),
+  organisation: pathOr(null, ['workExperience', 'organisationName']),
   duration: compose(formatStartEndWithDurationString, pick(['startDate', 'endDate'])),
-  countries: compose(join(', '), pathOr([], ['opportunity', 'countries'])),
+  countries: compose(join(', '), pathOr([], ['workExperience', 'countries'])),
 })

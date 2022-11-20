@@ -95,7 +95,7 @@
     "@types/common-tags": "^1.8.1",
     "@types/jest": "^27.4.1",
     "@types/react-native": "^0.69.2",
-    "@types/react-test-renderer": "^18.0.0",
+    "@types/react-test-renderer": "18.0.0",
     "@types/yup": "^0.29.11",
     "@typescript-eslint/eslint-plugin": "^5.30.5",
     "@typescript-eslint/parser": "^5.30.5",

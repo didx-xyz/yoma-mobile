@@ -111,3 +111,11 @@ export interface UserCredentialFormValues {
 }
 
 export type UserCredentials = UserChallenge[] | UserWorkExperienceCredential[]
+export enum CredentialTypes {
+  Education = 'education',
+  Opportunity = 'opportunity',
+  WorkExperience = 'workExperience',
+  Task = 'taskopportunity',
+  Impact = 'impactopportunity',
+  Learning = 'learningopportunity',
+}

@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { BANNER_BG_GIRL_ON_BLUE } from '~/assets/images'
 import { Colors } from '~/styles'
 
-import BannerCard from './index'
+import BannerCard from './BannerCard'
 
 const StayTunedBannerCard = () => {
   const { t } = useTranslation()

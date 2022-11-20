@@ -34,7 +34,7 @@ describe('modules/CompletedCourses/CompletedCoursesWidget/CompletedCoursesWidget
           entities: {
             'USER_QUALIFICATIONS_STATE_MOCK-002': {
               isValidated: true,
-              name: 'Test Qualification',
+              title: 'Test Qualification',
               organisationLogoURL: null,
               startDate: '2021-04-15T00:00:00',
             },
