@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import fontStyles from '~/styles/font.styles'
 
-import { Colors, colors, FontFamily } from '../../styles'
+import { Colors, colors } from '../../styles'
 
 const BannerWidth = Dimensions.get('window').width
 

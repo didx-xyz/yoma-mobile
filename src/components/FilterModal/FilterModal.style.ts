@@ -1,6 +1,6 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { Colors, colors, FontFamily, utils as StyleUtils } from '~/styles'
+import { Colors, utils as StyleUtils, colors } from '~/styles'
 import fontStyles from '~/styles/font.styles'
 
 const styles = StyleSheet.create({
