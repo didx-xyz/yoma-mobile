@@ -11,9 +11,8 @@ const PROFILE_IMAGE_SIZE = 35
 const styles = {
   item: {
     backgroundColor: colors[Colors.White],
-    padding: 10,
+    paddingHorizontal: 10,
     marginVertical: 8,
-    height: 170,
     borderRadius: 25,
   },
   OrganizationInfoContainer: {
@@ -42,7 +41,7 @@ const styles = {
   titleViewContainer: {
     textAlignVertical: 'center',
     width: '100%',
-    padding: 5,
+    paddingHorizontal: 5,
   } as ViewStyle,
   title: {
     fontFamily: 'Montserrat-SemiBold',
@@ -56,7 +55,7 @@ const styles = {
     textAlignVertical: 'top',
     width: '100%',
     height: 42,
-    padding: 5,
+    paddingHorizontal: 5,
   } as ViewStyle,
   biography: {
     fontFamily: 'Montserrat-Medium',
