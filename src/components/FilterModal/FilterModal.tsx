@@ -59,6 +59,14 @@ const FilterModal = ({ isModalOpen, setModalOpen, title = 'Filter', filterData, 
   const handleCloseModal = () => {
     setModalOpen(false)
   }
+  const handleMyStyle = (lateItem: string, letItem: string) => {
+    console.log(lateItem, letItem, '==================')
+    if (lateItem === letItem) {
+      return styles.newFilterItem
+    } else {
+      return styles.fitlerItem
+    }
+  }
 
   const countFilter = (text: string) => {
     if (filterData[text.toLowerCase()]) {
@@ -145,28 +153,42 @@ const FilterModal = ({ isModalOpen, setModalOpen, title = 'Filter', filterData, 
           </Optional>
         </View>
 
-        <FlatList
-          data={filterModalData}
-          keyExtractor={(item: FilterModalItem) => item.id.toString()}
-          renderItem={({ item }) => (
-            <>
-              <TouchableOpacity style={styles.filterItemContainer} onPress={() => handlePress(item)}>
-                <View style={styles.fitlerItem}>
-                  <Text>{item.text}</Text>
-                  <View style={styles.filterItemView}>
-                    {countFilter(item.text) && (
-                      <View style={styles.countView}>
-                        <Rectangle />
-                        <Text style={styles.countText}>{count}</Text>
+        <View style={{ backgroundColor: 'white', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
+          <FlatList
+            data={filterModalData}
+            keyExtractor={(item: FilterModalItem) => item.id.toString()}
+            renderItem={({ item }) => (
+              <View>
+                {console.log(
+                  filterModalData ? filterModalData[filterModalData?.length - 1]['text'] : null,
+                  '========================',
+                  item['text'],
+                )}
+                <TouchableOpacity style={styles.filterItemContainer} onPress={() => handlePress(item)}>
+                  {filterModalData ? (
+                    <View
+                      style={handleMyStyle(
+                        filterModalData && filterModalData[filterModalData?.length - 1]['text'],
+                        item['text'],
+                      )}
+                    >
+                      <Text style={styles.itemText}>{item.text}</Text>
+                      <View style={styles.filterItemView}>
+                        {countFilter(item.text) && (
+                          <View style={styles.countView}>
+                            <Rectangle />
+                            <Text style={styles.countText}>{count}</Text>
+                          </View>
+                        )}
+                        <ArrowPrev />
                       </View>
-                    )}
-                    <ArrowPrev />
-                  </View>
-                </View>
-              </TouchableOpacity>
-            </>
-          )}
-        />
+                    </View>
+                  ) : null}
+                </TouchableOpacity>
+              </View>
+            )}
+          />
+        </View>
         <ItemModal
           isVisible={isVisible}
           setVisible={setIsVisible}

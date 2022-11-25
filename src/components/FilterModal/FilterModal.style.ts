@@ -10,7 +10,6 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   modal: {
     backgroundColor: colors[Colors.LightWhite],
-    margin: 10,
     marginTop: 40,
     borderRadius: 12,
     overflow: 'hidden',
@@ -28,7 +27,8 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   modalHeaderTitle: {
     color: '#41204B',
-    fontFamily: fontStyles.semibold,
+    fontFamily: 'Montserrat',
+    fontWeight: '600',
     fontSize: 16,
   } as ViewStyle,
   button: {
@@ -42,21 +42,32 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   Text: {
     color: '#0B4ED5',
-    fontFamily: fontStyles.medium,
-    fontSize: 18,
+    fontFamily: 'Montserrat',
+    fontWeight: '500',
+    fontSize: 13,
   } as TextStyle,
   filterItemContainer: {
     padding: 10,
-    backgroundColor: colors[Colors.White],
     paddingTop: 15,
-    borderBottomWidth: 0.8,
-    borderBottomColor: '#DAE0ED',
+  } as ViewStyle,
+  newFilterItem: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingBottom: 12,
   } as ViewStyle,
   fitlerItem: {
     marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
     paddingBottom: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#DAE0ED',
+  } as ViewStyle,
+  itemText: {
+    fontSize: 14,
+    color: '#565B6F',
+    fontFamily: 'Montserrat',
+    fontWeight: '400',
   } as ViewStyle,
   filterItemView: {
     flexDirection: 'row',
@@ -76,5 +87,4 @@ const styles = StyleSheet.create({
     backgroundColor: colors[Colors.MenuGrey],
   } as ViewStyle,
 })
-
 export default styles
