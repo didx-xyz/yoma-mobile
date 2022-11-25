@@ -1,6 +1,7 @@
 import { StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
-import { Colors, utils as StyleUtils, colors } from '~/styles'
+import { Colors, colors, FontFamily, utils as StyleUtils } from '~/styles'
+import fontStyles from '~/styles/font.styles'
 
 const styles = StyleSheet.create({
   modalOverlay: {
@@ -18,10 +19,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    padding: 10,
+    paddingStart: 10,
     backgroundColor: '#FFFFFF',
-    paddingTop: 15,
+    paddingVertical: 15,
     marginBottom: 20,
   } as ViewStyle,
   modalHeaderTitle: {
@@ -40,25 +40,27 @@ const styles = StyleSheet.create({
     width: 60,
   } as ViewStyle,
   Text: {
-    color: '#0B4ED5',
-    fontFamily: 'Montserrat',
+    color: '#387F6A',
+    fontFamily: fontStyles.bold,
     fontWeight: '500',
     fontSize: 13,
   } as TextStyle,
   filterItemContainer: {
-    padding: 10,
-    paddingTop: 15,
+    paddingHorizontal: 10,
+    // paddingVertical: 10,
+    // paddingTop: 15,
   } as ViewStyle,
   newFilterItem: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 12,
+    paddingVertical: 10,
   } as ViewStyle,
   fitlerItem: {
-    marginTop: 10,
+    // marginTop: 10,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingBottom: 12,
+    paddingVertical: 10,
+    // paddingBottom: 12,
     borderBottomWidth: 1,
     borderBottomColor: '#DAE0ED',
   } as ViewStyle,
