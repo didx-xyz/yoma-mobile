@@ -42,7 +42,6 @@ const styles = {
   titleViewContainer: {
     textAlignVertical: 'center',
     width: '100%',
-    height: 50,
     padding: 5,
   } as ViewStyle,
   title: {
@@ -54,7 +53,7 @@ const styles = {
     paddingVertical: 15,
   } as ViewStyle,
   biographyContainer: {
-    textAlignVertical: 'center',
+    textAlignVertical: 'top',
     width: '100%',
     height: 42,
     padding: 5,
@@ -71,7 +70,6 @@ const styles = {
     height: 42,
   } as ViewStyle,
   bottomLeftView: {
-    width: '75%',
     height: 42,
   } as ViewStyle,
   bottomText: {
@@ -82,11 +80,10 @@ const styles = {
   tokensView: {
     backgroundColor: applyAlphaToHex(colors[Colors.PrimaryYellow])(0.15),
     flexDirection: 'row',
-    alignItems: 'center',
-    width: 54,
-    justifyContent: 'center',
-    paddingVertical: 1,
-    paddingHorizontal: 5,
+    alignItems: 'flex-end',
+    justifyContent: 'flex-end',
+    paddingVertical: 5,
+    paddingHorizontal: 10,
     borderRadius: 11,
     height: 20,
     top: 10,

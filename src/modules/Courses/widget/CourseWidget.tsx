@@ -41,7 +41,7 @@ const CourseWidget = ({ navigation, item }: Props) => {
             {item.timePeriod} • {item.difficulty} •
           </Text>
           <Text style={styles.bottomText}>
-            • Starts{item?.startTime && <DateDisplay date={item.startTime} template={'dd MMM yyyy'} />} • 30
+            • Starts {item?.startTime && <DateDisplay date={item.startTime} template={'dd MMM yyyy'} />} • 30
             participants
           </Text>
         </View>
