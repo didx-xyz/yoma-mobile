@@ -153,23 +153,19 @@ const FilterModal = ({ isModalOpen, setModalOpen, title = 'Filter', filterData, 
           </Optional>
         </View>
 
+        {/* eslint-disable-next-line react-native/no-inline-styles */}
         <View style={{ backgroundColor: 'white', borderBottomRightRadius: 10, borderBottomLeftRadius: 10 }}>
           <FlatList
             data={filterModalData}
             keyExtractor={(item: FilterModalItem) => item.id.toString()}
             renderItem={({ item }) => (
               <View>
-                {console.log(
-                  filterModalData ? filterModalData[filterModalData?.length - 1]['text'] : null,
-                  '========================',
-                  item['text'],
-                )}
                 <TouchableOpacity style={styles.filterItemContainer} onPress={() => handlePress(item)}>
                   {filterModalData ? (
                     <View
                       style={handleMyStyle(
-                        filterModalData && filterModalData[filterModalData?.length - 1]['text'],
-                        item['text'],
+                        filterModalData && filterModalData[filterModalData?.length - 1].text,
+                        item.text,
                       )}
                     >
                       <Text style={styles.itemText}>{item.text}</Text>
