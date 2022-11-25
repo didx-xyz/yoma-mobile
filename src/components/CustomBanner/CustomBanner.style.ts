@@ -2,7 +2,7 @@ import { Dimensions, StyleSheet, TextStyle, ViewStyle } from 'react-native'
 
 import fontStyles from '~/styles/font.styles'
 
-import { Colors, colors } from '../../styles'
+import { Colors, colors, FontFamily } from '../../styles'
 
 const BannerWidth = Dimensions.get('window').width
 
@@ -10,7 +10,6 @@ const styles = {
   container1: {
     alignItems: 'flex-start',
     width: BannerWidth,
-    // height: BannerHeight,
     backgroundColor: 'blue',
     padding: 5,
   } as ViewStyle,
@@ -29,20 +28,19 @@ const styles = {
   } as ViewStyle,
   textView: {
     width: '90%',
-    marginVertical: 15,
+    // marginVertical: 15,
     alignSelf: 'center',
   } as ViewStyle,
   text: {
-    fontFamily: fontStyles.semibold,
+    fontFamily: fontStyles.small,
     fontSize: 12,
     color: '#E4CFEA',
     width: '100%',
     textAlign: 'center',
   } as TextStyle,
   title: {
-    fontFamily: 'Bold',
+    fontFamily: fontStyles.bold,
     fontSize: 13,
-    fontWeight: 'bold',
     color: colors[Colors.White],
   } as TextStyle,
 }
