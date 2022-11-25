@@ -1,4 +1,8 @@
 Ver 0.0.1
+
+Build 82:
+- bugfixes for styling issues - YOMA-713,YOMA-714,YOMA-715,YOMA-716,YOMA-717,YOMA-718,YOMA-719
+
 Build 75:
 - Styling issues on opportunities
 
