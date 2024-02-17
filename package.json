@@ -63,7 +63,7 @@
     "react-i18next": "^11.18.0",
     "react-native": "0.69.1",
     "react-native-app-auth": "^6.4.3",
-    "react-native-document-picker": "^8.1.1",
+    "react-native-document-picker": "^9.1.1",
     "react-native-dropdown-picker": "^5.4.0",
     "react-native-elements": "^3.3.2",
     "react-native-encrypted-storage": "^4.0.2",
